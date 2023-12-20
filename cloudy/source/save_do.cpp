@@ -3116,6 +3116,10 @@ void SaveDo(
 					/* print the depth */
 					fprintf( save.params[ipPun].ipPnunit, "%.5e\t", radius.depth_mid_zone );
 
+					/* Density, number density, mu */
+					fprintf( save.params[ipPun].ipPnunit, "\t%.4e\t%.4e\t%.4f\t",
+						 dense.xMassDensity, dense.pden, dense.wmole );
+
 					/* temperature, heating */
 					if(dynamics.Cool() > dynamics.Heat()) 
 					{

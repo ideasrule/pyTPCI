@@ -37,6 +37,18 @@
 /*cdClosePunchFiles closes all the save files that have been used */
 /*cdB21cm - returns B as measured by 21 cm */
 /*cdPrtWL print line wavelengths in Angstroms in the standard format */
+
+/* CHANGES: (M. Salz 21.05.2013)
+ *  - define routine cdEDEN_depth( double )
+ *    for obtaining electron density structure 
+ *    after the simulation
+ *  - cdDenPart_depth
+ *    cdDenMass_depth
+ *    cdWindVel_depth 
+ *    cdCooling_depth
+ *    cdHeating_depth 
+ *    cdRadAcce_depth*/
+
 #include "cddefines.h"
 #include "cddrive.h"
 
@@ -302,6 +314,26 @@ double cdCooling_last() /* return cooling for last zone */
 }
 
 /*************************************************************************
++ *
++ * cdCooling_depth routine to query results and return cooling structure 
++ *
++ ************************************************************************/
+
+void cdCooling_depth( double Cool_struc[] )
+{
+  long int nz;
+       
+  DEBUG_ENTRY( "cdCooling_depth()" );
+       
+  for( nz = 0; nz<nzone; ++nz )
+    {
+      Cool_struc[nz] = struc.coolstr[nz];
+    }
+  return;
+}
+
+
+/*************************************************************************
  *
  * cdVersion - puts version number of code into string 
  * incoming string must have sufficient length and will become null
@@ -313,6 +345,100 @@ void cdVersion(char chString[])
 {
 	strcpy( chString , t_version::Inst().chVersion.c_str() );
 	return;
+}
+
+/*************************************************************************
+ *
+ * cdHeating_depth routine to query results and return heating structure
+ *
+ ************************************************************************/
+
+void cdHeating_depth( double Heat_struc[] )
+{
+       long int nz;
+
+       DEBUG_ENTRY( "cdHeating_depth()" );
+
+       for( nz = 0; nz<nzone; ++nz )
+       {
+               Heat_struc[nz] = struc.heatstr[nz];
+       }
+       return;
+}
+
+/*************************************************************************
+ *
+ * cdDenPart_depth get total particle density struc. from previous iteration 
+ *
+ ************************************************************************/
+void cdDenPart_depth( double DenPart[] )
+{
+        long int nz;
+
+        DEBUG_ENTRY( "cdDenPart_depth()" );
+
+        for( nz = 0; nz<nzone; ++nz )
+        {
+                DenPart[nz] = struc.DenParticles[nz];
+        }
+        return;
+}
+
+/*************************************************************************
+ *
+ * cdDenMass_depth get total mass density struc. from previous iteration 
+ *
+ ************************************************************************/
+void cdDenMass_depth( double DenMass[] )
+{
+        long int nz;
+
+        DEBUG_ENTRY( "cdDenMass_depth()" );
+
+        for( nz = 0; nz<nzone; ++nz )
+        {
+                DenMass[nz] = struc.DenMass[nz];
+        }
+        return;
+}
+
+
+/*************************************************************************
+ *
+ * cdWindVel_depth get total velocity struc. from previous iteration 
+ *
+ ************************************************************************/
+void cdWindVel_depth( double WindVel[] )
+{
+        long int nz;
+
+        DEBUG_ENTRY( "cdWindVel_depth()" );
+
+        for( nz = 0; nz<nzone; ++nz )
+        {
+                WindVel[nz] = struc.windv[nz];
+        }
+        return;
+}
+
+
+/*************************************************************************
+ *
+ * cdRadAcce_depth get struc. of total radiative acceleration
+ * from previous iteration (outward direction)
+ *
+ ************************************************************************/
+void cdRadAcce_depth( double RadAccel[] )
+{
+        long int nz;
+
+        DEBUG_ENTRY( "cdRadAcce_depth()" );
+
+        for( nz = 0; nz<nzone; ++nz )
+        {
+                RadAccel[nz] = struc.AccelTotalOutward[nz];
+        }
+        return;
 }
 
 /*************************************************************************
@@ -354,6 +480,24 @@ double cdHeating_last() /* return heating for last zone */
 double cdEDEN_last() /* return electron density for last zone */
 {
 	return dense.eden;
+}
+
+/*************************************************************************
+ *
+ * cdEDEN_depth get electron density structure from previous iteration 
+ *
+ ************************************************************************/
+void cdEDEN_depth( double cdEDEN[] )
+{
+        long int nz;
+
+        DEBUG_ENTRY( "cdEDEN_depth()" );
+
+        for( nz = 0; nz<nzone; ++nz )
+        {
+                cdEDEN[nz] = struc.ednstr[nz];
+        }
+        return;
 }
 
 /*************************************************************************

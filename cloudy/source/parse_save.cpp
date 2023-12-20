@@ -2011,7 +2011,7 @@ void ParseSave(Parser& p)
 		strcpy( save.chSave[save.nsave], "OVER" );
 		/* >>chng 20 07 25 add Opt Depth to illuminated face @ 1 Ryd as per Vianney LeBouteiller post */
 		sncatf( chHeader, 
-			"#depth\tTe\tHtot\thden\teden\t2H_2/H\tHI\tHII\tHeI\tHeII\tHeIII\tCO/C\tC1\tC2\tC3\tC4\tO1\tO2\tO3\tO4\tO5\tO6\tH2O/O\tAV(point)\tAV(extend)\tTau912\n" );
+			"#depth\trho(g cm^-3)\tn(cm^-3)\tmu\tTe\tHtot\thden\teden\t2H_2/H\tHI\tHII\tHeI\tHeII\tHeIII\tCO/C\tC1\tC2\tC3\tC4\tO1\tO2\tO3\tO4\tO5\tO6\tH2O/O\tAV(point)\tAV(extend)\tTau912\n" );
 	}
 
 	else if( p.nMatch(" PDR") )

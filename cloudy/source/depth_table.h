@@ -7,6 +7,8 @@
 class DepthTable
 {
 public:
+        /*true if quantities are interpreted linearly*/
+        bool lgLinear;
 	/* lg is true if depth, false if radius to be used*/
 	bool lgDepth;
 	/**dist is log radius in cm, val is log value*/

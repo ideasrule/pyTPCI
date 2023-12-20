@@ -173,6 +173,7 @@ void InitDefaultsPreparse( void )
 	dynamics.lgTracePrint = false;
 
 	/* parameters to do with wind */
+	wind.lgTabulated = false;
 	wind.lgWindOK = true;
 	wind.DiskRadius = 0;
 	wind.lgDisk = false;

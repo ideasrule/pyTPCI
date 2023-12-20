@@ -4,8 +4,13 @@
 #ifndef WIND_H_
 #define WIND_H_
 
+#include "depth_table.h"
+
 /** parameters for wind model; wind.h */
 struct Wind {
+        /** Depth table for wind velocity */
+        DepthTable wlaw;
+        bool lgTabulated;
 
 	/** initial wind velocity cm s-1, will be negative for D-critical flow */
 	realnum windv0;

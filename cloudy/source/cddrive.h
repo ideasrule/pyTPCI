@@ -1,6 +1,17 @@
 /* This file is part of Cloudy and is copyright (C)1978-2023 by Gary J. Ferland and
  * others.  For conditions of distribution and use see copyright notice in license.txt */
 
+/* CHANGES: (M. Salz 21.05.2013)
+ *  - define routine cdEDEN_depth( double )
+ *    for obtaining electron density structure 
+ *    after the simulation
+ *  - cdDenPart_depth
+ *    cdDenMass_depth
+ *    cdWindVel_depth
+ *    cdCooling_depth
+ *    cdHeating_depth 
+ *    cdRadAcce_depth*/
+
 #ifndef CDDRIVE_H_
 #define CDDRIVE_H_
 
@@ -328,12 +339,47 @@ void cdEmis_ip(
 double cdCooling_last();
 
 /**
+ * cdCooling_depth
+ * The returns the total cooling (erg cm^-3 s^-1) structure 
+ * \param Cool_struc[]
+*/
+void cdCooling_depth( double Cool_struc[] );
+
+/**
  * cdHeating_last
  * returns the total heating (erg cm^-3 s^-1) for the last computed zone */
 double cdHeating_last();
 
+/**
+ * cdHeating_depth
+ * returns the total heating (erg cm^-3 s^-1) structue 
+ * \param Heat_struc[]
+*/
+void cdHeating_depth( double Heat_struc[] );
+
+/**cdDenPart_depth return particle density struc. of previous model */
+void cdDenPart_depth( double DenPart[] );
+
+/**cdDenMass_depth return mass density struc. of previous model */
+void cdDenMass_depth( double DenMass[] );
+
+/**cdWindVel_depth return velocity struc. of previous model */
+void cdWindVel_depth( double WindVel[] );
+
+/**cdRadAcce_depth 
+ * return total radiative acceleration struc. 
+ * of previous model (outward direction) 
+ */
+void cdRadAcce_depth( double RadAccel[] );
+
 /**cdEDEN_last return electron density of last zone */
 double cdEDEN_last();
+
+/** 
+ * returns electron density structure of previous model 
+ * \param cdEDEN[]
+*/
+void cdEDEN_depth( double cdEDEN[] );
 
  /** cdPressure_last
  * This returns the pressure and its constituents for the last computed zone. 

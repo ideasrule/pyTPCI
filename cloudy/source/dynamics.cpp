@@ -15,6 +15,14 @@
 /* DynaSave, save output for dynamics solutions */
 /* ParseDynaTime parse the time command, called from ParseCommands */
 /* ParseDynaWind parse the wind command, called from ParseCommands */
+/* CHANGES: (M. Salz 14.05.2013)
+ *  - introduce the case table in ParseDynaWind(), which parse the
+ *    tabulated values and sets the logic variables
+ *  - changed p.getNumberCheck() to p.getNumberPlain() for wind
+ *    velocity, because in the tabulated case there is no number in the
+ *    first line
+ *  - introduce the tabulated case in the flux calculation*/
+
 #include "cddefines.h"
 #include "cddrive.h"
 #include "struc.h"
@@ -406,6 +414,7 @@ void DynaIonize(void)
 		 ionization terms */
 
 	dynamics.Rate = 1./dynamics.timestep;
+	ASSERT(dynamics.timestep > 0);
 
 	for( long mol=0;mol<mole_global.num_calc;mol++)
 	{
@@ -1442,6 +1451,12 @@ realnum DynaFlux(double depth)
 		/* WJH 21 may 04, changed to use dense.xMassDensity0, which should be strictly constant */
 		flux *= dense.xMassDensity0; 
 	}
+
+	if( wind.lgTabulated )
+	{
+	       flux = (realnum)wind.wlaw.tabval(radius.Radius, radius.depth);
+               flux *= dense.xMassDensity;
+	}
 	return flux;
 }
 
@@ -1996,7 +2011,7 @@ void ParseDynaWind( Parser &p)
 		/* assume old-style velocity-only specification */ 
 		/* wind structure, parameters are initial velocity and optional mass
 		 *  v in km/sec, mass in solar masses */
-		wind.windv0 = (realnum)(p.getNumberCheck("wind velocity")*1e5);
+		wind.windv0 = (realnum)(p.getNumberPlain("wind velocity")*1e5);
 		if (wind.windv0 < 0.) 
 		{
 			wind.setDefault();
@@ -2067,6 +2082,49 @@ void ParseDynaWind( Parser &p)
 	{
 		pressure.lgContRadPresOn = true;
 	}
+
+	/* read in velocity table at end, not to interfere with other options */
+	if( p.nMatch("TABL") )
+	{
+               /* velocity is tabulated */
+               wind.lgTabulated = true;
+	       
+               /* parse the tabulated values  */
+	       p.readLaw(wind.wlaw);
+
+               /* set initial velocity and static + ballistic = false */
+               wind.windv0 = wind.wlaw.val[0];
+               wind.windv = wind.windv0;
+               wind.setDefault();
+
+               dynamics.FluxScale = wind.windv0;
+               dynamics.lgFluxDScale = false;
+               /* Center doesn't mean much in this case -- make sure it's
+                * in front of grid so DynaFlux doesn't swap signs where
+                * it shouldn't */
+               dynamics.FluxCenter = -1.;
+
+               /* do not solve for pressure, so it is not important */
+               pressure.lgPres_radiation_ON = false;
+               pressure.lgContRadPresOn = false;
+               pressure.lgPres_magnetic_ON = false;
+               pressure.lgPres_ram_ON = true;
+               
+               /* do not include advective/expansion cooling or heating
+                * --> must be solved outside of Cloudy */
+               dynamics.lgCoolHeat = 0;
+
+               /* tabulated velocity can only be used with tabulated density 
+                * correct dynamics, except of advection must be solve outside
+                * of Cloudy */
+               strcpy( dense.chDenseLaw, "DLW2" );
+       }
+       else
+       {
+               /* not a tabulated velocity law */
+               wind.lgTabulated = false;
+       }
+
 	return;
 }
 

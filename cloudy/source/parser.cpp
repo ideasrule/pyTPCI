@@ -10,6 +10,7 @@
 #include "service.h"
 #include "depth_table.h"
 #include "lines.h"
+#include "radius.h"
 
 #include <deque>
 namespace
@@ -1147,6 +1148,17 @@ void Parser::readLaw(DepthTable& table)
 	{
 		table.lgDepth = false;
 	}
+
+	/* set true if linear interpolation to be used */
+	if( nMatch("LINE") )
+	{
+		table.lgLinear = true;
+	}
+	else
+	{
+		table.lgLinear = false;
+	}
+	
 	if (table.nvals != 0)
 	{
 		fprintf( ioQQQ, " Warning: over-writing existing table\n" );
@@ -1161,6 +1173,60 @@ void Parser::readLaw(DepthTable& table)
 		fprintf( ioQQQ, " No pairs entered - can\'t interpolate.\n Sorry.\n" );
 		cdEXIT(EXIT_FAILURE);
 	}
+
+	/* sanity check for first point in dlaw table */
+	if( table.lgDepth )
+	{
+	  if( table.lgLinear )
+	    {
+	      if( abs(table.dist[0]) > 0.000001 )
+		{
+		  fprintf( ioQQQ, " First point on dlaw linear depth table should be zero.  Sorry.\n" );
+		  cdEXIT(EXIT_FAILURE);
+		}
+	    }
+	  else
+	    {
+	      if( table.dist[0] >= -30 )
+		{
+		  fprintf( ioQQQ, " First point on dlaw logarithmic depth table shoule be < -30.  Sorry.\n" );
+		  cdEXIT(EXIT_FAILURE);
+		}
+	    }
+	}
+	else
+	{
+	  if( radius.lgRadiusKnown )
+	    {
+	      if( table.lgLinear )
+		{
+		  if( table.dist[0] >= radius.Radius )
+		    {
+		      fprintf( ioQQQ, " First point on dlaw radius table shoule be smaller than starting radius. Sorry.\n" );
+		      cdEXIT(EXIT_FAILURE);
+		    }
+		  else if( table.dist[0] < 0.01*radius.Radius )
+		    {
+		      fprintf( ioQQQ, " First point on dlaw radius table was much smaller than starting radius. Sorry.\n" );
+		      cdEXIT(EXIT_FAILURE);
+		    }
+		}
+	      else 
+		{
+		  if( pow(10., table.dist[0]) >= radius.Radius )
+		    {
+		      fprintf( ioQQQ, " First point on dlaw radius table shoule be smaller than starting radius. Sorry.\n" );
+		      cdEXIT(EXIT_FAILURE);
+				}
+		  else if( pow(10., table.dist[0]) < 0.01*radius.Radius )
+		    {
+		      fprintf( ioQQQ, " First point on dlaw radius table was much smaller than starting radius. Sorry.\n" );
+		      cdEXIT(EXIT_FAILURE);
+		    }
+		}
+	    }
+	}
+
 	
 	table.nvals = 2;
 	bool lgEnd = false;
@@ -1199,6 +1265,49 @@ void Parser::readLaw(DepthTable& table)
 			cdEXIT(EXIT_FAILURE);
 		}
 	}
+
+	/* sanity check for last point in dlaw table if thickness of cloud is defined */
+	/*if( radius.StopThickness[0] < 1.e30 )
+	{
+	  if( table.lgDepth )
+	    {
+	      if( table.lgLinear )
+		{
+		  if( table.dist[table.nvals - 1] <= radius.StopThickness[0] )
+		    {
+		      fprintf( ioQQQ, " Defined thickness is larger than dlaw table.  Sorry.\n" );
+		      cdEXIT(EXIT_FAILURE);
+		    }
+		}
+	      else
+		{
+		  if( pow(10., table.dist[table.nvals - 1]) <= radius.StopThickness[0] )
+		    {
+		      fprintf( ioQQQ, " Defined thickness is larger than dlaw table.  Sorry.\n" );
+		      cdEXIT(EXIT_FAILURE);
+		    }
+		}
+	    }
+	  else
+	    {
+	      if( table.lgLinear )
+		{
+		  if( (table.dist[table.nvals - 1] - radius.Radius) <= radius.StopThickness[0] )
+		    {
+		      fprintf( ioQQQ, " Defined thickness is larger than dlaw table.  Sorry.\n" );
+		      cdEXIT(EXIT_FAILURE);
+		    }
+		}
+	      else
+		{
+		  if( (pow(10., table.dist[table.nvals - 1])- radius.Radius) <= radius.StopThickness[0] )
+		    {
+		      fprintf( ioQQQ, " Defined thickness is larger than dlaw table.  Sorry.\n" );
+		      cdEXIT(EXIT_FAILURE);
+		    }
+		}
+	    }
+	    }*/
 }
 
 void DataParser::p_open(const string& name, eod_style es, access_scheme as)
