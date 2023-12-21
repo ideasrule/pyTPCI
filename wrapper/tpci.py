@@ -8,15 +8,16 @@ a = 2.3e11
 k_B = 1.38e-16
 Rp = 2.9 * 6.378136e8
 m_H = 1.67e-24
-NH_TO_RHO = 1.3 * m_H
+hydrogen_frac = 0.92
 init_temp = 740
-init_mu = 1.3
+init_mu = 1.23
 
 unit_density = 1e-10
 unit_length = Rp
 unit_velocity = 1e5
 unit_pressure = unit_density * unit_velocity**2
 
+iter_increase_at_step = 50
 dt = 0.1
 
 def run_cloudy(global_ind):
@@ -47,7 +48,7 @@ def run_cloudy(global_ind):
     
     script += 'dlaw table depth linear\n'
     for i in range(len(depths)-1, -1, -1):
-        script += '{:.6e} {:.3e}\n'.format(depths[i], rho[i] / NH_TO_RHO)
+        script += '{:.6e} {:.3e}\n'.format(depths[i], rho[i] / (init_mu * m_H) * hydrogen_frac)
     script += 'end of dlaw\n'
     
     script += 'tlaw table depth linear\n'
@@ -57,10 +58,15 @@ def run_cloudy(global_ind):
 
     script += 'wind advection table depth linear\n'
     for i in range(len(depths)-1, -1, -1):
-        script += '{:.6e} {:.3e}\n'.format(depths[i], -v[i])
+        #Positive (inward) velocities crash CLOUDY for some reason
+        script += '{:.6e} {:.3e}\n'.format(depths[i], min(-1, -v[i]))
     script += 'end of velocity table\n'
-    
-    script += 'iterate 2\n'
+
+    if global_ind > iter_increase_at_step:
+        script += 'iterate 20\n'
+    else:
+        script += 'iterate 2\n'
+        
     script += 'set dynamics advection length fraction 0.01\n'
     script += 'no molecules\n'
     script += 'element limit off -2\n'
@@ -74,6 +80,7 @@ def run_cloudy(global_ind):
     prefix = "cl_data." + str(global_ind).zfill(4)
     script += 'set save prefix "{}"\n'.format(prefix + ".")
     script += 'set save hash ""\n'
+    script += 'save overview "all_iters_over.tab"\n'
     script += 'save overview "over.tab" last\n'
     script += 'save pressure "pres.tab" last\n'
     script += 'save wind "wind.tab"\n'
@@ -102,10 +109,12 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
         heating /= rho
         cloudy_radii = 1 + (np.max(depth) - depth) / unit_length
         heating_interp = np.interp(pluto_radii, cloudy_radii[::-1], heating[::-1])
-
+        
     with open(output_file, "w") as f:
         for i in range(len(pluto_radii)):
             f.write("{} {}\n".format(pluto_radii[i], heating_interp[i]))
+
+    
 
 def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto.ini"):
     with open(template_file, "r") as f:
@@ -120,10 +129,9 @@ def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto
     print("Running pluto command: ", command)
     subprocess.run(command, check=True)
 
-
-cloudy_file = None    
 for i in range(100):
     t = i * dt
+    #t = 10 + (i-100) * dt
     write_heating_file(i)
     run_pluto(i, t)
     run_cloudy(i)
