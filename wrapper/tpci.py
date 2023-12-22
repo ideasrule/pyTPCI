@@ -1,17 +1,29 @@
 import subprocess
 import numpy as np
 
+#Physical constants
+AU = 1.5e13
+k_B = 1.38e-16
+R_earth = 6.378136e8
+M_earth = 5.97e27
+m_H = 1.67e-24
+
 pluto_radii = np.load("pluto_radii.npy")
 
+#System parameters
 STELLAR_SPEC = "spectra.ini"
-a = 2.3e11
-k_B = 1.38e-16
-Rp = 2.9 * 6.378136e8
-m_H = 1.67e-24
-hydrogen_frac = 0.92
-init_temp = 740
-init_mu = 1.23
+a = 0.06 * AU
+Rp = 2.9 * R_earth
+Mp = 11 * M_earth
+M_sun = 2e33
+M_star = 0.75 * M_sun
 
+hydrogen_frac = 0.92 #0.84 @ 100x metallicity
+init_temp = 740
+init_mu = 1.23 #2.62 at 100x metallicity
+metallicity = 1
+
+#Probably no need to change
 unit_density = 1e-10
 unit_length = Rp
 unit_velocity = 1e5
@@ -20,14 +32,29 @@ unit_pressure = unit_density * unit_velocity**2
 iter_increase_at_step = 50
 dt = 0.1
 
+def write_params_header(filename="params.h"):
+    f = open(filename, "w")
+    f.write("#define  PLANET_RADIUS   ({} * CONST_Rearth)\n".format(Rp/R_earth))
+    f.write("#define  PLANET_MASS     ({} * CONST_Mearth)\n".format(Mp/M_earth))
+    f.write("#define  MU              {}\n".format(init_mu))
+    f.write("#define  INIT_TEMP       {}\n".format(init_temp))
+    f.write("#define  STAR_MASS       ({} * CONST_Msun)\n".format(M_star/M_sun))
+    f.write("#define  SEMIMAJOR_AXIS  ({} * CONST_au)\n".format(a/AU))
+    f.write("#define  n_SURF          1e14\n")
+    f.write("#define  P_SURF          (n_SURF * CONST_kB * INIT_TEMP)\n")
+    f.write("#define  RHO_SURF        (P_SURF * (MU * CONST_mH) / (CONST_kB * INIT_TEMP))\n")
+    f.write("#define  BETA            (CONST_G * PLANET_MASS * (MU * CONST_mH) / (PLANET_RADIUS * CONST_kB * INIT_TEMP))\n")
+    f.write("#define  UNIT_DENSITY    {}\n".format(unit_density))
+    f.write("#define  UNIT_LENGTH     {:.3e}\n".format(Rp))
+    f.write("#define  UNIT_VELOCITY   {:.3e}\n".format(unit_velocity))
+    f.close()
+        
 def run_cloudy(global_ind):
     pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"            
     radii, rho, v, P = np.loadtxt(pluto_filename, usecols=(0,2,3,6), unpack=True)
     radii *= unit_length
     rho *= unit_density
     v *= unit_velocity
-    #CLOUDY doesn't like velocities that are exactly 0, so set to 1 cm/s
-    v[v==0] = 1
     P *= unit_pressure
     depths = np.max(radii) - radii
 
@@ -45,6 +72,7 @@ def run_cloudy(global_ind):
     script += 'init "spectra.ini"\n'
     script += 'radius {:.6e} linear\n'.format(a)
     script += 'stop depth {:.6e} linear\n'.format(0.9995 * depths.max())
+    script += 'illumination angle 66 deg\n'
     
     script += 'dlaw table depth linear\n'
     for i in range(len(depths)-1, -1, -1):
@@ -65,16 +93,16 @@ def run_cloudy(global_ind):
     if global_ind > iter_increase_at_step:
         script += 'iterate 20\n'
     else:
-        script += 'iterate 2\n'
+        script += 'iterate 1\n'
         
     script += 'set dynamics advection length fraction 0.01\n'
     script += 'no molecules\n'
-    script += 'element limit off -2\n'
-    script += 'metals 0 linear\n'
     script += 'stop temperature linear 5 K\n'
     script += 'turbulence 1 km/sec no pressure\n'
     script += 'double optical depth\n'
+    script += 'element limit off -5\n'        
     script += 'abundances GASS10 no grains\n'
+    script += 'metals {} linear\n'.format(metallicity)
     script += 'print short\n'
     script += 'print line faint -2 log\n'
     prefix = "cl_data." + str(global_ind).zfill(4)
@@ -97,7 +125,9 @@ def run_cloudy(global_ind):
         f.write(script)
 
     print("Running cloudy", global_ind)
-    subprocess.run(["../cloudy/source/cloudy.exe", "-r", prefix], check=False)
+    result = subprocess.run(["../cloudy/source/cloudy.exe", "-r", prefix], check=False)
+    if result.returncode != 0:
+        print("Warning: something went wrong in CLOUDY.  You can ignore this in the early timesteps")
 
 
 def write_heating_file(global_ind, output_file="curr_heat.dat"):
@@ -112,7 +142,7 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
         
     with open(output_file, "w") as f:
         for i in range(len(pluto_radii)):
-            f.write("{} {}\n".format(pluto_radii[i], heating_interp[i]))
+            f.write("{} {:.6e}\n".format(pluto_radii[i], heating_interp[i]))
 
     
 
@@ -128,6 +158,10 @@ def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto
         command += ["-restart", "{}".format(global_ind)]
     print("Running pluto command: ", command)
     subprocess.run(command, check=True)
+
+write_params_header()
+subprocess.run(["make", "clean"], check=True)
+subprocess.run(["make"], check=True)
 
 for i in range(100):
     t = i * dt
