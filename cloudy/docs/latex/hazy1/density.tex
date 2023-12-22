@@ -1,0 +1,581 @@
+\chapter{DENSITY LAWS}
+% !TEX root = hazy1.tex
+
+\section{Overview}
+
+Hydrogen plays a fundamental role in any astrophysical plasma because
+of its large abundance.
+As a result the hydrogen density [cm$^{-3}$] is a
+fundamental parameter.
+Commands that specify how the hydrogen density is
+set, and how it changes with radius or depth, are described in this section.
+Constant density is the default.  In this case the total hydrogen density
+(the sum of the protons in atomic, ionic, and molecular form,
+given by the
+command \cdCommand{hden}) is kept constant.
+Many other
+density or pressure distributions can also be computed.
+
+A cloud can be isobaric, maintain constant pressure, if the timescale
+for changes, for instance in the continuum source or the cooling time, is
+short compared with the dynamical or sound-crossing time $t_d$
+\begin{equation}
+t_d  = \frac{{\Delta r}}{{c_s }}
+\ [\mathrm{s}]
+\end{equation}
+where $\Delta r$ is the cloud thickness and $c_s$ is the sound speed
+(AGN3 eq 6.25)
+\begin{equation}
+c_s  = \left( {\frac{{\gamma kT_0 }}{{\mu _0 m_{\mathrm{H}} }}}
+\right)^{\frac{1}{2}}
+ [\cmps ].
+\end{equation}
+
+\section{Constant density, pressure, gas pressure}
+
+This command specifies how the density changes across the cloud.
+The
+\cdCommand{hden} command usually specifies the initial hydrogen density.
+Several commands determine how the density changes with radius.
+These are described next.
+
+\subsection{Constant density}
+
+This is the default.  The hydrogen density, the sum
+\begin{equation}
+n\left( {\mathrm{H}} \right) = n\left( {{\mathrm{H}}^{\mathrm{0}} } \right) + n\left(
+{{\mathrm{H}}^ +  } \right) + 2n\left( {{\mathrm{H}}_2 } \right) +
+\sum\limits_{other} {n\left( {{\mathrm{H}}_{other}^{} } \right)}
+\,[\mathrm{cm}^{-3}]% (28)
+\end{equation}
+is kept constant.
+This is not quite an isochoric density law because the
+total particle density is not constant---the electron and molecular
+fractions can vary with depth.
+I prefer this type of model because the
+homology relations with the ionization parameter (\citealp{Davidson1977}) are
+preserved.
+The hydrogen nucleon density is set with the \cdCommand{hden} command.
+
+\subsection{Constant gas pressure [index $=-$1.1]}
+
+An isobaric density law is specified with this command.
+The gas pressure
+\begin{equation}
+P_{gas} = n_{tot}kT_e \,  [\mathrm{dyne \,cm}^{-2}]
+\end{equation}
+where $n_{tot}$ is the total particle density [cm$^{-3}$],
+is kept constant.
+The optional index $\alpha$ can be any value, positive or negative,
+and will force
+the pressure to change as a power-law of the radius;
+\begin{equation}
+P_{gas}(r)=P_{\mathrm{o}}\left(\frac{r}{r_{\mathrm{o}}}\right)^{\alpha}
+[\mathrm{dyne\, cm}^{-2}]
+\end{equation}
+where $P_{\mathrm{o}}$ is the pressure at the illuminated face of the cloud.
+
+\subsection{Constant pressure [no continuum, no abort]}
+
+This holds the total pressure constant.
+This includes ram, magnetic,
+turbulent, particle, and radiation pressure.
+The equation of state,
+the relation between gas density, pressure, and temperature,
+is given by
+\begin{equation}
+\begin{array}{ccl}
+ P_{tot} \left( r \right)& =& P_{tot} \left( {r_o } \right)
+ + \int {a_{rad}\,\rho \,dr}  + \int {g\,\rho \,dr}  \\
+&=& P_{gas} + P_{ram} + P_{turb} + P_{mag} + P_{lines} + \Delta P_{rad} + \Delta P_{grav} \\
+ \end{array}\,
+  [\mathrm{dyne\, cm}^{-2}]% (31)
+\end{equation}
+where $a_{rad}$ is the radiative acceleration [cm s$^{-2}$] due to the attenuated
+incident continuum, $g$ is the (negative) gravitational acceleration
+[cm s$^{-2}$], and $\rho$ is the gas density [gm cm$^{-3}$].
+
+$P_{gas}  = n_{tot} kT_e$ is the thermal gas pressure.
+The ram pressure is $P_{ram} = \rho u_{wind}^2$, where $u_{wind}$ is the flow velocity.
+This is only present for a wind geometry.
+The turbulent pressure is $ P_{turb}  = \rho \,u_{turb}^2 /2$, where $u_{turb}$ is the turbulent velocity set with the \cdCommand{turbulence} command.
+The magnetic pressure is $P_{mag}  = B^2 /8\pi $, where the magnetic field B is set with the \cdCommand{magnetic field} command.
+Both magnetic and turbulent pressures are zero by default.
+If either dominates the total pressure then the density will be nearly constant.
+
+$P_{lines}$ is the nearly isotropic radiation pressure due to
+trapped emission
+lines (\citealp{FerlandElitzur1984}, and \citealp{Elitzur1986}).
+\Cloudy\ will
+stop if the internal line radiation pressure builds up to more than half
+of the total pressure since such clouds would be unstable unless they are
+self-gravitating (\citealp{Elitzur1986}).
+It is necessary to do at least
+a second iteration when radiation pressure is important since the total
+line optical depths must be known to compute line widths and level
+populations reliably.
+If more than one iteration is done then the radiation
+pressure will not be allowed to exceed the gas pressure on any except the
+last iteration.
+If the option \cdCommand{no abort} appears on the command line the
+code will never stop because of excessive radiation pressure.
+The radiation
+pressure is still computed and the simulation will probably become
+unstable when $P_{lines} > P_{gas}$.
+
+When the outward force due to the attenuation of the incident
+radiation field and the inward force of gravity are balanced by
+the pressure gradient, the cloud will be in hydrostatic equilibrium
+\citealp{AscasibarDiaz2009}).
+The required change to the total pressure is given by the integrals
+and referred to as $\Delta P_{rad}$ and $\Delta P_{grav}$, respectively.
+The \cdCommand{no continuum} option will turn off the $\Delta P_{rad}$ term.
+Gravity must be turned on separately using the \cdCommand{gravity} command
+described below.
+
+\subsection{Constant pressure set 6.5}
+
+The \cdCommand{set} option specifies the initial pressure.
+A number, the log of
+the pressure in ISM $nT$ units (K cm$^{-3}$), must appear.
+
+An initial gas density must still be specified with one of the commands
+in this Chapter.  This command works by first solving for the equilibrium
+temperature at the density that was specified.
+The density is then changed,
+using a Newton-method solver, to have the pressure match that specified.
+The solver will raise or lower the density assuming that pressure and
+density are directly related to one another.
+
+There are possible ambiguities in this solution since the same pressure
+can sometimes be achieved with more than one density.
+This is the well-known
+three-phase stability phenomenon \citep{Field1969}.
+
+\subsection{Constant pressure timescale = 2.3e9 s, alpha=-1}
+\label{sec:ConstantPressureTimescale}
+
+The pressure changes as a function of time.
+It is given by
+\begin{equation}
+P_{\mathrm{o}}(t)=P_{\mathrm{o}}(t_{\mathrm{o}})\;\left(1+\frac{t}{t_{\mathrm{scale}}}\right)^{\alpha}
+[\mathrm{dyne\ cm}^{-2}]
+\end{equation}
+The timescale $t_{\mathrm{scale}}$ is the first number on the line
+and the power-law index $\alpha$ is the second.
+Here $P_{\mathrm{o}}(t_{\mathrm{o}})$ is the static pressure evaluated at 
+the illuminated face of the cloud.
+
+\subsection{The reset option}
+
+This changes the behavior of the \cdCommand{constant pressure} command.
+By default the gas pressure in the first zone is derived from
+the specified hydrogen density and the resulting kinetic temperature.
+The hydrogen density is the fundamental quantity.
+In later iterations the initial hydrogen density 
+is kept constant but the kinetic temperature may change
+as details of the line radiative transfer change. 
+The resulting gas pressure, $\propto nT$,
+may not have exactly the same value on successive iterations.
+The total pressure in constant pressure clouds will change 
+slightly as a result.
+The change in the pressure is small, typically only
+a few percent. 
+
+The \cdCommand{reset} option tells the code to keep the total pressure
+at the illuminated face constant, from iteration to iteration,
+rather than the hydrogen density.
+The \cdCommand{reset} option works by allowing the gas density
+to change to try to match the total pressure 
+found in previous iterations.
+
+\section{Gravity [options] }
+
+The \cdCommand{gravity} command tells the code to balance the gravitational 
+acceleration by varying the total pressure as described in 
+\citealp{AscasibarDiaz2009}.
+
+\subsection{Gravity [spherical, plane-parallel] }
+
+One of the keywords \cdCommand{spherical} or \cdCommand{plane-parallel} 
+must appear.  Each of these commands specifies the symmetry of the mass distributions
+and activates self-gravitational pressure.
+
+\subsection{Gravity external [Mass = 10 {\Msun}, extent = 3 parsecs, powerlaw = -2]}
+
+Additional mass components can be specified by any number of 
+these commands.
+The first number of represents the mass.  
+The units depend upon the symmetry
+(which must be specified separately -- see above).
+In the spherical case, this number represents the mass (in solar masses) 
+of a pointlike star located at $r=0$; in the plane-parallel case, 
+it corresponds to the surface density (in~M$_\odot$~pc$^{-2}$) of a uniform
+mass sheet at $z=0$.
+The number is interpreted as linear 
+unless the keyword \cdCommand{log} is specified.
+Two optional parameters are the physical
+extent of the mass component (in parsecs, linear unless \cdCommand{log} appears)
+and a power-law index.  Together these specify the mass accumulation function
+\begin{equation}
+M_{\mathrm{enclosed}} = M (r/r_0)^\alpha.
+\end{equation}
+The last two parameters can be omitted from right to left.  
+Point sources or infinitesimally thin sheets are the default.
+The default index is zero.
+
+\begin{shaded}
+\section{\experimental Dark [options]}
+This command provides a gravitational pressure term due to a dark-matter
+distribution.  At present, there is only one option, a standard
+\citet{NFW96} (NFW) profile.
+
+\subsection{Dark NFW virial radius = 18 [characteristic radius = 17]}
+This command specifies an NFW profile uniquely specified by their 
+virial and characteristic radii $r_{200}$ and $r_s$, respectively.
+The second parameter can be omitted and has the
+default value $r_s=r_{200}/10.$ Both parameters are interpreted as 
+logarithms of distances in \cm.
+\end{shaded}
+
+\section{Dlaw [options]}
+
+An arbitrary density law, specified by the user, will be used.
+There are two forms of this command.
+It is possible to either edit the source
+to create a new routine that calculates the density at an arbitrary depth
+or to interpolate on a table of points.
+
+If the density or density law is specified with both this command and
+others, such as \cdCommand{hden}, \cdCommand{constant pressure}, etc,
+only the last command will be honored.
+
+It is possible to specify a change in densities so extreme that the code
+will have convergence problems.
+\Cloudy\ works by linearizing all equations.
+If the density changes dramatically over a very small radius the
+conditions may change too much for the solvers to converge.  The code uses
+adaptive logic to adjust the zoning and should prevent this from happening
+but the heuristics may be fooled by drastic density laws.  The code will
+generate a warning if the density does change by too much---if
+this happens
+the cure is to not use such large density contrasts.
+
+\subsection{dlaw p1, p2, p3\dots}
+
+This is the default form of the command.  It passes the parameters on
+the command line to a user-provided function  \cdTerm{dense\_fabden},
+located in \cdFilename{dense\_fabden.cpp}.  There are up to ten
+parameters.  A new function \cdTerm{dense\_fabden}  must be written
+by the user and the
+version of \cdTerm{dense\_fabden} already in \Cloudy\ must be deleted.
+(The code will stop
+if the initial version of \cdTerm{dense\_fabden} is not replaced.)
+\Cloudy\ will call \cdTerm{dense\_fabden}
+as needed to determine the density as a function of depth.
+The arguments
+of the function are the radius and the depth.
+Both are in centimeters and are double precision variables.
+The function must return the hydrogen density (cm$^{-3}$)
+as a double precision variable.
+The code provided in the function must use the ten or fewer
+parameters in the structure \cdVariable{dense}
+to compute the density at the current position.
+
+The following is an example of a function in which the density is the
+product of the first number on the command line and the depth.
+\begin{verbatim}
+/*dense_fabden implements the dlaw command, returns density using
+ * current position and up to ten parameters on dlaw command line */
+#include "cddefines.h"
+#include "rfield.h"
+#include "dense.h"
+
+double dense_fabden(double radius, double depth)
+{
+    return( depth*dense.DensityLaw[0] );
+}
+\end{verbatim}
+
+\begin{shaded}
+\subsection{\experimental Dlaw wind}
+
+This sets up a density profile consistent with a steady-state wind
+and the continuity equation. The steady-state velocity profile is 
+parametrized as in \citet{Springmann1994}:
+\begin{equation}
+v(r) = v_\star + (v_{\infty} - v_0) \sqrt{ \beta_1 x + (1-\beta_1) x^{\beta_2} }.
+\end{equation}
+where $x\equiv 1 - r_\star/r$ and we set $r_\star$ to the inner radius of the
+cloud (except that $x$ has a minimum value 0.01 for
+computational stability).
+The mass loss rate into 4$\pi$ sterradians ($\dot{M}$) then allows
+the density via continuity:
+\begin{equation}
+n(r) = \dot{M} / ( 4\pi m_H \mu r^2 v(r) ),
+\end{equation}
+where $\mu$ is the mean molecular weight of the gas.
+The parameters must be specified in this order:
+$\dot{M}$, $v_{\infty}$, $\beta_2$, $\beta_1$, $v_0$, $v_\star$.
+Only the first three are required.  
+$\dot{M}$ should be given as \Msunpyr.
+All velocities should be given as \kmps.
+The final three may be omitted right to left and
+take default values $\beta_1 = v_0 = v_\star = 0$.
+All values are interpreted as linear values.
+
+This command sets the hydrogen density but does not create a wind.  
+It creates a density profile that mimics a wind.  
+The  \cdCommand{dlaw} command 
+(with or without the  \cdCommand{wind} keyword) 
+and the  \cdCommand{wind} command described in section 
+\ref{sec:CommandWind} are mutually exclusive, 
+and you will just end up with whichever one appeared last.  
+There is no way to combine the two.
+
+This command is experimental.
+\end{shaded}
+
+\subsection{Dlaw table [depth, radius]}
+
+If the keyword \cdCommand{table} appears on the \cdCommand{dlaw}
+command then the code will read
+in a set of ordered pairs of radii and densities.
+The original form of
+this option was added by Kevin Volk.
+There must be two numbers per line
+as in the example below.
+The first number is the log of the radius or depth
+[cm] and is followed by the log of the hydrogen density [cm$^{-3}$].
+If the
+keyword \cdCommand{depth} also appears on the command line then
+the first number is
+interpreted as the log of the depth from the illuminated face
+and the table
+must begin with a depth smaller than 10$^{-30}$ cm,
+the first point where the
+depth is evaluated.
+The first number is interpreted as the log of the radius
+if \cdCommand{depth} does not appear.
+The ordered pairs end with a line with the keyword
+\cdCommand{end} in columns 1 through~3.
+
+Linear interpolation in log-log space is done.
+The following is an example.
+\begin{verbatim}
+dlaw table depth
+continue -35 4
+continue 12 4
+continue 13 5
+continue 14 6
+continue 15 7
+end of dlaw
+\end{verbatim}
+
+Be sure that the first and last radii or depths extend beyond the computed
+geometry---this law is only to be used for interpolation and the code will
+stop if extrapolation is necessary.
+Note that the first depth must be
+smaller than $10^{-30}$~cm,
+and also that there must not be a space in the first
+column of any lines with numbers---the code will think that an end of file
+has been reached.
+Alphabetic characters can be placed anywhere on the line
+and will be ignored---I placed the word
+\cdCommand{continue} in the first four columns
+for this reason (it is actually totally ignored).
+
+\section{Fluctuations density period \dots}
+
+This specifies a density that varies as a sine wave.  It was introduced
+to investigate the effects of inhomogeneities upon the
+emission-line spectrum
+(see \citealp{Mihalszki1983}; \citealp{KingdonFerland1995}).
+The first number
+is the log of the period $P$ of the sine wave in centimeters.
+The second
+two numbers are the logs of the largest and smallest hydrogen densities
+over the sine wave.  Order is important here.
+The last optional number
+is a phase shift $\varphi$ (in radians) which allows the initial zone to occur at
+any part of the sine wave.
+If it is omitted the calculation will begin
+at the maximum density.
+If the phase is set to $\pi$ the calculation will start
+at the minimum density.
+
+The density is scaled according to the relation
+\begin{equation}
+\label{eqn:commandFluctuations}
+n\left( r \right) = \left( {\frac{{n_{\max }  - n_{\min } }}{2}} \right)
+\times \cos \left( {\Delta r\frac{{\,2\pi }}{P} + \varphi } \right) + \left(
+{\frac{{n_{\max }  + n_{\min } }}{2}} \right)\, [\mathrm{cm}^{-3}]% (32)
+\end{equation}
+where $n_{max}$ and $n_{min}$ are the maximum and minimum densities and
+$\Delta r$ is the
+depth into the cloud, measured from the illuminated face.
+
+The simulation may result in a large number of zones since the code must
+spatially resolve the density fluctuations.
+The zone thickness is not
+allowed to exceed ${\sim}$0.05 of the period so that each cycle is
+divided into at least 20 zones.
+This may result in very long execution times.
+The total number of zones (this sets the code's execution time)
+will be at least 20
+times the number of cycles over the nebula.
+
+The keyword \cdCommand{column} will replace
+the depth variable in equation \ref{eqn:commandFluctuations} with
+the total hydrogen column density.
+The period should then be the column
+density of one cycle.
+This will more evenly weight the final column density
+over low- and high-density gas.
+
+The \cdCommand{fluctuations abundances} command proves a mechanism
+for varying the gas-phase abundances of the elements.
+
+\section{Globule [density =2, depth =16, power =2]}
+
+This produces a density law that would be appropriate for a power-law
+density gradient irradiated from the outside (see, for example, \citealp{Williams1992}).  The total hydrogen density $n(r)$ is given~by
+\begin{equation}
+n\left( r \right) = n_{\mathrm{o}} \left( {\frac{{R_{scale\,depth}
+}}{{R_{scale\,depth}  - \Delta r}}} \right)^\alpha   = n_o \left( {1 -
+\frac{{\Delta r}}{{R_{scale\,depth} }}} \right)^{ - \alpha }
+\c[\mathrm{cm}^{-3}]% (33)
+\end{equation}
+where $n_o$ is the background density outside the cloud,
+with default value
+1 cm$^{-3}$, and $\Delta r$ is the depth into the cloud,
+measured from the illuminated face.
+The log of $n_o$ is the optional first number on the command line.
+The variable \cdVariable{$R_{scale}$} depth is the scale depth
+for the cloud and has a default
+of one parsec, $R_{scale\, depth} = 3.086\times 10^{18} \; \mathrm{cm}$.
+Other scale depths are specified
+by the optional second parameter, which must be entered as a log of the
+scale depth in cm.
+The optional third argument is the index $\alpha$, which has
+the default\footnote{The default index was 2 for versions 89 and before.} $\alpha = 1$. The arguments can be omitted from right to left.
+
+\section{hden 5.6, [proportional to R -2,\dots]}
+
+The first number is the log of the total (ionic, atomic, and molecular)
+hydrogen density at the illuminated face of the cloud.
+This is the sum
+\begin{equation}
+n\left( {\mathrm{H}} \right) = n\left( {{\mathrm{H}}^{\mathrm{0}} } \right) + n\left(
+{{\mathrm{H}}^ +  } \right) + 2n\left( {{\mathrm{H}}_2 } \right) +
+\sum\limits_{other} {n\left( {{\mathrm{H}}_{other}^{} } \right)}
+\, [\mathrm{cm}^{-3}] .%   (34)
+\end{equation}
+If the optional keyword \cdCommand{linear} appears then
+the number is the density itself and not its log.
+
+For situations where the hydrogen atom is close to LTE and the gas is
+hot, there is a problem in defining the neutral hydrogen density because
+of the well-known divergence of the partition function, as discussed, for
+instance, by \citet{Mihalas1978}.
+The atomic hydrogen density is defined as
+the total population in all computed levels.
+In most circumstances, i.e.,
+$n(\mathrm{H}) \leq 10^{15}\; \mathrm{cm}^{-3}$ and $T \le 10^4\; \K$,
+the ambiguity is much less than 1\%.
+
+Several options are available to specify optional power-law dependencies
+on depth variables.  These are described in the next sub-sections.
+
+\subsection{Power-law dependence on radius}
+
+The second (optional) number is the exponent  for a power-law radial
+density dependence, as in the following example:
+\begin{verbatim}
+hden 9, power =-2
+\end{verbatim}
+i.e.,
+\begin{equation}
+n\left( r \right) = n_{\mathrm{o}} \left( {r_{\mathrm{o}} } \right)\,\left(
+{\frac{r}{{r_{\mathrm{o}} }}} \right)^\alpha
+\,[\mathrm{cm}^{-3}].% (35)
+\end{equation}
+In this example $n_o$, the density at the illuminated face
+of the cloud, will
+be $10^9 \, \mathrm{cm}^{-3}$.
+The optional power law is relative to radius, the distance
+to the central object, not the depth into the cloud.
+If $\alpha = -2$ then the
+density will be proportional to the inverse square of the radius.
+Both
+density and photon flux will fall off as an inverse square and the cloud
+will tend to have the same ionization parameter (and hence physical
+conditions) across the ionized zone.
+
+\subsection{Clouds extending to infinity}
+
+For an inverse-square density law there is a critical value of the number
+of ionizing photons emitted by the central object, corresponding to an
+ionization front at infinite radius;
+\begin{equation}
+Q_{crit} \left( {\mathrm{H}} \right) = \alpha _B \left( {T_e }
+\right)n_{\mathrm{o}}^2 \,4\,\pi \;r_{\mathrm{o}}^{\mathrm{3}}
+\,\, [\mathrm{s}^{-1}] .
+\end{equation}
+A hydrogen ionization front will not be present and the model will extend
+to infinite radius when $Q(\mathrm{H}) \ge Q_{crit}(H)$.
+In this expression
+$\alpha_B(Te)$ is the
+hydrogen Case~B recombination coefficient
+and $n_o$ and $r_o$ are the inner density
+and radius respectively.
+Generally, a hydrogen ionization front will not
+be present if the density falls off faster than an inverse square law,
+but
+rather the level of ionization will tend to \emph{increase}
+with increasing radius.
+In either case, if a reasonable outer radius is not set, the calculation
+will extend to very large radii,
+an unphysically small density will result,
+and usually the code will crash due to floating point underflow,
+followed by division by zero.
+It is usually necessary to set an outer radius when
+the density falls off with an index $\alpha \le -2$,
+since, for most circumstances,
+the cloud will remain hot and ionized to infinite radius and zero density.
+
+\subsection{Power-law dependence on depth}
+
+The density will depend on the depth into the cloud rather than the radius
+if both the optional exponent \emph{and} the keyword \cdCommand{depth} appear:
+\begin{verbatim}
+hden 9, power =-2, scale depth = 13
+\end{verbatim}
+The density is given by
+\begin{equation}
+n\left( r \right) = n_{\mathrm{o}} \left( {r_{\mathrm{o}} } \right)\left( {1 +
+\frac{{\Delta r}}{{R_{scale} }}} \right)^\alpha  \, [\mathrm{cm}^{-3}]% (37)
+\end{equation}
+where \cdVariable{$R_{scale}$} is the scale depth and $\Delta r$ is the depth.
+The log of \cdVariable{$R_{scale}$} [cm] is the
+third number on the line and must be set.
+
+\subsection{Power-law dependence on column density }
+
+The local hydrogen density will depend on the total hydrogen column
+density if both the optional exponent and the keyword
+\cdCommand{column} appear;
+\begin{verbatim}
+hden 9, power =-2, scale column density = 21
+\end{verbatim}
+Here the density is given by
+\begin{equation}
+n\left( r \right) = n_{\mathrm{o}} \left( {r_{\mathrm{o}} } \right)\left( {1 +
+\frac{{N\left( {\mathrm{H}} \right)}}{{N\left( {\mathrm{H}} \right)_{scale} }}}
+\right)^\alpha  \, [\mathrm{cm}^{-3}]% (38)
+\end{equation}
+where $N(\mathrm{H})$ is the total hydrogen column density [cm$^{-2}$] from the illuminated
+face to the point in question, and $N(\mathrm{H})_{scale}\mathrm{[cm}^{-2}$] is the scale column
+density.
+The log of $N(\mathrm{H})_{scale}$ is the third number.
+

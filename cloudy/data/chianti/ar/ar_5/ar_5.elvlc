@@ -1,0 +1,16 @@
+  1 3s2.3p2               3  1 P  0.0  1          0.000       0.000000          0.000       0.000000 
+  2 3s2.3p2               3  1 P  1.0  3        765.230       0.006973          0.000       0.000000 
+  3 3s2.3p2               3  1 P  2.0  5       2028.800       0.018488          0.000       0.000000 
+  4 3s2.3p2               1  2 D  2.0  5      16298.900       0.148527          0.000       0.000000 
+  5 3s2.3p2               1  0 S  0.0  1      37912.000       0.345480          0.000       0.000000 
+ -1
+%filename: ar_5.elvlc
+%observed energy levels: Version 3.0.3 of the NIST online database. http://physics.nist.gov/PhysRefData/ASD/index.html
+%theoretical energy levels: Not available for this ion.
+% produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+%   Peter Young   -   19-Jun-2006
+
+Reference:
+Chianti  2022-02-18
+ -1

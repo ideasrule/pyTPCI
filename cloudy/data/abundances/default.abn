@@ -1,0 +1,59 @@
+#default solar abundances 
+#refer Solar abund Grevesse, N., & Sauval, A. J. 2001, Space Sci. Rev., 85, 161-174
+#chng 02 aug 20, update to these values
+Hydrogen	1.0
+Helium		0.100
+Lithium		2.04e-9
+Beryllium	2.63e-11
+Boron		6.17E-10
+#chng 02 jul 30, from 3.55 to 2.45,
+#refer C abund Allende Prieto, C., Lambert, D. L., & Asplund, M. 2002, ApJ, 573, L137
+Carbon		2.45e-4
+#chng 02 jul 30, from 9.33 to 8.53,
+#refer N abund Holweger, H. 2001, in AIP Conf. Proc. 598, Solar and Galactic Composition: A
+#refercon Joint SOHO/ACE Workshop, ed. R.F. Wimmer-Schweingruber
+#refercon (Melville, NY: AIP), 23
+Nitrogen	8.51e-5
+#chng 02 jul 30, from 7.41 to 4.90,
+#refer O abund Allende Prieto, C., Lambert, D. L., & Asplund, M. 2001, ApJ, 556, L63
+OXYGEN		4.90e-4
+FLUORINE	3.02e-8
+#chng 02 jul 30, from 1.17 to 1.00,
+#refer Ne abund	Holweger, H. 2001, in AIP Conf. Proc. 598, Solar and Galactic Composition: A
+#refercon Joint SOHO/ACE Workshop, ed. R.F. Wimmer-Schweingruber
+#refercon (Melville, NY: AIP), 23
+NEON	1.00e-4
+SODIUM	2.14e-6
+#chng 02 jul 30, from 3.80 to 3.45,
+#refer Mg abund	Holweger, H. 2001, in AIP Conf. Proc. 598, Solar and Galactic Composition: A
+#refercon Joint SOHO/ACE Workshop, ed. R.F. Wimmer-Schweingruber
+#refercon (Melville, NY: AIP), 23
+MAGNESIUM	3.47e-5
+ALUMINIUM	2.95e-6
+#chng 02 jul 30, from 3.55 to 3.44,
+#refer Si abund Holweger, H. 2001, in AIP Conf. Proc. 598, Solar and Galactic Composition: A
+#refercon Joint SOHO/ACE Workshop, ed. R.F. Wimmer-Schweingruber
+#refercon (Melville, NY: AIP), 23
+SILICON		3.47e-5
+PHOSPHORUS	3.20e-7
+SULPHUR		1.84e-5
+CHLORINE	1.91e-7
+ARGON		2.51e-6
+POTASSIUM	1.32e-7
+CALCIUM		2.29e-6
+SCANDIUM	1.48e-9
+TITANIUM	1.05e-7
+VANADIUM	1.00e-8
+CHROMIUM	4.68e-7
+MANGANESE	2.88e-7
+#chng 02 jul 30, from 3.24 to 2.81,
+#refer Fe abund Holweger, H. 2001, in AIP Conf. Proc. 598, Solar and Galactic Composition: A
+#refercon Joint SOHO/ACE Workshop, ed. R.F. Wimmer-Schweingruber
+#refercon (Melville, NY: AIP), 23
+IRON		2.82e-5
+COBALT		8.32e-8
+NICKEL		1.78e-6
+COPPER		1.62e-8
+ZINC		3.98e-8
+****************************************************
+

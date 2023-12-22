@@ -1,0 +1,40 @@
+title cooling of a collisionally ionized plasma
+#
+# commands controlling continuum =========
+cosmic rays, background
+coronal 4 vary
+database stout print
+database chianti "CloudyChiantiFe.ini" print
+species "Fe+" levels=all
+grid 4 6 0.5 sequential
+#
+# commands for density & abundances =========
+hden 0
+init "honly.ini"
+element iron on
+element iron abundance 0
+set eden 0
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0 
+#
+# other commands for details     =========
+#
+# commands controlling output    =========
+save overview "chianti_fe_cool.ovr"
+save performance "chianti_fe_cool.per"
+save grid "chianti_fe_cool.grd" last no hash
+save cooling "chianti_fe_cool.col" last no hash
+save emitted continuum "chianti_fe_cool.con" units angstroms
+save monitors "chianti_fe_cool.asr" last
+#
+# commands giving the monitors    =========
+## >>chng 11 apr 26, 2nd -18.86 to .83, 3rd -18.42 to .47, Ar seq recom rates
+## >>chng 11 apr 29, 2nd -18.83 to .86, 3rd -18.42 to .47, Ar seq recom rates
+## >>chng 23 jun 27, 1st -19.07 to .1799, update Fe+ model to Smyth+19
+monitor ctot grid "chianti_fe_cool.dat"
+
+This tests the use of Chianti limited to Fe ions, and the Kurucz 
+Fe III, IV, and V added by Matt Lykins
+

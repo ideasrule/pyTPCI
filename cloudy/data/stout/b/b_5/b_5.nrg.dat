@@ -1,0 +1,31 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=10 were downloaded using ADM.
+#
+# NB NB NB  np energy used for shell n up to n=10
+#
+ 1 -1 -1 -1 0
+ 2 -1 -1 -1 2058150.76086667
+ 3 -1 -1 -1 2439240.89956667
+ 4 -1 -1 -1 2572624.587
+ 5 -1 -1 -1 2634360.99687333
+ 6 -1 -1 -1 2667896.10824
+ 7 -1 -1 -1 2688116.34378333
+ 8 -1 -1 -1 2701239.84777333
+ 9 -1 -1 -1 2710237.16048333
+10 -1 -1 -1 2716672.81407
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L12548 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=12548&comment_code=&amp;element=B&amp;spectr_charge=5&amp;ref=12548&amp;type=E
+# PUBCON    Title: Additions to the Spectrum and Energy Levels and a Critical Compilation of Helium-like and Hydrogen-like Boron, B IV and B V
+# PUBCON  Authors: A. E. Kramida, A. N. Ryabtsev, J. O. Ekberg, I. Kink, S. Mannervik, and I. Martinson
+# PUBCON  Journal: Phys. Scr. 78, 025302 (2008)
+# PUBCON      DOI: https://doi.org/10.1088/0031-8949/78/02/025302

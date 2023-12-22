@@ -1,0 +1,48 @@
+title create output file with list of func_lines
+print line precision 6 
+database h2 levels large 
+species "Fe+" levels=all 
+# report all species in use
+database print
+test
+#
+# commands controlling continuum =========
+# commands for density & abundances =========
+# commands controlling geometry  =========
+# other commands for details     =========
+#
+# commands controlling output    =========
+# this creates the file "func_lines.lab" that contains a list
+# of all emission labels
+save overview "func_lines.ovr"
+save performance "func_lines.per"
+save line labels "func_lines.lab"
+# the save species xxx series of line-related reports
+save species labels "func_lines.spclab" all
+save species lines "func_lines.spclin" all
+save species levels units wavenumber "func_lines.spclev" all
+# this must come last since code stops after doing it
+# this creates the file "func_lines.lis" that contains a list
+# of the emission func_lines that are transported. 
+save line data "func_lines.lis"
+# 
+# There is nothing extra to assert, since test does include many asserts
+# commands giving the monitors    =========
+# 
+# func_lines.in
+# class function 
+# ========================================
+# 
+
+This runs the standard "test" case, and then creates
+the line data and labels files.	 Test by itself includes
+many asserts, so no further asserts are needed here.
+
+The file func_lines.lab is a useful list of all lines predicted by the code.
+Cut and paste this into other places when you need to find a particular
+emission line.
+
+The func_lines lines.dat gives atomic data for all the lines, and their
+critical density at 10000 K.
+The large H2 and Fe II model atoms are turned on to include their lines. 
+

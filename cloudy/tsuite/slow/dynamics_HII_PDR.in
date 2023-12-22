@@ -1,0 +1,78 @@
+title fast H+He+metals (low ionization parameter) 009 km s 
+failures 1
+##
+## ADVECTION PARAMETERS
+##
+wind -9 advection no continuum
+set dynamics pressure mode subsonic
+iterate 10 to convergence 0.001
+## iterate 10 to convergence 0.001
+set nend 2000 
+##
+## INPUT SPECTRA
+##
+## hot wd star
+blackbody 120000
+phi(h) 9.5
+sphere 
+turbulence 8 km/sec
+## 
+## OTHER PHYS PARAMS
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, update 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+normalize to "Q(H)" 4861.32A 
+##
+hden 3.5
+##init "fast.ini"
+init "ism.ini"
+abundances hii region no grains
+grains orion no qheat single 
+##
+## STOPPING CRITERIA
+##
+stop thickness 18
+stop efrac -3
+## >>chng 15 oct 27, must not stop due to low-temperature
+## set equivalent Av
+stop temperature off
+stop Av point 0.0333
+no molecules
+##
+## SPEEDUP
+##
+database h-like levels small
+database he-like levels small
+##
+## Output
+##
+## the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save performance "dynamics_HII_PDR.per"
+save dr "dynamics_HII_PDR.dr"
+save monitors "dynamics_HII_PDR.asr"
+save overview "dynamics_HII_PDR.ovr"
+save wind "dynamics_HII_PDR.wnd"
+## 
+##
+## asserts
+## >>chng 09 feb 23, from 0.37 to 0.3907, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 nov 16, from 0.3907 to 0.4246, adjust newmole monitors
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 oct 27, must not stop due to low-temperature
+## set equivalent Av, from 0.4246 to 0.9713
+## >>chng 16 dec 15, from 0.9713 to 0.4217, fix abrupt end of sim at 4 iterations
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, update 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+## >>chng 21 sep 11, from 0.4217 to 0.4021, LAMDA update
+monitor line "H  1" 4861.32A 0.4021
+#
+# dynamics_HII_PDR.in
+#
+

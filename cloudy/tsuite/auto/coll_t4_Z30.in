@@ -1,0 +1,131 @@
+title coronal equilibrium at 10^4 K
+#
+# commands controlling continuum =========
+coronal 4
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling geometry  =========
+stop column density 15 
+#
+# commands for density & abundances =========
+hden 10
+metals 30 
+#
+# commands controlling output    =========
+save performance "coll_t4_Z30.per"
+save monitors "coll_t4_Z30.asr" 
+save overview "coll_t4_Z30.ovr" 
+save continuum "coll_t4_Z30.con"  units angstroms 
+#
+# commands giving the monitors    =========
+##
+## >>chng 12 dec 12, from 8.783 to 10.6, first run
+## >>chng 21 sep 11, from 10.6 to 10.53, LAMDA update
+## >>chng 23 mar 17, from 10.53 to 10.42, add SiS and Lamda model"
+## >>chng 23 may 15, from 10.42 to 10.35, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from 10.35 to 12.86, GS update UMIST to 2012 and set upper limit on T
+monitor CO column density 12.86 errr 0.1
+## >>chng 12 dec 12, from 7.696 to 7.935, first run
+## >>chng 13 feb 10, from 7.935 to 7.829, H2,e-=>H-,H update
+## >>chng 23 may 15, from 7.829 to 7.908, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from 7.908 to 7.632, GS update UMIST to 2012 and set upper limit on T
+monitor H2 column density 7.632 errr 0.1
+##
+## >>chng 12 dec 12, from -2.861 to -4.362, first run
+## >>chng 13 feb 01, from -4.362 to -4.479, BUGFIX, largely undo r6703
+## >>chng 13 may 07, from -4.479 to -4.543, bnl_effective change
+## >>chng 13 nov 22, from -4.543 to -4.415, collapsed branch merge r8609
+## >>chng 16 aug 07, from -4.415 to -4.583, Fran bug fix
+## >>chng 16 oct 21, from -4.583 to -4.523, new l-changing rates from Hlike_HS87 reintegration
+## >>chng 23 mar 17, from -4.523 to -4.804, add SiS and Lamda model"
+## >>chng 23 jul 15, from -4.804 to -4.908, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Hydrogen  2 -4.908 error 0.15
+##
+## >>chng 12 dec 12, from -9.46 to -11.29, first run
+## >>chng 16 mar 21, from -11.29 to -10.98, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 16 aug 18, from -10.98 to -10.83, enhanced coll ion from highest n
+## >>chng 19 jun 11, from -10.83 to -11, Percival and Richards (1978) used for He-like ions
+## >>chng 23 jul 15, from -11 to -11.93, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Helium    2 -11.93 error 0.30
+##
+## >>chng 12 dec 12, from -2.64 to -4.054, first run
+## >>chng 23 mar 17, from -4.054 to -3.795, add SiS and Lamda model"
+## >>chng 23 jul 15, from -3.795 to -5.911, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Carbon    2 -5.911 error 0.20
+##
+## >>chng 12 dec 12, from -2.762 to -4.268, first run
+## >>chng 13 feb 01, from -4.268 to -4.383, BUGFIX, largely undo r6703
+## >>chng 13 nov 19, from -4.383 to -4.454, fix CT bug in mole_eval_balance
+## >>chng 13 nov 22, from -4.454 to -4.319, collapsed branch merge r8609
+## >>chng 16 aug 07, from -4.319 to -4.484, Fran bug fix
+## >>chng 16 oct 21, from -4.484 to -4.425, new l-changing rates from Hlike_HS87 reintegration
+## >>chng 23 mar 17, from -4.425 to -4.696, add SiS and Lamda model"
+## >>chng 23 jul 15, from -4.696 to -5.585, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Nitrogen  2 -5.585 error 0.15
+##
+## >>chng 12 dec 12, from -2.956 to -4.457, first run
+## >>chng 13 feb 01, from -4.457 to -4.574, BUGFIX, largely undo r6703
+## >>chng 13 may 07, from -4.574 to -4.638, bnl_effective change
+## >>chng 13 nov 22, from -4.638 to -4.51, collapsed branch merge r8609
+## >>chng 16 aug 07, from -4.51 to -4.678, Fran bug fix
+## >>chng 16 oct 21, from -4.678 to -4.618, new l-changing rates from Hlike_HS87 reintegration
+## >>chng 23 mar 17, from -4.618 to -4.899, add SiS and Lamda model"
+## >>chng 23 jul 15, from -4.899 to -5.297, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Oxygen    2 -5.297 error 0.15
+##
+## >>chng 12 dec 12, from -1.495 to -1.074, first run
+## >>chng 13 feb 01, from -1.074 to -0.9826, BUGFIX, largely undo r6703
+## >>chng 23 mar 17, from -0.9826 to -0.6859, add SiS and Lamda model"
+## >>chng 23 jul 15, from -0.6859 to -0.7371, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Magnesium 1 -0.7371  error 0.1
+##
+## >>chng 12 dec 12, from -3.234 to -2.082, first run
+## >>chng 13 feb 01, from -2.082 to -2.014, BUGFIX, largely undo r6703
+## >>chng 23 mar 17, from -2.014 to -1.952, add SiS and Lamda model"
+## >>chng 23 jul 15, from -1.952 to -1.871, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Aluminium 1 -1.871 error 0.1
+##
+## >>chng 12 dec 12, from -0.9387 to -0.2437, first run
+## >>chng 16 dec 20, from -0.2437 to -0.1864, add secondary autoionization to DR suppression
+## >>chng 23 mar 17, from -0.1864 to -0.3962, add SiS and Lamda model"
+## >>chng 23 jul 15, from -0.3962 to -0.2698, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Silicon   1 -0.2698 error 0.15
+##
+## >>chng 12 dec 12, from -1.017 to -2.826, first run
+## >>chng 13 feb 01, from -2.826 to -2.893, BUGFIX, largely undo r6703
+## >>chng 23 mar 17, from -2.893 to -3.838, add SiS and Lamda model"
+## >>chng 23 may 15, from -3.838 to -3.908, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -3.908 to -3.528, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Sulphur   2 -3.528 error 0.15
+##
+## >>chng 12 dec 12, from -3.391 to -3.51, first run
+## >>chng 13 feb 01, from -3.51 to -3.564, BUGFIX, largely undo r6703
+## >>chng 23 jul 15, from -3.564 to -5.381, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Argon     2 -5.381 error 0.1 
+##
+## >>chng 12 dec 12, from -3.809 to -2.31, first run
+## >>chng 13 feb 01, from -2.31 to -2.191, BUGFIX, largely undo r6703
+## >>chng 13 feb 10, from -2.191 to -2.116, H2,e-=>H-,H update
+## >>chng 13 nov 22, from -2.116 to -2.193, collapsed branch merge r8609
+## >>chng 16 aug 07, from -2.193 to -2.082, Fran bug fix
+## >>chng 23 mar 17, from -2.082 to -1.863, add SiS and Lamda model"
+## >>chng 23 may 15, from -1.863 to -1.796, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -1.796 to -1.661, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Iron      1 -1.661 error 0.15
+##
+## >>chng 12 dec 12, from 7.174 to 7.416, first run
+## >>chng 23 mar 17, from 7.416 to 7.329, add SiS and Lamda model"
+monitor eden 7.329 error 0.1
+##
+#
+# coll_t4_Z30.in
+# class coronal  
+# ========================================
+
+This tests conditions of collisional equilibrium at low densities
+and high metallicity, where H-O CX will strongly affect
+ionization of H
+
+This is the high Z mate to coll_t4.in

@@ -1,0 +1,113 @@
+title test grain energy conservation
+#
+# commands controlling continuum =========
+# the incident continuum is two parts
+# star and flux of photons striking it
+## >>chng 03 sep 12, now go deep into omc1 and cannot assume plane par geometry
+# this is the photosphere of the OVI star, its temperature and Q(H)
+# this is the result of this command
+# table star kurucz 39600 K
+# and makes it possible to run these orion sims without
+# installing the stellar atmosphere files 
+table SED nuFnu "star_kurucz_39600.dat" 
+phi(H) 13
+# this adds the observed hot brems, its temperature and the flux of 
+# photons striking the cloud
+brems 6
+phi(h) 10
+## >>chng 03 apr 30, add cosmic rays to model
+# add cosmic rays, which are important in the pdr
+cosmic rays, background
+#
+# commands controlling geometry  =========
+# this sets the separation from the star and the face of the cloud
+## >>chng 00 oct 13, from 50 to 10
+## >>chng 04 nov 09, introduce off option
+# this turns off the stop temperature opption
+# the sim will not stop due to temperature
+stop temperature off
+# this is typical of a gmc, larson 1981
+# stop total hydrogen column density 22
+stop av 1000 
+## >>chng 02 dec 21, change to set thickness, with new hmole
+## co hits asymptote at 0.9 and so does not stop due to co
+## >>chng 03 sep 12, co network cleaned up, reset thickness to
+## 1 parsec, roughly the width of the cloud
+# this sets the thickness of the HII region & PDR
+##>>chng 05 nov 22, from 1 to 0.5 pc, so stop before ices fully form
+# stop thickness 0.5 linear parsec 
+## >>chng 01 dec 30, make constant gas pressure to avoid Lya rad pressure
+# assume constant pressure
+# constant gas pressure 
+## >>chng 06 aug 21, make total pressure so like orion_hii_open
+constant pressure 
+# this will result in a milli gauss B-field in molecular region
+magnetic field -5 gauss
+# the orion environment full covers the star, so turn on sphere
+sphere 
+# we have a spherical geometry but want to simulate observing
+# through a spectrometer's slit.  use the aperture
+# command for this
+aperture beam 
+#
+# other commands for details     =========
+## >>chng 03 sep 12, add this command
+# mimic existence of unmodeled molecular gas
+double 
+# iterate since lines optically thick
+# iterate
+# the observed microturbulence, partially a flow, so not included in pressure
+turbulence 8 km/sec no pressure
+# set the line width so lines appear on the save continuum
+set save line width 10 km/s
+# there should be no failures at all
+failures 3
+#
+# this model goes quite deep, needs lots of zones
+## >>chng 06 aug 12, do not let zoness become thick to IR grain emission
+set nend 2200
+#
+# commands for density & abundances =========
+# this is the log of the initial H density, cm-3
+hden 4
+# this will speed up the calculation a bit
+init file="ism.ini"
+# this uses HII region abundances, but no grains
+abundances hii region no grains
+# this turns on orion grains, but leaves quantum heating off to save time
+grains orion no qheat
+# turn on PAHs, with an abundance that depends on H0 fraction,
+# as suggested by long-slit observations of Orion bar,
+# with an abundance 3x larger than default built into the code
+grains pah function 3 no qheat 
+# 
+# commands controlling output    =========
+normalize to "O  1" 63.17m
+# print lots of faint CO lines
+print line faint -4
+save overview last "orion_hii_pdr.ovr"
+save heating "orion_hii_pdr.het"
+save cooling "orion_hii_pdr.col"
+save dr last "orion_hii_pdr.dr"
+save results last "orion_hii_pdr.rlt"
+save continuum last "orion_hii_pdr.con" units microns
+save hydrogen 21 cm last "orion_hii_pdr.21cm"
+save hydrogen lya last "orion_hii_pdr.lya" 
+save element silicon last "orion_hii_pdr.sil" 
+save lines cumulative "orion_hii_pdr.lin"
+TALL   1m 
+end of lines
+##
+## these are for the grains
+save grain extinction last  "orion_hii_pdr.grnext"
+save grain charge last "orion_hii_pdr.grnchr" 
+save grain potential last "orion_hii_pdr.grnpot" 
+save grain temperature last "orion_hii_pdr.grntem" 
+#
+
+this is Nick's proposed test of energy conservation in vastly
+dustly atmosphere
+
+TALL is sum of entire radiation field, should be a constant 
+3 erg cm-2 s-1
+

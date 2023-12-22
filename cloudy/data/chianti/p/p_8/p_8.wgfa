@@ -1,0 +1,44 @@
+    1    2      17397.356      0.000e+00      4.245e+00 
+    1    3      12792.631      0.000e+00      7.492e-05 
+    2    3      48332.528      0.000e+00      4.463e-01 
+    1    4       1913.656      0.000e+00      2.853e+01 
+    2    4       2150.168      0.000e+00      6.749e+00 
+    3    4       2250.276      0.000e+00      4.110e-04 
+    1    5        902.535      0.000e+00      1.854e-01 
+    2    5        951.919      0.000e+00      3.192e+02 
+    4    5       1708.146      0.000e+00      6.757e+00 
+    1    6        247.657      5.393e-01      1.172e+10 
+    2    6        251.234      1.776e-01      3.752e+09 
+    4    6        284.472      2.157e-03      3.553e+07 
+    1    7        244.565      1.834e-01      6.815e+09 
+    2    7        248.052      1.080e-01      3.902e+09 
+    3    7        249.331      1.428e-01      5.105e+09 
+    4    7        280.400      7.205e-05      2.037e+06 
+    5    7        335.468      3.352e-04      6.619e+06 
+    2    8        246.334      1.453e-01      1.597e+10 
+    1    9        178.420      3.385e-03      2.363e+08 
+    2    9        180.269      8.662e-05      5.923e+06 
+    3    9        180.943      1.876e-04      1.273e+07 
+    4    9        196.765      9.326e-01      5.353e+10 
+    5    9        222.382      7.857e-02      3.531e+09 
+    7   10        187.051      3.542e-04      6.750e+07 
+    9   10        261.078      4.590e-01      4.490e+10 
+ -1
+%filename:  /data2/svn/chianti/dbase/trunk/p/p_8/p_8.wgfa
+%filename: p_8.wgfa
+%observed energy levels: Edlen, B., 1983, Phys. Scr., 28, 51
+%Radiative data transition within the ground configuration: Tachiev, G.I., Froese Fischer, C., 2002, A&A. 385, 716
+%Radiative data 3-4 and 4-5 transitions: Froese Fischer, C., Saha, H.P., 1983, Phys. Rev. A., 28, 3169
+%Radiative data allowed transitions: Landi, E. 2005, A&A, 434, 365
+% Comment: A values for transitions 3-4 and 4-5 have been corrected to account for observed level energies.
+%produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+% E. Landi - Apr 2003
+
+ K. Dere  -  minimum branching ratio =   1.00e-05
+    2017 December 06
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

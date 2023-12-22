@@ -1,0 +1,94 @@
+title measure Rayleigh scattering of Lya
+# model from Korista, K., & Ferland, G. 1998, ApJ, 495, 672
+#
+# commands controlling continuum =========
+agn 6.683 -1.20 -1.20 -0.90
+ionization parameter 1.0
+#
+# commands for density & abundances =========
+init file = "ism.ini"
+no level 2 lines ## slight speedup, for consistency with old ver of ism.ini
+abundances old solar 84 
+hden 11.0
+#
+# commands controlling geometry  =========
+stop total column density = 23.75
+#
+# other commands for details     =========
+iterate 
+#
+# commands controlling output    =========
+normalize to "FeKa" 1.78
+print line faint -1
+print lines inward
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save overview "agn_blr_albedo.ovr"
+save performance "agn_blr_albedo.per"
+save continuum last "agn_blr_albedo.con" units kev
+save dr "agn_blr_albedo.dr" 
+save reflected continuum last "agn_blr_albedo.ref"
+save emitted continuum last "agn_blr_albedo.emt"
+save monitors last "agn_blr_albedo.asr"
+#
+# commands giving the monitors    =========
+# must assert the luminosity since change in this 
+# line would appear to change the rest of the spectrum
+monitor line luminosity "FeKa" 1.78 10.070
+## >>chng 21 sep 11, from 26.2 to 27.41, LAMDA update
+monitor line "nFnu" 1000 27.41
+monitor line "nInu" 1000 64.663
+## >>chng 13 jul 24, wl from 925.1 to 925.144A, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from 26 to 27.23, LAMDA update
+monitor line "nFnu" 925.144A 27.23
+## >>chng 13 jul 24, wl from 925.1 to 925.144A, increased wl precision to 6 sig. fig.
+monitor line "nInu" 925.144A 64.05
+## >>chng 11 sep 15, from 24.8 to 26.51, Chianti for Fe moderate to high ions
+monitor line "nFnu" 897.8 26.51
+##
+## >>chng 03 dec 08, from 57.7 to 60.7, chng zoning, ots
+## >>chng 11 sep 15, from 60.7 to 56.45, Chianti for Fe moderate to high ions
+monitor line "nInu" 897.8 56.45
+##
+## >>chng 04 sep 30, from 5 to 7, conv_base conv heat cool
+## >>chng 08 dec 08, from 7 to 4.95, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 4.95 to 18.33, merging newsolvers branch
+## >>chng 09 jan 16, from 18.33 to 18.22 (error 0.04), average of 10 runs
+## >>chng 09 feb 23, from 18.22 to 19.17, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 apr 18, from 19.17 to 19.95, refactor esc dest probs to sync with cooling
+## >>chng 09 jun 26, from 19.95 to 18.89, remove several dampers
+## >>chng 09 jul 28, from 18.89 to 18.38 mean vs08+gcc bcx
+## >>chng 11 aug 05, from 18.38 to 23.34, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 11 sep 15, from 23.34 to 17.05, Chianti for Fe moderate to high ions
+## >>chng 13 nov 05, from 17.05 to 5.994, convergence branch changes
+## >>chng 14 apr 07, from 5.994 to 4.397, move H/C out of ConvBase loop
+monitor itrzn 4.397 
+##
+## >>chng 08 dec 08, from 130 to 99, upper limit -> equals (r2515)
+## >>chng 09 feb 23, from 99 to 87, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 15, from 87 to 90, gradual approach to outer edge
+## >>chng 09 jun 26, from 90 to 91, remove several dampers
+## >>chng 09 jun 28, from 91 to 90, check convergence outward Hb
+## >>chng 10 aug 12, from 90 to 108, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 sep 15, from 108 to 146, Chianti for Fe moderate to high ions
+## >>chng 12 oct 26, from 146 to 166, adjust montiors to this branch
+## >>chng 12 nov 28, from 166 to 178, Make HII dr limit symmetric
+## >>chng 13 jan 10, from 178 to 161, fix in-zone continuum shielding
+## >>chng 13 feb 01, from 161 to 178, BUGFIX, largely undo r6703
+## >>chng 13 nov 13, from 178 to 234, resolve face at all freqs
+## >>chng 13 nov 25, from 234 to 220, convergence branch changes
+## >>chng 18 jun 20, from 220 to 210, #bugfixes at front face r12134:12136
+## >>chng 19 aug 06, from 210 to 225, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor nzone 225 
+##
+# agn_blr_albedo.in
+# class blr 
+# ========================================
+
+This model computes the albedo of a fairly
+standard BLR cloud.  This is the type of
+model that was presented in the BLR albedo
+paper by Korista & Ferland, 1998, ApJ 495, 672.
+
+The asserts then check that these continua have the expected brightness.
+

@@ -1,0 +1,57 @@
+title He atom in LTE for a large range of Te and density, with no molecules and no collapsed levels and no collisions
+#
+# commands controlling continuum =========
+blackbody 4.3 STE vary
+grid 3.7 to 6.5 step 0.1 sequential
+#
+# commands for density & abundances =========
+hden 1 
+## set eden 18
+# a high he abundance so that it dominates 
+element helium abundance 18 vary 
+grid 4 to 18 2.0
+init file "hheonly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+no molecules
+database h-like collisions off
+database he-like collisions off
+set dr -10
+#
+# commands controlling output    =========
+print he-like departure helium 
+print he-like population helium 
+print h-like departure helium 
+print h-like population helium 
+normalize to "Inci" 4860 
+print line faint -2
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save grid "limit_lte_he1_nomole_ste_nocoll2.grd"
+save overview "limit_lte_he1_nomole_ste_nocoll2.ovr"
+save performance "limit_lte_he1_nomole_ste_nocoll2.per"
+save heating "limit_lte_he1_nomole_ste_nocoll2.het" 
+save cooling "limit_lte_he1_nomole_ste_nocoll2.col" 
+save dr "limit_lte_he1_nomole_ste_nocoll2.dr" 
+save monitors "limit_lte_he1_nomole_ste_nocoll2.asr" 
+#
+# commands giving the monitors    =========
+# >>chng 14 dec 14, Badnell S DR, increase error
+monitor he-like helium excited departures 1 ZeroOK 0.15
+monitor h-like helium excited departures 1 ZeroOK 0.15
+monitor temperature face grid "ste_temps.dat"
+# limit_lte_he1_nomole_ste_nocoll2.in 
+# class limit 
+# ========================================
+# 
+
+test whether a gas dominated by He goes to LTE in a range of conditions.
+The level populations should be in LTE, the departure coefficients
+should be unity, and the temperature equal to the BB temp.
+
+These are STE calculations with no collapsed levels, no collisions,
+and no molecules, so these models should stringently test the
+thermodynamic equilibrium limit of radiative coupling terms.

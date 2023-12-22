@@ -1,0 +1,197 @@
+\chapter{GLOSSARY OF SYMBOLS}
+% !TEX root = hazy2.tex
+
+As far as possible, the notation used by \Hazy\ follows
+standard texts (AGN3; \citealp{Mihalas1978}).
+This is a summary of some of the symbols used.
+
+The fundamental constants used by the code are from the
+\href{http://physics.nist.gov/cuu/Constants/index.html}{
+CODATA recommended values}.
+Constants are contained in the header \cdFilename{physconst.h}.
+
+\begin{tabbing}
+  \textbf{Symbol}\quad \= \textbf{Description}\hspace{10em} \= \textbf{Units}\hspace{8em} \=
+  \textbf{Notes}\quad\quad \\
+  $a$ \>  Stefan radiation density \>   erg cm$^{-3}$ K$^{-4}$ \>
+$7.56464\times 10^{-15}$\\
+$a$ \>  damping constant \>   ---\\
+$a_o$ \>  Bohr radius \>  $\hbar
+/{m_e}{c^2}$ cm \>  $0.5291775\times 10^{-8}/Z$\\
+$A_{rad}$ \>   radiative acceleration \>  cm s$^{-2}$\\
+$A_{ul}$ \>  radiative rate from level $u$ to $l$ \>  s$^{-1}$\\
+ $b_n$ \>  departure coefficient \> ---\\
+$B$ \>  magnetic field \>  esu \>  \\
+$B_\nu$ \>  Planck function \>  erg cm$^{-2}$ s$^{-1}$ Hz$^{-1}$ sr$^{-1}$\\
+$c$ \>   speed of
+light \>  cm s$^{-1}$ \>   $2.997925\times 10^{10}$\\
+$C$ \>  collisional rate \>  s$^{-1}$\\
+$C_{ul}$ \>  line collision rate \>  s$^{-1}$\\
+$D_{ul}$ \>  line destruction probability \> ---\\
+$f$ \>  oscillator strength\> ---\\
+$f(r)$ \>  filling factor \> --- \> \\
+$f_\nu$ \>  flux density \>  erg cm$^{-2}$ s$^{-1}$ Hz$^{-1}$\\
+$F_\nu$ \>  flux density \>  erg s$^{-1}$
+Hz$^{-1}$\\
+$g$ \>  grain asymmetry factor \> ---\\
+$g_i$ \>  statistical weight \> ---\\
+$g_{III}$ \>  T
+aver free-free gaunt factor \> ---\\
+$g_\odot$ \>  Solar surface gravity \>  cm
+s$^{-2}$ \>  $2.74\times 10^4$\\
+$G$ \> gravitational constant \>  dyne cm$^2$ g$^{-2}$ \>  $6.673\times 10^{-8}$\\
+$G$ \>  energy gains,
+heating \>  erg cm$^{-3}$ s$^{-1}$\\
+$h$ \>  Planck's constant \>  erg s \>  $6.6262\times 10^{-27}$\\
+$\hbar $ \>  Planck's constant \>  erg s \>   $1.0546\times 10^{-27}$\\
+$I$ \>  integrated intensity \>  erg s$^{-1}$ sr$^{-1}$ Hz$^{-1}$\\
+$I_n$ \>  ionization potential of level n \>   erg Ryd\\
+$I_\nu$ \>  intensity \>  erg s$^{-1}$ sr$^{-1}$ Hz$^{-1}$\\
+$J$ \>  integrated mean intensity \>  erg s$^{-1}$ sr$^{-1}$\\
+$J_\nu$ \>  mean intensity \>  erg s$^{-1}$ sr$^{-1}$ Hz$^{-1}$\\
+$k$ \>  Boltzmann constant \>  eV deg$^{-1}$ \> $8.6171\times 10^{-5}$\\
+$k$ \>  Boltzmann constant \>  erg deg$^{-1}$ \>  $1.38062\times 10^{-16}$\\
+$L_\odot$ \>  luminosity of sun \>  erg s$^{-1}$ \>  $3.826\times10^{33}$\\
+$m_A$ \>  mass  of atom A \>  gm\\
+$m_{\mathrm{AMU}}$ \>  atomic mass unit \>  gm \>  $1.6605402\times10^{-24}$\\
+$m_e$ \>  electron mass \>  gm \>  $9.10956\times 10^{-28}$\\
+$m_e$ c$^2$ \>  electron energy \>  Ryd \>  $3.75584\times10^4$\\
+$m_p$ \>  proton mass \>  gm \>  $1.6726231\times 10^{-24}$\\
+$M_J$ \>  Jeans' mass \>  gm\\
+$M_\odot$ \>  mass of the sun \>  gm \>  $1.989\times 10^{33}$\\
+$M_\oplus$ \>  mass of the Earth \>  gm \>  $5.977\times 10^{27}$\\
+$n_e$ \>  electron
+density \>  cm$^{-3}$\\
+$n_j$ \>  population of level $j$ \>  cm$^{-3}$\\
+$n_p$ \>  proton density \> cm$^{-3}$\\
+$n(H)$ \>  total
+H density, all forms \>  cm$^{-3}$\\
+$n(x)$ \>  density of species x \>  cm$^{-3}$\\
+$n(cr)$ \>  cosmic ray
+density \>  cm$^{-3}$\\
+$n$ \>  atom's level \> --- \\
+$n(\mathrm{H}_{tot})$ \>  H density, all forms \>  cm$^{-3}$\\
+$N$(x) \>  column density
+of species x \>  cm$^{-2}$\\
+$N(\mathrm{H}_{tot})$ \>  total H col den, all forms \>   cm$^{-2}$\\
+$N_{\mathrm{eff}}$ \>  effective H
+column density \>  cm$^{-2}$\\
+$ P*$(x) \>  LTE relative population \>  cm$^3$\\
+$P_{gas}$ \>  gas pressure \>  dyn
+cm$^{-2}$\\
+$P_{lines}$ \>  line radiation pressure \> dyn cm$^{-2}$\\
+$P_{tot}$ \>  total pressure \>  dyn cm$^{-2}$\\
+$P_{ul}$ \>  line
+escape probability \> ---\\
+$P_{\tau x}(n)$ \>  continuum escape prob \> ---\\
+pc \>  parsec \>  cm \>  $3.085678\times 10^{18}$\\
+$q_{ij}$ \>  line collisional rate coefficient \>  cm$^3$ s$^{-1}$\\
+$q_n$ \>
+collisional rate coefficient \>  cm$^3$ s$^{-1}$\\
+$q_e$ \>  electron charge \>   esu \>
+$4.80325\times 10^{-10}$\\
+$Q_{\mathrm{abs}}$ \>  grain absorption efficiency \> ---\\
+$Q$(H) \>  hydrogen ionizing photons \>
+s$^{-1}$\\
+$r$ \>  radius \>  cm\\
+$r_{l,u}$ \>  rate \>  s$^{-1}$\\
+$R_0$ \>  inner radius \>  cm\\
+$R$ \>  total to selective extinction \> ---\\
+$R_{\mathrm{H}}$ \>  Rydberg unit for H \> ---\\
+$R_\infty$ \>  Rydberg unit for inf mass \> ---\\
+$R_{\mathrm{AU}}$ \>  radius of Earth's orbit \>  cm \>  $1.4959\times 10^{13}$\\
+$R_+$ \>  radius of the
+Earth \>  cm \>  $6.378\times10^{18}$\\
+$R_\odot$ \>  radius of the sun \>  cm \>  $6.9599\times 10^{10}$\\
+$T_e$ \>  electron temperature \>
+cm$^{-3}$\\
+$T_{eff}(\odot)$ \>  Sun's effective temperature \>  K \>  $5770 \K$\\
+$T_{exc}$ \>  excitation
+temperature \>  K \> \\
+$T_{color}$ \>  color temperature \>  K\\
+$T_{low}$ \>  lowest temp allowed \>  K \>   \TEMPLIMITLOW\\
+$T_{u}$ \>  energy density temperature \>  K\\
+$u$ \>  energy density \>  erg cm$^{-3}$\\
+$U_g$ \>  grain
+potential \>  volt\\
+$u$ \>  velocity (mean or projected) \>  cm s$^{-1}$\\
+$\bar u$ \>  mean particle speed \>  cm s$^{-1}$\\
+$u_{Dop}$ \>  Doppler velocity \>  cm s$^{-1}$\\
+$u_{exp}$ \>  expansion
+velocity \>  cm s$^{-1}$\\
+$u_{th}$ \>  thermal velocity \>  cm s$^{-1}$\\
+$u_{turb}$ \>  turbulent velocity \>  cm s$^{-1}$\\
+$V_g$ \>  grain potential \>  eV\\
+$V_n$ \>  grain work function \>  eV\\
+$W$ \>  geometric dilution factor \> ---\\
+$x$ \>  relative shift from line center \> ---\\
+$X_c$ \>  continuous to total opacity \> ---\\
+$\hat Y$ \>
+grain photoelectric yield \> ---\\
+year \>  \>  s \>  $3.156\times 10^7$\\
+$z$ \>  redshift \> ---\\
+$Z$ \> nuclear
+charge \> ---\\
+$\alpha$ \>  Fine structure constant \>  $q_e^2/( {\hbar c} )$ \>
+1/137.036\\
+$\alpha(n, T)$ \>  recombination coefficient \>  cm$^3$ s$^{-1}$\\
+$ \bar \alpha (n,T)$ \>
+effec recomb coefficient \>  cm$^3$ s$^{-1}$\\
+$\alpha_\nu$ \>  continuous abs cross section \>
+cm$^2$\\
+$\alpha_{lu}$ \>   line absorption cross section \>  cm$^2$\\
+$\alpha_\beta$ \>  Case B recomb rate coef \>  cm$^3$
+s$^{-1}$\\
+$\beta$ \>  recombination cooling coef \>  cm$^3$ s$^{-1}$\\
+$\eta_\nu$ \>  photon occupation number \> ---\\
+$\delta r$ \>  zone thickness \>  cm\\
+$\Delta r$ \>  depth into cloud \>  cm\\
+$\gamma_u,l$ \>  continuum pumping probability \> ---\\
+$\Gamma_n$ \>  photoionization rate \>  s$^{-1}$\\
+$\Gamma$ \>  reciprocal
+lifetime of up level \>  s$^{-1}$\\
+$\Gamma_{OTS}$ \>  OTS photoionization rate \>   s$^{-1}$\\
+$\kappa$ \>  absorption opacity \>
+cm$^{-1}$\\
+$\kappa_{lu}$ \>  line absorption opacity \>  cm$^{-1}$\\
+$\kappa_s$ \>  continuous scattering opacity \>  cm$^{-1}$\\
+$\kappa_\nu$ \>  continuous absorption opacity \>  cm$^{-1}$\\
+$\lambda_J$ \>  Jeans' length \>   cm\\
+$\Lambda$ \>  energy loss,
+cooling \>  erg cm$^{-3}$ s$^{-1}$\\
+$\mu$ \>  mean molecular weight \> ---\\
+$\Omega$ \>  energy-specific collision strength \> --- \\
+$\Omega$ \>  shell coverage \>  sr\\
+$\Omega/4\pi$ \>  covering factor \> ---\\
+$\Phi$(H) \>  flux of ionizing
+photons \>   cm$^{-2}$ s$^{-1}$\\
+$\phi\nu$ \>  photon flux density \>  cm$^{-2}$ s$^{-1}$ Ryd$^{-1}$\\
+$\phi_{OTS}$ \>  flux of OTS photons \>
+cm$^{-2}$ s$^{-1}$\\
+$\rho$ \>  mass density \>  gm cm$^{-3}$\\
+$\pi a_o^2$ \>  area of first Bohr
+orbit \>  cm$^2$ \>  $87.9737\times10^{-18}$\\
+ \> Classical electron radius \> $q_e^2/( {{m_e}{c^2}}
+)$
+ cm \>  $2.818\times10^{-13}$\\
+$\sigma_T$ \>  Thomson cross section \>  $8\pi /3 \times {\left[ {q_e^2/(
+{{m_e}{c^2}})} \right]^2}$ \>
+ $6.6524\times 10^{-25}$\\
+ \>  \> cm$^2$\\
+$\sigma_\nu$ \>  scattering cross section \>   cm$^2$\\
+$\sigma_{\mathrm{Ray}}$ \>  Rayleigh scat cross section \>  cm$^2$\\
+$\sum$ \>  projected grain area \>  cm$^2$\\
+$\tau$ \>  optical depth \> ---\\
+$\tau_{abs}$ \>
+absorption optical depth \> ---\\
+$\tau_{scat}$ \>  scattering optical depth \> ---\\
+$\tau_{u,l}$ \>  line
+optical depth \> ---\\
+$\Upsilon$ \>  thermal averaged collision strength\> --- \\
+$\nu$ \>  frequency \>  Hz\\
+$\nu_{\mathrm{Ryd}}$ \>
+frequency \>  Ryd\\
+$\delta_\nu$ \>  line width \> Hz\\
+$\delta\nu_{\mathrm{Dop}}$ \>  Doppler width \>  Hz\\
+$\chi_s$ \>  h$\nu$/kT \> ---\\
+\end{tabbing}

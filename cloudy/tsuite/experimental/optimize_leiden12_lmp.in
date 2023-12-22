@@ -1,0 +1,86 @@
+# optimize for 'low-mass protostar'
+# table draine 3 log
+# extiguish 24
+# blackbody 30000 
+table agn
+ionization parameter -4
+hden 6 vary 
+#
+# zone 1
+stop column density 23
+#
+## >>chng 13 aug 15, wl from 200.2m to 200.218m, wl precision now set 6 sig fig
+normalize to "CO  " 200.218m
+set save prefix "optimize_leiden12_lmp"
+save leiden ".lei" last
+save overview ".ovr" last
+save dr ".dr" last
+optimize intensity -12.1986 0.016 
+optimize lines
+## >>chng 13 aug 15, wl from 200.2m to 200.218m, wl precision now set 6 sig fig
+CO   200.218m	1.000	0.016
+## >>chng 13 aug 16, wl from 185.9m to 185.949m, wl precision now set to 6 sig-fig
+CO   185.949m	1.365	0.012
+## >>chng 13 aug 16, wl from 173.6m to 173.584m, wl precision now set to 6 sig-fig
+CO   173.584m	1.493	0.012
+## >>chng 13 aug 16, wl from 162.8m to 162.767m, wl precision now set to 6 sig-fig
+CO   162.767m	1.442	0.022
+## >>chng 13 aug 16, wl from 153.2m to 153.225m, wl precision now set to 6 sig-fig
+CO   153.225m	1.401	0.007
+## >>chng 13 aug 16, wl from 144.7m to 144.745m, wl precision now set to 6 sig-fig
+CO   144.745m	1.284	0.011
+## >>chng 13 aug 16, wl from 137.2m to 137.159m, wl precision now set to 6 sig-fig
+CO   137.159m	1.210	0.009
+## >>chng 13 aug 16, wl from 130.3m to 130.333m, wl precision now set to 6 sig-fig
+CO   130.333m	1.166	0.007
+## >>chng 13 aug 16, wl from 124.2m to 124.160m, wl precision now set to 6 sig-fig
+CO   124.160m	1.109	0.014
+## >>chng 13 aug 16, wl from 118.5m to 118.548m, wl precision now set to 6 sig-fig
+CO   118.548m	1.021	0.017
+## >>chng 13 aug 16, wl from 113.4m to 113.427m, wl precision now set to 6 sig-fig
+CO   113.427m	0.771	0.031
+## >>chng 13 aug 16, wl from 108.7m to 108.733m, wl precision now set to 6 sig-fig
+CO   108.733m	0.768	0.031
+## >>chng 13 aug 16, wl from 104.4m to 104.416m, wl precision now set to 6 sig-fig
+CO   104.416m	0.667	0.043
+## >>chng 13 aug 16, wl from 100.4m to 100.433m, wl precision now set to 6 sig-fig
+CO   100.433m	0.610	0.052
+## >>chng 13 aug 16, wl from 96.75m to 96.7462m, wl precision now set to 6 sig-fig
+CO   96.7462m	0.676	0.030
+## >>chng 13 aug 16, wl from 93.32m to 93.3237m, wl precision now set to 6 sig-fig
+CO   93.3237m	0.689	0.028
+## >>chng 13 aug 16, wl from 90.14m to 90.1384m, wl precision now set to 6 sig-fig
+CO   90.1384m	0.651	0.024
+## >>chng 13 aug 16, wl from 87.17m to 87.1666m, wl precision now set to 6 sig-fig
+CO   87.1666m	0.534	0.038
+## >>chng 13 aug 16, wl from 81.78m to 81.7835m, wl precision now set to 6 sig-fig
+CO   81.7835m	0.417	0.034
+## >>chng 13 aug 16, wl from 79.34m to 79.3383m, wl precision now set to 6 sig-fig
+CO   79.3383m	0.420	0.045
+## >>chng 13 aug 16, wl from 77.04m to 77.0375m, wl precision now set to 6 sig-fig
+CO   77.0375m	0.436	0.043
+## >>chng 13 aug 16, wl from 74.87m to 74.8697m, wl precision now set to 6 sig-fig
+CO   74.8697m	0.318	0.055
+## >>chng 13 aug 16, wl from 72.82m to 72.8231m, wl precision now set to 6 sig-fig
+CO   72.8231m	0.242	0.072
+## >>chng 13 aug 16, wl from 70.89m to 70.8878m, wl precision now set to 6 sig-fig
+CO   70.8878m	0.204	0.078
+## >>chng 13 aug 16, wl from 69.06m to 69.0557m, wl precision now set to 6 sig-fig
+CO   69.0557m	0.248	0.076
+## >>chng 13 aug 16, wl from 67.32m to 67.3181m, wl precision now set to 6 sig-fig
+CO   67.3181m	0.186	0.085
+## >>chng 13 aug 16, wl from 65.67m to 65.6684m, wl precision now set to 6 sig-fig
+CO   65.6684m	0.120	0.132
+## >>chng 13 aug 16, wl from 64.10m to 64.0998m, wl precision now set to 6 sig-fig
+CO   64.0998m	0.171	0.120
+## >>chng 13 aug 16, wl from 61.18m to 61.1843m, wl precision now set to 6 sig-fig
+CO   61.1843m	0.125	0.127
+## >>chng 13 aug 16, wl from 59.83m to 59.8271m, wl precision now set to 6 sig-fig
+CO   59.8271m	0.111	0.114
+## >>chng 13 aug 16, wl from 58.53m to 58.5311m, wl precision now set to 6 sig-fig
+CO   58.5311m	0.062	0.231
+## >>chng 13 aug 16, wl from 54.97m to 54.9712m, wl precision now set to 6 sig-fig
+CO   54.9712m	0.062	0.179
+## >>chng 13 aug 16, wl from 53.88m to 53.8829m, wl precision now set to 6 sig-fig
+CO   53.8829m	0.104	0.167
+end of lines

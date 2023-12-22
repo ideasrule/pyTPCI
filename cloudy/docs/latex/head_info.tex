@@ -1,0 +1,169 @@
+\usepackage{graphicx,rotate,url,mathptmx,lscape,times,framed,color}
+
+% include natbib for bibtex, options are
+% round use (2008) instead of [2008] for year
+\usepackage[round]{natbib}
+
+% cross references across documents
+\usepackage{xr-hyper}
+
+%\begin{comment}
+%This is my comment.
+%Note that it can span multiple lines.
+%This is very useful.
+%\end{comment}
+\usepackage{verbatim} 
+
+% allow hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat's bookmarks
+    pdftoolbar=true,        % show Acrobat's toolbar?
+    pdfmenubar=true,        % show Acrobat's menu?
+    pdffitwindow=true,      % page fit to window when opened
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfnewwindow=true,      % links in new window
+    pdfkeywords={keywords}, % list of keywords
+    colorlinks=true,        % false: boxed links; true: colored links
+    linkcolor=blue,         % color of internal links, def red
+    citecolor=blue,         % color of links to bibliography, def green
+    filecolor=blue,         % color of file links, def magenta
+    urlcolor=blue           % color of external links, def cyan
+}
+
+% geometry package controls page layout
+\usepackage[letterpaper,
+left=2.5cm,right=2.5cm,
+top=2.5cm,bottom=2.5cm]{geometry}
+\oddsidemargin=+0.7cm
+\evensidemargin=-0.7cm
+\pagestyle{headings}
+
+% journal name macros used by ADS
+\usepackage{../common/aas_macros_v61}
+
+% Include list of figures and references in contents lists
+\usepackage[nottoc]{tocbibind}
+
+% makes it easy to include all or part of a PDF document 
+% inside a LaTeX document
+\usepackage{pdfpages}
+
+% allow external files to be included verbatim
+\usepackage{moreverb}
+
+% allow tables to wrap over pages
+\usepackage{longtable}
+
+
+% set the default tabsize
+\def\verbatimtabsize{4\relax}
+
+% following are to pick up .aux files for cross references
+% with package xr to other volumes of Hazy
+% hazy 1
+\externaldocument[Hazy1-]{../hazy1/intro}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/define}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/cmdintro}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/cont-def}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/cont-lum}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/cont-shp}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/compos}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/density}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/geometry}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/optdepth}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/therm}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/dynamics-time}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/stopping}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/conout}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/optimize}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/grid}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/miscell}[hazy1.pdf]
+\externaldocument[Hazy1-]{../hazy1/latex_style}[hazy1.pdf]
+
+% hazy2
+\externaldocument[Hazy2-]{../hazy2/limits}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/coninter}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/lineatomparam}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/linedetl}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/CloudyStandaloneProgram}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/sub}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/output}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/observed}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/lines}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/problems}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/odetail}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/sources}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/glossary}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/conversion}[hazy2.pdf]
+\externaldocument[Hazy2-]{../hazy2/TestSuite}[hazy2.pdf]
+
+% hazy 3
+\externaldocument[Hazy3-]{../hazy3/isoseq}[hazy3.pdf]
+\externaldocument[Hazy3-]{../hazy3/hydroiso}[hazy3.pdf]
+\externaldocument[Hazy3-]{../hazy3/helikeiso}[hazy3.pdf]
+\externaldocument[Hazy3-]{../hazy3/molecules}[hazy3.pdf]
+\externaldocument[Hazy3-]{../hazy3/dheavy}[hazy3.pdf]
+\externaldocument[Hazy3-]{../hazy3/dtherm}[hazy3.pdf]
+\externaldocument[Hazy3-]{../hazy3/dgrain}[hazy3.pdf]
+\externaldocument[Hazy3-]{../hazy3/dother}[hazy3.pdf]
+
+% set paragraph styles
+\raggedright
+\setlength{\parindent}{4mm}
+% background color for shaded boxes
+\definecolor{shadecolor}{gray}{0.9}
+
+% Customize contents details from book.cls
+\makeatletter
+
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3.1em}}
+\renewcommand*\l@subsection{\@dottedtocline{2}{4.6em}{4.1em}}
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{8.7em}{5.1em}}
+\renewcommand*\l@paragraph{\@dottedtocline{4}{10em}{6em}}
+\renewcommand*\l@subparagraph{\@dottedtocline{5}{12em}{7em}}
+\renewcommand*\l@figure{\@dottedtocline{1}{1.5em}{3.3em}}
+
+% extract name of target of reference (e.g. chapter titles)
+\long\def\@thirdoffive#1#2#3#4#5{#3}%
+\def\refname#1{\expandafter\@setref\csname r@#1\endcsname\@thirdoffive{#1}}
+
+% create ruler underneath page header
+\advance\headheight1.2pt
+\def\@oddhead{\vbox{\parindent=0pt%
+\setbox0=\hbox to\textwidth{{\slshape\rightmark}\hfil\thepage}%
+\dimen0=4.5pt \advance\dimen0 by-\dp0 \box0\kern\dimen0\hrule}}
+\def\@evenhead{\vbox{\parindent=0pt%
+\setbox0=\hbox to\textwidth{\thepage\hfil\slshape\leftmark}%
+\dimen0=4.5pt \advance\dimen0 by-\dp0 \box0\kern\dimen0\hrule}}
+
+% modify font size for verbatim environment
+\newcommand{\setverbatimfontsize}[1]{\renewcommand*\verbatim@font{#1\ttfamily}}
+\renewcommand*\verbatim@font{\footnotesize\ttfamily}
+
+% Change title of bibliography
+\renewcommand\bibname{REFERENCES}
+\renewcommand\contentsname{CONTENTS}
+\renewcommand\listfigurename{LIST OF FIGURES}
+\renewcommand\listtablename{LIST OF TABLES}
+% tweak bibliograpy environment to be more like old Hazy
+\def\thebibliography#1{%
+\bibsection
+\@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+\list{}{\setlength\labelwidth{2.5em}\leftmargin\labelwidth
+\setlength\parsep{0pt}\setlength\itemsep{0.7mm plus1pt}
+\setlength{\itemindent}{-\leftmargin}
+\small}
+\def\newblock{\hskip .11em plus .33em minus -.07em}
+\sloppy
+\sfcode`\.=1000\relax}
+\def\endthebibliography{\endlist}
+
+
+\setcounter{tocdepth}{4}
+
+\makeatother
+% End of contents customization

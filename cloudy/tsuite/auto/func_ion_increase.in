@@ -1,0 +1,300 @@
+title test model where ionization increases with depth
+#
+# commands controlling continuum =========
+ionization parameter -4
+table agn
+#
+# commands for density & abundances =========
+hden 7 -4
+init "hheonly.ini"
+element oxygen on  
+element iron on  
+#
+# commands controlling geometry  =========
+sphere
+filling factor -5
+radius 17 20
+#
+# other commands for details     =========
+constant temperature 4
+#
+# commands controlling output    =========
+save overview "func_ion_increase.ovr"
+save performance "func_ion_increase.per"
+save dr "func_ion_increase.dr"
+save overveiw "func_ion_increase.ovr"
+save element oxygen "func_ion_increase.oxy"
+save element iron "func_ion_increase.fe"
+save monitors "func_ion_increase.asr"
+#
+# commands giving the monitors    =========
+## >>chng 04 jun 01, from -4.533 to -4.306, unified calc of Lya line width
+## >>chng 05 sep 27, from -4.306 to -4.553, TE, GS update H chem
+## >>chng 06 aug 09, from -4.553 to -4.597 Meudon 06, Bowen change
+## >>chng 11 jul 12, from -4.597 to -5.255, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -5.255 to -5.2, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 aug 24, from -5.2 to -5.168, BUGFIX r6603 DR rates not updated in const temp sim
+## >>chng 13 feb 01, from -5.168 to -5.045, BUGFIX, largely undo r6703
+monitor volumn ionization Iron  1 -5.045 
+## 
+## >>chng 05 sep 27, from -0.898 to -0.880, TE, GS update H chem
+## >>chng 06 aug 09, from -0.880 to -0.913 Meudon 06, Bowen change
+## >>chng 08 sep 22, from -0.913 to -0.9443, remove Ali et al. DR guess
+## >>chng 11 jul 12, from -0.9443 to -0.9779, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -0.9779 to -0.9221, make PRD redis func for h-like ions; LY_A func is now for H only
+monitor volumn ionization iron  2 -0.9221 
+## 
+## >>chng 08 apr 30, from -0.411 to -0.432 H, He topoff change
+## >>chng 11 jul 12, from -0.432 to -0.4598, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -0.4598 to -0.4142, make PRD redis func for h-like ions; LY_A func is now for H only
+monitor volumn ionization iron  3 -0.4142 
+## 
+## >>chng 06 aug 09, from -0.594 to -0.566 Meudon 06, Bowen change
+## >>chng 09 feb 23, from -0.566 to -0.543, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from -0.543 to -0.6172, make PRD redis func for h-like ions; LY_A func is now for H only
+monitor volumn ionization iron  4 -0.6172 
+## 
+## >>chng 06 feb 03, from -0.991 to -0.961, guess dr to Badnell mean
+## >>chng 06 aug 09, from -0.961 to -0.933 Meudon 06, Bowen change
+## >>chng 08 sep 22, from -0.933 to -0.9007, remove Ali et al. DR guess
+## >>chng 11 jul 12, from -0.9007 to -0.8741, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -0.8741 to -0.911, make PRD redis func for h-like ions; LY_A func is now for H only
+monitor volumn ionization iron  5 -0.911 
+## 
+## >>chng 04 sep 06, from -1.271 to -1.297 bug nej Auger
+## >>chng 06 feb 03, from -1.297 to -1.237, guess dr to Badnell mean
+## >>chng 06 nov 29, from -1.237 to -1.203, Badnell DR turned on
+## >>chng 07 apr 30, from -1.203 to -1.169, log DR average, use mix S DR
+## >>chng 11 jul 12, from -1.169 to -1.127, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -1.127 to -1.149, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 13 jan 29, from -1.149 to -1.17, more frequent 2nu OTS update
+monitor volumn ionization iron  6 -1.17 
+## 
+## >>chng 06 feb 03, from -1.451 to -1.600, guess dr to Badnell mean
+## >>chng 06 nov 29, from -1.600 to -1.474, Badnell DR turned on
+## >>chng 11 jul 12, from -1.474 to -1.394, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -1.394 to -1.465, BUGFIX r6603 DR rates not updated in const temp sim
+monitor volumn ionization iron  7 -1.465 
+## 
+## >>chng 06 feb 03, from -1.690 to -1.914, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.914 to -1.945, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 24, from -1.945 to -1.975, turn on Badnell RR
+## >>chng 06 nov 29, from -1.975 to -1.909, Badnell DR turned on
+## >>chng 11 jul 12, from -1.909 to -1.825, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -1.825 to -1.916, BUGFIX r6603 DR rates not updated in const temp sim
+monitor volumn ionization iron  8 -1.916 
+## 
+## >>chng 06 feb 03, from -1.988 to -2.009, guess dr to Badnell mean
+## >>chng 06 aug 17, from -2.009 to -1.981, update to Badnell dr
+## >>chng 06 nov 24, from -1.981 to -1.936, turn on Badnell RR
+## >>chng 06 nov 29, from -1.939 to -2.645, Badnell DR turned on
+## >>chng 07 jan 20, from -2.645 to -2.665, e2 bug
+## >>chng 08 sep 25, from -2.665 to -2.604, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -2.604 to -2.499, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -2.499 to -2.602, BUGFIX r6603 DR rates not updated in const temp sim
+monitor volumn ionization iron  9 -2.602 
+## 
+## >>chng 06 feb 03, from -2.433 to -2.518, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.518 to -2.478, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -2.478 to -2.572, update to Badnell dr
+## >>chng 06 nov 24, from -2.572 to -2.539, turn on Badnell RR
+## >>chng 06 nov 26, from -2.539 to -2.571, use Gu et al. UTA data
+## >>chng 06 nov 29, from -2.571 to -3.159, Badnell DR turned on
+## >>chng 07 jan 20, from -3.159 to -3.226, e2 bug
+## >>chng 07 jan 25, from -3.226 to -3.180, use only Gu UTA data file
+## >>chng 07 apr 30, from -3.180 to -3.202, log DR average, use mix S DR
+## >>chng 08 apr 20, incr error to more realistic 10%
+## >>chng 08 sep 25, from -3.202 to -3.014, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -3.014 to -2.908, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -2.908 to -3.013, BUGFIX r6603 DR rates not updated in const temp sim
+monitor volumn ionization iron 10 -3.013  error 0.1
+## 
+## >>chng 05 sep 27, from -2.701 to -2.718, TE, GS update H chem
+## >>chng 06 feb 03, from -2.718 to -2.971, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.971 to -2.946, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -2.946 to -3.011, update to Badnell dr
+## >>chng 06 nov 24, from -3.011 to -2.988, turn on Badnell RR
+## >>chng 06 nov 26, from -2.988 to -3.028, use Gu et al. UTA data
+## >>chng 06 nov 29, from -3.028 to -3.549, Badnell DR turned on
+## >>chng 07 jan 20, from -3.549 to -3.623, e2 bug
+## >>chng 07 jan 23, from -3.623 to -3.657, update Gu UTA data file, inc err
+## >>chng 08 sep 25, from -3.657 to -3.468, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -3.468 to -3.344, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -3.344 to -3.468, BUGFIX r6603 DR rates not updated in const temp sim
+monitor volumn ionization iron 11 -3.468 error 0.1
+## 
+## >>chng 05 sep 27, from -2.949 to -2.966, TE, GS update H chem
+## >>chng 06 feb 03, from -2.966 to -3.147, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.147 to -3.298, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -3.298 to -3.273, update to Badnell dr
+## >>chng 06 nov 24, from -3.273 to -3.250, turn on Badnell RR
+## >>chng 06 nov 26, from -3.250 to -3.203, use Gu et al. UTA data
+## >>chng 06 nov 29, from -3.203 to -3.865, Badnell DR turned on
+## >>chng 07 jan 20, from -3.865 to -3.914, e2 bug
+## >>chng 07 jan 23, from -3.914 to -4.081, update Gu UTA data file, inc err
+## >>chng 08 sep 25, from -4.081 to -3.97, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -3.97 to -3.824, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -3.824 to -3.97, BUGFIX r6603 DR rates not updated in const temp sim
+monitor volumn ionization iron 12 -3.97 error 0.1
+##
+## >>chng 05 mar 03, from -3.190 to -3.223, romas update uta data
+## >>chng 06 feb 03, from -3.223 to -3.258, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.258 to -3.449, use Savin & Gu DR to make mean DR
+## >>chng 06 Aug 10, from -3.449 to -3.478, update to Badnell RR DR for Fe+13
+## >>chng 06 aug 17, from -3.478 to -3.575, update to Badnell dr
+## >>chng 06 nov 24, from -3.575 to -3.550, turn on Badnell RR
+## >>chng 06 nov 26, from -3.550 to -3.308, use Gu et al. UTA data
+## >>chng 06 nov 29, from -3.308 to -4.293, Badnell DR turned on
+## >>chng 07 jan 20, from -4.293 to -4.314, e2 bug
+## >>chng 07 jan 23, from -4.314 to -4.695, update Gu UTA data file, inc err
+## >>chng 08 sep 25, from -4.695 to -4.651, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -4.651 to -4.484, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -4.484 to -4.652, BUGFIX r6603 DR rates not updated in const temp sim
+## >>chng 12 oct 26, from -4.652 to -4.693, adjust montiors to this branch
+monitor volumn ionization iron 13 -4.693 error 0.1
+## 
+## >>chng 04 sep 06, from -3.497 to -3.539 bug nej Auger
+## >>chng 05 mar 03, from -3.539 to -3.573, romas update uta data
+## >>chng 06 feb 03, from -3.573 to -3.524, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.524 to -3.892, use Savin & Gu DR to make mean DR
+## >>chng 06 Aug 10, from -3.892 to -3.818, update to Badnell RR DR for Fe+13
+## >>chng 06 aug 17, from -3.818 to -3.851, update to Badnell dr
+## >>chng 06 nov 24, from -3.851 to -3.808, turn on Badnell RR
+## >>chng 06 nov 26, from -3.808 to -3.492, use Gu et al. UTA data
+## >>chng 06 nov 29, from -3.492 to -4.731, Badnell DR turned on
+## >>chng 07 jan 23, from -4.731 to -5.165, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -5.165 to -5.103, use only Gu UTA data file
+## >>chng 08 sep 25, from -5.103 to -5.061, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -5.061 to -4.881, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -4.881 to -5.065, BUGFIX r6603 DR rates not updated in const temp sim
+## >>chng 12 oct 26, from -5.065 to -5.116, adjust montiors to this branch
+monitor volumn ionization iron 14 -5.116 error 0.1
+## 
+## >>chng 04 sep 06, from -3.448 to -3.491 bug nej Auger
+## >>chng 05 mar 03, from -3.491 to -3.464, romas update uta data
+## >>chng 06 feb 03, from -3.464 to -3.584, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.584 to -3.807, use Savin & Gu DR to make mean DR
+## >>chng 06 Aug 10, from -3.807 to -3.769, update to Badnell RR DR for Fe+13
+## >>chng 06 aug 17, from -3.769 to -3.803, update to Badnell dr
+## >>chng 06 nov 24, from -3.803 to -3.772, turn on Badnell RR
+## >>chng 06 nov 26, from -3.772 to -3.573, use Gu et al. UTA data
+## >>chng 06 nov 29, from -3.573 to -4.602, Badnell DR turned on
+## >>chng 07 jan 23, from -4.602 to -4.936, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -4.936 to -5.062, use only Gu UTA data file
+## >>chng 07 oct 26, from -5.062 to -5.104, very close to botch after recent changes
+## >>chng 11 jul 12, from -5.104 to -4.881, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -4.881 to -5.076, BUGFIX r6603 DR rates not updated in const temp sim
+monitor volumn ionization iron 15 -5.076 error 0.1
+## 
+## >>chng 04 sep 06, from -3.751 to -3.833 bug nej Auger
+## >>chng 05 mar 03, from -3.833 to -3.820, romas update uta data
+## >>chng 06 feb 03, from -3.820 to -3.790, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.790 to -3.955, use Savin & Gu DR to make mean DR
+## >>chng 06 Aug 10, from -3.955 to -3.921, update to Badnell RR DR for Fe+13
+## >>chng 06 aug 17, from -3.921 to -3.943, update to Badnell dr
+## >>chng 06 nov 24, from -3.943 to -3.897, turn on Badnell RR
+## >>chng 06 nov 26, from -3.897 to -3.751, use Gu et al. UTA data
+## >>chng 06 nov 29, from -3.751 to -4.018, Badnell DR turned on
+## >>chng 07 jan 20, from -4.018 to -3.996, e2 bug
+## >>chng 07 jan 23, from -3.996 to -3.976, update Gu UTA data file, inc err
+## >>chng 07 apr 30, from -3.976 to -3.924, log DR average, use mix S DR
+## >>chng 08 sep 22, from -3.924 to -3.981, remove Ali et al. DR guess
+## >>chng 08 sep 25, from -3.981 to -4.521, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -4.521 to -4.33, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -4.33 to -4.493, BUGFIX r6603 DR rates not updated in const temp sim
+monitor volumn ionization iron 16 -4.493 error 0.1
+## 
+## >>chng 04 sep 06, from -3.368 to -3.511 bug nej Auger
+## >>chng 05 mar 03, from -3.511 to -3.454, romas update uta data
+## >>chng 06 feb 03, from -3.454 to -3.429, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.429 to -3.468, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26, from -3.468 to -3.414, use Gu et al. UTA data
+## >>chng 06 nov 29, from -3.414 to -3.378, Badnell DR turned on
+## >>chng 07 jan 23, from -3.378 to -3.500, update Gu UTA data file, inc err
+## >>chng 07 apr 30, from -3.500 to -3.444, log DR average, use mix S DR
+## >>chng 07 dec 06, from -3.444 to -3.491, changes in h-like collisions
+## >>chng 08 feb 20, from -3.491 to -3.443, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 mar 17, from -3.443 to -3.490, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 mar 20, from -3.490 to -3.467, dbl precision gets diff answer, take average, widen err
+## >>chng 08 sep 25, from -3.467 to -4.074, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -4.074 to -3.92, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -3.92 to -4.062, BUGFIX r6603 DR rates not updated in const temp sim
+## >>chng 12 oct 26, from -4.062 to -3.952, adjust montiors to this branch
+monitor volumn ionization iron 17 -3.952 error 0.15
+## 
+## >>chng 04 sep 06, from -3.844 to -3.962 bug nej Auger
+## >>chng 05 mar 03, from -3.962 to -3.916, romas update uta data
+## >>chng 06 feb 03, from -3.916 to -4.323, guess dr to Badnell mean
+## >>chng 06 jul 12, from -4.323 to -4.391, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -4.391 to -4.171, Badnell DR turned on
+## >>chng 07 jan 20, from -4.171 to -4.131, e2 bug
+## >>chng 07 jan 23, from -4.131 to -4.301, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -4.301 to -4.258, use only Gu UTA data file
+## >>chng 07 apr 30, from -4.258 to -4.214, log DR average, use mix S DR
+## >>chng 07 dec 06, from -4.214 to -4.270, changes in h-like collisions
+## >>chng 08 feb 20, from -4.270 to -4.213, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 mar 17, from -4.213 to -4.270, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 mar 20, from -4.270 to -4.240, dbl precision gets diff answer, take average, widen err
+## >>chng 08 sep 25, from -4.24 to -4.429, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -4.429 to -4.291, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -4.291 to -4.422, BUGFIX r6603 DR rates not updated in const temp sim
+## >>chng 12 oct 26, from -4.422 to -4.319, adjust montiors to this branch
+monitor volumn ionization iron 18 -4.319 error 0.15
+## 
+## >>chng 04 sep 06, from -4.524 to -4.626 bug nej Auger
+## >>chng 05 mar 03, from -4.626 to -5.097, romas update uta data
+## >>chng 06 jul 12, from -5.097 to -5.141, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26, from -5.141 to -5.100, use Gu et al. UTA data
+## >>chng 06 nov 29, from -1.237 to -1.203, Badnell DR turned on
+## >>chng 07 jan 23, from -3.623 to -3.163, update Gu UTA data file, inc err
+## >>chng 06 nov 26 do not assert this minor species
+## >>chng 06 nov 29, from -5.100 to -5.100, Badnell DR turned on
+## >>chng 06 nov 29, from -5.100 to -3.958, Badnell DR turned on
+## >>chng 07 jan 20, from -3.958 to -3.917, e2 bug
+## >>chng 07 jan 23, from -3.917 to -3.968, update Gu UTA data file, inc err
+## >>chng 08 sep 25, from -3.968 to -5.049, remove damper on line pump (r2367)
+## >>chng 11 jul 12, from -5.049 to -4.925, enable fit to Badnell DR suppression
+## >>chng 12 aug 24, from -4.925 to -5.054, BUGFIX r6603 DR rates not updated in const temp sim
+## >>chng 12 oct 26, from -5.054 to -4.958, adjust montiors to this branch
+monitor volumn ionization iron 19 -4.958 error 0.1
+## 
+## >>chng 04 mar 04, from -5.480 to -5.504, inpr conv error, incr error
+## >>chng 04 sep 06, from -5.504 to -5.599 bug nej Auger
+## >>chng 05 mar 03, from -5.599 to -5.560, romas update uta data
+## >>chng 06 feb 03, from -5.560 to -6.125, guess dr to Badnell mean
+## >>chng 06 nov 29, from -6.13 to -3.98, Badnell DR turned on
+## >>chng 07 jan 20, from -3.98 to -3.94, e2 bug
+## >>chng 07 jan 23, from -3.94 to -4.01 update Gu UTA data file, inc err
+## >>chng 08 sep 25, remove: only trace amount left after r2367
+## assert volumn ionization iron 20 -6.35 error 0.1 
+##
+## >>chng 03 dec 08, from -6.717 to -6.692, chng ots, zones
+## >>chng 04 feb 09, from -6.692 to -6.724, chng Auger in ion_solver, incr err
+## >>chng 04 sep 06, from -6.724 to -6.894 bug nej Auger
+## >>chng 05 mar 03, from -6.894 to -6.855, romas update uta data
+## >>chng 06 feb 03, from -6.855 to -7.24, guess dr to Badnell mean
+## >>chng 06 nov 29, from -7.24 to -4.06, Badnell DR turned on
+## >>chng 07 jan 20, from -4.06 to -3.95, e2 bug
+## >>chng 07 jan 23, from -3.95 to -4.02, update Gu UTA data file, inc err
+## >>chng 08 sep 25, remove: only trace amount left after r2367
+## assert volumn ionization iron 21 -7.739 error 0.1 
+##
+## >>chng 03 dec 08, from -8.006 to -7.962, chng ots, zones
+## >>chng 04 feb 09, from -7.962 to -7.999, chng Auger in ion_solver, incr err
+## >>chng 04 sep 06, from -7.999 to -8.286 bug nej Auger
+## >>chng 05 mar 03, from -8.286 to -8.247, romas update uta data
+## >>chng 06 feb 03, from -8.247 to -8.88, guess dr to Badnell mean
+## >>chng 06 apr 09, rm since only for for 6 zones - result depends on
+## zoning - there is essentially no Fe 22 in sim 
+## assert volumn ionization iron 22 -8.88 error 0.1
+#
+# func_ion_increase.in
+# class function 
+# ========================================
+# 
+
+This density falls off faster than 1/r^2 so the ionization increases
+with depth.  Most sims have decreasing rather than increasing ionization.
+
+
+

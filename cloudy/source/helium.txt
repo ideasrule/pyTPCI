@@ -1,0 +1,61 @@
+helium like isoelectron sequence
+
+===============================================================
+
+helike, iso structure contains information
+space malloced in HeCreate, in helike.c
+this contains photo, coll rates, etc
+
+==============================================================
+
+levels 
+
+numbers of levels are set in cddefines 
+
+iso.numLevels[ipHELIUM][nelem] gives number of levels in the atom - 
+	including all l,s, includes collapsed levels if present
+
+iso.numPrintLevels[ipHELIUM][ipZ] is number of levels to print
+
+iso.n_HighestResolved is principal quantum number of highest resolved levels
+
+iso.nCollapsed[ipHE_LIKE] number of collapsed levels 
+
+the number of resolved levels is numLevels - nCollapsed
+
+iso.nTopOff topoff the recombination coefficient - not used for He
+
+==============================================================
+
+lines are HeLines[ipZ][ipHi][ipLo], are set up in hydrocreate.c, where space allocated
+
+==============================================================
+
+ionization potentials set in hydrocreate.c
+
+level energy assigned in HydroCreate, by calling he_assign
+
+lines added to line stack in lines_helium (search on HeLines)
+
+number of levels - see iso.txt
+
+designation of each level is in struc he_levels in hydrocreate.c
+trace helium will print transition designations
+trace helium includes output with a set of transition arrays
+
+HeCreate reads in the he1_cs.dat file
+
+cddefines.c has level numbers set as in
+const int ipHe1s1S = 0;
+
+=========================================
+levels
+the leve
+
+set with 
+atom he-like levels
+command.  default is 
+helium 29, complete through n=5; need 41 to get through 6
+iron 11
+rest 5
+

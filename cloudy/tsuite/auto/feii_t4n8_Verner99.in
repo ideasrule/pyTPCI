@@ -1,0 +1,168 @@
+title FeII emission in typical intermediate density photoionzied cloud
+species "Fe+" dataset="Verner99"
+database Stout print
+#
+# commands controlling continuum =========
+black 5e5K
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden 8
+element iron abundance 2
+element iron ionization -7 0 -7
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+constant temperature 4
+species "Fe+" levels=all
+#
+# commands controlling output    =========
+print lines column 
+print line inward
+print line sort wavelength
+print line faint 0.1
+normalize "Fe 2b" 5270
+set save prefix "feii_t4n8_Verner99"
+save overview ".ovr"
+save performance ".per"
+save monitors ".asr" last
+save species continuum last ".con" "Fe+" units angstroms
+save species bands ".fe2b" "FeII_bands.ini" "Fe+" last no hash
+#
+# commands giving the monitors    =========
+## >>chng 14 jul 08, from 1 to -19.67, first monitors
+## >>chng 14 jul 23, from -19.67 to -3.285, Change hden to 8
+## >>chng 16 mar 20, from -3.285 to -2.87, change from Werner model to Stout model for Fe+
+monitor line intensity "Fe 2b" 1148 -2.87 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -21.83, first monitors
+## >>chng 14 jul 12, from -21.83 to -21.79, Get strunk closer to stout branch
+## >>chng 14 jul 23, from -21.79 to -3.835, Change hden to 8
+## >>chng 16 mar 20, from -3.835 to -3.758, change from Werner model to Stout model for Fe+
+monitor line intensity "Fe 2b" 1212 -3.758 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -22.42, first monitors
+## >>chng 14 jul 23, from -22.42 to -4.062, Change hden to 8
+## >>chng 16 mar 20, from -4.062 to -4.017, change from Werner model to Stout model for Fe+
+monitor line intensity "Fe 2b" 1295 -4.017 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -21.99, first monitors
+## >>chng 14 jul 23, from -21.99 to -3.652, Change hden to 8
+monitor line intensity "Fe 2b" 1365 -3.652 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.83, first monitors
+## >>chng 14 jul 23, from -19.83 to -1.955, Change hden to 8
+monitor line intensity "Fe 2b" 1485 -1.955 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.41, first monitors
+## >>chng 14 jul 23, from -19.41 to -1.88, Change hden to 8
+monitor line intensity "Fe 2b" 1615 -1.88 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.63, first monitors
+## >>chng 14 jul 23, from -19.63 to -3.125, Change hden to 8
+## >>chng 16 mar 20, from -3.125 to -3.079, change from Werner model to Stout model for Fe+
+monitor line intensity "Fe 2b" 1787 -3.079 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -21.27, first monitors
+## >>chng 14 jul 23, from -21.27 to -2.79, Change hden to 8
+monitor line intensity "Fe 2b" 1822 -2.79 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.12, first monitors
+## >>chng 14 jul 23, from -16.12 to -0.1962, Change hden to 8
+monitor line intensity "Fe 2b" 2355 -0.1962 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.65, first monitors
+## >>chng 14 jul 23, from -18.65 to -0.7925, Change hden to 8
+monitor line intensity "Fe 2b" 2495 -0.7925 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.16, first monitors
+## >>chng 14 jul 23, from -19.16 to -1.38, Change hden to 8
+monitor line intensity "Fe 2b" 2695 -1.38 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.31, first monitors
+## >>chng 14 jul 23, from -17.31 to -0.5638, Change hden to 8
+monitor line intensity "Fe 2b" 2758 -0.5638 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -20.82, first monitors
+## >>chng 14 jul 12, from -20.82 to -20.65, Get strunk closer to stout branch
+## >>chng 14 jul 23, from -20.65 to -2.309, Change hden to 8
+monitor line intensity "Fe 2b" 2797 -2.309 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.57, first monitors
+## >>chng 14 jul 23, from -18.57 to -1.814, Change hden to 8
+monitor line intensity "Fe 2b" 2935 -1.814 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.7, first monitors
+## >>chng 14 jul 23, from -16.7 to -2.907, Change hden to 8
+monitor line intensity "Fe 2b" 4255 -2.907 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.37, first monitors
+## >>chng 14 jul 23, from -17.37 to -3.325, Change hden to 8
+monitor line intensity "Fe 2b" 4558 -3.325 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.9, first monitors
+## >>chng 14 jul 23, from -17.9 to -4, Change hden to 8
+monitor line intensity "Fe 2b" 4743 -4 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.2, first monitors
+## >>chng 14 jul 23, from -17.2 to -3.603, Change hden to 8
+monitor line intensity "Fe 2b" 4855 -3.603 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.84, first monitors
+## >>chng 14 jul 23, from -17.84 to -4.116, Change hden to 8
+monitor line intensity "Fe 2b" 4971 -4.116 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.79, first monitors
+## >>chng 14 jul 23, from -17.79 to -3.223, Change hden to 8
+monitor line intensity "Fe 2b" 4975 -3.223 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.89, first monitors
+## >>chng 14 jul 23, from -16.89 to -3.308, Change hden to 8
+monitor line intensity "Fe 2b" 5143 -3.308 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.03, first monitors
+## >>chng 14 jul 23, from -17.03 to -3.214, Change hden to 8
+monitor line intensity "Fe 2b" 5318 -3.214 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.76, first monitors
+## >>chng 14 jul 23, from -18.76 to -3.972, Change hden to 8
+monitor line intensity "Fe 2b" 5865 -3.972 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.99, first monitors
+## >>chng 14 jul 23, from -19.99 to -3.299, Change hden to 8
+monitor line intensity "Fe 2b" 6265 -3.299 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.98, first monitors
+## >>chng 14 jul 23, from -18.98 to -2.971, Change hden to 8
+monitor line intensity "Fe 2b" 6565 -2.971 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.96, first monitors
+## >>chng 14 jul 23, from -16.96 to -3.686, Change hden to 8
+monitor line intensity "Fe 2b" 7445 -3.686 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -23.78, first monitors
+## >>chng 14 jul 23, from -23.78 to -6.4, Change hden to 8
+## >>chng 16 mar 20, from -6.4 to -6.363, change from Werner model to Stout model for Fe+
+monitor line intensity "Fe 2b" 7785 -6.363 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.48, first monitors
+## >>chng 14 jul 23, from -16.4889 to -3.0141, Change hden to 8
+monitor line intensity "Fe 2b" 1.88900m -3.0141 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.77, first monitors
+## >>chng 14 jul 23, from -18.77 to -5.317, Change hden to 8
+monitor line intensity "Fe 2b" 2.20000m -5.317 error 0.1
+##
+#
+# feii_t4n8_Tayal18.in
+# class function 
+# ========================================
+# 
+
+This model has a very high iron abundance, 100x H, and most Fe is
+in the form of Fe+. it has a low density and unit thickness
+
+The model is optically thin, no RT.

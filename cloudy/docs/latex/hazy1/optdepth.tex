@@ -1,0 +1,552 @@
+\chapter{OPTICAL DEPTHS AND RADIATIVE TRANSFER}
+% !TEX root = hazy1.tex
+
+\section{Overview}
+
+Line transfer is relatively unimportant in
+low-density clouds such as \hii\ regions
+and planetary nebulae.
+Radiative transfer can be important in other
+environments,
+such as nova shells and the broad-line region of active nuclei,
+where excited states of hydrogen have significant
+populations and subordinate
+lines become optically thick.
+In other cases grains are present and all
+lines can be absorbed by background opacity.
+All radiative transfer effects
+are included in the treatment of line formation,
+including line thermalization,
+destruction by background opacities, pumping by the incident continuum,
+and escape from the cloud.
+
+It is necessary to iterate upon the solution if emission lines are
+optically thick since total optical depths are not known on the first
+iteration.
+The default is for a single iteration.
+This is
+often adequate for low-density nebulae such as planetary nebulae or \hii\ regions.
+A second iteration is sometimes enough to establish a fairly
+accurate line optical depth scale for many resonance transitions.
+Further
+iterations are usually needed when subordinate lines are also optically
+thick.
+The \cdCommand{iterate to convergence} command
+will iterate until the optical-depth scale is well defined.
+
+Line-radiation pressure cannot be computed accurately until the total
+line optical depths are known,
+so this quantity is only meaningful after
+the first iteration.
+\Cloudy\ will stop if the internal radiation pressure
+exceeds half of the surface gas pressure in a constant-pressure
+model since
+such a geometry is unstable unless it is self-gravitating.
+The radiation
+pressure is not allowed to exceed half the gas pressure on the initial
+iterations of a multi-iteration constant-pressure model.
+This is to prevent
+the calculation from stopping when the optical depth scale is
+not yet well converged.
+
+The following sections outline various commands that affect the
+radiative transfer.
+
+\section{Case A [options]}
+
+This has the same options as the Case~B command but sets the \la\ optical
+depth to a very small value by default.
+This does not turn off induced
+processes, which are normally ignored when Case A is assumed.
+You would
+use the \cdCommand{no induced processes} command to do that.
+
+\section{Case~B [tau ly alpha = 9; options]}
+\label{sec:CaseBCommand}
+
+This command is used to check the line emission from  hydrogen-like and
+helium-like species in the Case~B limit (AGN3 section 4.2).
+This command \emph{should
+not} be used in any model that is supposed to represent a real physical
+environment.
+It is intended only to provide an easy way to check predictions
+of the code against simple, more limited, calculations.
+In particular,
+when this is used the Lyman-line optical depths will be made artificially
+large.
+This may affect the ionization and temperature of the gas.
+
+With no options, this command sets the inward-looking optical depth of
+\la\ for all
+atoms and ions of the H- and He-like iso-electronic sequences to
+$10^5$ so
+that even a one-zone model will be close to
+Case~B.\footnote{Before version
+96 the default optical depth was $10^9$.  This caused
+extreme L$\alpha $ behavior in a grain-free \hii\ region.  The lower value is a better
+estimate of the physics that occurs in an actual \hii\ region.}
+This optical depth does not depend on the abundance of the element, or even
+the presence of the species.
+The optional number
+is the log of the L$\alpha $ optical depth.
+One-sided escape probabilities are
+used so the total escape probability is simply that for the inward direction.
+In keeping with the Case~B approximation the \cdCommand{Case~B} command suppresses
+excited-state line optical depths.
+
+{\bf The Hummer option.}
+The species include all collisional processes.
+Case~B does not define
+the population of the ground or first excited state so a true comparison
+with Case~B results should have collisions from these levels turned off.
+This is done with the Hummer and Storey option (with the key \cdCommand{Hummer}), to allow
+comparison with their 1987 and 1995 papers.
+Collisions from the ground
+and first excited states \emph{are} included if this second option is not specified.
+Collisions between levels with $n\ge  3$ \emph{are} included unless the
+\cdCommand{database H-like collision off}
+or \cdCommand{database He-like collision off} commands are given.  Collisions
+between the $2s$ and $2p$ levels are always included unless the
+\cdCommand{database H-like collisions l-mixing off} command is given.
+Similarly, this option uses the \citet{Percival1978} $n$-changing collisions and the
+classical \citet{PengellySeaton1964} theory for $l$-changing collisions.
+
+In the case of the He-like isoelectronic sequence
+the \cdCommand{Case~B} command
+sets the optical depths in the singlet Lyman lines to a large value.
+The
+Hummer \& Storey option has no effect on the He-like sequence.
+
+The \cdCommand{no Pdest} option turns off destruction of
+Lyman lines by background opacity.
+
+There are several side effects of this command that may after the spectrum
+or physical conditions in unexpected ways.
+The large L$\alpha $ optical depth will
+often result in an especially strong radiation field within this line.
+This affects the gas through photoionization of excited metastable states
+of H and He and of those elements
+with a small enough ionization potential.
+The \cdCommand{no photoionization} option on the \cdCommand{Case~B}
+command tells the code not to
+include photoionization from excited metastable states like the 2s level
+of \hO.
+But these strong diffuse fields will also strongly affect the level
+of ionization of the gas, making the resulting ionization equilibrium a
+fiction.
+Optically thin gas is actually described by Case C
+(\citealp{Ferland1999}, \citealp{LuridianaEtAl09} and
+AGN3 Section 11.4) where continuum pumping enhances Balmer lines.
+The large
+Lyman-line optical depths that result from the \cdCommand{Case~B}
+command will prevent
+continuum resonant pumping of the atom.  Beware.
+
+\section{Case C [options]}
+
+This has the same options as the Case~B command but sets the
+L$\alpha$ optical depth to a very small value by default.
+Case C is described by \citet{Ferland1999} and
+\citet{LuridianaEtAl09}.
+
+\section{Diffuse fields [outward, OTS]}
+
+This specifies which method is to be used to transfer the diffuse fields,
+the emission from gas within the computed structure.
+The options are \cdCommand{outward only} and \cdCommand{OTS}.
+
+The \cdCommand{OTS} option takes into account optical depths
+in both the inward and outward directions.
+The \cdCommand{OTS} option has a \cdCommand{SIMPLE} option which will
+do a very simple OTS approximation without taking optical depths into
+account.
+All diffuse fields with energies capable of ionizing hydrogen
+are assumed to do so, and those with smaller energies freely escape.
+This is intended as a debugging tool.
+
+If \cdCommand{outward} is chosen then the code will check for a number.
+This determines which of the many forms of the outward-only
+approximation (\citealp{Tarter1967}) is used.
+The default\footnote{OTS was the default in version 86 and before.} is 2.  This is intended for testing the code.
+
+This choice does not strongly affect the predicted emission-line spectrum
+but it does change the temperature at the illuminated face of the cloud.
+
+\section{Double optical depths}
+
+On second and later iterations the code uses the total optical depths
+of the computed structure to find the outwardly-directed radiation field.
+This command doubles the total optical depth so that the shielded face of
+the cloud becomes the mid-plane of a structure that is twice as thick as
+the computed cloud.
+
+This original purpose of this command was to simulate a geometry in which
+ionizing radiation strikes the plane-parallel cloud from both sides.
+Examples are a L$\alpha$ forest cloud or the diffuse ISM.
+The total line and
+continuum optical depths are set to twice the computed optical depth at
+the end of the iteration.
+The computed model is then one half of the cloud
+and the other half of the cloud is assumed to be a mirror image
+of the first half.
+Doubling the total line and continuum optical depths at the end of
+the iteration is the \emph{only} effect of this command.
+Physical quantities such
+as the physical thickness, column densities, or line emission
+\emph{are not} affected.
+
+This approximation makes sense if the cloud is optically thick in lines
+but optically thin (or nearly so) in continua.
+Lines such as the L$\alpha $
+transitions of He I and He II can be important sources
+of ionizing radiation.
+Their transport will be handled correctly in this limit when this command
+is used.
+Continuum transport out of the cloud will also be treated
+correctly, but attenuation of the incident continuum will
+\emph{not} be if the
+cloud is optically thick in the continuum.
+
+The second use of this command is when the outer edge of a computed
+structure is not the other edge of the cloud.
+A typical PDR calculation
+is an example.
+The calculation starts at the illuminated face and continues
+until the gas becomes cool and molecular.  The stopping point often does
+not correspond to the outer boundary of the molecular cloud, but rather
+is a point that is ``deep enough'' for a given study.  The optical depths
+are always computed self-consistently.  On second and later iterations the
+total optical depths are normally those of the computed structure.  Near
+the shielded face the outward optical depths will be small and radiation
+will freely escape in the outward direction.  The gas temperature may fall
+dramatically due to the enhanced cooling resulting from the free escape
+of line photons.
+In real PDRs considerable neutral or molecular material
+probably extends beyond the stopping point so that line photons do not freely escape.
+The shielding effects of this unmodeled extra material can be
+included with this command.
+Then, the shielded face of the cloud will
+correspond to the mid-plane of the overall structure and lines will not
+artificially radiate freely into the outer (unmodeled) hemisphere.
+
+\section{Iterate [2 times, to convergence]}
+\label{sec:IterateCommand}
+
+This specifies the number of iterations to be performed.
+The default
+is a single iteration, a single pass through the model.
+At least a second
+iteration should be performed in order to establish the correct total optical
+depth scale when line transfer or radiation pressure is important.
+Two
+iterations are sometimes sufficient and will be done if no numbers are
+entered on the command line.
+A comment will be printed after the last
+iteration if the total optical depth scale has not converged and further
+iterations are needed.
+
+\subsection{Number of iterations}
+
+There is a slight inconsistency in how the code counts the number of
+iterations.
+The way it functions in practice is what makes the most sense
+to me.
+
+The word \emph{iterate} is from Latin for ``again.''
+So the true number of
+``agains'' should be one less than the total number of calculations of the
+cloud structure.
+When the \cdCommand{iterate} command is not entered there is one
+calculation of the structure and so formally no iterations.
+ If any one
+of the following commands is entered:
+\begin{verbatim}
+iterate
+iterate 0
+iterate 1
+iterate 2
+\end{verbatim}
+then exactly two calculations of the structure will be done.
+If the number
+on the line is two or greater, then the number will be the total number
+of calculations of the structure.
+
+\subsection{Iterate to convergence [max =7, error =.05, all] }
+
+This is a special form of the \cdCommand{iterate} command
+in which the code will
+continue to iterate until the optical depths have converged or a limit to
+the number of iterations has been reached.
+The optional first number on
+the line is the maximum number of iterations to perform with a default of
+10.  The second optional number is the convergence criterion.
+The default
+is for relative optical depths to have changed by less than \autocv\ between
+the last two iterations.
+The optional numbers may be omitted from right
+to left.
+If all transitions are optically thin then only a second iteration
+is performed.
+
+If the \cdCommand{all} option is given, the convergence test will be
+made on all transitions, rather than a selected set.
+
+Section \ref{sec:ConvergenceProblems} discusses some reasons the
+simulation may not converge.  
+There are likely to be convergence problems if the outer edge of the cloud
+is set by the lowest allowed temperature rather than an outer radius of column density.
+
+\subsection{Convergence problems}
+\label{sec:ConvergenceProblems}
+
+The code generally will not converge if it has not done so within ten
+or so iterations.
+The most common reason for convergence problems is that
+the outer edge of the cloud changes from iteration to iteration.
+To prevent this from happening it is important to understand why the
+calculation stopped (Section \ref{sec:StoppingCriteria}).
+
+Convergence problems often happen if the outer edge of the cloud is set by
+the lowest allowed temperature, as set with the
+\cdCommand{stop temperature} command (Section \ref{sec:CommandStopTemperature}),
+or the default lowest allowed temperature.
+The temperature at the shielded face of the cloud can be affected by the total optical depths.
+As a result the point where the lowest temperature is reached can change from
+iteration to iteration, so the column densities and optical depths also change,
+independently of the radiative transfer solution.
+It will not be possible to converge the optical depths since so much is changing.
+The code will generate a caution if the solution is not converged after
+the limit to the number of iterations is reached.
+In that case it will also check if the calculation stopped due to the low-temperature limit
+being reached, and suggest changing the stopping criteria in that case.
+
+Another common reason for convergence problems is that
+the specified column density or thickness causes the simulation to end
+within a prominent ionization front.
+In this case very small changes in the
+physical conditions result in large changes in the optical depths.  
+
+These
+are physical, not numerical, problems.
+To prevent them, understand what sets the outer edge of the cloud. 
+The code should not have convergence
+problems if the outer edge is determined by the outer radius, total column density,
+or an equivalent, such as $A_V$.
+
+\section{No scattering opacity}
+\label{sec:CommandNoScatteringOpacity}
+
+This turns off several pure scattering opacities.  These include
+scattering by grains, electron scattering, and the extreme damping wings
+of Lyman lines (Rayleigh scattering).
+When scattering opacity is included
+and an open geometry is computed the scattering opacity is assumed to
+attenuate the incident radiation field as
+$\left( {1 + 0.5\,\tau _{scat} } \right)^{ - 1} $
+rather than $\exp \left( { - \tau } \right)$ (\citealp{Schuster1905}).
+
+Scattering can be neglected in a spherical geometry with gas fully
+covering the source of ionizing radiation.
+Scattered photons are not really
+lost but continue to diffuse out with (perhaps) a slight shift in energy.
+Electron scattering is generally the most important scattering opacity in
+a grain-free mixture.
+If $ \tau _{scat}  \le 1$
+then it is reasonable to consider electron scattering as a heating and
+cooling process but not as an absorption mechanism if the energy shifts
+are not large (i.e., $ h\nu \ll mc^2$) and the geometry is spherical
+(this is not correct for $\gamma$-ray energies,
+of course).
+\Cloudy\ is not now designed to work in environments that are
+quite Compton thick, but should work well for clouds where the electron
+scattering optical depths are less than or of order unity.
+
+When this command
+is entered scattering processes such as Compton energy exchange 
+and grain scattering are still included
+as heating, cooling, and ionization processes, but not as extinction sources.
+(Thermal and ionization effects of Compton scattering are turned off with
+the \cdCommand{no Compton} command).
+The \cdCommand{no scattering opacity} command is automatically
+generated when \cdCommand{sphere} (see section \ref{sec:CommandSphere}) is specified.
+
+\section{Turbulence = 100 km/s [log, dissipate]}
+
+This enters a microturbulent velocity $u_{turb}$.
+The velocity is given in
+km s$^{-1}$ on the command line although the code works with
+cm s$^{-1}$ internally. The turbulent line width $u_{turb}$ is zero by default,
+but the value that is entered must be $u_{turb} \ge 0$.
+If the optional keyword \cdCommand{log} appears then the number
+is interpreted as the log of the turbulence. Alternatively, you can
+also enter the keyword \cdCommand{equipartition} which is discussed
+further below.
+
+Turbulent pressure is included in the equation of state when the total
+pressure is computed.\footnote{Turbulence was not included as a pressure term in versions 06.02
+and before.}
+The \cdCommand{no pressure}
+option on this command says not to include turbulent pressure in the total
+pressure.
+
+Turbulence affects the shielding and pumping of lines.
+Fluorescent
+excitation of lines becomes increasingly important for larger turbulent
+line widths since a larger part of the continuum can be absorbed by a line.
+Line pumping is included as a general excitation mechanism for all lines
+using the formalism outlined by \citet{Ferland1992} and described further in
+a section of Part 3.
+The line-center optical depth varies inversely with
+the line width velocity $u$ so the effects of line optical depths
+and trapping become smaller with increasing line width.
+Larger $u$ inhibits self-shielding.
+
+\subsection{Definitions }
+
+The Doppler width of any line that is broadened by both thermal motions
+and turbulence that is given by a Gaussian is given by the quadratic sums
+of the thermal and turbulent parts,
+\begin{equation}
+u = \sqrt {u_{th}^2  + u_{turb}^2 }  = b = \sqrt 2 \sigma\;
+ [\cmps ].
+\end{equation}
+Here $b$ is the Doppler parameter used in much of the UV absorption-line
+literature, $\sigma $ is the standard deviation
+(often called the dispersion) for
+a normal distribution, and $\sigma^2$ is the variance.
+For a thermal distribution
+of motions the average velocity along the line of sight
+(\citealp{Mihalas1978}, equation 9-35, page 250)
+and the most probable speed (\citealp{Novotny1973}, p 122)
+of a particle with mass $m$ are both given~by
+\begin{equation}
+u_{th}  = \sqrt {2kT/m}\;
+[\cmps ].
+\end{equation}
+This corresponds to $16.3 \sqrt{ t_4/m_{AMU}}\ {\rm km\ s}^{-1}$ for pure thermal motions.
+This command sets $u_{turb}$.
+Note that with these definitions the full-width half-maximum
+(FWHM) of a line is equal to
+\begin{equation}
+u\left( {FWHM} \right) = u\sqrt {4\ln 2}\;
+[\cmps ].
+\end{equation}
+
+\subsection{Turbulent pressure}
+
+For an ideal gas the thermal pressure is $P = nkT$
+while the energy density is $1/2 nkT$
+per degree of freedom, so for a monatomic gas is $U = 3/2 nkT$.
+Turbulent motions add pressure and energy terms that are analogous
+to thermal motions if the turbulence has a Gaussian distribution.
+Note
+that the turbulent velocities may be organized, or lined up in certain
+directions, if the gas is magnetically controlled.
+This presents a
+complication that is ignored.
+
+\citet{HeilesTroland2005} discuss both turbulence and magnetic fields.
+Their equation 34 gives the turbulent energy density in terms of the
+one-dimensional turbulent velocity dispersion $\Delta V_{turb,1D}^2 $
+(or standard deviation).
+Note that we write velocities in terms of $u$
+with the relationship $u^2  = 2\Delta V_{turb,1D}^2 $.
+Their energy density can be rewritten as a pressure:
+\begin{equation}
+\begin{array}{ccl}
+ P_{turb}  = \frac{F}{6}\rho \,u_{turb}^2&  =& 3.9 \times 10^{ - 10} F\left(
+{\frac{{n_{tot} }}{{10^5 \;{\mathrm{cm}}^{ - 3} }}} \right)\left(
+{\frac{{u_{turb} }}{{1\;{\mathrm{km}}\;{\mathrm{s}}^{ - 1} }}} \right)^2 \quad \left[
+{{\mathrm{erg\; cm}}^{{\mathrm{ - 3}}} {\mathrm{;\ dyne\; cm}}^{ - 2}} \right] \\
+&  =& 2.8 \times 10^6 \,\,F\,\left( {\frac{{n_{tot} }}{{10^5 \;{\mathrm{cm}}^{
+- 3} }}} \right)\left( {\frac{{u_{turb} }}{{1\;{\mathrm{km}}\;{\mathrm{s}}^{ - 1}
+}}} \right)^2 \quad \left[ {{\mathrm{cm}}^{ - 3} \;{\mathrm{K}}} \right] \\
+ \end{array}
+\end{equation}
+where $n_{tot}$ is the total hydrogen density,
+$u_{turb}$ is the turbulent velocity,
+and He/H$ = 0.1$ was assumed.
+The term $F$ accounts for how the turbulent
+velocity field is ordered (\citealp{HeilesTroland2005}, their equation 34).
+$F$ is 2 for turbulent velocities that are perpendicular to
+the magnetic field
+as in Alfven waves and $F$ is 3 for isotropic turbulent motions.
+The default
+value of $F = 3$ is changed by entering a new value as a second number on
+this command line.
+
+\subsection{Energy dissipation}
+
+The \cdCommand{dissipate} option on the \cdCommand{turbulence}
+command provides a way in include
+conversion of wave energy into heat (see \citealp{BottorffFerland2002}).
+When
+the option is used a third number, the log of the scale length for the
+dissipation in cm, must appear.
+Then the turbulent velocity will have the form
+\begin{equation}
+u_{turb} (r) = u_{turb} (r_{\mathrm{o}} )\exp ( - \Delta r/r_{scale} )\quad
+\mathrm{[cm\, s}^{-1}]% (55)
+\end{equation}
+where $u_{turb}(r_{\mathrm{o}})$ is the turbulence at the illuminated face
+and $\Delta r$ is the depth into the cloud.
+The wave mechanical energy is assumed to have been
+converted into heat with a local heating rate given by
+(\citealp{BottorffFerland2002})
+\begin{equation}
+G(r) = 3.45 \times 10^{ - 28} 2^{ - 3/2} u_{turb}^3 (r) \quad
+\mathrm{[erg\, cm}^{-3} \mathrm{s}^{-1}]% (56)
+\end{equation}
+
+\subsection{Equipartition turbulent - magnetic pressures }
+
+The \cdCommand{equipartition} option on the \cdCommand{turbulence} command sets the turbulent
+velocity to an equipartition between magnetic and
+turbulent energy densities.
+That is,
+\begin{equation}
+\label{eqn:MagneticEquipartition}
+P_{turb}  = \frac{F}{6}\rho \,u_{turb}^2  = P_{mag}  = \frac{{B^2 }}{{8\pi
+}}\, \mathrm{[erg\, cm}^{-3}].% (54)
+\end{equation}
+The \cdCommand{magnetic field} command sets $B$.
+The turbulent
+velocity is determined from the magnetic field
+assuming equation \ref{eqn:MagneticEquipartition}.
+\citet{HeilesCrutcher2005} argue that the correlation between turbulent and
+magnetic pressures, while true on average, does not hold in detail for
+specific regions of the ISM. When this option is used, you can optionally add
+the parameter $F$ on the command line (the default is $F=3$). The keyword \cdCommand{no pressure} is
+supported, but not \cdCommand{dissipate}.
+
+\subsection{Turbulence command heads up!}
+
+\emph{N.B.!}  In the default (non-equipartition) form of the command, the turbulent velocity is the first number
+on the command line.
+The $F$ parameter is the second number.
+The energy-dissipation scale length is the third number and must appear
+after $u_{turb}$ and $F$.
+These numbers can only be omitted from right to left.
+In the equipartition case you can only specify $F$,
+which then is the first number on the command line.
+The energy-dissipation scale length is not supported in the equipartition case.
+The keyword \cdCommand{vary} is only supported in the non-equipartition case,
+in which case the turbulent velocity is varied.
+
+The turbulent velocity must be less than the speed of light.
+The code will stop if $u_{turb} \geq c$ is specified.
+
+\section{vlaw alpha=-1}
+
+This specifies a turbulent velocity that is a power law in radius.
+The number is the power law $\alpha$ on radius.
+It must be negative.
+The turbulence will be given by
+\begin{equation}
+u = u_0 \left( {{\raise0.7ex\hbox{$r$} \!\mathord{\left/
+ {\vphantom {r {r_0 }}}\right.\kern-\nulldelimiterspace}
+\!\lower0.7ex\hbox{${r_0 }$}}} \right)^\alpha
+\end{equation}
+where $r_0$ in the inner radius and
+$u_0$ is the initial turbulence specified with the
+\cdCommand{turbulence} command.

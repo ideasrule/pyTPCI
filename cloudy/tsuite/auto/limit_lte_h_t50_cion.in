@@ -1,0 +1,49 @@
+title collisionally ionized H in LTE limit
+#
+# commands controlling continuum =========
+black body, T = 50000 K
+ionization parameter -8
+#
+# commands for density & abundances =========
+hden = 20
+set eden 20
+init file="hheonly.ini"
+#
+# commands controlling geometry  =========
+stop lyman optical depth -6
+set dr -10
+stop zone 1
+#
+# other commands for details     =========
+constant temperature = 50000 K
+# want pure collisional model
+no induced processes  (OK) 
+database h-like collisional excitation off 
+database h-like collisions l-mixing off 
+database he-like collisional excitation off 
+database he-like collisions l-mixing off 
+database he-like collapsed levels 20
+iterate
+#
+# commands controlling output    =========
+print h-like departure coefficients hydrogen
+print he-like departure coefficients helium
+print populations h-like hydrogen 
+save overview "limit_lte_h_t50_cion.ovr"
+save performance "limit_lte_h_t50_cion.per"
+save monitors last "limit_lte_h_t50_cion.asr"
+#
+# commands giving the monitors    =========
+monitor h-like hydrogen departure coef, average 1
+monitor he-like excited helium departures 1
+##
+# limit_lte_h_t50_cion.in
+# class limit 
+# ========================================
+# 
+
+This is the limiting case pure hydrogen collisional ionization,
+There are no excitation or l-mixing collisions, so this tests whether 
+collisional ionization - three body recombination
+works in detailed balance.
+

@@ -1,0 +1,231 @@
+title Orion nebula blister with wind
+#
+# commands controlling continuum =========
+blackbody 40000
+phi(h) 13.0
+brems 6
+phi(h) 10
+#
+# commands for density & abundances =========
+hden 4
+abundances hii region no grains
+grains orion no qheat single 
+#
+# commands controlling geometry  =========
+wind -7 km/s advection
+# this accounts for matter beyond end of the model
+double optical depths
+sphere 
+## >>chng 06 jul 05, stop on AV rather than temperature */
+## >>chng 08 jul 01, from 15 to 5 
+stop AV 5 
+stop temperature linear 5  
+#
+# other commands for details     =========
+iterate 4
+magnetic field -4 
+cosmic rays background 
+# this has no effect on dynamics, but is to desaturate the lines as per flow
+turbulence 8 km/sec no pressure
+# try to speed up simulation without hurting dynamics
+init "fast.ini"
+# use Bakes & Tielens heating
+set PAH Bakes 
+## init "c84.ini"
+## failures 5
+#
+# commands controlling output    =========
+# want to print line intensities are surface brightness, per arcsec^2
+print lines surface brightness arcsec
+print line faint -1.5
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save performance "dynamics_orion_flow.per"
+save overview "dynamics_orion_flow.ovr" no hash
+save hydrogen 21 cm "dynamics_orion_flow.21cm" no hash
+save dr "dynamics_orion_flow.dr" no hash
+save continuum last "dynamics_orion_flow.con" units microns no hash
+save monitors last "dynamics_orion_flow.asr" no hash
+save pressure "dynamics_orion_flow.pre" no hash
+save heating "dynamics_orion_flow.het" no hash
+save cooling "dynamics_orion_flow.col" no hash
+save molecules "dynamics_orion_flow.mol" no hash
+save wind "dynamics_orion_flow.wnd" last 
+#
+# commands giving the monitors    =========
+## >>chng 06 mar 11, from -11.241 to -11.175, chng small H from 4 to 5 lev
+## >>chng 07 jun 25, from -11.175 to -11.328, old h-like topoff added indirect to n=4, new only to n=6, huge effect on 4861.
+## >>chng 07 oct 26, from -11.328 to -11.350, very close to botch after recent changes
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+## >>chng 23 sep 12, from -11.35 to -11.18, update fast.ini
+monitor line "H  1" 4861.32A intensity -11.18
+##
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "CaBo" 4861.32A 1.0
+##
+## >>chng 05 oct 01, from 0.103 to 0.082, RP update He levels
+## >>chng 07 dec 29, from 0.082 to 0.857, ddrift up
+## >>chng 08 apr 30, from 0.0857 to 0.0908 H, He topoff change
+## >>chng 12 nov 01, from 0.0908 to 0.095, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jul 24, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 22, from 0.095 to 0.1024, collapsed branch merge r8609
+## >>chng 17 sep 01, from 0.1024 to 0.0977, fix bug in high n collisional excitation rates for He-like iso-sequences
+## >>chng 18 feb 20, updated spectral label from "he 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+## >>chng 23 sep 12, from 0.0977 to 0.1271, update fast.ini
+monitor line "Blnd" 5875.66A 0.1271
+## 
+## >>chng 13 jul 24, wl from 5876 to 5875.64A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 5875.64A 0.127
+## 
+## >>chng 13 jul 24, wl from 3889 to 3888.63A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.0801 to 0.104, Marios bug fixes
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+## >>chng 23 sep 12, from 0.104 to 0.0203, update fast.ini
+monitor line "He 1" 3888.64A 0.0203
+## >>chng 13 jul 24, wl from 3889 to 3888.63A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+monitor line "Ca B" 3888.64A 0.105
+## 
+## >>chng 13 jul 24, wl from 7065 to 7065.18A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 7065.18A to 7065.22A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 22, from 0.0273 to 0.0306, collapsed branch merge r8609
+## >>chng 16 aug 07, from 0.0306 to 0.0327, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 7065.22A to "Blnd" 7067.20A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 7067.20A to 7065.25A, adjust multiplet Blend WL for refraction index
+## >>chng 23 sep 12, from 0.0327 to 0.1002, update fast.ini
+monitor line "Blnd" 7065.25A 0.1002
+## >>chng 13 jul 24, wl from 7065 to 7065.22A, increased wl precision to 6 sig. fig.
+## >>chng 23 sep 12, from 0.0331 to 0.0364, update fast.ini
+monitor line "Ca B" 7065.22A 0.0364
+##
+## >>chng 08 apr 30, from 0.913 to 0.842 H, He topoff change
+## >>chng 13 jul 24, wl from 10830 to 1.08299m, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 1.08299m to 1.08303m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 12, from 0.842 to 0.9799, coll. str. reduced mass scaling
+## >>chng 16 aug 07, from 0.9799 to 1.101, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+## >>chng 19 jun 28, from 1.101 to 1.156, reintegrate iso_collisions branch
+## >>chng 19 jul 30, from 1.156 to 0.714, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.714 to 0.5291, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+## >>chng 23 sep 12, from 0.5291 to 0.2482, update fast.ini
+monitor line "Blnd" 1.08302m 0.2482
+##
+## >>chng 06 mar 11, from 0.241 to 0.263, chng small H from 4 to 5 lev
+## >>chng 06 nov 29, from 0.263 to 0.221, Badnell DR turned on
+## >>chng 08 apr 30, from 0.221 to 0.250 H, He topoff change
+## >>chng 14 jan 05, from 0.25 to 0.273, N to external databases
+## >>chng 15 mar 07, from 0.273 to 0.2313, merging newmesh branch
+## >>chng 23 sep 12, from 0.2313 to 0.3157, update fast.ini
+monitor line "blnd" 2326 0.3157 error 0.1
+##
+## >>chng 05 oct 01, from 0.200 to 0.223, RP update He levels
+## >>chng 07 oct 22, from 0.223 to 0.246, resolve l-levels of h-like sequence
+## >>chng 09 feb 23, from 0.246 to 0.2746, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 15 mar 07, from 0.2746 to 0.3041, merging newmesh branch
+## >>chng 16 jul 24, from 0.3041 to 0.2221, update C III to 2014A&A...566A.104F
+## >>chng 23 sep 12, from 0.2221 to 0.354, update fast.ini
+monitor line "blnd" 1909 0.354 error 0.1
+##
+## >>chng 05 oct 01, from 0.505 to 0.480, RP update He levels
+## >>chng 05 dec 20, from 0.480 to 0.516, RP change default helium levels
+## >>chng 06 nov 29, from 0.516 to 0.449, Badnell DR turned on
+## >>chng 08 apr 30, from 0.449 to 0.497 H, He topoff change
+## >>chng 10 mar 05, from 0.497 to 0.5436, changes caused by r3848 atomic data update
+## >>chng 23 sep 12, from 0.5436 to 0.648, update fast.ini
+monitor line "N  2"  6583.45 0.648 error 0.1
+##
+## >>chng 05 dec 20, from 0.621 to 0.655, RP change default helium levels
+## >>chng 06 nov 29, from 0.655 to 0.610, Badnell DR turned on
+## >>chng 08 apr 30, from 0.610 to 0.668 H, He topoff change
+## >>chng 15 mar 07, from 0.668 to 0.7334, merging newmesh branch
+monitor line "blnd"  3727 0.7334 error 0.1
+##
+## >>chng 05 oct 01, from 3.707 to 3.871, RP update He levels
+## >>chng 07 dec 06, from 3.871 to 4.133, changes in h-like collisions
+## >>chng 20 jan 13, from 4.133 to 4.325, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+## >>chng 23 sep 12, from 4.325 to 5.535, update fast.ini
+monitor line "o  3"  5006.84 5.535
+##
+## >>chng 06 jul 06, from 0.159 to 0.175, update Ne cs, CO chem now
+## includes dynamics but no cross talk between CO and H2 in H2 part
+## >>chng 07 dec 14, from 0.175 to 0.167 RP update is seq
+## >>chng 08 nov 04, from 0.167 to 0.1746, line RT bug fixes (r2429-35)
+## >>chng 11 jul 12, from 0.1746 to 0.1629, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 0.1629 to 0.1769, BUGFIX, largely undo r6703
+## >>chng 13 jul 26, wl from 12.81m to 12.8101m, increased wl precision to 6 sig. fig.
+monitor line "ne 2" 12.8101m 0.1769
+##
+## >>chng 05 dec 08, from 0.342 to 0.309 update to Elwert Solomon rate
+## >>chng 06 jul 06, from 0.309 to 0.484, sim goes much deeper, CO chem now
+## includes dynamics but no cross talk between CO and H2 in H2 part
+## >>chng 06 nov 29, from 0.484 to 0.561, Badnell DR turned on, no co in advec
+## >>chng 07 may 08, from 0.561 to 0.543, dyn logic changed to set stop 
+## thickness after relaxing 2 iter, increased to 4 interation in this
+## sim to get more dynamics logic tested
+## >>chng 08 jul 01, from 0.561 to 0.0161, Av from 15 to 5
+monitor HHeicf 0.0161 error 0.02
+##
+## some dynamic stuff
+## >>chng 12 oct 22, from -0.13 to -0.1362, zone tau in rt_line_one
+## >>chng 23 sep 08, from -0.1362 to -0.1262, fix SQRTPI in Lya destprob
+## >>chng 23 sep 12, from -0.1262 to -0.1337, update fast.ini
+monitor velocity -0.1337
+##
+## assert dynamics convergence error < xx 
+##
+## >>chng 05 mar 28, from 80 to 50, impr mol converg
+## >>chng 08 jul 01, from 50 to 65 (58) Av from 15 to 5
+## >>chng 08 dec 08, from 65 to 57.33, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 57.33 to 100.8, merging newsolvers branch
+## >>chng 09 jan 16, from 100.8 to 100.1, average of 10 runs
+## >>chng 09 apr 19, from 100.1 to 101.5 refactor p esc and dest with cooling
+## >>chng 10 jun 17, from 101.5 to 91.29, fix botches due to recent dBase cooling changes
+## >>chng 11 aug 06, from 91.29 to 100.8, add default min dr rel to depth
+## >>chng 11 nov 16, from 100.8 to 75.31, adjust newmole monitors
+## >>chng 12 mar 07, from 75.31 to 58.32, renorm to r5961 results
+## >>chng 12 aug 16, from 58.32 to 55.3, further fix of Rawlings H2 rates
+## >>chng 13 nov 05, from 55.3 to 32.62, convergence branch changes
+## >>chng 13 nov 25, from 32.62 to 31, convergence branch changes
+## >>chng 14 apr 07, from 31 to 23.94, move H/C out of ConvBase loop
+## >>chng 14 jun 11, from 23.94 to 25.68, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+## >>chng 15 oct 14, from 25.68 to 24.19, update DR suppression in r10716
+## >>chng 21 mar 22, error from 0.05 to 0.10, drift after update to NIST energies & ionization potentials
+monitor itrzn 24.19 error 0.10
+##
+## >>chng 06 jul 06, from 900 to 1000 sim goes much deeper, CO chem now
+## includes dynamics but no cross talk between CO and H2 in H2 part
+## >>chng 08 dec 08, from 1000 to 578, upper limit -> equals (r2515)
+## >>chng 09 jan 16, from 578 to 582, average of 10 runs
+## >>chng 10 jun 17, from 582 to 658, fix botches due to recent dBase cooling changes
+## >>chng 11 aug 05, from 658 to 688, fix mistake in r5333
+## >>chng 11 aug 06, from 688 to 408, add default min dr rel to depth
+## >>chng 14 apr 07, from 408 to 389, move H/C out of ConvBase loop
+## >>chng 15 mar 07, from 389 to 419, merging newmesh branch
+## >>chng 23 sep 12, from 419 to 654 update fast.ini
+monitor nzone 654
+##
+# dynamics_orion_flow.in
+# class dynamics hii pdr
+# ========================================
+# 
+
+This is a model similar in spirit to the blister geometry H+ region
+model computed by Baldwin et al. (1991), but with a D-critical flow.
+Many physical processes have been disabled to make this simulationn faster.
+Grain physics is not done so the gas temperature is incorrect.  The
+main purpose is to do a quick test of the dynamical flow with grain
+opacities included.  The slow directory contains a full simulation
+of a flow like Orion.

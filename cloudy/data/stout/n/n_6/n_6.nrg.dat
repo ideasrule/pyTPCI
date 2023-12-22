@@ -1,0 +1,71 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=3 were downloaded using ADM.
+#
+# If no data exists for a given level, omit it in this table.
+# The value will be filled in using the quantum defect routine.
+#
+# helium
+# These energies from Drake 1996, except these divided by c
+#
+# lithium thru zinc
+# These energies are from CHIANTI 5, up to 5^1P 
+# >>refer He-like	Energies	Landi et al., 2005; ApJSS, in press 
+# >>refer He-like	Energies	Dere, K. P. et al. 1997, 
+# >>refercon	 Astronomy and Astrophysics Suppl. Ser., Vol. 125, pp. 149-173
+#
+# Ionization potentials (in Rydbergs) for each ion in the iso-seq up to Z=30.	
+# These are exactly what you get if you take Verner's numbers in atmdat_ph1(0,1,nelem,0) 
+# and multiply by (0.9998787/EVRYD)*RYD_INF, exactly as is done elsewhere in Cloudy
+#
+ 1  0  1  0 0
+ 2  0  3 -1 3385890
+ 2  1  3  0 3438304
+ 2  1  3  1 3438320
+ 2  1  3  2 3438610
+ 2  0  1  0 3439274
+ 2  1  1  1 3473790
+ 3  0  3 -1 3991860
+ 3  0  1  0 4006000
+ 3  1  3 -1 4006160 65.7342
+ 3  2  3 -1 4013460 60.7362
+ 3  2  1  2 4013770
+ 3  1  1  1 4016390
+ 4  0  3 -1 4196800.00
+ 4  0  1  0 4202520.00
+ 4  1  3 -1 4202620.00
+ 4  2  3 -1 4205820.00
+ 4  2  1  2 4205830.00
+ 4  3  3 -1 4205810.00
+ 4  3  1  3 4205820.00
+ 4  1  1  1 4206810.00
+ 5  0  3 -1 4290150.00
+ 5  0  1  0 4293020.00
+ 5  1  3 -1 4293080.00
+ 5  2  3 -1 4294570.00
+ 5  2  1  2 4294670.00
+ 5  3  3 -1 4294700.00
+ 5  3  1  3 4294700.00
+ 5  1  1  1 4296090.00
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L10054 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=10054&comment_code=&amp;element=N&amp;spectr_charge=6&amp;ref=10054&amp;type=E
+# PUBCON    Title: Theoretical Energies for the n=1 and 2 States of the Helium Isoelectronic Sequence up to Z=100
+# PUBCON  Authors: G. W. F. Drake
+# PUBCON  Journal: Can. J. Phys. 66, 586–611 (1988)
+# PUBCON      DOI: https://doi.org/10.1139/p88-100
+# 
+# PUB     Refcode: L11554 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=11554&comment_code=&amp;element=N&amp;spectr_charge=6&amp;ref=11554&amp;type=E
+# PUBCON    Title: High-Precision Wavelength Measurements of the 1s^{2} ^{1}S-1snp ^{1}P Resonance Lines in He-like Nitrogen and Oxygen
+# PUBCON  Authors: L. Engström, and U. Litzén
+# PUBCON  Journal: J. Phys. B 28, 2565–2574 (1995)
+# PUBCON      DOI: https://doi.org/10.1088/0953-4075/28/13/010

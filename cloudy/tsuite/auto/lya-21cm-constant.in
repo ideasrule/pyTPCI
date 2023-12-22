@@ -1,0 +1,50 @@
+title test effect of lya pump on spin temperature
+#
+# commands controlling continuum =========
+#
+table ism 
+extinguish column 22
+CMB, z=0
+# 
+# commands for density & abundances =========
+# set the density and composition, ism with grains
+#
+hden 2 
+abundance ism 
+#
+# other commands for details     =========
+#
+# this is an important ionization source
+cosmic rays background  
+# optical depth
+double
+iterate
+turbulence 3 km/s
+# stopping criteria
+stop temperature 3K linear
+stop neutral hydrogen column density 18
+#
+# command exercised =========
+#
+set lya 21cm constant
+#
+# commands controlling output    =========
+#
+set save prefix "lya-21cm-constant"
+save hydrogen 21cm ".21cm" last
+save hydrogen lya ".lya" last
+save overview ".ovr" last
+#
+# commands giving the monitors    =========
+#
+monitor 21cm temperature mean 31.7 error 0.1
+#
+monitor 21cm temperature optical 44.3 error 0.1
+#
+monitor 21cm temperature spin 47.5 error 0.1
+#
+# # ========================================
+
+This is one of the sims employed by Shaw, Ferland, & Hubeny 2017, ApJ, 843, 149.
+It exercises the Snu=constant case to column density of 1e18, while the original
+paper used a 1e20 stopping criterion.

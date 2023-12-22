@@ -1,0 +1,16 @@
+Title Produce report of species labels, data sources, and line wavelengths.
+# this runs the smoke test, needed in order to set up the species
+test
+# The save command produces a file, LineLablels.txt, which contains
+# the set of line labels for the standard Cloudy setup.  This file
+# gives the species identification, the line wavelength, and indications
+# of how the line was formed, or which database produced it.
+save line labels "LineLabels.txt"
+# this produces a file, SpeciesLabels.txt, which contains a list of 
+# all species known to the code and the database used to model it.  
+save species labels "SpeciesLabels.txt" all
+# This reports the number of levels and the database used for each species. 
+# The report is contained in the main output.
+# The report includes both the spectrum name (for instance, C 4) and the
+# species name (in this case C+3)
+database print

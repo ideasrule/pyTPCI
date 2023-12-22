@@ -1,0 +1,68 @@
+title pure-H Stromgren sphere
+# the answer is R(Stromgren) = 4.16E17 cm
+#
+# commands controlling continuum =========
+blackbody 50000 K
+q(h) 49
+#
+# commands for density & abundances =========
+hden 4
+init file "honly.ini"
+abundances all -10
+#
+# commands controlling geometry  =========
+sphere static
+radius 16
+stop efrac -0.5
+#
+# other commands for details     =========
+no level2
+turbulence 20 km/s
+constant temper 7500
+iterate
+#
+# commands controlling output    =========
+save performance "limit_strom.per"
+save overview last "limit_strom.ovr"
+save results last "limit_strom.rlt"
+save monitors last "limit_strom.asr"
+save dr last "limit_strom.dr"
+#
+# commands giving the monitors    =========
+monitor thickness 17.619
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A 1.00
+## 
+## >>chng 05 dec 22, from 160 to 180 (157)
+## >>chng 08 dec 08, from 180 to 157, upper limit -> equals (r2515)
+monitor nzone 157 error 0.01
+## 
+## >>chng 07 jun 25, from 4 to 4.5, h-like treatment goes to he-like methods.
+## >>chng 08 dec 08, from 4.5 to 2.834, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 2.834 to 4.376, merging newsolvers branch
+## >>chng 09 feb 23, from 4.376 to 3.701, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 15, from 3.701 to 3.611, gradual approach to outer edge
+## >>chng 09 jun 26, from 3.611 to 3.822, remove several dampers
+## >>chng 13 nov 05, from 3.822 to 2.386, convergence branch changes
+monitor itrzn 2.386
+## 
+# limit_strom.in
+# class limit 
+# ========================================
+# 
+
+This case checks that the code computes the geometry and emissivity
+correctly for a pure hydrogen spherical shell.  The low temperature
+is chosen to avoid collisional ionization.  The model stops at the
+Ho-H+ ionization front.  The turbulence is to prevent the Balmer lines
+from becoming optically thick.
+ 
+Checks
+-	Outer radius should be 4.16391017 cm.
+-	Predicted Hb, case B Hb, and Q(H) Hb, all agree.
+

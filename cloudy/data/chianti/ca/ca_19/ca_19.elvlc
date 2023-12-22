@@ -1,0 +1,88 @@
+  1 1s2                   1  0 S  0.0  1          0.000       0.000000          0.000       0.000000 
+  2 1s.2s                 3  0 S  1.0  3   31142000.000     283.786786   31142734.000     283.793475 
+  3 1s.2p                 3  1 P  0.0  1   31313398.000     285.348680   31313392.000     285.348625 
+  4 1s.2p                 3  1 P  1.0  3   31320000.000     285.408841   31320897.000     285.417015 
+  5 1s.2s                 1  0 S  0.0  1   31328460.000     285.485935   31328458.000     285.485916 
+  6 1s.2p                 3  1 P  2.0  5   31355800.000     285.735075   31356913.000     285.745217 
+  7 1s.2p                 1  1 P  1.0  3   31473300.000     286.805814   31474963.000     286.820968 
+  8 1s.3s                 3  0 S  1.0  3   36870940.000     335.992729   36871273.000     335.995763 
+  9 1s.3p                 3  1 P  0.0  1   36918070.000     336.422209   36915926.000     336.402671 
+ 10 1s.3s                 1  0 S  0.0  1   36919930.000     336.439159   36919852.000     336.438448 
+ 11 1s.3p                 3  1 P  1.0  3   36920260.000     336.442166   36919859.000     336.438512 
+ 12 1s.3p                 3  1 P  2.0  5   36930850.000     336.538669   36931410.000     336.543772 
+ 13 1s.3d                 3  2 D  1.0  3          0.000       0.000000   36956927.000     336.776300 
+ 14 1s.3d                 3  2 D  2.0  5          0.000       0.000000   36957461.000     336.781166 
+ 15 1s.3d                 3  2 D  3.0  7          0.000       0.000000   36961905.000     336.821663 
+ 16 1s.3d                 1  2 D  2.0  5          0.000       0.000000   36962999.000     336.831632 
+ 17 1s.3p                 1  1 P  1.0  3   36962850.000     336.830274   36964424.000     336.844618 
+ 18 1s.4s                 3  0 S  1.0  3   38850670.000     354.033356   38850924.000     354.035671 
+ 19 1s.4p                 3  1 P  0.0  1   38870230.000     354.211600   38869249.000     354.202660 
+ 20 1s.4s                 1  0 S  0.0  1   38870530.000     354.214334   38870558.000     354.214589 
+ 21 1s.4p                 3  1 P  1.0  3   38871150.000     354.219984   38870894.000     354.217651 
+ 22 1s.4p                 3  1 P  2.0  5   38875630.000     354.260808   38875777.000     354.262148 
+ 23 1s.4d                 3  2 D  1.0  3          0.000       0.000000   38886205.000     354.357175 
+ 24 1s.4d                 3  2 D  2.0  5          0.000       0.000000   38886479.000     354.359672 
+ 25 1s.4d                 3  2 D  3.0  7          0.000       0.000000   38888307.000     354.376330 
+ 26 1s.4f                 3  3 F  2.0  5          0.000       0.000000   38888854.000     354.381314 
+ 27 1s.4f                 3  3 F  3.0  7          0.000       0.000000   38888859.000     354.381360 
+ 28 1s.4d                 1  2 D  2.0  5          0.000       0.000000   38888918.000     354.381897 
+ 29 1s.4p                 1  1 P  1.0  3   38888680.000     354.379729   38889244.000     354.384868 
+ 30 1s.4f                 3  3 F  4.0  9          0.000       0.000000   38889901.000     354.390855 
+ 31 1s.4f                 1  3 F  3.0  7          0.000       0.000000   38889907.000     354.390910 
+ 32 1s.5s                 3  0 S  1.0  3   39761380.000     362.332356   39761489.000     362.333350 
+ 33 1s.5p                 3  1 P  0.0  1   39771270.000     362.422481   39770744.000     362.417687 
+ 34 1s.5s                 1  0 S  0.0  1   39771310.000     362.422845   39771344.000     362.423155 
+ 35 1s.5p                 3  1 P  1.0  3   39771750.000     362.426855   39771583.000     362.425333 
+ 36 1s.5p                 3  1 P  2.0  5   39774040.000     362.447723   39774085.000     362.448133 
+ 37 1s.5d                 3  2 D  1.0  3          0.000       0.000000   39779340.000     362.496020 
+ 38 1s.5d                 3  2 D  2.0  5          0.000       0.000000   39779490.000     362.497387 
+ 39 1s.5d                 3  2 D  3.0  7          0.000       0.000000   39780417.000     362.505834 
+ 40 1s.5f                 3  3 F  2.0  5          0.000       0.000000   39780726.000     362.508650 
+ 41 1s.5f                 3  3 F  3.0  7          0.000       0.000000   39780730.000     362.508686 
+ 42 1s.5d                 1  2 D  2.0  5          0.000       0.000000   39780763.000     362.508987 
+ 43 1s.5p                 1  1 P  1.0  3   39780630.000     362.507775   39780874.000     362.509999 
+ -1
+%filename:  ca_19.elvlc
+
+Theoretical gf and A-values:  Autostructure calculation
+A Breit-Pauli distorted wave implementation for AUTOSTRUCTURE
+Badnell, N.R., 2011, Computer Physics Communications, 182, 1528
+ADSref:  http://adsabs.harvard.edu/abs/2011CoPhC.182.1528B
+
+Observed energy levels (1s2s, 1s2p):  Artemyev, A. N.; Shabaev, V. M.; Yerokhin, V. A.; Plunien, G.; Soff, G., 2005, Phys. Rev. A, 72, 2104
+ADSref:  http://adsabs.harvard.edu/abs/2005PhRvA..71f2104A
+Artemyev  1s2 1S0 - 1s.2p 1P1 == 3.1771447 A
+
+Observed wavelengths:  w, x, y, z
+Rice, J. E.; Reinke, M. L.; Ashbourn, J. M. A.; Gao, C.; Victora, M. M.; Chilenski, M. A.;
+Delgado-Aparicio, L.; Howard, N. T.; Hubbard, A. E.; Hughes, J. W.; Irby, J. H.
+X-ray observations of Ca19 +, Ca18 + and satellites from Alcator C-Mod tokamak plasmas
+Journal of Physics B: Atomic, Molecular, and Optical Physics, Volume 47, Issue 7, article id. 075701 (2014).
+doi:10.1088/0953-4075/47/7/075701
+ADSref:  https://ui.adsabs.harvard.edu/abs/2014JPhB...47g5701R/abstract
+
+%observed energy levels:  Martin, W. C., Sugar, J., Musgrove, A., and Dalton, G. R., 1995,
+NIST Database for Atomic Spectroscopy, Version 1.0, NIST Standard Reference Database 61.
+%theoretical energy levels:  Sampson, D. H., Goett, S.J., Clark, R.E.H., 1983, ADNDT, 29, 467
+
+Theoretical energies for n=2, 3 above IP
+Goryaev, F. F.; Vainshtein, L. A.; Urnov, A. M.
+Atomic data for doubly-excited states 2lnl‧ of He-like ions and 1s2lnl‧ of Li-like ions with Z = 6-36 and n = 2 , 3
+2017, ADNDT, 113, 117-257
+adsRef:  http://adsabs.harvard.edu/abs/2017ADNDT.113..117G
+DOI:  10.1016/j.adt.2016.04.002
+
+Theoretical energy levels (n=4,5 above IP):
+calculations of U. Safronova reported in Kato et al., 1997, ADNDT, 67, 225.
+ADS http://adsabs.harvard.edu/abs/1997ADNDT..67..225K
+updated by U. Safronova, 2001, private communication
+
+theoretical energy levels adjusted by SHFTIC file derived from 
+Artemyev, NIST, Goryaev (n=2, 3 above IP) and Safronova (n= 4,5 above IP energies
+
+produced as a part of the  'CHIANTI' atomic database for astrophysical spectroscopy
+ K. Dere (GMU) - 2020 July 05
+
+Reference:
+Chianti  2022-02-18
+ -1

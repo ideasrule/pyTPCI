@@ -1,0 +1,10 @@
+set save prefix "crDensityTempLow"
+abundances ism no qheat
+hden 0 vary
+grid -5 3 .25
+cosmic rays background -5
+table Drain 1
+extinguish 23
+stop zone 1
+save grid ".grd" last no hash
+save overview ".ovr" last no hash

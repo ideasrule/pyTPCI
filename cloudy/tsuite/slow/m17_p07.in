@@ -1,0 +1,266 @@
+title Pellegrini+07 2007ApJ...658.1119P model for M17
+# a brief description of its purpose
+#
+# commands controlling incident radiation field =========
+# these give the shape and intensity
+brems 8500000K 
+luminosity 33.5 range 7.35 to 176 Ryd
+table star CoStar, 47490K
+Q(h) 49.63 
+table star CoStar, 45335K 
+Q(h) 49.47 
+table star CoStar, 43151K 
+Q(h) 49.30 
+table star CoStar, 41209K 
+Q(h) 49.18 
+table star CoStar, 39084K 
+Q(h) 49.08 
+table star CoStar, 36982K 
+Q(h) 48.81 
+table star atlas, 34914K 
+Q(h) 48.97 
+table star atlas,27700K 
+absolute bolometric magnitude -8.5 
+table star atlas, 23700K 
+absolute bolometric magnitude -7.5 
+table star atlas, 20350K 
+absolute bolometric magnitude -6.6 
+table star atlas, 17050 
+absolute bolometric magnitude -6.3 
+CMB
+#
+# commands for density & abundances =========
+hden 2.065
+abundances H II region no qheat no grains 
+grains PAH 10 
+grains orion 1 
+element Helium abundance -0.98 
+element Carbon abundance -4.14 
+element Nitrogen abundance -4.2 
+element Oxygen abundance -3.47 
+element Neon abundance -4.4 
+element Sulphur  abundance -5.06 
+element Chlorine abundance -6.88 
+element Argon abundance -5.64 
+element Iron abundance -5.5 
+# these are to speed things up a bit
+element limit off -6.9
+#
+# commands controlling geometry  =========
+radius 0.35355 linear parsecs 
+# the observed extinction along this sight line
+stop Av extended 6.36 
+# do not want to stop at too small a depth due to low temperature
+stop temperature off
+# magnetostatic equilibrium
+constant pressure 
+sphere 
+#
+# other commands for details     =========
+magnetic field tangled -4.3125 2
+turbulence 3km/s
+iterate
+## >>chng 12 apr 10, new background 7.9x larger than old,
+## so lower scale factor by this amount to keep model the same
+cosmic rays background 1.60
+#
+# commands controlling output    =========
+save performance "m17_p07.per"
+save lines emissivity last "m17_p07.ems" 
+## >>chng 13 jul 31, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 dec 01, wl from 6562.81A to 6562.80A, update levels database to NIST
+## >>chng 21 mar 17, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, update 1-e energies to np
+## >>chng 21 aug 19, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+H  1 6562.80A 
+Blnd 6720 
+## >>chng 13 jul 31, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+CO   1300.05m 
+## >>chng 13 jul 31, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+CO   2600.05m 
+## >>chng 13 jul 31, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+CO   866.727m 
+## >>chng 13 jul 31, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+CO   371.549m 
+C  2 157.636m 
+c  1 370.269m 
+c  1 609.590m 
+o  1  63.1679m 
+## >>chng 13 jul 31, wl from 145.5m to 145.530m, increased wl precision to 6 sig. fig.
+O  1 145.495m 
+## >>chng 13 jul 31, wl from 34.80m to 34.8046m, increased wl precision to 6 sig. fig.
+Si 2 34.8046m
+end of line 
+print line sort wavelength
+print line optical depths faint -100
+save species last "m17_p07.oh" "OH[:]" densities
+save overview last "m17_p07.ovr" 
+save monitors last "m17_p07.asr" 
+save hydrogen 21 CM last "m17_p07.h21"
+save pressure last "m17_p07.pre" 
+save molecules last "m17_p07.mol" 
+save heating last "m17_p07.het"
+save cooling last "m17_p07.col"
+save monitors last "m17_p07.asr"
+save continuum last "m17_p07.con" units microns
+#
+# commands giving the monitors    =========
+## >>chng 13 jul 31, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 dec 01, wl from 6562.81A to 6562.80A, update levels database to NIST
+## >>chng 21 mar 17, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, update 1-e energies to np
+## >>chng 21 aug 19, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line luminosity "H  1" 6562.80A 38.0166
+## >>chng 11 jul 14, from 36.69 to 36.61, update after run with stellar grids
+## >>chng 13 feb 01, from 36.61 to 36.66, BUGFIX, largely undo r6703 (missed on gtest since stars not installed)
+## >>chng 13 mar 05, from 36.66 to 36.62, further updates S II CS
+## >>chng 14 dec 14, from 36.62 to 36.68, update S2+ - S+ DR to Badnell 2015
+## >>chng 16 dec 20, from 36.68 to 36.7, add secondary autoionization to DR suppression
+## >>chng 19 jul 22, from 36.7 to 36.72, fix bug on heavy ions impact
+## >>chng 23 may 11, from 36.72 to 36.75, update RR DR to 2022 Badnell work
+monitor line luminosity "Blnd" 6720 36.75
+## 
+## >>chng 10 mar 03, from 33.71 to 34, fix botches after CO changes
+## >>chng 10 jun 22, from 34 to 33.96, fix botches after dBaseLines cooling/heating changes
+## >>chng 10 dec 22, from 33.96 to 33.93, update lamda in r4457
+## >>chng 11 nov 16, from 33.93 to 33.95, adjust newmole monitors
+## >>chng 11 dec 12, from 33.95 to 33.81, bug-fix for updating grain opacity (r5759)
+## >>chng 13 feb 01, from 33.81 to 33.78, BUGFIX, largely undo r6703 (missed on gtest since stars not installed)
+## >>chng 13 jul 31, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 03, from 33.78 to 33.83, update H2 - C II 158m collision
+## >>chng 13 dec 23, from 33.83 to 33.79, C to external databases
+## >>chng 14 mar 26, from 33.79 to 33.59, move O to external databases
+## >>chng 14 aug 28, from 33.59 to 33.62, EleyRideal H2 formation
+## >>chng 20 sep 06, from 33.62 to 33.66, further update to McCall CR-related rates from r14260
+## >>chng 23 may 15, from 33.66 to 33.69, GS updates 21 reactions to UMIST 2012
+monitor line luminosity "CO  " 1300.05m 33.69
+## 
+## >>chng 10 mar 03, from 32.98 to 33.13, fix botches after CO changes
+## >>chng 10 jun 22, from 33.13 to 33.1, fix botches after dBaseLines cooling/heating changes
+## >>chng 10 dec 22, from 33.1 to 33.078, update lamda in r4457
+## >>chng 11 nov 16, from 33.08 to 33.1, adjust newmole monitors
+## >>chng 11 dec 12, from 33.1 to 32.94, bug-fix for updating grain opacity (r5759)
+## >>chng 13 apr 16, from 32.94 to 32.92, limit cota 3body to T>100K
+## >>chng 13 jul 31, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 03, from 32.92 to 32.97, update H2 - C II 158m collision
+## >>chng 13 dec 23, from 32.97 to 32.92, C to external databases
+## >>chng 14 mar 26, from 32.92 to 32.75, move O to external databases
+## >>chng 14 aug 28, from 32.75 to 32.77, EleyRideal H2 formation
+## >>chng 20 aug 03, from 32.77 to 32.79, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from 32.79 to 32.81, further update to McCall CR-related rates from r14260
+## >>chng 23 may 15, from 32.81 to 32.84, GS updates 21 reactions to UMIST 2012
+monitor line luminosity "CO  " 2600.05m 32.84
+## 
+## >>chng 10 mar 03, from 33.83 to 34.19, fix botches after CO changes
+## >>chng 10 jun 22, from 34.19 to 34.15, fix botches after dBaseLines cooling/heating changes
+## >>chng 10 dec 22, from 34.15 to 34.11, update lamda in r4457
+## >>chng 11 nov 16, from 34.11 to 34.14, adjust newmole monitors
+## >>chng 11 dec 12, from 34.14 to 33.99, bug-fix for updating grain opacity (r5759)
+## >>chng 13 feb 01, from 33.99 to 33.97, BUGFIX, largely undo r6703 (missed on gtest since stars not installed)
+## >>chng 13 jul 31, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 03, from 33.97 to 34.02, update H2 - C II 158m collision
+## >>chng 13 dec 23, from 34.02 to 33.97, C to external databases
+## >>chng 14 mar 26, from 33.97 to 33.74, move O to external databases
+## >>chng 14 aug 28, from 33.74 to 33.76, EleyRideal H2 formation
+## >>chng 15 oct 14, from 33.76 to 33.78, update Ne 3 cs to McLaughlin+11
+## >>chng 20 sep 06, from 33.78 to 33.81, further update to McCall CR-related rates from r14260
+## >>chng 23 may 15, from 33.81 to 33.84, GS updates 21 reactions to UMIST 2012
+monitor line luminosity "CO  " 866.727m 33.84
+## 
+## >>chng 10 mar 03, from 32.2 to 33.08, fix botches after CO changes
+## >>chng 10 jun 22, from 33.08 to 33.01, fix botches after dBaseLines cooling/heating changes
+## >>chng 10 aug 23, from 33.01 to 32.97, first run since change continuum grid
+## >>chng 10 dec 22, from 32.97 to 33.04, update lamda in r4457
+## >>chng 11 jun 22, from 33.04 to 33.06, tune Te solver
+## >>chng 11 dec 12, from 33.06 to 33.03, bug-fix for updating grain opacity (r5759)
+## >>chng 13 apr 16, from 33.03 to 33.01, limit cota 3body to T>100K
+## >>chng 13 jul 31, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 03, from 33.01 to 33.08, update H2 - C II 158m collision
+## >>chng 13 dec 23, from 33.08 to 33.01, C to external databases
+## >>chng 14 mar 26, from 33.01 to 32.64, move O to external databases
+## >>chng 14 aug 28, from 32.64 to 32.66, EleyRideal H2 formation
+## >>chng 15 oct 14, from 32.66 to 32.7, update Ne 3 cs to McLaughlin+11
+## >>chng 20 sep 06, from 32.7 to 32.73, further update to McCall CR-related rates from r14260
+## >>chng 23 may 15, from 32.73 to 32.77, GS updates 21 reactions to UMIST 2012
+monitor line luminosity "CO  " 371.549m 32.77
+## 
+## >>chng 11 dec 12, from 36.74 to 36.56, bug-fix for updating grain opacity (r5759)
+## >>chng 13 nov 03, from 36.56 to 36.526, update H2 - C II 158m collision
+## >>chng 13 nov 04, wl from 157.6m to 157.636m, update C II
+## >>chng 13 dec 23, from 36.53 to 36.57, C to external databases
+## >>chng 14 mar 26, from 36.57 to 36.53, move O to external databases
+monitor line luminosity "C  2" 157.636m 36.53
+## 
+## >>chng 10 aug 23, from 35.15 to 35.05, first run since change continuum grid
+## >>chng 11 apr 27, from 35.05 to 35.073, r4955: higher precision A_V integration
+## >>chng 11 nov 28, from 35.07 to 35.04, fix mistakes in r5689 due to mixed heritage of test suite output
+## >>chng 11 dec 12, from 35.04 to 35.48, bug-fix for updating grain opacity (r5759)
+## >>chng 13 dec 23, from 35.48 to 35.53, C to external databases
+## >>chng 14 mar 26, from 35.53 to 35.49, move O to external databases
+## >>chng 15 oct 14, from 35.49 to 35.42, update Ne 3 cs to McLaughlin+11
+monitor line luminosity "c  1" 370.269m 35.42
+## 
+## >>chng 10 aug 23, from 34.67 to 34.59, first run since change continuum grid
+## >>chng 11 jun 23, from 34.59 to 34.61, tune Te solver (average of 3 runs)
+## >>chng 11 nov 28, from 34.61 to 34.57, fix mistakes in r5689 due to mixed heritage of test suite output
+## >>chng 11 dec 12, from 34.57 to 34.98, bug-fix for updating grain opacity (r5759)
+## >>chng 13 dec 23, from 34.98 to 35.03, C to external databases
+## >>chng 14 aug 28, from 35.03 to 35.01, EleyRideal H2 formation
+monitor line luminosity "c  1" 609.590m 35.01
+## >>chng 10 aug 23, from 37 to 37.02, first run since change continuum grid
+## >>chng 11 dec 12, from 37.02 to 36.76, bug-fix for updating grain opacity (r5759)
+## >>chng 14 mar 26, from 36.76 to 36.88, move O to external databases
+## >>chng 14 aug 28, from 36.88 to 36.85, EleyRideal H2 formation
+monitor line luminosity "o  1"  63.1679m 36.85
+## >>chng 10 aug 23, from 35.88 to 35.91, first run since change continuum grid
+## >>chng 11 nov 16, from 35.91 to 35.89, adjust newmole monitors
+## >>chng 11 dec 12, from 35.89 to 35.62, bug-fix for updating grain opacity (r5759)
+## >>chng 13 jul 31, wl from 145.5m to 145.530m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 35.62 to 35.7388, move O to external databases
+## >>chng 14 aug 28, from 35.74 to 35.71, EleyRideal H2 formation
+monitor line luminosity "O  1" 145.495m 35.71
+## 
+## >>chng 10 aug 23, from 36.37 to 36.39, first run since change continuum grid
+## >>chng 11 nov 16, from 36.39 to 36.36, adjust newmole monitors
+## >>chng 11 dec 12, from 36.36 to 36.17, bug-fix for updating grain opacity (r5759)
+## >>chng 14 mar 26, from 36.17 to 36.07, move O to external databases
+## >>chng 15 aug 30, from 36.07 to 36.05, update Si II stout data to Laha+2015
+monitor line luminosity "Si 2"  34.8046m 36.05
+## 
+## >>chng 10 jul 19, from 15.85 to 15.83, slow drift
+## >>chng 10 aug 23, from 15.83 to 15.77, first run since change continuum grid
+## >>chng 11 dec 12, from 15.77 to 16.15, bug-fix for updating grain opacity (r5759)
+## >>chng 14 mar 26, from 16.15 to 16, move O to external databases
+monitor column density  OH 16 error 0.1
+## 
+## >>chng 11 dec 12, from 21.42 to 21.5, bug-fix for updating grain opacity (r5759)
+monitor column density  H2 21.5 error 0.1
+## >>chng 10 jun 22, from 16.18 to 16.15, fix botches after dBaseLines cooling/heating changes
+## >>chng 11 nov 16, from 16.15 to 16.17, adjust newmole monitors
+## >>chng 11 dec 12, from 16.17 to 16.01, bug-fix for updating grain opacity (r5759)
+## >>chng 13 feb 01, from 16.01 to 15.99, BUGFIX, largely undo r6703 (missed on gtest since stars not installed)
+## >>chng 13 nov 03, from 15.99 to 16.04, update H2 - C II 158m collision
+## >>chng 13 dec 23, from 16.04 to 15.99, C to external databases
+## >>chng 14 mar 26, from 15.99 to 15.8, move O to external databases
+## >>chng 14 aug 28, from 15.8 to 15.83, EleyRideal H2 formation
+## >>chng 20 sep 06, from 15.83 to 15.87, further update to McCall CR-related rates from r14260
+## >>chng 23 may 15, from 15.87 to 15.9, GS updates 21 reactions to UMIST 2012
+monitor column density  CO 15.9
+## 
+monitor temperature "H+" radius 3.992
+## >>chng 10 aug 23, from 2.902 to 2.929, first run since change continuum grid
+## >>chng 11 dec 12, from 2.929 to 2.794, bug-fix for updating grain opacity (r5759)
+## >>chng 14 mar 26, from 2.794 to 2.548, move O to external databases
+monitor temperature "H" radius 2.548
+## >>chng 14 mar 26, from 2.028 to 1.968, move O to external databases
+monitor temperature "H2" radius 1.968
+#
+# m17_P07.in 
+# class hii pdr 
+# ========================================
+# 
+
+This is the magnetostatic model of the M17 H+ / H0 / H2 region
+presented in Pellegrini et al. 2007, ApJ, 658, 1119

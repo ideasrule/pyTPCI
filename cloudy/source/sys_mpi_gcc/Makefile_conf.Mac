@@ -1,0 +1,4 @@
+# mpi is not included in XCODE as of version 4.  But openmpi can be
+# obtained from MacPorts.  Move this to Makefile.conf to use that version.
+CXX = openmpic++
+CXXFLAGS += -DMPI_GRID_RUN

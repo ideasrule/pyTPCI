@@ -1,0 +1,507 @@
+title cloud with primordial abundances exposed to background at Z=10
+#
+# commands controlling continuum =========
+background, redshift= 10
+# background due to agn from Haardt & Madau 1996 ApJ, 461, 20
+# this sets both continuum shape and intensity, actually for z=2
+table HM96 old
+#
+# other commands for details     =========
+# put in a velocity field to stop Lya from causing stability problems
+turbulence 20 km/s
+# do a second iteration to establish that it is optically thick downstream
+iterate
+# this sim should run cleanly - do not accept problems
+failures 2 
+#
+# commands for density & abundances =========
+# this log of the hydrogen density
+hden 5
+# stored set of primordial abundances 
+abundances primordial
+#
+# commands controlling geometry  =========
+# we want to shielded face to not be exposed to empty space, but rather
+# be just very deep in a dense cloud - this prevents lines from freely
+# radiating from the shielded face
+double optical depths 
+# set a lower temperature stopping criterion - default is 4000K
+stop temperature 30
+#
+# commands controlling output    =========
+# don't want to print lots of faint hydrogen lines
+print line faint -3
+# some output files with info we want to save 
+save performance "igm_primal.per"
+save temperature history "igm_primal_tem.his"
+save ionizing continuum "igm_primal.ion"
+save hydrogen conditions "igm_primal.mol"
+save heating "igm_primal.het"
+save dr "igm_primal.dr"
+save cooling "igm_primal.col"
+save overview "igm_primal.ovr"
+save results last "igm_primal.rlt"
+save monitors last "igm_primal.asr"
+#
+# commands giving the monitors    =========
+## >>chng 02 apr 03, from 0.296 to 0.274, bound compton
+## >>chng 02 jul 19, from 0.274 to 0.298, better two photon
+## >>chng 03 may 21, from 0.298 to 0.2722, chng Lya transport
+## >>chng 03 may 22, from 0.272 to 0.079, lya dest prob, DEST0
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from -5.920 to -5.973, NA update H chem net
+## >>chng 04 aug 14, from -5.973 to -5.994, drift
+## >>chng 04 dec 08, from -5.995 to -5.881, co-ion feedback, check converg
+## >>chng 05 jun 19, from -5.88 to -5.84, small chng in chem
+## >>chng 07 oct 22, from -5.84 to -5.77, resolve l-levels of h-like sequence
+## >>chng 08 mar 22, from -5.77 to -5.66 bugfix r1879
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -5.66 to -5.729, updated HD cooling
+## >>chng 13 sep 17, from -5.729 to -5.603, D chem off by default
+## >>chng 13 nov 19, from -5.603 to -5.713, fix CT bug in mole_eval_balance
+## >>chng 13 dec 18, from -5.713 to -5.659, fixes to Federman shielding
+## >>chng 15 jun 03, from -5.659 to -5.569, exact LTE H2 cooling (not big model)
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "H  1" 4861.32A -5.569 error 0.1
+##
+## >>chng 02 apr 03, from 0.721 to 0.758, bound compton
+## >>chng 02 jul 19, from 0.758 to 0.717, better two photon
+## >>chng 03 may 22, from 0.717 to 1.156, lya dest prob, DEST0
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from 1.022 to 1.155, NA update H chem net
+## >>chng 04 aug 14, from 1.155 to 1.211, drift
+## >>chng 04 dec 08, from 1.211 to 0.935, co-ion feedback, check converg
+## >>chng 05 jun 19, from 0.93 to 0.86, small chng in chem
+## >>chng 07 oct 22, from 0.86 to 0.72, resolve l-levels of h-like sequence
+## >>chng 08 mar 22, from 0.72 to 0.56 bugfix r1879
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from 0.56 to 0.665, updated HD cooling
+## >>chng 13 sep 17, from 0.665 to 0.4978, D chem off by default
+## >>chng 13 nov 19, from 0.4978 to 0.6413, fix CT bug in mole_eval_balance
+## >>chng 13 dec 18, from 0.6413 to 0.566, fixes to Federman shielding
+## >>chng 15 jun 03, from 0.566 to 0.4636, exact LTE H2 cooling (not big model)
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A 0.4636 error 0.1
+##
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from -4.221 to -4.276, NA update H chem net
+## >>chng 04 dec 08, from -4.144 to -4.144, co-ion feedback, check converg
+## >>chng 05 jun 19, from -4.144 to -4.110, small chng in chem
+## >>chng 07 dec 06, from -4.110 to -4.051, secondaries prop to osc str, apply to iso species
+## >>chng 07 dec 06, from -4.051 to -4.021, changes in h-like collisions
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -4.021 to -4.063, use Flower+00 simple HD cooling
+## >>chng 13 sep 17, from -4.063 to -3.961, D chem off by default
+## >>chng 13 nov 19, from -3.961 to -4.009, fix CT bug in mole_eval_balance
+## >>chng 16 aug 07, from -4.009 to -4.058, Marios bug fixes
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line luminosity "h  1" 1215.67A -4.058 error 0.1
+##
+## >>chng 02 apr 03, from 3.46 to 3.22 bound compton
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 03 oct 25, from 0.786 to 0.806, update H chem net
+## >>chng 04 feb 09, from 0.806 to 0.775, update H chem
+## >>chng 04 apr 17, from 0.775 to 0.809, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from -5.296 to -5.345, NA update H chem net
+## >>chng 04 dec 08, from -5.345 to -5.292, co-ion feedback, check converg
+## >>chng 05 jun 19, from -5.29 to -5.24 small chng in chem
+## >>chng 05 aug 02, from -5.24 to -5.27 chem changes, H, CO, ct, inc err
+## >>chng 05 dec 08, from -5.27 to -5.23, update to Elwert Solomon rate
+## >>chng 07 oct 22, from -5.23 to -5.28, resolve l-levels of h-like sequence
+## >>chng 08 mar 22, from -5.28 to -5.19 bugfix r1879
+## >>chng 08 apr 30, from -5.19 to -5.15 H, He topoff change
+## >>chng 13 jul 24, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -5.15 to -5.203, updated HD cooling
+## >>chng 13 sep 17, from -5.203 to -5.071, D chem off by default
+## >>chng 13 nov 19, from -5.071 to -5.167, fix CT bug in mole_eval_balance
+## >>chng 13 dec 18, from -5.167 to -5.111, fixes to Federman shielding
+## >>chng 15 jun 03, from -5.111 to -4.98, exact LTE H2 cooling (not big model)
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line luminosity "h  1" 6562.80A -4.98 error 0.1
+##
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 03 aug 03, from -0.204 to -0.230, chng 2s-2p coll
+## >>chng 03 sep 11, from -0.230 to -0.267, better H2* 
+## >>chng 04 apr 17, from -0.267 to -0.220, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from -6.303 to -6.358, NA update H chem net
+## >>chng 04 jul 03, from -6.358 to -6.380, NA update H, CO chem net
+## >>chng 04 dec 08, from -6.380 to -6.249, co-ion feedback, check converg
+## >>chng 05 jun 19, from -6.25 to -6.216 small chng in chem
+## >>chng 05 aug 02, from -6.21 to -6.24 chem changes, H, CO, ct, inc err
+## >>chng 05 dec 08, from -6.24 to -6.21, adopt Elwert Solomon formula
+## >>chng 07 oct 22, from -6.21 to -6.10, resolve l-levels of h-like sequence
+## >>chng 08 mar 22, from -6.10 to -6.00 bugfix r1879
+## >>chng 13 jul 24, wl from 4340 to 4340.49A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -6 to -6.081, updated HD cooling
+## >>chng 13 sep 17, from -6.081 to -5.955, D chem off by default
+## >>chng 13 nov 19, from -5.955 to -6.07, fix CT bug in mole_eval_balance
+## >>chng 13 dec 18, from -6.07 to -6.022, fixes to Federman shielding
+## >>chng 15 jun 03, from -6.022 to -5.927, exact LTE H2 cooling (not big model)
+## >>chng 17 may 25, wl from 4340.49A to 4340.46A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4340.46A to 4340.47A, update NIST energies
+## >>chng 21 aug 18, wl from 4340.47A to 4340.46A, revert to PvH energies for H
+monitor line luminosity "H  1" 4340.46A -5.927 error 0.1
+##
+## H 2 pht very sensitive to J-bar in Lya
+## >>chng 01 jun 15, from 20.8 to 15.7, H ct rates
+## >>chng 02 may 27, from 15.7 to 11.4, brems gaunt factors
+## >>chng 03 may 21, from 11.4 to 7.89, chng Lya transport
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 04 apr 17, from 1.500 to 1.711, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 dec 08, from -4.512 to -4.430, co-ion feedback, check converg
+## >>chng 11 nov 16, from -4.43 to -4.548, adjust newmole monitors
+## >>chng 13 sep 10, from -4.55 to -4.64, update HD cooling to Flower+00
+## >>chng 13 sep 17, from -4.64 to -4.443, D chem off by default
+## >>chng 16 aug 07, from -4.443 to -4.362, Marios bug fixes
+## >>chng 18 feb 13, wl from 0 to 2431.34A, update two-photon wl 
+monitor line luminosity "H  1" 2431.34A -4.362 error 0.2
+##
+## very sensitive to J-bar in Lya
+## >>chng 02 apr 03, from 60.8 to 48.1 bound compton
+## >>chng 03 may 21, from 48.1 to 31.8, chng Lya transoprt
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 05 aug 02, from -4.36 to -6.26 chem changes, H, CO, ct
+## >>chng 09 feb 24, from -4.26 to -4.349, botches due to r2763
+## >>chng 11 nov 16, from -4.349 to -4.518, adjust newmole monitors
+## >>chng 13 jul 26, wl from 912 to 911.759A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -4.518 to -4.428, fix CT bug in mole_eval_balance
+## >>chng 15 jun 03, from -4.428 to -37, exact LTE H2 cooling (not big model)
+## >>chng 15 jun 04, remove this monitor because it went to 0 with the exact H2 LTE cooling
+## >>chng 16 apr 04, change label "Clin" 911.759A to "H  1c" 0A
+## monitor line luminosity "H  1c" 0A -37 error 0.2
+##
+## >>chng 02 apr 03, from 10.01 to 6.74 bound compton
+## >>chng 02 may 31, from 6.74 to 7.10, better convergence
+## >>chng 02 dec 11, from 7.10 to 7.91, new hei
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 03 oct 25, from 1.17 to 1.194 update H chem net
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 05 jun 19, from -4.705 to -4.646 small chng in chem
+## >>chng 05 dec 08, from -4.65 to -4.62, update to Elwert Solomon rate
+## >>chng 11 nov 16, from -4.62 to -4.575, adjust newmole monitors
+## >>chng 13 jul 26, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -4.575 to -4.75, updated HD cooling
+## >>chng 13 sep 17, from -4.75 to -4.463, D chem off by default
+## >>chng 15 jun 03, from -4.463 to -4.394, exact LTE H2 cooling (not big model)
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line luminosity "La x" 1215.67A -4.394 error 0.1
+##
+## >>chng 01 apr 02, from 80.3 to 75.8, better convergence criteria
+## >>chng 01 jun 15, from 75.8 to 69.8 H ct rates
+## >>chng 02 apr 03, from 69.8 to 65.1 bound compton
+## >>chng 02 may 27, from 65.1 to 61.1, brems gaunt factors
+## >>chng 03 may 21, from 61.1 to 45.7, chng Lya transoprt
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 03 sep 10, from 1.941 to 1.971, diff field bug
+## >>chng 03 sep 13, from 1.971 to 1.942, chng H2* rates
+## >>chng 04 apr 17, from 1.942 to 2.044, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from -4.114 to -4.093, NA update H chem net
+## >>chng 04 jul 03, from -4.093 to -4.131, NA update H, CO chem net, inc err
+## >>chng 05 aug 02, from -4.13 to -4.07 chem changes, H, CO, ct
+## >>chng 05 dec 08, from -4.07 to -4.11, adopt Elwert Solomon formula
+## >>chng 13 sep 10, from -4.11 to -4.178, updated HD cooling
+## >>chng 13 sep 17, from -4.178 to -4.114, D chem off by default
+## >>chng 15 jun 03, from -4.114 to -3.038, exact LTE H2 cooling (not big model)
+## >>chng 16 nov 14, from -3.038 to -2.998, Reintegration of RydDep after several bug fixes
+monitor line luminosity "toth" 0 -2.998 error 0.1   ## total heating
+##
+## >>chng 01 feb 26, from 37.555 to 39.784, H 2s 2p optical depths together
+## >>chng 01 apr 02, from 39.784 to 34.484 better convergence criteria
+## >>chng 01 jun 15, from 34.5 to 28.6 H ct rates
+## >>chng 02 apr 03, from 28.6 to 22.9 bound compton
+## >>chng 02 may 27, from 22.9 to 19.1, brems gaunt factors
+## >>chng 02 jun 14, from 19.1 to 17.6, finer H i-front zoning
+## >>chng 02 nov 20, from 17.6 to 20.57 stops when cold
+## >>chng 02 dec 11, from 20.57 to 22.28, new hei
+## >>chng 03 mar 17, from 22.28 to 19.19, better stability, incr error
+## >>chng 03 may 21, from 19.2 to 4.06 chng Lya transoprt
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 03 sep 10, from 0.956 to 1.076, diff field bug
+## >>chng 03 sep 11, from 0.954 to 0.954, better H2* 
+## >>chng 04 feb 09, from 0.954 to 1.071, update H chem
+## >>chng 04 mar 24, from 1.071 to 1.024, small changes, incr error
+## >>chng 04 apr 17, from 1.024 to 1.322, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jul 03, from -8.438 to -8.541, NA update H, CO chem net, inc err
+## >>chng 05 aug 02, from -8.54 to -8.29 chem changes, H, CO, ct
+## >>chng 05 sep 15, from -8.29 to -8.19, H- mut neut from Lepp et al 02
+## >>chng 05 dec 08, from -8.19 to -8.33, update to Elwert Solomon rate
+## >>chng 07 jan 20, from -8.33 to -8.59, e2 bug
+## >>chng 08 mar 22, from -8.59 to -8.74 bugfix r1879
+## >>chng 11 nov 16, from -8.74 to -8.59, adjust newmole monitors
+## >>chng 12 nov 08, from -8.59 to -9.245, fix e-,H2 dissociation rate
+## >>chng 13 feb 10, from -9.245 to -9.095, H2,e-=>H-,H update
+## >>chng 15 jun 03, from -9.095 to -8.064, exact LTE H2 cooling (not big model)
+monitor line luminosity "H- H" 0 -8.064 error 0.20 ## h- heating
+##
+## >>chng 01 mar 17, from 2.066 to 0.541 updated H cs
+## >>chng 02 dec 15, from 1.951 to 1.87, slow drift
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 04 apr 17, from 0.541 to 0.573, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from -6.336 to -6.410, NA update H chem net
+## >>chng 04 jul 03, from -6.418 to -6.457, NA update H, CO chem net
+## >>chng 05 aug 02, from -6.46 to -6.49 chem changes, H, CO, ct
+## >>chng 05 sep 15, from -6.49 to -6.42, H- mut neut from Lepp et al 02
+## >>chng 08 mar 22, from -6.42 to -6.46 bugfix r1879
+## >>chng 11 nov 16, from -6.46 to -6.059, adjust newmole monitors
+## >>chng 13 nov 19, from -6.059 to -6.376, fix CT bug in mole_eval_balance
+## >>chng 15 jun 03, from -6.376 to -7.306, exact LTE H2 cooling (not big model)
+monitor line luminosity "H ff" 0 -7.306 error 0.1   ## H free-free heating
+##
+## very sensitive to J-bar in Lya
+## >>chng 01 jun 19, from 0.032 to 0.039, see below
+## >>chng 02 dec 15, from 0.039 to 0.0441 slow drift
+## >>chng 03 mar 17, from 0.0441 to 0.0530 better stability
+## >>chng 03 may 21, from 0.0530 to 0.0776 chng Lya transoprt
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 04 apr 17, from -0.843 to -0.509, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from -5.070 to -5.150, NA update H chem net
+## >>chng 04 jul 03, rom -5.150 to -5.248, NA update H, CO chem net
+## >>chng 05 aug 02, from -5.25 to -5.14 chem changes, H, CO, ct
+## >>chng 05 dec 08, from -5.14 to -5.25, update to Elwert Solomon rate
+## >>chng 11 nov 16, from -5.25 to -4.899, adjust newmole monitors
+## >>chng 12 nov 08, from -4.899 to -5.241, fix e-,H2 dissociation rate
+## >>chng 13 feb 10, from -5.241 to -5.147, H2,e-=>H-,H update
+## >>chng 13 jul 26, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -5.147 to -5.423, fix CT bug in mole_eval_balance
+## >>chng 15 jun 03, from -5.423 to -6.973, exact LTE H2 cooling (not big model)
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 dec 01, wl from 6562.81A to 6562.80A, update energies to NIST
+monitor line luminosity "H-ct" 6562.80A -6.973 errror 0.2 
+##
+## >>chng 02 apr 03, from 0.56 to 0.717 bound compton
+## >>chng 02 may 27, from 0.717 to 1.59, brems gaunt factors
+## >>chng 02 oct 28, from 1.59 to 1.27, chng in H2+ + H => H2 + H+ rate
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 03 sep 10, from 0.351 to 0.101, H2* resolution improved
+## >>chng 03 sep 11, from 0.101 to 0.358, better H2* 
+## >>chng 04 feb 09, from 0.358 to 0.458, update H chem
+## >>chng 04 apr 17, from 0.458 to 0.516, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 05 aug 02, from -5.04 to -5.20 chem changes, H, CO, ct
+## >>chng 05 dec 08, from -5.20 to -5.02, update to Elwert Solomon rate
+## >>chng 11 nov 16, from -5.02 to -4.858, adjust newmole monitors
+## >>chng 12 nov 08, from -4.858 to -4.772, fix e-,H2 dissociation rate
+## >>chng 13 sep 10, rm this line - it is a very inaccurate hack from an old Hollenbach paper
+## monitor line luminosity "H2 l" 2.00m -4.772 errror 0.2 
+##
+##very sensitive to J-bar in Lya
+## >>chng 02 apr 03, from 8.56 to 6.41 bound compton
+## >>chng 02 may 27, from 6.41 to 4.66 brems gaunt factors
+## >>chng 02 dec 15, from 4.66 to 5.56 slow drift
+## >>chng 03 may 21, from 5.56 to 2.98 chng Lya transoprt
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 03 sep 10, from 0.789 to 0.942, H2* resolution improved
+## >>chng 03 sep 11, from 0.942 to 0.823, better H2* 
+## >>chng 04 apr 17, from 0.823 to 1.148, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jul 17, from -5.038 to -5.135, drift down
+## >>chng 05 aug 02, from -5.14 to -5.02 chem changes, H, CO, ct
+## >>chng 05 dec 08, from -5.02 to -5.14, update to Elwert Solomon rate
+## >>chng 08 mar 22, from -5.14 to -5.25 bugfix r1879
+## >>chng 11 nov 16, from -5.25 to -5.06, adjust newmole monitors
+## >>chng 13 nov 19, from -5.06 to -5.211, fix CT bug in mole_eval_balance
+## >>chng 15 jun 03, from -5.211 to -6.766, exact LTE H2 cooling (not big model)
+monitor line luminosity "H-fb" 0 -6.766 errror 0.2
+##
+##very sensitive to J-bar in Lya
+## >>chng 02 apr 03, from 4.07 to 3.352 bound compton
+## >>chng 02 may 27, from 3.35 to 2.44 brems gaunt factors
+## >>chng 02 dec 15, from 2.44 to 2.91 slow drift
+## >>chng 03 may 21, from 2.91 to 1.59 chng Lya transoprt
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 03 sep 10, from 0.516 to 0.669, H2* resolution improved
+## >>chng 03 sep 11, from 0.669 to 0.547, better H2* 
+## >>chng 04 apr 17, from 0.547 to 0.868, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jul 03, from -5.464 to -5.562, NA update H, CO chem net
+## >>chng 05 aug 02, from -5.56 to -5.46 chem changes, H, CO, ct
+## >>chng 05 dec 08, from -5.46 to -5.57, adopt Elwert Solomon formula
+## >>chng 11 nov 16, from -5.57 to -5.354, adjust newmole monitors
+## >>chng 13 nov 19, from -5.354 to -5.519, fix CT bug in mole_eval_balance
+## >>chng 15 jun 03, from -5.519 to -9.321, exact LTE H2 cooling (not big model)
+monitor line luminosity "H2+ " 0 -9.321 errror 0.2
+##
+## >>chng 03 sep 10, add this column density
+## >>chng 03 sep 11, from 25.14 to 25.20 better H2* 
+## >>chng 03 oct 25, from 25.20 to 25.028 update H chem net
+## >>chng 04 feb 09, from 25.028 to 24.774 update H chem
+## >>chng 04 mar 24, from 24.774 to 25.070 small changes, incr error
+## >>chng 04 apr 17, from 25.070 to 24.910, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 05 dec 07, from 21.34 to 21.40, slow drift
+## >>chng 05 dec 08, from 21.40 to 21.51, adopt Elwert Solomon formula
+## >>chng 13 sep 10, from 21.51 to 20.11, updated HD cooling
+## >>chng 13 sep 17, from 20.11 to 22.71, D chem off by default
+## >>chng 15 jun 03, from 22.71 to 26.58, exact LTE H2 cooling (not big model)
+monitor H2 column density 26.58 error 0.15 
+##
+## >>chng 02 nov 20, add this line
+## >>chng 03 may 22, from intensity to luminosity
+## >>chng 04 apr 17, from -0.823 to -0.737, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from -6.651 to -6.617, NA update H chem net
+## >>chng 04 jul 03, from -6.617 to -6.772, NA update H, CO chem net
+## >>chng 05 aug 02, from -6.772 to -6.810 chem changes, H, CO, ct
+## >>chng 05 sep 15, from -6.810 to -6.755, H- mut neut from Lepp et al 02
+## >>chng 05 oct 01, from -6.755 to -6.824, RP update levels
+## >>chng 08 mar 22, from -6.824 to -7.422 bugfix r1879
+## >>chng 08 apr 30, from -7.422 to -7.334, H, He topoff change
+## >>chng 11 nov 16, from -7.334 to -7.291, adjust newmole monitors
+## >>chng 12 nov 08, from -7.291 to -7.241, fix e-,H2 dissociation rate
+## >>chng 13 feb 25, from -7.241 to -7.197, update primordial abundance He
+## >>chng 13 jul 24, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -7.197 to -7.288, fix CT bug in mole_eval_balance
+## >>chng 14 dec 11, from -7.288 to -7.309, update He/H to Planck concordance
+## >>chng 15 jun 03, from -7.309 to -6.725, exact LTE H2 cooling (not big model)
+## >>chng 16 aug 07, from -6.725 to -6.83, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+monitor line luminosity "Blnd" 5875.66A -6.83
+##
+## >>chng 01 may 07, from 1.111 to 1.046, chng in he+ H ct rate
+## >>chng 02 apr 03, from 1.046 to 1.135 bound compton
+## >>chng 02 nov 20, from 1.135 to 1.077, new he ots diff
+## >>chng 02 dec 11, from 1.077 to 0.980 new hei
+## >>chng 03 may 21, from 0.980 to 1.083 chng Lya transoprt
+## >>chng 03 may 22, fron intensity to luminosity
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jul 03, from -6.347 to -6.478, NA update H, CO chem net
+## >>chng 05 aug 02, from -6.478 to -6.500 chem changes, H, CO, ct
+## >>chng 05 sep 15, from -6.500 to -6.445, H- mut neut from Lepp et al 02
+## >>chng 05 dec 08, from -6.45 to -6.47, update to Elwert Solomon rate
+## >>chng 08 mar 22, from -6.47 to -7.12 bugfix r1879
+## >>chng 11 nov 16, from -7.12 to -7.06, adjust newmole monitors
+## >>chng 12 nov 08, from -7.06 to -7.014, fix e-,H2 dissociation rate
+## >>chng 13 feb 25, from -7.014 to -6.968, update primordial abundance He
+## >>chng 13 jul 24, wl from 1.083m to 1.08299m, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 1.08299m to 1.08303m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -6.968 to -7.101, fix CT bug in mole_eval_balance
+## >>chng 15 jun 03, from -7.101 to -6.711, exact LTE H2 cooling (not big model)
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+monitor line luminosity "Blnd" 1.08302m -6.711 error 0.1
+##
+## >>chng 01 jun 15, from 3.789 to 3.766 H ct rates
+## >>chng 02 may 27, from 3.766 to 3.695 brems gaunt factors
+## >>chng 03 may 21, from 3.695 to 3.611, chng Lya transport
+## >>chng 03 sep 10, from 3.611 to 3.687, H2* resolution improved
+## >>chng 03 sep 11, from 3.687to 3.636 better H2* 
+## >>chng 03 oct 25, from 3.636 to 3.608 update H chem net
+## >>chng 04 apr 17, from 3.608 to 3.678, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jun 09, from 2.994 to 2.964, NA update H chem net
+## >>chng 04 jul 03, from 2.964 to 2.927, NA update H, CO chem net
+## >>chng 05 jun 19, from 2.927 to 2.845 small chng in chem
+## >>chng 05 aug 02, from 2.845 to 2.937 chem changes, H, CO, ct, inc err
+## >>chng 05 sep 15, from 2.93 to 2.98 H- mut neut from Lepp et al 02
+## >>chng 05 dec 08, from 2.98 to 2.76, update to Elwert Solomon rate
+## >>chng 12 oct 09, from 2.76 to 2.798, fix CRD esc prob
+## >>chng 13 mar 06, from 2.798 to 2.755, mean gcc/64 pgcc
+## >>chng 13 sep 10, from 2.755 to 3.242, updated HD cooling
+## >>chng 13 sep 17, from 3.242 to 2.366, D chem off by default
+## >>chng 13 nov 19, from 2.366 to 2.268, fix CT bug in mole_eval_balance
+## >>chng 15 jun 03, from 2.268 to 1.657, exact LTE H2 cooling (not big model)
+monitor temperature "H+" 1.657 error 0.1
+##
+## >>chng 01 may 06. from 3.786 to 3.856, chng in He+ H ct rates
+## >>chng 02 may 27, from 3.856 to 3.811 brems gaunt factors
+## >>chng 03 may 21, from 3.811 to 3.716, chng Lya transport
+## >>chng 03 may 22, from 3.716 to 3.737, chng Lya dest prob DEST0
+## >>chng 03 sep 10, from 3.737 to 3.787, H2* resolution improved
+## >>chng 03 sep 11, from 3.787 to 3.745 better H2* 
+## >>chng 04 feb 09, from 3.745 to 3.768, update H chem
+## >>chng 04 apr 17, from 3.768 to 3.725, better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 jul 03, from 3.814 to 3.792, NA update H, CO chem net
+## >>chng 08 mar 22, from 3.792 to 3.549 bugfix r1879
+## >>chng 11 nov 16, from 3.549 to 3.366, adjust newmole monitors
+## >>chng 13 sep 10, from 3.366 to 3.423, updated HD cooling
+## >>chng 13 sep 17, from 3.423 to 3.326, D chem off by default
+## >>chng 13 nov 19, from 3.326 to 3.372, fix CT bug in mole_eval_balance
+## >>chng 15 jun 03, from 3.372 to 2.441, exact LTE H2 cooling (not big model)
+monitor temperature "He+" 2.441
+##
+## >>chng 05 sep 15, add this assert, eden for last zone
+## >>chng 05 dec 08, from -0.661 to -0.748, update to Elwert Solomon rate
+## >>chng 11 nov 16, from -0.748 to -0.8708, adjust newmole monitors
+## >>chng 13 sep 10, from -0.8708 to -0.1911, updated HD cooling
+## >>chng 13 sep 17, from -0.1911 to -1.571, D chem off by default
+## >>chng 15 jun 03, from -1.571 to -6.21, exact LTE H2 cooling (not big model)
+## >>chng 16 oct 21, from -6.21 to -6.484, new l-changing rates from Hlike_HS87 reintegration
+## >>chng 20 jan 30, from -6.484 to -6.446, Interpolate Anderson+2000 collisionstrengths to 0
+monitor eden -6.446
+##
+## >>chng 01 apr 02, from 450 to 550 better convergence criteria
+## >>chng 02 jun 14, from 550 to 650 finer ifront zoning
+## >>chng 02 nov 25, from 650 to 800, new he grnd rec eff
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 08 dec 08, from 300 to 296, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 296 to 287, merging newsolvers branch
+## >>chng 09 jan 16, from 287 to 288 (error 0.03), average of 10 runs
+## >>chng 09 feb 23, from 288 to 296, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 mar 27, from 296 to 285 improve rigor esc prob & pop defns
+## >>chng 09 apr 18, from 285 to 289, refactor evaluation of esc dest probs to occur with cooling
+## >>chng 11 nov 16, from 289 to 306, adjust newmole monitors
+## >>chng 12 nov 08, from 306 to 281, fix e-,H2 dissociation rate
+## >>chng 12 nov 28, from 281 to 303, Make HII dr limit symmetric
+## >>chng 13 apr 16, from 303 to 289, limit cota 3body to T>100K
+## >>chng 13 apr 16, from 289 to 304, update DR suppression
+## >>chng 13 sep 10, from 304 to 268, update HD cooling to Flower+ 00
+## >>chng 13 sep 15, from 268 to 253, improve Thomson c.s.
+## >>chng 13 sep 17, from 253 to 344, D chem off by default
+## >>chng 15 jun 03, from 344 to 764, exact LTE H2 cooling (not big model)
+monitor nzone 764 
+##
+## >>chng 02 nov 20, increase from 13 to 17
+## >>chng 02 dec 13, from 17 to 16, better conv
+## >>chng 03 mar 17, from 16 to 21 better stability
+## >>chng 03 may 21, from 21 to 13, worked on H- oscil
+## >>chng 04 feb 09, from 13 to 10
+## >>chng 04 apr 17, from 10 to 13 better h mole conv
+## >>chng 04 apr 29, change from agn, U-3 to HM96 agn background
+## >>chng 04 sep 15, from <14 to < 16
+## >>chng 04 sep 16, from <16 to < 20 incr edentrue convergence
+## >>chng 05 mar 26, from 20 to 24, update pops2ion in h to agree with chm
+## >>chng 08 dec 08, from 24 to 19.26, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 19.26 to 26.96, merging newsolvers branch
+## >>chng 09 jan 16, from 26.96 to 27.14 (error 0.03), average of 10 runs
+## >>chng 09 jan 22, from 27.14 to 28.35, some minor botches as a result of r2655
+## >>chng 09 feb 24, from 28.35 to 27.55, botches due to r2763
+## >>chng 09 nov 16, from 27.55 to 26.38, slight changes resulting from r3590-3593
+## >>chng 11 nov 16, from 26.38 to 14.4, adjust newmole monitors
+## >>chng 13 nov 05, from 14.4 to 7.699, convergence branch changes
+monitor itrzn 7.699
+##
+# igm_primal.in
+# class hii pdr igm
+# ========================================
+ 
+This is a high redshift cloud irradiated by the cosmic background and AGN light.
+H- absorption of the z=10 cosmic background is a MAJOR heating agent
+This model is very sensitive to treatment of Lya destruction, since resulting
+J-bar is major destruction process for H-, which is the H2 formation route.
+Lya ots oscillations could develop and are damped by not reevaluating H-
+photo rate after first n times, as in hmole.c 
+

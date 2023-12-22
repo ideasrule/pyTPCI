@@ -1,0 +1,54 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=5 were downloaded using ADM.
+#
+ 1  0  1  0 0
+ 2  0  3 -1 12703061
+ 2  1  3  0 12807847
+ 2  1  3  1 12809088
+ 2  1  3  2 12814213
+ 2  0  1  0 12815760
+ 2  1  1  1 12891081
+ 3  0  3 -1 15020463
+ 3  0  1  0 15050257
+ 3  1  3 -1 15050434
+ 3  2  3 -1 15067287.0666667
+ 3  2  1  2 15068371
+ 3  1  1  1 15072141
+ 4  0  3 -1 15816791
+ 4  0  1  0 15828851
+ 4  1  3 -1 15829158.6666667
+ 4  2  3 -1 15836125.1333333
+ 4  2  1  2 15836581
+ 4  3  3 -1 15836714
+ 4  1  1  1 15838068
+ 5  0  3 -1 16182216
+ 5  0  1  0 16188281
+ 5  1  3 -1 16188471.3333333
+ 5  2  3 -1 16192010.1333333
+ 5  2  1  2 16192244
+ 5  3  3 -1 16192318
+ 5  4  3 -1 16192385
+ 5  1  1  1 16192975
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L12128 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=12128&comment_code=&amp;element=Al&amp;spectr_charge=12&amp;ref=12128&amp;type=E
+# PUBCON    Title: QED Calculation of the n = 1 and n = 2 Energy Levels in He-like Ions
+# PUBCON  Authors: A. N. Artemyev, V. M. Shabaev, V. A. Yerokhin, G. Plunien, and G. Soff
+# PUBCON  Journal: Phys. Rev. A 71, 062104 (2005)
+# PUBCON      DOI: https://doi.org/10.1103/PhysRevA.71.062104
+# 
+# PUB     Refcode: L4714 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=4714&comment_code=&amp;element=Al&amp;spectr_charge=12&amp;ref=4714&amp;type=E
+# PUBCON    Title: Energy Levels of Aluminum, Al I through Al XIII
+# PUBCON  Authors: W. C. Martin, and R. Zalubas
+# PUBCON  Journal: J. Phys. Chem. Ref. Data 8, 817–864 (1979)
+# PUBCON      DOI: https://doi.org/10.1063/1.555608

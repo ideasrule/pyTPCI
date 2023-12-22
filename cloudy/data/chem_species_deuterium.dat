@@ -1,0 +1,25 @@
+#
+# columns are species label, formation enthalpy at OK in KJ/mol
+#
+D     	216
+D+    	1528
+D-    	143.2
+D2	0.0
+D2+	1488.3
+D3+   	1107
+HD    	0
+HD+   	1488.3
+H2D+  	1107
+HD2+  	1107
+HeD+  	1352
+
+
+# nothing after above line is processed
+H2DCO 	0
+H2DCO+	0
+D2O   	0
+CD4   	0
+CHD3  	0
+CH2D2 	0
+ND3   	0
+NHD2  	0

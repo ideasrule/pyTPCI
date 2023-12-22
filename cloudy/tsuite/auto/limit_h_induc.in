@@ -1,0 +1,47 @@
+title constant temper black body limit from Ferland and Rees 1988
+# tests whether departure coef are forced to unity by induced processes
+#
+# commands controlling continuum =========
+black body, t = 50000 lte
+#
+# commands for density & abundances =========
+hden 10
+init file="hheonly.ini"
+#
+# commands controlling geometry  =========
+stop lyman continuum optical depth -6
+set dr -10
+stop zone 1
+#
+# other commands for details     =========
+iterate 
+constant temper 50000
+#
+# commands controlling output    =========
+print populations h-like element hydrogen
+print heating
+print departure coef element hydrogen
+print line faint -1
+save overview "limit_h_induc.ovr"
+save performance "limit_h_induc.per"
+save monitors "limit_h_induc.asr" last
+#
+# commands giving the monitors    =========
+monitor h-like departure coef hydrogen, average 1
+monitor h-like departure coef helium, average 1
+# limit_h_induc.in
+# class limit 
+# ========================================
+# 
+
+This example tests whether induced processes force level populations
+of hydrogen to LTE when they are irradiated by a
+blackbody in strict thermodynamic equilibrium.  The density is
+low enough value for radiation to dominate the rate equations
+coupling levels with each other and the continuum.  The expectation
+is for all departure coefficients to equal unity.
+
+Checks:
+-	Departure coefficients exactly unity.
+-	Grain temperatures are exactly 5*104 K.
+

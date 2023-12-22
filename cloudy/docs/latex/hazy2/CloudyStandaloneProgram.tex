@@ -1,0 +1,145 @@
+\chapter{CLOUDY AS A STANDALONE PROGRAM}
+% !TEX root = hazy2.tex
+
+\Cloudy\ can be used to run a single model, to create large grids of
+calculations, or to compute a number of simulations while
+varying one or more parameters to match an observed spectrum.
+This Chapter describes how to use \Cloudy\ as a self-contained
+program to read in the parameters for
+the simulation and compute the result.
+The next Chapter discusses the case in which the code is called
+as a subroutine of another larger code.
+
+\section{Running a single model with a shell script}
+
+The code reads from an input file and can create a large number of
+output files.  The latter include both the main output (described in
+Chapter~\ref{sec:output}, \cdSectionTitle{\refname{sec:output}}) and
+the ancillary ``save'' files (described in the
+Chapter~\ref{Hazy1-sec:ControllingOutput} of Hazy 1,
+\cdSectionTitle{\refname{Hazy1-sec:ControllingOutput}}).
+
+It is a good idea to follow a naming convention for these files.
+The
+convention I use is the style ``\cdFilename{basename.type}''
+where \cdFilename{basename} explains
+the astrophysical context (for instance, ``quasar'' or ``IGM'')
+and \cdFilename{type}
+gives the type of information in the file.
+For instance, a model of a
+planetary nebula may have the base name ``\cdFilename{pn\_halo}'',
+the input script might be
+\cdFilename{pn\_halo.in}, the output would be in
+\cdFilename{pn\_halo.out}, and the file created
+by the \cdCommand{save overview} command might be
+\cdFilename{pn\_halo.ovr}.
+Then all of these files
+could be located with a simple ``\cdCommand{ls pn}.*''
+and all overview files with a
+``\cdCommand{ls *.ovr}'' on a Linux system.
+
+The \cdFilename{pn.in} file contains the input commands
+that tell the program what
+to do.
+A typical example might be the following:
+\begin{verbatim}
+# log of the hydrogen density (cm^-3)
+hden 4
+# log of the inner radius (cm)
+radius 17
+# black body temperature and total luminosity
+black body 1e5 K, luminosity 38
+save overview "pn.ovr"
+\end{verbatim}
+\Cloudy\ stops reading the input steam when it reaches
+either an empty line or the end of file.
+Nothing special is needed at the end of the input file.
+
+I have a shell script named \cdFilename{run} which is in my
+``\cdFilename{bin}'' directory, which
+I include on my path.
+The shell script \cdFilename{run} consists of the following on
+Linux:
+\begin{verbatim}
+cloudy.exe < $1.in > $1.out
+\end{verbatim}
+Under Windows it would have the name \cdFilename{run.bat} and would contain the following
+\begin{verbatim}
+cloudy.exe < %1.in > %1.out
+\end{verbatim}
+If \cdFilename{run} is executed by typing
+\begin{verbatim}
+run pn
+\end{verbatim}
+it would read the input stream in \cdFilename{pn.in} and create
+an output file called \cdFilename{pn.out}.
+
+\section{Running a single model from the command line}
+\label{sec:RunCommandLine}
+
+The code also has two command-line options that will accomplish the same thing
+as the shell script described in the previous section. If you create an
+executable called \cdFilename{cloudy.exe}, then the command
+\begin{verbatim}
+cloudy.exe model.in
+\end{verbatim}
+will read input from \cdFilename{model.in}, write output to
+\cdFilename{model.out}, and add the prefix \cdFilename{model} to all the save
+files.  This can also be written
+\begin{verbatim}
+cloudy.exe -p model
+\end{verbatim}
+Alternatively, you can use the command
+\begin{verbatim}
+cloudy.exe -r model
+\end{verbatim}
+which does the same thing, except that it will {\em not} add the prefix
+\cdFilename{model} to all the save files (mnemonic: \cdFilename{-p} will
+Prefix Save file names, while \cdFilename{-r} will only Redirect input
+and output).
+
+By typing the command
+\begin{verbatim}
+cloudy.exe -h
+\end{verbatim}
+you can a list of all the command line flags that \Cloudy\ supports.
+There are two additional flags, \cdCommand{-a} and \cdCommand{-g},
+that are used for debugging the code and internally in grid runs.
+They should never be used in normal situations.
+
+\section{Running grids of simulations or optimizing a simulation}
+
+The greatest insight is gained by creating grids of simulations
+which vary one or more of the input parameters to show how
+various predictions change, or to optimize the agreement between the
+predicted and observed values.
+One example, the predicted \civ\ $lambda 1549$ equivalent width as a
+function of the flux of ionizing photons and cloud density,
+is shown in Figure \ref{fig:CIV_EW}.
+See \citet{BaldwinEtAl95} for more details.
+
+Such grids of simulations can be made parallel on distributed memory
+parallel machines because each point in the grid is independent of the
+other points.
+
+\subsection{Grids of simulations}
+
+The \cdCommand{grid} command is described in
+Chapter~\ref{Hazy1-sec:CommandGrid}
+\cdSectionTitle{\refname{Hazy1-sec:CommandGrid}} of Hazy 1.
+
+\subsection{Optimizing a simulation}
+
+The \cdCommand{optimize} command is described in
+Chapter~\ref{Hazy1-sec:CommandOptimize}
+\cdSectionTitle{\refname{Hazy1-sec:CommandOptimize}} of Hazy 1.
+
+
+\section{Parallel processing with MPI}
+\label{sec:ParallelMPI}
+
+Peter van Hoof created a wrapper for the 
+\cdCommand{grid} and \cdCommand{optimize} commands.
+\Cloudy\ will automatically run these commands using
+all available processors if the code is compiled with 
+an MPI aware compiler and run on an appropriate computer.

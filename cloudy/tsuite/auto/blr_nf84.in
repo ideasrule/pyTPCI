@@ -1,0 +1,588 @@
+title early model of blr
+## >>refer	tsuite	blr	Netzer, H., & Ferland, G.J. 1984, PASP 96, 593, Table 1
+#
+# commands controlling continuum =========
+ionization parameter -1.92
+power law -1 100 0.01
+#
+# commands for density & abundances =========
+hden 9.5
+init, file="ism.ini"
+abundances cameron
+stop lyman optical 6
+#
+# commands controlling geometry  =========
+#
+# other commands for details     =========
+constant gas pressure
+iterate to convergence
+#
+# commands controlling output    =========
+save performance "blr_nf84.per"
+save overview last "blr_nf84.ovr"
+save convergence reason last "blr_nf84.cvr"
+save dr last "blr_nf84.dr"
+save results last "blr_nf84.rlt"
+save monitors last "blr_nf84.asr"
+#
+# commands giving the monitors    =========
+## these are optically thick brems continua 
+## >>chng 01 sep 09, from 4.615 to 4.636, H level index problem
+monitor pressure error < 0.002
+##
+## >>chng 02 may 27, from 4.636 to 4.672, improved gaunt factors
+## >>chng 02 jun 21, from 4.672 to 4.641, improved gaunt factors
+## >>chng 03 apr 11, from 4.641 to 4.616, PopOpc bug
+## >>chng 03 nov 06, from 4.616 to 4.593, slow drift
+## >>chng 03 nov 08, from 4.593 to 4.582, diff field reset bug
+## >>chng 04 jul 02, from 4.582 to 4.615, O H ct
+## >>chng 04 jul 03, from 4.615 to 4.592, NA update H, Co chem net
+## >>chng 04 jul 07, from 4.592 to 4.631, oh ct integ
+## >>chng 04 dec 08, from 4.63 to 4.58 co-ion feedback, check converg
+## >>chng 07 oct 27, from 4.58 to 4.62, add up lev opac to WNW FeII model
+## >>chng 11 nov 16, from 4.62 to 4.745, adjust newmole monitors
+## >>chng 14 mar 26, from 4.745 to 4.656, Move oxygen data to stout and chianti files
+## >>chng 14 apr 08, from 4.656 to 4.719, O excit state photo back in
+## >>chng 16 mar 24, from 4.719 to 4.757, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from 4.757 to 4.685, Fran bug fix
+monitor line "nFnu" 122.4m luminosity 4.685 error 0.1
+##
+## >>chng 01 nov 22, from 4.895 to 4.919, ? ?
+## >>chng 02 may 27, from 4.919 to 4.950, improved gaunt factors
+## >>chng 02 jun 21, from 4.950 to 4.914, improved gaunt factors
+## >>chng 03 apr 11, from 4.914 to 4.887, PopOpc bug
+## >>chng 03 nov 06, from 4.887 to 4.865, slow drift
+## >>chng 04 jul 07, from 4.865 to 4.903, oh ct integ
+## >>chng 04 jul 29, from 4.903 to 4.925, imprv conv chem net, inc err
+## >>chng 04 dec 08, from 4.925 to 4.85 co-ion feedback, check converg
+## >>chng 07 oct 27, from 4.85 to 4.89, add up lev opac to WNW FeII model
+## >>chng 11 nov 16, from 4.89 to 5.024, adjust newmole monitors
+## >>chng 13 jul 24, wl from 60.83m to 60.8322m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 5.024 to 4.928, Move oxygen data to stout and chianti files
+## >>chng 14 apr 08, from 4.928 to 5, O excit state photo back in
+## >>chng 16 mar 24, from 5 to 5.044, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from 5.044 to 4.965, Fran bug fix
+monitor line "nFnu" 60.8322m luminosity 4.965 error 0.1
+##
+## 01 dec 21, from 5.052 to 5.074, inner shell yields
+## >>chng 02 may 27, from 5.074 to 5.096, improved gaunt factors
+## >>chng 02 jun 21, from 5.096 to 5.058, improved gaunt factors
+## >>chng 03 apr 11, from 5.058 to 5.031 PopOpc bug
+## >>chng 03 nov 08, from 5.031 to 4.997, diff field reset bug
+## >>chng 04 jul 02, from 4.997 to 5.033, O H ct
+## >>chng 04 jul 03, from 5.033 to 5.007, NA update H, Co chem net
+## >>chng 04 jul 07, from 5.007 to 5.051, oh ct integ
+## >>chng 04 jul 29, from 5.051 to 5.073, imprv conv chem net, inc err
+## >>chng 04 dec 08, from 5.07 to 5.00 co-ion feedback, check converg
+## >>chng 07 oct 27, from 5.00 to 5.04, add up lev opac to WNW FeII model
+## >>chng 11 nov 16, from 5.04 to 5.179, adjust newmole monitors
+## >>chng 13 jul 24, wl from 41.22m to 41.2152m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 5.179 to 5.081, Move oxygen data to stout and chianti files
+## >>chng 14 apr 08, from 5.081 to 5.157, O excit state photo back in
+## >>chng 16 mar 24, from 5.157 to 5.204, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from 5.204 to 5.124, Fran bug fix
+monitor line "nFnu" 41.2152m luminosity 5.124 error 0.1
+##
+## >>chng 00 oct 03, from 5.931 to 6.004, rebin opt continuum, H- opac bug
+## >>chng 01 mar 09, from 6.004 to 5.82, change in H redis
+## >>chng 01 mar 11, from to 5.85 to 5.85 change in H coll str
+## >>chng 01 sep 09, from 5.856 to 5.883, H level index problem
+## >>chng 01 oct 08, from 5.883 to 5.905 
+## >>chng 03 apr 11, from 5.905 to 5.952 PopOpc bug
+## >>chng 04 jul 02, from 5.952 to 6.007, O H ct
+## >>chng 04 jul 29, from 6.007 to 6.041, imprv conv chem net, inc err
+## >>chng 04 dec 08, from 6.04 to 5.97 co-ion feedback, check converg
+## >>chng 06 jul 18, from 5.97 to 6.03, RP major upgrade VS coll strengths
+## >>chng 07 oct 22, from 6.03 to 5.92, resolve l-levels of h-like sequence
+## >>chng 07 dec 05, from 5.92 to 5.96, drift up
+## >>chng 08 mar 17, from 5.96 to 5.74, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 09 oct 12, from 5.74 to 5.905, extend fine continuum to lower limit of code by default
+## >>chng 11 nov 16, from 5.905 to 5.947, adjust newmole monitors
+## >>chng 12 oct 09, from 5.947 to 6.045, fix CRD esc prob
+## >>chng 12 oct 17, from 6.045 to 5.953, Improved CRD esc p
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 16 mar 24, from 5.953 to 5.872, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from 5.872 to 6.043, Fran bug fix
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A luminosity 6.043 error 0.10
+##
+## >>chng 00 oct 03, from 25.27 to 21.42 rebin opt continuum, H- opac bug
+## >>chng 01 mar 09, from 21.42 to 32.4 change in H redis
+## >>chng 01 mar 11, from 32.4 to 30.6 change in H coll str
+## >>chng 01 may 17, use luminosity rather than rel intensity since Hb change
+## >>chng 01 jul 04, from 7.343 to 7.365, change in diffuse fields
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 7.365 to 7.397, Fran bug fix
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line "H  1" 1215.67A  luminosity 7.397
+##
+## >>chng 00 oct 03, from 4.64 to 4.051 rebin opt continuum, H- opac bug
+## >>chng 01 mar 09, from 4.05 to 6.24 change in H redis
+## >>chng 01 mar 11, from 6.24 to 5.77 change in H coll str
+## >>chng 01 may 17, use luminosity rather than rel intensity since Hb change
+## >>chng 03 apr 28, from 6.613 to 6.590, slow drift
+## >>chng 06 aug 09, from 6.590 to 6.621 Meudon 06, Bowen change
+## >>chng 06 nov 29, from 6.621 to 6.752, Badnell DR turned on
+## >>chng 11 jul 12, from 6.752 to 6.72, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from 6.72 to 6.698, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 nov 01, from 6.698 to 6.636, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from 6.636 to 6.673, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from 6.673 to 6.639, update DR suppression
+## >>chng 16 jul 24, from 6.639 to 6.6, update C III to 2014A&A...566A.104F
+monitor line "blnd" 1909  luminosity  6.6
+##
+## >>chng 00 oct 03, from 20.4 to 17.2 rebin opt continuum, H- opac bug
+## >>chng 01 mar 09, from 17.2 to 26.4 change in H redis
+## >>chng 01 mar 11, from 26.4 to 24.1 change in H coll str
+## >>chng 01 may 17, use luminosity rather than rel intensity since Hb change
+## >>chng 01 jul 04, from 7.237 to 7.264, change in diffuse fields
+## >>chng 06 nov 29, from 7.264 to 7.228, Badnell DR turned on
+## >>chng 11 jul 12, from 7.228 to 7.253, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from 7.253 to 7.222, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 nov 01, from 7.222 to 7.26, Chianti experimental levels, revised Badnell DR suppression
+monitor line "blnd" 1549 luminosity  7.26 
+##
+## >>chng 09 jun 28, from 1 to 6.992, check convergence of outward Hb
+## >>chng 11 jul 12, from 6.992 to 7.015, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from 7.015 to 6.977, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 nov 01, from 6.977 to 7.016, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 mar 03, from 7.016 to 1.685, update atomic models for S II, S III
+## >>chng 13 jun 14, from 1.685 to 7.02, findline fix for mis-identified lines
+## >>chng 19 feb 22, line no longer predicted
+## monitor line luminosity "Inwd" 1549 7.02, 
+##
+## >>chng 09 jun 28, from 1 to 5.737, check convergence of outward Hb
+## >>chng 09 jul 15, from 5.737 to 5.706, autocv from 0.1 back to 0.2
+## >>chng 09 oct 12, from 5.706 to 5.905, extend fine continuum to lower limit of code by default
+## >>chng 11 aug 07, from 5.905 to 5.926, compile new h-like recom coef table
+## >>chng 11 nov 16, from 5.926 to 5.947, adjust newmole monitors
+## >>chng 11 dec 16, from 5.947 to 5.922, adjust botches due to recent iso recomb changes
+## >>chng 12 oct 09, from 5.922 to 6.045, fix CRD esc prob
+## >>chng 12 oct 17, from 6.045 to 5.953, Improved CRD esc p
+## >>chng 13 jul 19, from 5.953 to 5.976, start bracketing tau only after second iteration
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 5.976 to 5.935, Move oxygen data to stout and chianti files
+## >>chng 14 apr 08, from 5.935 to 5.965, O excit state photo back in
+## >>chng 16 mar 24, from 5.965 to 5.872, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from 5.872 to 6.043, Fran bug fix
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "H  1" 4861.32A 6.043, 
+##
+## >>chng 09 jun 28, from 1 to 5.644, check convergence of outward Hb
+## >>chng 09 oct 12, from 5.644 to 5.797, extend fine continuum to lower limit of code by default
+## >>chng 11 nov 16, from 5.797 to 5.818, adjust newmole monitors
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 13, from 5.818 to 5.838, resolve face at all freqs
+## >>chng 14 mar 26, from 5.838 to 5.795, Move oxygen data to stout and chianti files
+## >>chng 14 apr 08, from 5.795 to 5.82, O excit state photo back in
+## >>chng 16 aug 07, from 5.82 to 5.961, Fran bug fix
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "Inwd" 4861.32A 5.961, 
+##
+## >>chng 00 oct 03, from 2.01 to 1.73 rebin opt continuum, H- opac bug
+## >>chng 01 mar 09, from 1.73 to 2.65 change in H redis
+## >>chng 01 mar 11, from 2.65 to 2.41 change in H coll str
+## >>chng 01 may 17, use luminosity rather than rel intensity since Hb change
+## >>chng 01 dec 21, from 6.242 to 6.269, inner shell yields
+## >>chng 02 dec 06, from 6.269 to 6.246, new he treatment
+## >>chng 06 feb 03, from 6.246 to 6.226, guess dr to Badnell mean
+## >>chng 06 jul 25, from 6.226 to 6.169 HN update OIII collision data
+## >>chng 06 aug 09, from 6.169 to 6.197 Meudon 06, Bowen change
+## >>chng 09 feb 23, from 6.197 to 6.224, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 jul 12, from 6.224 to 6.146, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from 6.146 to 6.122, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 13 jan 08, from 6.122 to 6.102, remove duplicated factor in Pelec_esc
+## >>chng 13 feb 01, from 6.102 to 6.147, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from 6.147 to 6.115, update DR suppression
+## >>chng 14 mar 26, from 6.115 to 6.088, Move oxygen data to stout and chianti files
+monitor line "blnd"  1666  luminosity  6.088
+##
+## >>chng 01 mar 09, from 7.94 to 11.9 change in H redis
+## >>chng 01 mar 17, 11.9 to 11.1, inc error to 0.1, chng in H coll strength
+## >>chng 01 may 17, use luminosity rather than rel intensity since Hb change
+## >>chng 01 jun 15, from 6.949 to 6.886, H ct net change
+## >>chng 04 jun 01, from 6.886 to 6.993, unified calc of Lya line width
+## >>chng 04 jul 02, from 6.993 to 7.023, O H ct
+## >>chng 04 jul 29, from 7.023 to 7.055, imprv conv chem net, inc err
+## >>chng 04 dec 08, from 7.06 to 7.00 co-ion feedback, check converg
+## >>chng 13 sep 06, wl from 2798 to 2798.00A, botched merge
+## >>chng 16 mar 24, from 7 to 6.758, FeII cooling using Stout 80 levels
+monitor line "blnd" 2798.00A  luminosity  6.758 err 0.1
+##
+## >>chng 01 mar 09, from 3.11 to 4.81 change in H redis
+## >>chng 01 mar 11, from 4.81 to 4.41 change in H coll str
+## >>chng 01 may 17, use luminosity rather than rel intensity since Hb change
+## >>chng 01 jun 15, from 6.548 to 6.485, H ct net change
+## >>chng 03 oct 16, from 6.485 to 6.254, chng feii cooling, ots cleanup
+## >>chng 04 jun 01, from 6.254 to 6.396, unified calc of Lya line width
+## >>chng 04 jul 07, from 6.396 to 6.417, oh ct integ
+## >>chng 05 feb 22, from 6.417 to 6.397, rt_diffuse chng
+## >>chng 09 feb 23, from 6.397 to 6.374, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 14 mar 26, from 6.374 to 6.395, Move oxygen data to stout and chianti files
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line "Fe 2" 6200  luminosity  6.395
+##
+## >>chng 03 aug 22, from 6.010 to 6.033, line overlap
+## >>chng 03 oct 16, from 6.033 to 6.085, chng feii cooling, ots cleanup
+## >>chng 04 may 13, from 6.085 to 6.062, dest albedo chng, incr err
+## >>chng 04 jun 01, from 6.062 to 6.263, unified calc of Lya line width
+## >>chng 08 apr 10, from 6.263 to 6.201, change default h-like levels, other minor changes
+## >>chng 09 oct 12, from 6.201 to 6.145, extend fine continuum to lower limit of code by default
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line "Fe 2" 2400  luminosity  6.145 error 0.1
+##
+## amount of Lya lost to Fe 2
+## >>chng 03 aug 15, from 6.528 to 6.554, add guess of low-T dr for fe
+## >>chng 03 oct 16, from 6.554 to 6.599, chng feii cooling, ots cleanup
+## >>chng 04 jun 01, from 6.599 to 7.133, unified calc of Lya line width
+## >>chng 04 jul 02, from 7.133 to 7.157, O H ct
+## do not assert this intermediate quantity, not an observed line
+## assert line "Fe 2" 1216 luminosity 7.157 
+##
+monitor element ionization Hydrogen 1 -0.011
+##
+## >>chng 00 oct 03, from -1.59 to -1.518 rebin opt continuum, H- opac bug
+## >>chng 01 apr 29, from -1.518 to -1.540, small drift away 
+## >>chng 01 sep 09, from -1.519 to -1.490 H level index problem
+## >>chng 03 nov 06, from -1.490 to -1.513 slow drift
+## >>chng 04 jun 01, from -1.513 to -1.539 unified calc of Lya line width
+## >>chng 04 jul 02, from -1.539 to -1.477 O H ct
+## >>chng 04 jul 03, from -1.477 to -1.536 NA update H, Co chem net
+## >>chng 04 jul 07, from -1.536 to -1.450, oh ct integ
+## >>chng 04 jul 29, from -1.450 to -1.403 imprv conv chem net, inc err
+## >>chng 04 dec 08, from -1.403 to -1.55 co-ion feedback, check converg
+## >>chng 05 mar 25, from -1.55 to -1.48, renorm H pops in level solver
+## >>chng 11 nov 16, from -1.48 to -1.394, adjust newmole monitors
+## >>chng 14 mar 26, from -1.394 to -1.455, Move oxygen data to stout and chianti files
+## >>chng 16 mar 24, from -1.455 to -1.353, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from -1.353 to -1.396, Marios bug fixes
+monitor element ionization Hydrogen 2 -1.396 erro 0.1
+##
+monitor element ionization Helium   1 -0.007
+##
+## >>chng 00 oct 03, from -1.97 to -2.005 rebin opt continuum, H- opac bug
+## >>chng 00 dec 01, from -2.005 to -1.904, change he sec ioniz effic
+## >>chng 01 may 06, from -1.904 to -2.051, chng in He+ H ct rates
+## >>chng 01 may 06, from -2.052 to -2.028, chng in He+ H ct rates
+## >>chng 02 aug 20, from -2.028 to -2.051, slow drift
+## >>chng 03 apr 11, from -2.051 to -2.077 PopOpc bug
+## >>chng 04 apr 17, from -2.077 to -1.959, better h mole conv
+## >>chng 04 apr 28, from -1.959 to -1.926, He+ - H ct rate udpate
+## >>chng 04 jun 01, from -1.926 to -1.873 unified calc of Lya line width
+## >>chng 04 jul 02, from -1.873 to -1.936 O H ct
+## >>chng 04 jul 03, from -1.936 to -1.676 NA update H, Co chem net
+## >>chng 04 jul 07, from -1.676 to -1.640, oh ct integ
+## >>chng 04 jul 29, from -1.640 to -1.588 imprv conv chem net, inc err
+## >>chng 04 dec 08, from -1.588 to -1.683 co-ion feedback, check converg
+## >>chng 08 mar 22, from -1.683 to -2.056 bugfix r1879
+## >>chng 09 feb 23, from -2.056 to -2.012, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 nov 16, from -2.012 to -2.078, adjust newmole monitors
+## >>chng 16 mar 24, from -2.078 to -2.138, FeII cooling using Stout 80 levels
+monitor element ionizaiton Helium   2 -2.138 error 0.1 
+##
+## >>chng 01 aug 26, from -2.379 to -2.339 con res 2x better
+## >>chng 08 apr 30, from -2.339 to -2.312 H, He topoff change
+## >>chng 13 may 07, from -2.312 to -2.335, bnl_effective change
+## >>chng 16 aug 18, from -2.335 to -2.358, enhanced coll ion from highest n
+## >>chng 16 nov 14, from -2.358 to -2.388, Reintegration of RydDep after several bug fixes
+## >>chng 16 dec 15, from -2.388 to -2.341, fix bug on Hlike Percival annd Richard collisions
+monitor element ionizaiton Helium   3 -2.341
+## 
+monitor element ionizaiton Carbon   2 -0.005
+## 
+## >>chng 06 nov 29, from -2.305 to -2.211, Badnell DR turned on
+## >>chng 12 nov 01, from -2.211 to -2.26, Chianti experimental levels, revised Badnell DR suppression
+monitor element ionizaiton Carbon   3 -2.26 error 0.1
+## 
+## >>chng 06 nov 24, from -2.503 to -2.463, turn on Badnell RR
+## >>chng 06 nov 29, from -2.463 to -2.550, Badnell DR turned on
+## >>chng 11 jul 12, from -2.55 to -2.499, enable fit to Badnell DR suppression
+monitor element ionizaiton Carbon   4 -2.499 error 0.1
+## 
+## >>chng 14 jan 05, from -0.051 to -0.016, N to external databases
+## >>chng 14 jun 11, from -0.016 to -0.0518, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+monitor element ionizaiton Nitrogen 1 -0.0518
+##
+## >>chng 00 oct 03, from -0.993 to -0.964 rebin opt continuum, H- opac bug
+## >>chng 05 feb 22, from -0.965 to -0.987, rt_diffuse chng
+## >>chng 06 jul 07, from -0.987 to -1.018, Stancil N1 CT
+## >>chng 11 nov 16, from -1.018 to -0.9833, adjust newmole monitors
+## >>chng 14 jan 05, from -0.9833 to -1.586, N to external databases
+## >>chng 14 mar 26, from -1.586 to -1.636, Move oxygen data to stout and chianti files
+## >>chng 14 apr 08, from -1.636 to -1.592, O excit state photo back in
+## >>chng 14 jun 11, from -1.592 to -0.9908, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+## >>chng 16 aug 07, from -0.9908 to -1.015, Fran bug fix
+monitor element ionizaiton Nitrogen 2 -1.015
+##
+## >>chng 01 jun 15, from -2.370 to -2.348, H ct net chng
+## >>chng 09 feb 23, from -2.348 to -2.305, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 12 nov 01, from -2.305 to -2.375, Chianti experimental levels, revised Badnell DR suppression
+monitor element ionizaiton Nitrogen 3 -2.375 error 0.1
+##
+## >>chng 01 aug 26, from -2.464 to -2.421, con res 2x better
+## >>chng 06 nov 29, from -2.421 to -2.379, Badnell DR turned on
+monitor element ionizaiton Nitrogen 4 -2.379 error 0.1
+##
+## >>chng 01 dec 21, from -2.919 to -2.856 inner shell yields
+## >>chng 06 nov 29, from -2.856 to -2.946, Badnell DR turned on
+## >>chng 11 jul 12, from -2.946 to -2.906, enable fit to Badnell DR suppression
+## >>chng 12 nov 01, from -2.906 to -2.842, Chianti experimental levels, revised Badnell DR suppression
+monitor element ionizaiton Nitrogen 5 -2.842 error 0.1
+##
+monitor element ionizaiton Oxygen   1 -0.011
+##
+## >>chng 00 oct 03, from -1.820 to -1.707 rebin opt continuum, H- opac bug
+## >>chng 01 apr 01, from -1.707 to -1.741, change in d eden
+## >>chng 01 sep 09, from -1.715 to -1.690 H level index problem
+## >>chng 03 nov 06, from -1.690 to -1.714 slow drift
+## >>chng 04 apr 28, from -1.714 to -1.744, He+ - H ct rate udpate
+## >>chng 04 jul 02, from -1.744 to -1.661 O H ct
+## >>chng 04 jul 03, from -1.661 to -1.798 NA update H, Co chem net
+## >>chng 04 jul 07, from -1.798 to -1.676, oh ct integ
+## >>chng 04 jul 16, from -1.676 to -1.701, chng order O ion eval, inc err
+## >>chng 04 jul 29, from -1.613 to -1.81 imprv conv chem net, inc err
+## >>chng 05 mar 25, from -1.81 to -1.72, renorm H pops in level solver
+## >>chng 11 nov 16, from -1.72 to -1.603, adjust newmole monitors
+## >>chng 14 mar 26, from -1.603 to -1.689, Move oxygen data to stout and chianti files
+## >>chng 16 mar 24, from -1.689 to -1.553, FeII cooling using Stout 80 levels
+monitor element ionizaiton Oxygen   2 -1.553 error 0.15
+##
+## >>chng 03 apr 28, from -2.203 to -2.249 slow drift
+## >>chng 09 feb 23, from -2.249 to -2.201, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from -2.201 to -2.27, make PRD redis func for h-like ions; LY_A func is now for H only
+monitor element ionizaiton Oxygen   3 -2.27 error 0.1
+##
+## >>chng 06 aug 09, from -2.657 to -2.614 Meudon 06, Bowen change
+## >>chng 06 nov 29, from -2.614 to -2.541, Badnell DR turned on
+## >>chng 11 jul 12, from -2.541 to -2.464, enable fit to Badnell DR suppression
+## >>chng 12 nov 01, from -2.464 to -2.518, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 16 nov 14, from -2.518 to -2.562, Reintegration of RydDep after several bug fixes
+monitor element ionizaiton Oxygen   4 -2.562 error 0.1
+##
+## >>chng 01 aug 26, from -2.946 to -2.903, con res 2x better
+## >>chng 12 nov 01, from -2.903 to -2.848, Chianti experimental levels, revised Badnell DR suppression
+monitor element ionizaiton Oxygen   5 -2.848 error 0.1
+##
+## >>chng 01 dec 21, from -3.455 to -3.384 inner shell yields
+## >>chng 05 feb 22, from -3.384 to -3.428, rt_diffuse chng
+## >>chng 07 jan 25, from -3.428 to -3.475, use only Gu UTA data file
+## >>chng 11 jul 12, from -3.475 to -3.423, enable fit to Badnell DR suppression
+## >>chng 12 jul 09, from -3.423 to -3.472, get rid of major discontinuities in 3body rates
+## >>chng 12 nov 01, from -3.472 to -3.373, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -3.373 to -3.425, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -3.425 to -3.376, update DR suppression
+monitor element ionizaiton Oxygen   6 -3.376 error 0.1
+##
+monitor element ionizaiton Iron     2 -0.005
+##
+## >>chng 00 oct 03, from -2.682 to -2.596 rebin opt continuum, H- opac bug
+## >>chng 00 oct 03, from -2.596 to -2.621 rebin opt continuum, H- opac bug
+## >>chng 01 sep 24, from -2.600 to -2.577 ? ? ?
+## >>chng 03 apr 12, from -2.577 to -2.60, drift down
+## >>chng 03 aug 15, from -2.60 to -2.562, add guess low-T dr for fe
+## >>chng 03 oct 16, from -2.562 to -2.591 chng feii cooling, ots cleanup
+## >>chng 04 jun 01, from -2.591 to -2.614 unified calc of Lya line width
+## >>chng 04 jul 02, from -2.614 to -2.546 O H ct
+## >>chng 04 jul 03, from -2.546 to -2.611 NA update H, Co chem net
+## >>chng 04 jul 07, from -2.611 to -2.519, oh ct integ
+## >>chng 04 jul 29, from -2.519 to -2.470 imprv conv chem net, inc err
+## >>chng 04 jul 29, from -2.47 to -2.62 imprv conv chem net, inc err
+## >>chng 05 mar 25, from -2.62 to -2.55, renorm H pops in level solver
+## >>chng 08 nov 13, from -2.55 to -2.82, fix Boltzmann factor in CT rates (r2455)
+## >>chng 11 nov 16, from -2.82 to -2.73, adjust newmole monitors
+## >>chng 14 mar 26, from -2.73 to -2.789, Move oxygen data to stout and chianti files
+## >>chng 14 apr 08, from -2.789 to -2.742, O excit state photo back in
+## >>chng 16 mar 24, from -2.742 to -2.834, FeII cooling using Stout 80 levels
+## >>chng 16 nov 14, from -2.834 to -2.876, Reintegration of RydDep after several bug fixes
+monitor element ionizaiton Iron     3 -2.876 error 0.1
+##
+## >>chng 01 jun 15, from -2.588 to -2.563, H ct net chng
+## >>chng 01 jul 04, from -2.563 to -2.517 diffuse fields
+## >>chng 02 nov 20, from -2.517 to -2.587, new he atom ots diff
+## >>chng 03 nov 08, from -2.587 to -2.540 diff field reset bug
+## >>chng 03 nov 23, from -2.540 to -2.478, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -2.478 to -2.439, guess dr to Badnell mean
+## >>chng 06 aug 09, from -2.439 to -2.393 Meudon 06, Bowen change
+## >>chng 09 oct 12, from -2.393 to -2.355, extend fine continuum to lower limit of code by default
+## >>chng 11 jul 12, from -2.355 to -2.439, enable fit to Badnell DR suppression
+## >>chng 12 oct 09, from -2.439 to -2.482, fix CRD esc prob
+monitor element ionization Iron     4 -2.482 error 0.1
+##
+## >>chng 04 jul 07, from 3.791 to 3.812, oh ct integ
+## >>chng 16 mar 24, from 3.812 to 3.755, FeII cooling using Stout 80 levels
+monitor temperature "H" 3.755
+##
+## >>chng 00 oct 03, from 4.052 to 4.027 rebin opt continuum, H- opac bug
+## >>chng 04 jun 09, from 4.028 to 4.050, NA update chem
+## >>chng 04 jul 02, from 4.050 to 4.027 O H ct
+## >>chng 04 jul 03, from 4.027 to 4.050 NA update H, Co chem net
+## >>chng 04 jul 07, from 4.050 to 4.018, oh ct integ
+## >>chng 04 jul 29, from 4.018 to 4.049 imprv conv chem net, inc err
+## >>chng 05 mar 25, from 4.049 to 4.023, renorm H pops in level solver
+## >>chng 08 dec 13, from 4.023 to 4.043, merging newsolvers branch
+## >>chng 11 nov 16, from 4.043 to 4.005, adjust newmole monitors
+## >>chng 16 mar 24, from 4.005 to 3.959, FeII cooling using Stout 80 levels
+monitor temperature "H+" 3.959
+##
+## >>chng 00 oct 03, from 3.761 to 3.793 rebin opt continuum, H- opac bug
+## >>chng 04 jul 29, from 3.793 to 3.822 imprv conv chem net, inc err
+## >>chng 16 mar 24, from 3.822 to 3.757, FeII cooling using Stout 80 levels
+monitor temperature "He" 3.757 err 0.1
+##
+## >>chng 00 dec 01, from 4.074 to 4.048 change he sec ioniz effic
+## >>chng 01 may 06, from -4.048 to 4.119, chng in He+ H ct rates
+## >>chng 04 apr 17, from 4.124 to 4.074, better h mole conv
+## >>chng 04 jun 01, from 4.074 to 4.045 unified calc of Lya line width
+## >>chng 04 jul 02, from 4.045 to 4.072 O H ct
+## >>chng 04 jul 03, from 4.072 to 3.989 NA update H, Co chem net
+## >>chng 04 jul 29, from 3.989 to 3.962 imprv conv chem net, inc err
+## >>chng 08 mar 22, from 3.962 to 4.132 bugfix r1879
+## >>chng 16 jul 24, from 4.132 to 4.17, update C III to 2014A&A...566A.104F
+monitor temperature "He+" 4.17 error 0.1
+##
+monitor temperature "He+2" 4.272
+##
+## >>chng 00 oct 03, from 3.760 to 18.792 rebin opt continuum, H- opac bug
+## >>chng 04 jul 07, from 3.792 to 3.812 oh ct integ
+## >>chng 16 mar 24, from 3.812 to 3.755, FeII cooling using Stout 80 levels
+monitor temperature "O" 3.755
+##
+## >>chng 04 jun 09, from 3.877 to 3.899, NA update chem
+## >>chng 16 mar 24, from 3.899 to 3.826, FeII cooling using Stout 80 levels
+monitor temperature "O+" 3.826
+monitor temperature "O+2" 4.228
+monitor temperature "O+3" 4.270
+monitor temperature "O+4" 4.277
+monitor temperature "O+5" 4.279
+monitor temperature "O+6" 4.280
+##
+## >>chng 00 oct 03, from 3.783 to 3.883 rebin opt continuum, H- opac bug
+## >>chng 05 mar 25, from 3.880 to 3.848, renorm H pops in level solver
+## >>chng 08 mar 22, from 3.848 to 3.868 bugfix r1879
+## >>chng 11 jul 12, from 3.868 to 3.846, enable fit to Badnell DR suppression
+## >>chng 14 mar 26, from 3.846 to 3.871, Move oxygen data to stout and chianti files
+## >>chng 16 mar 24, from 3.871 to 3.774, FeII cooling using Stout 80 levels
+monitor temperature "Fe" 3.774
+##
+## >>chng 00 oct 03, from 3.762 to 3.793 rebin opt continuum, H- opac bug
+## >>chng 04 jul 07, from 3.793 to 3.814 oh ct integ
+## >>chng 16 mar 24, from 3.814 to 3.757, FeII cooling using Stout 80 levels
+monitor temperature "Fe+" 3.757
+##
+## >>chng 04 jun 01, from 3.946 to 3.979 unified calc of Lya line width
+## >>chng 04 jul 07, from 3.979 to 3.957 oh ct integ
+## >>chng 04 jul 29, from 3.957 to 3.983 imprv conv chem net, inc err
+## >>chng 05 mar 25, from 3.983 to 3.963, renorm H pops in level solver
+## >>chng 08 nov 13, from 3.963 to 4.02, fix Boltzmann factor in CT rates (r2455)
+## >>chng 11 nov 16, from 4.02 to 3.989, adjust newmole monitors
+monitor temperature "Fe+2" 3.989
+## 
+monitor temperature "Fe+3" 4.207
+## 
+## >>chng 07 jan 20, from 4.237 to 4.258, e2 bug
+## >>chng 12 nov 28, from 4.258 to 4.238, Make HII dr limit symmetric
+monitor temperature "Fe+4" 4.238
+## 
+## >>chng 07 jan 23, from 4.256 to 4.276, update Gu UTA data file
+## >>chng 12 nov 01, from 4.276 to 4.255, Chianti experimental levels, revised Badnell DR suppression
+monitor temperature "Fe+5" 4.255
+## 
+monitor temperature "Fe+6" 4.272
+monitor temperature "Fe+7" 4.276
+##
+## >>chng 03 jun 08, from 250 to 350, n0 zoning
+## >>chng 03 nov 06, from 350 to 300, reorder radius_next
+## >>chng 03 dec 07, from 300 to 350, finer dr metal ioniz
+## >>chng 04 apr 24, from 350 to 400 ? ?
+## >>chng 08 dec 08, from 400 to 346, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 346 to 352, merging newsolvers branch
+## >>chng 11 nov 16, from 352 to 285, adjust newmole monitors
+## >>chng 12 mar 07, from 285 to 352, renorm to r5961 results
+## >>chng 13 nov 13, from 352 to 381, resolve face at all freqs
+## >>chng 14 apr 07, from 381 to 362, update of Gaunt free-free factors
+## >>chng 14 apr 08, from 362 to 381, O excit state photo back in
+## >>chng 16 mar 24, from 381 to 352, FeII cooling using Stout 80 levels
+## >>chng 18 jun 20, from 352 to 330, #bugfixes at front face r12134:12136
+monitor nzone 330 
+##
+## >>chng 04 feb 15, from 15 to 12
+## >>chng 04 sep 25, from 12 to 15, incr temp toler 0.02 to 0.005
+## >>chng 04 sep 30, from 15 to 18, conv_base conv heat cool
+## >>chng 08 apr 30, from 18 to 20 H, He topoff change
+## >>chng 08 dec 08, from 20 to 18.46, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 18.46 to 40.45, merging newsolvers branch
+## >>chng 09 jan 16, from 40.45 to 41.2 (error 0.04), average of 10 runs
+## >>chng 09 oct 12, from 41.2 to 43.83, extend fine continuum to lower limit of code by default
+## >>chng 12 mar 07, from 43.83 to 33.03, renorm to r5961 results
+## >>chng 13 nov 05, from 33.03 to 20.53, convergence branch changes
+## >>chng 14 apr 07, from 20.53 to 13.07, move H/C out of ConvBase loop
+monitor itrzn 13.07
+##
+## >>chng 09 jul 14, from 7 to 5, reset autocv to 0.2 since 0.1 developed 32/64 bit distinction
+## >>chng 09 jul 27, from 5 to 3, rm test on outward Hb - will create ticket on problems
+## >>chng 11 aug 05, from 3 to 4, make PRD redis func for h-like ions; LY_A func is now for H only
+monitor niter 4 
+##
+## >>chng 14 jul 10, from 1.01 to 5.245, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 4300.00 5.245 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 6.15, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2400.00 6.15 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 6.381, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 6200.00 6.381 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 3.636, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1080.00 3.636 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 4.819, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1500.00 4.819 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 5.872, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1.15000m 5.872 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 6.473, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2500.00 6.473 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 6.48, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2300.00 6.48 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 6.027, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 8900.00 6.027 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 5.372, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1786.00 5.372 error 0.1 
+##
+# blr_nf84.in
+# class blr 
+# ========================================
+# 
+
+This is an example of a "conventional" BLR calculation. The parameters are
+similar to those of Table 1 of Netzer and Ferland (1984).  Notice that the
+ratio of Lyalpha to Hbeta ratio is much larger than observed.
+
+>>refer	blr	model	Netzer, H., & Ferland, G. J. 1984, PASP, 96, 593  
+

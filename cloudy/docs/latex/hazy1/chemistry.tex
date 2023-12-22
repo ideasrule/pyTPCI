@@ -1,0 +1,25 @@
+\chapter{CONTROLLING CHEMICAL MODELS}
+% !TEX root = hazy1.tex
+
+\section{The Chemistry command}
+
+Several chemistry sub-commands can be specified on a single line,
+separated by commas, e.g.
+
+\cdCommand{chemistry reaction ``$\mathbf{S+,Mg=>S,Mg+}$'' off, reaction ``$\mathbf{S+,Fe=>S,Fe+}$'' off}
+
+\subsection{Chemistry reaction}
+
+The keyword \cdCommand{reaction} takes a string argument for the
+reaction which is being referred to.  Care is taken to ensure that the
+effect of this command does not depend on the order in which reactants
+or products are specified.
+
+At present, it has a single option, \cdCommand{off}, which disables
+the reaction.
+
+A list of reactions can be specified for the command, i.e.
+
+\cdCommand{chemistry reaction (``$\mathbf{S+,Mg=>S,Mg+}$'', ``$\mathbf{S+,Fe=>S,Fe+}$'') off}
+
+The brackets, and commas between entries, are required.

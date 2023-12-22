@@ -1,0 +1,55 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=10 were downloaded using ADM.
+#
+# NB NB NB  np energy used for shell n up to n=10
+#
+# The remaining data were calculated using the ATLL r123
+#
+ 1 -1 -1 -1 0
+ 2 -1 -1 -1 5271783.53
+ 3 -1 -1 -1 6247696.554
+ 4 -1 -1 -1 6589280.11166667
+ 5 -1 -1 -1 6747376.73733333
+ 6 -1 -1 -1 6833251.6876
+ 7 -1 -1 -1 6885029.08846667
+ 8 -1 -1 -1 6918633.2581
+ 9 -1 -1 -1 6941671.3895
+10 -1 -1 -1 6958149.9619
+11 -1 -1 -1 6970353.3
+12 -1 -1 -1 6979624.3
+13 -1 -1 -1 6986839.2
+14 -1 -1 -1 6992564.00
+15 -1 -1 -1 6997182.44
+16 -1 -1 -1 7000962.28
+17 -1 -1 -1 7004094.90
+18 -1 -1 -1 7006720.06
+19 -1 -1 -1 7008941.73
+20 -1 -1 -1 7010838.55
+21 -1 -1 -1 7012470.90
+22 -1 -1 -1 7013885.75
+23 -1 -1 -1 7015120.10
+24 -1 -1 -1 7016203.39
+25 -1 -1 -1 7017159.308
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L3620 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=3620&comment_code=&amp;element=O&amp;spectr_charge=8&amp;ref=3620&amp;type=E
+# PUBCON    Title: Energy Levels of One-Electron Atoms
+# PUBCON  Authors: G. W. Erickson
+# PUBCON  Journal: J. Phys. Chem. Ref. Data 6, 831–869 (1977)
+# PUBCON      DOI: https://doi.org/10.1063/1.555557
+# 
+# PUB     Refcode: L7188 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=7188&comment_code=&amp;element=O&amp;spectr_charge=8&amp;ref=7188&amp;type=E
+# PUBCON    Title: The Lamb Shift in Hydrogen-like Atoms, 1 ≤ Z ≤ 110
+# PUBCON  Authors: W. R. Johnson, and G. Soff
+# PUBCON  Journal: At. Data Nucl. Data Tables 33, 405–446 (1985)
+# PUBCON      DOI: https://doi.org/10.1016/0092-640X(85)90010-5

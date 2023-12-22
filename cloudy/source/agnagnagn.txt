@@ -1,0 +1,10 @@
+recombination coef
+	punch recombination agn
+	calls
+	ion_recombAGN in makerecom.c
+
+punch agn opacity
+	creates tables of photoionization data
+
+punch charge transfer agn
+	table of charge transfer rates

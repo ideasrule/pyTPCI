@@ -1,0 +1,720 @@
+\chapter{USING THE GRAIN CODE IN CLOUDY}
+\label{grain:appendix}
+% !TEX root = hazy1.tex
+
+\section{Introduction}
+
+This release of Cloudy contains a grain model that constitutes a
+significant upgrade from the original model that was described in
+\citet{Baldwin1991}. The code has been written by Peter van Hoof, except
+where indicated differently. These are the main features:
+\begin{itemize}
+\item The code resolves the size distribution of the grains in an arbitrary
+  number of size bins (chosen by the user), and calculates all grain
+  parameters such as temperature, charge distribution, emitted flux, etc.,
+  separately for each bin. Since grain opacities depend strongly on the grain
+  radius, they need to be calculated separately for each bin as well.
+\item For this purpose Cloudy contains a Mie code for spherical grains
+  (written by P.G. Martin, based on a code by \citet{Hansen1974}). This code
+  allows the user to calculate grain opacities using either a pre-defined or a
+  user-supplied set of optical constants or opacities, an arbitrary size
+  distribution, and an arbitrary number of grain size bins. The code can
+  handle any number of grain bins, only limited by the memory on your machine.
+\item The code fully treats quantum heating of grains using a robust and
+  efficient algorithm (which is a comprehensively upgraded version of a code
+  originally written by K. Volk), implementing an improved version of the
+  procedure described in \citet{Guhathakurta1989}. Combined with resolved size
+  distributions, this will lead to a much more realistic modeling of the grain
+  emission under all circumstances. Quantum heating is turned on automatically
+  for all resolved size distributions\footnote{The actual criterion is that
+    the ratio of the volumes of the largest and smallest grain in each bin is
+    smaller than 100 for quantum heating to be the default. Note that this
+    criterion is very generous and that a much smaller ratio (i.e., a higher
+    number of size bins) will usually be necessary to achieve proper
+    convergence of the emitted spectrum.} and single-sized grains (including
+  PAH's, but excluding grey grains for which quantum heating is never used).
+  The user can change the default behavior of the code by including the
+  keyword \cdCommand{qheat} (to enable quantum heating) or \cdCommand{no
+    qheat} (to disable quantum heating) with the \cdCommand{grains} command.
+  If the relative grain abundance $A_{\rm rel}(r)$ in a particular zone
+  (variable \cdVariable{gv.bin[nd]-$>$dstAbund}) drops below a preset
+  threshold value (variable \cdVariable{gv.dstAbundThreshold}, default value
+  $10^{-5}$), quantum heating will be disabled for that zone only. Note that
+  quantum heating usually only influences the energy distribution of the
+  emitted spectrum, nothing else\footnote{Quantum heating can influence the
+    emission line spectrum as well if continuum pumping of the lines by the
+    short wavelength end of the dust spectrum is important. Typically these
+    will be molecular lines.}. So switching off quantum heating can be a good
+  idea to speed up the modeling, provided the correct shape of the emitted
+  spectrum has no influence on the results the user is interested in.
+\item The treatment of the grain physics has been completely overhauled,
+  following the discussion in \citet{Weingartner2001a}, \citet{VanHoof2004},
+  and \citet{Weingartner2006}. The grain model has a detailed treatment of the
+  photo-electric effect and collisional processes, and includes thermionic
+  emissions. The code uses the $n$-charge state model where for each bin the
+  charge distribution is resolved in exactly $n$ discrete charge states,
+  independent of the grain size. The default value for $n$ is 2, but the user
+  can choose any number between 2 and \cdVariable{NCHS}/3 = 10 using the
+  \cdCommand{set nchrg $<$n$>$} command (note that there is no ``a'' in
+  \cdCommand{nchrg}!). Choosing a higher value will usually give more accurate
+  results at the expense of computing time. Using the default $n = 2$ should
+  give sufficient accuracy for most astronomical applications. The maximum
+  value of $n$ can be increased by altering the definition of
+  \cdVariable{NCHS} in \cdFilename{grainvar.h} and recompiling the code. It is
+  however extremely unlikely that a value of $n > 10$ would ever be needed. A
+  detailed description of the $n$-charge state model can be found in
+  \citet{VanHoof2004}.
+
+  Extensive comparisons in collaboration with Joe Weingartner done in 2001
+  show that the photo-electric heating rates and collisional cooling rates
+  predicted by Cloudy agree very well with the results from the
+  \citet{Weingartner2001a} model for a wide range of grain sizes (between
+  5~\AA\ and 0.1~$\mu$m), and using various choices for the incident radiation
+  field. A detailed discussion of this comparison can be found in van
+  \citet{VanHoof2001}.
+\end{itemize}
+
+\section{Using the grain model}
+\label{grain:compile}
+In order to use the grain model, two steps need to be taken. In the first
+step, the grain opacities are calculated using the \cdCommand{compile grain}
+command. In the second step these opacities can be used with the
+\cdCommand{grains} command to create the actual photo-ionization model. The
+Cloudy distribution comes with a number of pre-compiled opacity files which
+cover a number of standard combinations of grain materials and size
+distributions. If these are sufficient for your needs, you can skip the skip
+the first step, and use these opacities directly in the \cdCommand{grains}
+command. If you wish to use different grain materials and/or size
+distributions, you will have to compile the grain opacities first with the
+\cdCommand{compile grain} command described on page \pageref{sec:CompileGrains}.
+In order to do this, you type in a single command line, e.g.:
+
+\begin{verbatim}
+compile grain "silicate.rfi"  "ism.szd" 10
+\end{verbatim}
+
+\noindent followed by an extra carriage return. The Mie code needs refractive
+index or mixed medium, and size distribution files as input. These are files
+with names ending in ``\cdFilename{.rfi}'', ``\cdFilename{.mix}'', or
+``\cdFilename{.szd}'', resp. It will generate an opacity file, ending in
+``\cdFilename{.opc}''. The command shown above will instruct the Mie
+code to calculate opacities using optical constants for astronomical silicate
+and a \citet{Mathis1977} standard ISM size distribution. The size
+distribution will be resolved in 10 bins. This will produce a file
+\cdFilename{silicate\_ism\_10.opc} which contains all the opacities. This
+opacity file is in human readable form and contains many comments to clarify
+its contents. It also contains a table of the size distribution function $a^4
+n(a)$ as a function of the grain radius $a$ for reference. The format of the
+table is such that it could be used directly to define a size distribution
+table (see section~\ref{sdtable}). Note that only a single \cdCommand{compile
+  grain} command can be given in a single Cloudy run. Note furthermore that
+the opacity file produced in the example above is already included in the
+Cloudy distribution!
+
+In the previous example a refractive index file was used to define the optical
+properties of a pure grain material (e.g., astronomical silicate or graphite).
+A second example could be:
+
+\begin{verbatim}
+compile grain "fluffy.mix"  "ism.szd" 10
+\end{verbatim}
+
+\noindent (the mixed medium file \cdFilename{fluffy.mix} is
+included in the Cloudy distribution, and the text is also shown in
+Table~\ref{mixfile}). Here the mixed medium file is used instead of a
+refractive index file to define a mixture of two or more grain materials
+(possibly including vacuum for defining fluffy grains). In this case the
+optical properties of the constituting materials are combined with a mixing
+law (also called effective medium theory or EMT) to create a set of optical
+constants that represents the mixture and can be fed into the Mie theory.
+Hence the refractive index and mixed medium files play similar roles in that
+both define a set of optical constants to be used by the Mie code. They differ
+in the fact that refractive index files are used to define pure materials,
+while mixed medium files define impure materials. As a consequence the
+internal format of both files is very different and will be described in more
+detail in Sections~\ref{rfi:descr} and \ref{mix:descr}. The opacities
+generated from both types of input files are fully compatible though and can
+be used in exactly the same way, as shown below.
+
+In the second step, you can use these opacities in a subsequent run of Cloudy
+with the \cdCommand{grains} command described in Hazy. An example could be:
+
+\begin{verbatim}
+set nchrg <n> # optional
+grains "silicate_ism_10.opc" +0.100 log # quantum heating on
+grains "fluffy_ism_10.opc" no qheat # quantum heating off
+\end{verbatim}
+
+Several \cdCommand{grains} commands may be used simultaneously to define
+mixtures of grains. One can freely mix \cdCommand{set nchrg} and
+\cdCommand{grains} commands, and different grain types may be calculated using
+a different number of charge states. The \cdCommand{set nchrg} command will
+only affect \cdCommand{grains} commands that come later in the input file. For
+ease of use, the filenames of certain refractive index, size distribution, and
+opacity files in the standard Cloudy distribution may be replaced by keywords,
+as described in Hazy.
+
+% say something about choice of nBin, convergence of spectrum and GrGH !!
+
+The refractive index, mixed medium, and size distribution files may be
+replaced by user-defined versions, giving the user considerably more freedom
+to define grain properties compared to the old grain model in Cloudy. The
+format for each of those files will be defined in Sections~\ref{rfi:descr},
+\ref{mix:descr}, and \ref{szd:descr}.
+
+\section[Description of the refractive index files]
+{Description of the refractive index files\protect\footnote{Note that the
+term ``refractive index file'' is used rather loosely here. It also pertains
+to materials for which no refractive index data in the strict sense exist,
+such as grey grains and PAH's.}}
+\label{rfi:descr}
+
+In order for the Mie code in Cloudy to work, it needs to know the optical
+properties of the grains under consideration. If the grain consists of a
+single, pure material, these have to be defined in a separate file with a name
+that must end in ``\cdFilename{.rfi}''. In this section we will describe the
+format of this file. It is helpful to compare with e.g. the
+\cdFilename{graphite.rfi} or \cdFilename{silicate.rfi} file in the standard
+distribution while reading this section. This document pertains to refractive
+index files with magic number \cdVariable{1030103}. Mixtures of grain
+materials can also be defined using mixed medium files which are described in
+Section~\ref{mix:descr}.
+
+As is the case with all files connected with the Mie code in Cloudy, the user
+has the freedom to add comments to the file provided they start with a sharp
+sign (\#). These comments may either occupy an entire line (in which case the
+sharp sign has to be in the first column), or be appended to some input value.
+Comments have been liberally added to the refractive index files that come
+with the standard Cloudy distribution in an effort to make them
+self-explanatory. All refractive index files start with a magic number for
+version control. This number should simply be copied from the files in the
+standard distribution. Next comes the chemical formula of the grain material,
+for graphite this would simply be ``\cdMono{C}''; for a certain type of
+silicate this could be ``\cdMono{Mg0.6Fe0.4SiO3}'' indicating
+Mg$_{0.6}$Fe$_{0.4}$SiO$_3$. Note that the formula is case sensitive. For
+simplicity I will call this elementary building block the grain molecule, even
+though this term is not always appropriate. The molecular weight will be
+calculated by Cloudy using the chemical formula. The next two lines in the
+refractive index file define the default abundance of the grain molecule. The
+first number gives the maximum number density $A_{\rm max}$ of the grain
+molecule (relative to hydrogen = 1) that can be formed, assuming it completely
+depletes at least one of the constituting atoms from the gas phase. Let us
+assume that the initial abundances in the gas phase (i.e., abundances {\em
+  before} grains were formed) were $A(X)$. Then , for the silicate example
+above, $A_{\rm max}$ should be min($A({\rm Mg})/0.6$, $A({\rm Fe})/0.4$,
+$A({\rm Si})$, $A({\rm O})/3$). The second number gives the fraction $A_{\rm
+  eff}$ of the maximum amount that is actually formed (i.e., the efficiency of
+the process), and should be a number between 0 and 1. The default abundance of
+the grain molecule is then given by the product of these two numbers: $A_{\rm
+  eff} A_{\rm max}$. The actual grain abundance used in the Cloudy modeling
+can be set with the \cdCommand{grains} and the \cdCommand{metals} command (see
+Hazy for details). This essentially defines an additional multiplier $A_{\rm
+  rel}$ which may be either smaller or larger than 1, and may depend on
+position $r$. The actual grain molecule abundance used in the Cloudy model is
+then given by $A_{\rm rel}(r) A_{\rm eff} A_{\rm max}$. For the silicate
+example above, the number density of iron locked up in these grains would be
+given by $0.4 A_{\rm rel}(r) A_{\rm eff} A_{\rm max}$ (relative to hydrogen =
+1), or $0.4 A_{\rm rel}(r) A_{\rm eff} A_{\rm max} n_{\rm H}(r)$ (in
+atoms/cm$^3$, $n_{\rm H}$ is the hydrogen number density as defined by the
+\cdCommand{hden} command). The next line in the refractive index file gives
+the specific density of the grain material in g/cm$^3$. The grain code needs
+to know the material type in order to determine certain grain properties that
+are currently hardwired into the code. Examples would be the grain enthalpy as
+a function of temperature and the ro-vibrational distribution of H$_2$ formed
+on the grain surface. The next line indicates which material type to use.
+Currently six choices are available. They are outlined in
+Table~\ref{mat:type}. The next two lines give the work function and the
+bandgap between the valence and conduction band in Rydberg respectively. For
+conductors the bandgap should be set to zero, for insulators such as
+silicates, a non-zero value should be used. The next line gives the efficiency
+of thermionic emissions. This parameter is usually unknown for materials of
+astrophysical interest, and using 0.5 should be a reasonably safe guess. Next
+comes the sublimation temperature in Kelvin. Then comes a line with a keyword
+which identifies what type of refractive index file is being read. It
+determines what the remainder of the file will look like. Allowed values are
+\cdVariable{rfi\_tbl}, \cdVariable{opc\_tbl}, \cdVariable{grey},
+\cdVariable{pah1}, \cdVariable{ph2n}, \cdVariable{ph2c}, \cdVariable{ph3n},
+and \cdVariable{ph3c}. In the \cdVariable{grey}, \cdVariable{pah1},
+\cdVariable{ph2n}, \cdVariable{ph2c}, \cdVariable{ph3n}, and \cdVariable{ph3c}
+cases, no further data is needed and the refractive index file ends there
+(i.e., the information needed to calculate the opacities is hardwired in the
+code).
+
+\begin{table}
+\caption[The definition of each of the material types hardwired into Cloudy.]
+{The definition of each of the material types hardwired into Cloudy.
+The code in column 1 needs to be entered in the refractive index file. Each of
+the entries in columns 3 and higher will be explained in the table indicated
+in the header of that column.}
+\vspace*{-6mm}
+\label{mat:type}
+\begin{center}
+\footnotesize
+\begin{tabular}{rllllllll}
+\hline
+code & mnemonic & Table~\ref{enthalpy} & Table~\ref{zmin} & Table~\ref{affinity} & Table~\ref{ial} & Table~\ref{pe} & Table~\ref{storage} & Table~\ref{htwo:rate} \\
+\hline
+1 & \cdVariable{MAT\_CAR}  & \cdVariable{ENTH\_CAR}  & \cdVariable{ZMIN\_CAR} & \cdVariable{POT\_CAR} & \cdVariable{IAL\_CAR} & \cdVariable{PE\_CAR} & \cdVariable{STRG\_CAR} & \cdVariable{H2\_CAR} \\
+2 & \cdVariable{MAT\_SIL}  & \cdVariable{ENTH\_SIL}  & \cdVariable{ZMIN\_SIL} & \cdVariable{POT\_SIL} & \cdVariable{IAL\_SIL} & \cdVariable{PE\_SIL} & \cdVariable{STRG\_SIL} & \cdVariable{H2\_SIL} \\
+3 & \cdVariable{MAT\_PAH}  & \cdVariable{ENTH\_PAH}  & \cdVariable{ZMIN\_CAR} & \cdVariable{POT\_CAR} & \cdVariable{IAL\_CAR} & \cdVariable{PE\_CAR} & \cdVariable{STRG\_CAR} & \cdVariable{H2\_CAR} \\
+4 & \cdVariable{MAT\_CAR2} & \cdVariable{ENTH\_CAR2} & \cdVariable{ZMIN\_CAR} & \cdVariable{POT\_CAR} & \cdVariable{IAL\_CAR} & \cdVariable{PE\_CAR} & \cdVariable{STRG\_CAR} & \cdVariable{H2\_CAR} \\
+5 & \cdVariable{MAT\_SIL2} & \cdVariable{ENTH\_SIL2} & \cdVariable{ZMIN\_SIL} & \cdVariable{POT\_SIL} & \cdVariable{IAL\_SIL} & \cdVariable{PE\_SIL} & \cdVariable{STRG\_SIL} & \cdVariable{H2\_SIL} \\
+6 & \cdVariable{MAT\_PAH2} & \cdVariable{ENTH\_PAH2} & \cdVariable{ZMIN\_CAR} & \cdVariable{POT\_CAR} & \cdVariable{IAL\_CAR} & \cdVariable{PE\_CAR} & \cdVariable{STRG\_CAR} & \cdVariable{H2\_CAR} \\
+7 & \cdVariable{MAT\_SIC}  & \cdVariable{ENTH\_SIC} & \cdVariable{ZMIN\_CAR} & \cdVariable{POT\_CAR} & \cdVariable{IAL\_CAR} & \cdVariable{PE\_CAR} & \cdVariable{STRG\_CAR} & \cdVariable{H2\_CAR} \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[p]
+\caption{The various choices for the enthalpy function hardwired in Cloudy.}
+\label{enthalpy}
+%\begin{center}
+\small
+\begin{tabular}{lll}
+\hline
+mnemonic & type & reference \\
+\hline
+\cdVariable{ENTH\_CAR}  & graphite & \citet{Guhathakurta1989}, Eq.~3.3 \\
+\cdVariable{ENTH\_SIL}  & silicate & \citet{Guhathakurta1989}, Eq.~3.4 \\
+\cdVariable{ENTH\_PAH}  & PAH & \citet{Dwek1997}, Eq.~A4 \\
+\cdVariable{ENTH\_CAR2} & graphite & \citet{Draine2001}, Eq.~9 \\
+\cdVariable{ENTH\_SIL2} & silicate & \citet{Draine2001}, Eq.~11 \\
+\cdVariable{ENTH\_PAH2} & PAH & \citet{Draine2001}, Eq.~33 \\
+\cdVariable{ENTH\_SIC}  & $\alpha$-SiC & \citet{Chekhovskoy1971} \\
+\hline
+\end{tabular}
+%\end{center}
+\end{table}
+
+\begin{table}[p]
+\caption{The various choices for the minimum charge hardwired in Cloudy.}
+\label{zmin}
+%\begin{center}
+\small
+\begin{tabular}{lll}
+\hline
+mnemonic & type & reference \\
+\hline
+\cdVariable{ZMIN\_CAR}  & graphite & \citet{Weingartner2001a}, Eq.~23a+24 \\
+\cdVariable{ZMIN\_SIL}  & silicate & \citet{Weingartner2001a}, Eq.~23b+24 \\
+\hline
+\end{tabular}
+%\end{center}
+\end{table}
+
+\begin{table}[p]
+\caption{The various expressions for the electron affinity hardwired in Cloudy.}
+\label{affinity}
+%\begin{center}
+\small
+\begin{tabular}{lll}
+\hline
+mnemonic & type & reference \\
+\hline
+\cdVariable{POT\_CAR}  & graphite & \citet{Weingartner2001a}, Eq.~4 \\
+\cdVariable{POT\_SIL}  & silicate & \citet{Weingartner2001a}, Eq.~5 \\
+\hline
+\end{tabular}
+%\end{center}
+\end{table}
+
+\begin{table}[p]
+\caption[The various choices for the inverse attenuation length.]
+{The various choices for the inverse attenuation length. Note that
+these choices will {\em only} be used if no refractive index data is contained
+in the refractive index file.}
+% \vspace{1mm}
+\label{ial}
+%\begin{center}
+\small
+\begin{tabular}{lll}
+\hline
+mnemonic & type & description \\
+\hline
+\cdVariable{IAL\_CAR}  & graphite & use \cdFilename{graphite.rfi} to calculate the inverse attenuation length \\
+\cdVariable{IAL\_SIL}  & silicate & use \cdFilename{silicate.rfi} to calculate the inverse attenuation length \\
+\hline
+\end{tabular}
+%\end{center}
+\end{table}
+
+\begin{table}[p]
+\caption{The various expressions for the photoelectric yield hardwired in Cloudy.}
+\label{pe}
+%\begin{center}
+\small
+\begin{tabular}{lll}
+\hline
+mnemonic & type & reference \\
+\hline
+\cdVariable{PE\_CAR}  & graphite & \citet{Weingartner2006}, Sect.\ 4 -- 6 \\
+                      & graphite & \citet{Weingartner2001a}, Eq.~16 (with \cdCommand{no grain x-ray treatment}) \\
+\cdVariable{PE\_SIL}  & silicate & \citet{Weingartner2006}, Sect.\ 4 -- 6 \\
+                      & silicate & \citet{Weingartner2001a}, Eq.~17 (with \cdCommand{no grain x-ray treatment}) \\
+\hline
+\end{tabular}
+%\end{center}
+\end{table}
+
+\begin{table}[p]
+\caption{The various choices for splitting up the grain emissions.}
+\label{storage}
+%\begin{center}
+\small
+\begin{tabular}{lll}
+\hline
+mnemonic & type & description \\
+\hline
+\cdVariable{STRG\_CAR}  & graphite & store emitted spectrum as graphitic emission. \\
+\cdVariable{STRG\_SIL}  & silicate & store emitted spectrum as silicate emission. \\
+\hline
+\end{tabular}
+%\end{center}
+\end{table}
+
+\begin{table}[p]
+\caption{The expressions for the ro-vibrational distribution of H$_2$ formed on various grain surfaces.}
+\label{htwo:rate}
+%\begin{center}
+\small
+\begin{tabular}{lll}
+\hline
+mnemonic & type & reference \\
+\hline
+\cdVariable{H2\_ICE}  & ice mantle & \citet{Takahashi2001b}, Table 2 \\
+\cdVariable{H2\_CAR}  & graphite   & \citet{Takahashi2001b}, Table 2 \\
+\cdVariable{H2\_SIL}  & silicate   & \citet{Takahashi2001b}, Table 2 \\
+\hline
+\end{tabular}
+%\end{center}
+\end{table}
+
+\subsection{rfi\_tbl}
+
+This format is used to define the refractive index as a function of wavelength,
+which will then be used by the Mie code to generate the opacities when combined
+with a size distribution file.
+
+The remaining lines in the refractive index file define the optical constants.
+First the user has to enter a code to define how the complex refractive index
+$n$ is written up; the following choices are supported:
+\begin{enumerate}
+\item
+-- supply Re($n^2$), Im($n^2$) (the dielectric function),
+\item
+-- supply Re($n-1$), Im($n$),
+\item
+-- supply Re($n$), Im($n$).
+\end{enumerate}
+The next line gives the number of principal axes $N_a$ for the grain crystal
+and should be a number between 1 and 3. For amorphous materials one should
+always choose 1 axis. For crystalline materials the number may be 2 or 3. Next
+comes a line with $N_a$ numbers giving the relative weights for each of the
+axes. These numbers will be used to average the opacities over each of the
+axes in crystalline materials. For materials with only one axis, this number
+is obviously redundant, and a single 1 should be entered. For graphite it is
+appropriate to enter ``1~2'' indicating that the first axis will have relative
+weight 1/3 and the second 2/3 (i.e., the relative weights are 1:2). Next come
+$N_a$ chunks of data defining the optical constants for each axis. Each chunk
+starts with a line giving the number of data points $N_d$ for that axis,
+followed by $N_d$ lines containing 3 numbers: the wavelength in $\mu$m, and
+the real and imaginary part of the complex number defined above. Note that the
+wavelengths may be either monotonically increasing or decreasing, and that the
+number of data points or the wavelength grid may be different for each axis.
+The grid of wavelengths need not coincide with the Cloudy grid, nor does it
+need to cover the entire range of energies used in Cloudy. Logarithmic
+interpolation or extrapolation will be performed where needed. {\em It is the
+users responsibility to ensure that each wavelength grid contains sufficient
+points to make this process meaningful; only minimal checks will be performed
+by Cloudy.} Note that if your refractive index data do not have sufficient
+wavelength coverage (as will usually be the case if they come from laboratory
+experiments) you cannot simply merge data from another refractive index file
+to extend the range. This is because the refractive index data need to obey
+the Kramers-Kronig relations. If you take data from two different sources,
+this will not be the case. In most cases you need to extend your data into the
+EUV and X-ray regime. The proper procedure in this case is to calculate the
+absorption opacity by adding the photoionization opacities (including
+inner-shell ionizations) for each of the atoms that make up the grain using
+data for neutral atoms. You then need to combine these data with the
+Kramers-Kronig relations to reverse engineer the refractive index data. This
+is the procedure that was used to create the refractive index files that are
+included in the Cloudy distribution.
+
+\subsection{opc\_tbl}
+
+This format can be used to directly define the opacities as a function of
+photon energy. It is mainly useful to define alternative prescriptions for
+PAH's. Note that the refractive index file created this way still needs to be
+combined with a size distribution file in the usual way with the
+\cdCommand{compile grain} command. This step will not alter the opacities
+themselves, but is necessary to compute certain quantities that are related to
+the size distribution which are not defined in the refractive index file
+itself. It is not allowed to resolve the size distribution when using an
+opacity table. If you want to define a resolved size distribution, you will
+have to supply an opacity table and corresponding size distribution file for
+each size bin separately.
+
+The remaining lines in the refractive index file define the opacities. The
+first line contains the number of data values $N_v$ supplied on each line in
+the table. Allowed values are:
+\begin{enumerate}
+\item
+-- supply $\sigma_{\rm abs}$ only (in cm$^2$/H),
+\item
+-- supply $\sigma_{\rm abs}$, $\sigma_{\rm sct} \times (1-g)$ (in cm$^2$/H),
+\item
+-- supply $\sigma_{\rm abs}$, $\sigma_{\rm sct}$ (in cm$^2$/H), and $(1-g)$
+   separately.
+\item
+-- supply $\sigma_{\rm abs}$, $\sigma_{\rm sct}$ (in cm$^2$/H), $(1-g)$,
+   and the inverse attenuation length (in cm$^{-1}$).
+\end{enumerate}
+Here $\sigma_{\rm abs}$ and $\sigma_{\rm sct}$ are the absorption and
+scattering cross sections, and $g$ is called the asymmetry factor or phase
+function. The latter is needed since the radiative transfer in Cloudy assumes
+that photons that are scattered in a forward direction (at an angle of less
+than 90$^\circ$) are not lost from the beam (i.e., they still make it out of
+the cloud). The asymmetry factor $g$ gives the average value of the cosine of
+the scattering angle, so that $(1-g)$ is an approximate correction factor for
+the anisotropy of the scattering by grains. If no scattering cross sections
+are supplied, $\sigma_{\rm sct} \times (1-g)$ will default to 10\% of the
+absorption cross section. If no asymmetry factor is supplied, $g$ will default
+to zero. If no inverse attenuation lengths are supplied, they will be derived
+from the material type supplied previously in the file. On the next line is a
+keyword with two allowed values: \cdCommand{log} or \cdCommand{linear},
+defining whether the opacity table will contain logarithmic or linear data
+values. The next line gives the number of data points $N_d$, followed by $N_d$
+lines of actual data. Each line of the table should contain $N_v+1$ numbers,
+starting with the photon energy in Rydberg, followed by the absorption cross
+section, the scattering cross section, the factor $(1-g)$, and the inverse
+attenuation length (the last three values may be omitted, depending on the
+value of $N_v$). The photon energies must either be strictly monotonically
+increasing or decreasing. The grid of photon energies need not coincide with
+the Cloudy grid, nor does it need to cover the entire range of energies.
+Logarithmic interpolation or extrapolation will be performed where needed.
+{\em It is the users responsibility to ensure that the frequency grid contains
+  sufficient points to make this process meaningful; only minimal checks will
+  be performed by Cloudy. }
+
+\section{Description of the mixed medium files}
+\label{mix:descr}
+
+In order to define the optical properties of a grain consisting of a mixture
+of materials\footnote{In this section the term material can also mean vacuum
+  so that the user can define fluffy grains by mixing one or more materials
+  with vacuum.}, a separate file with a name that must end in
+``\cdFilename{.mix}'' has to be used. In this section we will describe the format
+of this file. An example of a mixed medium file is shown in
+Table~\ref{mixfile}. This document pertains to mixed medium files with magic
+number \cdVariable{4030103}.
+
+\begin{table}
+\caption[Example of a mixed medium file for fluffy silicate.]
+{Example of a mixed medium file for fluffy silicate (\cdFilename{fluffy.mix}).}
+\label{mixfile}
+\begin{verbatim}
+# toy model of fluffy silicate; for test purposes only!
+4030103  # magic number for version control
+0.61     # default depletion
+2        # number of separate materials in grain
+#
+  50  "vacuum.rfi"
+  50  "silicate.rfi"
+#
+br35     # which EMT should be used
+\end{verbatim}
+\end{table}
+
+As is the case with all files connected with the Mie code in Cloudy, the user
+has the freedom to add comments to the file provided they start with a sharp
+sign (\#). These comments may either occupy an entire line (in which case the
+sharp sign has to be in the first column), or be appended to some input value.
+%Comments have been liberally added to the refractive index files that come
+%with the standard Cloudy distribution in an effort to make them
+%self-explanatory.
+All mixed medium files start with a magic number for version control, as shown
+in Table~\ref{mixfile}.
+%This number should simply be copied from the files in the
+%standard distribution.
+The chemical formula and the abundance at maximum depletion of the mixed
+material will be derived by Cloudy using the information supplied in the
+refractive index files of the constituting materials. However, the default
+depletion cannot be calculated and needs to be supplied by the user on the
+next line. This number is defined as a fraction of the maximum depletion, and
+should be a number between 0 and 1 (see also the discussion in
+Section~\ref{rfi:descr}). When the opacities are calculated, the code will
+print the chemical formula and the abundances (both at maximum and default
+depletion), so that the user can check whether the default abundance is
+correct. The next line gives the number $n$ of separate materials in the grain
+($n$ should be at least 2; it is allowed to specify the same material several
+times), followed by $n$ lines giving information about the materials. Each of
+these lines should give the relative fraction of the volume occupied by that
+particular material, followed by the name of the refractive index file between
+double quotes. Note that the refractive index files have to be of type
+\cdVariable{rfi\_tbl} since mixing laws need optical constants as input and
+cannot work with opacities. The normalization of the relative volumes can be
+on an arbitrary scale. The last line in the file should be a keyword
+identifying which mixing law is to be used. Allowed values are listed in
+Table~\ref{mixid}. In the case of \citet{Farafonov2000}, the mixing law
+assumes that the grain consists of concentric layers of material. It is
+assumed that the first material supplied in the mixed medium file identifies
+the innermost layer, and the following lines identify the subsequent layers
+towards the outer edge of the grain. The outermost layer will determine the
+material type as defined in Table~\ref{mat:type}. None of the layers are
+allowed to be crystalline, i.e., have more than one principal axis, and the
+outermost layer is also not allowed to be vacuum. In the case of
+\citet{Bruggeman1935} and \citet{Stognienko1995}, the grain is assumed to be a
+random (possibly fractal) mixture of materials and the sequence in the mixed
+medium file is irrelevant, except that the material type of the mixture is
+still defined by the last entry in the list of materials. For this reason it
+is not allowed to have vacuum as the last entry. In the case of
+\citet{MaxwellGarnett04} the grain is assumed to consist predominantly of a
+matrix which is defined by the first entry in the mixed medium file, which
+encapsulates small, random inclusions which are defined by the remaining
+entries. The material type, as well as many other properties of the grain will
+be determined by the matrix material, i.e., the first entry in the file. The
+matrix material is not allowed to be vacuum or a crystalline material, but the
+inclusions can be.
+
+\begin{table}
+\caption{Allowed choices for the mixing law.}
+\label{mixid}
+\begin{tabular}{ll}
+\hline
+mnemonic & reference \\
+\hline
+\cdVariable{BR35} & \citet{Bruggeman1935} \\
+\cdVariable{FA00} & \citet{Voshchinnikov1999} \\
+                  & \citet{Farafonov2000} \\
+\cdVariable{MG04} & \citet{MaxwellGarnett04} \\
+\cdVariable{ST95} & \citet{Stognienko1995} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Description of the size distribution files}
+\label{szd:descr}
+
+In order for the Mie code in Cloudy to work, it needs to know the size
+distribution of the grains under consideration. This distribution has to be
+defined in a separate file with a name that must end in ``\cdFilename{.szd}''.
+In this section I will describe the format of this file. This document
+pertains to size distribution files with magic number \cdVariable{2010403}.
+
+If we denote the number of grains $n_{\rm g} d a$ with radii between $a$ and
+$a + d a$ as $n_{\rm g} d a = n(a)d a$, the purpose of the size distribution
+file is to define $n(a)$, or alternatively $a^4 n(a)$ which is more commonly
+used.
+
+As is the case with all files connected with the Mie code in Cloudy, the user
+has the freedom to add comments to the file provided they start with a sharp
+sign (\#). These comments may either occupy an entire line (in which case the
+sharp sign has to be in the first column), or be appended to some input value.
+Comments have been liberally added to the size distribution files that come
+with the standard Cloudy distribution in an effort to make them
+self-explanatory. All size distribution files start with a magic number for
+version control. This number should simply be copied from the files in the
+standard distribution. The next line should contain a keyword indicating which
+type of size distribution will be entered. The following choices are currently
+supported: \cdVariable{ssize} - a single sized grain, \cdVariable{ncarb} - a
+PAH molecule with a specified number of carbon atoms, \cdVariable{power} - a
+simple power law, \cdVariable{exp1}, \cdVariable{exp2}, \cdVariable{exp3} -
+power laws with an exponential cutoff, \cdVariable{normal},
+\cdVariable{lognormal} - a Gaussian distribution in $a$ or $\ln(a)$,
+\cdVariable{table} - an arbitrary size distribution supplied as a table. This
+keyword is case insensitive. The rest of the file contains the parameters
+needed to fully define each of those choices. I will now describe these
+choices in more detail. It should be noted that at this stage the absolute
+normalization of the size distribution is irrelevant; that will be defined in
+the refractive index file by the default grain abundance. Each parameter
+mentioned below should be entered on a separate line, unless indicated
+otherwise. All size parameters should be entered in $\mu$m.
+
+\subsection{ssize}
+
+In this case the size distribution is given by a simple delta function:
+\[ n(a) \propto \delta(a - a_0) \]
+The only parameter that needs to be supplied is the radius of the grain
+$a_0$.
+
+\subsection{ncarb}
+
+This case also describes a single-sized grain, but this time the number
+of carbon atoms is the only parameter that is supplied. This is convenient
+for defining a PAH molecule of a specific size. This size distribution is
+obviously only meaningful when combined with carbonaceous material.
+
+\subsection{power}
+In this case the size distribution is given by a simple power law:
+\[ n(a) \propto a^\alpha \hspace{2mm} a_0 \leq a \leq a_1 \]
+Hence this distribution needs three parameters, which need to be supplied
+in the order $a_0$, $a_1$, $\alpha$.
+
+\subsection{exp1, exp2, exp3}
+In this case the size distribution is given by a power law with a first-,
+second-, or third-order exponential cutoff:
+\[ n(a) \propto a^\alpha F(a;\beta) C_l(a;a_l,\sigma_l) C_u(a;a_u,\sigma_u)
+\hspace{2mm} a_0 \leq a \leq a_1. \] The function $F$ is included to give
+extra curvature in the power-law region, the functions $C_l$ and $C_u$ define
+the cutoff of the distribution below $a_l$ and above $a_u$. These functions
+are defined as follows:
+\[ F(a;\beta) = \left\{
+	\begin{array}{l@{\hspace*{4mm}}l}
+	    (1 - \beta a)^{-1} & \mbox{if } \beta < 0 \\
+	     1 & \mbox{if } \beta = 0 \\
+	    (1 + \beta a)      & \mbox{if } \beta > 0
+        \end{array}
+    \right.
+\]
+\[ C_l(a;a_l,\sigma_l) = \left\{
+        \begin{array}{l@{\hspace*{4mm}}l}
+	    \exp \left[ - \left( \frac{a_l - a}{\sigma_l} \right)^n \right] & \mbox{if } a < a_l \\
+	    1 & \mbox{if } a \geq a_l
+        \end{array}
+     \right.
+\]
+\[ C_u(a;a_u,\sigma_u) = \left\{
+        \begin{array}{l@{\hspace*{4mm}}l}
+	    1 & \mbox{if } a \leq a_u \\
+	    \exp \left[ - \left( \frac{a - a_u}{\sigma_u} \right)^n \right] & \mbox{if } a > a_u
+        \end{array}
+     \right.
+\]
+The values of $\sigma_l$ or $\sigma_u$ may be set to zero, in which case a
+straight cutoff in the size distribution will be used. Note that when $\beta$,
+$\sigma_l$, and $\sigma_u$ are all set to zero, this size distribution
+degenerates to the simple power law discussed above. The parameters need to be
+supplied in the following order: $a_l$, $a_u$, $\alpha$, $\beta$, $\sigma_l$,
+$\sigma_u$, $a_0$, $a_1$. The value of $n$ is determined by the keyword used:
+$n=1$ for \cdVariable{exp1}, etc. The parameter $\beta$ should be entered
+in $\mu$m$^{-1}$. Note that this size distribution extends
+infinitely beyond $a_l$ and $a_u$, so additional cutoffs at $a_0$ and $a_1$
+are needed. Either of these values may be set to zero, in which case Cloudy
+will calculate a safe default value such that only a negligible amount of mass
+is contained in the tail beyond that limit.
+\subsection{normal}
+In this case the size distribution is given by a Gaussian distribution in $a$:
+\[ n(a) \propto \frac{1}{a} \exp \left( -\frac{1}{2} \left[ \frac{a -
+      a_c}{\sigma} \right]^2 \right) \hspace{2mm} a_0 \leq a \leq a_1 \] The
+parameters for this distribution need to be supplied in the order: $a_c$,
+$\sigma$, $a_0$, $a_1$. As was discussed in the previous section, the values
+of $a_0$ or $a_1$ may be set to zero in which case Cloudy will calculate a
+safe default.
+\subsection{lognormal}
+This case is completely analogous to the \cdVariable{normal} case discussed
+above, except that the distribution is now given by:
+\[ n(a) \propto \frac{1}{a} \exp \left( -\frac{1}{2} \left[
+    \frac{\ln\{a/a_c\}}{\sigma} \right]^2 \right) \hspace{2mm} a_0 \leq a \leq
+a_1 \]
+\subsection{table}
+\label{sdtable}
+This option allows the user to define an arbitrary size distribution in the
+form of a table of $a^4 n(a)$ as a function of $a$. First values for the lower
+and upper size limit $a_0$ and $a_1$ should be supplied. These values need not
+coincide with the lower and upper size limit of the table, although the range
+of the table should be at least that large (no extrapolation will be
+performed). Next the number of data pairs $n$ in the table should be supplied,
+followed by $n$ lines each containing two numbers: $a$ (in $\mu$m) and $a^4
+n(a)$ (in arbitrary units). Note that the values for $a$ in the table must be
+strictly monotonically increasing.

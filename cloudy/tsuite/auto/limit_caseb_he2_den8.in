@@ -1,0 +1,128 @@
+title limit_caseb_he2_den8 He II case B
+#
+# commands controlling continuum =========
+table agn 
+ionization parameter 0
+#
+# commands for density & abundances =========
+hden = 8
+element helium abundance 1
+init file="ism.ini"
+#
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+database h-like element helium levels resolved 30 
+case b hummer no photoionization no Pdest 
+no induced processes (OK)
+constant temperature = 5e4 K
+#
+# commands controlling output    =========
+## >>chng 20 aug 22, wl from 1640.43 to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, up 1-e energies to np
+normalize to "He 2" 1640.41A ## the balmer alpha transition
+save overview "limit_caseb_he2_den8.ovr"
+save performance "limit_caseb_he2_den8.per"
+save results "limit_caseb_he2_den8.rlt"
+save monitors "limit_caseb_he2_den8.asr"
+#
+monitor Case B H-like helium error 0.1 range 1000 40000A faint -2
+#
+# commands giving the monitors    =========
+## >>chng 15 dec 15, change to testing "Ca B" 1640A (was "He 2" 1640A).
+## >>chng 20 aug 22, wl from 1640.43A to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, up 1-e energies to np
+monitor line "Ca B"  1640.41A  1.0000 
+## >>chng 13 jul 24, wl from 1215A to 1215.23A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1215.23A to 1215.13A, up Rydberg constant
+## >>chng 20 aug 22, wl from 1215.13A to 1215.12A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1215.12A to 1215.13A, up 1-e energies to np
+monitor line "He 2"  1215.13A  0.3667
+## >>chng 13 jul 24, wl from 1085A to 1085.03A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1085.03A to 1084.94A, up Rydberg constant
+## >>chng 20 aug 22, wl from 1084.94A to 1084.93A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1084.93A to 1084.94A, up 1-e energies to np
+monitor line "He 2"  1084.94A  0.1771 
+## >>chng 13 jul 24, wl from 1025A to 1025.35A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 22, from 0.1013 to 0.1069, collapsed branch merge r8609
+## >>chng 17 may 25, wl from 1025.35A to 1025.27A, up Rydberg constant
+monitor line "He 2"  1025.27A  0.1069 
+## >>chng 13 jul 24, wl from 4686A to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+monitor line "He 2"  4685.68A  0.1053 
+## >>chng 13 jul 24, wl from 3203A to 3203.30A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3203.30A to 3203.04A, up Rydberg constant
+## >>chng 20 aug 22, wl from 3203.04A to 3203.10A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 3203.10A to 3203.08A, up 1-e energies to np
+monitor line "He 2"  3203.08A  0.0544 
+## >>chng 13 jul 24, wl from 2733A to 2733.46A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 2733.46A to 2733.24A, up Rydberg constant
+## >>chng 20 aug 22, wl from 2733.24A to 2733.30A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2733.30A to 2733.28A, up 1-e energies to np
+monitor line "He 2"  2733.28A  0.0314 
+## >>chng 13 jul 24, wl from 2511A to 2511.36A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 22, from 0.02 to 0.0214, collapsed branch merge r8609
+## >>chng 16 aug 07, from 0.0214 to 0.0202, Fran bug fix
+## >>chng 17 may 25, wl from 2511.36A to 2511.15A, up Rydberg constant
+## >>chng 20 aug 22, wl from 2511.15A to 2511.21A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2511.21A to 2511.19A, up 1-e energies to np
+monitor line "He 2"  2511.19A  0.0202 
+## >>chng 13 jul 24, wl from 1.012m to 1.01242m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.01242m to 1.01233m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.01233m to 1.01236m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.01236m to 1.01235m, up 1-e energies to np
+monitor line "He 2" 1.01235m  0.0231 
+## >>chng 13 jul 24, wl from 6560A to 6560.44A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 6560.44A to 6559.91A, up Rydberg constant
+## >>chng 20 aug 22, wl from 6559.91A to 6560.09A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 6560.09A to 6560.01A, up 1-e energies to np
+monitor line "He 2"  6560.01A  0.0140 
+## >>chng 13 jul 24, wl from 5412A to 5411.80A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 22, from 0.0089 to 0.0094, collapsed branch merge r8609
+## >>chng 16 aug 07, from 0.0094 to 0.0087, Fran bug fix
+## >>chng 17 may 25, wl from 5411.80A to 5411.37A, up Rydberg constant
+## >>chng 20 aug 22, wl from 5411.37A to 5411.52A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 5411.52A to 5411.45A, up 1-e energies to np
+monitor line "He 2"  5411.45A  0.0087 
+## >>chng 13 jul 24, wl from 4860A to 4859.57A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 22, from 0.0061 to 0.0066, collapsed branch merge r8609
+## >>chng 16 aug 07, from 0.0066 to 0.006, Fran bug fix
+## >>chng 17 may 25, wl from 4859.57A to 4859.18A, up Rydberg constant
+## >>chng 20 aug 22, wl from 4859.18A to 4859.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4859.32A to 4859.26A, up 1-e energies to np
+monitor line "He 2"  4859.26A  0.006
+## >>chng 13 jul 24, wl from 1.864m to 1.86377m, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.007 to 0.0066, Fran bug fix
+## >>chng 17 may 28, 1.86377m to  1.86362m, update Rydberg constant
+## >>chng 20 aug 22, wl from 1.86362m to 1.86367m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.86367m to 1.86365m, up 1-e energies to np
+monitor line "He 2" 1.86365m  0.0066 
+## >>chng 13 jul 24, wl from 1.163m to 1.16270m, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.0047 to 0.0045, Fran bug fix
+## >>chng 17 may 25, wl from 1.16270m to 1.16260m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.16260m to 1.16264m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 13, wl from 1.16264m to 1.16262m
+monitor line "He 2" 1.16262m  Elow=421353.2  0.0045 
+## >>chng 13 jul 24, wl from 9345A to 9345.37A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 9345.37A to 9344.62A, up Rydberg constant
+## >>chng 20 aug 22, wl from 9344.62A to 9344.93A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9344.93A to 9344.80A, up 1-e energies to np
+monitor line "He 2"  9344.80A  0.0032 0.1
+## 
+# limit_caseb_he2_den8.in
+# class limit 
+# ========================================
+# 
+
+This test case compares the predictions of the multi-level hydrogen atom
+with the Storey and Hummer (1995) results.  The set dr command sets the
+zone thickness to 1 cm.  The case b command sets Lyman line optical depths
+to very large values. 
+Checks:
+-	Neutral fractions
+-	H* emissivity
+-	Relative line intensities
+

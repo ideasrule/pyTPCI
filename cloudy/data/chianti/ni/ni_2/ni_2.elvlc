@@ -1,0 +1,32 @@
+  1 3p6.3d9               2  2 D  2.5  6          0.000       0.000000          0.000       0.000000 
+  2 3p6.3d8(3F).4s        4  3 F  4.5 10       8393.900       0.076491       8393.900       0.076491 
+  3 3p6.3d9               2  2 D  1.5  4       1506.940       0.013732       1506.940       0.013732 
+  4 3p6.3d8(3F).4s        4  3 F  3.5  8       9330.040       0.085022       9330.040       0.085022 
+  5 3p6.3d8(3F).4s        4  3 F  2.5  6      10115.660       0.092181      10115.660       0.092181 
+  6 3p6.3d8(3F).4s        4  3 F  1.5  4      10663.890       0.097177      10663.890       0.097177 
+  7 3p6.3d8(3F).4s        2  3 F  3.5  8      13550.390       0.123480      13550.390       0.123480 
+  8 3p6.3d8(3F).4s        2  3 F  2.5  6      14995.570       0.136650      14995.570       0.136650 
+  9 3p6.3d8(3P).4s        4  1 P  2.5  6      23108.279       0.210578      23108.279       0.210578 
+ 10 3p6.3d8(1D).4s        2  2 D  1.5  4      23796.180       0.216847      23796.180       0.216847 
+ 11 3p6.3d8(3P).4s        4  1 P  0.5  2      24835.930       0.226322      24835.930       0.226322 
+ 12 3p6.3d8(3P).4s        4  1 P  1.5  4      24788.200       0.225887      24788.200       0.225887 
+ 13 3p6.3d8(1D).4s        2  2 D  2.5  6      25036.380       0.228148      25036.380       0.228148 
+ 14 3p6.3d8(3P).4s        2  1 P  1.5  4      29070.930       0.264914      29070.930       0.264914 
+ 15 3p6.3d8(3P).4s        2  1 P  0.5  2      29593.460       0.269675      29593.460       0.269675 
+ 16 3p6.3d8(1G).4s        2  4 G  4.5 10      32499.530       0.296158      32499.530       0.296158 
+ 17 3p6.3d8(1G).4s        2  4 G  3.5  8      32523.540       0.296376      32523.540       0.296376 
+ -1
+%filename:  ni_2.elvlc
+%Observed energies: Ver. 3 of the NIST Atomic Database
+%Theoretical energies: none provided by Bautista (2004) so observed energies used.
+%Comment: The energies given to levels 11 and 12 by Bautista are reversed compared
+   to those in NIST. The NIST values are used here.
+   Bautista did not give the parent terms for the Ni II levels. These
+   have been derived from the energy level compilation at NIST.
+% produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+%   P.R. Young, Feb-2009
+
+Reference:
+Chianti  2022-02-18
+ -1

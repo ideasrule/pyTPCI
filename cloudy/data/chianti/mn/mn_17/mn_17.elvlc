@@ -1,0 +1,14 @@
+  1 2s2.2p5               2  1 P  1.5  4          0.000       0.000000          0.000       0.000000 
+  2 2s2.2p5               2  1 P  0.5  2      85634.000       0.780354      84229.000       0.767551 
+  3 2s.2p6                2  0 S  0.5  2    1000001.000       9.112680    1000050.000       9.113126 
+ -1
+%filename: mn_17.elvlc
+%observed energy levels: Edlen, B., 1983, Phys.Scr., 28, 51
+%theoretical energy levels: Bhatia, A.K., 1982, J.Appl.Phys., 53, 59
+% Produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+% Enrico Landi 1999
+
+Reference:
+Chianti  2022-02-18
+ -1

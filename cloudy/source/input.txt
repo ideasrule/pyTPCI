@@ -1,0 +1,26 @@
+most is in input.h / input.cpp
+the number of input lines is unlimited since stored in a vector
+
+maximum line length is
+INPUT_LINE_LENGTH is set to 2000 in cddefines.h
+
+cdRead routine to read in command lines and enter into command stack 
+ called by user when cloudy used as subroutine 
+ called by cdMain and ParseInit when used as standalone program
+
+certain characters define comments that can start at the beginning of a line
+or after a command, and that run until the end of the line
+the logic for this is in the routine lgIsCommentSeq
+
+empty lines or a field of stars define the end of the input
+anything after such a sentinel is ignored
+the logic for this is in the routine lgInputEOF
+
+before an input line is stored, invisible comments (i.e. comments that are
+not echoed to output) are stripped, as well as the end-of-line character
+furthermore, underscores and square brackets are replaced by spaces
+this is done by the routine StripComment
+
+input.readarray is used to expose the next input line to the parser
+
+any further processing of the input line is done by the parser

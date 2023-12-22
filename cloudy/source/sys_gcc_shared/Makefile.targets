@@ -1,0 +1,29 @@
+DEFAULT = cloudy_shared.exe data
+
+cloudy_shared.exe: ${preobjects} maincl.o libcloudy.so
+	${CXX} ${LDFLAGS} -o cloudy_shared.exe maincl.o -L. -lcloudy ${LDLIBS} 
+	
+libcloudy.so: ${libobjects}
+	g++ -shared ${CXXFLAGS} -o $@ $^
+
+cloudy.so: libcloudy.so cloudy_lua.o
+	g++ -shared ${CXXFLAGS} -o $@ cloudy_lua.o -L. -lcloudy -llua
+cloudy_lua.o: cloudy_lua.cpp ../cddefines.h ../cddrive.h
+	g++ -I.. -c ${CXXFLAGS} -o $@ $<
+test_lua: cloudy.so
+	lua test.lua
+.PHONY: test_lua
+
+cloudy_python.c: cloudy.i
+	swig -c++ -o cloudy_python.c -python $^
+cloudy_python.o: cloudy_python.c
+	${CXX} ${CXXFLAGS} -c $< -I/usr/include/python2.4 -I..
+_cloudy.so: ${libobjects} cloudy_python.o
+	g++ -shared ${CXXFLAGS} -o $@ $^ ${LDLIBS} 
+
+cloudy_perl.c: cloudy.i
+	swig -c++ -module Cloudy -o cloudy_perl.c -perl $^
+cloudy_perl.o: cloudy_perl.c
+	${CXX} ${CXXFLAGS} -c $< `perl -MExtUtils::Embed -e ccopts` -I..
+Cloudy.so: ${libobjects} cloudy_perl.o
+	g++ -shared -o $@ $^ ${LDLIBS} 

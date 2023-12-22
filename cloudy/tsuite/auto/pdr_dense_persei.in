@@ -1,0 +1,202 @@
+title dense phase zeta persei cloud
+#
+# density and abundances ==========
+# density of dense phase from Table 2 of Le Petit paper ========
+hden 4.3
+# 
+# abundandces from Table 1 of Le Petit paper ==========
+element carbon abundance 0.000132 linear
+element helium abundance 0.10 linear
+element oxygen abundance 0.00032 linear
+element nitrogen abundance 0.000075 linear
+element sulphur abundance 0.0000186 linear
+element silicon abundance 0.000029 linear
+# set abundance of all other elements to zero ====================
+element copper off
+element magnesium off
+element manganese off
+element sodium off
+element chlorine off
+element vanadium off
+element potassium off
+element phosphorous off
+element calcium off
+element iron off
+element zinc off
+element neon off
+element argon off
+element fluorine off
+element aluminum off
+element boron off
+element lithium off
+element beryllium off
+element scandium off
+element nickel off
+element titanium off
+element chromium off
+element cobalt off
+# do not use Federman rates for this model ==============
+set federman chemistry off
+# use standard ism grain size distribution ============
+grains ism 
+# 
+# command controlling the continuum, for this model is Draine 1978 field ====
+table draine 0.5 linear
+# make sure no H-ioinizing radiation strikes the cloud
+extinguish 24 
+# 
+# fix the temperature to 20 K =============
+constant temperature 20
+# stop at a radius of 4.3e-4 parsecs ============ 
+stop thickness 0.00043 parsecs linear
+# Le Petit model does not consider ices, so turn this off ============
+no grain molecules
+# turn on cosmic rays =========
+cosmic rays background
+# Set cosmic ray ionization rate to Table 2 of Le Petit paper ========
+set csupra -15.6
+# Allow calculation to go extend into cold environment ============
+stop temperature linear 3
+# 
+# commands controlling output ============
+save performance "pdr_dense_persei.per"
+save overview "pdr_dense_persei.ovr"
+save dr "pdr_dense_persei.dr"
+save molecules "pdr_dense_persei.mol"
+save heating "pdr_dense_persei.het"
+save cooling "pdr_dense_persei.col"
+save monitors "pdr_dense_persei.asr"
+# 
+# commands giving the monitors ==========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 21 sep 11, from 12.91 to 12.41, LAMDA update
+## >>chng 23 may 15, from 12.41 to 11.8, GS updates 21 reactions to UMIST 2012
+monitor C2 column density 11.8 error 0.2 
+## >>chng 21 sep 11, from 11.87 to 11.23, LAMDA update
+monitor C3 column density 11.23 error 0.2
+monitor "H" temperature 20K
+## 
+## >>chng 06 mar 02, from 13.30 to 13.46, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 23 may 15, from 13.46 to 13.63, GS updates 21 reactions to UMIST 2012
+monitor CO column density 13.63 error 0.2
+## 
+## >>chng 08 dec 08, from 300 to 226, upper limit -> equals (r2515)
+## >>chng 09 jun 15, from 226 to 244, gradual approach to outer edge
+## >>chng 11 nov 16, from 244 to 211, adjust newmole monitors
+## >>chng 21 sep 11, from 211 to 165, LAMDA update
+monitor nzone 165 error 0.01
+##
+## >>chng 08 dec 08, from 10 to 3.898, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 3.898 to 5.628, merging newsolvers branch
+## >>chng 09 jan 16, from 5.628 to 5.645, average of 10 runs
+## >>chng 09 feb 24, from 5.645 to 5.54, botches due to r2763
+## >>chng 09 jun 15, from 5.54 to 5.406, gradual approach to outer edge
+## >>chng 09 jun 26, from 5.406 to 5.107, remove several dampers
+## >>chng 11 nov 16, from 5.107 to 4.507, adjust newmole monitors
+## >>chng 12 mar 07, from 4.507 to 4.619, renorm to r5961 results
+## >>chng 12 jul 01, from 4.619 to 4.479, update Badnell DR to 13-electron iso sequence
+## >>chng 13 nov 05, from 4.479 to 2.948, convergence branch changes
+## >>chng 21 sep 11, from 2.948 to 2.345, LAMDA update
+monitor itrzn 2.345
+##
+## >>chng 13 jun 27, from -8.869 to -10.98, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -10.98 to -10.94, update LAMDA to 2015
+## >>chng 20 aug 03, from -10.94 to -10.67, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from -10.67 to -10.58, further update to McCall CR-related rate
+monitor "H2O " 538.142m line intensity -10.58
+## >>chng 13 jun 27, from -7.357 to -10.03, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -10.03 to -10.68, LAMDA update
+monitor "HNC " 1652.90m  line intensity -10.68
+## >>chng 13 jun 27, from -8.563 to -10.86, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -10.86 to -10.91, LAMDA update
+## >>chng 21 nov 04, from -10.91 to -10.86, update mole co data
+## >>chng 23 may 15, from -10.86 to -10.99, GS updates 21 reactions to UMIST 2012
+monitor "HCS+" 1755.88m  -10.99 line intensity
+## >>chng 13 jun 27, from -7.453 to -8.632, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -8.632 to -8.659, update LAMDA to 2015
+## >>chng 23 may 15, from -8.659 to -8.764, GS updates 21 reactions to UMIST 2012
+monitor "CS  " 3058.86m  -8.764 line intensity
+## >>chng 13 jun 27, from -7.288 to -9.192, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -9.192 to -9.272, LAMDA update
+## >>chng 21 nov 04, from -9.272 to -9.225, update mole co data
+## >>chng 23 may 15, from -9.225 to -9.023, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 2600.05m  -9.023 line intensity
+## >>chng 13 jun 27, from -6.463 to -8.039, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -8.039 to -8.118, LAMDA update
+## >>chng 21 nov 04, from -8.118 to -8.072, update mole co data
+## >>chng 23 may 15, from -8.072 to -7.873, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 1300.05m  -7.873 line intensity
+## >>chng 13 jun 27, from -6.149 to -7.779, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -7.779 to -7.859, LAMDA update
+## >>chng 21 nov 04, from -7.859 to -7.812, update mole co data
+## >>chng 23 may 15, from -7.812 to -7.611, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 866.727m  -7.611 line intensity
+## >>chng 13 jun 27, from -6.177 to -8.014, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -8.014 to -8.095, LAMDA update
+## >>chng 21 nov 04, from -8.095 to -8.048, update mole co data
+## >>chng 23 may 15, from -8.048 to -7.844, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 650.074m  -7.844 line intensity
+## >>chng 13 jun 27, from -6.485 to -8.576, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -8.576 to -8.659, LAMDA update
+## >>chng 21 nov 04, from -8.659 to -8.611, update mole co data
+## >>chng 23 may 15, from -8.611 to -8.407, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 520.089m  -8.407 line intensity
+## >>chng 13 jun 27, from -6.954 to -9.371, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -9.371 to -9.455, LAMDA update
+## >>chng 21 nov 04, from -9.455 to -9.407, update mole co data
+## >>chng 23 may 15, from -9.407 to -9.204, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 433.438m  -9.204 line intensity
+## >>chng 13 jun 27, from -7.48 to -10.34, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -10.34 to -10.42, LAMDA update
+## >>chng 21 nov 04, from -10.42 to -10.37, update mole co data
+## >>chng 23 may 15, from -10.37 to -10.17, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 371.549m  -10.17 line intensity
+## >>chng 13 jun 27, from -8.049 to -11.45, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -11.45 to -11.53, LAMDA update
+## >>chng 21 nov 04, from -11.53 to -11.48, update mole co data
+## >>chng 23 may 15, from -11.48 to -11.28, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 325.137m  -11.28 line intensity
+## >>chng 13 jun 27, from -7.522 to -9.277, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -9.277 to -9.358, LAMDA update
+## >>chng 21 nov 04, from -9.358 to -9.31, update mole co data
+## >>chng 23 may 15, from -9.31 to -9.107, GS updates 21 reactions to UMIST 2012
+monitor "^13CO" 906.599m  -9.107 line intensity
+## >>chng 13 jun 27, from -8.247 to -10.4, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -10.4 to -10.72, LAMDA update
+## >>chng 21 sep 15, from -10.72 to -9.895, go back to unresolved model
+## >>chng 21 nov 04, from -9.895 to -9.842, update mole co data
+## >>chng 23 may 15, from -9.842 to -9.944, GS updates 21 reactions to UMIST 2012
+monitor "CN  " 880.858m  -9.944  line intensity
+##
+# pdr_dense_persei.in
+# class pdr
+# ====================================
+
+This is the dense phase model presented by LePetit, Roueff, and Herbst 
+in order to reproduce C2 and C3 column densities observed along the line
+of sight to zera persei.  This is our attempt at reproducing their calculation.
+This is the dense molecular phase, not the phase that produces H3+ 
+
+# >>refer	model	pdr	Le Petit, F., Roueff, E., & Herbst, E. 2004,
+# >>refercon	A&A, 417, 993
+
+If you do a thermal equilibrium calculation by removing the constant temperature
+command the kinetic temperature will be about three times larger than
+assumed in their paper.

@@ -1,0 +1,186 @@
+title spherical conservation and hydrogenic emission for pure hydrogen
+#
+# commands controlling continuum =========
+ionization -2
+blackbody 40000
+#
+# commands for density & abundances =========
+hden 5
+init file "honly.ini"  
+#
+# commands controlling geometry  =========
+radius 13
+# not iterating does not affect the solution
+sphere static (OK)
+stop efrac 0.05 ##stop when 5 percent ionized
+#
+# other commands for details     =========
+constant temper 7500
+no level2
+database h-like levels resolved 20 
+no induced processes (OK) 
+diffuse outward
+#
+# commands controlling output    =========
+save performance "h_outsp.per"
+save overview "h_outsp.ovr" 
+save monitors "h_outsp.asr" 
+save dr "h_outsp.dr" 
+#
+# commands giving the monitors    =========
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, change to testing "Ca B" 4861.36A (was "H  1" 4861.36A).
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A = 1. ## should be within 1 percent of precise
+## 
+## >>chng 08 apr 19, incr error from 0.02 to def of 0.05 since nl atom
+## less accurate
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A = 1 ##make sure we conserve energy 
+##
+## >>chng 07 oct 22, from 2.884 to 2.836, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "H  1" 6562.80A = 2.836 
+##
+## >>chng 07 oct 22, from 0.3512 to 0.3307, resolve l-levels of h-like sequence
+## >>chng 08 mar 20, from 0.3307 to 0.3247 value drifted but did not throw assert
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 16 may 13, from 0.3247 to 0.3566, "PS64 only dipole l-changing calculations"
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+## >>chng 17 sep 09, from 0.3566 to 0.339, fix bug in high n collisional excitation rates for H-like iso-sequences
+monitor line "H  1" 1.87510m = 0.339 ##Paschen alpha
+##
+## >>chng 07 oct 22, from 0.1693 to 0.1639, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 1.282m to 1.28181m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.28181m to 1.28180m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.28180m to 1.28181m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.28181m = 0.1639 ##Paschen beta
+## 
+## >>chng 06 feb 03, from 0.0835 to 0.0850, guess dr to Badnell mean
+## >>chng 07 mar 13, from 0.0850 to 0.0869, change in lines_service to fix cache errors
+## >>chng 07 oct 22, from 0.0869 to 0.0764, resolve l-levels of h-like sequence
+## >>chng 07 nov 17, from 0.0764 to 0.0740, changes in r1512
+## >>chng 13 jul 25, wl from 4.051m to 4.05113m, increased wl precision to 6 sig. fig.
+## >>chng 16 may 13, from 0.074 to 0.0859, "PS64 only dipole l-changing calculations"
+## >>chng 16 aug 07, from 0.0859 to 0.0816, Marios bug fixes
+## >>chng 17 may 25, wl from 4.05113m to 4.05113m, up Rydberg constant
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "H  1" 4.05115m = 0.0816 ##Bracket alpha
+## 
+## >>chng 07 mar 13, from 0.0477 to 0.0488, change in lines_service to fix cache errors
+## >>chng 07 oct 22, from 0.0488 to 0.0449, resolve l-levels of h-like sequence
+## >>chng 08 apr 07, from 0.0449 to 0.0436, a number of mostly minor iso changes
+## >>chng 13 jul 25, wl from 2.625m to 2.62515m, increased wl precision to 6 sig. fig.
+## >>chng 16 may 13, from 0.0436 to 0.0482, "PS64 only dipole l-changing calculations"
+## >>chng 17 may 25, wl from 2.62515m to 2.62513m, up Rydberg constant
+## >>chng 20 aug 22, wl from 2.62513m to 2.62515m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.62515m to 2.62514m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.62514m to 2.62515m, revert to PvH energies for H
+monitor line "H  1" 2.62515m = 0.0482 ##Bracket beta
+## 
+monitor line "BaC " 3646 = 18.26 ##Balmer continuum rel to h-beta
+# energies dominated by two photon emission not included since very
+# sensitive to Lya transport
+## >>chng 02 may 27, from 0.582 to 0.631, improved gaunt factors
+## >>chng 06 nov 29, from 0.631 to 0.603, use Badnell DR by default
+## >>chng 13 jul 25, wl from 2.324m to 2.32440m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 2.32440m  0.603
+## 
+## >>chng 08 apr 19, incr error from 0.05 to 0.1, fewer levels less emission
+## >>chng 02 may 27, from 0.795 to 0.849, improved gaunt factors
+## >>chng 13 jul 25, wl from 1.643m to 1.64313m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 1.64313m  0.849 error 0.1
+## 
+## >>chng 00 sep 18 continuum energy grid changed
+## >>chng 02 may 27, from 0.816 to 0.835, improved gaunt factors
+## >>chng 07 dec 14, from 0.835 to 0.795 RP update is seq
+## >>chng 13 jul 25, wl from 1.480m to 1.48022m, increased wl precision to 6 sig. fig.
+## >>chng 17 sep 09, from 0.795 to 0.8367, fix bug in high n collisional excitation rates for H-like iso-sequences
+monitor line "nFnu" 1.48022m  0.8367
+## 
+## >>chng 00 sep 18 continuum energy grid changed
+## >>chng 02 may 27, from 1.429 to 1.444, improved gaunt factors
+## >>chng 13 jul 25, wl from 1.436m to 1.43649m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 1.43649m   1.444
+## 
+## >>chng 02 may 27, from 1.243 to 1.310 improved gaunt factors
+## >>chng 13 jul 25, wl from 1.119m to 1.11867m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 1.11867m   1.310
+##
+## >>chng 00 sep 18 continuum energy grid changed
+## >>chng 07 dec 06, from 1.045 to 0.970, changes in h-like collisions
+## >>chng 13 jul 25, wl from 8330 to 8329.68A, increased wl precision to 6 sig. fig.
+## >>chng 16 oct 21, from 0.97 to 1.022, new l-changing rates from Hlike_HS87 reintegration
+monitor line "nFnu"  8329.68A   1.022
+##
+## >>chng 00 sep 18 continuum energy grid changed
+## >>chng 13 jul 25, wl from 8079 to 8078.61A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  8078.61A   3.504
+##
+## >>chng 06 feb 03, from 2.294 to 2.398, guess dr to Badnell mean
+## >>chng 07 dec 06, from 2.398 to 2.267, changes in h-like collisions
+## >>chng 13 jul 25, wl from 6210 to 6209.66A, increased wl precision to 6 sig. fig.
+## >>chng 16 oct 21, from 2.267 to 2.373, new l-changing rates from Hlike_HS87 reintegration
+monitor line "nFnu"  6209.66A   2.373
+##
+## >>chng 01 sep 24, from 1.444 to 1.521, 2s2p br chng => 2nu stronger
+## >>chng 07 dec 06, from 1.521 to 1.301, changes in h-like collisions
+## >>chng 13 jul 25, wl from 4885 to 4885.36A, increased wl precision to 6 sig. fig.
+## >>chng 16 may 13, from 1.301 to 1.361, "PS64 only dipole l-changing calculations"
+## >>chng 16 oct 21, from 1.361 to 1.429, new l-changing rates from Hlike_HS87 reintegration
+monitor line "nFnu"  4885.36A   1.429
+##
+## >>chng 00 sep 18 continuum energy grid changed
+## >>chng 02 jul 19, from 0.934 to 0.983, better two photon
+## >>chng 07 dec 06, from 0.983 to 0.553, changes in h-like collisions
+## >>chng 13 jul 25, wl from 3704 to 3704.34A, increased wl precision to 6 sig. fig.
+## >>chng 15 may 27, from 0.553 to 0.6115, PS64 fixes
+## >>chng 16 oct 21, from 0.6115 to 0.7472, new l-changing rates from Hlike_HS87 reintegration
+monitor line "nFnu"  3704.34A   0.7472
+##
+## >>chng 00 sep 18 continuum energy grid changed
+## >>chng 13 jul 25, wl from 3588 to 3587.67A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  3587.67A   18.3
+##
+## >>chng 13 jul 25, wl from 1196 to 1196.33A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  1196.33A 0.00142844 error 0.1
+## >>chng 13 jul 25, wl from 1175 to 1175.06A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  1175.06A 0.00105623 error 0.1
+##
+## >>chng 08 dec 08, from 160 to 144, upper limit -> equals (r2515)
+## >>chng 09 jan 16, from 144 to 143.1, average of 10 runs
+monitor nzone 143 
+##
+## >>chng o3 dec 08, from < 5 to < 6.5, chng ots, zones
+## >>chng 08 dec 08, from 6.5 to 5.611, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 5.611 to 5.923, merging newsolvers branch
+## >>chng 09 feb 23, from 5.923 to 3.482, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 13 nov 05, from 3.482 to 3.176, convergence branch changes
+## >>chng 13 nov 25, from 3.176 to 3.099, convergence branch changes
+monitor itrzn 3.099 error 0.02
+##
+# h_outsp.in
+# class limit 
+# ========================================
+# 
+
+This tests the total emission from a spherical pure hydrogen Stromgren sphere
+using the outward only approximation.  The conservation of the total number
+of ionizing photons, and the emitted spectrum, are all checked.
+

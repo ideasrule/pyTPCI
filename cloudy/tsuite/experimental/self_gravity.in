@@ -1,0 +1,26 @@
+title - Hydrostatic equilibrium -
+## -----------------------------------------------
+##              Yago Ascasibar (UAM, Spring 2009)
+## -----------------------------------------------
+CMB
+cosmic ray background
+table ism
+## -----------------------------------------------
+hden 0.5 linear
+abundances ism
+## -----------------------------------------------
+constant pressure
+gravity plane-parallel
+gravity external Sigma = 43.680, z0 = 520, a = 1
+gravity external Sigma =-39.312, z0 = 520, a = 2
+gravity external Sigma = 13.104, z0 = 520, a = 3
+## -----------------------------------------------
+magnetic field -5.3
+## -----------------------------------------------
+stop temperature off
+stop thickness 1e4 linear parsec
+stop eden -5.5
+iterate
+## -----------------------------------------------
+save overview "self_gravity.ovr" last
+save pressure "self_gravity.pre" last

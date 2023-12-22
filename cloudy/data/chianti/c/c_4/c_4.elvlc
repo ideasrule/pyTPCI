@@ -1,0 +1,77 @@
+  1 1s2.2s                2  0 S  0.5  2          0.000       0.000000          0.000       0.000000 
+  2 1s2.2p                2  1 P  0.5  2      64484.000       0.587621      64486.745       0.587646 
+  3 1s2.2p                2  1 P  1.5  4      64591.700       0.588603      64591.655       0.588602 
+  4 1s2.3s                2  0 S  0.5  2     302849.000       2.759763     302847.502       2.759750 
+  5 1s2.3p                2  1 P  0.5  2     320050.100       2.916511     320046.373       2.916477 
+  6 1s2.3p                2  1 P  1.5  4     320081.700       2.916799     320080.179       2.916785 
+  7 1s2.3d                2  2 D  1.5  4     324879.800       2.960523     324870.924       2.960442 
+  8 1s2.3d                2  2 D  2.5  6     324890.300       2.960618     324885.036       2.960570 
+  9 1s2.4s                2  0 S  0.5  2     401348.100       3.657353     401343.667       3.657313 
+ 10 1s2.4p                2  1 P  0.5  2     408311.100       3.720805     408311.898       3.720812 
+ 11 1s2.4p                2  1 P  1.5  4     408324.200       3.720924     408324.143       3.720923 
+ 12 1s2.4d                2  2 D  1.5  4     410336.100       3.739258     410331.497       3.739216 
+ 13 1s2.4d                2  2 D  2.5  6     410340.100       3.739294     410337.483       3.739270 
+ 14 1s2.4f                2  3 F  2.5  6     410434.200       3.740152     410429.450       3.740108 
+ 15 1s2.4f                2  3 F  3.5  8     410434.200       3.740152     410432.373       3.740135 
+ 16 1s2.5s                2  0 S  0.5  2     445368.500       4.058496     445363.770       4.058453 
+ 17 1s2.5p                2  1 P  0.5  2     448855.800       4.090275     448844.948       4.090176 
+ 18 1s2.5p                2  1 P  1.5  4     448862.900       4.090340     448856.739       4.090284 
+ 19 1s2.5d                2  2 D  1.5  4     449888.200       4.099683     449878.753       4.099597 
+ 20 1s2.5d                2  2 D  2.5  6     449889.900       4.099698     449881.824       4.099625 
+ 21 1s2.5f                2  3 F  2.5  6     449939.800       4.100153     449937.008       4.100128 
+ 22 1s2.5f                2  3 F  3.5  8     449939.800       4.100153     449938.506       4.100141 
+ 23 1s2.5g                2  4 G  3.5  8     449948.400       4.100232     449939.154       4.100147 
+ 24 1s2.5g                2  4 G  4.5 10     449948.400       4.100232     449940.052       4.100155 
+ 25 1s2.6s                2  0 S  0.5  2     468784.000       4.271874     468779.608       4.271834 
+ 26 1s2.6p                2  1 P  0.5  2     470775.000       4.290017     470766.784       4.289943 
+ 27 1s2.6p                2  1 P  1.5  4     470778.900       4.290053     470773.572       4.290004 
+ 28 1s2.6d                2  2 D  1.5  4     471370.300       4.295442     471365.347       4.295397 
+ 29 1s2.6d                2  2 D  2.5  6     471371.500       4.295453     471367.127       4.295413 
+ 30 1s2.6f                2  3 F  2.5  6          0.000       0.000000     471376.324       4.295497 
+ 31 1s2.6f                2  3 F  3.5  8          0.000       0.000000     471377.191       4.295505 
+ 32 1s2.6g                2  4 G  3.5  8          0.000       0.000000     471377.630       4.295509 
+ 33 1s2.6h                2  5 H  4.5 10          0.000       0.000000     471378.113       4.295513 
+ 34 1s2.6g                2  4 G  4.5 10          0.000       0.000000     471378.149       4.295514 
+ 35 1s2.6h                2  5 H  5.5 12          0.000       0.000000     471378.460       4.295517 
+ 36 1s2.7s                2  0 S  0.5  2     482706.000       4.398741     482701.462       4.398699 
+ 37 1s2.7p                2  1 P  0.5  2          0.000       0.000000     483952.063       4.410096 
+ 38 1s2.7p                2  1 P  1.5  4          0.000       0.000000     483956.323       4.410135 
+ 39 1s2.7d                2  2 D  1.5  4     484320.600       4.413454     484313.548       4.413390 
+ 40 1s2.7d                2  2 D  2.5  6     484320.600       4.413454     484314.669       4.413400 
+ -1
+%filename:  c_4.elvlc.olg.nist
+
+Theoretical energy levels:
+Autostructure calculation with energy levels optimized to match to the observed energies
+A Breit-Pauli distorted wave implementation for AUTOSTRUCTURE
+Badnell, N.R., 2011, Computer Physics Communications, 182, 1528
+ADSref:  http://adsabs.harvard.edu/abs/2011CoPhC.182.1528B
+
+optimization by means of AS SHFTIC file with corrections from the following data
+
+Observed bound energy levels n=2, 3, 4, 5, 6, 7 :
+Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2012).
+NIST Atomic Spectra Database (ver. 5.0), [Online].
+Available: http://physics.nist.gov/asd [2012, September 14].
+National Institute of Standards and Technology, Gaithersburg, MD.
+
+Theoretical energies for n=2, 3 above IP
+Goryaev, F. F.; Vainshtein, L. A.; Urnov, A. M.
+Atomic data for doubly-excited states 2lnl‧ of He-like ions and 1s2lnl‧ of Li-like ions with Z = 6-36 and n = 2 , 3
+2017, ADNDT, 113, 117-257
+adsRef:  http://adsabs.harvard.edu/abs/2017ADNDT.113..117G
+DOI:  10.1016/j.adt.2016.04.002
+
+theoretical energy levels (n=4, 5 above IP):
+calculations of U. Safronova reported in Kato et al., 1997, ADNDT, 67, 225.
+ADS http://adsabs.harvard.edu/abs/1997ADNDT..67..225K
+updated by U. Safronova, 2001, private communication
+
+produced as a part of the 'CHIANTI' atomic database for astrophysical spectroscopy
+ K. Dere (GMU) - 2017 August 10
+
+
+
+Reference:
+Chianti  2022-02-18
+ -1

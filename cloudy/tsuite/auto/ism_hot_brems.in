@@ -1,0 +1,461 @@
+title generate continuum due to hot ism in high Z,z starburst
+# 
+# commands controlling continuum =========
+# this sets up coronal equilibrium for temperature and continuum
+# cloud is predominantly collisionally ionized
+coronal equilibrium, t = 1.e6 K
+#
+# commands for density & abundances =========
+# log of hydrogen density (cm-3), by default a constant density model
+hden 1
+# chemical composition for a well-evolved star cluster with high Z
+# the starburst command generates scale factors that will be used to
+# multiply the old solar composition, used in ver 84.  this is maintain
+# record of physical changes
+abundances old solar 84 
+abundances starburst Z=10 Zsun
+#
+# commands controlling geometry  =========
+# the log of the total hydrogen column density, cm-2
+stop column density 21
+#
+# other commands for details     =========
+#  continuum is plotted in Hzay, we me must iterate to predict this
+iterate
+# 
+# commands controlling output    =========
+# normalize to O 7 Lya
+normalize to "O  7" 21.6020 
+# this shortens the printout somewhat
+print line faint 1
+# output options
+save performance "ism_hot_brems.per"
+save continuum last "ism_hot_brems.con" no title, units keV
+save sulphur ionization "ism_hot_brems.sul"
+save overview last "ism_hot_brems.ovr"
+save monitors last "ism_hot_brems.asr"
+save species data sources "ism_hot_brems.dsource"
+# this is only to document the problem described above
+save dr last "ism_hot_brems.dr"
+#
+# commands giving the monitors    =========
+## >>chng 01 aug 17, from -5.036 to -4.996, ? ?
+## >>chng 04 may 13, from -4.996 to -5.104, dest albedo chng
+## >>chng 07 oct 22, from -5.104 to -5.001, resolve l-levels of h-like sequence
+## >>chng 08 mar 17, from -5.001 to -4.945, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 apr 30, from -4.945 to -4.971 H, He topoff change
+## >>chng 09 feb 23, from -4.971 to -4.939, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 nov 16, from -4.939 to -4.918, adjust newmole monitors
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 13, from -4.918 to -4.942, resolve face at all freqs
+## >>chng 16 aug 07, from -4.942 to -5.014, Fran bug fix
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 19 aug 06, from -5.014 to -4.969, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "H  1" 4861.32A -4.969
+##
+## >>chng 01 mar 17, all lines to luminosity instead of rel intensity
+## >>chng 02 may 27, from -1.274 to -1.504, improved ism_hot_brems cooling
+## >>chng 02 jun 22, from -1.504 to -1.088, improved ism_hot_brems
+monitor line luminosity "HFFc" 0 -1.088
+##
+monitor line luminosity "HeFF" 0 -1.605
+## 
+## free free heating, added 05 jul 14
+## >>chng 05 aug 15, from -18.333 to -23.331, lowered U from -10 to -15
+## comment out - too small to count
+## assert line luminosity "FF H" 0 -23.331
+##
+## >>chng 03 nov 23, from -1.581 to -1.606 Kraemer et al. guess of dr
+monitor line luminosity "MeFF" 0 -1.606
+##
+## >>chng 06 jul 18, from -1.076 to -1.099 RP major upgrade VS coll strengths
+monitor line luminosity "ToFF" 0 -1.099
+##
+## >>chng 01 jul 01, from -0.042 to -0.094, change in diff cont transfer
+## >>chng 02 feb 14, from -0.094 to -0.072, chng coll rates for he-like ions
+## >>chng 02 mar 16, from -0.072 to -0.129, chng he-like ions
+## >>chng 02 mar 25, from -0.129 to -0.091, further corrections to above
+## >>chng 02 jul 19, from -0.091 to -0.127, better two photon
+## >>chng 02 aug 19, from -0.127 to -0.038, better he-like cs
+## >>chng 02 dec 20, from -0.038 to -0.0604, improve he-like seq, incr err
+## >>chng 03 mar 13, from -0.060 to -0.0200, improve he-like seq, decr err
+## >>chng 03 nov 23, from -0.020 to  0.110 Kraemer et al. guess of dr
+## >>chng 06 feb 03, from 0.11 to 0.03, guess dr to Badnell mean
+## >>chng 06 jul 18, from 0.030 to 0.079 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from 0.079 to 0.121, Badnell DR turned on
+## >>chng 11 sep 13, use Chianti, change wavelength
+## >>chng 11 sep 15, from 0.121 to -0.1948, Chianti for Fe moderate to high ions
+## >>chng 13 jul 24, wl from 174.5 to 174.531A, increased wl precision to 6 sig. fig.
+## >>chng 22 jul 09, from -0.1948 to -0.2679, upgrade to Chianti v10
+monitor line luminosity "Fe10" 174.531A  -0.2679 error 0.1
+##
+## >>chng 01 jun 15, from -0.073 to -0.120, full CT reaction network
+## >>chng 01 jul 01, from -0.120 to -0.147, change in diff cont transfer
+## >>chng 01 jul 21, from -0.147 to -0.111, small change, very sensitive
+## >>chng 02 aug 19, from -0.119 to -0.094, better he-like cs
+## >>chng 03 may 02, from -0.094 to -0.163, several small changes
+## >>chng 03 oct 04, from -0.163 to -0.092, atom2 ots
+## >>chng 03 nov 23, from -0.109 to -0.151 Kraemer et al. guess of dr
+## >>chng 04 may 19, from -0.151 to -0.125, RP update he-like seq
+## >>chng 06 jul 12, from -0.125 to -0.183, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 18, from -0.183 to -0.214 RP major upgrade VS coll strengths
+## >>chng 10 aug 12, from -0.214 to -0.2388, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 sep 13, use Chianti, change wavelength
+## >>chng 11 sep 15, from -0.2388 to -0.6632, Chianti for Fe moderate to high ions
+## >>chng 12 feb 27, from -0.6632 to -0.6357, Upgrade to Chianti 7
+## >>chng 13 jul 24, wl from 180.4 to 180.401A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, from -0.6357 to -0.6593, allow all NIST levels to be used
+monitor line luminosity "Fe11" 180.401A -0.6593
+##
+## >>chng 02 jul 19, from -0.081 to -0.-059, better two photon
+## >>chng 02 aug 19, from -0.059 to -0.129, better he-like cs
+## >>chng 03 jan 24, from -0.129 to -0.166, better he-like cs
+## >>chng 03 may 02, from -0.166 to -0.307, several small changes
+## >>chng 03 oct 04, from -0.307 to -0.170, atom2 ots
+## >>chng 03 nov 23, from -0.170 to -0.560 Kraemer et al. guess of dr
+## >>chng 04 may 19, from -0.560 to -0.490, RP update he-like seq
+## >>chng 05 jun 05, from -0.490 to -0.455, RP update he-like iso seq
+## >>chng 06 feb 03, from -0.455 to -0.297, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.297 to -0.417, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 18, from -0.417 to -0.507 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from -0.507 to -0.607, Badnell DR turned on
+## >>chng 07 apr 30, from -0.607 to -0.642, log DR average, use mix S DR
+## >>chng 08 sep 19, from -0.642 to -0.6074, new method for average Badnell DR
+## >>chng 10 aug 12, from -0.6074 to -0.6606, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 aug 05, from -0.6606 to -0.6958, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 11 sep 13, use Chianti, change wavelength
+## >>chng 11 sep 15, from -0.6958 to -1.389, Chianti for Fe moderate to high ions
+## >>chng 12 oct 15, from -1.389 to -1.409, experimental Chianti levels
+## >>chng 13 jul 24, wl from 214.4 to 214.399A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 12, from -1.409 to -1.429, database Mg
+## >>chng 13 nov 25, from -1.429 to -1.408, convergence branch changes
+## >>chng 15 nov 01, from -1.408 to -1.439, improve first iteration inwd
+## >>chng 22 jul 09, from -1.439 to -1.482, upgrade to Chianti v10
+monitor line luminosity "Fe12" 214.399A -1.482
+##
+## >>chng 02 jul 19, from -0.111 to -0.200, better two photon
+## >>chng 02 aug 19, from -0.200 to -0.030, better he-like cs
+## >>chng 03 nov 23, from -0.030 to  0.190 Kraemer et al. guess of dr
+## >>chng 05 jun 05, from  0.190 to  0.137, RP update he-like iso seq
+## >>chng 06 jul 12, from 0.137 to 0.198, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from 0.198 to 0.057, Badnell DR turned on
+## >>chng 13 jul 15, from 0.057 to -0.3852, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 22 jul 09, wl from 319.840 to 319.839A, upgrade to Chianti v10
+monitor line luminosity "si 8" 319.839A  -0.3852 error 0.15
+##
+## >>chng 01 jun 15, from -0.106 to -0.272, full CT reaction network
+## >>chng 01 aug 08, from -0.272 to -0.304, ? ? ?
+## >>chng 02 feb 10, from -0.304 to -0.254, don't understand, up error to 0.15
+## >>chng 02 jul 19, from -0.254 to -0.-0.333, better two photon
+## >>chng 02 aug 19, from -0.333 to -0.182, better he-like cs
+## >>chng 03 nov 23, from -0.182 to  0.041 Kraemer et al. guess of dr
+## >>chng 13 jul 24, wl from 368.5 to 368.480A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 12, from 0.041 to 0.1789, database Mg
+monitor line luminosity "mg 9" 368.071A  0.1789 error 0.15
+##
+## >>chng 01 aug 17, -6.832 to -6.738, fe lev2 cs change => ots =>  h ion chng
+## >>chng 03 may 02, from -6.738 to -6.761, several small changes
+## >>chng 03 oct 08, from -6.761 to -6.712, several small changes
+## >>chng 04 may 13, from -6.712 to -7.049, dest albedo chng
+## >>chng 06 jul 12, from -7.049 to -7.029, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -7.029 to -7.070, Badnell DR turned on
+## >>chng 09 feb 23, from -7.07 to -6.975, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 15, from -6.975 to -6.948, gradual approach to outer edge
+## >>chng 11 sep 15, from -6.948 to -6.921, Chianti for Fe moderate to high ions
+## >>chng 13 nov 05, from -6.921 to -6.957, convergence branch changes
+monitor hydrogen 1 ionization fraction is -6.957
+##
+## >>chng 01 jun 15, from -5.243 to -5.210, full CT reaction network
+## >>chng 01 aug 17, -5.210 to -5.077, fe lev2 cs change => ots =>  h ion chng
+## >>chng 03 may 02, from -5.077 to -4.593, several small changes
+## >>chng 03 oct 04, from -4.593 to -5.085, atom2 ots
+## >>chng 03 nov 23, from -5.085 to -5.052 Kraemer et al. guess of dr
+## >>chng 04 may 13, from -5.052 to -5.334, dest albedo chng
+## >>chng 06 jul 12, from -5.334 to -5.314, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -5.314 to -5.347, Badnell DR turned on
+## >>chng 09 jun 15, from -5.347 to -5.318, gradual approach to outer edge
+## >>chng 10 oct 18, from -5.318 to -5.271, replace faint brems with laser at high-energy limit of code in coronal cmmnd
+## >>chng 11 sep 15, from -5.271 to -5.117, Chianti for Fe moderate to high ions
+## >>chng 13 jul 24, from -5.117 to -5.138, Ne to external databases
+## >>chng 13 nov 13, from -5.138 to -5.182, resolve face at all freqs
+## >>chng 14 may 24, from -5.182 to -4.994, allow all NIST levels to be used
+## >>chng 15 oct 14, from -4.994 to -5.014, update DR suppression in r10716
+## >>chng 16 jul 04, from -5.014 to -4.987, upgrade Fe 9 and Ni 11 to Stout
+monitor helium 2 ionization fraction is -4.987
+##
+## add this, 02 mar 16, o very optically thick, 
+## >>chng 02 mar 25, from -0.586 to -0.428, further chngs to he-like
+## >>chng 02 may 07, from -0.428 to -0.455, included des of rec photons
+## >>chng 02 jun 08, from -0.455 to -0.479, better zoning
+## >>chng 02 jun 13, from -0.479 to -0.775, he-like seq
+## >>chng 02 aug 19, from -0.775 to -0.362, better he-like cs
+## >>chng 02 sep 18, from -0.362 to -0.338, better he-like cs
+## >>chng 02 nov 20, from -0.338 to -0.361, new he ots diffuse, incr error
+## >>chng 03 jan 24, from -0.361 to -0.244, better he-like cs
+## >>chng 04 may 19, from -0.244 to -0.352, RP update he-like seq
+## >>chng 05 jun 05, from -0.352 to -0.508, RP update he-like iso seq
+## >>chng 06 jul 18, from -0.508 to -0.221 RP major upgrade VS coll strengths
+## >>chng 17 feb 25, from -0.221 to -0.2659 increase number of collapsed levels
+monitor nitrogen 6 ionization -0.2659 error 0.1
+##
+## >>chng 02 mar 25, from -0.138 to -0.210, further chngs to he-like
+## >>chng 02 jun 08, from -0.210 to -0.183, better zoning
+## >>chng 02 jun 13, from -0.183 to -0.088, he-like seq
+## >>chng 02 aug 19, from -0.088 to -0.255, better he-like cs
+## >>chng 02 oct 28, from -0.255 to -0.287, better norm continuum, increase err
+## >>chng 03 jan 24, from -0.287 to -0.374, better he-like cs
+## >>chng 04 may 19, from -0.374 to -0.263, RP update he-like seq
+## >>chng 05 jun 05, from -0.263 to -0.170, RP update he-like iso seq
+## >>chng 06 jul 18, from -0.170 to -0.406 RP major upgrade VS coll strengths
+## >>chng 17 feb 25, from -0.406 to -0.3471, increase number of collapsed levels
+monitor nitrogen 7 ionization -0.3471 error 0.1 
+##
+## add this, 02 mar 16, o very optically thick, all O 7, he like
+## >>chng 02 aug 19, from -2.591 to -2.625, better he-like cs
+## >>chng 03 may 02, from -2.625 to -2.483, several small changes
+## >>chng 03 oct 04, from -2.483 to -2.651, atom2 ots
+## >>chng 03 nov 23, from -2.651 to -2.763 Kraemer et al. guess of dr
+## >>chng 03 dec 08, from -2.763 to -2.806, chng ots, zones
+## >>chng 04 may 13, from -2.806 to -2.871, dest albedo chng
+## >>chng 05 jun 05, from -2.871 to -2.837, RP update he-like iso seq
+## >>chng 06 jul 12, from -2.837 to -2.895, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 18, from -2.895 to -2.926 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from -2.926 to -2.824, Badnell DR turned on
+## >>chng 09 feb 23, from -2.824 to -2.755, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 15, from -2.755 to -2.727, gradual approach to outer edge
+## >>chng 11 sep 15, from -2.727 to -2.615, Chianti for Fe moderate to high ions
+## >>chng 13 mar 18, from -2.615 to -2.594, Chianti version 7.0 -> 7.1
+## >>chng 13 sep 12, from -2.594 to -2.516, database Mg
+## >>chng 16 jul 04, from -2.516 to -2.547, upgrade Fe 9 and Ni 11 to Stout
+monitor oxygen 6 ionization -2.547
+##
+## >>chng 02 mar 25, from -2.060 to -2.111, further chngs to he-like
+## >>chng 02 may 07, from -2.111 to -2.016, included des of rec photons
+## >>chng 02 jun 13, from -2.016 to -1.953, he-like seq
+## >>chng 02 aug 19, from -1.953 to -2.052, better he-like cs
+## >>chng 03 jan 24, from -2.052 to -2.075, better he-like cs
+## >>chng 05 jun 05, from -2.075 to -2.037, RP update he-like iso seq
+## >>chng 06 jul 18, from -2.037 to -2.087 RP major upgrade VS coll strengths
+## >>chng 11 sep 15, from -2.087 to -2.015, Chianti for Fe moderate to high ions
+monitor oxygen 8 ionization -2.015
+##
+## >> this changes by about 11% when zoning changes
+## >>chng 99 dec 6 caused by changing dr to go from 50 to 10
+## >>chng 01 jun 15, from -3.85 to -3.788 full CT reaction network
+## >>chng 03 may 02, from -3.788 to -3.268, several small changes
+## >>chng 03 oct 04, from -3.268 to -3.808, atom2 ots
+## >>chng 03 nov 23, from -3.808 to -3.739 Kraemer et al. guess of dr
+## >>chng 04 may 13, from -3.739 to -3.880, dest albedo chng
+## >>chng 06 jul 12, from -3.88 to -3.75, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -3.75 to -3.16, Badnell DR turned on
+## >>chng 09 feb 23, from -3.16 to -3.103, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 15, from -3.103 to -3.042, gradual approach to outer edge
+## >>chng 10 oct 18, from -3.042 to -2.957, replace faint brems with laser at high-energy limit of code in coronal cmmnd
+## >>chng 11 sep 15, from -2.957 to -2.883, Chianti for Fe moderate to high ions
+## >>chng 13 jul 15, from -2.883 to -2.819, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 sep 12, from -2.819 to -2.72, database Mg
+monitor iron 7 ionization fraction is -2.72 error 0.15
+##
+## >> this changes by about 7% when zoning changes
+## >>chng 99 dec 6 caused by changing dr to go from 50 to 10
+## >>chng 02 jul 19, from -2.156 to -2.203, better two photon
+## >>chng 02 sep 18, from -2.203 to -2.161, better He-like cs
+## >>chng 03 mar 13, from -2.161 to -2.120, better He-like cs and coll ion...how they are split up.
+## >>chng 03 may 02, from -2.120 to -1.724, several small changes
+## >>chng 03 oct 04, from -1.724 to -2.131, atom2 ots
+## >>chng 03 nov 23, from -2.131 to -1.973 Kraemer et al. guess of dr
+## >>chng 04 may 13, from -1.973 to -2.047, dest albedo chng
+## >>chng 06 feb 03, from -2.047 to -2.10, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.10 to -2.03, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -2.03 to -1.75, Badnell DR turned on
+## >>chng 09 jun 15, from -1.75 to -1.688, gradual approach to outer edge
+## >>chng 10 oct 18, from -1.688 to -1.628, replace faint brems with laser at high-energy limit of code in coronal cmmnd
+## >>chng 12 oct 15, from -1.628 to -1.585, experimental Chianti levels
+## >>chng 13 jul 15, from -1.585 to -1.539, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 sep 12, from -1.539 to -1.483, database Mg
+monitor iron 8 ionization fraction is -1.483 error 0.1
+##
+## >>chng 01 jun 15, from -0.852 to -0.885 full CT reaction network
+## >>chng 01 jul 01, from -0.885 to -0.945, change in diff cont transfer
+## >>chng 02 feb 14, from -0.954 to -0.917, chng coll rates for he-like ions
+## >>chng 02 mar 16, from -0.917 to -0.985, chng he-like ions
+## >>chng 02 mar 25, from -0.985 to -0.946, further chngs to he-like
+## >>chng 02 jul 19, from -0.946 to -0.998, better two photon
+## >>chng 02 aug 19, from -0.998 to -0.908, better he-like cs
+## >>chng 02 nov 16, from -0.908 to -0.890, increase error
+## >>chng 03 may 02, from -0.890 to -0.655, several small changes
+## >>chng 03 oct 04, from -0.655 to -0.862, atom2 ots
+## >>chng 03 nov 23, from -0.862 to -0.612 Kraemer et al. guess of dr
+## >>chng 05 jun 05, from -0.612 to -0.671, RP update he-like iso seq
+## >>chng 06 jul 12, from -0.67 to -0.59, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 18, from -0.597 to -0.54 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from -0.54 to -0.58, Badnell DR turned on
+## >>chng 10 aug 12, from -0.58 to -0.5422, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 may 24, from -0.5422 to -0.5027, allow all NIST levels to be used
+monitor iron 9 ionization fraction is -0.5027 error 0.1
+##
+## >>chng 01 jun 15, from -0.550 to -0.591 full CT reaction network
+## >>chng 01 jul 01, from -0.591 to -0.625, change in diff cont transfer
+## >>chng 02 feb 14, from -0.625 to -0.604, chng coll rates for he-like ions
+## >>chng 02 mar 16, from -0.604 to -0.660, chng he-like ions
+## >>chng 02 mar 25, from -0.660 to -0.623, further chngs to he-like
+## >>chng 02 jul 19, from -0.623 to -0.658, better two photon
+## >>chng 02 aug 19, from -0.658 to -0.580, better he-like cs
+## >>chng 03 jan 24, from -0.580 to -0.555, better he-like cs
+## >>chng 03 may 02, from -0.555 to -0.529, several small changes
+## >>chng 03 oct 04, from -0.529 to -0.553, atom2 ots
+## >>chng 03 nov 23, from -0.553 to -0.423 Kraemer et al. guess of dr
+## >>chng 05 jun 05, from -0.423 to -0.443, RP update he-like iso seq
+## >>chng 06 feb 03, from -0.443 to -0.501, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.50 to -0.47, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -0.47 to -0.41, Badnell DR turned on
+monitor iron 10 ionization fraction is  -0.41 error 0.1
+##
+## >>chng 03 may 02, from -0.512 to -0.565, several small changes
+## >>chng 03 oct 04, from -0.565 to -0.499, atom2 ots
+## >>chng 03 nov 23, from -0.499 to -0.558 Kraemer et al. guess of dr
+## >>chng 04 may 19, from -0.558 to -0.532, RP update he-like seq
+## >>chng 06 jul 12, from -0.53 to -0.59, use Savin & Gu DR to make mean DR
+## >>chng 07 apr 30, from -0.59 to -0.64, log DR average, use mix S DR
+monitor iron 11 ionization fraction is  -0.64 error 0.1
+##
+## >> next three changed when zoning changes
+## >>chng 01 jun 29, from -0.687 to -0.644, small temp chng ?
+## >>chng 03 may 02, from -0.644 to -0.823, several small changes
+## >>chng 03 oct 04, from -0.823 to -0.695, atom2 ots
+## >>chng 03 nov 23, from -0.695 to -1.083 Kraemer et al. guess of dr
+## >>chng 05 jun 05, from -1.083 to -0.980, RP update he-like iso seq
+## >>chng 06 feb 03, from -0.98 to -0.82, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.82 to -0.94, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 18, from -0.94 to -1.03 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from -1.03 to -1.13, Badnell DR turned on
+## >>chng 11 aug 05, from -1.13 to -1.219, make PRD redis func for h-like ions; LY_A func is now for H only
+monitor iron 12 ionization fraction is  -1.219 error 0.2
+##
+## >>chng 01 feb 21 from -1.247 to -1.194 improved He-seq coll treatment
+## >>chng 01 jun 15, from -1.194 to -1.141 full CT reaction network
+## >>chng 01 jul 01, from -1.141 to -1.079, change in diff cont transfer
+## >>chng 02 feb 14, from -1.079 to -1.155, chng coll rates for he-like ions
+## >>chng 02 mar 16, from -1.155 to -1.023, chng he-like ions
+## >>chng 02 mar 25, from -1.023 to -1.112, further chngs to he-like
+## >>chng 02 jul 19, from -1.112 to -1.016, better two photon
+## >>chng 02 aug 19, from -1.016 to -1.217, better he-like cs
+## >>chng 03 jan 24, from -1.217 to -1.281, better he-like cs
+## >>chng 03 may 02, from -1.281 to -1.435, several small changes
+## >>chng 03 oct 04, from -1.435 to -1.289, atom2 ots
+## >>chng 03 nov 23, from -1.289 to -2.126 Kraemer et al. guess of dr
+## >>chng 04 may 19, from -2.126 to -2.008, RP update he-like seq
+## >>chng 05 jun 05, from -2.008 to -1.937, RP update he-like iso seq
+## >>chng 06 feb 03, from -1.94 to -1.46, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.47 to -1.63, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 18, from -1.63 to -1.81 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from -1.81 to -1.89, Badnell DR turned on
+## >>chng 07 apr 30, from -1.89 to -1.93, log DR average, use mix S DR
+## >>chng 08 nov 08, from -1.93 to -1.864, fix VS80 elec impact coll. str. (r2444)
+## >>chng 09 oct 06, from -1.864 to -1.909, [NI] pumping changes
+## >>chng 10 aug 12, from -1.909 to -1.953, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 aug 05, from -1.953 to -2.023, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 11 sep 15, from -2.023 to -1.941, Chianti for Fe moderate to high ions
+monitor iron 13 ionization fraction is  -1.941 error 0.1
+##
+## >>chng 01 feb 21 from -2.224 to -2.128 improved He-seq coll treatment
+## >>chng 01 jun 15, from -2.128 to -2.028 full CT reaction network
+## >>chng 01 jul 01, from -2.028 to -1.954, change in diff cont transfer
+## >>chng 01 jul 21, from -1.954 to -2.015, very sensitive
+## >>chng 01 aug 08, from -2.015 to -1.912, ? ? ?
+## >>chng 02 feb 14, from -1.912 to -2.105, chng coll rates for he-like ions
+## >>chng 02 mar 16, from -2.105 to -1.864, chng he-like ions
+## >>chng 02 mar 25, from -1.864 to -2.030, further chngs to he-like
+## >>chng 02 jul 19, from -2.030 to -1.865, better two photon
+## >>chng 02 aug 19, from -1.865 to -2.219, better he-like cs
+## >>chng 03 jan 28, from -2.219 to -2.316, slow drift
+## >>chng 03 may 02, from -2.313 to -2.487, several small changes
+## >>chng 03 oct 04, from -2.487 to -2.322, atom2 ots
+## >>chng 03 nov 23, from -2.322 to -3.580 Kraemer et al. guess of dr
+## >>chng 04 may 19, from -3.580 to -3.400, RP update he-like seq
+## >>chng 05 jun 05, from -3.400 to -3.285, RP update he-like iso seq
+## >>chng 06 feb 03, from -3.28 to -2.49, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.49 to -2.71, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 18, from -2.71 to -2.99 RP major upgrade VS coll strengths
+## >>chng 08 nov 08, from -2.99 to -2.885, fix VS80 elec impact coll. str. (r2444)
+## >>chng 10 aug 12, from -2.885 to -2.994, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 aug 05, from -2.994 to -3.11, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 11 sep 15, from -3.11 to -2.964, Chianti for Fe moderate to high ions
+monitor iron 14 ionization fraction is  -2.964 error 0.20
+##
+## >> changed by 5% when zoning changes
+## >>chng 99 dec 6 caused by changing dr to go from 50 to 10
+## >>chng 01 feb 21 from -3.359 to -3.159 improved He-seq coll treatment
+## >>chng 01 jun 15, from -3.159 to -2.973 full CT reaction network
+## >>chng 01 jul 01, from -2.973 to -2.880, change in diff cont transfer
+## >>chng 02 feb 14, from -2.880 to -3.149, chng coll rates for he-like ions
+## >>chng 02 mar 16, from -3.149 to -2.765, chng he-like ions
+## >>chng 02 mar 25, from -2.765 to -3.039, further chngs to he-like
+## >>chng 02 jul 19, from -3.039 to -2.792, better two photon
+## >>chng 02 aug 19, from -2.792 to -3.365, better he-like cs
+## >>chng 02 dec 20, from -3.365 to -3.247, better he-like atom
+## >>chng 03 jan 24, from -3.247 to -3.508, better he-like cs
+## >>chng 03 may 02, from -3.508 to -3.701, several small changes
+## >>chng 03 oct 04, from -3.701 to -3.535, atom2 ots
+## >>chng 03 nov 23, from -3.535 to -9.824 Kraemer et al. guess of dr
+## assert iron 15 ionization fraction is  -9.824 error 0.2
+##
+## >>chng 02 jun 08, from 75 to 192, smaller rel dr step
+## >>chng 03 may 22, from 200 to 20 (??)
+## >>chng 03 dec 10, from 20 to 30 dr logic change
+## >>chng 04 mar 04, from <30 to <40, chng conver criteria
+## >>chng 04 may 19, from -40 to -50 RP update he-like seq
+## >>chng 05 aug 10, from 50 to 130, vs gets 40 with an unresolved 
+## front, gcc resolves front with more zone
+## >>chng 05 dec 22, from 130 to 60 (44), rationalize zone asserts
+## >>chng 08 dec 08, from 60 to 36, upper limit -> equals (r2515)
+## >>chng 09 jan 22, from 36 to 35, some minor botches as a result of r2655
+## >>chng 09 feb 23, from 35 to 39, remove otslin, otscon dampers PR #84, r2758
+## >>chng 09 mar 27, from 39 to 38 improve rigor esc prob & pop defns
+## >>chng 09 jun 15, from 38 to 56, gradual approach to outer edge
+## >>chng 10 oct 18, from 56 to 39 replace faint brems with laser at high-energy limit of code in coronal cmmnd
+## >>chng 12 nov 28, from 39 to 41, Make HII dr limit symmetric
+## >>chng 13 nov 13, from 41 to 52, resolve face at all freqs
+## >>chng 13 nov 25, from 52 to 55, convergence branch changes
+## >>chng 14 apr 07, from 55 to 51, move H/C out of ConvBase loop
+monitor nzone 51
+##
+## >>chng 03 nov 23, from 6 to 8 Kraemer et al. guess of dr
+## >>chng 04 feb 15, from 8 to 7, conv ionz loop auger
+## >>chng 08 dec 08, from 7 to 4.222, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 4.222 to 6.833, merging newsolvers branch
+## >>chng 09 jan 22, from 6.833 to 7.029, some minor botches as a result of r2655
+## >>chng 09 feb 23, from 7.029 to 6.359, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 apr 18, from 6.359 to 6.71, refactor evaluation of esc dest probs to occur with cooling
+## >>chng 09 jun 15, from 6.71 to 6.018, gradual approach to outer edge
+## >>chng 09 jun 17, from 6.02 to 6.10 adjust approach to outer eduge
+## >>chng 11 jun 14, from 6.1 to 7.821, new Te solver
+## >>chng 11 sep 15, from 7.821 to 6.342, Chianti for Fe moderate to high ions
+## >>chng 13 may 23, from 6.342 to 4.976, move opac_update before cool_eval
+## >>chng 13 nov 05, from 4.976 to 2.902, convergence branch changes
+## >>chng 14 apr 07, from 2.902 to 2.118, move H/C out of ConvBase loop
+monitor itrzn 2.118
+##
+## check that stop column gets exactly right thickness 
+monitor thickness 20 error 0.001
+# ism_hot_brems.in
+# class ism 
+# ========================================
+# 
+
+This model generates a large column constant density cloud
+similar to the hot phase of the interstellar medium. 
+The continuum is punched to generate one of the figures in Part 2 of Hazy.
+
+There is a strange feature between 1.7e-3A and 2.2e-3A that is the N emission
+(head starting at 1.7e-3A with O absorption at 2.2e-3A.  This model is
+strongly enriched in heavies so many metal edges, esp O, are optically thick.
+
+>>TODO	1	the guess of the thickness of the first zone is badly too small,
+because this model is collisionally ionized, and it used Stromgren
+length - better to use collisional balance and dr - as result of this
+the model takes far too many zones

@@ -1,0 +1,9 @@
+to use the Chianti and Leiden data base files uncomment database_readin at 
+atmdat_readin.cpp line 1135
+species.cpp near line 
+
+the code will then read a list of species
+
+IonStg and nelem are part of t_quantumState
+
+lgMolecular is in t_species

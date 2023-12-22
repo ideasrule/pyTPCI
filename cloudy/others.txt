@@ -1,0 +1,27 @@
+This lists those who have contributed to the development of Cloudy.  This list is incomplete.
+If we have overlooked you please contact Gary Ferland at gary at pa dot uky dot edu
+
+- Nick Abel
+- Yago Ascasibar
+- Manuel Bautista
+- Kevin Blagrave
+- Bob Carswell
+- Marios Chatzikos
+- Steve Cota
+- Torsten Elwert
+- Jason Ferguson
+- Gary Ferland
+- Chamani Gunasekera
+- Fran Guzman
+- Will Henney
+- Jim Kingdon
+- Kirk Korista
+- Matt Lykins
+- Peter Martin
+- Humeshkar Nemala
+- Ryan Porter
+- Joshua Schlueter
+- Gargi Shaw
+- Peter van Hoof
+- Ye Wang
+- Robin Williams

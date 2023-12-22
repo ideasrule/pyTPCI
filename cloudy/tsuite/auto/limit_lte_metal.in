@@ -1,0 +1,47 @@
+title STE with metals
+# this tests whether thermal processes go to STE
+#
+# commands controlling continuum =========
+# a dilution factor of 1 is one way to get STE
+black body, t = 20000 dilution 1
+#
+# commands for density & abundances =========
+hden 10
+abundances starburst 5
+#
+# commands controlling geometry  =========
+stop zone 1
+stop lyman optical depth -6
+set dr -10
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling output    =========
+print departure coef element hydrogen
+print populations h-like hydrogen
+save overview "limit_lte_metal.ovr"
+save performance "limit_lte_metal.per"
+save monitors "limit_lte_metal.asr" last
+save heating "limit_lte_metal.het" last
+save cooling "limit_lte_metal.col" last
+#
+# commands giving the monitors    =========
+monitor "H+" temperature 20000
+monitor h-like departure coef hydrogen  average = 1
+## >>chng 00 sep 18, he ion not exactly in LTE
+monitor h-like departure coef helium error, aver 1 largest error= 0.09
+# limit_lte_metal.in
+# class limit 
+# ========================================
+# 
+
+This checks that the code goes to strict thermodynamic equilibrium
+for the case of a metal rich gas exposed to a true black body. 
+The many heavy element lines should dominate cooling, so this is
+a test that the multilevel atoms go to LTE in the radiation-dominated limit.
+
+Checks:
+-	Temperature should equilibrate at 20000 K.  
+-	Departure coefficients should equal unity.
+

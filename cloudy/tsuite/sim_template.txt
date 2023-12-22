@@ -1,0 +1,10 @@
+Commands can occur in any order but we have made an effort to enter them
+in the following order.  This is so that they can be studied to see
+examples of how to use the code.
+
+# commands controlling continuum
+# commands for density & abundances
+# commands controlling geometry
+# other commands for details
+# commands controlling output print and save commands
+# commands giving the monitors 

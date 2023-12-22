@@ -1,0 +1,194 @@
+title continuous emission from HeI 
+#
+# commands controlling continuum =========
+laser 1.9 ryd
+ionization -1
+#
+# commands for density & abundances =========
+# need high density to supress two-photon emission
+hden 10
+# force high density for electrons, He+ density will be the same
+set eden 12
+# set He/H ratio to 100, He and elec will have same density
+element abundance helium 2
+init "hheonly.ini"
+#
+# commands controlling geometry  =========
+# this thickness will get unit emission when combined with above densities
+stop thickness -24
+#
+# other commands for details     =========
+iterate
+constant temperature 4
+#
+# commands controlling output    =========
+#
+## increase continuum resolution by factor of ten
+set continuum resolution 0.1
+## 
+## include only the diffuse components in this
+set nFnu diffuse outward, diffuse inward
+##
+print line faint 1
+print line column
+## 
+save overview "heatomt10.ovr"
+save performance "heatomt10.per"
+save continuum "heatomt10.con" last no title units microns 
+save diffuse continuum "heatomt10.dif" last no title units microns
+save monitors "heatomt10.asr"
+#
+# commands giving the monitors    =========
+## >>chng 02 may 27, all following to 4.11 micron changed as result
+## of better gaunt factors
+## >> all following, through 2 micron, got fainter by ~10 percent
+## as result of improved brems gaunt factors, better sum over species
+monitor line luminosity "nFnu"  122.4m -26.446
+## >>chng 13 jul 24, wl from 60.83m to 60.8322m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  60.8322m -26.215
+## >>chng 13 jul 24, wl from 41.22m to 41.2152m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  41.2152m -26.082
+## >>chng 13 jul 24, wl from 30.87m to 30.8695m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  30.8695m -25.984
+## >>chng 13 jul 24, wl from 24.78m to 24.7829m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  24.7829m -25.901
+## >>chng 13 jul 24, wl from 24.30m to 24.2998m, increased wl precision to 6 sig. fig.
+## >>chng 14 apr 07, from -25.9 to -25.88, update of Gaunt free-free factors
+monitor line luminosity "nFnu"  24.2998m -25.88
+## >>chng 11 oct 12, from -25.88 to -25.86, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 22.83m to 22.8302m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  22.8302m -25.86
+## >>chng 11 oct 12, from -25.86 to -25.84, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 21.42m to 21.4199m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  21.4199m -25.84
+## >>chng 11 oct 12, from -25.86 to -25.84, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 21.12m to 21.1235m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  21.1235m -25.84
+## >>chng 11 oct 12, from -25.83 to -25.81, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 19.62m to 19.6199m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  19.6199m -25.81
+## >>chng 11 oct 12, from -25.79 to -25.77, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 17.65m to 17.6534m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  17.6534m -25.77
+## >>chng 11 oct 12, from -25.79 to -25.76, scale iso highest pcs to be consistent with recomb topoff
+monitor line luminosity "nFnu"  17.37m -25.76
+## >>chng 11 oct 12, from -25.75 to -25.73, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 15.69m to 15.6901m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  15.6901m -25.73
+## >>chng 11 oct 12, from -25.72 to -25.7, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 14.60m to 14.6036m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  14.6036m -25.7
+## >>chng 11 oct 12, from -25.66 to -25.64, scale iso highest pcs to be consistent with recomb topoff
+monitor line luminosity "nFnu"  12.43m -25.64
+## >>chng 11 oct 12, from -25.64 to -25.62, scale iso highest pcs to be consistent with recomb topoff
+monitor line luminosity "nFnu"  11.40m -25.62
+## 
+## >>chng 07 feb 06, bugfix in r828, from -25.602 to -25.583 
+monitor line luminosity "nFnu"  10.46m -25.583
+## 
+## >>chng 11 oct 12, from -25.57 to -25.55, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 9.480m to 9.48002m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  9.48002m -25.55
+## >>chng 11 oct 12, from -25.57 to -25.54, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 9.325m to 9.32488m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  9.32488m -25.54
+## 
+## >>chng 07 feb 06, bugfix in r828, from -25.515 to -25.496 
+## >>chng 13 jul 24, wl from 8.210m to 8.21035m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  8.21035m -25.496
+## 
+## >>chng 11 oct 12, from -25.49 to -25.47, scale iso highest pcs to be consistent with recomb topoff
+monitor line luminosity "nFnu"  7.580m -25.47
+## >>chng 11 oct 12, from -25.45 to -25.43, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 7.050m to 7.05026m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  7.05026m -25.43
+## >>chng 11 oct 12, from -25.25 to -25.23, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 4.114m to 4.11370m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  4.11370m -25.23
+## >>chng 11 oct 12, from -25.07 to -25.05, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 2.324m to 2.32440m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  2.32440m -25.05
+## >>chng 02 may 27, end changes in continuum
+## >>chng 02 jun 21, end changes in continuum
+## >>chng 13 jul 24, wl from 1.643m to 1.64313m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1.64313m -24.927
+## >>chng 13 jul 24, wl from 1.480m to 1.48022m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1.48022m -24.923
+## >>chng 13 jul 24, wl from 1.436m to 1.43649m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1.43649m -24.776
+## >>chng 13 jul 24, wl from 1.119m to 1.11867m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1.11867m -24.744
+## >>chng 13 jul 24, wl from 8330A to 8329.68A, increased wl precision to 6 sig. fig.
+## >>chng 19 jun 28, from -24.8 to -24.78, reintegrate iso_collisions branch
+monitor line luminosity "nFnu"   8329.68A -24.78
+## >>chng 13 jul 24, wl from 8079A to 8078.61A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   8078.61A -24.511
+## >>chng 11 oct 12, from -24.47 to -24.45, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 6210A to 6209.66A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   6209.66A -24.45
+## >>chng 13 jul 24, wl from 4885A to 4885.36A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   4885.36A -24.598
+## >>chng 01 dec 28, nearly all of following reset
+## >>chng 13 jul 24, wl from 3704A to 3704.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   3704.34A -24.861
+## >>chng 13 jul 24, wl from 3588A to 3587.67A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   3587.67A -24.340
+## >>chng 02 apr 16, nearly all of following reset
+## >>chng 13 jul 24, wl from 2392A to 2392.03A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   2392.03A -23.998
+## >>chng 13 jul 24, wl from 2071A to 2071.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   2071.34A -24.278
+## >>chng 13 jul 24, wl from 2053A to 2052.68A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   2052.68A -24.298
+## >>chng 13 jul 24, wl from 1793A to 1793.44A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1793.44A -24.619
+## >>chng 13 jul 24, wl from 1585A to 1585.12A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1585.12A -24.968
+## >>chng 13 jul 24, wl from 1458A to 1458.33A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1458.33A -25.237
+## >>chng 13 jul 24, wl from 1357A to 1356.96A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1356.96A -25.491
+## >>chng 13 jul 24, wl from 1297A to 1297.29A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1297.29A -25.661
+## >>chng 13 jul 24, wl from 1263A to 1262.79A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1262.79A -25.766
+## >>chng 13 jul 24, wl from 1218A to 1218.08A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1218.08A -25.911
+## >>chng 13 jul 24, wl from 1196A to 1196.33A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1196.33A -25.984
+## >>chng 13 jul 24, wl from 1175A to 1175.06A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1175.06A -26.059
+## >>chng 13 jul 24, wl from 1144A to 1143.64A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1143.64A -26.172
+## >>chng 09 feb 24, from -26.29 to -26.31, botches due to r2763
+## >>chng 13 jul 24, wl from 1113A to 1113.22A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1113.22A -26.31
+## >>chng 09 feb 24, from -26.32 to -26.35, botches due to r2763
+## >>chng 13 jul 24, wl from 1103A to 1103.23A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1103.23A -26.35
+##
+## >>chng 02 jul 19, from -26.433 to -26.458, better two photon
+## >>chng 05 mar 12, from -26.458 to -26.433, RP merge He-like code
+## >>chng 13 jul 24, wl from 1074A to 1073.86A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1073.86A -26.433 error 0.1
+##
+## >>chng 02 jul 19, from -26.470 to -26.497, better two photon
+## >>chng 05 mar 12, from -26.497 to -26.470, RP merge He-like code
+## >>chng 13 jul 24, wl from 1064A to 1064.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1064.34A -26.470 error 0.1
+##
+## >>chng 02 jul 19, from -26.576 to -26.612, better two photon
+## >>chng 05 mar 12, from -26.612 to -26.575, RP merge He-like code
+## >>chng 09 feb 24, from -26.57 to -26.62, botches due to r2763
+## >>chng 13 jul 24, wl from 1036A to 1035.92A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"   1035.92A -26.62 error 0.1
+##
+# heatomt10.in
+# class limit 
+# ========================================
+# 
+
+This tests continuous emission from the He I atom.
+The laser is used so that the incident continuum
+is not included in the total emission.
+

@@ -1,0 +1,171 @@
+title FeII emission in typical intermediate density photoionzied cloud
+#
+# commands controlling continuum =========
+black 5e5K
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden 0
+element iron abundance 2
+element iron ionization -7 0 -7
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+constant temperature 4
+species "Fe+" levels=all
+#
+# commands controlling output    =========
+print lines column 
+print line inward
+print line sort wavelength
+print line faint 0.1
+normalize "Fe 2b" 5270
+set save prefix "feii_t4n0"
+save overview ".ovr"
+save performance ".per"
+save monitors ".asr" last
+save species continuum last ".con" "Fe+" units angstroms
+save species bands ".fe2b" "FeII_bands.ini" "Fe+" last no hash
+#
+# commands giving the monitors    =========
+## >>chng 14 jul 08, from 1 to -19.67, first monitors
+## >>chng 16 mar 20, from -19.67 to -18.58, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -18.58 to -18.19, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1148 -18.19 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -21.83, first monitors
+## >>chng 14 jul 12, from -21.83 to -21.79, Get strunk closer to stout branch
+## >>chng 16 mar 20, from -21.79 to -21.07, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -21.07 to -19.82, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1212 -19.82 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -22.42, first monitors
+## >>chng 16 mar 20, from -22.42 to -21.95, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -21.95 to -21.29, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1295 -21.29 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -21.99, first monitors
+## >>chng 16 mar 20, from -21.99 to -21.51, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -21.51 to -20.46, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1365 -20.46 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.83, first monitors
+## >>chng 16 mar 20, from -19.83 to -19.52, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -19.52 to -18.91, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1485 -18.91 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.41, first monitors
+## >>chng 16 mar 20, from -19.41 to -18.88, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -18.88 to -18.16, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1615 -18.16 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.63, first monitors
+## >>chng 16 mar 20, from -19.63 to -19.34, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -19.34 to -19.54, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1787 -19.54 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -21.27, first monitors
+## >>chng 16 mar 20, from -21.27 to -21.19, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -21.19 to -20.4, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1822 -20.4 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.12, first monitors
+## >>chng 23 jun 27, from -16.12 to -16.26, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2355 -16.26 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.65, first monitors
+## >>chng 16 mar 20, from -18.65 to -18.59, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -18.59 to -18.68, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2495 -18.68 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.16, first monitors
+## >>chng 23 jun 27, from -19.16 to -18.5, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2695 -18.5 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.31, first monitors
+## >>chng 23 jun 27, from -17.31 to -17.59, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2758 -17.59 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -20.82, first monitors
+## >>chng 14 jul 12, from -20.82 to -20.65, Get strunk closer to stout branch
+## >>chng 16 mar 20, from -20.65 to -20.6, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from -20.6 to -19.62, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2797 -19.62 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.57, first monitors
+## >>chng 23 jun 27, from -18.57 to -18.7, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2935 -18.7 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.7, first monitors
+## >>chng 23 jun 27, from -16.7 to -16.4, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4255 -16.4 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.37, first monitors
+## >>chng 23 jun 27, from -17.37 to -17.13, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4558 -17.13 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.9, first monitors
+## >>chng 23 jun 27, from -17.9 to -17.84, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4743 -17.84 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.2, first monitors
+## >>chng 23 jun 27, from -17.2 to -17.26, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4855 -17.26 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.84, first monitors
+## >>chng 23 jun 27, from -17.84 to -17.32, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4971 -17.32 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.79, first monitors
+## >>chng 23 jun 27, from -17.79 to -17.27, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4975 -17.27 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.89, first monitors
+## >>chng 23 jun 27, from -16.89 to -16.66, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5143 -16.66 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -17.03, first monitors
+## >>chng 23 jun 27, from -17.03 to -16.7, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5318 -16.7 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.76, first monitors
+## >>chng 23 jun 27, from -18.76 to -18.35, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5865 -18.35 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -19.99, first monitors
+## >>chng 23 jun 27, from -19.99 to -18.89, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 6265 -18.89 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.98, first monitors
+## >>chng 23 jun 27, from -18.98 to -18.41, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 6565 -18.41 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.96, first monitors
+## >>chng 23 jun 27, from -16.96 to -16.79, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 7445 -16.79 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -23.78, first monitors
+## >>chng 23 jun 27, from -23.78 to -23.63, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 7785 -23.63 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -16.48, first monitors
+## >>chng 14 jul 08, from -16.488890 to -16.3010, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1.88900m -16.3010 error 0.1
+##
+## >>chng 14 jul 08, from 1 to -18.77, first monitors
+## >>chng 23 jun 27, from -18.77 to -18.12, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2.20000m -18.12 error 0.1
+##
+#
+# feii_t4n0.in
+# class function 
+# ========================================
+# 
+
+This model has a very high iron abundance, 100x H, and most Fe is
+in the form of Fe+. it has a low density and unit thickness
+
+The model is optically thin, no RT.

@@ -1,0 +1,158 @@
+title feii in case of high radiation density limit
+#
+# commands controlling continuum =========
+black 8000 K lte 
+#
+# commands for density & abundances =========
+hden 9
+element iron abundance 2
+#
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+species "Fe+" levels=all
+constant tempera 8000
+iterate
+#
+# commands controlling output    =========
+set save prefix "feii_hirad"
+save overview ".ovr"
+save performance ".per"
+save monitors ".asr" last
+save species densities ".lv1" "Fe+[:200]" last
+save species densities ".lv2" "Fe+[201:]" last
+save species continuum ".fe2con" "Fe+" last units microns
+save species bands ".fe2b" "FeII_bands.ini" "Fe+" last
+#
+# commands giving the monitors    =========
+##
+monitor "Fe+" departure, value 1 std 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 1.964, Move FeII to Stout
+## >>chng 23 jun 27, from 1.964 to 2.24, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1148 2.24 error 0.1
+##
+## >>chng 23 jun 27, from 1.01 to 1.849, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1212 1.849 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 1.104, Move FeII to Stout
+## >>chng 23 jun 27, from 1.104 to 1.159, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1295 1.159 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 1.057, Move FeII to Stout
+## >>chng 23 jun 27, from 1.057 to 1.695, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1365 1.695 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 2.991, Move FeII to Stout
+## >>chng 23 jun 27, from 2.991 to 3.525, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1485 3.525 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 3.216, Move FeII to Stout
+## >>chng 23 jun 27, from 3.216 to 3.583, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1615 3.583 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 2.289, Move FeII to Stout
+## >>chng 23 jun 27, from 2.289 to 2.36, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1787 2.36 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 2.269, Move FeII to Stout
+## >>chng 23 jun 27, from 2.269 to 2.682, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1822 2.682 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 5.154, Move FeII to Stout
+## >>chng 23 jun 27, from 5.154 to 5.222, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2355 5.222 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 4.231, Move FeII to Stout
+## >>chng 23 jun 27, from 4.231 to 4.15, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2495 4.15 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 3.612, Move FeII to Stout
+## >>chng 23 jun 27, from 3.612 to 3.976, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2695 3.976 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 4.601, Move FeII to Stout
+## >>chng 23 jun 27, from 4.601 to 4.551, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2758 4.551 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 2.396, Move FeII to Stout
+## >>chng 23 jun 27, from 2.396 to 1.995, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2797 1.995 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 3.313, Move FeII to Stout
+## >>chng 23 jun 27, from 3.313 to 3.581, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2935 3.581 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 1.519, Move FeII to Stout
+## >>chng 23 jun 27, from 1.519 to 1.94, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4255 1.94 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 1.63, Move FeII to Stout
+## >>chng 23 jun 27, from 1.63 to 1.906, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4558 1.906 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to -0.1852, Move FeII to Stout
+## >>chng 23 jun 27, from -0.1852 to -0.6606, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4743 -0.6606 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to -0.5984, Move FeII to Stout
+## >>chng 23 jun 27, from -0.5984 to -0.1854, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4855 -0.1854 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to -0.6127, Move FeII to Stout
+monitor line intensity "Fe 2b" 4971 -0.6127 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 1.758, Move FeII to Stout
+## >>chng 23 jun 27, from 1.758 to 1.957, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4975 1.957 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 1.636, Move FeII to Stout
+## >>chng 23 jun 27, from 1.636 to 1.796, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5143 1.796 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 1.228, Move FeII to Stout
+## >>chng 23 jun 27, from 1.228 to 1.838, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5318 1.838 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to -0.1945, Move FeII to Stout
+## >>chng 23 jun 27, from -0.1945 to 0.1377, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5865 0.1377 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 0.4158, Move FeII to Stout
+## >>chng 23 jun 27, from 0.4158 to 0.8996, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 6265 0.8996 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 0.3387, Move FeII to Stout
+## >>chng 23 jun 27, from 0.3387 to 0.7275, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 6565 0.7275 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 0.249, Move FeII to Stout
+## >>chng 23 jun 27, from 0.249 to 0.7343, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 7445 0.7343 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to -1.478, Move FeII to Stout
+## >>chng 23 jun 27, from -1.478 to -1.544, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 7785 -1.544 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to -1.052, Move FeII to Stout
+## >>chng 23 jun 27, from -1.052 to -1.508, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1.88900m -1.508 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to -2.196, Move FeII to Stout
+## >>chng 23 jun 27, from -2.196 to -2.716, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2.20000m -2.716 error 0.1
+##
+#
+# feii_hirad.in
+# class limit 
+# ========================================
+# 
+
+This checks that, at high radiation densitites, in which
+the gas is irradiated by a blackbody in strict thermodynamic
+equilibrium, the level populations of the large model Fe+ ion
+go to the proper values, where the departure coefficients
+are all equal to unity.
+

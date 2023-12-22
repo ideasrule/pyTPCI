@@ -1,0 +1,56 @@
+title He atom in LTE at high densities, with no molecules
+#
+# commands controlling continuum =========
+blackbody 50000 STE
+#
+# commands for density & abundances =========
+hden 1
+## set eden 18
+# a high he abundance so that it dominates 
+element helium abundance 18
+init file "hheonly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+database he-like resolved levels 7
+database he-like collapsed levels 30
+no molecules
+iterate
+#
+# commands controlling output    =========
+print he-like departure helium 
+print he-like population helium 
+print h-like departure helium 
+print h-like population helium 
+print h-like departure hydrogen 
+## >>chng 13 jul 24, wl from 4471 to 4471.47A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 4471.47A to 4471.49A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 4471.49A to "Blnd" 4472.76A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 4472.76A to 4471.50A, adjust multiplet Blend WL for refraction index
+normalize to "Blnd" 4471.50A
+print line faint -2
+save overview "limit_lte_he1_nomole_ste.ovr"
+save performance "limit_lte_he1_nomole_ste.per"
+save heating "limit_lte_he1_nomole_ste.het" 
+save cooling "limit_lte_he1_nomole_ste.col" 
+save dr "limit_lte_he1_nomole_ste.dr" 
+save monitors "limit_lte_he1_nomole_ste.asr" 
+save species departure "limit_lte_he1_nomole_ste.dep" last all
+#
+# commands giving the monitors    =========
+monitor he-like excited helium departures 1 
+monitor departures "He" 1.0
+monitor departures "He+" 1.0
+monitor temperature "He" 50000
+monitor temperature "H" 50000
+# limit_lte_he1_nomole_ste.in 
+# class limit 
+# ========================================
+# 
+
+test whether a gas dominated by He goes to LTE in high-density limit.
+The level populations should be in LTE, the departure coefficients
+should be unity, and the temperature equal to the BB temp.
+

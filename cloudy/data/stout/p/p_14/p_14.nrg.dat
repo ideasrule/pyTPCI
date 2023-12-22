@@ -1,0 +1,63 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=6 were downloaded using ADM.
+#
+ 1  0  1  0 0
+ 2  0  3 -1 17135769
+ 2  1  3  0 17258746
+ 2  1  3  1 17261163
+ 2  0  1  0 17268828
+ 2  1  3  2 17270908
+ 2  1  1  1 17360546
+ 3  0  3 -1 20271101
+ 3  0  1  0 20306284
+ 3  1  3 -1 20307208.5555556
+ 3  2  3 -1 20327864.8666667
+ 3  2  1  2 20329412
+ 3  1  1  1 20332953
+ 4  0  3 -1 21350958
+ 4  0  1  0 21365193
+ 4  1  3 -1 21365893.1111111
+ 4  2  3 -1 21374427.9333333
+ 4  2  1  2 21375043
+ 4  3  3 -1 21375302
+ 4  1  1  1 21376454
+ 5  0  3 -1 21846994
+ 5  0  1  0 21854145
+ 5  1  3 -1 21854551.8888889
+ 5  2  3 -1 21858894.8
+ 5  2  1  2 21859210
+ 5  3  3 -1 21859341
+ 5  4  3 -1 21859465
+ 5  1  1  1 21859894
+ 6  0  3 -1 22115189
+ 6  0  1  0 22119283
+ 6  1  3 -1 22119546.7777778
+ 6  2  3 -1 22122045.2666667
+ 6  2  1  2 22122227
+ 6  3  3 -1 22122303
+ 6  4  3 -1 22122371
+ 6  5  3 -1 22122413
+ 6  1  1  1 22122612
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L12128 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=12128&comment_code=&amp;element=P&amp;spectr_charge=14&amp;ref=12128&amp;type=E
+# PUBCON    Title: QED Calculation of the n = 1 and n = 2 Energy Levels in He-like Ions
+# PUBCON  Authors: A. N. Artemyev, V. M. Shabaev, V. A. Yerokhin, G. Plunien, and G. Soff
+# PUBCON  Journal: Phys. Rev. A 71, 062104 (2005)
+# PUBCON      DOI: https://doi.org/10.1103/PhysRevA.71.062104
+# 
+# PUB     Refcode: L7147 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=7147&comment_code=&amp;element=P&amp;spectr_charge=14&amp;ref=7147&amp;type=E
+# PUBCON    Title: Energy Levels of Phosphorus, P I through P XV
+# PUBCON  Authors: W. C. Martin, R. Zalubas, and A. Musgrove
+# PUBCON  Journal: J. Phys. Chem. Ref. Data 14, 751–802 (1985)
+# PUBCON      DOI: https://doi.org/10.1063/1.555736

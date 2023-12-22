@@ -1,0 +1,51 @@
+title mid-T Compton energy exchange
+# test of thermal equil in limit_compton_mid_t limit; temp should EXACTLY equal 2E5K
+# check continuum partition;
+# energy range, photon densities, luminosities, follow
+# 0.25-1.  Q=26.6470 L=15.8190     c 1-1.807  Q=26.8867 L=16.3766
+# 1.807-4  Q=27.3042 L=17.0948     c 4-20     Q=27.2041 L=17.3179
+# 20 --    Q=22.9038 L=22.9038     c total lumin 17.5597
+# nufnu(912A) = 1.8029E+16
+#
+# commands controlling continuum =========
+black body t = 2.e5 K lte
+#
+# commands for density & abundances =========
+hden = 6
+init file "hheonly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+stop lyman continuum optical depth = -6
+set dr 0
+#
+# other commands for details     =========
+set temperature convergence .0001  ## decrease error on heat-cool match
+#
+# commands controlling output    =========
+print line faint .1
+print departure coef element hydrogen
+save overview "limit_compton_mid_t.ovr"
+save performance "limit_compton_mid_t.per"
+save monitors last "limit_compton_mid_t.asr"
+#
+# commands giving the monitors    =========
+monitor temperature "H+" 2.e5 K, error 0.005
+# limit_compton_mid_t.in
+# class limit 
+# ========================================
+# 
+
+This tests the behavior of the code in the Compton limit.
+The incident continuum is a blackbody in strict thermodynamic equilibrium.
+Strict thermodynamic equilibrium is expected for all constituents of the gas.
+The input stream also lists the expected photon fluxes for the incident
+continuum; this tests the normalization of the continuum,
+and its distribution. Grains are included to confirm their behavior
+in the LTE limit. The set dr command sets the zone thickness to 1 cm. 
+
+Checks:
+-	Luminosity, photon flux, over various energy intervals, 4*J at 912143.
+-	Electron temperature exactly 2*105 K.
+-	Grain temperature forced to 2*105 K by radiative processes.
+

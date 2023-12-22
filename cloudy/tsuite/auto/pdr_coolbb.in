@@ -1,0 +1,331 @@
+title illumination by cool STE blackbody
+# gasis fully molecular, grains should be in STE
+#
+# commands controlling continuum =========
+# illuminate with 120 blackbody in thermodynamic equilibrium
+blackbody 120 STE
+CMB  
+# 
+# commands for density & abundances =========
+# density
+hden 7
+# ism dust and grains
+abundances ISM no grains
+# dust to gas ratio is 10x standard
+grains 1.0
+# lowers metals and grains to 1/10 standard, so metals are
+# 1/10 solar while dust to gas ratio is galactic
+metals and grains 0.1
+#
+# other commands for details     =========
+# CO heating sets dr on second iteration, need many zones
+set nend 1600
+# set background cosmic rays to allow chemistry 
+cosmic ray background
+# we need iterate to convergence here, but that doesn't work for now... 
+iterate convergence
+#
+# commands controlling geometry  =========
+radius 17.5
+sphere
+stop temperature 20K linear 
+stop column density 25.5
+# double optical depths in PDR sims, to account for unmodelled
+# molecular cloud behind the PDR
+double
+#
+# commands controlling output    =========
+save performance "pdr_coolbb.per"
+save overview "pdr_coolbb.ovr"
+save monitors "pdr_coolbb.asr" last
+save heating "pdr_coolbb.het"
+save cooling "pdr_coolbb.col"
+save dr "pdr_coolbb.dr"
+save grain temperature "pdr_coolbb.grntem"
+save convergence reason "pdr_coolbb.cvr"
+save lines emissivity "pdr_coolbb.ems"
+H2O  212.468m
+H2O  160.466m
+CO   325.137m
+CO   144.745m
+CO   118.548m
+CN   880.858m
+end
+#
+# commands giving the monitors    =========
+## increase default error for molecular sims
+monitor set error 0.1
+## >>chng 12 jun 07, from 59.1 to 56.42, vib_evap fix
+monitor temperature "H" 56.42
+monitor H2 column density 25.20 
+monitor CO column density 20.89
+monitor "ArH+" column density 7.142
+## >>chng 13 jul 15, from -4.459 to -1.652 move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 20 aug 03, from -1.652 to -1.796, update H3+ rates Indriola+ 2012
+## >>chng 23 may 15, from -1.796 to -1.743, GS updates 21 reactions to UMIST 2012
+monitor line luminosity "Si 2" 34.8046m  -1.743
+##
+## >>chng 08 feb 20, from -1.123 to -1.475, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 jun 25, from -1.475 to -1.43 add source/sink to ioniz ladder
+## >>chng 11 nov 16, from -1.43 to -1.255, adjust newmole monitors
+## >>chng 12 apr 09, from -1.255 to -0.5646, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 12 jun 07, from -0.5646 to -0.6186, vib_evap fix
+## >>chng 12 jul 17, from -0.6186 to -0.5746, minor changes due to r6414
+## >>chng 12 aug 16, from -0.5746 to -0.6182, fix radasc bug from r6346
+## >>chng 12 aug 16, from -0.6182 to -0.5722, further fix of Rawlings H2 rates
+## >>chng 12 oct 26, from -0.5722 to -0.6358, adjust montiors to this branch
+## >>chng 12 nov 01, from -0.6358 to -0.5872, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 08, from -0.5872 to -0.6306, remove duplicated factor in Pelec_esc
+## >>chng 13 jan 10, from -0.6306 to -0.5888, fix in-zone continuum shielding
+## >>chng 13 jan 13, from -0.5888 to -0.6356, Pelec_esc change
+## >>chng 13 jan 29, from -0.6356 to -0.5896, more frequent 2nu OTS update
+## >>chng 13 aug 20, from -0.5896 to -0.5341, enable D chem by default
+## >>chng 13 sep 17, from -0.5341 to -0.6049, D chem off by default
+## >>chng 15 apr 11, from -0.6049 to -0.6487, CollisSuppres change (r10314)
+## >>chng 15 apr 28, from -0.6487 to -0.6086, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 29, from -0.6086 to -0.5647, double optical depth, iterate to convergence
+## >>chng 20 aug 03, from -0.5647 to -0.6633, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -0.6633 to -0.7449, LAMDA update
+monitor eden -0.7449
+##
+## >>chng 08 dec 08, from 9 to 4.214, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 4.214 to 9.777, merging newsolvers branch
+## >>chng 09 jan 16, from 9.777 to 9.823 (error 0.03), average of 10 runs
+## >>chng 09 jan 22, from 9.823 to 10.19, some minor botches as a result of r2655
+## >>chng 09 dec 09, from 10.19 to 9.84, array overrun fix
+## >>chng 11 jun 22, from 9.84 to 7.81, tune Te solver
+## >>chng 12 oct 22, from 7.81 to 10.57, zone tau in rt_line_one
+## >>chng 13 jan 10, from 10.57 to 8.184, fix in-zone continuum shielding
+## >>chng 13 nov 05, from 8.184 to 4.818, convergence branch changes
+## >>chng 14 apr 07, from 4.818 to 3.264, move H/C out of ConvBase loop
+monitor itrzn 3.264
+##
+## >>chng 09 oct 25, add this monitor
+## >>chng 09 dec 09, from 1412 to 385 array overrun fix
+## >>chng 10 mar 02, from 385 to 363, fix botches after CO model switch
+## >>chng 10 jun 25, from 383 to 384 Ryan's species cooling bugfix
+## >>chng 12 jun 07, from 384 to 408, vib_evap fix
+## >>chng 12 oct 22, from 408 to 453, zone tau in rt_line_one
+## >>chng 13 jan 10, from 453 to 407, fix in-zone continuum shielding
+## >>chng 18 jan 10, from 407 to 452, masers are allowed by default
+monitor nzone 452
+##
+## >>chng 13 jun 27, from -8.869 to -2.03, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -2.03 to -1.816, update newly added monitors
+## >>chng 13 jul 15, from -1.816 to -2.066, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 19, from -2.066 to -2.321, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -2.321 to -2.676, double optical depth, iterate to convergence
+monitor "H2O " 538.142m line intensity -2.676
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 212.5m to 212.468m, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 17, from -1.969 to -2.075, Matt move Cl to Chianti & Stout
+## >>chng 13 aug 25, from -2.075 to -1.972, make D conv check similar to others
+## >>chng 13 sep 10, from -1.972 to -2.113, use Flower+00 simple HD cooling
+## >>chng 13 sep 15, from -2.113 to -1.973, improve Thomson c.s.
+## >>chng 13 nov 03, from -1.973 to -2.063, update H2 - C II collision rates
+## >>chng 15 may 29, from -2.063 to -2.225, double optical depth, iterate to convergence
+monitor "H2O " 212.468m line intensity -2.225 error 0.2
+## 
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 160.5m to 160.466m, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 12, from -1.924 to -1.873, database Mg
+## >>chng 13 nov 03, from -1.873 to -1.826, update H2 - C II collisions"
+## >>chng 13 nov 05, from -1.826 to -1.873, convergence branch changes
+## >>chng 15 may 29, from -1.873 to -2.061, double optical depth, iterate to convergence
+## >>chng 20 aug 03, from -2.061 to -2.023, update H3+ rates Indriola+ 2012
+monitor "H2O " 160.466m line intensity -2.023
+## >>chng 13 jun 27, from -7.357 to -3.583, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -3.583 to -3.463, update newly added monitors
+## >>chng 13 jul 15, from -3.463 to -3.078, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 19, from -3.078 to -3.791, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 20, from -3.791 to -3.859, enable D chem by default
+## >>chng 13 sep 17, from -3.859 to -3.769, D chem off by default
+## >>chng 13 oct 14, from -3.769 to -3.861, update energies, fig bug stout sc 3
+## >>chng 13 oct 31, from -3.861 to -3.772, sims allowed to wander away over past few weeks
+## >>chng 14 jan 05, from -3.772 to -3.713, N to external databases
+## >>chng 14 mar 26, from -3.713 to -3.761, Move oxygen data to stout and chianti files
+## >>chng 15 may 29, from -3.761 to -4.2, double optical depth, iterate to convergence
+monitor "HNC " 1652.90m  line intensity -4.2
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 178.2m to 178.228m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -2.411 to -2.507, LAMDA update
+## >>chng 21 nov 04, from -2.507 to -2.466, update mole co data
+## >>chng 23 may 15, from -2.466 to -2.513, GS updates 21 reactions to UMIST 2012
+monitor "HCN " 178.228m line intensity -2.513
+## >>chng 13 jun 27, from -8.563 to -4.031, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 19, from -4.031 to -4.086, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -4.086 to -4.476, double optical depth, iterate to convergence
+monitor "HCS+" 1755.88m  -4.476 line intensity
+## >>chng 13 jun 27, from -7.453 to -4.239, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -4.239 to -3.504, update newly added monitors
+## >>chng 13 jul 15, from -3.504 to -4.346, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 19, from -4.346 to -4.653, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 14, from -4.653 to -4.72, update energies, fig bug stout sc 3
+## >>chng 13 oct 31, from -4.72 to -4.634, sims allowed to wander away over past few weeks
+## >>chng 14 jan 05, from -4.634 to -4.562, N to external databases
+## >>chng 14 mar 26, from -4.562 to -4.617, Move oxygen data to stout and chianti files
+## >>chng 15 mar 07, from -4.617 to -4.662, merging newmesh branch
+## >>chng 15 apr 28, from -4.662 to -4.623, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 29, from -4.623 to -5.047, double optical depth, iterate to convergence
+monitor "CS  " 3058.86m  -5.047 line intensity
+## >>chng 13 jun 27, from -7.288 to -4.068, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -4.068 to -3.873, update newly added monitors
+## >>chng 13 jul 15, from -3.873 to -4.122, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 19, from -4.122 to -4.359, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 25, from -4.359 to -4.429, make D conv check similar to others
+## >>chng 13 sep 06, from -4.429 to -4.339, rearranged CoolEvaluate() for HfsLines to get indirect excitations
+## >>chng 13 oct 14, from -4.339 to -4.429, update energies, fig bug stout sc 3
+## >>chng 13 oct 31, from -4.429 to -4.34, sims allowed to wander away over past few weeks
+## >>chng 15 may 29, from -4.34 to -4.785, double optical depth, iterate to convergence
+monitor "CO  " 2600.05m  -4.785 line intensity
+## >>chng 13 jun 27, from -6.463 to -2.674, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -2.674 to -3.245, update newly added monitors
+## >>chng 13 jul 15, from -3.245 to -2.849, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 19, from -2.849 to -3.480, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -3.48 to -3.895, double optical depth, iterate to convergence
+monitor "CO  " 1300.05m  -3.895 line intensity
+## >>chng 13 jun 27, from -6.149 to -1.932, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -1.932 to -2.761, update newly added monitors
+## >>chng 13 jul 15, from -2.761 to -2.828, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 19, from -2.828 to -2.979, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -2.979 to -3.393, double optical depth, iterate to convergence
+monitor "CO  " 866.727m  -3.393 line intensity
+## >>chng 13 jun 27, from -6.177 to -2.401, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -2.401 to -1.865, update newly added monitors
+## >>chng 13 jul 15, from -1.865 to -2.096, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 19, from -2.096 to -2.621, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -2.621 to -3.054, double optical depth, iterate to convergence
+monitor "CO  " 650.074m  -3.054 line intensity
+## >>chng 13 jun 27, from -6.485 to -2.368, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 19, from -2.368 to -2.362, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -2.362 to -2.805, double optical depth, iterate to convergence
+monitor "CO  " 520.089m  -2.805 line intensity
+## >>chng 13 jun 27, from -6.954 to -2.264, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 19, from -2.264 to -2.154, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -2.154 to -2.616, double optical depth, iterate to convergence
+monitor "CO  " 433.438m  -2.616 line intensity
+## >>chng 13 jun 27, from -7.48 to -2.142, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 19, from -2.142 to -1.981, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 04, from -1.981 to -1.885, remove Lyman line TauIn hack
+## >>chng 13 nov 05, from -1.885 to -1.981, convergence branch changes
+## >>chng 15 may 29, from -1.981 to -2.47, double optical depth, iterate to convergence
+monitor "CO  " 371.549m  -2.47 line intensity
+## >>chng 13 jun 27, from -8.049 to -2.029, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 19, from -2.029 to -1.841, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 17, from -1.841 to -1.793, Matt move Cl to Chianti & Stout
+## >>chng 13 aug 25, from -1.793 to -1.728, make D conv check similar to others
+## >>chng 13 sep 12, from -1.728 to -1.854, database Mg
+## >>chng 13 oct 14, from -1.854 to -1.351, update energies, fig bug stout sc 3
+## >>chng 13 oct 31, from -1.351 to -1.784, sims allowed to wander away over past few weeks
+## >>chng 13 nov 05, from -1.784 to -1.828, convergence branch changes
+## >>chng 15 may 29, from -1.828 to -2.357, double optical depth, iterate to convergence
+monitor "CO  " 325.137m  -2.357 line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 260.2m to 260.169m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -1.597 to -1.541, fix CT bug in mole_eval_balance
+## >>chng 13 dec 04, from -1.541 to -1.607, properly reset mult_opac
+## >>chng 13 dec 09, from -1.607 to -1.501, force nfine to nfine_malloc
+## >>chng 13 dec 18, from -1.501 to -1.584, fixes to Federman shielding
+## >>chng 13 dec 23, from -1.584 to -1.539, C to external databases
+## >>chng 13 dec 27, from -1.539 to -1.570, aver 32 bit llvm, 64 bit gcc, mac osx
+## >>chng 14 jun 05, from -1.57 to -1.52, ionization acceleration tweaks
+## >>chng 14 jun 11, from -1.52 to -1.563, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+## >>chng 14 jun 11, from -1.563 to -1.52, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+## >>chng 14 aug 28, from -1.52 to -1.603, EleyRideal H2 formation
+## >>chng 15 mar 07, from -1.603 to -1.515, merging newmesh branch
+## >>chng 15 mar 10, from -1.515 to -1.613, tweak frequency mesh edges
+## >>chng 15 may 27, from -1.613 to -1.573, PS64 fixes
+## >>chng 15 may 29, from -1.573 to -2.203, double optical depth, iterate to convergence
+monitor "CO  " 260.169m  -2.203 line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 216.9m to 216.868m, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -1.506 to -1.457, use Flower+00 simple HD cooling
+## >>chng 13 sep 12, from -1.457 to -1.529, database Mg
+## >>chng 13 nov 05, from -1.529 to -1.482, convergence branch changes
+## >>chng 14 may 06, from -1.482 to -1.524, fix K -> Ryd conversions
+## >>chng 14 jun 11, from -1.524 to -1.483, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+## >>chng 15 may 29, from -1.483 to -2.115, double optical depth, iterate to convergence
+monitor "CO  " 216.868m  -2.115 line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 185.9m to 185.949m, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -1.544 to -1.59, use Flower+00 simple HD cooling
+## >>chng 13 sep 17, from -1.59 to -1.552, D chem off by default
+## >>chng 15 may 29, from -1.552 to -2.069, double optical depth, iterate to convergence
+monitor "CO  " 185.949m  -2.069 line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 144.7m to 144.745m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -1.885 to -2.121, double optical depth, iterate to convergence
+monitor "CO  " 144.745m  -2.121 line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 118.5m to 118.548m, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -2.451 to -2.505, use Flower+00 simple HD cooling
+## >>chng 13 sep 17, from -2.505 to -2.444, D chem off by default
+## >>chng 14 mar 26, from -2.444 to -2.528, Move oxygen data to stout and chianti files
+## >>chng 15 may 30, from -2.528 to -2.484, updates after merge from mainline, r10248
+## >>chng 20 aug 03, from -2.484 to -2.538, update H3+ rates Indriola+ 2012
+monitor "CO  " 118.548m  -2.538 line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 100.4m to 100.433m, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 10, from -3.635 to -3.699, use Flower+00 simple HD cooling
+## >>chng 13 sep 17, from -3.699 to -3.63, D chem off by default
+## >>chng 14 mar 26, from -3.63 to -3.738, Move oxygen data to stout and chianti files
+## >>chng 15 may 29, from -3.738 to -3.686, double optical depth, iterate to convergence
+## >>chng 15 jun 04, from -3.686 to -3.62, updates after merge from trunk, r10449
+## >>chng 20 aug 03, from -3.62 to -3.676, update H3+ rates Indriola+ 2012
+monitor "CO  " 100.433m  -3.676 line intensity
+## >>chng 13 jun 27, from -7.522 to -2.884, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -2.884 to -2.823, update newly added monitors
+## >>chng 13 jul 15, from -2.823 to -2.897, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 19, from -2.897 to -3.063, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -3.063 to -3.509, double optical depth, iterate to convergence
+monitor "^13CO" 906.599m  -3.509 line intensity
+## >>chng 13 jun 27, from -8.247 to -2.927, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 29, from -2.927 to -2.967, update newly added monitors
+## >>chng 13 jul 19, from -2.967 to -3.025, set number of iterations to 8 for proper convergence of the model
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 17, from -3.025 to -3.161, Matt move Cl to Chianti & Stout
+## >>chng 13 oct 31, from -3.161 to -3.014, sims allowed to wander away over past few weeks
+## >>chng 13 nov 03, from -3.014 to -3.101, update H2 - C II collisions"
+## >>chng 13 nov 04, from -3.101 to -3.032, remove Lyman line TauIn hack
+## >>chng 13 nov 05, from -3.032 to -3.074, convergence branch changes
+## >>chng 15 may 29, from -3.074 to -3.462, double optical depth, iterate to convergence
+## >>chng 21 sep 11, from -3.462 to -3.508, LAMDA update
+## >>chng 21 sep 15, from -3.508 to -3.436, go back to unresolved model
+monitor "CN  " 880.858m  -3.436  line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 986.1m to 986.129m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -3.244 to -3.716, double optical depth, iterate to convergence
+monitor "SiO " 986.129m  -3.716  line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 238.6m to 238.551m, increased wl precision to 6 sig. fig.
+monitor "SiO " 238.551m  -2.680  line intensity
+## >>chng 13 jul 19, add this monitor
+## >>chng 13 jul 24, wl from 209.8m to 209.779m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 29, from -2.789 to -2.746, double optical depth, iterate to convergence
+## >>chng 20 aug 03, from -2.746 to -2.705, update H3+ rates Indriola+ 2012
+monitor "SiO " 209.779m  -2.705  line intensity
+#
+# pdr_coolbb.in
+# class pdr 
+# ========================================
+
+This is a dense ISM exposed to a cool blackbody.  This tests the
+ability to converge onto a VERY molecular environment.  Nearly all
+C and H are in CO and H2.  Cosmic rays are the main source of
+heat and ionization.
+
+Continuum pumping of CO followed by collisional deexcitation is a
+major heating agent across the sim.

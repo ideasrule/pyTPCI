@@ -1,0 +1,97 @@
+title H II region sim from Christophe Morriset's ionization paramter family
+set save prefix "hii_Um385"
+Blackbody 56000
+ionization parameter = -3.85
+hden = 3
+abundances HII region
+cosmic ray background
+element limit off -8
+print line optical depth
+iterate
+#
+# commands giving the monitors    =========
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A luminosity -2.743
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A  1.125.
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 5875.66A  0.1174
+## >>chng 18 jun 20, from 0.128 to 0.1338, #bugfixes at front face r12134:12136
+monitor line "Ca B" 5875.64A 0.1338
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+monitor line "He 1" 3888.64A  0.1119
+## >>chng 17 may 25, wl from 3889.07A to 3889.05A, update Rydberg constant
+## >>chng 21 mar 16, wl from 3889.05A to 3889.06A, update NIST energies
+## >>chng 21 aug 18, wl from 3889.06A to 3889.05A, revert to PvH energies for H
+monitor line "Ca B" 3889.05A 0.104
+## >>chng 18 feb 20, updated spectral label from "he 1" 7065.22A to "Blnd" 7067.20A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 7067.20A to 7065.25A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 7065.25A  0.0271
+monitor line "Ca B" 7065.22A 0.0261
+## >>chng 18 feb 20, updated spectral label from "he 1" 4471.49A to "Blnd" 4472.76A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 4472.76A to 4471.50A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 4471.50A  0.0476
+monitor line "Ca B" 4471.49A 0.0472
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+## >>chng 19 jul 30, from 0.5688 to 0.4045, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.4045 to 0.3405, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line "Blnd" 1.08302m 0.3405
+monitor line "blnd" 2326  0.7739 error 0.1
+## >>chng 19 mar 01, from 0.0726 to 0.0277, remove recombination, etc, components from blends (#415)
+monitor line "blnd" 1335  0.0277 error 0.1
+monitor line "blnd" 1909  0.111 error 0.1
+monitor line "N  2"  6583.45  2.589 error 0.1
+## >>chng 22 jul 09, from 0.0143 to 0.0136, upgrade to Chianti v10
+monitor line "n  3"  57.3238m  0.0136
+monitor line "blnd"  7325  0.1544 error 0.07
+monitor line "blnd"  3727  6.133 0.1
+monitor line "O  3"  51.8004m  0.0528
+monitor line "o  3"  5006.84  0.1887
+monitor line "Ne 2"  12.8101m  0.4236
+monitor line "Ne 3"  15.5509m  0.1422
+monitor line "Ne 3"  36.0036m  0.0129
+## >>chng 18 jun 20, from 0.0599 to 0.0644, #bugfixes at front face r12134:12136
+monitor line "Ne 3" 3868.76A  0.0644 error 0.08
+## >>chng 23 may 11, from 0.2797 to 0.2653, update RR DR to 2022 Badnell wor
+monitor line "S  3"  18.7078m  0.2653
+## >>chng 23 may 11, from 0.48 to 0.4379, update RR DR to 2022 Badnell wor
+monitor line "S  3"   9530.62A  0.4379
+## >>chng 18 jan 17, rm line, became too faint, only 1 sig fig, so could not assert high accuracy
+## >>chng 18 jan 17, from 0.0009 to 0.0009, ## >>chng 18 jan 17, from 2.262 to 2.139, update Badnell RR, DR to http://dx.doi.org/10.1051/0004-6361/201731243
+## monitor line "S  4"  10.5076m  0.0009
+monitor line "Ar 2" 6.98337m  0.1029
+monitor line "Bac " 3646 16.36
+monitor hydrogen 2 ionization fraction is 0.5981
+monitor helium   2 ionization fraction is 0.6574
+monitor depth 16.4040
+## >>chng 18 jun 20, from 128 to 122, #bugfixes at front face r12134:12136
+monitor nzone 122
+monitor temperature face 9157
+monitor temperature "O" 3.893
+monitor temperature "O+" 3.964
+monitor temperature "O+2" 3.948
+monitor HHeicf -0.0608 error 0.01
+## >>chng 18 aug 30, from 6.859 to 7.159, average of 14 runs
+monitor itrzn 7.159 error 0.05
+#
+save last continuum ".con" units microns
+save last overview ".ovr"
+save last monitors ".asr"
+save performance ".per"
+#
+# hii_Um3.in
+# class hii
+# ===========================
+
+This is one of three tests suggested by Christophe Morisset to span
+the range of ionization parameter on a BPT diagram

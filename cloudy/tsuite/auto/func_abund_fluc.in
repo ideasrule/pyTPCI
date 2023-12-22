@@ -1,0 +1,37 @@
+title check fluctuating heavy-element abundances 
+# commands controlling continuum =========
+blackbody 5
+ionization -2
+# 
+# commands for density & abundances =========
+hden 3
+# this varies the abundnaces between default and 1e-4 times default,
+# over a 1e10 cm period - we will compute half a cycle
+fluctuations abundances 10.3 0 -4
+# 
+# commands controlling geometry  =========
+# stop at half a cycle so pick off lowest abundances
+stop thickness 10
+# 
+# other commands for details     =========
+# speed things up a bit
+init "c84.ini"
+#
+# commands controlling output    =========
+print column density
+save performance "func_abund_fluc.per"
+save monitors "func_abund_fluc.asr"
+save overview "func_abund_fluc.ovr"
+save abundances "func_abund_fluc.abn"
+#
+# commands giving asserts
+monitor "H+" temperature 4.228
+monitor hydrogen 1 ionization -3.148
+#
+# func_abund_fluc.in
+# class function 
+# ========================================
+# 
+
+This checks that the variable abundances option works
+

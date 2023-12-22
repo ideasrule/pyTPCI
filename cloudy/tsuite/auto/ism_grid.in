@@ -1,0 +1,73 @@
+title interstellar cloud irradiated by ism background
+#
+# commands controlling continuum =========
+# this uses the Black continuum with no H-ionizing radiation,
+# and with background cosmic rays
+table ism
+extinguish by a column of 22
+## >>chng 12 apr 09, scale factor will result in Williams et al CR rate 
+## this old rate is used to maintain history of changes
+cosmic rays background linear 0.1266
+#
+# commands for density & abundances =========
+hden 0 vary
+grid from -3 to 2 in 0.5 dex steps sequential
+init file="ism.ini"
+# this turns on ism abundances and grains
+abundances ism
+#
+# commands controlling geometry  =========
+# set sphere since matter in all directions
+sphere 
+stop temperature linear 10
+stop thickness 0.1 linear parsecs
+stop zone 1 
+#
+# other commands for details     =========
+# this prevents continuum pumping from exciting H0
+## >>chng 16 apr 14, had been case B, this gets same effect with
+## no large Lyman optical depths
+Database H-like Lyman pumping off
+#
+# commands controlling output    =========
+# this model has no heavy element molecules, because H2 does not
+# really fully form, since Lyman bands are not self-shielded
+normalize to 157.636m "C  2"
+save performance "ism_grid.per"
+save pressure "ism_grid.pre" last no hash
+save grid "ism_grid.grd" last no hash
+save averages "ism_grid.avr" last no hash
+temperature hydrogen 1 
+end of averages
+save monitors "ism_grid.asr" last
+save overview "ism_grid.ovr" last
+save dr "ism_grid.dr"
+save heating "ism_grid.het"  last no hash
+save coolign "ism_grid.col"  last no hash
+save xspec mtable "ism_grid.fit" range 0.1 3 keV
+save temperature "ism_grid.tem"  last no hash
+#
+# commands giving the monitors    =========
+# this is a special version of the monitors that does a series of models 
+## >>chng 08 feb 11, from 776 to 811 for sim 5, cr&secondary heat efficiency
+# sert tempe hydro 1 9942 .05 grid 8575 6468 3606 776 304 169 103 66.2 44.1 31.3
+monitor temperature grid "ism_grid.dat" "H+" .05
+#
+# ism_grid.in
+# class ism 
+# ========================================
+
+this shows an S-curve calculation - make plot showing density as X-axis
+and gas pressure (nT) as y-axis
+
+the gas is ionized by the galactic background.  the density varies between
+1e-3 and 100 cm-3.  this is the full range found in the diffuse ism.
+The components that are produced are 
+CNM - cold neutral medium, density ~ 40 cm-3
+WNM - n ~ 0.5 cm-3, 
+WIM - warm ionized medium, n ~ 0.25 cm-3
+HIM - hot ionized medium, n ~ 1e-3 cm-3, calculation DOES NOT 
+      reproduce observed temperature of HIM - we get ~1e4K but
+      observed is ~1e6 K.  HIM is shock, not photo, ionized
+
+

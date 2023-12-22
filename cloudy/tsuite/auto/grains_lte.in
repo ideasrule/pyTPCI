@@ -1,0 +1,72 @@
+title check that grains equilibriate at correct temp in ste limit
+# this also tests that the code works when H He ionization is ZERO
+#
+# commands controlling continuum =========
+black 3 lte 
+#
+# commands for density & abundances =========
+hden 5
+eden 5
+init file "hheonly.ini"
+# need to normalize to some line, oxygen will provide some 
+element oxygen on 
+# ism grains with high dust to gas ratio
+grain abund 1
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0 
+#
+# other commands for details     =========
+iterate
+cosmic rays background
+database h2
+#
+# commands controlling output    =========
+save species "grains_lte.h" "H[:]" last densities 
+save species "grains_lte.h2" "H2[:]" last densities  
+normalize to "O  1" 63.1679m
+save overview "grains_lte.ovr"
+save performance "grains_lte.per"
+save monitors last "grains_lte.asr"
+save heating last "grains_lte.het"
+save cooling last "grains_lte.col"
+#
+# commands giving the monitors    =========
+monitor temperature "H2" 3 error 0.02
+monitor grain temperature  1 3 error 0.005
+monitor grain temperature  2 3 error 0.005
+monitor grain temperature  3 3 error 0.005
+monitor grain temperature  4 3 error 0.005
+monitor grain temperature  5 3 error 0.005
+monitor grain temperature  6 3 error 0.005
+monitor grain temperature  7 3 error 0.005
+monitor grain temperature  8 3 error 0.005
+monitor grain temperature  9 3 error 0.005
+monitor grain temperature 10 3 error 0.005
+monitor grain temperature 11 3 error 0.005
+monitor grain temperature 12 3 error 0.005
+monitor grain temperature 13 3 error 0.005
+monitor grain temperature 14 3 error 0.005
+monitor grain temperature 15 3 error 0.005
+monitor grain temperature 16 3 error 0.005
+monitor grain temperature 17 3 error 0.005
+monitor grain temperature 18 3 error 0.005
+monitor grain temperature 19 3 error 0.005
+monitor grain temperature 20 3 error 0.005
+# grains_lte.in
+# class limit 
+# ========================================
+# 
+
+This test irradiates a set of grains with a true blackbody in
+strict thermodynamic equilibrium.  We expect the grains
+(and everything else) to equilibriate at the blackbody temperature.
+The gas temperature is forced to the radiation temperature because
+the current molecule network (based on ISM approximations) does not
+go to LTE in the high-radiation density limit.  The calculation
+asserts that all grain temperatures are very close to the radiation
+temperature.
+
+
+

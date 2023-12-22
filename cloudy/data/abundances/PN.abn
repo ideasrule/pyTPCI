@@ -1,0 +1,66 @@
+#PN abund from
+#refer	PN	abund	Aller, L. H., & Czyzak, S. J. 1983, ApJS, 51, 211
+HYDROGEN	1
+GRAINS ISM
+HELIUM		0.1
+#LITHIUM	1.00E-20--Element Off
+#BERYLLIUM	1.00E-20--Element Off
+#BORON		1.00E-20--Element Off
+CARBON		7.80E-04
+NITROGEN	1.80E-04
+OXYGEN		4.40E-04
+FLUORINE	3.00E-07
+NEON		1.10E-04
+SODIUM		1.90E-06
+MAGNESIUM	1.60E-06
+ALUMINIUM	2.70E-07
+SILICON		1.00E-05
+PHOSPHORUS	2.00E-07
+SULPHUR		1.00E-05
+CHLORINE	1.70E-07
+ARGON		2.70E-06
+POTASSIUM	1.20E-07
+CALCIUM		1.20E-08
+#SCANDIUM	1.00E-20--Element Off
+#TITANIUM	1.00E-20--Element Off
+#VANADIUM	1.00E-20--Element Off
+#CHROMIUM	1.00E-20--Element Off
+#MANGANESE	1.00E-20--Element Off
+IRON		5.00E-07
+#COBALT		1.00E-20--Element Off
+NICKEL		1.80E-08
+#COPPER		1.00E-20--Element Off
+#ZINC		1.00E-20--Element Off
+*********************************************
+
+
+These abundances are from Aller and Czyzak (1983) and
+Khromov (1989), with high depletions assumed for elements
+they do not list. The grains are from unpublished work of
+Kevin Volk on post-AGB stars. The derived dust to gas ratios
+of different PNe have a large spread. Evidence summarized
+by Clegg and Harrington (1989) suggests that some
+PNe have dust to gas ratios roughly ten times smaller than
+ISM. However, Mallik and Peimbert (1988) find dust to gas
+ratios similar to ISM and Borkowski and Harrington (1991)
+find one object with a dust-to-gas ratio an order of magnitude
+above ISM. The grain composition of planetary nebulae
+should be treated on a case by case rather than statistical
+basis. Abundances entered as “1E-20” are not real values,
+simply values chosen to be small enough to be of no consequence.
+I would appreciate learning about better numbers.
+
+L. H. Aller and S. J. Czyzak. Chemical compositions of planetary nebulae. ApJS, 51:211–247, February
+1983. doi: 10.1086/190846.
+
+G. S. Khromov. Planetary nebulae. Space Science Reviews, 51:339–423, December 1989. doi:
+10.1007/BF00172024.
+
+R. E. S. Clegg and J. P. Harrington. The photo-ionization of He I (2 3S) in nebulae. MNRAS, 239:869–883,
+August 1989.
+
+D. C. V. Mallik and M. Peimbert. Filling factor determinations and their effects on planetary nebula studies.
+Revista Mexicana de Astronomia y Astrofisica, 16:111–121, December 1988.
+
+K. J. Borkowski and J. P. Harrington. A grain-heated, dusty planetary nebula in M22. ApJ, 379:168–176,
+September 1991. doi: 10.1086/170493.

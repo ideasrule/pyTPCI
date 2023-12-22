@@ -1,0 +1,110 @@
+visual studio
+
+set path
+project / trunk properties / c/c++ / preprocessor / preprocessor definiation - at after ;   
+CLOUDY_DATA_PATH="\"c:\\projects\\cloudy\\trunk\\data\\\\\""
+
+inline functions - use even in debug - factor of 2 speedup:
+"only __inline" 
+
+Visual Studio Team Suite edition
+
+================================
+
+static code analysis 
+
+based on PREfast which was developed for analysing native C++ code
+Both are driven by rules that specify coding policies covering design, 
+security, naming, reliability and so forth. VSTS comes with a whole set 
+of rules ready defined, and others can be added as required.
+
+PREfast is driven by rules that specify coding policies that cover naming, 
+globalisation, design, security, reliability and so forth. The rules provided 
+are not exhaustive and we understand that you will be able to add new rules.
+
+By default, every rule is enabled and generates a warning once compilation 
+is completed. However, you can change their setting so that any breach results 
+in an error and a failed compile. You can also manage this from your code by 
+including a header file listing all the rules and their default state. You 
+can then upgrade warnings to errors or disable warnings using the #pragma 
+directive.
+
+================================
+
+code profiler
+
+code profiler which analyses how your code executes and where the majority 
+of time is spent during execution. Once you’ve highlighted bottlenecks in 
+your code you can start looking at ways to make it more efficient.
+
+The VSTS code profiler supports two profiling methods, namely ‘sampling’ 
+and ‘instrumentation’. The sampling technique involves interrupting the 
+execution at regular intervals and checking what function is being executed 
+and how it was called. Instrumentation involves inserting new code that 
+reports back the state of the application as it executes. As such it is much 
+more intrusive, but instrumentation profiling does illicit more information 
+than sampling.
+
+Application performance has become a major issue today. To help developers get an 
+understanding of how their code is performing, the Developers edition includes 
+some tools that allow you to profile your application. There are two distinct 
+approaches: sampling, which reports on what is happening at the time the sample 
+is taken, such as what is running and the state of the stack; and instrumentation, 
+which uses probes to monitor such things as memory and processor activity, and the 
+behaviour of functions.
+
+To profile your application you start with the Performance Wizard. There are 
+just three simple steps: Select the application, choose Sampling or Instrumentation, 
+and Finish. When you are ready to gather the sampled information you go to the 
+Performance Explorer, right click on the application and select Launch.
+The next step is to work through some test operations so that the profiler can 
+capture information. Once you have finished you close the application and the wizard 
+generates a report.
+
+There are several things that you can investigate from the report but of common interest 
+is likely to be the frequency that a particular function is called. If you have a function 
+that appears to be called more than you would expect, you can right-click on the report 
+to have the source code opened.
+
+If you want to look more closely at a particular module you should consider using the 
+Instrumentation rather than the Sampling approach. As before, once the wizard is 
+running, you work with the application to allow the wizard to gather enough information. 
+In this case what you are looking for is signs of excessive time or resources being 
+consumed by a particular function. From here you can drill down more deeply into the 
+code and look for variables that appear to be wrong or code that appears to be constantly 
+looping.
+
+Perhaps one of the most important things that you can get from an Instrumentation report 
+is a view of how memory is being managed. You might find that a particular function 
+uses more memory than expected, or that during execution the memory consumption 
+continues to rise. This is almost certainly caused by memory not being returned to the 
+pool, or by a memory leak. Either way, you can now locate and deal with the problem long 
+before the application is sent to the QA team for more detailed testing.
+
+That said, these profiling tools should not be considered as just a pre-QA set. If code 
+is returned or an error report is raised, you can use these tools to get more detailed 
+information than the report may contain.
+
+Before you can use any of these tools you need to have a good working knowledge of your 
+environment. These are not tools to be given to junior members of the team. They require 
+training and experience in order to get the best out of them. Nevertheless, such an 
+approach to code testing is long overdue.
+
+=================================
+
+Unit Testing
+
+The first and most basic testing element is the Unit Test. You create a Unit Test from 
+the Generate Unit Tests page, where you can select the method on which you wish to 
+conduct the test and the language that the test project will use.
+
+=================================
+
+Code coverage
+
+Code Coverage allows you to instrument your code so you can get much more granular 
+information on what is happening when you run your tests, and is supported by both the 
+Developers and the Testers editions. You select which tests to run in the usual way, except 
+now you ensure that the Code Coverage box is checked. Once the tests have run you will see a 
+new Code Coverage tab alongside Error List and Test Results. This opens the Code Coverage 
+window listing the elements that were called when the test was run.

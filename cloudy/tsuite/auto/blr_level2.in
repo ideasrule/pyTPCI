@@ -1,0 +1,478 @@
+title test dominant level2 lines
+#
+# commands controlling continuum =========
+table agn
+ionization -2
+#
+# commands controlling geometry  =========
+stop column density 19
+#
+# commands for density & abundances =========
+hden 10
+element phosphorus abundance 0
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling output    =========
+save performance "blr_level2.per" 
+save monitors "blr_level2.asr" last
+save convergence reason last "blr_level2.cvr"
+save overview "blr_level2.ovr"
+save dr "blr_level2.dr"
+#
+# commands giving the monitors    =========
+## >>chng 02 jul 23 most of P asserts changed, growing smaller due to 
+## better brems opacity, causing gas to be cooler
+## >>chng 01 jul 04, from 93.2, to 80.4 chng in diffuse fields
+## >>chng 02 jul 23, from 80.4 to 55.1, better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 aug 15, from 6.422 to 6.376, add guess of low-T dr for fe
+## >>chng 03 aug 28, from 6.376 to 6.432, inner shell physics
+## >>chng 06 feb 08, from 6.43 to 6.41, add exp to low-T DR 
+## >>chng 07 nov 29, from 6.41 to 6.45, update DR rates
+## >>chng 08 sep 22, from 6.45 to 6.392, remove Ali et al. DR guess
+## >>chng 10 aug 12, from 6.392 to 6.336, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from 6.336 to 5.993, enable fit to Badnell DR suppression
+## >>chng 12 jul 01, from 5.993 to 6.065, update Badnell DR to 13-electron iso sequence
+## >>chng 12 jul 09, from 6.065 to 6.087, get rid of major discontinuities in 3body rates
+## >>chng 12 oct 13, from 6.087 to 6.159, Badnell revise DR collisional suppression fit
+## >>chng 13 feb 01, from 6.159 to 6.18, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 1539 to 1539.20A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, wl change allow all stout levels
+## >>chng 14 may 24, from 6.18 to 4.971, allow all NIST levels to be used
+## >>chng 14 may 29, from 4.971 to 4.951, fix lowered Lyman depths
+## >>chng 14 sep 20, from 4.951 to 4.923, NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 16 dec 20, from 4.923 to 5.166, add secondary autoionization to DR suppression
+## >>chng 18 aug 30, from 5.166 to 4.801, update TP's for P II
+## >>chng 18 sep 11, from 4.801 to 5.922, update P II collision strengths
+monitor line luminosity "P  2" 1536.42A  5.922
+##
+## >>chng 01 jul 04, from 58.4 to 50.05 chng in diffuse fields
+## >>chng 02 jul 23, from 50.05 to 33.3, better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 aug 15, from 6.214 to 6.169, add guess of low-T dr for fe
+## >>chng 03 aug 28, from 6.169 to 6.215, inner shell physics
+## >>chng 06 feb 08, from 6.215 to 6.198, add exp to low-T DR 
+## >>chng 07 nov 29, from 6.198 to 6.248, update DR rates
+## >>chng 08 sep 22, from 6.248 to 6.182, remove Ali et al. DR guess
+## >>chng 10 aug 12, from 6.182 to 6.125, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from 6.125 to 5.776, enable fit to Badnell DR suppression
+## >>chng 12 jul 01, from 5.776 to 5.844, update Badnell DR to 13-electron iso sequence
+## >>chng 12 jul 09, from 5.844 to 5.866, get rid of major discontinuities in 3body rates
+## >>chng 12 oct 13, from 5.866 to 5.945, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 5.945 to 5.924, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from 5.924 to 5.965, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 1308 to 1307.68A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, wl change allow all stout levels
+## >>chng 14 may 24, from 5.965 to 5.699, allow all NIST levels to be used
+## >>chng 14 may 27, from 5.699 to 5.673, update to number of levels
+## >>chng 14 sep 20, from 5.673 to 5.634, NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 16 dec 20, from 5.634 to 5.862, add secondary autoionization to DR suppression
+## >>chng 18 aug 30, from 5.862 to 5.287, update TP's for P II
+## >>chng 18 sep 11, from 5.287 to 5.641, update P II collision strengths
+monitor line luminosity "P  2" 1305.50A  5.641            
+##
+## >>chng 01 mar 02, add error after change in H rt
+## >>chng 01 jul 04, from 68.6 to 61.5 chng in diffuse fields
+## >>chng 02 jul 23, from 61.5 to 39.7, better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 aug 15, from 6.301 to 6.253, add guess of low-T dr for fe
+## >>chng 03 sep 03, from 6.253 to 6.298, heavy free bound
+## >>chng 10 aug 12, from 6.298 to 6.221, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from 6.221 to 5.876, enable fit to Badnell DR suppression
+## >>chng 12 jul 01, from 5.876 to 5.942, update Badnell DR to 13-electron iso sequence
+## >>chng 12 oct 13, from 5.942 to 6.049, Badnell revise DR collisional suppression fit
+## >>chng 13 jul 24, wl from 1154 to 1154.42A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, wl change allow all stout levels
+## >>chng 14 may 24, from 6.049 to 5.305, allow all NIST levels to be used
+## >>chng 14 sep 20, from 5.305 to 5.245, NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 16 dec 20, from 5.245 to 5.502, add secondary autoionization to DR suppression
+## >>chng 18 aug 30, from 5.502 to 4.906, update TP's for P II
+## >>chng 18 sep 11, from 4.906 to 5.348, update P II collision strengths
+monitor line luminosity "P  2" 1301.87A  5.348 error 0.1
+##
+## >>chng 01 jul 04, from 69.5 to 65.4 chng in diffuse fields
+## >>chng 02 jul 23, from 65.4 to 42.3 better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 aug 15, from 6.327 to 6.302, add guess of low-T dr for fe
+## >>chng 03 sep 03, from 6.302 to 6.330, heavy free bound
+## >>chng 03 dec 08, from 6.330 to 6.307, chng zones, ots, inrc error
+## >>chng 07 nov 29, from 6.307 to 6.348, update DR rates
+## >>chng 08 sep 22, from 6.348 to 6.298, remove Ali et al. DR guess
+## >>chng 11 jul 12, from 6.298 to 5.954, enable fit to Badnell DR suppression
+## >>chng 12 jul 01, from 5.954 to 6.008, update Badnell DR to 13-electron iso sequence
+## >>chng 12 oct 13, from 6.008 to 6.12, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 6.12 to 6.072, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 10, from 6.072 to 6.111, fix in-zone continuum shielding
+## >>chng 13 jul 24, wl from 967.2 to 967.202A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, wl change allow all stout levels
+## >>chng 14 may 24, from 6.111 to 4.709, allow all NIST levels to be used
+## >>chng 16 dec 20, from 4.709 to 4.474, add secondary autoionization to DR suppression
+## >>chng 19 feb 20, wl from 628.481A to 628.404A, adjust photo edges (r12609).
+## >>chng 22 nov 09, wl from 628.404A to 627.149A, use NIST ionization potentials
+monitor line luminosity "P  2"  627.149A  4.474 error 0.1
+##
+## >>chng 02 jun 13, from 111 to 105, gridding
+## >>chng 02 jul 23, from 105 to 71 better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 06 feb 08, from 6.542 to 6.52, add exp to low-T DR 
+## >>chng 07 nov 29, from 6.52 to 6.55, update DR rates
+## >>chng 08 sep 22, from 6.55 to 6.511, remove Ali et al. DR guess
+## >>chng 11 jul 12, from 6.511 to 6.209, enable fit to Badnell DR suppression
+## >>chng 12 jul 01, from 6.209 to 6.255, update Badnell DR to 13-electron iso sequence
+## >>chng 12 oct 13, from 6.255 to 6.364, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 6.364 to 6.318, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 10, from 6.318 to 6.352, fix in-zone continuum shielding
+## >>chng 13 jul 24, wl from 963.8 to 963.828A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, wl change allow all stout levels
+## >>chng 14 may 24, from 6.352 to 6.39, allow all NIST levels to be used
+## >>chng 14 may 27, from 6.39 to 6.345, update to number of levels
+## >>chng 14 sep 20, from 6.345 to 6.277, NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 16 dec 20, from 6.277 to 6.438, add secondary autoionization to DR suppression
+## >>chng 18 aug 30, from 6.438 to 6.477, update TP's for P II
+## >>chng 18 sep 11, from 6.477 to 5.929, update P II collision strengths
+monitor line luminosity "P  2"  963.828A  5.929 error 0.07
+##
+## >>chng 18 aug 30, add monitor for 3P-1D transition, this line was missing in c17.00 and c17.01
+## >>chng 18 sep 11, from 4.321 to 3.708, update P II collision strengths
+monitor line luminosity "P  2"  1.18828m  3.708 error 0.1
+##
+## >>chng 01 jul 04, from 340.1 to 365.8 chng in diffuse fields
+## >>chng 02 jul 23, from 366 to 262 better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 06 nov 29, from 7.083 to 7.062, Badnell DR turned on
+## >>chng 07 nov 29, from 7.06 to 7.086, update DR rates
+## >>chng 10 aug 12, from 7.086 to 7.111, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from 7.111 to 7.009, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from 7.009 to 7.108, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 7.108 to 7.075, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jul 24, wl from 1341 to 1341.17A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, wl change allow all stout levels
+## >>chng 14 may 24, from 7.075 to 6.99, allow all NIST levels to be used
+## >>chng 14 may 27, from 6.99 to 6.956, update to number of levels
+## >>chng 14 sep 20, from 6.956 to 6.907, NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 18 sep 11, from 6.907 to 6.435, update P II collision strengths
+monitor line luminosity "P  3" 1344.33A  6.435            
+##
+## >>chng 01 jul 04, from 110.7 to 119.6 chng in diffuse fields
+## >>chng 02 jul 23, from 119.6 to 82.4 better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 nov 10, from 6.593 to 6.570, chng zoning
+## >>chng 07 nov 29, from 6.570 to 6.598 update DR rates
+## >>chng 10 aug 12, from 6.598 to 6.622, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from 6.622 to 6.5, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from 6.5 to 6.616, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 6.616 to 6.568, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 10, from 6.568 to 6.589, fix in-zone continuum shielding
+## >>chng 13 jul 24, wl from 1002 to 1001.73A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, wl change allow all stout levels
+## monitor line luminosity "P  3" 760.639  6.589 
+##
+## >>chng 01 aug 11, from 136.8 to 144, always reevel lev2 dest
+## >>chng 02 jul 23, from 114 to 101 better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 nov 08, from 6.670 to 6.642, diff reset bug
+## >>chng 07 nov 29, from 6.642 to 6.678 update DR rates
+## >>chng 11 jun 22, from 6.678 to 6.697, tune Te solver
+## >>chng 11 jul 12, from 6.697 to 6.561, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from 6.561 to 6.681, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 6.681 to 6.623, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 10, from 6.623 to 6.648, fix in-zone continuum shielding
+## >>chng 13 jul 24, wl from 918.1 to 918.147A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, wl change allow all stout levels
+## monitor line luminosity "P  3"  760.639A  6.648
+##
+## >>chng 01 jul 04, from 1.008 to 1.125 chng in diffuse fields
+## >>chng 02 jul 23, from 1.125 to 0.901 better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 nov 08, from 4.574 to 4.541, diff reset bug
+## >>chng 07 nov 29, from 4.541 to 4.359 update DR rates
+## >>chng 11 jul 12, from 4.359 to 4.839, enable fit to Badnell DR suppression
+## >>chng 12 jul 09, from 4.839 to 4.815, get rid of major discontinuities in 3body rates
+## >>chng 12 oct 13, from 4.815 to 4.415, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 4.415 to 4.518, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jul 24, wl from 1467 to 1467.43A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, from 4.518 to 4.556, allow all NIST levels to be used
+## >>chng 14 may 27, from 4.556 to 4.517, update to number of levels
+## >>chng 14 sep 20, from 4.517 to 6.907 NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## also change wavelength from 1476 - OP data were quite bad for this
+## >>chng 18 sep 11, from 6.28 to 5.864, update P II collision strengths
+monitor line luminosity "P  4" 1025.56A  5.864
+##
+## >>chng 01 jul 04, from 197.9 to 210.9 chng in diffuse fields
+## >>chng 02 jul 23, from 210.9 to 160 better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 nov 08, from 6.845 to 6.810, diff reset bug
+## >>chng 06 feb 08, from 6.810 to 6.829, add exp to low-T DR 
+## >>chng 07 nov 29, from 6.829 to 6.733 update DR rates
+## >>chng 11 jul 12, from 6.733 to 6.867, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from 6.867 to 6.748, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 6.748 to 6.77, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 10, from 6.77 to 6.791, fix in-zone continuum shielding
+## >>chng 13 jul 24, wl from 950.7 to 950.661A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, from 6.791 to 6.843, allow all NIST levels to be used
+## >>chng 14 may 27, from 6.843 to 6.778, update to number of levels
+## >>chng 14 sep 20, from 6.778 to 6.075 NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 18 sep 11, from 6.075 to 5.763, update P II collision strengths
+monitor line luminosity "P  4"  950.657A  5.763            
+##
+## >>chng 00 oct 20, changed from 0.1159 to 0.123 frm small change in cont mesh
+## increase error and change intensity
+## >>chng 00 dec 20, change pumping correction, from 0.123 to 0.201
+## >>chng 02 jun 13, from 0.201 to 0.086, gridding, zone opt dep corr
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 may 17, from 3.493 to 3.387, reevaluate pump more often
+## >>chng 04 mar 04, from 3.387 to 3.826, improv conv criteria
+## >>chng 04 jun 12, from 3.826 to 3.899 chng cont shield fcn
+## >>chng 06 feb 08, from 3.90 to 3.93, add exp to low-T DR 
+## >>chng 07 nov 29, from 3.93 to 3.87 update DR rates
+## >>chng 11 jul 12, from 3.87 to 4.034, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from 4.034 to 3.878, Badnell revise DR collisional suppression fit
+## >>chng 12 oct 22, from 3.878 to 3.41, zone tau in rt_line_one
+## >>chng 13 jan 10, from 3.41 to 3.899, fix in-zone continuum shielding
+## >>chng 13 jul 24, wl from 388.3 to 388.319A, increased wl precision to 6 sig. fig.
+## >>chng 16 dec 20, from 3.899 to 3.86, add secondary autoionization to DR suppression
+monitor line luminosity "P  4"  388.319A  3.86 error 0.08
+##
+## >>chng 01 aug 11, from 87.3 to 93.7, always reevel lev2 dest
+## >>chng 01 dec 21, inner shell yields, 93.7 to 100.6
+## >>chng 02 jul 23, from 100.6 to 81.1 better brems opacity
+## >>chng 02 nov 15, from int to lum
+## >>chng 03 nov 08, from 6.524 to 6.483, diff reset bug
+## >>chng 04 sep 06, from 6.483 to 6.447, bug nej Auger
+## >>chng 06 feb 08, from 6.447 to 6.476, add exp to low-T DR 
+## >>chng 06 nov 29, from 6.476 to 6.619, Badnell DR turned on
+## >>chng 07 nov 29, from 6.619 to 6.514 update DR rates
+## >>chng 11 jul 12, from 6.514 to 6.756, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from 6.756 to 6.55, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 6.55 to 6.654, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 10, from 6.654 to 6.691, fix in-zone continuum shielding
+## >>chng 13 may 18, chianti P 5, this had been level 2
+## >>chng 13 jul 24, wl from 1118 to 1117.98A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, from 6.499 to 6.557, allow all NIST levels to be used
+## >>chng 14 may 27, from 6.557 to 6.497, update to number of levels
+## >>chng 14 sep 20, from 6.497 to 6.419, NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 18 sep 11, from 6.419 to 6.096, update P II collision strengths
+## >>chng 22 jul 09, from 6.096 to 6.047, upgrade to Chianti v10
+monitor line luminosity "P  5" 1117.98A  6.047 
+##
+## >>chng 13 may 18, chianti P 5, add this
+## >>chng 13 jul 24, wl from 1128 to 1128.01A, increased wl precision to 6 sig. fig.
+## >>chng 14 may 24, from 6.26 to 6.317, allow all NIST levels to be used
+## >>chng 14 may 27, from 6.317 to 6.257, update to number of levels
+## >>chng 14 sep 20, from 6.257 to 6.18, NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 18 sep 11, from 6.18 to 5.857, update P II collision strengths
+## >>chng 22 jul 09, from 5.857 to 5.834, upgrade to Chianti v10
+monitor line luminosity "P  5" 1128.01A  5.834 
+##
+## >>chng 00 oct 03, from -2.773 to -2.676, cont rebin in opt, uv, H- opac bug
+## >>chng 01 jul 04, from -2.676 to -2.905 chng in diffuse fields
+## >>chng 02 jul 23, from -2.905 to -2.876 better brems opacity
+## >>chng 02 nov 15, from -2.876 to -2.904
+## >>chng 03 jun 02, from -2.904 to -2.878, larger default H atom
+## >>chng 03 aug 15, from -2.878 to -2.918 add guess of low-T dr for fe
+## >>chng 03 aug 28, from -2.918 to -2.878 inner shell physics
+## >>chng 06 aug 09, from -2.878 to -2.913 Meudon 06, Bowen change
+## >>chng 07 nov 29, from -2.913 to -2.881 update DR rates
+## >>chng 08 sep 22, from -2.881 to -2.828, remove Ali et al. DR guess
+## >>chng 10 aug 12, from -2.828 to -2.868, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from -2.868 to -2.816, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -2.816 to -2.84, BUGFIX, largely undo r6703
+## >>chng 14 may 24, from -2.84 to -2.818, allow all NIST levels to be used
+## >>chng 16 aug 07, from -2.818 to -2.879, Fran bug fix
+## >>chng 16 dec 20, from -2.879 to -2.926, add secondary autoionization to DR suppression
+## >>chng 18 aug 30, from -2.926 to -2.951, update TP's for P II
+## >>chng 18 sep 11, from -2.951 to -2.832, update P II collision strengths
+monitor ionization Hydrogen 1 -2.832
+##
+monitor ionization Hydrogen 2 -0.001
+## >>chng 01 jul 04, from -2.343 to -2.413 chng in diffuse fields
+## >>chng 02 jul 23, from -2.413 to -2.391 better brems opacity
+## >>chng 02 nov 15, from -2.391 to -2.419
+## >>chng 03 aug 15, from -2.419 to -2.461 add guess of low-T dr for fe
+## >>chng 03 aug 28, from -2.461 to -2.427 inner shell physics
+## >>chng 05 mar 12, from -2.427 to -2.369 RP merge He-like code
+## >>chng 05 oct 01, from -2.369 to -2.327, RP update levels
+## >>chng 06 jul 18, from -2.327 to -2.370, RP major upgrade VS coll strengths
+## >>chng 07 nov 29, from -2.370 to -2.324 update DR rates
+## >>chng 08 apr 30, from -2.324 to -2.37 H, He topoff change
+## >>chng 10 aug 12, from -2.37 to -2.44, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from -2.44 to -2.552, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from -2.552 to -2.482, Badnell revise DR collisional suppression fit
+## >>chng 13 nov 22, from -2.482 to -2.413, collapsed branch merge r8609
+## >>chng 16 dec 20, from -2.413 to -2.324, add secondary autoionization to DR suppression
+## >>chng 18 sep 11, from -2.324 to -2.219, update P II collision strengths
+monitor ionization Helium   1 -2.219 error 0.1
+##
+## >>chng 11 jul 12, from -0.146 to -0.1724, enable fit to Badnell DR suppression
+## >>chng 13 may 07, from -0.1724 to -0.1488, bnl_effective change
+monitor ionization Helium   2 -0.1488
+##
+## >>chng 03 jun 02, from -0.550 to -0.577, larger default H atom
+## >>chng 06 jul 18, from -0.577 to -0.552, RP major upgrade VS coll strengths
+## >>chng 09 jan 22, from -0.552 to -0.524, some minor botches as a result of r2655
+## >>chng 11 jul 12, from -0.524 to -0.4883, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from -0.4883 to -0.5308, Badnell revise DR collisional suppression fit
+## >>chng 13 nov 22, from -0.5308 to -0.5646, collapsed branch merge r8609
+## >>chng 16 nov 14, from -0.5646 to -0.5892, Reintegration of RydDep after several bug fixes
+## >>chng 16 dec 15, from -0.5892 to -0.5617, fix bug on Hlike Percival annd Richard collisions
+## >>chng 18 sep 11, from -0.5617 to -0.5918, update P II collision strengths
+monitor ionization Helium   3 -0.5918
+##
+## >>chng 01 jan 31, from -3.869 to -3.932, Pequignot charge transfer
+## >>chng 01 jul 04, from -3.932 to -4.166 chng in diffuse fields
+## >>chng 02 jul 23, from -4.166 to -4.066 better brems opacity
+## >>chng 02 nov 15, from -4.066 to -4.165
+## >>chng 03 apr 28, from -4.165 to -3.997, ??, incre error
+## >>chng 03 aug 15, from -3.997 to -4.115 add guess of low-T dr for fe
+## >>chng 03 aug 28, from -4.115 to -4.000 inner shell physics
+## >>chng 03 oct 04, from -4.000 to -4.176, atom2 ots
+## >>chng 07 nov 29, from -4.176 to -4.084 update DR rates
+## >>chng 10 aug 12, from -4.084 to -4.199, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from -4.199 to -4.709, enable fit to Badnell DR suppression
+## >>chng 12 jul 01, from -4.709 to -4.624, update Badnell DR to 13-electron iso sequence
+## >>chng 12 jul 09, from -4.624 to -4.583, get rid of major discontinuities in 3body rates
+## >>chng 12 oct 13, from -4.583 to -4.507, Badnell revise DR collisional suppression fit
+## >>chng 14 may 24, from -4.507 to -4.414, allow all NIST levels to be used
+## >>chng 16 dec 20, from -4.414 to -4.177, add secondary autoionization to DR suppression
+## >>chng 18 jan 17, from -4.177 to -4.358, update Badnell RR, DR to http://dx.doi.org/10.1051/0004-6361/201731243
+## >>chng 18 aug 30, from -4.358 to -4.41, update TP's for P II
+## >>chng 18 sep 11, from -4.41 to -4.111, update P II collision strengths
+monitor ionization Phosphorus 1 -4.111 error 0.1
+##
+## >>chng 01 jul 04, from -0.652 to -0.808 chng in diffuse fields
+## >>chng 03 aug 15, from -0.808 to -0.922 add guess of low-T dr for fe
+## >>chng 03 aug 28, from -0.922 to -0.809 inner shell physics
+## >>chng 03 nov 08, from -0.809 to -0.787, diff reset bug
+## >>chng 06 feb 08, from -0.787 to -0.813, add exp to low-T DR 
+## >>chng 07 nov 29, from -0.813 to -0.725 update DR rates
+## >>chng 08 sep 22, from -0.725 to -0.8034, remove Ali et al. DR guess
+## >>chng 10 aug 12, from -0.8034 to -0.9174, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from -0.9174 to -1.312, enable fit to Badnell DR suppression
+## >>chng 12 jul 01, from -1.312 to -1.221, update Badnell DR to 13-electron iso sequence
+## >>chng 12 jul 09, from -1.221 to -1.195, get rid of major discontinuities in 3body rates
+## >>chng 12 oct 13, from -1.195 to -1.116, Badnell revise DR collisional suppression fit
+## >>chng 13 feb 01, from -1.116 to -1.093, BUGFIX, largely undo r6703
+## >>chng 16 dec 20, from -1.093 to -0.7978, add secondary autoionization to DR suppression
+## >>chng 18 sep 11, from -0.7978 to -0.7294, update P II collision strengths
+monitor ionization Phosphorus 2 -0.7294
+##
+## >>chng 01 jul 04, from -0.189 to -0.154 chng in diffuse fields
+## >>chng 08 sep 22, from -0.154 to -0.1236, remove Ali et al. DR guess
+## >>chng 10 aug 12, from -0.1236 to -0.1042, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from -0.1042 to -0.1912, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from -0.1912 to -0.0868, Badnell revise DR collisional suppression fit
+## >>chng 13 feb 01, from -0.0868 to -0.1082, BUGFIX, largely undo r6703
+## >>chng 16 dec 20, from -0.1082 to -0.147, add secondary autoionization to DR suppression
+monitor ionization Phosphorus 3 -0.147
+##
+## >>chng 01 jul 04, from -0.912 to -0.869 chng in diffuse fields
+## >>chng 03 nov 08, from -0.869 to -0.896, diff reset bug
+## >>chng 06 feb 08, from -0.896 to -0.877, add exp to low-T DR 
+## >>chng 07 nov 29, from -0.877 to -1.092 update DR rates
+## >>chng 11 jul 12, from -1.092 to -0.5407, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from -0.5407 to -1.024, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from -1.024 to -0.8931, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 16 dec 20, from -0.8931 to -0.942, add secondary autoionization to DR suppression
+## >>chng 18 sep 11, from -0.942 to -0.9921, update P II collision strengths
+monitor ionization Phosphorus 4 -0.9921
+##
+## >>chng 01 dec 21, inner shell yields, -2.147 to -2.097
+## >>chng 03 nov 08, from -2.097 to -2.129, diff reset bug
+## >>chng 04 sep 06, from -2.129 to -2.167, bug nej Auger
+## >>chng 06 feb 08, from -2.167 to -2.129, add exp to low-T DR 
+## >>chng 06 nov 29, from -2.129 to -1.948, Badnell DR turned on
+## >>chng 07 nov 29, from -1.948 to -2.097 update DR rates
+## >>chng 11 jul 12, from -2.097 to -1.74, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from -1.74 to -2.047, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from -2.047 to -1.893, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 10, from -1.893 to -1.869, fix in-zone continuum shielding
+## >>chng 14 sep 20, from -1.869 to -1.893, NIST baseline data - botches due to replacing bad OP data with NIST lab data"
+## >>chng 18 sep 11, from -1.893 to -1.952, update P II collision strengths
+monitor ionization Phosphorus 5 -1.952
+##
+## >>chng 00 oct 03, from -3.024 to -3.056, cont rebin in opt, uv, H- opac bug
+## >>chng 01 may 10, from -3.056 to -3.034, ct network rates change
+## >>chng 01 dec 21, inner shell yields, -3.034 to -2.742
+## >>chng 03 apr 26, from -2.742 to -2.758 efrac zoning added
+## >>chng 03 oct 04, from -2.758 to -2.783, atom2 ots
+## >>chng 03 nov 08, from -2.783 to -2.827, diff reset bug
+## >>chng 03 dec 08, from -2.827 to -2.892 chng zones, ots, inrc error
+## >>chng 04 feb 09, from -2.892 to -2.833, ion_solver algor chng
+## >>chng 04 sep 06, from -2.833 to -3.100, bug nej Auger
+## >>chng 06 nov 29, from -3.10 to -3.02, Badnell DR turned on
+## >>chng 07 nov 29, from -3.02 to -3.11 update DR rates
+## >>chng 11 jul 12, from -3.11 to -2.908, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from -2.908 to -3.074, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from -3.074 to -2.987, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jan 10, from -2.987 to -2.948, fix in-zone continuum shielding
+## >>chng 18 sep 11, from -2.948 to -3.042, update P II collision strengths
+monitor ionization Phosphorus 6 -3.042 error 0.1
+##
+## >>chng 18 sep 11, from 4.09 to 4.005, update P II collision strengths
+monitor temperature "H" 4.005
+## >>chng 18 sep 11, from 4.103 to 4.017, update P II collision strengths
+monitor temperature "H+" 4.017
+## >>chng 18 sep 11, from 4.073 to 3.969, update P II collision strengths
+monitor temperature "He" 3.969
+## >>chng 18 sep 11, from 4.088 to 3.994, update P II collision strengths
+monitor temperature "He+" 3.994
+## >>chng 18 sep 11, from 4.138 to 4.077, update P II collision strengths
+monitor temperature "He+2" 4.077
+##
+## >>chng 03 aug 15, from 4.070 to 4.096 add guess of low-T dr for fe
+## >>chng 06 feb 08, from 4.096 to 4.079, add exp to low-T DR 
+## >>chng 18 sep 11, from 4.079 to 3.975, update P II collision strengths
+monitor temperature "P" 3.975
+##
+## >>chng 18 sep 11, from 4.08 to 3.983, update P II collision strengths
+monitor temperature "P+" 3.983
+## >>chng 18 sep 11, from 4.102 to 4.014, update P II collision strengths
+monitor temperature "P+2" 4.014
+## >>chng 18 sep 11, from 4.14 to 4.082, update P II collision strengths
+monitor temperature "P+3" 4.082
+## >>chng 18 sep 11, from 4.155 to 4.108, update P II collision strengths
+monitor temperature "P+4" 4.108
+## >>chng 18 sep 11, from 4.158 to 4.116, update P II collision strengths
+monitor temperature "P+5" 4.116
+##
+## >>chng 03 apr 26, from 65 to 80 efrac zoning added
+## >>chng 08 dec 08, from 80 to 48, upper limit -> equals (r2515)
+## >>chng 09 jun 15, from 48 to 63, gradual approach to outer edge
+## >>chng 11 jul 12, from 63 to 69, enable fit to Badnell DR suppression
+## >>chng 12 nov 28, from 69 to 80, Make HII dr limit symmetric
+## >>chng 16 dec 20, from 80 to 76, add secondary autoionization to DR suppression
+## >>chng 18 jun 20, from 76 to 70, #bugfixes at front face r12134:12136
+monitor nzone 70 
+##
+## >>chng 02 dec 13, from 5.5 to 4.5, better conv
+## >>chng 04 feb 09, from 4.5 to 5 ion_solver algor chng
+## >>chng 04 feb 15, from 5 to 6, conv ion loop augger
+## >>chng 08 dec 08, from 6 to 5.562, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 5.562 to 12.83, merging newsolvers branch
+## >>chng 09 jan 16, from 12.83 to 12.81 (error 0.06), average of 10 runs
+## >>chng 09 jan 22, from 12.81 to 17.6, some minor botches as a result of r2655
+## >>chng 09 feb 23, from 17.6 to 15.96, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 26, from 15.96 to 13.87, remove several dampers
+## >>chng 10 mar 02, from 13.87 to 14.83, fix botches after CO model switch
+## >>chng 10 mar 14, from 14.83 to 13.81, update As to NIST recommended values
+## >>chng 10 jul 26, from 13.81 to 14.2 (actually 14.8) icc on mac, inc err
+## >>chng 11 jun 22, from 14.2 to 12.36, tune Te solver
+## >>chng 11 oct 14, from 12.36 to 11.07, adjustments to chianti use
+## >>chng 11 nov 16, from 11.07 to 8.174, adjust newmole monitors
+## >>chng 12 nov 28, from 8.174 to 7.287, Make HII dr limit symmetric
+## >>chng 13 nov 05, from 7.287 to 4.899, convergence branch changes
+## >>chng 14 apr 07, from 4.899 to 3.911, move H/C out of ConvBase loop
+## >>chng 18 sep 11, from 3.911 to 4.903, update P II collision strengths
+monitor itrzn 4.903 error 0.1
+##
+# blr_level2.in
+# class blr 
+# ========================================
+
+This model checks predictions for the "level2" lines.  These are
+lines that are normally very weak, have Opacity Project wavelengths,
+and g-bar collision strengths.  Phosphorus is given a large abundance
+so that its level2 lines are significant.
+

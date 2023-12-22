@@ -1,0 +1,46 @@
+title constant density cooling cloud
+#
+# commands controlling continuum =========
+coronal 3.4e7 K init time 
+#
+# commands for density & abundances =========
+# want nT = 2e6 K cm-3
+hden 5.88e-2 linear
+#
+# commands controlling geometry  =========
+set dr 0 
+set nend 1
+stop zone 1
+#
+# other commands for details     =========
+# number of time steps
+iterate 300
+stop time when temperature falls below 1e7 K
+cosmic rays background
+#
+# commands controlling output    =========
+## >>chng 17 may 25, wl from 18.9732A to 18.9709A, up Rydberg constant
+## >>chng 20 aug 22, wl from 18.9709A to 18.9696A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 18.9696A to 18.9689A, update NIST energies
+normalize to "O  8" 18.9689A
+print line faint -3 log
+print ages
+set cumulative off
+set save prefix "time_cool_cd_noaccu"
+save monitors ".asr" last
+#
+# commands giving the asserts    =========
+## >>chng 21 jan 19, from -29.18 to -29.16, timestep logic change from tcool to n(H+)
+monitor line luminosity intrinsic "Fe24"      11.1710A   -29.16
+#
+# time_cool_cd_flux.in 
+# class dynamics 
+# ========================================
+# 
+
+Test time dependent cooling at constant density.
+In time_cool_cd.in, the line emission accumulation is done by default by mass.
+In this sim, no accumulation is performed (see 'set cumulative' above).  The
+final line fluxes are those of the last iteration.
+This sim is meant simply to exercise the 'set cumulative off' command, so a
+full run to low temperatures is deemed unnecessary.

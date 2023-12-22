@@ -1,0 +1,533 @@
+\chapter{INCIDENT RADIATION FIELD LUMINOSITY}
+\label{sec:IncidentRadiationFieldLuminosity}
+% !TEX root = hazy1.tex
+\section{Overview}
+
+All commands setting the intensity or luminosity of the
+incident radiation field are
+defined in this Chapter.
+
+\section{Intensity and luminosity cases}
+The brightness of the incident radiation field can be specified
+as either an intensity, the energy per unit area of cloud,
+or as a luminosity, the power emitted by the central
+source of radiation into $4 \pi \sr$.
+The \cdTerm{intensity case} and \cdTerm{luminosity case}
+are described on page \pageref{sec:IntensityLuminosityCases}.
+Each of the following commands is listed as an intensity or
+luminosity command.
+This distinction is important because the inner radius of the
+cloud must also be specified in the luminosity case.
+
+\section{The range option}
+
+Many of the intensity/luminosity commands specify the number of photons
+or integrated energy \emph{in hydrogen-ionizing radiation}
+$(1 \Ryd \le h\nu \le$ \egamry ).
+Other
+energy intervals can be specified with the \cdCommand{range} option, an optional keyword
+that can appear on most intensity / luminosity commands.
+
+When the keyword \cdCommand{range} appears there are an
+additional two parameters,
+the low- and high-energy limits to the energy range in Rydbergs.
+These
+appear as the second and third numbers on the line
+(the first number gives
+the intensity or luminosity).
+The position of the keyword \cdCommand{range} on the
+command line does not matter but the order of the numbers on the line does
+matter.
+If both range parameters are omitted then the low
+(\emm ) and high (\egamry )
+energy limit of the incident radiation field will be
+substituted.  If both energies are specified then the
+second number must be larger than the first.
+If only
+one parameter appears then only the lower limit of the range
+will be changed
+and the high-energy limit will be left at its default of
+\egamry .
+If the first optional number is negative or
+the keyword \cdCommand{log} appears then
+\emph{both} of the extra numbers are interpreted as logs.
+If you want to set the lower limit of the range to the low
+energy limit \emm\ of the incident radiation field, but want
+to supply your own upper limit, you can enter 0 followed by
+the upper limit if you use linear numbers, or $-10$ followed by
+the upper limit if you use log numbers ($-10$ is actually any
+number $\leq$ log(\emm)).
+
+If \cdCommand{range total}, or simply \cdCommand{range} or \cdCommand{total},
+appears with no parameters then the
+full energy range considered by the program,
+\emm\ to
+\egamry , will be used.
+In this case the number is the total integrated (bolometric) intensity
+or luminosity.
+
+The following shows examples of the range option for the
+\cdCommand{luminosity} command.
+By default the \cdCommand{luminosity} command has a single parameter,
+the log of the luminosity [erg s$^{-1}$] in hydrogen-ionizing
+radiation ($1 \Ryd \le  h\nu <$ \egamry ).
+The ``;'' symbol is used to terminate the line in one
+case.
+\begin{verbatim}
+# this will use the default range, only ionizing radiation
+luminosity 38 #the log of the luminosity in erg s^-1
+
+# either will be the total luminosity
+luminosity total 38
+luminosity 33.4 range
+luminosity 33.4 range total
+
+# this will be the luminosity in visible light
+luminosity 37.8 range .15 to .23 Ryd
+
+# the luminosity in radiation more energetic than 0.1 Ryd
+luminosity 38.1 range -1
+
+# this will be the luminosity in non-ionizing radiation
+luminosity 39.8 range 0 1
+\end{verbatim}
+
+\section{Absolute [visual, bolometric] magnitude -2.3}
+
+It is possible to specify the integrated or monochromatic luminosity
+in ``magnitudes,'' a quaint unit of historical interest.
+One of the keywords
+\cdCommand{bolometric} or \cdCommand{visual} must also appear.
+The absolute bolometric magnitude
+$M_{bol}$ is related to the total luminosity by (\citealp{Allen1976}, page 197)
+\begin{equation}
+L_{total}  = 3.826 \times 10^{33}  \times 10^{\left( {4.75 - M_{bol} }
+\right)/2.5}\,
+ [\ergps].
+\end{equation}
+The absolute visual magnitude $M_V$ is approximately related to the
+monochromatic luminosity per octave at 5550 \AA\
+by (\citealp{Allen1976}, page 197)
+\begin{equation}
+\nu \,L_\nu  \left( 5500\mathrm{\AA}\right) \approx 2.44 \times 10^{35}
+\times 10^{ - M_V /2.5}\,
+[\ergps].
+\end{equation}
+The conversion between monochromatic luminosity per octave $\nu L_{\nu}$ and absolute
+visual magnitude $M_V$ is approximate,
+with typical errors of roughly a percent.
+This is because \Cloudy\ assumes that the V filter has an
+isophotal wavelength of 5550\AA\ and does not actually integrate
+over the incident radiation field using
+a $V$-filter transmission function.
+
+This is a luminosity command.
+
+\section{Energy density 5e4 K [linear]}
+
+This specifies the energy density [K] of the incident radiation field.
+The number is the equivalent energy-density temperature, defined as
+$T_u  = \left( {u/a} \right)^{1/4} \K$
+where $u$ is the total energy density in all radiation
+[erg cm$^{-3}$] and $a$ is the Stefan radiation-density constant.
+The number is interpreted as the log of the temperature if it is less than or equal to 10
+or the keyword \cdCommand{log} is present,
+and as a linear number otherwise.
+The optional keyword \cdCommand{linear} forces the
+number to always be interpreted as a linear temperature.
+
+This is an intensity command.
+
+\section{f(nu) = -12.456 [at .1824 Ryd]}
+
+This specifies the monochromatic intensity at an arbitrary energy.  The
+first number is the log of the monochromatic mean intensity at the
+illuminated face of the cloud,
+$4\pi J_\nu$ (with units erg
+s$^{-1}\mathrm{Hz}^{-1} \mathrm{cm}^{-2})$, where
+$J_{\nu}$ is the mean intensity of the incident radiation field
+per unit solid angle.
+
+The optional second number is the frequency in Rydbergs where
+$4\pi J_\nu$ is specified.
+The default is 1 Ryd.
+In the example above the incident radiation field is
+specified at 0.1824 Ryd = 5000\AA.
+The frequency can be any within the energy
+band considered by the code,
+presently \emm\ to \egamry .
+If the energy is less than or equal to zero then it is interpreted as the
+log of the energy in Rydbergs, and as the linear energy itself if positive.
+
+This is an intensity command.
+
+\section{Intensity 8.3 [range, linear]}
+\label{sec:IntensityCommand}
+
+This specifies the integrated mean intensity,
+$4\pi J$, [erg cm$^{-2}\mathrm{s}^{-1}$] at the
+illuminated face of the cloud
+\begin{equation}
+4\pi J= \int_{v1}^{v2}4\pi J_v \; dv \,[\ergpscmps] .
+\end{equation}
+This is the per unit area equivalent of the \cdCommand{luminosity}
+command.
+The number is the log of the intensity unless the optional
+keyword \cdCommand{linear} appears.
+Unlike the majority of the commands, the first
+five characters of the line must be entered.
+
+The default range is over hydrogen-ionizing energies
+(1 Ryd  $\le hv\le$ \egamry ).
+The range option can be used to adjust
+the values of $v_1$ and $v_2$.
+
+Some of the interstellar medium and photo-dissociation region (PDR)
+literature specifies the incident radiation field in units of the
+\citet{Habing1968} field (see, for instance, \citealp{Tielens1985a},
+\citealp{Tielens1985b}).
+This
+radiation field has an integrated intensity of
+$1.6\times 10^{-3} \ergpscmps$ between
+the limits of 6 and 13.6 eV (\citealp{Tielens1985a}; \citealp{Hollenbach1991}).
+This integrated intensity is sometimes referred
+to as $Go$.
+The incident radiation field described by Tielens and Hollenbach,
+but with an
+intensity of 1 $Go$, could be generated with the commands:
+\begin{verbatim}
+# a B star with an intensity roughly the Habing 1968 radiation field
+blackbody 3e4 K
+intensity -2.8, range 0.44 to 1 Ryd
+# remove all H-ionizing radiation
+extinguish by 24, leakage = 0
+\end{verbatim}
+This set of commands sets the shape of the Balmer continuum to
+that of a hot blackbody, sets the intensity to the Habing value,
+and then extinguishes
+all hydrogen-ionizing radiation,
+as is assumed in the PDR literature.
+
+This is an intensity command.
+
+\section{ionization parameter $= -1.984$}
+
+The ionization parameter $U$ is the dimensionless ratio of hydrogen-ionizing
+photon to total-hydrogen densities evaluated at the illuminated face of the cloud.  
+It is defined as
+\begin{equation}
+U \equiv \frac{{Q\left( {\mathrm{H}} \right)}}{{4{\kern 1pt} \pi \,r_{\mathrm{o}}^2
+\,n\left( {\mathrm{H}} \right)\,c}} \equiv \frac{{\Phi \left( {\mathrm{H}}
+\right)}}{{n\left( {\mathrm{H}} \right)\,c}}%(6)
+\end{equation}
+(AGN3, equation 14.7, page 357).
+Here $r_o$ is the separation [cm] between
+the center of the source of ionizing radiation and the illuminated face
+of the cloud, $n$(H) [cm$^{-3}$] is the
+total\footnote{Before version 65 of the code the
+electron density was used rather
+than the hydrogen density.
+Before version 75 $n$(H) was the atomic/ionic
+hydrogen density, and did not include molecules.}
+hydrogen density (ionized, neutral,
+and molecular) at that point, $c$ is the speed of light,
+$Q(\mathrm{H})$ [s$^{-1}$] is the number of
+hydrogen-ionizing photons emitted by the central object,
+and $\Phi(\mathrm{H})$
+[cm$^{-2}\, \mathrm{s}^{-1}$] is the surface flux of ionizing photons at the illuminated face.
+The number on the command line is interpreted
+as the log of $U$ unless the keyword \cdCommand{linear} appears.
+The ionization parameter
+is a useful quantity in plane-parallel, low-density, constant-density,
+models, because of homology relations between models with different photon
+and gas densities but the same ionization parameter (see \citealp{Davidson1977}).
+
+This is an intensity command.
+
+\section{L(nu) = 24.456 [at .1824 Ryd]}
+
+This sets the monochromatic luminosity
+$L_{\nu}$ [erg s$^{-1} \mathrm{Hz}^{-1}$] of the central object.
+The first number is the log of the luminosity.
+The optional
+second number is the frequency in Rydbergs where $L_{\nu}$ is specified.  The default is 1 Ryd.
+In the example above the incident radiation field is specified at
+$0.1824 \Ryd = 5000 $\AA.
+The frequency can be any within the energy band considered
+by the code, presently \emm\ to \egamry .  If the energy is
+less than or equal to zero then it is interpreted as the log of the energy
+in Rydbergs, and the linear energy itself if positive.
+
+This is a luminosity command.
+\label{sec:LuminosityCommand}
+
+\section{luminosity 38.3 [solar, total, range, linear]}
+
+The number is the log of the integrated luminosity\footnote{Before version 83 of the code, the luminosity command was used to
+enter both luminosity and intensity.  The code decided between the two by
+checking on the resulting ionization parameter.  There are now separate
+intensity and luminosity commands.} emitted by the central
+object into $4\pi$~sr,
+\begin{equation}
+L = 4 \pi R_{star}^2 \int_{\nu _1 }^{\nu _2 } {\pi F_\nu
+\, d\nu } [\ergps ].% (7)
+\end{equation}
+The default range is over hydrogen-ionizing energies ($1\mathrm{ Ryd} \le
+h\nu\le$ \egamry ).  The \cdCommand{range} option can be used to adjust
+the values of $\nu_1$ and $\nu_2$.
+
+If the optional keyword \cdCommand{solar} appears
+the number is the log of the \emph{total} luminosity relative to the sun. 
+It is the log of the total luminosity if the keyword \cdCommand{total} appears.
+If the
+\cdCommand{linear} keyword is also used then the quantity will be the luminosity itself
+and not the log.
+The \cdCommand{range} option cannot be used if the luminosity is the
+total luminosity or it is specified in solar units.
+It will be ignored
+if it appears.
+
+The following are examples of the luminosity command.
+\begin{verbatim}
+# log of luminosity (erg/s) in ionizing radiation
+luminosity 36
+
+# roughly the Eddington limit for one solar mass
+luminosity total 38
+
+# both are a total luminosity 1000 times solar since
+# solar specifies the total luminosity relative to the sun
+luminosity solar 3
+luminosity linear solar 1000
+
+# this will be the luminosity in visible light
+luminosity 37.8 range .15 to .23 Ryd
+\end{verbatim}
+This is a luminosity command.
+
+\section{nuF(nu) = 13.456 [at .1824 Ryd]}
+
+This command specifies the log of the monochromatic mean intensity
+per octave $4\pi \nu J_\nu  $ [erg s$^{-1}$ cm$^{-2}$]
+at the illuminated face of the cloud.
+Here $J_{\nu}$ is the
+mean intensity of the incident radiation field.
+
+The optional second number is the energy (Ryd) where
+$4\pi \,\nu J_\nu  $ is specified.
+The default is 1 Ryd.  In the example above the incident radiation field
+is specified at $0.1824 \Ryd = 5000\AA$.
+The energy can be any within the
+energy band considered by the code,
+presently \emm\ to \egamry .
+If the energy is less than or equal to zero it is interpreted as the
+log of the energy in Rydbergs.  It is the linear energy if it is positive.
+
+This is an intensity command.
+
+\section{nuL(nu) = 43.456 [at .1824 Ryd]}
+
+This command specifies the monochromatic luminosity per octave
+$\nu L_\nu$ [erg s$^{-1}$].
+The first number is the log of the luminosity radiated by the central
+object into $4\pi$~sr.  It can be expressed at an arbitrary photon
+energy but the default is 1 Ryd.
+
+The optional second number is the energy (Ryd) where $L_\nu$ is
+specified.
+In the example above the incident radiation field is specified
+at 0.1824 Ryd = 5000\AA.
+The frequency can be any within the energy band considered by
+the code, presently \emm\ to \egamry .  If the energy is less
+than or equal to zero, it is interpreted as the log of the energy in
+Rydbergs, and the linear energy if positive.
+
+This is a luminosity command.
+
+\section{phi(H) = 12.867 [range\dots]}
+
+This command specifies the log of $\Phi(\mathrm{H})$,
+the surface flux of
+hydrogen-ionizing photons [cm$^{-2}\ \mathrm{s}^{-1}$]
+striking the illuminated face of the cloud.
+It is defined as
+\begin{equation}
+\Phi \left( {\mathrm{H}} \right) \equiv \frac{{Q\left( {\mathrm{H}} \right)}}{{4\,\pi
+\;r_{\mathrm{o}}^{\mathrm{2}} }} \equiv \frac{{R_{star}^2 }}{{r_{\mathrm{o}}^2
+}}\;\int_{\nu _1 }^{\nu _2 } {\frac{{\pi \,F_\nu  }}{{h\,\nu }}\;d\nu }
+ [\mathrm{cm}^{-2}\ \mathrm{s}{^{-1}]}
+\end{equation}
+and is proportional to the optical depth in excited lines,
+such as the Balmer lines (\citealp{FerlandNetzerShields1979}; AGN3).
+The range option can be
+used to change the default energy range,
+given by the values of $\nu_{1}$ and $\nu_{2}$.
+
+This is an intensity command.
+
+\section{Q(H) = 56.789 [range\dots]}
+
+This is the log of the total number of ionizing photons emitted by the
+central object [s$^{-1}$]
+\begin{equation}
+Q\left( {\mathrm{H}} \right) = 4\,\pi \;R_{star}^2 \;\int_{\nu _1 }^{\nu _2
+} {\frac{{\pi \,F_\nu  }}{{h\,\nu }}\;d{\kern 1pt} \nu } . %(9)
+\end{equation}
+The default energy range is 1 Ryd to \egamry\
+and the \cdCommand{range} option
+can be used to change the energy bounds $\nu_1$ and $\nu_2$.
+The photon flux (the
+number of photons per unit area of cloud surface) can be specified with
+the \cdCommand{phi(H)} command\footnote{Before version 83
+of the code the \cdCommand{phi(H)} and \cdCommand{Q(H)} commands were the
+same.
+The code decided which was specified by checking the order of
+magnitude of the resulting ionization parameter.
+These are now two different commands.}.
+
+This is a luminosity command.
+
+\section{ratio -3.4 0.3645 Ryd to 147 Ryd [alphaox, log]}
+
+This specifies the intensity of a second radiation field
+(referred to as the current radiation field) relative to the
+intensity of the previous
+radiation field.
+The ratio of the intensities
+$4\pi J_\nu$ (erg cm$^{-2}\ \mathrm{s}^{-1}\ \mathrm{Hz}^{-1}$)
+of the current to the previous radiation field is given
+by the first number on the command line.
+It is assumed to be the linear ratio unless it is
+less than or equal to zero, in which case it is interpreted as a log.
+If the keyword \cdCommand{log} appears then the
+positive number is interpreted
+as the log of the ratio.
+
+The second parameter is the energy in Rydbergs where the previous
+radiation field is evaluated and the optional third parameter
+is the energy
+where the current radiation field is evaluated.
+If the second energy is not
+entered then the same energy is used for both.
+The following is an example
+of using the \cdCommand{ratio} command to simulate the
+spectral energy distribution of a typical quasar.
+\begin{verbatim}
+blackbody 5e4 K        # the big blue bump
+ionization parameter -2 # its ionization parameter
+table power law         #an alpha =-1 power law
+# now set intensity of power law relative to bump at 1 Ryd
+ratio 0.001 at 1 Ryd
+\end{verbatim}
+This command was introduced to provide a mechanism to specify the optical
+to X-ray spectral index $\alpha_{ox}$.
+This is defined here as in \citet{Zamorani1981}, except for a difference in sign convention.
+Here $\alpha_{ox}$ is the spectral
+index which would describe the continuum between 2 keV (147 Ryd) and
+2500\AA\ (0.3645 Ryd) if the continuum could be described
+as a single power-law, that~is,
+\begin{equation}
+\frac{{f_\nu  \left( {2\;{\mathrm{keV}}} \right)}}{{f_\nu  \left(
+{2500\;{\mathrm{{\AA}}}} \right)}} = \left( {\frac{{\nu _{2\;{\mathrm{keV}}} }}{{\nu
+_{2500\;{\mathrm{{\AA}}}} }}} \right)^{\alpha _{ox} }  = \,\;403.3^{\alpha _{ox}
+} .% (10)
+\end{equation}
+The definition of $\alpha_{ox}$ used here is slightly different
+from that of Zamorani et al. since implicit negative signs are
+never used by \Cloudy.
+Typical AGN have $\alpha_{ox}\sim  -1.4$.
+If X-rays are not present then
+$\alpha_{ox} = 0$.
+
+The \cdCommand{ratio} command has an optional keyword,
+\cdCommand{alphaox}, which allows $\alpha_{ox}$
+to be specified directly.
+If the keyword appears then only one parameter
+is read, the value of $\alpha_{ox}$.
+A generic AGN spectral energy distribution could be produced with
+the following,
+\begin{verbatim}
+blackbody 5e4 K   # the big blue bump
+ionization parameter -2
+table power law    # an alpha =-1 power law
+ratio alphaox -1.4 # set alpha_ox of the X-ray and UV continua
+\end{verbatim}
+Note that $\alpha_{ox}$ may (or may not) depend on the luminosity of the quasar,
+as described by \citet{Avni1986}.
+The solid line in their Figure 8 corresponds to
+\begin{equation}
+\alpha _{ox}  =  - 1.32 - 0.088 \times \log \left( {\frac{{L_o }}{{10^{28}
+\,{\mathrm{erg}}\,{\mathrm{s}}^{ - {\mathrm{1}}} \,{\mathrm{Hz}}^{ - {\mathrm{1}}} }}} \right)% (11)
+\end{equation}
+where they define $L_o$ as the monochromatic optical luminosity
+at 2500\AA\  in the source rest frame,
+and we assume H$_0 = 50$ and q$_0 = 0$.
+Other fits are given
+by \citet{Worrall1987}:
+\begin{equation}
+\alpha _{ox}  =  - 1.11 - 0.111 \times \log \left( {\frac{{L_o }}{{10^{27}
+\,{\mathrm{erg}}\,{\mathrm{s}}^{ - {\mathrm{1}}} \,{\mathrm{Hz}}^{ - {\mathrm{1}}} }}} \right)% (12)
+\end{equation}
+and by \citet{Wilkes1994}:
+\begin{equation}
+\alpha _{ox}  =  - 1.53 - 0.11 \times \log \left( {\frac{{L_o }}{{10^{30.5}
+\,{\mathrm{erg}}\,{\mathrm{s}}^{ - {\mathrm{1}}} \,{\mathrm{Hz}}^{ - {\mathrm{1}}} }}} \right)
+.% (13)
+\end{equation}
+However, \citet{LaFranca1995} find no dependence
+of $\alpha_{ox}$ on luminosity.
+\citet{Avni1995} find a complicated luminosity dependence.
+Clearly this is an area of active research.
+
+\emph{N.B.}  The net incident radiation field may have a
+smaller than specified ratio of current
+to total incident radiation field,
+since the command specifies the ratio of the current
+to the previous incident radiation fields,
+not the ratio of current to total incident radiation field.
+The ionization parameter will be slightly larger than
+specified for the same reason.
+
+In general, it is probably better to use the \cdCommand{AGN} command
+rather than this command.
+
+This is neither a luminosity nor intensity command---the units
+of the previous radiation field carry over to this command.
+
+\section{xi -0.1 }
+
+\citet{Tarter1969, Krolik1981, 2001ApJS..133..221K} define an ionization parameter
+$\xi$ given by
+\begin{equation}
+\xi  =  \left( {4\pi
+} \right)^2 \int_{1R}^{1000R}  J_\nu  {\kern 1pt} d\nu /n\left( {\mathrm{H}}
+\right)
+= \frac{{F_{ion} }}{{n\left( {\mathrm{H}} \right)r_0^2 }}
+\approx \frac{{L_{ion} }}{{n\left( {\mathrm{H}} \right)r_0^2 }}
+ [\mathrm{erg\ cm\ s}^{-1}]
+ \label{eqn:xi}
+\end{equation}
+where $n(\mathrm{H})$ is the hydrogen density at the illuminated face
+of the cloud and $r_0$ is the source - cloud separation.
+The number is the log of $\xi$.
+
+The original \citet{Tarter1969} paper defined $\xi$ as the last term in equation \ref{eqn:xi}, 
+with $L_{ion}$ defined as including all ionizing radiation.  
+\Cloudy\ used this definition, integrating over all ionizing photon energies,
+through version C13.03.  
+
+The 1 - 1000 Ryd  energy range first appears in \citet{Krolik1981}, 
+in the discussion above eqn 2.2a, 
+but they introduce a new variable, $F_{ion}$, for the luminosity over this range.
+The XSTAR code \citep{2001ApJS..133..221K} defines  $\xi$ over 1 - 1000 Ryd.
+
+Beginning with C13.04 the XSTAR definition is used for $\xi$,
+for compatibility with that code.
+That is, we now integrate over 1 - 1000 Ryd.
+The middle and right terms in equation \ref{eqn:xi} are not equal for a hard SED.
+
+You can easily define your own energy intervals by using the \cdCommand{luminosity},
+page \pageref{sec:LuminosityCommand},
+or \cdCommand{intensity}, page \pageref{sec:IntensityCommand}, commands to specify $L$ or $4\pi J$.
+They both accept the \cdCommand{range} option to change the limits in equation \ref{eqn:xi}.
+

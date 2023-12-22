@@ -1,0 +1,422 @@
+set h2 continuum dissociation Stancil
+title test large H2 molecule in PDR-like conditions
+#
+# commands controlling continuum =========
+# first continuum is FIR hot grain continuum produced in 
+# unmodeled HII Region
+blackbody, t = 75 K
+intensity -2.7 (total)
+# this is hot star continuum
+black 30000
+intensity  -5 range  0.4412 to 1 Ryd
+# this will remove all ionizing radiation
+extinguish 24 0
+#
+# commands for density & abundances =========
+hden 6
+grains ism, abundance log 0.16 single, no qheat 
+init file="ism.ini"
+abundances he= -1.01 c= -3.52 n=-8 o=-3.30 ne=-8 mg=-5.89
+continue si= -6.10 s= -5.10 cl=-7 ar=-8 fe= -6.60
+turbulence 2.7 km/sec
+#
+# commands controlling geometry  =========
+stop zone 10
+# force zone thickess to 1 cm 
+sphere
+set dr 0 
+# stop when gas is fully neutral
+stop efrac -10
+# stop when gas is cold
+stop temperature 10 linear
+#
+# other commands for details     =========
+failures 2 
+database h2  
+constant temperature 500 
+iterate
+## >>chng 16 apr 14, had been case B, this gets same effect with
+## no large Lyman optical depths
+Database H-like Lyman pumping off
+##>>chng 05 nov 22, add cr since grain absorption of molecues
+## is too extreme without it
+cosmic rays background
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+normalize to "CO  " 866.727m 
+# uv lines are strongly pumped by stellar continuum, break out contribution
+print line pump
+print line optical depths
+print line faint -2
+print ages
+# 
+save performance "h2_t500.per"
+save cooling "h2_t500.col"
+save monitors "h2_t500.asr"
+save pdr "h2_t500.pdr"
+save H2 rates "h2_t500.rat"
+save H2 lines "h2_t500.lin" all 
+save H2 column density "h2_t500.h2col"
+save H2 populations "h2_t500.pop"
+save H2 levels "h2_t500.lev"
+save raw continuum "h2_t500.raw"
+save continuum "h2_t500.con"
+save overview "h2_t500.ovr"
+save dominant rates "h2_t500.h2" "H2" 
+save chemistry rates "h2_t500.h2d" "H2" destruction
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+##
+## >>chng 05 aug 06, bound cond changed to dense gas with low levels
+## in LTE - everything changed
+monitor h2 ortho 3.000
+##
+##>>chng 05 nov 24, from 6.69 to 5.70, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 5.70 to 6.70, do not stop due to ices
+monitor h2 column density 6.70 error 0.15
+##
+##>>chng 05 nov 24, from 5.60 to 4.60, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 4.60 to 5.60, do not stop due to ices
+monitor h2 column density level 0 0 5.60 error 0.1
+##
+##>>chng 05 nov 24, from 6.40 to 5.41, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 5.41 to 6.41, do not stop due to ices
+monitor h2 column density level 0 1 6.41 error 0.1
+##
+##>>chng 05 nov 24, from 5.85 to 4.86, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 4.86 to 5.86, do not stop due to ices
+monitor h2 column density level 0 2 5.86 error 0.1
+##
+##>>chng 05 nov 24, from 3.04 to 5.04, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 5.04 to 6.04, do not stop due to ices
+monitor h2 column density level 0 3 6.04 error 0.1
+##
+##>>chng 05 nov 24, from 5.09 to 4.09, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 4.09 to 5.09, do not stop due to ices
+monitor h2 column density level 0 4 5.09 error 0.1
+##
+##>>chng 05 nov 24, from 4.93 to 3.93, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 3.93 to 4.93, do not stop due to ices
+monitor h2 column density level 0 5 4.93 error 0.1
+##
+##>>chng 05 nov 24, from 3.64 to 2.64, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 2.64 to 3.64, do not stop due to ices
+monitor h2 column density level 0 6 3.64 error 0.1
+##
+## departure coef well away from unity from here on up
+##
+##>>chng 05 nov 24, from 3.09 to 2.09, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 2.09 to 3.09, do not stop due to ices
+monitor h2 column density level 0 7 3.09 error 0.1
+##
+##>>chng 05 nov 24, from 1.40 to 0.40, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from 0.40 to 1.40, do not stop due to ices
+## >>chng 11 nov 16, from 1.4 to 1.48, adjust newmole monitors
+## >>chng 13 jun 27, from 1.48 to 1.356, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 8 1.356 error 0.1
+## >>chng 11 nov 16, from 1.163 to 1.371, adjust newmole monitors
+## >>chng 12 jan 06, from 1.371 to 1.268, several H2 model changes
+## >>chng 13 mar 23, from 1.268 to 1.37, improve big h2/chemistry consistency
+## >>chng 13 jun 27, from 1.37 to 0.865, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 9 0.865 error 0.1
+## >>chng 11 nov 16, from 0.501 to 0.6803, adjust newmole monitors
+## >>chng 12 jan 06, from 0.6803 to 0.6115, several H2 model changes
+## >>chng 13 mar 23, from 0.6115 to 0.6797, improve big h2/chemistry consistency
+## >>chng 13 jun 27, from 0.6797 to 0.3438, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 10  0.3438 error 0.1
+## >>chng 11 nov 16, from 0.6321 to 0.8403, adjust newmole monitors
+## >>chng 12 jan 06, from 0.8403 to 0.787, several H2 model changes
+## >>chng 13 mar 23, from 0.787 to 0.84, improve big h2/chemistry consistency
+## >>chng 13 jun 27, from 0.84 to 0.6606, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 11  0.6606 error 0.1
+## >>chng 11 nov 16, from 0.0137 to 0.1878, adjust newmole monitors
+## >>chng 13 jun 27, from 0.1878 to 0.0153, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 12  0.0153 error 0.1
+## >>chng 11 nov 16, from 0.2097 to 0.4179, adjust newmole monitors
+## >>chng 13 jun 27, from 0.4179 to 0.2776, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 13  0.2776 error 0.1
+## >>chng 11 nov 16, from -0.5462 to -0.311, adjust newmole monitors
+## >>chng 13 jun 27, from -0.311 to -0.4417, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 14 -0.4417 error 0.1
+## >>chng 11 nov 16, from 0.0159 to 0.2184, adjust newmole monitors
+## >>chng 13 jun 27, from 0.2184 to 0.2833, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 15  0.2833 error 0.1
+## >>chng 11 nov 16, from -0.6911 to -0.4492, adjust newmole monitors
+## >>chng 16 dec 29, from -0.4492 to -0.512, uupdate H-H2 coll to Lique 15
+monitor h2 column density level 0 16 -0.512 error 0.1
+## >>chng 11 nov 16, from -0.5405 to -0.2091, adjust newmole monitors
+## >>chng 13 jun 27, from -0.2091 to -0.1467, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 17 -0.1467 error 0.1
+## >>chng 11 nov 16, from -1.062 to -0.7699, adjust newmole monitors
+## >>chng 13 jun 27, from -0.7699 to -0.8206, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 18 -0.8206 error 0.1
+## >>chng 11 nov 16, from -0.655 to -0.2397, adjust newmole monitors
+## >>chng 13 jun 27, from -0.2397 to -0.1009, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 19 -0.1009 error 0.1
+## >>chng 11 nov 16, from -1.289 to -0.9219, adjust newmole monitors
+## >>chng 13 jun 27, from -0.9219 to -1.003, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 20 -1.003 error 0.1
+## >>chng 11 nov 16, from -0.866 to -0.4287, adjust newmole monitors
+## >>chng 13 jun 27, from -0.4287 to -0.2962, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 21 -0.2962 error 0.1
+## >>chng 11 nov 16, from -1.477 to -1.115, adjust newmole monitors
+monitor h2 column density level 0 22 -1.115 error 0.1
+## >>chng 11 nov 16, from -1.085 to -0.6998, adjust newmole monitors
+## >>chng 13 jun 27, from -0.6998 to -0.5879, BUGFIX use g-bar for H2-H2 collisions
+## >>chng 14 dec 04, from -0.5879 to -0.5492, fix double-counting of big-H2 Solomon rate
+monitor h2 column density level 0 23 -0.5492 error 0.1
+## >>chng 11 nov 16, from -1.778 to -1.381, adjust newmole monitors
+monitor h2 column density level 0 24 -1.381 error 0.1
+## >>chng 11 nov 16, from -1.522 to -1.111, adjust newmole monitors
+## >>chng 13 jun 27, from -1.111 to -1.039, BUGFIX use g-bar for H2-H2 collisions
+## >>chng 13 aug 05, from -1.039 to -0.9554, SDIV->safe_div for H2 Boltzmann ratios
+monitor h2 column density level 0 25 -0.9554 error 0.1
+## >>chng 11 nov 16, from -2.072 to -1.801, adjust newmole monitors
+monitor h2 column density level 0 26 -1.801 error 0.1
+## >>chng 11 nov 16, from -2.856 to -2.722, adjust newmole monitors
+## >>chng 13 aug 04, from -2.722 to -2.223, fix underflow in H2_Boltzmann
+## >>chng 13 aug 05, from -2.223 to -1.468, SDIV->safe_div for H2 Boltzmann ratios
+monitor h2 column density level 0 27 -1.468 error 0.1
+## >>chng 11 nov 16, from -2.096 to -1.982, adjust newmole monitors
+## >>chng 13 jun 27, from -1.982 to -2.104, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 0 28 -2.104 error 0.1
+## >>chng 11 nov 16, from -2.667 to -2.544, adjust newmole monitors
+## >>chng 13 jun 27, from -2.544 to -2.415, BUGFIX use g-bar for H2-H2 collisions
+## >>chng 13 aug 05, from -2.415 to -1.799, SDIV->safe_div for H2 Boltzmann ratios
+monitor h2 column density level 0 29 -1.799 error 0.1
+## >>chng 11 nov 16, from -2.326 to -2.206, adjust newmole monitors
+## >>chng 13 jun 27, from -2.206 to -2.115, BUGFIX use g-bar for H2-H2 collisions
+## >>chng 13 aug 05, from -2.115 to -2.228, SDIV->safe_div for H2 Boltzmann ratios
+monitor h2 column density level 0 30 -2.228 error 0.1
+##
+##>>chng 05 nov 24, from -0.42 to -1.40, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from -1.40 to -0.40, do not stop due to ices
+##>>chng 07 apr 08, from -0.40 to -0.45, use ORNL H2-He data set
+##>>chng 07 nov 09, from -0.45 to -0.41, update H - H2 collisions data
+##>>chng 09 may 11, from -0.41 to -0.48, update H2 - H2 collisions data
+## >>chng 11 nov 16, from -0.48 to -0.3381, adjust newmole monitors
+## >>chng 13 jun 27, from -0.3381 to -0.0208, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 0 -0.0208 error 0.1
+##
+##>>chng 05 nov 24, from 0.43 to -0.55, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from -0.55 to 0.45 do not stop due to ices
+##>>chng 07 apr 08, from 0.45 to 0.49, use ORNL H2-He data set
+##>>chng 07 nov 09, from 0.49 to 0.57, update H - H2 collisions data
+##>>chng 07 dec 26, from 0.57 to 0.50, us full H-H2 data set
+##>>chng 09 may 11, from 0.50 to 0.43, update H2 - H2 collisions data
+## >>chng 11 nov 16, from 0.43 to 0.5583, adjust newmole monitors
+## >>chng 13 jun 27, from 0.5583 to 0.8496, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 1 0.8496 error 0.1
+##
+##>>chng 05 nov 24, from -0.10 to -1.08, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from -1.08 to -0.08, do not stop due to ices
+##>>chng 07 apr 08, from -0.08 to -0.13, use ORNL H2-He data set
+##>>chng 07 nov 09, from -0.13 to -0.09, update H - H2 collisions data
+##>>chng 09 may 11, from -0.09 to -0.13, update H2 - H2 collisions data
+## >>chng 11 nov 16, from -0.13 to 0.0095, adjust newmole monitors
+## >>chng 13 jun 27, from 0.0095 to 0.2544, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 2 0.2544 error 0.1
+##
+##>>chng 05 nov 24, from 0.21 to -0.76, NA add mole freeze out onto grains
+##>>chng 05 dec 17, from -0.76 to 0.24, do not stop due to ices
+##>>chng 07 nov 09, from 0.24 to 0.36, update H - H2 collisions data
+##>>chng 07 dec 26, from 0.36 to 0.27, us full H-H2 data set
+## >>chng 11 nov 16, from 0.27 to 0.4385, adjust newmole monitors
+## >>chng 13 jun 27, from 0.4385 to 0.6368, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 3 0.6368 error 0.1
+## >>chng 11 nov 16, from -0.3834 to -0.2077, adjust newmole monitors
+## >>chng 13 jun 27, from -0.2077 to 0.0153, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 4  0.0153 error 0.1
+## >>chng 11 nov 16, from 0.065 to 0.2686, adjust newmole monitors
+monitor h2 column density level 1 5   0.2686 error 0.1
+## >>chng 11 nov 16, from -0.4255 to -0.2213, adjust newmole monitors
+monitor h2 column density level 1 6  -0.2213 error 0.1
+## >>chng 11 nov 16, from 0.054 to 0.2721, adjust newmole monitors
+## >>chng 13 jun 27, from 0.2721 to 0.4038, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 7   0.4038 error 0.1
+## >>chng 11 nov 16, from -0.293 to -0.0841, adjust newmole monitors
+## >>chng 12 jan 06, from -0.084 to -0.1251, several H2 model changes
+## >>chng 13 mar 22, from -0.1251 to -0.084, improve big h2/chemistry consistency
+## >>chng 13 jun 27, from -0.084 to 0.1865, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 8  0.1865 error 0.1
+## >>chng 11 nov 16, from 0.14 to 0.3674, adjust newmole monitors
+## >>chng 13 jun 27, from 0.3674 to 0.3011, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 9   0.3011 error 0.1
+## >>chng 13 jun 27, from -0.0063 to -0.0762, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 1 10 -0.0762 error 0.1
+## >>chng 11 nov 16, from -1.119 to -0.9466, adjust newmole monitors
+## >>chng 13 jun 27, from -0.9466 to -1.119, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 2 0   -1.119 error 0.1
+## >>chng 11 nov 16, from -0.1463 to -0.0214, adjust newmole monitors
+## >>chng 13 jun 27, from -0.0214 to 0.1419, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 2 1   0.1419 error 0.1
+## >>chng 11 nov 16, from -0.8002 to -0.6298, adjust newmole monitors
+## >>chng 13 jun 27, from -0.6298 to -0.7998, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 2 2   -0.7998 error 0.1
+## >>chng 11 nov 16, from -0.1905 to -0.0357, adjust newmole monitors
+## >>chng 13 jun 27, from -0.0357 to 0.0814, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 2 3   0.0814 error 0.1
+## >>chng 11 nov 16, from -1.45 to -1.283, adjust newmole monitors
+## >>chng 13 jun 27, from -1.283 to -1.543, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 3 0   -1.543 error 0.1
+## >>chng 11 nov 16, from -0.6791 to -0.4908, adjust newmole monitors
+## >>chng 13 jun 27, from -0.4908 to -0.4327, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 3 1   -0.4327 error 0.1
+## >>chng 11 nov 16, from -1.109 to -0.9431, adjust newmole monitors
+## >>chng 13 jun 27, from -0.9431 to -1.189, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 3 2   -1.189 error 0.1
+## >>chng 11 nov 16, from -0.732 to -0.5585, adjust newmole monitors
+monitor h2 column density level 3 3   -0.5585 error 0.1
+## >>chng 11 nov 16, from -1.661 to -1.482, adjust newmole monitors
+## >>chng 13 jun 27, from -1.482 to -1.742, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 4 0   -1.742 error 0.1
+## >>chng 11 nov 16, from -0.8418 to -0.6763, adjust newmole monitors
+## >>chng 13 jun 27, from -0.6763 to -0.756, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 4 1   -0.756 error 0.1
+## >>chng 11 nov 16, from -1.32 to -1.137, adjust newmole monitors
+## >>chng 13 jun 27, from -1.137 to -1.38, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 4 2   -1.38 error 0.1
+## >>chng 11 nov 16, from -0.9681 to -0.7979, adjust newmole monitors
+## >>chng 13 jun 27, from -0.7979 to -0.8771, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 4 3   -0.8771 error 0.1
+## >>chng 11 nov 16, from -2.074 to -1.753, adjust newmole monitors
+## >>chng 13 jun 27, from -1.753 to -1.951, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 5 0   -1.951 error 0.1
+## >>chng 11 nov 16, from -1.089 to -0.9146, adjust newmole monitors
+## >>chng 13 jun 27, from -0.9146 to -1.042, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 5 1   -1.042 error 0.1
+## >>chng 11 nov 16, from -1.732 to -1.366, adjust newmole monitors
+## >>chng 13 jun 27, from -1.366 to -1.508, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 5 2   -1.508 error 0.1
+## >>chng 11 nov 16, from -1.236 to -1.018, adjust newmole monitors
+## >>chng 13 jun 27, from -1.018 to -1.115, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 5 3   -1.115 error 0.1
+## >>chng 11 nov 16, from -2.185 to -1.926, adjust newmole monitors
+## >>chng 13 jun 27, from -1.926 to -2.14, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 6 0   -2.14 error 0.1
+## >>chng 11 nov 16, from -1.407 to -1.25, adjust newmole monitors
+## >>chng 13 jun 27, from -1.25 to -1.427, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 6 1   -1.427 error 0.1
+## >>chng 11 nov 16, from -1.827 to -1.519, adjust newmole monitors
+## >>chng 13 jun 27, from -1.519 to -1.648, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 6 2   -1.648 error 0.1
+## >>chng 11 nov 16, from -1.538 to -1.25, adjust newmole monitors
+## >>chng 13 jun 27, from -1.25 to -1.351, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 6 3   -1.351 error 0.1
+## >>chng 11 nov 16, from -2.27 to -2.087, adjust newmole monitors
+## >>chng 13 jun 27, from -2.087 to -2.335, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 7 0   -2.335 error 0.1
+## >>chng 11 nov 16, from -1.67 to -1.538, adjust newmole monitors
+## >>chng 13 jun 27, from -1.538 to -1.781, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 7 1   -1.781 error 0.1
+## >>chng 11 nov 16, from -1.853 to -1.64, adjust newmole monitors
+## >>chng 13 jun 27, from -1.64 to -1.793, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 7 2   -1.793 error 0.1
+## >>chng 11 nov 16, from -1.581 to -1.373, adjust newmole monitors
+## >>chng 13 jun 27, from -1.373 to -1.521, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 7 3   -1.521 error 0.1
+## >>chng 11 nov 16, from -2.371 to -2.256, adjust newmole monitors
+## >>chng 13 jun 27, from -2.256 to -2.546, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 8 0   -2.546 error 0.1
+## >>chng 11 nov 16, from -2.117 to -1.913, adjust newmole monitors
+## >>chng 13 jun 27, from -1.913 to -2.141, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 8 1   -2.141 error 0.1
+## >>chng 11 nov 16, from -1.877 to -1.748, adjust newmole monitors
+## >>chng 13 jun 27, from -1.748 to -1.978, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 8 2   -1.978 error 0.1
+## >>chng 11 nov 16, from -1.615 to -1.5, adjust newmole monitors
+## >>chng 13 jun 27, from -1.5 to -1.709, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 8 3   -1.709 error 0.1
+## >>chng 11 nov 16, from -2.231 to -2.151, adjust newmole monitors
+## >>chng 13 aug 04, from -2.151 to -2.451, fix underflow in H2_Boltzmann
+## >>chng 13 aug 05, from -2.451 to -2.84, SDIV->safe_div for H2 Boltzmann ratios
+monitor h2 column density level 9 0   -2.84 error 0.1
+## >>chng 11 nov 16, from -1.989 to -1.896, adjust newmole monitors
+## >>chng 13 jun 27, from -1.896 to -2.105, BUGFIX use g-bar for H2-H2 collisions
+## >>chng 13 aug 04, from -2.105 to -2.206, fix underflow in H2_Boltzmann
+## >>chng 13 aug 05, from -2.206 to -2.36, SDIV->safe_div for H2 Boltzmann ratios
+monitor h2 column density level 9 1   -2.36 error 0.1
+## >>chng 11 nov 16, from -1.818 to -1.758, adjust newmole monitors
+## >>chng 13 jun 27, from -1.758 to -2.376, BUGFIX use g-bar for H2-H2 collisions
+## >>chng 13 aug 04, from -2.376 to -2.245, fix underflow in H2_Boltzmann
+monitor h2 column density level 9 2   -2.245 error 0.1
+## >>chng 11 nov 16, from -2.177 to -2.113, adjust newmole monitors
+## >>chng 13 jun 27, from -2.113 to -2.291, BUGFIX use g-bar for H2-H2 collisions
+monitor h2 column density level 9 3   -2.291 error 0.1
+##
+## >>chng 5 dec 17 add this assert, make sure ices do not stop this sim
+monitor nzone 10 error 0.01
+##
+## >>chng 13 jun 27, from -3.4460 to -18.0497, add H2 2.1215m line luminosity
+## >>chng 13 jun 27, from -18.0497 to -17.8515, fix the errors in mole_h2_coll.cpp
+## >>chng 13 jul 25, wl from 2.1215m to 2.12125m, increased wl precision to 6 sig. fig.
+monitor line luminosity "H2  " 2.12125m  -17.8515 error 0.1
+##
+## >>chng 13 jun 27, from -8.869 to -16.66, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 27, from -16.66 to -16.06, fix the error in mole_h2_coll.cpp
+## >>chng 13 jul 25, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -16.06 to -15.84, update LAMDA to 2015
+## >>chng 16 dec 29, from -15.84 to -15.81, uupdate H-H2 coll to Lique 15
+monitor "H2O " 538.142m line intensity -15.81
+## >>chng 13 jun 27, from -7.357 to -23.33, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 27, from -23.33 to -23.28, fix the error in mole_h2_coll.cpp
+## >>chng 13 jul 25, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -23.28 to -23.25, fix double-counting of big-H2 Solomon rate
+## >>chng 21 sep 11, from -23.25 to -23.73, LAMDA update
+monitor "HNC " 1652.90m  line intensity -23.73
+## >>chng 13 jun 27, from -8.563 to -22.81, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 27, from -22.81 to -23.02, fix the error in mole_h2_coll.cpp
+## >>chng 13 jul 25, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+monitor "HCS+" 1755.88m  -23.02 line intensity
+## >>chng 13 jun 27, from -7.453 to -24.22, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 27, from -24.22 to -24.37, fix the error in mole_h2_coll.cpp
+## >>chng 13 jul 25, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -24.37 to -24.45, update LAMDA to 2015
+## >>chng 21 sep 11, from -24.45 to -24.34, LAMDA update
+## >>chng 23 may 15, from -24.34 to -24.43, GS updates 21 reactions to UMIST 2012
+monitor "CS  " 3058.86m  -24.43 line intensity
+## >>chng 13 jun 27, from -7.288 to -20.45, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 25, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 2600.05m  -20.45 line intensity
+## >>chng 13 jun 27, from -6.463 to -18.95, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 25, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 1300.05m  -18.95 line intensity
+## >>chng 13 jun 27, from -6.149 to -18.08, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+monitor "CO  " 866.727m  -18.08 line intensity
+## >>chng 13 jun 27, from -6.177 to -17.48, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 25, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+monitor "CO  " 650.074m  -17.48 line intensity
+## >>chng 13 jun 27, from -6.485 to -17.02, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 25, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+monitor "CO  " 520.089m  -17.02 line intensity
+## >>chng 13 jun 27, from -6.954 to -16.65, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 25, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+monitor "CO  " 433.438m  -16.65 line intensity
+## >>chng 13 jun 27, from -7.48 to -16.35, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 25, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+monitor "CO  " 371.549m  -16.35 line intensity
+## >>chng 13 jun 27, from -8.049 to -16.11, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 25, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+monitor "CO  " 325.137m  -16.11 line intensity
+## >>chng 13 jun 27, from -7.522 to -19.66, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 25, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+monitor "^13CO" 906.599m  -19.66 line intensity
+## >>chng 13 jun 27, from -8.247 to -23.75, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 27, from -23.75 to -23.65, fix the error in mole_h2_coll.cpp
+## >>chng 13 jul 25, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -23.65 to -24.59, LAMDA update
+## >>chng 21 sep 15, from -24.59 to -23.68, go back to unresolved model
+monitor "CN  " 880.858m  -23.68  line intensity
+##
+# h2_t500.in 
+# class limit  
+# ========================================
+
+This is a dense molecular gas with background cosmic rays and the incident
+radiation field set to a small value.  The lower levels are in LTE.
+

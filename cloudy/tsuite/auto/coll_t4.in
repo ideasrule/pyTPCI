@@ -1,0 +1,410 @@
+title coronal equilibrium at 10^4 K
+#
+# commands controlling continuum =========
+coronal 4
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling geometry  =========
+stop column density 15 
+#
+# commands for density & abundances =========
+hden 10
+#
+# commands controlling output    =========
+save performance "coll_t4.per"
+save monitors "coll_t4.asr" 
+save overview "coll_t4.ovr" 
+save continuum "coll_t4.con"  units angstroms 
+#
+# commands giving the monitors    =========
+## >>chng 14 jul 13, from 5.786 to -2.019, add new monitors
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2400.00A     -2.019 
+##
+## >>chng 14 jul 13, from 6.241 to -6.333, add new monitors
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 6200.00A     -6.333 
+##
+## >>chng 14 jul 13, from 3.235 to -5.282, add new monitors
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1080.00A     -5.282 
+##
+## >>chng 14 jul 13, from 5.641 to -4.278, add new monitors
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1.15000m     -4.278 
+##
+## >>chng 14 jul 13, from 6.316 to -5.32, add new monitors
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2500.00A     -5.32 
+##
+## >>chng 14 jul 13, from 6.234 to -5.913, add new monitors
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2300.00A     -5.913 
+##
+## >>chng 14 jul 13, from 5.82 to -6.203, add new monitors
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 8900.00A     -6.203 
+##
+## >>chng 14 jul 13, from 5.218 to -3.857, add new monitors
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1786.00A     -3.857 
+##
+## >>chng 15 nov 13, from -12.9 to -6.146, add this monitor
+## >>chng 16 mar 20, from -6.146 to -6.106, change from Werner model to Stout model for Fe+
+## >>chng 16 mar 24, from -6.106 to -6.171, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from -6.171 to -6.207, Fran bug fix
+## >>chng 23 may 15, from -6.207 to -6.289, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -6.289 to -6.223, GS update UMIST to 2012 and set upper limit on T
+monitor ctot -6.223
+##
+## >>chng 12 nov 09, first run
+## >>chng 13 feb 10, from 8.783 to 8.835, H2,e-=>H-,H update
+## >>chng 21 sep 11, from 8.835 to 8.456, LAMDA update
+## >>chng 23 jul 15, from 8.456 to 9.472, GS update UMIST to 2012 and set upper limit on T
+monitor CO column density 9.472 errr 0.1
+## >>chng 12 nov 09, first run
+## >>chng 13 feb 10, from 7.696 to 7.545, H2,e-=>H-,H update
+## >>chng 13 nov 19, from 7.545 to 7.459, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from 7.459 to 7.746, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from 7.746 to 7.543, GS update UMIST to 2012 and set upper limit on T
+monitor H2 column density 7.543 errr 0.1
+##
+## >>chng 01 may 07, from -2.509 to -2.477, chng in He+ H ct rate
+## >>chng 01 may 10, from -2.477 to -2.605, ct network update
+## >>chng 01 jun 14, from -2.605 to -2.492, ct network update
+## >>chng 03 jan 21, from -2.492 to -2.594 improved H mole network
+## >>chng 04 mar 24, from -2.594 to -2.862 iterate, improve H pops
+## >>chng 04 apr 17, from -2.862 to -2.685, impr h mole conv
+## >>chng 04 apr 29, from -2.685 to -2.868, He+ - H ct rate update
+## >>chng 04 jun 09, from -2.868 to -2.919, NA update H mole net
+## >>chng 04 jul 02, from -2.919 to -2.961, O H ct
+## >>chng 04 jul 03, from -2.961 to -2.885, NA update H, CO chem net, inr err
+## >>chng 04 jul 07, from -2.885 to -2.969, oh ct integ
+## >>chng 04 jul 28, from -2.969 to -2.909, imp conv chem
+## >>chng 04 sep 06, from -2.909 to -2.980, bug nej Auger
+## >>chng 04 dec 08, from -2.98 to -2.61, co-ion feedback, check converg
+## >>chng 05 mar 25, from -2.61 to -2.98, renorm H pops in level solver
+## >>chng 05 aug 16, from -2.98 to -3.34, lower contin in coronal, rm photo
+## >>chng 05 aug 18, from -3.34 to -3.45, rm guess for H0 coll, inc err
+## >>chng 05 sep 15, from -3.45 to -3.29 H- mut neut from Lepp et al 02
+## >>chng 06 nov 29, from -3.29 to -3.43, use Badnell DR by default
+## >>chng 11 jul 12, from -3.43 to -3.345, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.345 to -2.966, adjust newmole monitors
+## >>chng 12 mar 09, from -2.966 to -2.878, several renorms due to mid 5960s revisions
+## >>chng 12 nov 01, from -2.878 to -2.785, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 12 dec 11, from -2.785 to -2.861, CX to ground state
+## >>chng 13 nov 19, from -2.861 to -3.191, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from -3.191 to -3.326, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -3.326 to -3.254, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Hydrogen  2 -3.254 error 0.15
+##
+## >>chng 01 may 06, from -2.724 to -3.566, chng in he+ ct rate
+## >>chng 04 mar 24, from -3.566 to -3.543 iterate, improve H pops
+## >>chng 04 apr 17, from -3.543 to -2.642, impr h mole conv
+## >>chng 04 apr 29, from -2.642 to -2.530, He+ - H ct rate update
+## >>chng 04 jul 03, from -2.530 to -2.355, NA update H, CO chem net, inr err
+## >>chng 04 jul 07, from -2.355 to -2.407, oh ct integ
+## >>chng 04 jul 28, from -2.407 to -2.370, imp conv chem
+## >>chng 04 sep 06, from -2.370 to -2.413, bug nej Auger
+## >>chng 04 dec 08, from -2.413 to -2.192, co-ion feedback, check converg
+## >>chng 05 mar 25, from -2.19 to -2.41, renorm H pops in level solver
+## >>chng 05 aug 16, from -2.41 to -2.84, lower contin in coronal, rm photo
+## >>chng 05 aug 18, from -2.84 to -2.95, rm guess for H0 coll, inc err
+## >>chng 05 sep 15, from -2.95 to -2.80 H- mut neut from Lepp et al 02
+## >>chng 05 sep 27, from -2.80 to -2.91, TE, GS update H chem, chr trn, inc err
+## >>chng 06 sep 30, from -2.91 to -2.81, rjrw merge chem, corr several bugs
+## >>chng 06 nov 29, from -2.81 to -2.98, use Badnell DR by default
+## >>chng 08 mar 22, from -2.98 to -10.09 bugfix r1879
+## >>chng 11 jul 12, from -10.09 to -9.985, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -9.985 to -9.743, adjust newmole monitors
+## >>chng 12 apr 02, from -9.743 to -9.634, Chianti 7 change, gcc 4.4.6 wolkje
+## >>chng 12 nov 08, from -9.634 to -9.46, fix e-,H2 dissociation rate
+## >>chng 13 feb 01, from -9.46 to -9.607, BUGFIX, largely undo r6703
+## >>chng 13 nov 19, from -9.607 to -9.881, fix CT bug in mole_eval_balance
+## >>chng 16 mar 21, from -9.881 to -9.634, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 23 may 15, from -9.634 to -9.923, GS updates 21 reactions to UMIST 2012
+monitor ionization Helium    2 -9.923 error 0.30
+##
+## >>chng 01 may 06, from -1.325 to -1.492, chng in he+ ct rate
+## >>chng 01 may 10, from -1.492 to -1.469, ct network update
+## >>chng 01 jun 14, from -1.469 to -1.492 ct network update
+## >>chng 03 jan 21, from -1.492 to -1.469 improved H mole network
+## >>chng 03 may 18, from -1.469 to -1.447, drift up
+## >>chng 04 feb 21, from -1.447 to -1.619, and H- ct recomb
+## >>chng 04 mar 24, from -1.619 to -1.590 iterate, improve H pops
+## >>chng 04 apr 17, from -1.590 to -1.380, impr h mole conv
+## >>chng 04 apr 29, from -1.380 to -1.262, He+ - H ct rate update
+## >>chng 04 jul 02, from -1.262 to -1.228, O H ct
+## >>chng 04 jul 03, from -1.228 to -1.459, NA update H, CO chem net, inr err
+## >>chng 05 aug 03, from -1.459 to -2.298, NA update CO, H chem net
+## >>chng 05 aug 16, from -2.30 to -2.72, lower contin in coronal, rm photo
+## >>chng 05 aug 18, from -2.72 to -2.81, rm guess for H0 coll, inc err
+## >>chng 05 sep 15, from -2.81 to -2.69 H- mut neut from Lepp et al 02
+## >>chng 05 sep 27, from -2.69 to -2.75, TE, GS update H chem, chr trn, inc err
+## >>chng 06 nov 29, from -2.75 to -2.88, use Badnell DR by default
+## >>chng 08 mar 22, from -2.88 to -3.15 bugfix r1879
+## >>chng 11 nov 16, from -3.15 to -2.804, adjust newmole monitors
+## >>chng 12 mar 09, from -2.804 to -2.732, several renorms due to mid 5960s revisions
+## >>chng 12 nov 01, from -2.732 to -2.64, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 nov 19, from -2.64 to -2.953, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from -2.953 to -2.873, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -2.873 to -3.009, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Carbon    2 -3.009 error 0.20
+##
+## >>chng 01 may 07, from -2.328 to -2.296, chng in He+ H ct rate
+## >>chng 01 may 10, from -2.296 to -2.423, ct network update
+## >>chng 01 jun 14, from -2.423 to -2.311 ct network update
+## >>chng 03 jan 21, from -2.311 to -2.276 improved H mole network
+## >>chng 03 oct 23, from -2.276 to -2.302, update chem net
+## >>chng 04 mar 24, from -2.302 to -2.679 iterate, improve H pops
+## >>chng 04 apr 17, from -2.679 to -2.503, impr h mole conv
+## >>chng 04 apr 29, from -2.503 to -2.685, He+ - H ct rate update
+## >>chng 04 jun 09, from -2.685 to -2.736, NA update H mole net
+## >>chng 04 jul 02, from -2.736 to -2.777, O H ct
+## >>chng 04 jul 03, from -2.777 to -2.702, NA update H, CO chem net, inr err
+## >>chng 04 jul 07, from -2.702 to -2.786, oh ct integ
+## >>chng 04 jul 28, from -2.786 to -2.725, imp conv chem
+## >>chng 04 sep 06, from -2.725 to -2.795, bug nej Auger
+## >>chng 04 dec 08, from -2.79 to -2.43, co-ion feedback, check converg
+## >>chng 05 mar 25, from -2.43 to -2.79, renorm H pops in level solver
+## >>chng 05 aug 16, from -2.79 to -3.15, lower contin in coronal, rm photo
+## >>chng 05 aug 18, from -3.15 to -3.27, rm guess for H0 coll, inc err
+## >>chng 05 sep 15, from -3.27 to -3.11 H- mut neut from Lepp et al 02
+## >>chng 06 jul 07, from -3.11 to -3.23, Stancil N1 CT
+## >>chng 06 nov 29, from -3.23 to -3.33, use Badnell DR by default
+## >>chng 11 jul 12, from -3.33 to -3.246, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.246 to -2.868, adjust newmole monitors
+## >>chng 12 mar 09, from -2.868 to -2.778, several renorms due to mid 5960s revisions
+## >>chng 12 nov 01, from -2.778 to -2.687, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 12 dec 11, from -2.687 to -2.762, CX to ground state
+## >>chng 13 nov 19, from -2.762 to -3.091, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from -3.091 to -3.227, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -3.227 to -3.155, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Nitrogen  2 -3.155 error 0.15
+##
+## >>chng 01 may 07, from -2.565 to -2.533, chng in He+ H ct rate
+## >>chng 01 may 10, from -2.533 to -2.661, ct network update
+## >>chng 01 jun 14, from -2.661 to -2.549 ct network update
+## >>chng 03 jan 21, from -2.549 to -2.514 improved H mole network
+## >>chng 03 oct 23, from -2.514 to -2.539, update chem net
+## >>chng 04 mar 24, from -2.539 to -2.918 iterate, improve H pops
+## >>chng 04 apr 17, from -2.918 to -2.742, impr h mole conv
+## >>chng 04 apr 29, from -2.742 to -2.924, He+ - H ct rate update
+## >>chng 04 jun 09, from -2.924 to -2.976, NA update H mole net
+## >>chng 04 jul 02, from -2.976 to -3.017, O H ct
+## >>chng 04 jul 03, from -3.017 to -2.979, NA update H, CO chem net, inr err
+## >>chng 04 jul 07, from -2.979 to -3.063, oh ct integ
+## >>chng 04 jul 28, from -3.063 to -3.003, imp conv chem
+## >>chng 04 sep 06, from -3.003 to -3.074, bug nej Auger
+## >>chng 04 dec 08, from -3.07 to -2.70, co-ion feedback, check converg
+## >>chng 05 mar 25, from -2.70 to -3.07, renorm H pops in level solver
+## >>chng 05 aug 16, from -3.07 to -3.43, lower contin in coronal, rm photo
+## >>chng 05 aug 18, from -3.43 to -3.55, rm guess for H0 coll, inc err
+## >>chng 05 sep 15, from -3.55 to -3.38 H- mut neut from Lepp et al 02
+## >>chng 06 nov 29, from -3.38 to -3.52, use Badnell DR by default
+## >>chng 11 jul 12, from -3.52 to -3.44, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.44 to -3.06, adjust newmole monitors
+## >>chng 12 mar 09, from -3.06 to -2.973, several renorms due to mid 5960s revisions
+## >>chng 12 nov 01, from -2.973 to -2.88, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 12 dec 11, from -2.88 to -2.956, CX to ground state
+## >>chng 13 nov 19, from -2.956 to -3.285, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from -3.285 to -3.42, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -3.42 to -3.35, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Oxygen    2 -3.35 error 0.15
+##
+## >>chng 01 may 06, from -2.237 to -2.260, chng in he+ ct rate
+## >>chng 04 feb 21, from -2.260 to -2.117, and H- ct recomb
+## >>chng 04 mar 24, from -2.117 to -2.062 iterate, improve H pops
+## >>chng 04 apr 29, from -2.062 to -2.003, He+ - H ct rate update
+## >>chng 04 jul 02, from -2.003 to -1.972, O H ct
+## >>chng 04 jul 07, from -1.972 to -1.949, oh ct integ
+## >>chng 04 dec 08, from -1.949 to -2.044 co-ion feedback, check converg
+## >>chng 05 mar 25, from -2.04 to -1.95, renorm H pops in level solver
+## >>chng 05 aug 03, from -1.95 to -1.91, NA update CO, H chem net
+## >>chng 05 aug 16, from -1.91 to -1.84, lower contin in coronal, rm photo
+## >>chng 06 nov 29, from -1.84 to -1.16, use Badnell DR by default
+## >>chng 08 mar 22, from -1.16 to -1.22 bugfix r1879
+## >>chng 11 jul 12, from -1.22 to -1.315, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.315 to -1.27, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -1.27 to -1.495, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 10, from -1.495 to -1.449, H2,e-=>H-,H update
+## >>chng 23 may 15, from -1.449 to -1.393, GS updates 21 reactions to UMIST 2012
+monitor ionization Magnesium 1 -1.393  error 0.1
+##
+## >>chng 01 jan 31, from -1.938 to -3.155 due to Al CT with H+
+## >>chng 02 jul 19, from -3.155 to -3.192, better two photon
+## >>chng 04 feb 21, from -3.192 to -3.089, and H- ct recomb
+## >>chng 04 mar 24, from -3.089 to -3.047 iterate, improve H pops
+## >>chng 04 apr 29, from -3.047 to -2.981, He+ - H ct rate update
+## >>chng 04 jul 02, from -2.981 to -2.952, O H ct
+## >>chng 04 jul 07, from -2.952 to -2.926, oh ct integ
+## >>chng 04 dec 08, from -2.926 to -3.008 co-ion feedback, check converg
+## >>chng 05 mar 25, from -3.01 to -2.92, renorm H pops in level solver
+## >>chng 05 aug 16, from -2.92 to -2.84, lower contin in coronal, rm photo
+## >>chng 07 nov 29, from -2.84 to -2.79, update DR rates
+## >>chng 08 mar 22, from -2.79 to -2.88 bugfix r1879
+## >>chng 11 jul 12, from -2.88 to -3.192, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.192 to -3.28, adjust newmole monitors
+## >>chng 12 oct 13, from -3.28 to -3.02, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from -3.02 to -3.152, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 12 nov 08, from -3.152 to -3.234, fix e-,H2 dissociation rate
+## >>chng 13 feb 01, from -3.234 to -3.186, BUGFIX, largely undo r6703
+## >>chng 13 nov 19, from -3.186 to -3.14, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from -3.14 to -3.04, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -3.04 to -3.095, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Aluminium 1 -3.095 error 0.1
+##
+## >>chng 01 jan 31, from -3.102 to 3.159, Si ct with He+
+## >>chng 01 may 06, from -3.159 to -3.135, chng in he+ ct rate
+## >>chng 04 feb 21, from -3.135 to -2.986, and H- ct recomb
+## >>chng 04 mar 24, from -2.986 to -2.935 iterate, improve H pops
+## >>chng 04 apr 17, from -2.935 to -3.017, impr h mole conv
+## >>chng 04 apr 29, from -3.017 to -3.016, He+ - H ct rate update
+## >>chng 04 jul 03, from -3.016 to -3.050, NA update H, CO chem net, inr err
+## >>chng 05 aug 03, from -3.05 to -3.00, NA update CO, H chem net
+## >>chng 05 aug 16, from -3.00 to -2.88, lower contin in coronal, rm photo
+## >>chng 05 sep 27, from -2.88 to -2.41, TE, GS update H chem, chr trn, inc err
+## >>chng 06 mar 02, from -2.41 to -2.36, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 sep 30, from -2.36 to -2.72, rjrw merge chem, corr several bugs
+## >>chng 06 nov 29, from -2.72 to -2.53, use Badnell DR by default
+## >>chng 08 mar 22, from -2.53 to -0.74 bugfix r1879
+## >>chng 11 jul 12, from -0.74 to -0.824, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -0.824 to -0.7142, Chianti for Fe moderate to high ions
+## >>chng 11 nov 16, from -0.7142 to -0.7942, adjust newmole monitors
+## >>chng 12 nov 08, from -0.7942 to -0.9387, fix e-,H2 dissociation rate
+## >>chng 13 feb 01, from -0.9387 to -0.8666, BUGFIX, largely undo r6703
+## >>chng 16 dec 20, from -0.8666 to -0.7565, add secondary autoionization to DR suppression
+## >>chng 23 mar 17, from -0.7565 to -0.8235, add SiS and Lamda model"
+## >>chng 23 jul 15, from -0.8235 to -0.7535, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Silicon   1 -0.7535 error 0.15
+##
+## >>chng 01 may 10, from -0.897 to -0.950, ct network update
+## >>chng 01 jun 14, from -0.950 to -0.900 ct network update
+## >>chng 03 jan 21, from -0.900 to -0.878 improved H mole network
+## >>chng 04 feb 21, from -0.878 to -0.964, and H- ct recomb
+## >>chng 04 mar 24, from -0.964 to -1.124 iterate, improve H pops
+## >>chng 04 apr 17, from -1.124 to -1.031, impr h mole conv
+## >>chng 04 apr 29, from -1.031 to -1.098, He+ - H ct rate update
+## >>chng 04 jul 02, from -1.098 to -1.131, O H ct
+## >>chng 04 jul 03, from -1.131 to -1.090, NA update H, CO chem net, inr err
+## >>chng 04 sep 12, from -1.090 to -1.134, NA update H, CO chem net, inr err
+## >>chng 04 dec 08, from -1.13 to -0.98 co-ion feedback, check converg
+## >>chng 05 mar 25, from -0.98 to -1.13, renorm H pops in level solver
+## >>chng 05 aug 03, from -1.13 to -0.63, NA update CO, H chem net
+## >>chng 05 aug 16, from -0.63 to -0.88, lower contin in coronal, rm photo
+## >>chng 05 aug 18, from -0.88 to -0.94, rm guess for H0 coll, inc err
+## >>chng 05 sep 15, from -0.94 to -0.87 H- mut neut from Lepp et al 02
+## >>chng 06 mar 02, from -0.87 to -0.95, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 sep 30, from -0.95 to -0.89, rjrw merge chem, corr several bugs
+## >>chng 06 nov 29, from -0.89 to -1.04, use Badnell DR by default
+## >>chng 08 mar 22, from -1.04 to -1.66 bugfix r1879
+## >>chng 11 jul 12, from -1.66 to -1.558, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -1.558 to -1.274, adjust newmole monitors
+## >>chng 12 mar 09, from -1.274 to -1.202, several renorms due to mid 5960s revisions
+## >>chng 12 nov 01, from -1.202 to -1.116, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 12 nov 08, from -1.116 to -1.017, fix e-,H2 dissociation rate
+## >>chng 13 feb 01, from -1.017 to -1.137, BUGFIX, largely undo r6703
+## >>chng 13 nov 19, from -1.137 to -1.362, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from -1.362 to -1.577, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -1.577 to -1.479, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Sulphur   2 -1.479 error 0.15
+##
+## >>chng 01 may 10, from -2.018 to -1.908, ct network update
+## >>chng 01 jun 14, from -1.908 to -2.009 ct network update
+## >>chng 03 jan 21, from -2.009 to -1.919 improved H mole network
+## >>chng 04 feb 21, from -1.919 to -2.115, and H- ct recomb
+## >>chng 04 mar 24, from -2.115 to -1.942 iterate, improve H pops
+## >>chng 04 apr 17, from -1.942 to -2.095, impr h mole conv
+## >>chng 04 apr 29, from -2.095 to -2.001, He+ - H ct rate update
+## >>chng 04 jun 09, from -2.001 to -1.971, NA update H mole net
+## >>chng 04 jul 02, from -1.971 to -1.951, O H ct
+## >>chng 04 jul 03, from -1.951 to -2.021, NA update H, CO chem net, inr err
+## >>chng 04 jul 07, from -2.021 to -1.969, oh ct integ
+## >>chng 04 dec 08, from -1.97 to -2.19 co-ion feedback, check converg
+## >>chng 05 mar 25, from -2.19 to -1.96, renorm H pops in level solver
+## >>chng 05 aug 16, from -1.96 to -3.56, lower contin in coronal, rm photo
+## >>chng 05 sep 27, from -3.56 to -3.60, TE, GS update H chem, chr trn
+## >>chng 08 mar 22, from -3.60 to -3.56 bugfix r1879
+## >>chng 11 jul 12, from -3.56 to -3.514, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.514 to -3.556, adjust newmole monitors
+## >>chng 12 nov 08, from -3.556 to -3.391, fix e-,H2 dissociation rate
+## >>chng 13 feb 01, from -3.391 to -3.441, BUGFIX, largely undo r6703
+## >>chng 13 feb 10, from -3.441 to -3.488, H2,e-=>H-,H update
+## >>chng 13 nov 19, from -3.488 to -3.432, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from -3.432 to -3.546, GS updates 21 reactions to UMIST 2012
+monitor ionization Argon     2 -3.546 error 0.1 
+##
+## >>chng 01 jan 31, from -0.860 to -3.564 Fe ct with He+
+## >>chng 02 jul 19, from -3.564 to -3.603 better two photon
+## >>chng 03 apr 12, from -3.603 to -3.581, slow drift
+## >>chng 03 aug 15, from -3.581 to -3.434, include guess for low T dr
+## >>chng 04 feb 21, from -3.434 to -3.283, and H- ct recomb
+## >>chng 04 mar 24, from -3.283 to -3.222 iterate, improve H pops
+## >>chng 04 apr 29, from -3.222 to -3.153, He+ - H ct rate update
+## >>chng 04 jul 02, from -3.153 to -3.117, O H ct
+## >>chng 04 jul 07, from -3.117 to -3.090, oh ct integ
+## >>chng 04 dec 08, from -3.090 to -3.200 co-ion feedback, check converg
+## >>chng 05 mar 25, from -3.20 to -3.09, renorm H pops in level solver
+## >>chng 05 aug 03, from -3.09 to -3.05, NA update CO, H chem net
+## >>chng 05 aug 16, from -3.05 to -2.96, lower contin in coronal, rm photo
+## >>chng 05 aug 18, from -2.96 to -2.93, rm guess for H0 coll, inc err
+## >>chng 05 sep 27, from -2.93 to -3.20, TE, GS update H chem, chr trn
+## >>chng 08 mar 22, from -3.20 to -3.28 bugfix r1879
+## >>chng 11 jul 12, from -3.28 to -3.466, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.466 to -3.578, adjust newmole monitors
+## >>chng 12 nov 01, from -3.578 to -3.647, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 12 nov 08, from -3.647 to -3.809, fix e-,H2 dissociation rate
+## >>chng 13 feb 10, from -3.809 to -3.71, H2,e-=>H-,H update
+## >>chng 23 may 15, from -3.71 to -3.523, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -3.523 to -3.622, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Iron      1 -3.622 error 0.15
+##
+## >>chng 01 may 10, from 7.529 to 7.422 ct network update
+## >>chng 01 jun 14, from 7.422 to 7.529 ct network update
+## >>chng 03 jan 21, from 7.529 to 7.431, improved H mole network
+## >>chng 04 mar 24, from 7.431 to 7.182 iterate, improve H pops
+## >>chng 04 apr 17, from 7.182 to 7.383, impr h mole conv
+## >>chng 04 apr 29, from 7.383 to 7.249, He+ - H ct rate update
+## >>chng 04 jun 09, from 7.249 to 7.207, NA update H mole net
+## >>chng 04 jul 02, from 7.207 to 7.185, O H ct
+## >>chng 04 jul 03, from 7.185 to 7.270, NA update H, CO chem net, inr err
+## >>chng 04 jul 07, from 7.270 to 7.203, oh ct integ
+## >>chng 04 jul 28, from 7.203 to 7.252, imp conv chem
+## >>chng 04 sep 06, from 7.252 to 7.192 bug nej Auger
+## >>chng 04 dec 08, from 7.19 to 7.51 co-ion feedback, check converg
+## >>chng 05 mar 25, from 7.51 to 7.19, renorm H pops in level solver
+## >>chng 05 aug 16, from 7.19 to 6.85, lower contin in coronal, rm photo
+## >>chng 05 aug 18, from 6.85 to 6.76, rm guess for H0 coll, inc err
+## >>chng 05 sep 15, from 6.76 to 6.89 H- mut neut from Lepp et al 02
+## >>chng 05 sep 27, from 6.89 to 6.85, TE, GS update H chem, chr trn
+## >>chng 06 sep 30, from 6.85 to 6.90, rjrw merge chem, corr several bugs
+## >>chng 06 nov 29, from 6.90 to 6.77, use Badnell DR by default
+## >>chng 08 mar 22, from 6.77 to 6.69 bugfix r1879
+## >>chng 11 jul 12, from 6.69 to 6.743, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from 6.743 to 6.696, Chianti for Fe moderate to high ions
+## >>chng 11 nov 16, from 6.696 to 7.074, adjust newmole monitors
+## >>chng 12 mar 09, from 7.074 to 7.16, several renorms due to mid 5960s revisions
+## >>chng 12 nov 01, from 7.16 to 7.245, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 12 dec 11, from 7.245 to 7.174, CX to ground state
+## >>chng 13 nov 19, from 7.174 to 6.875, fix CT bug in mole_eval_balance
+## >>chng 23 may 15, from 6.875 to 6.755, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from 6.755 to 6.82, GS update UMIST to 2012 and set upper limit on T
+monitor eden 6.82 error 0.1
+##
+## >>chng 04 dec 08, from 5 to 7.5 co-ion feedback, check converg
+## >>chng 05 mar 25, from 7.5 to 5 renorm H pops in level solver
+## >>chng 08 dec 08, from 5 to 4.091, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 4.091 to 6.636, merging newsolvers branch
+## >>chng 09 jan 08, from 6.636 to 7.818, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, disabled this assert since this model has too few zones for it to be reliable
+## assert itrzn 7.818 error 0.02
+#
+# coll_t4.in
+# class coronal  
+# ========================================
+
+this tests conditions of collisional equilibrium at low densities

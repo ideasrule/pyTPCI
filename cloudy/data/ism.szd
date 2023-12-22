@@ -1,0 +1,8 @@
+# size distribution file for standard MRN size distribution
+# based on:
+#>>refer	grain	size distribution	Mathis J.S, Rumpl W., Nordsieck K.H., 1977, ApJ, 217, 425	
+2010403 # magic number for version control
+power  # choices are SSIZE, POWER, EXP1, EXP2, EXP3
+0.005  # lower limit for grain size (micron)
+0.250  # upper limit for grain size (micron)
+-3.5   # slope of power law distribution

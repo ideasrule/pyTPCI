@@ -1,0 +1,122 @@
+title FeII emission in typical intermediate density photoionzied cloud
+species "Fe+" dataset="Tayal18"
+database Stout print
+#
+# commands controlling continuum =========
+black 5e5K
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden 8
+element iron abundance 2
+element iron ionization -7 0 -7
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+constant temperature 4
+species "Fe+" levels=all
+#
+# commands controlling output    =========
+print lines column 
+print line inward
+print line sort wavelength
+print line faint 0.1
+normalize "Fe 2b" 5270
+set save prefix "feii_t4n8_Tayal18"
+save overview ".ovr"
+save performance ".per"
+save monitors ".asr" last
+save species continuum last ".con" "Fe+" units angstroms
+save species bands ".fe2b" "FeII_bands.ini" "Fe+" last no hash
+#
+# commands giving the monitors    =========
+## >>chng 19 jun 19, from -3.758 to -4.189, add new datasets
+monitor line intensity "Fe 2b" 1212 -4.189 error 0.1
+##
+## >>chng 19 jun 19, from -4.017 to -3.727, add new datasets
+monitor line intensity "Fe 2b" 1295 -3.727 error 0.1
+##
+## >>chng 19 jun 19, from -3.652 to -4.064, add new datasets
+monitor line intensity "Fe 2b" 1365 -4.064 error 0.1
+##
+## >>chng 19 jun 19, from -1.955 to -2.314, add new datasets
+monitor line intensity "Fe 2b" 1485 -2.314 error 0.1
+##
+## >>chng 19 jun 19, from -1.88 to -2.277, add new datasets
+monitor line intensity "Fe 2b" 1615 -2.277 error 0.1
+##
+monitor line intensity "Fe 2b" 1787 -3.079 error 0.1
+##
+## >>chng 19 jun 19, from -2.79 to -2.605, add new datasets
+monitor line intensity "Fe 2b" 1822 -2.605 error 0.1
+##
+## >>chng 19 jun 19, from -0.1962 to -0.32, add new datasets
+monitor line intensity "Fe 2b" 2355 -0.32 error 0.1
+##
+## >>chng 19 jun 19, from -0.7925 to -1.002, add new datasets
+monitor line intensity "Fe 2b" 2495 -1.002 error 0.1
+##
+## >>chng 19 jun 19, from -1.38 to -1.593, add new datasets
+monitor line intensity "Fe 2b" 2695 -1.593 error 0.1
+##
+## >>chng 19 jun 19, from -0.5638 to -0.6126, add new datasets
+monitor line intensity "Fe 2b" 2758 -0.6126 error 0.1
+##
+## >>chng 19 jun 19, from -2.309 to -3.328, add new datasets
+monitor line intensity "Fe 2b" 2797 -3.328 error 0.1
+##
+## >>chng 19 jun 19, from -1.814 to -1.938, add new datasets
+monitor line intensity "Fe 2b" 2935 -1.938 error 0.1
+##
+## >>chng 19 jun 19, from -2.907 to -2.788, add new datasets
+monitor line intensity "Fe 2b" 4255 -2.788 error 0.1
+##
+## >>chng 19 jun 19, from -3.325 to -3.285, add new datasets
+monitor line intensity "Fe 2b" 4558 -3.285 error 0.1
+##
+monitor line intensity "Fe 2b" 4743 -4 error 0.1
+##
+monitor line intensity "Fe 2b" 4855 -3.603 error 0.1
+##
+monitor line intensity "Fe 2b" 4971 -4.116 error 0.1
+##
+## >>chng 19 jun 19, from -3.223 to -3.53, add new datasets
+monitor line intensity "Fe 2b" 4975 -3.53 error 0.1
+##
+monitor line intensity "Fe 2b" 5143 -3.308 error 0.1
+##
+## >>chng 19 jun 19, from -3.214 to -3.275, add new datasets
+monitor line intensity "Fe 2b" 5318 -3.275 error 0.1
+##
+monitor line intensity "Fe 2b" 5865 -3.972 error 0.1
+##
+monitor line intensity "Fe 2b" 6265 -3.299 error 0.1
+##
+## >>chng 19 jun 19, from -2.971 to -3.444, add new datasets
+monitor line intensity "Fe 2b" 6565 -3.444 error 0.1
+##
+## >>chng 19 jun 19, from -3.686 to -3.307, add new datasets
+monitor line intensity "Fe 2b" 7445 -3.307 error 0.1
+##
+## >>chng 19 jun 19, from -6.363 to -6.84, add new datasets
+monitor line intensity "Fe 2b" 7785 -6.84 error 0.1
+##
+## >>chng 19 jun 19, from -3.014 to -2.858, add new datasets
+monitor line intensity "Fe 2b" 1.88900m -2.858 error 0.1
+##
+## >>chng 19 jun 19, from -5.317 to -4.782, add new datasets
+monitor line intensity "Fe 2b" 2.20000m -4.782 error 0.1
+##
+#
+# feii_t4n8_Tayal18.in
+# class function 
+# ========================================
+# 
+
+This model has a very high iron abundance, 100x H, and most Fe is
+in the form of Fe+. it has a low density and unit thickness
+
+The model is optically thin, no RT.

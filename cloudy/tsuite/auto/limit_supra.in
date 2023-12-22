@@ -1,0 +1,131 @@
+title secondary ionization dominated gas
+# like SN envelope
+#
+# commands controlling continuum =========
+# this continuum will be VERY faint
+table agn
+ionization parameter -25
+# secondary ioinzations will dominate
+set csupra -5
+#
+# commands for density & abundances =========
+hden 5
+abundances old solar 84 
+#
+# commands controlling geometry  =========
+stop temperature 20
+## >>chng 07 nov 21, from 10 to 1 to insure initial convergence
+stop zone 1
+set dr 0 
+#
+# other commands for details     =========
+constant temperature 1000 K
+iterate convergence
+#
+# commands controlling output    =========
+print ages
+save overview "limit_supra.ovr"
+save performance "limit_supra.per"
+save heating "limit_supra.het"
+save ionizing continuum "limit_supra.ion" last 
+save monitors "limit_supra.asr" last
+save molecules "limit_supra.mol"
+#
+# commands giving the monitors    =========
+monitor eden 5.068 0.07
+monitor csupra -5
+##
+## charge transfer heating 
+## >>chng 02 may 05, from -14.058 to -14.148, fix CT rate matrix
+## >>chng 03 aug 29, from -14.148 to -13.145, update H2, 1->10 zones
+## >>chng 06 aug 02, from -13.145 to -13.172, update O+2, N+2 CT
+## >>chng 06 nov 29, from -13.172 to -13.214, Badnell DR turned on
+## >>chng 07 nov 21, from -13.214 to -14.211, change in number of zones
+monitor line intensity "ct h" 0 -14.211
+##
+## >>chng 01 jul 01, from -14.15 to -14.106, diffuse fields improved
+## >>chng 02 jan 09, from -14.106 to -14.050
+## >>chng 02 apr 26, from -14.050 to -13.898, he iso-seq cooling enabled
+##                   large change due to 23S to ground coll deex heating,
+##                   not counted before
+## >>chng 02 may 05, from -13.898 to -13.962, fix CT rate matrix
+## >>chng 05 mar 12, from -13.962 to -13.885, RP merge He-like code
+## >>chng 05 oct 01, from -13.885 to -13.983, RP update He-like levels
+## >>chng 06 nov 29, from -13.983 to -14.035, Badnell DR turned on
+monitor htot -14.035 .1
+##
+monitor ionization hydrogen 2 -0.010
+## 
+## >>chng 08 apr 30, from -1.640 to -1.662 H, He topoff change
+monitor ionization hydrogen 1 -1.662
+## 
+monitor ionization helium 2 -.992
+##
+## >>chng 01 jul 01, from -1.19 to -1.246, diffuse fields improved
+## >>chng 02 jan 09, from -1.246 to -1.323
+## >>chng 02 may 05, from -1.323 to -1.205, fix CT rate matrix
+## >>chng 05 oct 01, from -1.205 to -1.189, RP update He-like levels
+## >>chng 06 nov 29, from -1.189 to -1.003, Badnell DR turned on
+monitor ionization carbon 2 -1.003
+##
+## >>chng 06 nov 29, from -0.746 to -0.772, Badnell DR turned on
+## >>chng 07 nov 29, from -0.772 to -0.531, update DR rates
+## >>chng 11 jul 12, from -0.531 to -0.6877, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from -0.6877 to -0.5314, Badnell revise DR collisional suppression fit
+monitor ionization silicon 2 -0.5314
+##
+## >>chng 03 aug 15, from -1.579 to -1.389, add guess low T dr for fe
+## >>chng 06 feb 07, from -1.389 to -1.486, add exp to low-T DR 
+## >>chng 08 apr 30, from -1.486 to -1.508 H, He topoff change
+## >>chng 08 sep 22, from -1.508 to -1.326, remove Ali et al. DR guess
+## >>chng 08 nov 13, from -1.326 to -1.042, fix Boltzmann factor in CT rates (r2455)
+## >>chng 11 apr 22, from -1.042 to -1.179, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -1.179 to -1.244, enable fit to Badnell DR suppression
+monitor ionization iron 2 -1.244
+##
+## >>chng 07 nov 21, add ionization of titanium
+## >>chng 08 sep 22, from -1.154 to -1.003, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -1.003 to -0.8837, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -0.8837 to -0.9557, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.9557 to -0.9275, BUGFIX, largely undo r6703
+monitor ionization titanium 2 -0.9275
+##
+## >>chng 08 sep 22, from -0.868 to -0.7525, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -0.7525 to -0.6043, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -0.6043 to -0.6647, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.6647 to -0.6356, BUGFIX, largely undo r6703
+monitor ionization titanium 3 -0.6356
+##
+## >>chng 08 sep 22, from -0.55 to -0.5911, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -0.5911 to -0.3094, update Ar sequence Badnell DR rates
+## >>chng 13 feb 01, from -0.3094 to -0.2896, BUGFIX, largely undo r6703
+monitor ionization titanium 4 -0.2896
+##
+## >>chng 08 sep 22, from -0.395 to -0.4365, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -0.4365 to -0.9895, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -0.9895 to -0.8162, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.8162 to -0.9653, BUGFIX, largely undo r6703
+monitor ionization titanium 5 -0.9653
+##
+## >>chng 08 sep 22, from -1.031 to -1.062, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -1.062 to -1.632, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -1.632 to -1.449, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -1.449 to -1.613, BUGFIX, largely undo r6703
+monitor ionization titanium 6 -1.613
+##
+## >>chng 08 sep 22, from -1.838 to -1.888, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -1.888 to -2.431, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -2.431 to -2.231, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -2.231 to -2.415, BUGFIX, largely undo r6703
+monitor ionization titanium 7 -2.415 
+# 
+# limit_supra.in
+# class limit 
+# ========================================
+# 
+
+This model computes the ionization within cool gas that is totally ionized
+by suprathermal secondary electrons.  
+
+Charge transfer heating is VERY important in this simulation.
+

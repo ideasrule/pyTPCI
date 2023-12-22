@@ -1,0 +1,356 @@
+title the best we can do to predict the H I emission spectrum 
+#
+# commands controlling continuum =========
+coronal 5
+#
+# commands for density & abundances =========
+hden 100 linear 
+set eden 2
+init file "honly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+database h-like resolved levels 30
+database h-like collapsed levels 70
+## database h-like gbar vriens
+# Hummer option not included here because the population of the excited states will be zero
+case b no photoionzation no pdest 
+no scattering escape
+no induced processes
+iterate
+#
+# commands controlling output    =========
+## >>chng 16 jul 28, from 2.881 to 3.355, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 3.355 to 2.866, Fran bug fix
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 19 aug 06, from 2.866 to 3.038, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "H  1"      6562.80A  3.038
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1"      4861.32A  1.0064
+## >>chng 16 jul 28, from 0.4713 to 0.4495, new sims to monitor Case B and departure
+## >>chng 17 may 25, wl from 4340.49A to 4340.46A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4340.46A to 4340.47A, update NIST energies
+## >>chng 21 aug 18, wl from 4340.47A to 4340.46A, revert to PvH energies for H
+monitor line "H  1"      4340.46A  0.4495
+## >>chng 16 jul 28, from 0.2606 to 0.2157, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.2157 to 0.1115, Fran bug fix
+## >>chng 17 may 25, wl from 4101.76A to 4101.73A, up Rydberg constant
+## >>chng 19 jun 28, from 0.1115 to 0.1212, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.1212 to 0.1319, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 21 mar 16, wl from 4101.73A to 4101.74A, update NIST energies
+## >>chng 21 aug 18, wl from 4101.74A to 4101.73A, revert to PvH energies for H
+monitor line "H  1"      4101.73A  0.1319
+## >>chng 16 jul 28, from 0.16 to 0.1248, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.1248 to 0.068, Fran bug fix
+## >>chng 17 may 25, wl from 3970.09A to 3970.07A, up Rydberg constant
+## >>chng 19 jun 28, from 0.068 to 0.0719, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0719 to 0.0768, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 21 mar 16, wl from 3970.07A to 3970.08A, update NIST energies
+## >>chng 21 aug 18, wl from 3970.08A to 3970.07A, revert to PvH energies for H
+monitor line "H  1"      3970.07A  0.0768
+## >>chng 16 jul 28, from 0.1057 to 0.079, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.079 to 0.0446, Fran bug fix
+## >>chng 17 may 25, wl from 3889.07A to 3889.05A, up Rydberg constant
+## >>chng 19 aug 06, from 0.0446 to 0.0488, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 21 mar 16, wl from 3889.05A to 3889.06A, update NIST energies
+## >>chng 21 aug 18, wl from 3889.06A to 3889.05A, revert to PvH energies for H
+monitor line "H  1"      3889.05A  0.0488
+## >>chng 16 jul 28, from 0.0736 to 0.0532, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0532 to 0.0308, Fran bug fix
+## >>chng 17 may 25, wl from 3835.40A to 3835.38A, up Rydberg constant
+## >>chng 19 aug 06, from 0.0308 to 0.0329, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 21 mar 16, wl from 3835.38A to 3835.39A, update NIST energies
+## >>chng 21 aug 18, wl from 3835.39A to 3835.38A, revert to PvH energies for H
+monitor line "H  1"      3835.38A  0.0329
+## >>chng 16 jul 28, from 0.0534 to 0.0376, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0376 to 0.0222, Fran bug fix
+## >>chng 17 may 25, wl from 3797.92A to 3797.89A, up Rydberg constant
+## >>chng 19 aug 06, from 0.0222 to 0.0233, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 3797.89A to 3797.90A, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1"      3797.90A  0.0233
+## >>chng 16 jul 28, from 0.04 to 0.0276, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0276 to 0.0165, Fran bug fix
+## >>chng 17 may 25, wl from 3770.65A to 3770.63A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3770.63A to 3770.64A, update NIST energies
+## >>chng 21 aug 18, wl from 3770.64A to 3770.63A, revert to PvH energies for H
+monitor line "H  1"      3770.63A  0.0165
+## >>chng 16 jul 28, from 0.0307 to 0.0208, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0208 to 0.0126, Fran bug fix
+## >>chng 17 may 25, wl from 3750.17A to 3750.15A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3750.15A to 3750.16A, update NIST energies
+## >>chng 21 aug 18, wl from 3750.16A to 3750.15A, revert to PvH energies for H
+monitor line "H  1"      3750.15A  0.0126
+## >>chng 16 jul 28, from 0.0241 to 0.0161, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0161 to 0.0099, Fran bug fix
+## >>chng 17 may 25, wl from 3734.39A to 3734.36A, up Rydberg constant
+## >>chng 20 aug 22, wl from 3734.36A to 3734.37A, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1"      3734.37A  0.0099
+## >>chng 16 jul 28, from 0.0193 to 0.0128, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0128 to 0.0079, Fran bug fix
+## >>chng 17 may 25, wl from 3721.96A to 3721.93A, up Rydberg constant
+## >>chng 20 aug 22, wl from 3721.93A to 3721.94A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 3721.94A to 3721.95A, update NIST energies
+## >>chng 21 aug 18, wl from 3721.95A to 3721.94A, revert to PvH energies for H
+monitor line "H  1"      3721.94A  0.0079
+## >>chng 16 jul 28, from 0.0157 to 0.0103, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0103 to 0.0064, Fran bug fix
+## >>chng 17 may 25, wl from 3711.99A to 3711.97A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3711.97A to 3711.98A, update NIST energies
+## >>chng 21 aug 18, wl from 3711.98A to 3711.97A, revert to PvH energies for H
+monitor line "H  1"      3711.97A  0.0064
+## >>chng 16 jul 28, from 0.0129 to 0.0084, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0084 to 0.0052, Fran bug fix
+## >>chng 17 may 25, wl from 3703.87A to 3703.85A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3703.85A to 3703.86A, update NIST energies
+## >>chng 21 aug 18, wl from 3703.86A to 3703.85A, revert to PvH energies for H
+monitor line "H  1"      3703.85A  0.0052
+## >>chng 16 jul 28, from 0.0108 to 0.0069, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0069 to 0.0043, Fran bug fix
+## >>chng 17 may 25, wl from 3697.17A to 3697.15A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3697.15A to 3697.16A, update NIST energies
+## >>chng 21 aug 18, wl from 3697.16A to 3697.15A, revert to PvH energies for H
+monitor line "H  1"      3697.15A  0.0043
+## >>chng 16 jul 28, from 0.3408 to 0.3707, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.3707 to 0.1632, Fran bug fix
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+## >>chng 19 jun 28, from 0.1632 to 0.1929, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.1929 to 0.2313, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor line "H  1"      1.87510m  0.2313
+## >>chng 16 jul 28, from 0.1643 to 0.1241, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.1241 to 0.0923, Fran bug fix
+## >> chng 17 may 28, from  1.28181m to 1.28180m, update Rydberg constant
+## >>chng 19 jun 28, from 0.0923 to 0.097, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.097 to 0.1021, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 1.28180m to 1.28181m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1"      1.28181m  0.1021
+## >>chng 16 jul 28, from 0.091 to 0.0693, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0693 to 0.0285, Fran bug fix
+## >>chng 17 may 25, wl from 1.09381m to 1.09380m, up Rydberg constant
+## >>chng 19 jun 28, from 0.0285 to 0.0339, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0339 to 0.0392, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 25, wl from 1.09380m to 1.09381m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1"      1.09381m  0.0392
+## >>chng 16 jul 28, from 0.0558 to 0.0391, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0391 to 0.0178, Fran bug fix
+## >>chng 17 may 25, wl from 1.00494m to 1.00493m, up Rydberg constant
+## >>chng 19 jun 28, from 0.0178 to 0.0198, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0198 to 0.0222, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 1.00493m to 1.00494m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.00494m to 1.00493m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 1.00493m to 1.00494m, revert to PvH energies for H
+monitor line "H  1"      1.00494m  0.0222
+## >>chng 16 jul 28, from 0.0368 to 0.0244, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0244 to 0.0118, Fran bug fix
+## >>chng 17 may 25, wl from 9545.99A to 9545.93A, up Rydberg constant
+## >>chng 19 jun 28, from 0.0118 to 0.0127, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0127 to 0.0139, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 9545.93A to 9545.97A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9545.97A to 9545.95A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9545.95A to 9545.97A, revert to PvH energies for H
+monitor line "H  1"      9545.97A  0.0139
+## >>chng 16 jul 28, from 0.0256 to 0.0164, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0164 to 0.0082, Fran bug fix
+## >>chng 17 may 25, wl from 9229.03A to 9228.97A, up Rydberg constant
+## >>chng 19 jun 28, from 0.0082 to 0.0087, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0087 to 0.0093, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 9228.97A to 9229.02A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9229.02A to 9229.00A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9229.00A to 9229.02A, revert to PvH energies for H
+monitor line "H  1"      9229.02A  0.0093
+## >>chng 16 jul 28, from 0.0185 to 0.0115, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0115 to 0.006, Fran bug fix
+## >>chng 17 may 25, wl from 9014.92A to 9014.87A, up Rydberg constant
+## >>chng 19 aug 06, from 0.006 to 0.0066, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 9014.87A to 9014.91A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9014.91A to 9014.89A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9014.89A to 9014.91A, revert to PvH energies for H
+monitor line "H  1"      9014.91A  0.0066
+## >>chng 16 jul 28, from 0.0139 to 0.0084, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0084 to 0.0045, Fran bug fix
+## >>chng 17 may 25, wl from 8862.80A to 8862.74A, up Rydberg constant
+## >>chng 19 aug 06, from 0.0045 to 0.0048, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 8862.74A to 8862.79A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8862.79A to 8862.77A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8862.77A to 8862.79A, revert to PvH energies for H
+monitor line "H  1"      8862.79A  0.0048
+## >>chng 16 jul 28, from 0.0107 to 0.0064, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0064 to 0.0034, Fran bug fix
+## >>chng 17 may 25, wl from 8750.48A to 8750.43A, up Rydberg constant
+## >>chng 19 aug 06, from 0.0034 to 0.0036, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 8750.43A to 8750.48A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8750.48A to 8750.46A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8750.46A to 8750.48A, revert to PvH energies for H
+monitor line "H  1"      8750.48A  0.0036
+## >>chng 16 jul 28, from 0.0807 to 0.1087, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.1087 to 0.0264, Fran bug fix
+## >>chng 17 may 25, wl from 4.05113m to 4.05113m, up Rydberg constant
+## >>chng 19 jun 28, from 0.0264 to 0.038, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.038 to 0.0535, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "H  1"      4.05115m  0.0535
+## >>chng 16 jul 28, from 0.0458 to 0.0406, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0406 to 0.011, Fran bug fix
+## >>chng 17 may 25, wl from 2.62515m to 2.62513m, up Rydberg constant
+## >>chng 19 jun 28, from 0.011 to 0.0156, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0156 to 0.0205, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 2.62513m to 2.62515m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.62515m to 2.62514m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.62514m to 2.62515m, revert to PvH energies for H
+monitor line "H  1"      2.62515m  0.0205
+## >>chng 16 jul 28, from 0.028 to 0.0202, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0202 to 0.007, Fran bug fix
+## >>chng 17 may 25, wl from 2.16553m to 2.16551m, up Rydberg constant
+## >>chng 19 jun 28, from 0.007 to 0.0086, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0086 to 0.0105, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 2.16551m to 2.16553m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.16553m to 2.16552m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.16552m to 2.16553m, revert to PvH energies for H
+monitor line "H  1"      2.16553m  0.0105
+## >>chng 16 jul 28, from 0.0184 to 0.012, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.012 to 0.0047, Fran bug fix
+## >>chng 17 may 25, wl from 1.94456m to 1.94454m, up Rydberg constant
+## >>chng 19 jun 28, from 0.0047 to 0.0054, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0054 to 0.0063, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 1.94454m to 1.94456m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.94456m to 1.94455m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 1.94455m to 1.94456m, revert to PvH energies for H
+monitor line "H  1"      1.94456m  0.0063
+## >>chng 16 jul 28, from 0.0127 to 0.0078, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0078 to 0.0033, Fran bug fix
+## >>chng 17 may 25, wl from 1.81741m to 1.81740m, up Rydberg constant
+## >>chng 19 jun 28, from 0.0033 to 0.0037, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0037 to 0.0041, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 1.81740m to 1.81741m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1"      1.81741m  0.0041
+## >>chng 16 jul 28, from 0.0257 to 0.0468, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0468 to 0.0054, Fran bug fix
+## >>chng 16 aug 07, from 0.0054 to 0.0049, Marios bug fixes
+## >>chng 17 may 25, wl from 7.45781m to 7.45777m, up Rydberg constant
+## >>chng 19 jun 28, from 0.0049 to 0.0115, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0115 to 0.0194, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 7.45777m to 7.45782m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 13, wl from 7.45782m to 7.45780m
+## >>chng 21 aug 18, wl from 7.45780m to 7.45782m and Elow from 105291.6 to 105291.7, revert to PvH energies for H
+monitor line "H  1"      7.45782m  Elow=105291.7  0.0194
+## >>chng 16 aug 07, from 0.0163 to 0.0034, Fran bug fix
+## >>chng 17 may 25, wl from 4.65250m to 4.65247m fix Rydberg constant
+## >>chng 19 jun 28, from 0.0034 to 0.005, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.005 to 0.0071, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 4.65247m to 4.65251m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 13, wl from 4.65251m to 4.65248m
+## >>chng 21 aug 18, wl from 4.65248m to 4.65251m and Elow from 105291.6 to 105291.7, revert to PvH energies for H
+monitor line "H  1"      4.65251m  Elow=105291.7  0.0071
+## >>chng 16 jul 28, from 0.0107 to 0.0081, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 0.0081 to 0.0023, Fran bug fix
+## >>chng 17 may 25, wl from 3.73953m to 3.73951m, up Rydberg constant
+## >>chng 19 jun 28, from 0.0023 to 0.0029, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.0029 to 0.0038, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 3.73951m to 3.73954m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 3.73954m to 3.73952m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 3.73952m to 3.73954m, revert to PvH energies for H
+monitor line "H  1"      3.73954m  0.0038
+## >>chng 16 jul 28, from 1 to 4.21, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 4.21 to 2.437, Fran bug fix
+## >>chng 19 jun 28, from 2.437 to 2.53, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 2.53 to 2.68, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[30]"  2.68
+## >>chng 16 jul 28, from 1 to 2.245, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 2.245 to 0.8867, Fran bug fix
+## >>chng 19 jun 28, from 0.8867 to 0.9507, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.9507 to 1.043, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[70]"  1.043
+## >>chng 16 jul 28, from 1 to 37.34, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 37.34 to 1.645, Fran bug fix
+## >>chng 16 aug 07, from 1.645 to 1.115, Marios bug fixes
+## >>chng 19 jun 28, from 1.115 to 3.888, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 3.888 to 8.663, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[90]"  8.663
+## >>chng 16 jul 28, from 1 to 2.777, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 2.777 to 0.943, Fran bug fix
+## >>chng 19 jun 28, from 0.943 to 1.016, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 1.016 to 1.126, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[110]"  1.126
+## >>chng 16 jul 28, from 1 to 11.46, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 11.46 to 1.3, Fran bug fix
+## >>chng 16 aug 07, from 1.3 to 1.033, Marios bug fixes
+## >>chng 19 jun 28, from 1.033 to 1.504, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 1.504 to 2.28, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[130]"  2.28
+## >>chng 16 jul 28, from 1 to 28.54, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 28.54 to 1.649, Fran bug fix
+## >>chng 16 aug 07, from 1.649 to 1.098, Marios bug fixes
+## >>chng 19 jun 28, from 1.098 to 2.691, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 2.691 to 5.491, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[150]"  5.491
+## >>chng 16 jul 28, from 1 to 33.1, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 33.1 to 1.729, Fran bug fix
+## >>chng 16 aug 07, from 1.729 to 1.118, Marios bug fixes
+## >>chng 19 jun 28, from 1.118 to 3.043, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 3.043 to 6.576, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[250]"  6.576
+## >>chng 16 jul 28, from 1 to 30.91, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 30.91 to 1.687, Fran bug fix
+## >>chng 16 aug 07, from 1.687 to 1.12, Marios bug fixes
+## >>chng 19 jun 28, from 1.12 to 3.338, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 3.338 to 7.52, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 21 nov 02, from 7.52 to 7.474, fix bug with overresolving CS in isoseq
+monitor departure "H[350]"  7.474
+## >>chng 16 jul 28, from 1 to 11.93, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 11.93 to 1.559, Fran bug fix
+## >>chng 16 aug 07, from 1.559 to 1.067, Marios bug fixes
+## >>chng 19 jun 28, from 1.067 to 1.352, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 1.352 to 1.753, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[450]"  1.753
+## >>chng 16 jul 28, from 1 to 6.623, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 6.623 to 1.146, Fran bug fix
+## >>chng 16 aug 07, from 1.146 to 1.098, Marios bug fixes
+## >>chng 19 jun 28, from 1.098 to 1.327, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 1.327 to 1.51, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[470]"  1.51
+## >>chng 16 jul 28, from 1 to 8.554, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 8.554 to 1.332, Fran bug fix
+## >>chng 16 aug 07, from 1.332 to 1.217, Marios bug fixes
+## >>chng 17 sep 09, from 1.217 to 1.068, fix bug in high n collisional excitation rates for H-like iso-sequences
+## >>chng 19 jun 28, from 1.068 to 1.294, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 1.294 to 1.421, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[490]"  1.421
+## >>chng 16 jul 28, from 1 to 9.14, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 9.14 to 1.546, Fran bug fix
+## >>chng 16 aug 07, from 1.546 to 1.427, Marios bug fixes
+## >>chng 17 sep 09, from 1.427 to 1.247, fix bug in high n collisional excitation rates for H-like iso-sequences
+## >>chng 19 jun 28, from 1.247 to 1.402, reintegrate iso_collisions branch
+monitor departure "H[510]"  1.402
+## >>chng 16 jul 28, from 1 to 9.208, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 9.208 to 1.595, Fran bug fix
+## >>chng 16 aug 07, from 1.595 to 1.476, Marios bug fixes
+## >>chng 17 sep 09, from 1.476 to 1.76, fix bug in high n collisional excitation rates for H-like iso-sequences
+## >>chng 19 jun 28, from 1.76 to 1.877, reintegrate iso_collisions branch
+monitor departure "H[520]"  1.877
+## >>chng 16 jul 28, from 1 to 9.239, new sims to monitor Case B and departure
+## >>chng 16 aug 07, from 9.239 to 1.625, Fran bug fix
+## >>chng 16 aug 07, from 1.625 to 1.506, Marios bug fixes
+## >>chng 17 sep 09, from 1.506 to 2.658, fix bug in high n collisional excitation rates for H-like iso-sequences
+## >>chng 19 jun 28, from 2.658 to 2.954, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 2.954 to 3.158, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor departure "H[530]"  3.158
+print departure h-like hydrogen
+print line faint 0.01
+print line column
+save overview "limit_caseb_h_den2_temp5_coronal.ovr"
+save performance "limit_caseb_h_den2_temp5_coronal.per"
+save diffuse continuum "limit_caseb_h_den2_temp5_coronal.dif" last no title units microns
+save continuum "limit_caseb_h_den2_temp5_coronal.con" last no title units microns
+save monitors  "limit_caseb_h_den2_temp5_coronal.asr"

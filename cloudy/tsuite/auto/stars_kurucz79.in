@@ -1,0 +1,172 @@
+title Kurucz 1979 SED
+#
+# commands controlling continuum =========
+# Approximate model of a hot star ionizing its surroundings.
+# Assume H density of 1e+6 per cc.  This run tests the Kurucz model option.
+# I choose the T_eff and log(g) values arbitrarily.  It implies a star
+# with luminosity 32300 L_sun, radius 6.4745 R_sun, and mass 3.745 M_sun.
+table star kurucz 30400.0
+luminosity 4.509202522 solar
+#
+# commands for density & abundances =========
+abundances old solar 84 
+hden 6.0
+grains ism
+#
+# commands controlling geometry  =========
+radius -3.0 parsec
+sphere
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+constant temperature 4
+no blends
+#
+# commands controlling output    =========
+#
+save performance "stars_kurucz79.per"
+save overview last "stars_kurucz79.ovr"
+save results last "stars_kurucz79.rlt"
+save monitors last "stars_kurucz79.asr"
+save transmitted continuum last "stars_kurucz79.trn" no header
+save continuum last "stars_kurucz79.con" units angstrom
+#
+# commands giving the monitors    =========
+## >>chng 10 aug 12, from 22.5 to 22.56, fix botches related to r4125; star botches from recent continuum mesh changes
+monitor line luminosity "nInu" 3.400c  22.56
+monitor line luminosity "nInu" 122.4m  29.887
+## >>chng 13 jul 25, wl from 60.83m to 60.8322m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 60.8322m  30.800
+## >>chng 13 jul 25, wl from 41.22m to 41.2152m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 41.2152m  31.308
+## >>chng 13 jul 25, wl from 30.87m to 30.8695m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 30.8695m  31.686
+## >>chng 13 jul 25, wl from 24.78m to 24.7829m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 24.7829m  31.972
+## >>chng 13 jul 25, wl from 24.30m to 24.2998m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 24.2998m  31.992
+## >>chng 13 jul 25, wl from 22.83m to 22.8302m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 22.8302m  32.077
+## >>chng 13 jul 25, wl from 21.42m to 21.4199m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 21.4199m  32.161
+## >>chng 13 jul 25, wl from 21.12m to 21.1235m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 21.1235m  32.174
+## >>chng 13 jul 25, wl from 19.62m to 19.6199m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 19.6199m  32.272
+## >>chng 13 jul 25, wl from 17.65m to 17.6534m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 17.6534m  32.409
+monitor line luminosity "nInu" 17.37m  32.435
+## >>chng 13 jul 25, wl from 15.69m to 15.6901m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 15.6901m  32.565
+## >>chng 13 jul 25, wl from 14.60m to 14.6036m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 14.6036m  32.656
+monitor line luminosity "nInu" 12.43m  32.871
+monitor line luminosity "nInu" 11.40m  32.982
+monitor line luminosity "nInu" 10.46m  33.093
+## >>chng 13 jul 25, wl from 9.480m to 9.48002m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 9.48002m  33.224
+## >>chng 13 jul 25, wl from 9.325m to 9.32488m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 9.32488m  33.243
+## >>chng 13 jul 25, wl from 8.210m to 8.21035m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 8.21035m  33.413
+monitor line luminosity "nInu" 7.580m  33.511
+## >>chng 13 jul 25, wl from 7.050m to 7.05026m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 7.05026m  33.609
+## >>chng 13 jul 25, wl from 4.114m to 4.11370m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 4.11370m  34.311
+## >>chng 13 jul 25, wl from 2.324m to 2.32440m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 2.32440m  35.040
+## >>chng 13 jul 25, wl from 1.643m to 1.64313m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 1.64313m  35.481
+## >>chng 13 jul 25, wl from 1.480m to 1.48022m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 1.48022m  35.615
+## >>chng 13 jul 25, wl from 1.436m to 1.43649m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 1.43649m  35.653
+## >>chng 13 jul 25, wl from 1.119m to 1.11867m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 1.11867m  35.969
+## >>chng 13 jul 25, wl from 8330A to 8329.68A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  8329.68A  36.326
+## >>chng 13 jul 25, wl from 8079A to 8078.61A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  8078.61A  36.362
+## >>chng 13 jul 25, wl from 6210A to 6209.66A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  6209.66A  36.681
+## >>chng 13 jul 25, wl from 4885A to 4885.36A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  4885.36A  36.965
+## >>chng 13 jul 25, wl from 3704A to 3704.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  3704.34A  37.242
+## >>chng 13 jul 25, wl from 3588A to 3587.67A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  3587.67A  37.268
+## >>chng 13 jul 25, wl from 2430A to 2430.05A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  2430.05A  37.641
+## >>chng 13 jul 25, wl from 2392A to 2392.03A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  2392.03A  37.653
+## >>chng 13 jul 25, wl from 2071A to 2071.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  2071.34A  37.769
+## >>chng 13 jul 25, wl from 2053A to 2052.68A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  2052.68A  37.773
+## >>chng 13 jul 25, wl from 1793A to 1793.44A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1793.44A  37.880
+## >>chng 13 jul 25, wl from 1585A to 1585.12A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1585.12A  37.979
+## >>chng 13 jul 25, wl from 1458A to 1458.33A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1458.33A  38.046
+## >>chng 13 jul 25, wl from 1357A to 1356.96A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1356.96A  38.092
+## >>chng 13 jul 25, wl from 1297A to 1297.29A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1297.29A  38.119
+## >>chng 13 jul 25, wl from 1263A to 1262.79A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1262.79A  38.138
+## >>chng 13 jul 25, wl from 1218A to 1218.08A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1218.08A  38.159
+## >>chng 13 jul 25, wl from 1196A to 1196.33A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1196.33A  38.168
+## >>chng 13 jul 25, wl from 1175A to 1175.06A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1175.06A  38.174
+## >>chng 13 jul 25, wl from 1144A to 1143.64A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1143.64A  38.173
+## >>chng 13 jul 25, wl from 1113A to 1113.22A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1113.22A  38.172
+## >>chng 13 jul 25, wl from 1103A to 1103.23A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1103.23A  38.171
+## >>chng 13 jul 25, wl from 1074A to 1073.86A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1073.86A  38.170
+## >>chng 13 jul 25, wl from 1064A to 1064.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1064.34A  38.169
+## >>chng 13 jul 25, wl from 1036A to 1035.92A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu"  1035.92A  38.168
+monitor line luminosity "nInu"  1000A  38.167
+## >>chng 13 jul 25, wl from 925.1A to 925.144A, increased wl precision to 6 sig. fig.
+## >>chng 15 mar 07, from 37.77 to 37.8, merging newmesh branch
+monitor line luminosity "nInu" 925.144A  37.8
+monitor line luminosity "nInu" 897.8A  37.253
+## >>chng 13 jul 25, wl from 760.0A to 760.023A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 760.023A  36.981
+## >>chng 13 jul 25, wl from 701.5A to 701.514A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 701.514A  36.857
+## >>chng 13 jul 25, wl from 608.2A to 608.160A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 608.160A  36.678
+## >>chng 13 jul 25, wl from 575.1A to 575.146A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 575.146A  36.595
+## >>chng 13 jul 25, wl from 511.9A to 511.948A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 511.948A  36.391
+## >>chng 13 jul 25, wl from 496.9A to 496.874A, increased wl precision to 6 sig. fig.
+## >>chng 15 mar 07, from 35.4 to 35.34, merging newmesh branch
+monitor line luminosity "nInu" 496.874A  35.34
+## >>chng 13 jul 25, wl from 399.2A to 399.153A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nInu" 399.153A  34.128
+## 
+# stars_kurucz79.in
+# class stars 
+# ========================================
+
+This is a test that the code can correctly access the
+Kurucz model atmosphere continua described by Kurucz (1979). 
+Kevin Volk provided it as part of his original coding of these
+stellar atmosphere files.
+Constant temperature is assumed since this tests shape of stellar continuum
+rather than thermal physics.
+
+Checks:
+table star kurucz command works.
+

@@ -1,0 +1,138 @@
+title constant density equilibrium cooling cloud
+#
+# commands controlling continuum =========
+coronal 3.4e7 K init time 
+#
+# commands for density & abundances =========
+# want nT = 2e6 K cm-3
+hden 5.88e-2 linear
+#
+# commands controlling geometry  =========
+set dr 0 
+set nend 1
+stop zone 1
+#
+# other commands for details     =========
+# number of time steps
+iterate 300
+stop time when temperature falls below 1e4 K
+# this will do equilibrium cooling
+set dynamics populations equilibrium
+cosmic rays background
+#
+# commands controlling output    =========
+print line faint 2 log
+print line cumulative
+print ages
+set save prefix "time_cool_cd_eq"
+save time dependent ".tim" no hash
+save overview ".ovr" no hash
+save cooling ".col" no hash
+save heating ".het" no hash
+save continuum units Angstroms ".con"
+save cumulative continuum units Angstroms last ".concum"
+save monitors ".asr" last
+#
+# commands giving the asserts    =========
+monitor line luminosity cumulative intrinsic "Fe24"      11.1710A   13.4382
+## >>chng 22 jul 09, from 13.78 to 13.76, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      15.0130A   13.76
+## >>chng 22 jul 09, from 13.43 to 13.4, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      17.0960A   13.4
+## >>chng 22 jul 09, from 13.58 to 13.55, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      17.0510A   13.55
+monitor line luminosity cumulative intrinsic "O  6"      1031.91A   12.9464
+## >>chng 22 jul 09, wl from 11.4271A to 11.4260A, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe24"      11.4260A   13.1374
+## >>chng 22 jul 09, wl from 12.1612A to 12.1610A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 13.23 to 13.26, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe23"      12.1610A   13.26
+monitor line luminosity cumulative intrinsic "Fe20"      13.0520A   12.3831
+## >>chng 22 jul 09, from 13.58 to 13.55, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      17.0510A   13.55
+## >>chng 22 jul 09, from 13.43 to 13.4, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      17.0960A   13.4
+## >>chng 22 jul 09, wl from 5303.01A to 5303.00A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.83 to 11.69, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe14"      5303.00A   11.69
+## >>chng 22 jul 09, from 11.59 to 11.48, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe13"      1.07462m   11.48
+## >>chng 22 jul 09, from 11.37 to 11.2, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe13"      1.07978m   11.2
+## >>chng 22 jul 09, wl from 2405.69A to 2405.68A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.12 to 11.26, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe12"      2405.68A   11.26
+## >>chng 22 jul 09, wl from 2169.09A to 2169.08A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.03 to 11.12, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe12"      2169.08A   11.12
+## >>chng 22 jul 09, from 10.34 to 10.5, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe12"      1349.40A   10.5
+## >>chng 22 jul 09, from 10.57 to 10.73, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe12"      1242.01A   10.73
+## >>chng 22 jul 09, from 11.25 to 11.27, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe11"      2648.71A   11.27
+## >>chng 22 jul 09, wl from 6374.54A to 6374.53A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.28 to 11.23, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe10"      6374.53A   11.23
+monitor line luminosity cumulative intrinsic "Fe 9"      8234.56A   10.8790
+## >>chng 17 may 25, wl from 18.9732A to 18.9709A, up Rydberg constant
+## >>chng 19 jul 24, fix bug on resolving ions excitation on He like
+## >>chng 20 aug 22, wl from 18.9709A to 18.9696A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 18.9696A to 18.9689A, update NIST energies
+## >>chng 22 jul 09, from 14.01 to 13.99, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  8"      18.9689A   13.99
+## >>chng 21 mar 16, from O 7 16.7725A to 16.7699A, update to NIST
+monitor line luminosity cumulative intrinsic "O  7"      16.7699A   12.0288
+## >>chng 16 aug 07, from 12.8 to 12.7, Marios bug fixes
+## >>chng 17 sep 01, from 12.7 to 11.51, fix bug in high n collisional excitation rates for He-like iso-sequences
+## >>chng 19 jun 11, from 11.51 to 11.72, Percival and Richards (1978) used for He-like ions
+## >>chng 19 jul 24, from 11.72 to 11.47, fix bug on resolving ions excitation on He like
+## >>chng 19 aug 06, from 11.47 to 11.51, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 21 nov 02, from 11.51 to 11.83, fix bug with overresolving CS in isoseq
+## >>chng 22 jul 09, from 11.83 to 11.81, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  7"      18.6270A   11.81
+## >>chng 19 jun 11, from 12.95 to 12.98, Percival and Richards (1978) used for He-like ions
+## >>chng 19 jul 24, from 12.98 to 12.96, fix bug on resolving ions excitation on He like
+## >>chng 21 nov 02, from 12.96 to 13, fix bug with overresolving CS in isoseq
+## >>chng 22 jul 09, from 13 to 12.98, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  7"      21.6020A   12.98
+## >>chng 19 jun 11, from 12.49 to 12.52, Percival and Richards (1978) used for He-like ions
+## >>chng 19 jul 24, from 12.52 to 12.49, fix bug on resolving ions excitation on He like
+monitor line luminosity cumulative intrinsic "O  7"      21.8070A   12.49
+## >>chng 19 jun 11, from 13.01 to 13.04, Percival and Richards (1978) used for He-like ions
+## >>chng 19 jul 24, from 13.04 to 13.01, fix bug on resolving ions excitation on He like
+## >>chng 22 jul 09, from 13.01 to 12.99, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  7"      22.1012A   12.99
+## >>chng 22 jul 09, wl from 1037.62A to 1037.61A, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  6"      1037.61A   12.6438
+monitor line luminosity cumulative intrinsic "O  5"      1213.81A   11.9151
+monitor line luminosity cumulative intrinsic "N  5"      1242.80A   11.4594
+monitor line luminosity cumulative intrinsic "Si 7"      2146.64A   10.9219
+monitor line luminosity cumulative intrinsic "Mg 6"      1806.00A   10.7775
+## >>chng 22 jul 09, wl from 1806.43A to 1806.42A, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Mg 6"      1806.42A   10.8847
+## >>chng 22 jul 09, wl from 1404.78A to 1404.81A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.45 to 11.43, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  4"      1404.81A   11.43
+monitor line luminosity cumulative intrinsic "C  4"      1548.19A   12.0837
+## >>chng 16 jul 24, from 11.77 to 11.74, update C III to 2014A&A...566A.104F
+monitor line luminosity cumulative intrinsic "C  3"      1906.68A   11.74
+## >>chng 16 aug 07, from 11.26 to 11.28, Marios bug fixes
+monitor line luminosity cumulative intrinsic "O  3"      1666.15A   11.28
+monitor line luminosity cumulative intrinsic "O  3"      5006.84A   11.5285
+## >>chng 16 aug 07, from 11.31 to 11.28, Marios bug fixes
+## >>chng 16 nov 14, from 11.28 to 11.12, Reintegration of RydDep after several bug fixes
+## >>chng 19 jun 28, from 11.12 to 11.42, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 11.42 to 11.46, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 22, wl from 1640.43A to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, up 1-e energies to np
+monitor line luminosity cumulative intrinsic "He 2"      1640.41A   11.46
+## >>chng 16 aug 07, from 11.72 to 11.74, Fran bug fix
+monitor line luminosity cumulative intrinsic "O  2"      3728.81A   11.74
+#
+# time_cool_cd_eq.in 
+# class dynamics 
+# ========================================
+# 
+
+test time dependent equilibrium cooling at constant density

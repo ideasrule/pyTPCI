@@ -1,0 +1,19 @@
+title test whether the output from a repeated model reproduces exactly
+## checkall.pl calls test_grid.pl to check that output is identical
+print depart he-like element helium
+trace h-like full helium no print
+trace he-like full no print
+trace heavy no print
+trace convergence esource no print
+test
+no time
+fudge 0 vary
+grid 0 to 1 1 repeat sequential
+iterate 3
+****************
+
+This tests that the code gets repeatable results in a large grid run.
+It will not if variables are not properly initialized.
+tsuite / programs / comp does a similar test.
+
+auto / checkall.pl includes test to check this.

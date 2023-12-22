@@ -1,0 +1,27 @@
+wind.windv - wind velocity - cm/s
+wind.windv0 - initial wind velocity cm/s
+wind.dvdr 
+
+wind changes speed at pressure_change.cpp
+ballistic at line:363
+
+radiative acceleration 
+
+developed in collaboration with Robin Williams, Will Henney, & Jane Arthur
+
+all code is within dynamics.c
+
+ionization recombination terms:
+ionization adds term dynamics.Photo
+recombination adds term dynamics.Recomb[nelem][ion]
+
+thermal effects added
+cooling - dynamics.CoolHeat
+it deriv dynamics.dCoolHeatdT
+
+all energy terms boil down to
+EnergyInternal = phycon.EnergyExcitation + phycon.EnergyIonization + phycon.EnergyBinding;
+these are evaluated in pressuretotal
+
+/*TODO this is the molecular binding energy (?) not set to anything */
+phycon.EnergyBinding = 0.;

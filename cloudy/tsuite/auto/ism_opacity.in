@@ -1,0 +1,95 @@
+title generate standard ISM opacity curve
+#
+# commands controlling continuum =========
+table agn
+ionization parameter -3
+#
+# commands for density & abundances =========
+hden 0 ##set density of unity so that total opacity is per hydrogen atom
+abundances ism no grains ##this turns on depleted gas-phas abundances
+grains no qheat
+#
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling output    =========
+save overview "ism_opacity.ovr"
+save performance "ism_opacity.per"
+save total opacity last "ism_opacity.opc" units kev
+#
+# commands giving the monitors    =========
+## >>chng 02 jun 15, all entries converted to luminosity since Hb changed
+## >>chng 07 oct 22, from -24.833 to -24.892, resolve l-levels of h-like sequence
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 04, from -24.89 to -24.92, remove Lyman line TauIn hack
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A intensity -24.92
+## 
+## >>chng 01 feb 20, from 9070 to 10075 when default ISM O abundance changed
+## >>chng 15 oct 14, from 1.008e+04 to 1.059e+04, update Ne 3 cs to McLaughlin+11
+monitor temperature "H+" 1.059e+04
+## 
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 oct 14, from -24.86 to -24.88, update Ne 3 cs to McLaughlin+11
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "ca b" 4861.32A intensity -24.88
+## 
+## >>chng 01 feb 20, from 1.461 to 1.227 when default ISM O abundance changed
+## >>chng 06 nov 29, from -24.594 to -24.619, Badnell DR turned on
+monitor line "totm" 0  intensity -24.619
+## 
+## >>chng 01 feb 20, from 1.007 to 1.166 when default ISM O abundance changed
+## >>chng 02 may 27, from 1.166 to 1.062, improved gaunt factors
+## >>chng 02 jun 21, from -24.660 to -24.698 improved gaunt factors
+## >>chng 14 apr 07, from -24.7 to -24.68, update of Gaunt free-free factors
+monitor line "h ff" 0  intensity -24.68
+## 
+## >>chng 02 jun 21, from -24.562 to -24.603 improved gaunt factors
+## >>chng 14 apr 07, from -24.6 to -24.58, update of Gaunt free-free factors
+monitor line "toff" 0  intensity -24.58
+## 
+## >>chng 01 feb 20, from 0.9766 to 1.076 when default ISM O abundance changed
+## >>chng 01 mar 07, from 1.08 to 0.902 change in grain physics
+## >>chng 03 jan 12, from -24.727 to -24.642, new grains
+## >>chng 07 dec 15, from -24.642 to -24.820, X-ray grain merge
+monitor line "GrGH" 0  intensity -24.820
+## 
+## >>chng 01 feb 20, from 0.3728 to 0.459 when default ISM O abundance changed
+## >>chng 01 mar 07, from 0.459 to 0.391 change in grain physics
+## >>chng 03 jan 12, from -25.084 to -25.062, new grains
+## >>chng 05 jul 05, from -25.062 to -25.070, fine tune
+monitor line "GrCC" 0  intensity -25.070
+## 
+## >>chng 01 feb 20, from 0.3158 to 0.244 when default ISM O abundance changed
+monitor line "ct h" 0  intensity -25.299
+## 
+save monitors last "ism_opacity.asr"
+# ism_opacity.in
+# class limit 
+# ========================================
+# 
+
+This example creates the file ism_opacity.opc which tabulates
+the total opacity of the gas as a function of energy.  These
+plots are used in ISM studies to understand the transmission
+characteristics along a line of sight.  The opacity depends on 
+the dust to gas ratio, the gas phase abundances, and the level
+of ionization, all of which can be changed by altering parameters
+given above.
+
+The model is of a 1 cm think parcel of gas which is optically thin 
+in the Lyman continuum and Lyman lines.  As a result the hydrogen
+emission line spectrum is close to case C.  The model iterates
+so that the predicted ionization and emission know about this.

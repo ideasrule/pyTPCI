@@ -1,0 +1,202 @@
+title model of Compton reflector
+#
+# commands controlling continuum =========
+# this is a powerlaw that extends into the x-rays, but by default
+# has exponential cutoff in FIR
+power law -1. hi=1000000000
+# the ionization parameter for this powerlaw
+ionization parameter 1.
+# add background so that FIR/radio does not have zero flux
+background
+iterate 
+#
+# commands for density & abundances =========
+hden 11
+#
+# commands controlling geometry  =========
+stop total column density 24
+#
+# other commands for details     =========
+constant temper 5
+database h-like element hydrogen levels resolved 10
+database h-like element helium levels resolved 10
+#
+# commands controlling output    =========
+print line faint 1
+print line inward
+#
+# this is to produce lines with lots of contrast with the continuum
+set save Line Width 100 km/sec
+# a fig in part 3 of hazy uses data from this model.  the fig shows lines
+# with above and below linewidth
+# set save line Width   c  
+save performance "agn_reflector.per"
+save monitors "agn_reflector.asr"
+save continuum last "agn_reflector.con" units kev 
+save continuum reflected last "agn_reflector.alb" units kev 
+save overview last "agn_reflector.ovr"
+save dr last "agn_reflector.dr"
+#
+# commands giving the monitors    =========
+## >>chng 02 jun 08, from 9.327 to 9.364, better zoning
+monitor line luminosity  "InwT"  122.4m  9.364 error 0.1
+##
+## >>chng 02 jun 08, from 10.003 to 10.038 better zoning
+## >>chng 13 jul 24, wl from 60.83m to 60.8322m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  60.8322m 10.038 error 0.1
+##
+## >>chng 02 jun 08, from 10.375 to 10.400 better zoning
+## >>chng 13 jul 24, wl from 41.22m to 41.2152m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  41.2152m 10.400
+##
+## >>chng 13 jul 24, wl from 30.87m to 30.8695m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  30.8695m 10.646
+## >>chng 13 jul 24, wl from 24.78m to 24.7829m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  24.7829m 10.840
+## >>chng 13 jul 24, wl from 24.30m to 24.2998m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  24.2998m 10.857
+## >>chng 13 jul 24, wl from 22.83m to 22.8302m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  22.8302m 10.906
+## >>chng 13 jul 24, wl from 21.42m to 21.4199m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  21.4199m 10.961
+## >>chng 13 jul 24, wl from 21.12m to 21.1235m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  21.1235m 10.969
+## >>chng 13 jul 24, wl from 19.62m to 19.6199m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  19.6199m 11.021
+## >>chng 13 jul 24, wl from 17.65m to 17.6534m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  17.6534m 11.097
+monitor line luminosity  "InwT"  17.37m 11.110
+## >>chng 13 jul 24, wl from 15.69m to 15.6901m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  15.6901m 11.171
+## >>chng 13 jul 24, wl from 14.60m to 14.6036m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  14.6036m 11.209
+monitor line luminosity  "InwT"  12.43m 11.286
+monitor line luminosity  "InwT"  11.40m 11.323
+monitor line luminosity  "InwT"  10.46m 11.352
+## >>chng 13 jul 24, wl from 9.480m to 9.48002m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  9.48002m 11.383
+## >>chng 13 jul 24, wl from 9.325m to 9.32488m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  9.32488m 11.389
+## >>chng 13 jul 24, wl from 8.210m to 8.21035m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  8.21035m 11.422
+monitor line luminosity  "InwT"  7.580m 11.438
+## >>chng 13 jul 24, wl from 7.050m to 7.05026m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  7.05026m 11.453
+## >>chng 13 jul 24, wl from 4.114m to 4.11370m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  4.11370m 11.518m
+## >>chng 13 jul 24, wl from 2.324m to 2.32440m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  2.32440m 11.547
+## >>chng 13 jul 24, wl from 1.643m to 1.64313m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  1.64313m 11.555
+## >>chng 13 jul 24, wl from 1.480m to 1.48022m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  1.48022m 11.557
+## >>chng 13 jul 24, wl from 1.436m to 1.43649m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  1.43649m 11.558
+## >>chng 13 jul 24, wl from 1.119m to 1.11867m, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  1.11867m 11.562
+## >>chng 13 jul 24, wl from 8330A to 8329.68A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 8329.68A  11.566
+## >>chng 13 jul 24, wl from 8079A to 8078.61A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 8078.61A  11.564
+## >>chng 13 jul 24, wl from 6210A to 6209.66A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 6209.66A  11.569
+## >>chng 13 jul 24, wl from 4885A to 4885.36A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 4885.36A  11.573
+## >>chng 13 jul 24, wl from 3704A to 3704.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 3704.34A  11.577
+## >>chng 13 jul 24, wl from 3588A to 3587.67A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 3587.67A  11.563
+## >>chng 13 jul 24, wl from 2392A to 2392.03A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 2392.03A  11.582
+## >>chng 13 jul 24, wl from 2071A to 2071.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 2071.34A  11.586
+## >>chng 13 jul 24, wl from 2053A to 2052.68A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 2052.68A  11.586
+## >>chng 13 jul 24, wl from 1793A to 1793.44A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1793.44A  11.589
+## >>chng 13 jul 24, wl from 1585A to 1585.12A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1585.12A  11.592
+## >>chng 13 jul 24, wl from 1458A to 1458.33A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1458.33A  11.593
+## >>chng 13 jul 24, wl from 1357A to 1356.96A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1356.96A  11.593
+## >>chng 13 jul 24, wl from 1297A to 1297.29A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1297.29A  11.594
+## >>chng 13 jul 24, wl from 1263A to 1262.79A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1262.79A  11.594
+## >>chng 13 jul 24, wl from 1218A to 1218.08A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1218.08A  11.594
+## >>chng 13 jul 24, wl from 1196A to 1196.33A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1196.33A  11.594
+## >>chng 13 jul 24, wl from 1175A to 1175.06A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1175.06A  11.594
+## >>chng 13 jul 24, wl from 1144A to 1143.64A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1143.64A  11.594
+## >>chng 13 jul 24, wl from 1113A to 1113.22A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1113.22A  11.593
+## >>chng 13 jul 24, wl from 1103A to 1103.23A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1103.23A  11.593
+## >>chng 13 jul 24, wl from 1074A to 1073.86A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1073.86A  11.593
+## >>chng 13 jul 24, wl from 1064A to 1064.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1064.34A  11.593
+## >>chng 13 jul 24, wl from 1036A to 1035.92A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT" 1035.92A  11.593
+monitor line luminosity  "InwT" 1000A  11.592
+## >>chng 13 jul 24, wl from 925.1A to 925.144A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  925.144A  11.591
+##
+## >>chng 02 may 09, from 11.446 to 11.418, e scat escape
+## >>chng 04 may 13, from 11.418 to 11.449, dest albedo chng
+monitor line luminosity  "InwT"  897.8A  11.449
+##
+## >>chng 02 may 09, from 11.513 to 11.489, e scat escape
+## >>chng 04 may 13, from 11.489 to 11.513, dest albedo chng
+## >>chng 13 jul 24, wl from 760.0A to 760.023A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  760.023A  11.513
+##
+## >>chng 02 may 12, from 11.534 to 11.510, elec scat escape
+## >>chng 04 may 13, from 11.510 to 11.534, dest albedo chng
+## >>chng 13 jul 24, wl from 701.5A to 701.514A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  701.514A  11.534
+##
+## >>chng 13 jul 24, wl from 575.1A to 575.146A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  575.146A  11.567
+## >>chng 13 jul 24, wl from 511.9A to 511.948A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  511.948A  11.574
+## >>chng 13 jul 24, wl from 496.9A to 496.874A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  496.874A  11.575
+## >>chng 13 jul 24, wl from 399.2A to 399.153A, increased wl precision to 6 sig. fig.
+monitor line luminosity  "InwT"  399.153A  11.575
+##
+## >>chng 04 feb 15, from 5 to 3
+## >>chng 08 dec 08, from 3 to 2.759, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 2.759 to 4.586, merging newsolvers branch
+## >>chng 09 jan 16, from 4.586 to 4.575, average of 10 runs
+## >>chng 09 feb 23, from 4.575 to 3.898, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 26, from 3.898 to 3.794, remove several dampers
+## >>chng 09 jul 28, from 3.974 to 3.90 mean vs08+gcc bcx
+## >>chng 13 nov 05, from 3.9 to 2.37, convergence branch changes
+## >>chng 13 nov 25, from 2.37 to 1.624, convergence branch changes
+monitor itrzn 1.624
+##
+## >>chng 04 sep 06, from 250 to 300 (actually 253) bug nej Auger
+## >>chng 08 dec 08, from 300 to 290, upper limit -> equals (r2515)
+## >>chng 09 feb 23, from 290 to 295, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 jul 12, from 295 to 270, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 270 to 300, BUGFIX, largely undo r6703
+## >>chng 18 jun 20, from 300 to 281, #bugfixes at front face r12134:12136
+## >>chng 19 aug 06, from 281 to 299, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor nzone 299 
+##
+# agn_reflector.in
+# class blr 
+# ========================================
+# 
+
+This is a model of the Compton reflector in AGN.  It is a
+constant temperature since models of this region often make that assumption. 
+A plot in Part I of Hazy shows the incident and reflected portions of the 
+continuum.  The code will complain that the cloud is Compton thick since it 
+is not really designed to simulate this situation.
+

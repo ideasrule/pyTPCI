@@ -1,0 +1,30 @@
+#/* primordial abundances */
+HYDROGEN	1.0
+HELIUM		0.08232
+LITHIUM		1.6e-10
+BERYLLIUM	1e-16
+******************************
+
+2014 Dec 08, update to Planck concordance, 
+
+from Vikram Khaire email:
+The recent estimate of Yp is 0.2477 from Planck collaboration paper XVI
+(2014, \aap, 571, A16  http://adsabs.harvard.edu/abs/2014A%26A...571A..16P)
+see table 2. The previous estimates (with WMAP, see for example Ichikawa et al 2008) are consistent with 
+the number 0.25 which gives n[H/He]=12.
+
+The CLOUDY's Helium abundances are slightly lower. Its one sigma away from the value of Yp obtained 
+by combining (WMAP+Planck+High_l) data (table number 10 of the same paper mentioned above). The 
+required value of Yp for Helium abundances in CLOUDY is 0.2236.
+
+===========
+
+2013 Feb 25, update to recommended He/H from Steigman email 
+Advances in High Energy Physics, Volume 2012 (2012) article ID 268321 (arXiv:1208.0032). 
+4He: Y_P = 0.2565+-0.0010(stat)+-0.0050(syst) or, Y_P = 0.2565+-0.0060 
+for He/H = 0.0860 +/- 0.002
+
+choose 0.085 to be smaller than photospheric abundance recommended by
+Asplund+09 ARAA http://adsabs.harvard.edu/abs/2009ARA%26A..47..481A
+
+A(Li) = 12 + log(Li/H) = 2.2+-0.1, updated from 1.0 to 1.6e-10

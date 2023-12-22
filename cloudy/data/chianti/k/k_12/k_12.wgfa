@@ -1,0 +1,43 @@
+    1    2       5278.438      0.000e+00      1.456e+02 
+    1    3       4305.890      0.000e+00      5.221e-03 
+    2    3      23369.946      0.000e+00      3.410e+00 
+    1    4       1256.455      0.000e+00      4.467e+02 
+    2    4       1648.968      0.000e+00      6.721e+01 
+    1    5        613.994      0.000e+00      1.202e+00 
+    2    5        694.816      0.000e+00      4.648e+03 
+    4    5       1200.783      0.000e+00      1.126e+01 
+    1    6        174.403      4.238e-01      1.858e+10 
+    2    6        180.362      1.390e-01      5.697e+09 
+    4    6        202.513      7.631e-03      2.481e+08 
+    1    7        169.725      1.501e-01      1.158e+10 
+    2    7        175.363      8.572e-02      6.194e+09 
+    3    7        176.689      1.117e-01      7.950e+09 
+    4    7        196.232      1.261e-04      7.279e+06 
+    5    7        234.564      1.419e-03      5.729e+07 
+    2    8        172.580      1.167e-01      2.613e+10 
+    1    9        126.662      1.114e-02      1.543e+09 
+    2    9        129.776      3.891e-04      5.134e+07 
+    3    9        130.501      8.405e-04      1.097e+08 
+    4    9        140.863      7.201e-01      8.065e+10 
+    5    9        159.583      6.572e-02      5.735e+09 
+    7   10        133.778      1.634e-03      6.085e+08 
+    9   10        182.749      3.734e-01      7.454e+10 
+ -1
+%filename:  /data2/svn/chianti/dbase/trunk/k/k_12/k_12.wgfa
+%filename: k_12.wgfa
+%observed energy levels: Edlen, B., 1983, Phys. Scr., 28, 51
+%Radiative data allowed transitions: Landi, E. 2005, A&A, 434, 365
+%Radiative data transition within the ground configuration: Tachiev, G.I., Froese Fischer, C., 2002, A&A. 385, 716
+%Radiative data 3-4 and 4-5 transitions: Froese Fischer, C., Saha, H.P., 1983, Phys. Rev. A., 28, 3169
+% Comment: A values for transitions 3-4 and 4-5 have been corrected to account for observed level energies.
+%produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+% E. Landi - Apr 2003
+
+ K. Dere   -  minimum branching ratio =   1.00e-05
+    2017 December 06
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

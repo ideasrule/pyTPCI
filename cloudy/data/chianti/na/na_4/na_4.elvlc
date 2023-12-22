@@ -1,0 +1,22 @@
+  1 2s2.2p4               3  1 P  2.0  5          0.000       0.000000          0.000       0.000000 
+  2 2s2.2p4               3  1 P  1.0  3       1107.000       0.010088       1193.451       0.010876 
+  3 2s2.2p4               3  1 P  0.0  1       1576.000       0.014362       1700.779       0.015499 
+  4 2s2.2p4               1  2 D  2.0  5      30841.000       0.281044      34113.411       0.310864 
+  5 2s2.2p4               1  0 S  0.0  1      66496.000       0.605956      66821.751       0.608925 
+  6 2s.2p5                3  1 P  2.0  5     243682.000       2.220594     254177.417       2.316235 
+  7 2s.2p5                3  1 P  1.0  3     244688.000       2.229761     255249.703       2.326006 
+  8 2s.2p5                3  1 P  0.0  1     245238.000       2.234773     255831.168       2.331305 
+  9 2s.2p5                1  1 P  1.0  3     343688.000       3.131916     365154.968       3.327537 
+ 10 2p6                   1  0 S  0.0  1     570823.000       5.201722     608554.589       5.545557 
+ -1
+%filename: na_4.elvlc
+%experimental energy levels: Edlen, B., 1983, Phys. Scripta, 28, 51
+%theoretical energy levels 2s2p5, 2p6 conf.: Butler, K., Zeippen, C.J., 1994, AASS, 108, 1
+%theoretical energy levels 2s22p4 conf.: Galavis, M.E., Mendoza, C., Zeippen, C.J., 1997, AASS, 123, 159
+% produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+% 
+% E. Landi - May 2004
+
+Reference:
+Chianti  2022-02-18
+ -1

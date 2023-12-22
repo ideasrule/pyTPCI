@@ -1,0 +1,400 @@
+title FeII model 
+table agn
+print lines column
+print lines sort intensity 
+abundances starburst 20 
+species "Fe+" levels=all 
+hden 12
+phi(h) 21
+stop column density 23
+iterate convergence 
+##
+## affects appearance of printout
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+normalize to "H  1" 1215.67A 100 
+print line faint 1  ## get rid of lots of faint lines 
+##
+## these are to try to speed things up
+init "c84.ini"
+##
+set save prefix "feii_blr_n12_p21_Z20"
+save performance ".per"
+save monitors ".asr" last
+save species lines ".lin" "Fe+" last
+save species continuum units microns ".fe2con" "Fe+" last
+save species column density ".fe2col" "Fe+[:]" last
+save species densities ".lev" "Fe+[:]" last
+save species bands ".fe2b" "FeII_bands.ini" "Fe+" last
+save overview ".ovr" last
+save dr ".dr" last
+save convergence reason ".cvr"
+##
+## strong blr lines
+## >>chng 10 jun 29, from 7.768 to 9.021, init
+## >>chng 11 jul 12, from 9.021 to 9.079, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from 9.079 to 9.052, adjust newmole monitors
+## >>chng 12 oct 13, from 9.052 to 9.005, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from 9.005 to 9.031, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 14 jul 02, from 9.031 to 8.982, Add monitors for Fe II Bands
+## >>chng 16 aug 17, from 8.982 to 9.038, bugfix at r11237
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line luminosity "H  1"  1215.67A 9.038 ##total Hydrogen Lyman-alpha 1215.67 
+##
+## >>chng 10 jun 29, from 5.112 to 9.096, init
+## >>chng 11 aug 06, from 9.096 to 9.075, effects of yesterday's changes, mostly r5341
+## >>chng 12 oct 22, from 9.075 to 9.038, zone tau in rt_line_one
+## >>chng 13 jan 10, from 9.038 to 9.079, fix in-zone continuum shielding
+## >>chng 13 apr 14, from 9.079 to 9.057, update DR suppression
+## >>chng 13 jul 15, from 9.057 to 9.023, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 sep 12, from 9.023 to 9.002, Mg converted to database
+## >>chng 13 dec 23, from 9.002 to 8.98, C to external databases
+## >>chng 14 jan 05, from 8.98 to 8.954, N to external databases
+monitor line luminosity "blnd"  1397 8.954 ##total of sum of both Si IV comp
+##
+## >>chng 10 jun 29, from 3.327 to 8.006, init
+## >>chng 11 jul 12, from 8.006 to 8.067, enable fit to Badnell DR suppression
+## >>chng 11 aug 06, from 8.067 to 8.039, effects of yesterday's changes, mostly r5341
+## >>chng 13 jul 15, from 8.039 to 8.01, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 14 jan 05, from 8.01 to 7.953, N to external databases
+## >>chng 14 mar 26, from 7.953 to 7.977, move O to external databases
+monitor line luminosity "blnd"  1402 7.977 ##total O IV] 1402 
+##
+##total of sum of both C IV comp
+## >>chng 10 jun 29, from 5.459 to 9.034, init
+monitor line luminosity "blnd" 1549 9.034 error 0.1
+##
+## >>chng 10 jun 29, from 6.816 to 8.493, init
+## >>chng 11 jul 12, from 8.493 to 8.528, enable fit to Badnell DR suppression
+## >>chng 12 nov 01, from 8.528 to 8.56, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 nov 22, from 8.56 to 8.603, collapsed branch merge r8609
+## >>chng 16 nov 14, from 8.603 to 8.564, Reintegration of RydDep after several bug fixes
+## >>chng 20 aug 22, wl from 1640.43 to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, update 1-e energies to np
+monitor line luminosity "he 2"  1640.41A 8.564 ##total He II Balmer-alpha 1640
+##
+## >>chng 10 jun 29, from 4.53 to 8.032, init
+## >>chng 12 oct 22, from 8.032 to 7.968, zone tau in rt_line_one
+## >>chng 13 jan 10, from 7.968 to 8.042, fix in-zone continuum shielding
+## >>chng 13 mar 03, from 8.042 to 8.004, update atomic model S II, S III
+## >>chng 13 jul 15, from 8.004 to 7.955, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 sep 12, from 7.955 to 7.909, Mg converted to database
+## >>chng 13 dec 18, from 7.909 to 7.883, fixes to Federman shielding
+## >>chng 14 jan 05, from 7.883 to 7.849, N to external databases
+## >>chng 14 mar 26, from 7.849 to 7.72, move O to external databases
+monitor line luminosity "o  3"  1666.15 7.72 ##total O III] 1666
+##
+##total of sum of CIII] 1908.73+
+## >>chng 10 jun 29, from 4.541 to 7.733, init
+## >>chng 12 oct 22, from 7.733 to 7.651, zone tau in rt_line_one
+## >>chng 13 jan 10, from 7.651 to 7.748, fix in-zone continuum shielding
+## >>chng 13 may 07, from 7.748 to 7.704, bnl_effective change
+## >>chng 13 jul 15, from 7.704 to 7.663, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 nov 17, from 7.663 to 7.622, remove double-counted db heating
+## >>chng 13 dec 23, from 7.622 to 7.821, C to external databases
+monitor line luminosity "blnd"  1909 7.821 error 0.1
+##
+##total of sum of Si III] 1892+
+## >>chng 10 jun 29, from 6.29 to 8.663, init
+## >>chng 12 oct 22, from 8.663 to 8.608, zone tau in rt_line_one
+## >>chng 13 dec 18, from 8.608 to 8.557, fixes to Federman shielding
+## >>chng 15 nov 16, from 8.557 to 8.379, update Si III, 1888 TP now 3x smaller
+monitor line luminosity "blnd"  1888 8.379 error 0.1
+##
+## >>chng 10 jun 29, from 5.449 to 8.742, init
+## >>chng 11 jul 12, from 8.742 to 8.712, enable fit to Badnell DR suppression
+## >>chng 12 oct 22, from 8.712 to 8.662, zone tau in rt_line_one
+## >>chng 13 jan 10, from 8.662 to 8.752, fix in-zone continuum shielding
+## >>chng 13 may 06, from 8.752 to 8.719, use Stout/Chianti for Al ions
+## >>chng 13 jul 15, from 8.719 to 8.691, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 sep 12, from 8.691 to 8.661, Mg converted to database
+## >>chng 13 dec 18, from 8.661 to 8.629, fixes to Federman shielding
+## >>chng 14 jan 05, from 8.629 to 8.608, N to external databases
+## >>chng 16 aug 17, from 8.608 to 8.639, bugfix at r11237
+monitor line luminosity "Blnd"  1860 8.639 ##total sum of both Al III comp
+##
+## >>chng 10 jun 29, from 5.39 to 7.62, init
+## >>chng 10 aug 23, from 7.62 to 7.551, first run since change continuum grid
+## >>chng 11 jul 12, from 7.551 to 7.604, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from 7.604 to 7.553, adjust newmole monitors
+## >>chng 12 oct 22, from 7.553 to 7.432, zone tau in rt_line_one
+## >>chng 13 jan 10, from 7.432 to 7.575, fix in-zone continuum shielding
+## >>chng 13 nov 17, from 7.575 to 7.515, remove double-counted db heating
+## >>chng 13 dec 18, from 7.515 to 7.458, fixes to Federman shielding
+## >>chng 13 dec 23, from 7.458 to 7.406, C to external databases
+## >>chng 14 mar 26, from 7.406 to 7.473, move O to external databases
+## >>chng 14 apr 08, from 7.473 to 7.418, O excit state photo back on
+## >>chng 14 jul 02, from 7.418 to 7.558, Add monitors for Fe II Bands
+monitor line luminosity "blnd"  2326 7.558 err 0.1 ##total C II] 2324.69+2328.12
+##
+## >>chng 10 jun 29, from 7.438 to 8.774, init
+## >>chng 12 oct 22, from 8.774 to 8.737, zone tau in rt_line_one
+## >>chng 13 jan 10, from 8.737 to 8.793, fix in-zone continuum shielding
+## >>chng 13 may 29, from 8.793 to 8.773, more Fe III levels in stout
+## >>chng 13 nov 22, from 8.773 to 8.752, collapsed branch merge r8609
+## >>chng 14 jan 05, from 8.752 to 8.726, N to external databases
+monitor line luminosity "blnd" 2798 8.726 ##total of sum of both Mg II comp
+##
+##total of sum of both Mg II comp
+## >>chng 10 jun 29, from 7.324 to 8.638, init
+## >>chng 13 may 07, from 8.638 to 8.68, bnl_effective change
+## >>chng 13 jul 25, wl from 584.3 to 584.334A, increased wl precision to 6 sig. fig.
+## >>chng 19 jun 28, from 8.68 to 8.771, reintegrate iso_collisions branch
+monitor line luminosity "He 1" 584.334A 8.771 error 0.1
+##
+## >>chng 10 jun 29, from 7.152 to 9.532, init
+## >>chng 11 jul 12, from 9.532 to 9.505, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from 9.505 to 9.451, adjust newmole monitors
+## >>chng 12 mar 07, from 9.451 to 9.483, renorm to r5961 results
+## >>chng 12 oct 17, from 9.483 to 9.528, Improved CRD esc prob
+## >>chng 12 oct 22, from 9.528 to 9.379, zone tau in rt_line_one
+## >>chng 13 jan 10, from 9.379 to 9.586, fix in-zone continuum shielding
+## >>chng 13 jul 15, from 9.586 to 9.649, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 nov 17, from 9.649 to 9.601, remove double-counted db heating
+## >>chng 14 mar 26, from 9.601 to 9.681, move O to external databases
+## >>chng 14 apr 08, from 9.681 to 9.579, O excit state photo back on
+## >>chng 14 apr 19, from 9.579 to 9.631, move Ca 2 to Stout
+## >>chng 14 jul 02, from 9.631 to 9.682, Add monitors for Fe II Bands
+## >>chng 16 mar 20, from 9.682 to 9.776, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 9.776 to 9.799, update Fe+ model to Smyth+19
+monitor line luminosity "Fe 2b"  2500 9.799 ##total of sum of both Mg II comp
+##
+##total of sum of both Mg II comp
+## >>chng 10 jun 29, from 6.645 to 7.354, init
+## >>chng 12 oct 09, from 7.354 to 7.424, fix CRD esc prob
+## >>chng 12 oct 17, from 7.424 to 7.38, Improved CRD esc prob
+## >>chng 13 jul 19, from 7.38 to 7.335, start bracketing tau only after second iteration
+## >>chng 13 jul 25, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+## >>chng 19 jun 28, from 7.335 to 7.586, reintegrate iso_collisions branch
+## >>chng 19 jul 30, from 7.586 to 7.482, split He I 2 ^3P_J
+monitor line luminosity "Blnd"  5875.66A 7.482 error 0.1
+##
+## >>chng 10 jun 29, from 7.145 to 9.53, init
+## >>chng 11 jul 12, from 9.53 to 9.492, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from 9.492 to 9.444, adjust newmole monitors
+## >>chng 12 oct 17, from 9.444 to 9.465, Improved CRD esc prob
+## >>chng 12 oct 22, from 9.465 to 9.357, zone tau in rt_line_one
+## >>chng 13 jan 10, from 9.357 to 9.5, fix in-zone continuum shielding
+## >>chng 13 jul 15, from 9.5 to 9.605, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 nov 17, from 9.605 to 9.53, remove double-counted db heating
+## >>chng 14 jan 05, from 9.53 to 9.557, N to external databases
+## >>chng 14 mar 26, from 9.557 to 9.67, move O to external databases
+## >>chng 14 apr 08, from 9.67 to 9.519, O excit state photo back on
+## >>chng 14 apr 19, from 9.519 to 9.594, move Ca 2 to Stout
+## >>chng 14 jul 12, from 9.594 to 9.614, Get strunk closer to stout branch
+## >>chng 16 mar 20, from 9.614 to 9.565, change from Werner model to Stout model for Fe+
+## >>chng 16 aug 17, from 9.565 to 9.603, bugfix at r11237
+## >>chng 23 jun 27, from 9.603 to 9.541, update Fe+ model to Smyth+19
+monitor line luminosity "Fe 2c" 0 9.541
+##
+## >>chng 10 jun 29, from 7.013 to 9.347, init
+## >>chng 11 jul 12, from 9.347 to 9.315, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from 9.315 to 9.259, adjust newmole monitors
+## >>chng 12 mar 07, from 9.259 to 9.294, renorm to r5961 results
+## >>chng 12 oct 17, from 9.294 to 9.357, Improved CRD esc prob
+## >>chng 12 oct 22, from 9.357 to 9.204, zone tau in rt_line_one
+## >>chng 13 jan 10, from 9.204 to 9.415, fix in-zone continuum shielding
+## >>chng 13 jul 15, from 9.415 to 9.478, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 nov 17, from 9.478 to 9.429, remove double-counted db heating
+## >>chng 14 mar 26, from 9.429 to 9.511, move O to external databases
+## >>chng 14 apr 08, from 9.511 to 9.408, O excit state photo back on
+## >>chng 14 apr 19, from 9.408 to 9.461, move Ca 2 to Stout
+## >>chng 14 jul 02, from 9.461 to 9.501, Add monitors for Fe II Bands
+## >>chng 16 mar 20, from 9.501 to 9.608, change from Werner model to Stout model for Fe+
+monitor line luminosity "Fe 2b" 2445 9.608
+##
+## >>chng 10 jun 29, from 5.65 to 8.066, init
+## >>chng 11 nov 16, from 8.066 to 8.033, adjust newmole monitors
+## >>chng 12 apr 18, from 8.033 to 8.056, stout merge
+## >>chng 12 may 22, from 8.056 to 8.025, bugfix r6155
+## >>chng 12 oct 17, from 8.025 to 7.94, Improved CRD esc prob
+## >>chng 12 oct 22, from 7.94 to 7.821, zone tau in rt_line_one
+## >>chng 13 jan 10, from 7.821 to 7.987, fix in-zone continuum shielding
+## >>chng 13 jul 15, from 7.987 to 8.056, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 nov 17, from 8.056 to 8.019, remove double-counted db heating
+## >>chng 14 mar 26, from 8.019 to 8.092, move O to external databases
+## >>chng 14 apr 08, from 8.092 to 7.998, O excit state photo back on
+## >>chng 14 apr 19, from 7.998 to 8.043, move Ca 2 to Stout
+## >>chng 23 jun 27, from 8.043 to 8.111, update Fe+ model to Smyth+19
+monitor line luminosity "Fe 2b" 4558 8.111
+##
+## >>chng 10 jul 19, from 18 to 16.6, drift from changes over past few weeks
+## >>chng 11 nov 16, from 16.6 to 15.68, adjust newmole monitors
+## >>chng 11 dec 18, from 15.68 to 16.6, adjust outstanding botches
+## >>chng 12 mar 07, from 16.6 to 19.6, renorm to r5961 results
+## >>chng 12 mar 10, from 19.6 to 15.63, adjust several performance monitors
+## >>chng 12 apr 02, from 15.63 to 14.55, Chianti 7 change, gcc 4.4.6 wolkje
+## >>chng 12 dec 12, from 14.55 to 13.01, CX to ground state
+## >>chng 13 mar 05, from 13.01 to 13.74, further updates S II CS
+## >>chng 13 sep 15, from 13.74 to 12.93, improve Thomson c.s.
+## >>chng 13 oct 14, from 12.93 to 13.96, update data, fix bug stout sc 3
+## >>chng 13 nov 05, from 13.96 to 6.393, convergence branch changes
+## >>chng 13 nov 12, from 6.393 to 5.835, fix FeII/LyA overlap bug
+## >>chng 13 nov 25, from 5.835 to 5.257, convergence branch changes
+## >>chng 14 jan 05, from 5.257 to 4.949, N to external databases
+## >>chng 14 apr 07, from 4.949 to 3.949, move H/C out of ConvBase loop
+## >>chng 14 apr 08, from 3.949 to 3.58, O excit state photo back on
+## >>chng 14 jun 11, from 3.58 to 3.801, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+monitor itrzn 3.801 error 0.06
+##
+## >>chng 10 jun 29, from 3 to 5, init
+## >>chng 10 jul 26, cloud9 gcc got 3 at r4068
+## >>chng 10 jul 26, icc 11.1 mac 64, got 5
+monitor niter >2 error 0.01
+monitor niter <6 error 0.01
+##
+## >>chng 10 jun 29, from 316 to 509, init
+## >>chng 11 nov 16, from 509 to 473, adjust newmole monitors
+## >>chng 12 mar 07, from 473 to 535, renorm to r5961 results
+## >>chng 12 oct 22, from 535 to 563, zone tau in rt_line_one
+## >>chng 12 dec 12, from 563 to 591, CX to ground state
+## >>chng 13 jan 10, from 591 to 557, fix in-zone continuum shielding
+## >>chng 14 mar 26, from 557 to 487, move O to external databases
+## >>chng 14 apr 08, from 487 to 569, O excit state photo back on
+## >>chng 17 apr 24, from 569 to 543, Stancil update Ne2, 3 CS to published version of Wang et al 17
+monitor nzone 543 
+##
+## >>chng 14 jul 08, from 1.01 to 7.419, Move FeII to Stout
+## >>chng 16 dec 20, from 7.419 to 7.457, add secondary autoionization to DR suppression
+## >>chng 19 jun 14, from 7.457 to 7.4, update to CODATA 2018
+## >>chng 23 jun 27, from 7.4 to 7.753, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1148 7.753 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.019, Move FeII to Stout
+## >>chng 17 may 26, from 7.019 to 7.138, update Rydberg constant, slight shift in Lya energy chng pump
+## >>chng 19 jun 14, from 7.138 to 7.041, update to CODATA 2018
+## >>chng 21 mar 22, from 7.041 to 7.080, drift after update to NIST energies & ionization potentials
+## >>chng 21 mar 31, from 7.08 to 7.038, add HF+ chemistry
+## >>chng 23 jun 27, from 7.038 to 8.381, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1212 8.381 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 6.841, Move FeII to Stout
+## >>chng 16 mar 20, from 6.841 to 6.888, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 6.888 to 7.764, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1295 7.764 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 6.601, Move FeII to Stout
+## >>chng 16 mar 20, from 6.601 to 6.645, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 6.645 to 7.671, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1365 7.671 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.894, Move FeII to Stout
+## >>chng 16 mar 20, from 7.894 to 7.946, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.946 to 8.464, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1485 8.464 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.449, Move FeII to Stout
+## >>chng 16 mar 20, from 7.449 to 7.561, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.561 to 8.053, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1615 8.053 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.306, Move FeII to Stout
+## >>chng 16 mar 20, from 7.306 to 7.448, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.448 to 7.54, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1787 7.54 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.473, Move FeII to Stout
+## >>chng 16 mar 20, from 7.473 to 7.576, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.576 to 7.906, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1822 7.906 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 9.104, Move FeII to Stout
+## >>chng 16 mar 20, from 9.104 to 9.217, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 9.217 to 9.263, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2355 9.263 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 8.902, Move FeII to Stout
+## >>chng 16 mar 20, from 8.902 to 8.984, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 8.984 to 8.922, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2495 8.922 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 8.23, Move FeII to Stout
+## >>chng 16 mar 20, from 8.23 to 8.343, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 8.343 to 8.515, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2695 8.515 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 8.858, Move FeII to Stout
+## >>chng 23 jun 27, from 8.858 to 8.906, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2758 8.906 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.46, Move FeII to Stout
+## >>chng 16 mar 20, from 7.46 to 7.52, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.52 to 7.615, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2797 7.615 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 8.5, Move FeII to Stout
+## >>chng 16 mar 20, from 8.5 to 8.646, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 8.646 to 8.549, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2935 8.549 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 8.067, Move FeII to Stout
+## >>chng 23 jun 27, from 8.067 to 8.18, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4255 8.18 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 8.055, Move FeII to Stout
+## >>chng 23 jun 27, from 8.055 to 8.111, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4558 8.111 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 6.946, Move FeII to Stout
+## >>chng 16 mar 20, from 6.946 to 6.89, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 6.89 to 6.957, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4743 6.957 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.384, Move FeII to Stout
+## >>chng 16 mar 20, from 7.384 to 7.304, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.304 to 7.435, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4855 7.435 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.043, Move FeII to Stout
+## >>chng 16 mar 20, from 7.043 to 6.979, change from Werner model to Stout model for Fe+
+monitor line intensity "Fe 2b" 4971 6.979 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.482, Move FeII to Stout
+## >>chng 16 mar 20, from 7.482 to 7.641, change from Werner model to Stout model for Fe+
+monitor line intensity "Fe 2b" 4975 7.641 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.555, Move FeII to Stout
+## >>chng 16 mar 20, from 7.555 to 7.633, change from Werner model to Stout model for Fe+
+monitor line intensity "Fe 2b" 5143 7.633 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.824, Move FeII to Stout
+## >>chng 23 jun 27, from 7.824 to 7.934, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5318 7.934 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.495, Move FeII to Stout
+## >>chng 16 mar 20, from 7.495 to 7.433, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.433 to 7.661, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5865 7.661 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.738, Move FeII to Stout
+## >>chng 16 mar 20, from 7.738 to 7.673, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.673 to 7.819, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 6265 7.819 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.416, Move FeII to Stout
+## >>chng 23 jun 27, from 7.416 to 7.623, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 6565 7.623 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 7.734, Move FeII to Stout
+## >>chng 16 mar 20, from 7.734 to 7.684, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 7.684 to 7.731, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 7445 7.731 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 6.247, Move FeII to Stout
+## >>chng 23 jun 27, from 6.247 to 5.971, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 7785 5.971 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 6.795, Move FeII to Stout
+## >>chng 23 jun 27, from 6.795 to 6.603, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1.88900m 6.603 error 0.1
+##
+## >>chng 14 jul 08, from 1.01 to 5.608, Move FeII to Stout
+## >>chng 23 jun 27, from 5.608 to 5.201, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2.20000m 5.201 error 0.1
+##
+
+This is one of the models that sample the LOC plane.

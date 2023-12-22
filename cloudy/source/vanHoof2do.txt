@@ -1,0 +1,246 @@
+From: vanhoof@cita.utoronto.ca
+Sent: Monday, July 26, 1999 6:58 PM
+
+Hi Gary,
+
+Below I will go through the changes I made in version 84 of Cloudy. I will
+use the same sequence as in the appendix of my thesis. This file is intended
+as an addition to the discussion in my thesis and both should be read together.
+For each command I will indicate my assessment of the importance of the command.
+
+1. distance 21.85 [vary]
+
+Very useful for allowing the user to supply fluxes in natural units
+(i.e. as observed) and allowing Cloudy to generate output that is
+normalized in a more natural way (i.e. spectra and line fluxes normalized
+at earth distance). This command is necessary when one wants to optimize
+an observed flux and simultaneously wants to vary the inner radius.
+
+Priority: high
+
+2. dlaw <n1> <n2> [vary]
+
+At present it is not possible to use the keyword vary, although this
+may very well be useful.
+
+Priority: high
+
+3. dtable [use full range]
+
+Is implemented as "dlaw table". However the option "full range" is not
+implemented. This sets the inner and outer radius of the nebula to the
+start and end radius supplied in the table. This is convenient when the
+table is produced by an external program and the inner and outer radius
+may vary from run to run.
+
+Priority: medium
+
+4. element helium 11.02
+
+Is mostly implemented in Cloudy 90. However the normalization of the
+abundance scale cannot be altered, although several normalizations are
+in use.
+
+Priority: high
+
+5. flunit herz [at earth distance]
+
+Allows the user to choose other flux units for the spectrum and to normalize
+fluxes at the earths distance. See also point 1.
+
+Priority: high
+
+6. frunit micron
+
+Allows the user to choose the frequency unit for his plot
+
+7. grains .... [log], [vary]
+
+The keywords log and vary are not included now.
+
+Priority: high
+
+8. minimum electron temperature 10K
+
+Was needed in Cloudy 84 to assure stability far out in the cold part of the
+nebula. I am not sure if it is still needed in Cloudy 93
+
+Priority: ??
+
+9. optimize amoeba
+
+No action necessary.
+
+10. optimize angular diameter
+
+Combined with the distance, this allow further constraints on the model.
+
+Priority: high.
+
+11. optimize color temperature
+
+Was introduced when optimizing on IRAS fluxes introduced unstable behavior.
+Was later abandoned again.
+
+Priority: low.
+
+12. optimize continue
+
+Is already implemented for optimize_phymir. It could also be implemented for the other
+optimizers.
+
+Priority: low.
+
+13. optimize far-infrared flux
+
+Is roughly similar to optimizing on GraT 0 (although not completely, this
+command includes all emission at IR wavelengths, not just grain emission).
+See also point 11.
+
+Priority: low.
+
+14. optimize flux 3 cm 6 mJy
+
+Very useful for optimizing continuum fluxes, e.g. IR grain emission or
+radio flux.
+
+Priority: high.
+
+15. optimize intensity -12.26
+
+Different normalization, see point 1.
+
+Priority: high.
+
+16. optimize lines:
+    IRAS 60 ....
+
+All kinds of photometric bands were added to Cloudy 84. These are very
+informative by themselves and probably should be added to Cloudy. I also
+allowed for the possibility to optimize on fluxes observed in these bands,
+but found that to be less useful (although not useless). It can introduce
+instabilities because the code can exchange continuum flux for line flux.
+This can lead to absurd abundances.
+
+Priority: high (for inclusion in output)
+          low to medium (for optimizing)
+
+17. optimize optimize_phymir
+
+Already included.
+
+18. optimize tolerance
+
+Already changed.
+
+19. plot commands
+
+They were very useful, but it is not clear whether they are suitable for
+distribution since my plot system is based on idl.
+
+Priority: low
+
+20. print verbose
+
+The default and the exception for printing every iteration/only the last
+iteration is switched. A matter of taste...
+
+Priority: low.
+
+21. punch emissivity
+
+Very useful when you want to use a separate code which does proper radiative
+transport of diffuse continua in optically thick conditions. I have a code
+which does this (neglecting scattering).
+
+Priority: medium
+
+22. punch extended spectrum
+
+Is automatically implemented now with the extension of the radio continuum
+in Cloudy. Hence no action is necessary.
+
+23. rfac 3.
+
+Was introduced to solve problems with the "radius 17.0 17.5 vary" command
+(the optimizer could let the inner radius go outside the outer radius).
+Apart from this problem, the command is obsolete now.
+
+Priority: low.
+
+24. runit parsec
+
+Allows the user to chose a radius unit for the punch output. See also point
+5 and 6.
+
+Priority: high
+
+25. set drmax 0.01 relative
+
+Prevent the code from taking very big steps outwards. Allows for a more
+precise integration outwards and may make the chi^2 function smoother
+when optimizing.
+
+Priority: medium
+
+26. silent
+
+Turn off all optimizer output for intermediate iterations. Only the initial
+messages and the final model are printed. Useful for people with limited
+disk space (they still exist !).
+
+Priority: medium
+
+27. single iteration
+
+Is like the "no vary" command, except that it produces the chi^2 information
+at the end of the file. Useful for doing a short test of the input file.
+Using "optimize iterations 0" doesn't work, since the number is defaulted
+to 1 and therefore the model is executed twice. The command "no vary" could
+be altered to include this possibility.
+
+Priority: medium
+
+28. stop flux at 5.9 cm 93 mJy
+
+I do not use it at the moment. I am not sure whether it is useful.
+
+Priority: low
+
+29. stop [ionized] mass 0.2
+
+I do not use it at the moment. I am not sure whether it is useful.
+
+Priority: low
+
+30. stop photometry IRAS 60 23 Jy
+
+I use this command for defining an outer radius in the neutral zone, for
+lack of anything better... Could be altered to something like "stop
+continuum flux at 60 micron 23 Jy" which would be easier to implement.
+
+Priority: high
+
+31. sublimation radius 17.25
+
+Since Cloudy allows for a varying D/G ratio as a function of radius, this
+is command is obsolete now.
+
+32. sublimation temperature 1500K
+
+Force grains to exist only there where the equilibrium temperature is below
+a preset sublimation temperature. I think this command is still very useful.
+
+Priority: high
+
+
+
+I hope this is somewhat clear.... I also made changes to the output, some of
+which may also be useful. I will discuss those at a later date.
+
+
+Cheers,
+
+Peter.
+
+

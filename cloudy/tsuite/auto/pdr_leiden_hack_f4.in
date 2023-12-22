@@ -1,0 +1,151 @@
+title Leiden meeting model 4 with hacks
+# This is one of the tests in Rollig et al. 2007, A&A, 467, 187 
+#
+# commands controlling continuum =========
+#
+# commands for density & abundances =========
+grains ism 1.16 no qheat
+#
+# commands controlling geometry  =========
+# Use the Draine 1978 field, for a semi-infinite slab we have to use half
+# the requested value, so the actual value
+# they want for the model is actually twice the value below
+table draine 50000
+extinguish 24
+#
+# other commands for details     =========
+failures 3
+#  use leiden initialization file
+init file="pdr_leiden_hack.ini"
+#  This command defines the grain temperature to be a constant 20 Kelvin
+constant grain temperature 20 
+#  This sets the temperature to a constant 50 Kelvin
+constant temperature 50 linear
+#  hydrogen density 
+hden 5.5
+#
+# commands controlling output    =========
+save performance "pdr_leiden_hack_f4.per"
+save leiden lines "pdr_leiden_hack_f4.lin"
+save leiden "pdr_leiden_hack_f4.lei"
+save dr "pdr_leiden_hack_f4.dr" 
+save grain physical conditions "pdr_leiden_hack_f4.grn"
+save overview "pdr_leiden_hack_f4.ovr"
+save monitors "pdr_leiden_hack_f4.asr"
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+monitor H2 column density 21.845 error 0.1
+## >>chng 21 sep 11, from 18 to 18.05, LAMDA update
+monitor CO column density 18.05 error 0.1
+## >>chng 20 aug 03, from 16.18 to 16.27, update H3+ rates Indriola+ 2012
+monitor O2 column density 16.27 error 0.1
+## >>chng 20 aug 03, from 13.35 to 13.47, update H3+ rates Indriola+ 2012
+monitor OH column density 13.47 error 0.1
+##
+## >>chng 06 nov 28, add these lines
+## >>chng 13 dec 23, from -3.9 to -3.813, C to external databases
+monitor line luminosity "c  2" 157.636m -3.813
+##
+## >>chng 06 nov 29, from -5.933 to -5.743, Badnell DR turned on
+## >>chng 11 jul 12, from -5.743 to -5.838, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -5.838 to -5.737, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -5.737 to -5.758, update DR suppression
+## >>chng 15 may 14, from -5.758 to -5.723, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -5.723 to -5.744, update DR suppression in r10716
+## >>chng 16 dec 20, from -5.744 to -5.723, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -5.723 to -6.06, LAMDA update
+## >>chng 21 nov 04, from -6.06 to -5.676, update mole co data
+## >>chng 23 may 15, from -5.676 to -5.72, GS updates 21 reactions to UMIST 2012
+monitor line luminosity "c  1" 370.269m -5.72
+##
+## >>chng 06 nov 29, from -6.557 to -6.366, Badnell DR turned on
+## >>chng 11 jul 12, from -6.366 to -6.461, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -6.461 to -6.359, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -6.359 to -6.381, update DR suppression
+## >>chng 15 may 14, from -6.381 to -6.343, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -6.343 to -6.365, update DR suppression in r10716
+## >>chng 16 dec 20, from -6.365 to -6.343, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -6.343 to -6.681, LAMDA update
+## >>chng 21 nov 04, from -6.681 to -6.296, update mole co data
+## >>chng 23 may 15, from -6.296 to -6.34, GS updates 21 reactions to UMIST 2012
+monitor line luminosity "c  1" 609.590m -6.34
+##
+## >>chng 14 mar 26, from -3.59 to -3.196, Move oxygen data to stout and chianti files
+monitor line luminosity "O  1" 63.1679m -3.196
+##
+## >>chng 13 jul 24, wl from 145.5m to 145.495m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -4.911 to -4.833, Move oxygen data to stout and chianti files
+monitor line luminosity "O  1" 145.495m -4.833
+##
+## >>chng 04 sep 21, from 5 to 6 - finer molec conver criteria
+## >>chng 05 mar 28, from 6 to 3.5, impr mol converg
+## >>chng 08 dec 08, from 3.5 to 3.228, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 3.228 to 4.592, merging newsolvers branch
+## >>chng 09 jan 16, from 4.592 to 4.497 (error 0.06), average of 10 runs
+## >>chng 09 mar 27, from 4.50 to 4.17 improve rigor esc prob & pop defns
+## >>chng 09 jun 02, from 4.17 to 4.3, 64/32
+## >>chng 11 nov 16, from 4.3 to 3.977, adjust newmole monitors
+## >>chng 12 oct 22, from 3.977 to 3.645, zone tau in rt_line_one
+## >>chng 13 jan 10, from 3.645 to 3.981, fix in-zone continuum shielding
+## >>chng 13 nov 05, from 3.981 to 2.649, convergence branch changes
+## >>chng 13 nov 25, from 2.649 to 2.248, convergence branch changes
+## >>chng 17 sep 09, from 2.248 to 2.101, fix bug in high n collisional excitation rates for H-like iso-sequences
+monitor itrzn 2.101 error 0.07
+##
+## >>chng 08 dec 08, from 550 to 556, upper limit -> equals (r2515)
+## >>chng 10 aug 08, from 556 to 562, increase continuum resolution in radio
+## >>chng 11 jul 12, from 562 to 570, enable fit to Badnell DR suppression
+## >>chng 11 sep 13, from 570 to 564, update gcc cloud9
+## >>chng 11 sep 15, from 564 to 570, Chianti for Fe moderate to high ions
+## >>chng 11 nov 16, from 570 to 619, adjust newmole monitors
+## >>chng 13 nov 13, from 619 to 679, resolve face at all freqs
+## >>chng 14 mar 26, from 679 to 665, Move oxygen data to stout and chianti files
+## >>chng 14 apr 08, from 665 to 707, O excit state photo back in
+## >>chng 15 may 14, from 707 to 700, CollisSuppres, final version from Dragan Nikolic
+## >>chng 18 jun 17, from 700 to 671, improve zone 0 thermal relaxation
+## >>chng 20 sep 30, from 671 to 679, update phfit.dat (!!) increase error 0.01 -> 0.02
+monitor nzone 679 error 0.02
+##
+## >>chng 13 jun 27, from -8.869 to -5.661, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -5.661 to -5.574, update LAMDA to 2015
+## >>chng 20 aug 03, from -5.574 to -5.489, update H3+ rates Indriola+ 2012
+monitor "H2O " 538.142m line intensity -5.489
+## >>chng 13 jun 27, from -7.288 to -6.727, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 2600.05m  -6.727 line intensity
+## >>chng 13 jun 27, from -6.463 to -5.672, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 1300.05m  -5.672 line intensity
+## >>chng 13 jun 27, from -6.149 to -5.111, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+monitor "CO  " 866.727m  -5.111 line intensity
+## >>chng 13 jun 27, from -6.177 to -4.749, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+monitor "CO  " 650.074m  -4.749 line intensity
+## >>chng 13 jun 27, from -6.485 to -4.5, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+monitor "CO  " 520.089m  -4.5 line intensity
+## >>chng 13 jun 27, from -6.954 to -4.331, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+monitor "CO  " 433.438m  -4.331 line intensity
+## >>chng 13 jun 27, from -7.48 to -4.229, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+monitor "CO  " 371.549m  -4.229 line intensity
+## >>chng 13 jun 27, from -8.049 to -4.196, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+monitor "CO  " 325.137m  -4.196 line intensity
+## >>chng 13 jun 27, from -7.522 to -5.788, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+monitor "^13CO" 906.599m  -5.788 line intensity
+# 
+# pdr_leiden_hack_f4.in
+# class pdr 
+# ========================================
+# 
+
+This is one of the tests in Rollig et al. 2007, A&A, 467, 187 
+includes hacks needed to get standard answer.

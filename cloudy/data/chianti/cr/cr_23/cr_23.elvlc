@@ -1,0 +1,82 @@
+  1 1s2                   1  0 S  0.0  1          0.000       0.000000          0.000       0.000000 
+  2 1s.2s                 3  0 S  1.0  3   45384236.000     413.571590   45384241.000     413.571636 
+  3 1s.2p                 3  1 P  0.0  1   45596004.000     415.501362   45596000.000     415.501326 
+  4 1s.2p                 3  1 P  1.0  3   45609438.000     415.623782   45608931.000     415.619162 
+  5 1s.2s                 1  0 S  0.0  1   45614426.000     415.669236   45614426.000     415.669236 
+  6 1s.2p                 3  1 P  2.0  5   45691887.000     416.375113   45691889.000     416.375131 
+  7 1s.2p                 1  1 P  1.0  3   45831000.000     417.642804   45829477.000     417.628925 
+  8 1s.3s                 3  0 S  1.0  3   53760100.000     489.898080   53762232.000     489.917508 
+  9 1s.3p                 3  1 P  0.0  1   53818510.000     490.430351   53816383.000     490.410968 
+ 10 1s.3s                 1  0 S  0.0  1   53821190.000     490.454773   53821183.000     490.454709 
+ 11 1s.3p                 3  1 P  1.0  3   53822410.000     490.465890   53823366.000     490.474602 
+ 12 1s.3p                 3  1 P  2.0  5   53847040.000     490.690335   53849450.000     490.712297 
+ 13 1s.3d                 3  2 D  1.0  3   53879040.000     490.981941   53880373.000     490.994088 
+ 14 1s.3d                 3  2 D  2.0  5   53878640.000     490.978296   53881099.000     491.000704 
+ 15 1s.3p                 1  1 P  1.0  3   53884060.000     491.027686   53887537.000     491.059371 
+ 16 1s.3d                 3  2 D  3.0  7   53888200.000     491.065413   53890991.000     491.090846 
+ 17 1s.3d                 1  2 D  2.0  5   53890160.000     491.083274   53892305.000     491.102820 
+ 18 1s.4s                 3  0 S  1.0  3   56658500.000     516.310244   56660391.000     516.327476 
+ 19 1s.4p                 3  1 P  0.0  1   56683000.000     516.533504   56682615.000     516.529996 
+ 20 1s.4s                 1  0 S  0.0  1   56684100.000     516.543528   56684209.000     516.544522 
+ 21 1s.4p                 3  1 P  1.0  3   56684700.000     516.548996   56685522.000     516.556486 
+ 22 1s.4p                 3  1 P  2.0  5   56695100.000     516.643768   56696560.000     516.657072 
+ 23 1s.4d                 3  2 D  1.0  3   56708600.000     516.766789   56709194.000     516.772202 
+ 24 1s.4d                 3  2 D  2.0  5   56708400.000     516.764966   56709576.000     516.775683 
+ 25 1s.4p                 1  1 P  1.0  3   56708000.000     516.761321   56712070.000     516.798410 
+ 26 1s.4d                 3  2 D  3.0  7   56712400.000     516.801417   56713680.000     516.813081 
+ 27 1s.4f                 3  3 F  2.0  5          0.000       0.000000   56714316.000     516.818877 
+ 28 1s.4f                 3  3 F  3.0  7          0.000       0.000000   56714322.000     516.818931 
+ 29 1s.4d                 1  2 D  2.0  5   56713200.000     516.808707   56714406.000     516.819697 
+ 30 1s.4f                 3  3 F  4.0  9          0.000       0.000000   56716545.000     516.839189 
+ 31 1s.4f                 1  3 F  3.0  7          0.000       0.000000   56716553.000     516.839262 
+ 32 1s.5s                 3  0 S  1.0  3   57992700.000     528.468369   57994095.000     528.481081 
+ 33 1s.5p                 3  1 P  0.0  1   58004840.000     528.578997   58005318.000     528.583353 
+ 34 1s.5s                 1  0 S  0.0  1   58005800.000     528.587745   58006046.000     528.589987 
+ 35 1s.5p                 3  1 P  1.0  3   58006100.000     528.590479   58006797.000     528.596830 
+ 36 1s.5p                 3  1 P  2.0  5   58011400.000     528.638776   58012454.000     528.648381 
+ 37 1s.5d                 3  2 D  1.0  3          0.000       0.000000   58018822.000     528.706410 
+ 38 1s.5d                 3  2 D  2.0  5          0.000       0.000000   58019032.000     528.708324 
+ 39 1s.5p                 1  1 P  1.0  3   58019100.000     528.708943   58020267.000     528.719578 
+ -1
+%filename:  cr_23.elvlc.nist
+Theoretical energy levels:  Autostructure calculation
+A Breit-Pauli distorted wave implementation for AUTOSTRUCTURE
+Badnell, N.R., 2011, Computer Physics Communications, 182, 1528
+ADSref:  http://adsabs.harvard.edu/abs/2011CoPhC.182.1528B
+
+Observed (theoretical) energy levels (1s2s, 1s2p):  Artemyev, A. N.; Shabaev, V. M.; Yerokhin, V. A.; Plunien, G.; Soff, G., 2005, Phys. Rev. A, 72, 2104
+ADSref:  http://adsabs.harvard.edu/abs/2005PhRvA..71f2104A
+
+Observed energy levels:  Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2018).
+ NIST Atomic Spectra Database (ver. 5.0), [Online]. Available: http://physics.nist.gov/asd [Tue Feb 20 2018]. 
+National Institute of Standards and Technology, Gaithersburg, MD.
+
+Observed wavelengths, energies: 1s^2 - 1s2p 1P1, 1s4p 1P1, 1s5p 1P1:
+
+Beiersdorfer, P.; Bitter, M.; von Goeler, S.; Hill, K. W.
+Physical Review A (General Physics), Volume 40, Issue 1, July 1, 1989, pp.150-157
+DOI:  https://ui.adsabs.harvard.edu/link_gateway/1989PhRvA..40..150B/doi:10.1103/PhysRevA.40.150
+ADSref:  https://ui.adsabs.harvard.edu/abs/1989PhRvA..40..150B/abstract
+
+Theoretical energies for n=2, 3 above IP
+Goryaev, F. F.; Vainshtein, L. A.; Urnov, A. M.
+Atomic data for doubly-excited states 2lnl‧ of He-like ions and 1s2lnl‧ of Li-like ions with Z = 6-36 and n = 2 , 3
+2017, ADNDT, 113, 117-257
+adsRef:  http://adsabs.harvard.edu/abs/2017ADNDT.113..117G
+DOI:  10.1016/j.adt.2016.04.002
+
+Theoretical energy levels (n=4,5 above IP):
+calculations of U. Safronova reported in Kato et al., 1997, ADNDT, 67, 225.
+ADS http://adsabs.harvard.edu/abs/1997ADNDT..67..225K
+updated by U. Safronova, 2001, private communication
+
+theoretical energy levels adjusted by SHFTIC file derived from 
+Artemyev, nterpolated bnd energies, Goryaev (n=2, 3 above IP) and Safronova (n= 4,5,6 above IP energies
+
+
+produced as a part of the 'CHIANTI' atomic database for astrophysical spectroscopy
+K. Dere (GMU) - 2020 October 07
+
+Reference:
+Chianti  2022-02-18
+ -1

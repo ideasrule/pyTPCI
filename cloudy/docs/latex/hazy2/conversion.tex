@@ -1,0 +1,77 @@
+\chapter{CONVERSION FACTORS}
+% !TEX root = hazy2.tex
+
+Table \ref{tab:ConversionFactors} gives conversion factors between
+various common units.
+The last column of the table gives the variable names for
+constants that occur within the code.
+Most are defined as macros within the header file
+\cdCommand{physconst.h}.
+These should be used instead of entering the constant directly.
+In the following all Rydbergs are for infinite mass nuclei.
+
+The fundamental constants used by the code are from the
+\href{http://physics.nist.gov/cuu/Constants/index.html}{CODATA
+recommended values}
+and are in the header file \cdFilename{physconst.h}.
+Derived quantities should be
+formed from the fundamental quantities given there, so that any future
+changes will trickle down into all parts of the code.
+
+\begin{table}\caption{Conversion Factors}
+\label{tab:ConversionFactors}
+{\small
+\begin{tabular}{lllll}
+\hline
+To convert from& Variable& to& multiply by& Parameter\\
+\hline
+AU&&cm& 1.49597870(13)&\\
+Boltzmann
+constant& BOLTZMANN& 1.3806503(-16)\\
+cm&& micron($\mu$m)& $10^4$\\
+phot/s/cm$^2$& flux& f$_\nu$& $\nu_{\mathrm{Ryd}}$h$\nu_1$ (erg)\\
+phot/Ryd/s/cm$^2$& flux/widflx& $\nu f_\nu$& $\nu_{\mathrm{Ryd}}^2$ h$\nu_1$
+(erg)\\
+phot/Ryd/s/cm$^2$& flux/widflx& J$_\nu$& $\nu_{\mathrm{Ryd}}$ h\\
+optical depth& tautot& A$_{\mathrm{V}}$(mag)& 1.08574\\
+energy
+(eV)&&  ergs& 1.602192($-$12)\\
+energy (eV)&& K& 1.1604448(4)&\cdVariable{ eVdegK}\\
+energy (keV)&& Frequency
+Hz& 2.41799($+$17)\\
+energy (Ryd)& anu& Kelvin& 1.5788866(5)& \cdVariable{Te1ryd}\\
+energy
+(Ryd)&anu& ergs& 2.179872($-$11)& \cdVariable{en1ryd}\\
+energy (Ryd)& anu& cm$^{-1}$& 109737.315& \cdVariable{1/WavNRyd}\\
+energy
+(Ryd)& anu& eV& 13.6056981& \cdVariable{evRyd}\\
+energy (Ryd)& anu& \AA& 911.6/energy(Ryd) & \cdVariable{rydlam}\\
+energy (Ryd), T& anu,
+Te& h$\nu$/kT& 1.5788866(5)*anu/Te& \cdVariable{Te1ryd}\\
+temperature (K)& Te& eV& 8.617385($-$5)\\
+temperature
+(K)& Te& ergs& 1.38063($-$16)& \cdVariable{boltzmann}\\
+temperature (K)& Te& Rydbergs& 1/1.5788866(5)&
+\cdVariable{1/te1ryd}\\
+wavelength (\AA )&& meters& 1(-10)\\
+wavelength (\AA )&& ergs& 1.9864(-8)/$\lambda$(\AA)\\
+wavelength (\AA )&& degree K& 1.43877($+$8)/$\lambda$(\AA )\\
+wavelength
+(cm)& micron& 1($+$4)\\
+wavelength (cm)& \AA& 1($+$8)\\
+wavelength
+(cm)&& ergs& 1.9864($-$12)/$\lambda$(cm)\\
+wavelength (cm)&& degree K& 1.43877/$\lambda$(cm)\\
+wavelength
+(cm)&& Rydbergs& 9.11256($-$6)/$\lambda$(cm)\\
+wavelength (micron)&& degree
+K& 1.43877($+$4)/$\lambda(\mu)$\\
+wavelength (micron)&& ergs& 1.9864($-$12)/$\lambda(\mu)$\\
+wavenumbers (
+cm$^{-1}$)&& ergs& 1.98648($-$16)\\
+wavenumbers ( cm$^{-1}$)&& degree K& 1.43877& \cdVariable{WavNKelv}\\
+wavenumbers
+( cm$^{-1}$)&& Rydbergs& 9.1126732($-$6)& \cdVariable{WavNRyd}\\
+\hline
+\end{tabular}
+}\end{table}

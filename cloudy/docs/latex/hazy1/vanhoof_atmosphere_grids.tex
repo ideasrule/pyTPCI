@@ -1,0 +1,231 @@
+\chapter{INCLUDING USER-DEFINED ATMOSPHERE GRIDS IN CLOUDY}
+% !TEX root = hazy1.tex
+
+\section{Introduction}
+
+\Cloudy\ now features the possibility of including user-defined stellar
+atmosphere grids with an arbitrary number of dimensions (this is the number of
+parameters that are varied in the grid). Using such a grid requires two steps.
+The first is to create an ascii file with all the necessary information. The
+format of this file will be described in Section~\ref{ascii}. The second
+(optional) step is to compile this file into an index file. This is described
+in Section~\ref{compiling}. The runtime behavior of the code is described in
+Section~\ref{runtime}.
+
+\section{The ascii file}
+\label{ascii}
+
+Each stellar atmosphere grid needs to be defined in a single ascii file
+containing all the necessary information. The format is illustrated in
+Table~\ref{def}. The aim of this format is to keep the data in the ascii file
+as close as possible to the original calculations. The file starts with some
+general information, followed by a block of model parameters, the
+frequency/wavelength grid, and finally each of the spectral energy
+distributions (SEDs). No comments of any sort are allowed in the file, except
+at the start (i.e., before the magic number). It is implicitly assumed that
+each SED has been rebinned onto the same frequency/wavelength grid. This grid
+does not need to coincide with the \Cloudy\ grid. The grid will be automatically
+rebinned onto the \Cloudy\ grid. The supplied frequency/wavelength grid doesn't
+need to cover the entire \Cloudy\ frequency range. Extrapolation to lower
+frequencies will be done using a Rayleigh-Jeans slope. It is allowed for flux
+points in the Wien tail to have zero flux. Above the highest frequency present
+in the ascii file, fluxes will be set to zero. It is the users responsibility
+to assure that sufficient data are supplied to enable a safe extrapolation of
+the spectra to the entire \Cloudy\ grid.
+
+I will now describe each of the items in the ascii file in more detail. You
+can start the ascii file with an optional block of comments, consisting of
+lines with a hash symbol '\#' in the first column. Such comments are {\em only}
+allowed at the start of the file and cannot be embedded amongst the data! The
+first line after the comment block contains the magic number that identifies
+the syntax version. It is checked
+when \Cloudy\ reads the ascii file. This document describes versions
+\cdVariable{20060612} and \cdVariable{20160614}. These two versions are
+almost identical, except for one extra model parameter in the latter version.
+So unless noted explicitly, all of the discussion below applies to both
+versions. The second line contains the number of parameters
+\cdVariable{ndim} that are varied in the grid. Typically this number is 2, but
+it may be any number $\geq$ 1 and $\leq$ \cdVariable{MDIM} (the latter
+parameter is defined in \cdFilename{stars.h}). The default value for
+\cdVariable{MDIM} is 4, which should be sufficient for all current grids. The
+parameter can however be increased if the user wishes so. The code
+will then have to be recompiled. The third line
+contains the number of parameters \cdVariable{npar} that are supplied for each
+atmosphere model. This number may be larger than \cdVariable{ndim}, but not
+smaller. The additional parameters are printed in the output, so using
+\cdVariable{npar} $>$ \cdVariable{ndim} can be a useful way of supplying
+additional information about the models. The number of parameters is limited
+by the parameter \cdVariable{MDIM} defined in \cdFilename{stars.h}. Next
+follow \cdVariable{npar} lines, each giving a label for that parameter. This
+is used in the \Cloudy\ output. The labels are completely free. However, if the
+first label matches the string \cdVariable{Teff}, and the second label matches
+\cdVariable{log(g)} (case sensitive), then special rules apply. We will refer
+to this as a Teff-log(g) grid. See Sections~\ref{compiling} and \ref{runtime}
+for further details. The next line gives the number of atmosphere models
+\cdVariable{nmod} in the grid, followed on the next line by the number of
+frequency/wavelength points \cdVariable{nfreq} in each of those models. In
+order to keep the format of the ascii file as close as possible to the
+original models, it is allowed to use either a frequency or wavelength grid in
+arbitrary units. The same holds for the dependent variable, which may either
+be a flux per frequency or wavelength unit. Both the dependent and independent
+variable should be entered as linear quantities, so logarithmic units like
+magnitudes are not supported. With this amount of freedom, the code needs to
+know how to convert these variables to \Cloudy's internal units. This is
+defines on the next 4 lines. The next line should contain either
+\cdVariable{nu} to state that the file contains a frequency grid, or
+\cdVariable{lambda} to state that it contains a wavelength grid. The next line
+contains a conversion factor to convert the numbers in the ascii file to a
+frequency in Hz (case \cdVariable{nu}) or a wavelength in \AA\ (case
+\cdVariable{lambda}). The conversion factor is multiplied with the numbers in
+the ascii file. So, if the ascii file would contain a wavelength grid in
+nanometer, then the conversion factor would have to be 10 to convert it into a
+grid in \AA. The next line defines the data type of the dependent variable.
+Legal values are \cdVariable{F\_nu, H\_nu} for fluxes per frequency unit, or
+\cdVariable{F\_lambda, H\_lambda} for fluxes per wavelength unit. The next
+line contains the conversion factor to convert the numbers in the ascii file
+to a flux in erg\,cm$^{-2}$\,s$^{-1}$\,Hz$^{-1}$ (case \cdVariable{F\_nu,
+  H\_nu}) or erg\,cm$^{-2}$\,s$^{-1}$\,\AA$^{-1}$ (case \cdVariable{F\_lambda,
+  H\_lambda}). Again the conversion factors are multiplied with the numbers in
+the ascii file. In the cases \cdVariable{H\_nu} and \cdVariable{H\_lambda} no
+implicit factor $4\pi$ will be used! So if the ascii file contains Eddington
+fluxes \cdVariable{H\_nu} in erg\,cm$^{-2}$\,s$^{-1}$\,\AA$^{-1}$\,sr$^{-1}$,
+then the conversion factor should be 12.56637$\ldots$ All fluxes are
+eventually renormalized in \Cloudy, but nevertheless it is important to get
+this conversion correct. The effective temperature of interpolated models is
+internally checked by evaluating the integral:
+\[ \int_0^\infty F_\nu d \nu = \sigma T_{\rm eff}^4. \]
+If the result deviates too much from the expected value an error will be
+printed. If all models generate such an error, you should check your
+normalization.
+
+This concludes the general setup of the grid. The remainder of the file
+contains the actual parameters and the data of the atmosphere models. These
+numbers can be formatted in any way you like, as long as it complies with C
+formatting rules. More in particular, you can supply more than 1 number per
+line, as long as they are separated by whitespace. Several forms of Fortran
+number formatting are not recognized in C! First, using ``D-format'' numbers
+(e.g. 1.0d+20) is not allowed as C does not recognize this notation. Second,
+Fortran may omit the ``e'' in numbers with large exponents (e.g. 1.0-102).
+This notation is not recognized either by C. The ``e'' in the exponential
+notation may be either lowercase or uppercase. In the ascii file, first the
+model parameters must be supplied. For syntax version 20060612 this means
+that \cdVariable{nmod} $\times$ \cdVariable{npar} numbers must be entered.
+First all parameters for model \#1, then the parameters for model \#2, etc.
+For syntax version 20160614 \cdVariable{nmod} $\times$ \cdVariable{npar+1}
+items must be entered. First all parameters for model \#1 followed by
+a track ident (e.g. A1, in general a character followed by a number), then
+all parameters for model \#2 followed by a different track ident, etc.
+The latter format is used for the CoStar grids. Next follows a block of
+\cdVariable{nfreq} numbers defining the frequency/wavelength grid. Finally,
+\cdVariable{nmod} blocks, each containing \cdVariable{nfreq} numbers, must be
+entered which give the fluxes for each of the atmosphere models. This then
+concludes the ascii file.
+
+\begin{table}
+  \caption[Example of an ascii file, derived from the kwerner.ascii file.]
+  {Example of an ascii file, derived from the kwerner.ascii file.
+    {\bf Comments are not allowed to be embedded in the file and are only shown here for clarity.}
+    \label{def}}
+  \small
+\begin{verbatim}
+  20060612       # magic number
+  2              # ndim
+  2              # npar
+  Teff           # label par 1
+  log(g)         # label par 2
+  20             # nmod
+  513            # nfreq
+  nu             # type of independent variable (nu or lambda)
+  3.28984196e+15 # conversion factor for independent variable
+  F_nu           # type of dependent variable (F_nu/H_nu or F_lambda/H_lambda)
+  1.00000000e+00 # conversion factor for dependent variable
+# nmod sets of npar model parameters (syntax version 20060612)
+# nmod sets of npar model parameters plus track ident (syntax version 20160614)
+   80000. 5.0  80000. 6.0  80000. 7.0  80000. 8.0
+  100000. 5.0 100000. 6.0 100000. 7.0 100000. 8.0
+  120000. 6.0 120000. 7.0 120000. 8.0 140000. 6.0
+  140000. 7.0 140000. 8.0 160000. 7.0 160000. 8.0
+  180000. 7.0 180000. 8.0 200000. 7.0 200000. 8.0
+# the frequency/wavelength grid, nfreq points
+  1.0100000e-05  3.0396596e-04  6.0762797e-04  9.1129000e-04  9.8728144e-04
+                   ...  <505 more frequency points>
+  1.7655824e+02  1.7940598e+02  1.8225368e+02
+# the SED for model 1, nfreq flux points
+  6.2701018e-11  5.5260639e-08  2.1959737e-07  4.9197354e-07  5.7711065e-07
+                      ...  <505 more flux points>
+  9.0885815e-37  2.7039771e-37  7.9828291e-38
+                 ... <the SED's for models 2 ... 19>
+# the SED for model 20, nfreq flux points
+  1.4960523e-10  1.3383193e-07  5.3344235e-07  1.1975753e-06  1.4049202e-06
+                      ...  <505 more flux points>
+  2.1177483e-13  1.3848120e-13  9.0415034e-14
+\end{verbatim}
+\end{table}
+
+\section{Compiling the grid}
+\label{compiling}
+
+Ascii files containing the stellar atmosphere grid can have arbitrary names as
+long as the filename extension is ``\cdFilename{.ascii}''. In the remainder we
+will assume the file has been named \cdFilename{usergrid.ascii}. Cloudy will
+read this file every time it needs to interpolate an SED. For small files this
+is a negligible overhead, but for large files this will noticeably slow down
+the code. The alleviate this problem, you can compile the ascii file into an
+index file with a name ending in ``\cdFilename{.idx}''. This file holds
+offsets into the ascii file telling the code where each new SED starts. Using
+that, the code can simply skip the SEDs it doesn't need, making the reading
+process much faster. The presence of this file is optional, but is strongly
+recommended for large grids. The index file is in principle OS and compiler
+dependent, so it needs to be recreated for every computer that you wish to use
+it on if either the OS or the compiler are different. In practice the index
+files will often be identical, but nothing in the standard guarantees that.
+The files will definitely be different on UNIX/Linux and Windows systems. In
+order to compile the file, type the following command in your shell:
+
+\begin{verbatim}
+cloudy.exe -e 'compile stars "usergrid.ascii"'
+\end{verbatim}
+
+\noindent
+\Cloudy\ will now create a file
+\cdFilename{usergrid.idx}. You may need to move this file to a location in
+your search path. See Section~\ref{sec:ReadingWritingFiles} for details. You
+can now use the grid by including the following in your input file:
+
+\begin{verbatim}
+table star "usergrid.ascii" 2.4e4 4.3
+\end{verbatim}
+
+In the case of a Teff-log(g) grid (see Section~\ref{ascii} for a definition)
+you can supply only Teff, and log(g) will default to the highest value in the
+grid. In all other cases you need to supply exactly \cdVariable{ndim}
+parameters. See Section~\ref{sect:TableStars} for further details.
+
+\section{Runtime behavior}
+\label{runtime}
+
+When \Cloudy\ encounters the following command in its input:
+
+\begin{verbatim}
+table star "usergrid.ascii" 24300 4.3
+\end{verbatim}
+
+\noindent
+it will try to interpolate the requested model using using as few models as
+possible. This means that if an exact match could be found in the grid, only
+that model will be used. If an exact match could be found for one parameter,
+but not another, then only interpolation in the latter parameter will be
+performed. In general no extrapolation will be performed. The only exception
+is the log(g) parameter in Teff-log(g) grids for which more relaxed rules are
+used. More on that later. First we will return to the example above. Let's
+assume that the usergrid contains models for Teff = \{$\ldots$ 24000, 25000
+$\ldots$\} and log(g) = \{$\ldots$ 4.0, 4.5 $\ldots$\}. Then \Cloudy\ will
+perform interpolation using the following 4 models: (Teff, log(g)) = (24000,
+4.0), (24000, 4.5), (25000, 4.0), and (25000, 4.5). It will perform linear
+interpolation on those models using the log of the flux. If any of the models
+it needs for the interpolation is not present in the grid, the interpolation
+will fail and \Cloudy\ will stop. However, more relaxed rules exist for log(g)
+in Teff-log(g) grids (see Section~\ref{ascii} for a definition). If it cannot
+find a model with a given log(g), it will substitute the model with the
+nearest log(g) instead. The reasoning behind this is that in general the
+spectral energy distribution is not very sensitive to the value of log(g).

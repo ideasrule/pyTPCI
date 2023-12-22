@@ -1,0 +1,160 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=8 were downloaded using ADM.
+#
+# If no data exists for a given level, omit it in this table.
+# The value will be filled in using the quantum defect routine.
+#
+# helium
+# These energies from Drake 1996, except these divided by c
+#
+# lithium thru zinc
+# These energies are from CHIANTI 5, up to 5^1P 
+# >>refer He-like	Energies	Landi et al., 2005; ApJSS, in press 
+# >>refer He-like	Energies	Dere, K. P. et al. 1997, 
+# >>refercon	 Astronomy and Astrophysics Suppl. Ser., Vol. 125, pp. 149-173
+#
+# Ionization potentials (in Rydbergs) for each ion in the iso-seq up to Z=30.	
+# These are exactly what you get if you take Verner's numbers in atmdat_ph1(0,1,nelem,0) 
+# and multiply by (0.9998787/EVRYD)*RYD_INF, exactly as is done elsewhere in Cloudy
+#
+ 1  0  1  0      0.0000      0.0011     
+ 2  0  3 -1 159855.9743297   0.0000020  
+ 2  0  1  0 166277.440141    0.000005   
+ 2  1  3  2 169086.7664725   0.0000020  
+ 2  1  3  1 169086.8428979   0.0000020  
+ 2  1  3  0 169087.8308131   0.0000020  
+ 2  1  1  1 171134.896946    0.000007   
+ 3  0  3 -1 183236.7917 7e-05
+ 3  0  1  0 184864.82932     0.00003    
+ 3  1  3 -1 185564.601758333 4.6014e-06
+ 3  2  3 -1 186101.556356887 4.25154e-07
+ 3  2  1  2 186104.9666893   0.0000007  
+ 3  1  1  1 186209.364940    0.000007   
+ 4  0  3 -1 190298.11326 2.3e-05
+ 4  0  1  0 190940.226355    0.000020   
+ 4  1  3 -1 191217.057223778 4.6014e-06
+ 4  2  3 -1 191444.4852741 1.82209e-07
+ 4  2  1  2 191446.4557405   0.0000003  
+ 4  3  3 -1 191451.880760617 4.14997e-08
+ 4  3  1  3 191451.89746084  0.00000007 
+ 4  1  1  1 191492.711909    0.000007   
+ 5  0  3 -1 193346.991344 1e-05
+ 5  0  1  0 193663.512095    0.000010   
+ 5  1  3 -1 193800.715765778 1.97203e-06
+ 5  2  3 -1 193917.153521061 1.21472e-07
+ 5  2  1  2 193918.28990114  0.00000017 
+ 5  3  3 -1 193921.121366713 1.77856e-08
+ 5  3  1  3 193921.13088112  0.00000003 
+ 5  4  3 -1 193921.617448797 4.10744e-09
+ 5  4  1  4 193921.621933101 0.000000007
+ 5  1  1  1 193942.462294    0.000003   
+ 6  0  3 -1 194936.119697 7e-06
+ 6  0  1  0 195114.868700    0.000007   
+ 6  1  3 -1 195192.7476477 1.51189e-06
+ 6  2  3 -1 195260.072653173 7.89571e-08
+ 6  2  1  2 195260.77050808  0.00000010 
+ 6  3  3 -1 195262.425894104 1.1857e-08
+ 6  3  1  3 195262.431784358 0.000000020
+ 6  4  3 -1 195262.724528161 1.76033e-09
+ 6  4  1  4 195262.727124343 0.000000003
+ 6  5  3 -1 195262.794005572 1.16736e-09
+ 6  5  1  5 195262.795750108 0.000000002
+ 6  1  1  1 195274.9084660   0.0000023  
+ 7  0  3 -1 195868.236975 3e-06
+ 7  0  1  0 195978.895183    0.000003   
+ 7  1  3 -1 196027.317946756 8.54545e-07
+ 7  2  3 -1 196069.673625449 4.25154e-08
+ 7  2  1  2 196070.12838342  0.00000007 
+ 7  3  3 -1 196071.177190816 7.70708e-09
+ 7  3  1  3 196071.181064965 0.000000013
+ 7  4  3 -1 196071.369648109 1.76033e-09
+ 7  4  1  4 196071.371283543 0.000000003
+ 7  5  3 -1 196071.415113768 5.83678e-10
+ 7  5  1  5 196071.416212368 0.000000001
+ 7  6  3 -1 196071.429317152 5.81887e-10
+ 7  6  1  6 196071.430106489 0.000000001
+ 7  1  1  1 196079.0875698   0.0000013  
+ 8  0  3 -1 196461.3618105 2.3e-06
+ 8  0  1  0 196534.5641527   0.0000023  
+ 8  1  3 -1 196566.713767322 6.57342e-07
+ 8  2  3 -1 196595.062749797 4.25154e-08
+ 8  2  1  2 196595.37405237  0.00000003 
+ 8  3  3 -1 196596.079420259 5.92852e-09
+ 8  3  1  3 196596.082092602 0.000000010
+ 8  4  3 -1 196596.210265856 1.76033e-09
+ 8  4  1  4 196596.211361727 0.000000002
+ 8  5  3 -1 196596.241469045 5.83678e-10
+ 8  5  1  5 196596.242205021 0.000000001
+ 8  6  3 -1 196596.251337451 5.81887e-10
+ 8  6  1  6 196596.251866245 0.000000001
+ 8  7  3 -1 196596.255110789 5.80762e-10
+ 8  7  1  7 196596.255509048 0.000000001
+ 8  1  1  1 196601.4002470   0.0000010  
+ 9  0  3 -1 196861.9861
+ 9  0  1  0 196912.9014
+ 9  1  3 -1 196935.3339
+ 9  2  3 -1 196955.2261
+ 9  2  1  2 196955.4477
+ 9  3  3 -1 196955.9445
+ 9  3  1  3 196955.9463
+ 9  4  3 -1 196956.0373
+ 9  4  1  4 196956.0380
+ 9  5  3 -1 196956.0595
+ 9  5  1  5 196956.0600
+ 9  6  3 -1 196956.0666
+ 9  6  1  6 196956.0670
+ 9  7  3 -1 196956.0693
+ 9  7  1  7 196956.0696
+ 9  8  3 -1 196956.0705
+ 9  8  1  8 196956.0707
+ 9  1  1  1 196959.6917
+10  0  3 -1 197145.2320
+10  0  1  0 197182.0643
+10  1  3 -1 197198.3343
+10  2  3 -1 197212.8252
+10  2  1  2 197212.9885
+10  3  3 -1 197213.3513
+10  3  1  3 197213.3527
+10  4  3 -1 197213.4194
+10  4  1  4 197213.4200
+10  5  3 -1 197213.4358
+10  5  1  5 197213.4362
+10  6  3 -1 197213.4411
+10  6  1  6 197213.4414
+10  7  3 -1 197213.4431
+10  7  1  7 197213.4433
+10  8  3 -1 197213.4440
+10  8  1  8 197213.4442
+10  9  3 -1 197213.4445
+10  9  1  9 197213.4446
+10  1  1  1 197216.0885
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L17714 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=17714&comment_code=&amp;element=He&amp;spectr_charge=1&amp;ref=17714&amp;type=E
+# PUBCON    Title: Extreme Ultraviolet Frequency Comb Metrology
+# PUBCON  Authors: D. Z. Kandula, C. Gohle, T. J. Pinkert, W. Ubachs, and K. S. E. Eikema
+# PUBCON  Journal: Phys. Rev. Lett. 105, 063001 (2010)
+# PUBCON      DOI: https://doi.org/10.1103/PhysRevLett.105.063001
+# 
+# PUB     Refcode: L366 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=366&comment_code=&amp;element=He&amp;spectr_charge=1&amp;ref=366&amp;type=E
+# PUBCON    Title: Energy Levels and Spectrum of Neutral Helium (^{4}He I)
+# PUBCON  Authors: W. C. Martin
+# PUBCON  Journal: J. Res. Natl. Bur. Stand. (U.S.), Sect. A 64, 19–28 (1960)
+# PUBCON      DOI: https://doi.org/10.6028/jres.064A.003
+# 
+# PUB     Refcode: L8948 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=8948&comment_code=&amp;element=He&amp;spectr_charge=1&amp;ref=8948&amp;type=E
+# PUBCON    Title: Energy Levels for the Stable Isotopes of Atomic Helium (^{4}He I and ^{3}He I)
+# PUBCON  Authors: D. C. Morton, Q. Wu, and G. W. F. Drake
+# PUBCON  Journal: Can. J. Phys. 84, 83–105 (2006)
+# PUBCON      DOI: https://doi.org/10.1139/P06-009

@@ -1,0 +1,3054 @@
+\chapter{MISCELLANEOUS COMMANDS}
+\label{sec:MiscellaneousCommands}
+% !TEX root = hazy1.tex
+
+\section{Overview}
+
+This Chapter describes commands that are used to disable physical
+processes, change the code's internal behavior, or to take care of
+housekeeping activities.
+These are not usually used.
+
+\section{Introduction to the compile commands}
+
+The following subsections describe how to set up and then compile some
+external data files that are needed by the code.
+In most cases, the stellar atmosphere
+files must be compiled if you wish to use some of the
+\cdCommand{table star} emergent radiation fields.
+Most of the other files are included in the code's distribution and only
+need to be compiled if you change the code.
+
+The files produced by the compilation process must be accessible to the
+code when it is executed from other directories.
+For this the files need to be somewhere on the search path.
+This is most easily done
+if you place the compiled files in
+the code's \cdFilename{data} directory.
+See Section~\ref{sec:ReadingWritingFiles} for further options.
+
+The \cdCommand{compile} command will be executed after
+the command parser is finished
+examining the input deck.
+You must specify a complete model to get past
+the parser's validation of the input stream.
+The easiest way to do this
+is to also include the \cdCommand{test} command
+in addition to
+\cdCommand{compile} commands.
+
+The code stops after executing the first \cdCommand{compile}
+command it comes across.
+It will not do more than one compilation in a single run.
+
+The script \cdFilename{data/make\_data.sh} runs all the \cdCommand{compile}
+commands mentioned in this Section.
+It can be used to update the relevant data files.
+
+\section{Compile stars}
+
+Kevin Volk incorporated several large grids of stellar atmosphere
+continua
+into \Cloudy\ in the 1990's.
+Peter van Hoof has generalized the treatment
+and made several extensions.
+The \cdCommand{table star} commands use these atmospheres.
+The data files can be very large and ``direct access'' is used to read these
+files quickly.
+The result is that the final files are not portable although
+the code used to read or write them is.
+The process of converting the
+stellar atmosphere files from their original format into a form that can
+be read by \Cloudy\ is referred to as compiling the stellar atmospheres.
+
+The \cdCommand{table star} commands will only function
+if the atmosphere files
+are installed as described on the code's web site.
+This is only done once
+while installing \Cloudy\ although it will have to be
+done again if you ever
+change the continuum energy mesh.
+This step does not need to be done if
+you don't want to use these stellar atmospheres.
+
+Full instructions on how to download and install the stellar continua
+are given at
+\href{https://gitlab.nublado.org/cloudy/cloudy/-/wikis/StellarAtmospheres}{gitlab.nublado.org/cloudy/cloudy/-/wikis/StellarAtmospheres}.
+
+\begin{shaded}
+\section{Compile opacities}
+
+\cdTerm{N.B.} This command does not now function and may be removed.
+
+When the code is initialized it spends some time evaluating numerical
+fits to the needed opacities.
+This initialization time can be saved if
+the opacities are compiled and the resulting file placed on the path.
+To
+do this, execute the code and enter only the command
+\cdCommand{compile opacities}.
+The code will generate a binary file named \cdCommand{opacity.opc}
+containing the needed opacities and array indices.
+
+\cdTerm{N.B.}  It is not really necessary to compile the opacities---
+the code
+will generate them when it starts up if the file does not exist.
+This may
+actually slow down the calculation if you are using a fast computer on a
+slow network.
+\end{shaded}
+
+\section{Compile recombination coefficients [H-like; He-like]}
+
+The code reads in a table of recombination coefficients for the hydrogen and
+helium isoelectronic sequences when it initializes.
+This command regenerates that file.
+It was
+introduced by Ryan Porter.
+One of the iso-electronic sequences must be
+specified with either keyword \cdCommand{H-like} or \cdCommand{He-like}.
+
+\section{Compile grains}
+\label{sec:CompileGrains}
+
+This command prepares the grain opacity files that are used by the
+\cdCommand{grains} command.
+This does not need to be done if you only want to use
+the types of grains included in the data distribution.
+You can create other species, with their own size
+distribution and refractive indices, by compiling them with this command.
+It is also necessary to compile the grains if you change the code's
+continuum energy mesh.
+
+This command uses a spherical Mie code originally developed by Peter
+G. Martin using code written by \citet{Hansen1974}, and implemented
+into \Cloudy\ by Peter van Hoof, to generate sets of grain opacities from
+a description of their size distribution and grain material optical
+properties (\citealp{VanHoof2004}).
+The set of grain opacities created by
+this \cdCommand{compile} command are then used to
+compute temperature, charge, drift
+velocity, and emitted spectrum, for each bin within the
+grain-size distribution.
+Section~\ref{grain:compile} describes how to create new grain opacity files.
+
+A grain model is specified by the optical properties of the material
+and by a description of the distribution of grain sizes.
+The optical
+properties are given by a file, with a name ending in ``\cdFilename{.rfi}'',
+giving the
+refractive indices as function of photon energy for the full energy range
+considered by the code.
+The grain-size distribution is specified in a
+separate data file with a name ending in ``\cdFilename{.szd}''.
+Sample refractive index
+and size distribution files are included in the data directory or you can
+create your own.
+In all cases the \cdCommand{compile} command combines the refractive
+index data with the size distribution to produce an opacity file
+(with a name ending in ``\cdFilename{.opc}'').
+
+Section~\ref{grain:appendix} includes far
+more information and should be consulted.
+
+\subsection{Compile grains}
+
+With no options this compiles the minimum number of grain types needed
+for the \cdCommand{grains} command to function.
+Examine the output to check
+for problems. If you change the continuum mesh the grains need to be recompiled. 
+This must be done in the data directory.
+
+The following steps are for running “Compile grains”:\\
+1) \texttt{cd} into the data directory\\
+2) create a \texttt{.in} file and paste the command \texttt{Compile grains} in the file\\
+3) Then run Cloudy like you normally do:
+\begin{verbatim}
+~/path to source/cloudy.exe  -r  <name of the .in file>
+\end{verbatim}
+
+\subsection{Compile grain 10 bins, [filename, ism graphite]}
+
+This version of the command produces opacities of a single grain species
+and is used to create new types of grains.
+Both the optical properties
+and size distribution must be specified.
+This is done by giving keywords
+(to use one of the standard files located in the data distribution)
+or a filename between double quotes (to read properties for a new species).
+
+The number on the command line specifies the number of
+grain size bins to compute.
+If no number appears then 10 is set by default.
+
+\cdTerm{Keywords for standard data sets}
+One of a set of keywords may be used to
+specify refractive index files and grain size distributions.
+The keyword is usually the
+name of a file included in the \Cloudy\ distribution
+without the filename extension.
+
+A grain-size
+distribution may be specified with one of the keywords given in
+Table~\ref{tab:GrainSizeDistributionKeywords}.
+The first three are single-sized distribution functions that are mainly
+used for testing the code.
+For single-sized grains the supplied number
+of cells is ignored since one cell is always used.
+These files have names
+that end in ``\cdFilename{.szd}''.
+
+\begin{table}
+\centering
+\caption{Grain keywords for size distribution (*.szd files)}
+\begin{tabular}{ll}
+\hline
+Keyword& Size distribution\\
+0m010& 0.01 $\mu$m\\
+0m100& 0.1 $\mu$m\\
+1m000& 1 $\mu$m\\
+ab08& \citealp{Abel2008}\\
+c15& Small PAH, 15 C atoms\\
+c120& Large PAH, 120 C atoms\\
+ism& ISM distribution, \citealp{Mathis1977}\\
+orion& Orion distribution, \citealp{Baldwin1991}\\
+\hline
+\label{tab:GrainSizeDistributionKeywords}
+\end{tabular}
+\end{table}
+
+The keywords given in Table \ref{tab:GrainRefractiveIndexKeywords}
+may be used to specify a file containing
+refractive index information.
+These files have names that end in
+``\cdFilename{.rfi}''.
+
+\begin{table}
+\centering
+\caption{Refractive index data files in the \protect\Cloudy\ distribution}
+\begin{tabular}{llll}
+\hline
+Filename & Keyword & Grain type & Reference\\
+\hline
+\cdFilename{ac1-amcarb.rfi} & ac1-amcarb   & amorphous carbon      & \citealp{Rouleau1991} \\
+\cdFilename{be1-amcarb.rfi} & be1-amcarb   & amorphous carbon      & \citealp{Rouleau1991} \\
+\cdFilename{gdraine.rfi}    & ---          & graphite              & \citealp{Laor1993}    \\
+\cdFilename{gdraine03.rfi}  & ---          & graphite              & \citealp{Draine2003}  \\
+\cdFilename{graphite.rfi}   & graphite     & graphite              & \citealp{Martin1991}  \\
+\cdFilename{grey.rfi}       & grey, gray   & grey grain            & ---                   \\
+\cdFilename{pah1.rfi}       & pah          & PAH                   & Volk, private comm.   \\
+\cdFilename{ph2c.rfi}       & ---          & charged PAH           & \citealp{Li2001}      \\
+\cdFilename{ph2n.rfi}       & ---          & neutral PAH           & \citealp{Li2001}      \\
+\cdFilename{ph3c.rfi}       & ---          & charged PAH           & \citealp{Draine2007}  \\
+\cdFilename{ph3n.rfi}       & ---          & neutral PAH           & \citealp{Draine2007}  \\
+\cdFilename{sdraine.rfi}    & ---          & astronomical silicate & \citealp{Laor1993}    \\
+\cdFilename{sdraine03.rfi}  & ---          & astronomical silicate & \citealp{Draine2003}  \\
+\cdFilename{sic.rfi}        & sic          & $\alpha$-SiC          & \citealp{Laor1993}    \\
+\cdFilename{silicate.rfi}   & silicate     & astronomical silicate & \citealp{Martin1991}  \\
+\cdFilename{vacuum.rfi}     & ---          & vacuum                & ---                   \\
+\hline
+\label{tab:GrainRefractiveIndexKeywords}
+\end{tabular}
+\end{table}
+
+\cdTerm{Creating new data files}  If none of the keywords
+listed in the tables
+occur then the name of the file must be given explicitly.
+This may be a user-generated file.
+A pair of double quotes must
+surround the filename, as in ``\cdFilename{name.rfi}''.
+Names ending in
+``\cdFilename{.rfi}'' are
+refractive index files while those ending in ``\cdFilename{.szd}''
+are size distribution files.
+Filenames and keywords can be mixed on a single line as shown in
+the examples below.
+
+\subsection{Some caveats}
+
+\begin{itemize}
+
+\item
+  If you run the code in another directory than where you compiled the grains,
+  you must make that the files are moved to a location on the search path.
+  See Section~\ref{sec:ReadingWritingFiles} for details.
+
+\item
+The grains will need to be recompiled if the energy mesh of the radiation
+field is changed. 
+The input script \cdFilename{compilegrains.in} in the \cdFilename{data}  
+directory will do this.
+
+\end{itemize}
+
+\subsection{Examples}
+\begin{verbatim}
+# compile all grain types
+compile grains
+
+# only ism graphite
+compile grains ism graphite
+
+# use 20 bins for a silicate
+# with Orion size distribution
+compile grains 20 Orion silicate
+
+# the grey.rfi file is the one read
+# with the key grey, so the following
+# is equivalent to grey ism
+compile grains "grey.rfi" ism
+
+# explicitly request the graphite.rfi
+# (default with graphite) refractive index
+# file, and the Orion size distribution
+compile grains "graphite.rfi"  "orion.szd"
+
+# these refractive index files are also
+# present in the standard distribution
+compile grains "gdraine.rfi" ism # graphite, Laor & Draine (1993)
+compile grains "gdraine03.rfi" ism # graphite, Draine (2003)
+compile grains "sdraine.rfi" ism # silicate, Laor & Draine (1993)
+compile grains "sdraine03.rfi" ism # silicate, Draine (2003)
+compile grains "ph2n.rfi" ab08 # neutral PAH, Li and Draine (2001)
+compile grains "ph2c.rfi" ab08 # charged PAH, Li and Draine (2001)
+compile grains "ph3n.rfi" ab08 # neutral PAH, Draine and Li (2007)
+compile grains "ph3c.rfi" ab08 # charged PAH, Draine and Li (2007)
+\end{verbatim}
+
+\section{Crash [keywords]}
+
+This command is intended to test that the code handles various error
+conditions in the desired manner. These include floating point exceptions, but
+also other errors like array bounds violations or the use of uninitialized
+variables. Note that not all error conditions will be caught in a standard
+setup. Array bounds violations and the use of uninitialized variables will not
+be caught by default since that would slow down the code too much. One of the
+following keywords must appear.
+
+The IEEE standard for floating point arithmetic says to not throw an
+exception when a floating-point exception occurs.
+Instead the result is
+set the result to \cdCommand{+/-inf} or \cdCommand{NaN} (not a number)
+and have the calculation continue.
+The code will only crash if this is explicitly requested by
+setting compiler options or enabling traps on the CPU.
+The source includes
+logic that will do this on most platforms.
+\Cloudy\ should crash on division
+by zero, overflow, or invalid operation.
+The \cdCommand{zero},
+\cdCommand{overflow}, and \cdCommand{NaN} options
+on the \cdCommand{crash} command confirms this.
+
+\subsection{crash zero}
+
+This command causes the code to divide a positive number by zero.  This
+causes a division by zero exception.
+
+\subsection{crash overflow}
+
+This command causes the code to divide a very large number by a very
+small number.  The result will overflow.
+
+\subsection{crash long overflow}
+
+This command causes the code to convert a floating number that
+is larger than the largest long int into a long int.  Some machines may
+throw an exception in this case (mine does not).
+
+\subsection{crash NaN}
+
+This command will divide zero by zero.  This will cause an invalid operation
+exception.
+
+\subsection{crash setnan [float, double]}
+
+This command will test that the routine \cdTerm{set\_NaN} sets
+variables to NaN.  A variable is set
+to NaN with these routines and is then used in a multiplication.
+
+\subsection{crash isnan [float, double]}
+
+This command will test that the routine \cdTerm{is\_nan} correctly
+determines whether a variable is NaN.  A variable is set to NaN with
+\cdTerm{set\_nan}
+then is asserted not to be NaN.  The monitor should fail.
+
+\subsection{crash segfault}
+
+This command causes the code to dereference a \cdTerm{NULL} pointer. This will
+trigger a segmentation violation (segfault) and should always cause the code to crash.
+
+\subsection{crash assert}
+
+This command causes the code to assert that a positive number is less
+than zero.  This should cause an exception when the code is compiled in
+debug mode, but will have no effect when the optimization is set to a high
+level or if the flag -DNDEBUG is included with the compiler options.  If
+the code does indeed crash with a failed assert then it may request that
+the output be posted on the web site.  This is normal and only shows that
+the asserts are working properly.
+
+\subsection{crash bounds}
+
+This command will cause an array to be evaluated with an index that
+exceeds the array bounds.  In some cases the code may crash when this occurs.
+
+There are multiple types of arrays within the code and keywords say which
+one to test.
+Allocated arrays are created on the heap by using
+\cdTerm{new}, \cdTerm{vector}, or \cdTerm{valarray}.
+Bounds errors for these types of arrays can be trapped with the compiler or
+external tools such as \cdTerm{valgrind} (http://valgrind.org)
+and \cdTerm{Purify}.
+Declared arrays are explicitly given a size when the variable
+is declared in the source, as in
+\begin{verbatim}
+double c[5];
+array<double,5> c;
+\end{verbatim}
+Modern versions of the GNU and LLVM C++ compilers have options to check that limits are not
+exceeded on a declared array.
+Finally, the \emph{multi\_arr}, \emph{flex\_arr}, and \emph{avx\_ptr} classes were introduced
+after the code migrated to C++ and can check on array bounds if the macro
+\cdCommand{BOUNDS\_CHECK} is set when the code is compiled.
+This is done with the
+compiler option \cdCommand{-DBOUNDS\_CHECK} on most compilers.
+
+A keyword specifying the type of array to test must appear.
+The keyword
+\cdCommand{static} will use
+a static array.
+Either keyword \cdCommand{stack} or \cdCommand{auto} will use an array created
+off the stack. The keyword \cdCommand{array} or \cdCommand{vector} will use an array created
+using the corresponding STL class.
+Code generated by a bounds-checking compiler should catch these errors.
+The keyword
+\cdCommand{multi} will
+check an array created from the \cdVariable{multi\_arr} class.
+The two keywords
+\cdCommand{multi iter} will test an iterator in the
+\cdVariable{multi\_arr} class.
+These should crash if
+the macro \cdCommand{BOUNDS\_CHECK} is set.
+The \cdCommand{crash bounds multi
+iter} command does
+the same as the \cdCommand{crash bounds multi} command
+except that it tests access
+through iterators (which behave like pointers) rather
+than direct access to the array.
+Finally the keyword \cdCommand{avxptr} allows you can test an array created using the \cdVariable{avx\_ptr} class.
+This should crash if
+the macro \cdCommand{BOUNDS\_CHECK} is set.
+
+The \cdCommand{crash bounds} command has an optional offset
+to add to the array size \cdCommand{ARR\_SIZE}.
+If $n$ is positive then the code will access
+\cdCommand{array[ARR\_SIZE+n]}.
+If it is negative then the code will access \cdCommand{array[n]}.
+The default is zero,
+that is, to access \cdCommand{array[ARR\_SIZE]}.
+If either of two keywords, \cdCommand{low} or
+\cdCommand{high}, occur with no number then the code will assume \cdCommand{n = 2} and check only the low or high bounds.
+
+\subsection{crash exception}
+
+This command will cause
+the code to throw an exception.
+The exception should be caught by the handler in the
+main program.
+
+\subsection{crash domain}
+
+This command will call a vectorized math routine with invalid arguments. This
+routine will then throw an exception. The exception should be caught by the
+handler in the main program. This test will only be executed if AVX
+vectorization has been enabled by the compiler.
+
+\subsection{crash undefined}
+
+This command multiplies a valid constant
+by an undefined float created off the stack.
+Special tools such as \cdRoutine{valgrind} can detect this and will report an error.
+In normal execution, the fact that the variable is not initialized will not be
+detected, though in some circumstances the multiplication may result in a floating
+point exception.
+
+\subsection{crash abort}
+
+This command will cause the code to simulate a \Cloudy\ abort. This exception
+should be caught and a message giving the reason for the abort should be
+printed.
+
+\subsection{crash grid}
+
+This command will cause random grid points in a grid to fail due to a randomly
+selected signal (e.g., a floating point exception) or a \Cloudy\ abort. On
+average one in four grid points should fail. This command is intended to test
+the robustness of the grid command against such failures and should never be
+used in normal grid runs. The correct behavior of the code is that the grid
+will finish normally. The \cdCommand{save grid} output should be complete and
+correctly identify each failure. The output from other \cdCommand{save}
+commands should also be complete and contain default (invalid) entries for
+each of the failed grid points.
+
+\section{Eden -2}
+\label{sec:CommandEden}
+
+This adds free electrons to the gas.
+The argument is the log of the
+electron density [cm$^{-3}$].
+This command accepts the \cdCommand{vary} keyword.
+It is mainly intended to test the
+behavior of \Cloudy\ in the limit of very low Compton temperatures.
+When
+the color temperature $T_{color} \ll 10^4 \K$ the gas is almost
+entirely neutral
+and free electrons must be artificially added to test the Compton energy
+exchange problem in the strict TE limit.
+(Remember, charge conservation is a horrible thing to violate.)
+
+Note:  This command adds an extra component of electrons.
+The \cdCommand{set eden} commands,
+described on page \pageref{sec:CommandSetEden}, set the electron density.
+Both commands violate charge conservation.
+
+\section{Fudge factors 4.59678 [12.3 34.5 958 \dots]}
+
+The numbers appearing on the line can be communicated to any part of
+the code by calling routine \cdRoutine{fudge}.
+That routine has a single integer
+argument that is an index to the array of numbers entered on this command
+line.
+A call to \cdRoutine{fudge}(0) would return the first number\footnote{In version 90 and before the array index was on the Fortran scale,
+so fudge(1) returned the first number.  The code is now written in C++ and
+the array index is interpreted on the C scale.  The first number is fudge[0].} and, in the
+example given above, a call to \cdRoutine{fudge}(1) would return the value 12.3.
+Up to ten numbers can be entered on the command line.
+
+This command is used to pass numbers to temporary or trial parts of the
+code.  Routine \cdRoutine{fudge} is a permanent part of \Cloudy\ and
+a warning is given
+at the end of the calculation if this function is evaluated.
+The code will
+stop if the index to the array of stored values exceeds
+the number of values
+entered.
+Extra numbers are simply ignored.
+
+The code will abort if \cdRoutine{fudge} is asked to return
+a parameter that was not defined.
+For instance if the command line reads
+\begin{verbatim}
+fudge 4.0
+\end{verbatim}
+then \cdTerm{fudge}(1) does not exist and the code will terminate.
+
+\cdRoutine{fudge} will return the number of parameters entered
+on the command line
+if it is called with a negative argument.
+The following code fragment shows
+how to check on the number of parameters and then evaluate
+\cdRoutine{fudge} if \cdRoutine{fudge} factors were entered.
+\begin{verbatim}
+factor = 1.;
+if( fudge(-1) > 0 )
+    factor = fudge(0);
+\end{verbatim}
+
+\section{Init [``c84.ini'', path]}
+
+This reads a set of commands from an initialization file.
+Frequently-used
+commands can be stored in this file and easily accessed.
+
+There is no limit to the number of commands that can be in this
+initialization file.
+An arbitrary number of \cdCommand{init} commands can appear in a single
+input stream, as well as inside another initialization file.
+
+The default name for the initialization file is \cdFilename{cloudy.ini}.  This will
+be used if no double quotes occur on the command line.
+Other file names
+are specified by including a file name within a pair of double quotes as
+in ``\cdFilename{special.ini}''.
+The name can be any name allowed by the operating system in use.
+
+The data directory includes the \cdFilename{ini} files that are used
+in the test suite.
+They were set up with particular applications in mind.
+They may or may
+not be appropriate for your purpose.
+Please review the contents of these
+files before using them.
+
+\section{No \dots}
+
+It is possible to disable physical processes as a test of their
+importance.
+If a physical process is turned off then a flag is set to
+indicate that the treatment of a physical process has been disabled.
+
+A warning will be printed at the end of the calculation as a reminder
+that the results of the calculation are not to be trusted.
+This warning
+will not be printed if the four-character keyword (\cdCommand{OK}) appears on the command
+line.
+The parenthesis is part of this keyword.
+
+\subsection{No advection [H-like, He-like, \dots]}
+
+This turns off the effects of advection on the ionization, recombination
+and energy of the gas.
+Keywords make it possible to turn off these terms
+for only certain parts of the calculation.
+The \cdCommand{metals} option will turn
+off the effects of advection on the ionization of any species not treated
+as one of the iso-electronic sequences.
+\cdCommand{Cooling} will turn off thermal effects of advection.
+
+\subsection{No Auger effect}
+
+This turns off the Auger effect.
+Inner-shell ionizations will eject only one electron.
+
+\subsection{No blends}
+
+The code keeps a list multiplets and blends in the file \cdFilename{blends.ini}
+in the data directory. This list is an init file that is automatically read by
+the code when the input script is parsed (i.e., the code behaves implicitly as
+if the command \cdCommand{init "blends.ini"} had been included at the end of
+the script). Including the command \cdCommand{no blends} prevents the list from
+being read. This can speed up the code when running large grids of single-zone
+models.
+
+\subsection{No buffering}
+\label{sec:no_buffering}
+
+Programs produce output by first writing into a buffer.
+Information is written to disk once the buffer is full.
+If a C++ program crashes
+before this buffer is ``flushed'' the information within the buffer will
+be lost.
+This poses a problem if the printout generated just before the
+crash is needed for debugging.
+The \cdCommand{no buffering} command will redirect the
+standard output to \cdFilename{stderr} which is not buffered.
+\cdCommand{Save} commands also have
+a \cdCommand{no buffering} option to turn off file buffering
+for the files they create.
+
+On most systems \cdFilename{stderr} can be directed to a file by redirection of file descriptor 2 as in the following example
+(this assumes you are running a \cdCommand{bash} shell or something equivalent).
+\begin{verbatim}
+cloudy.exe < sim.in > sim.out 2> sim.err
+\end{verbatim}
+When the \cdCommand{-r} or \cdCommand{-p} command line flag is used, the
+situation is different. In parallel runs, multiple output files would be open
+at once and redirecting to \cdFilename{stderr} would create havoc. In this
+case, the output file is closed and immediately reopened again in append mode.
+Buffering can then safely be turned off. In this case you run the code as you
+would normally.
+\begin{verbatim}
+cloudy.exe -r sim
+\end{verbatim}
+
+\subsection{No charge transfer}
+
+This turns off all charge transfer interactions.
+
+\subsection{No collisional ionization}
+
+This turns off collisional ionization from ground states of all atoms
+and ions treated as an equivalent two-level system \citep{2017RMxAA..53..385F}.
+Specifically, this disables the collisional ionization rate coefficients computed
+with the \citet{Voronov1997} results.  
+This should only be used in experimental conditions.
+
+\subsection{No Compton effect}
+
+This command turns off Compton heating and cooling of free electrons
+and Compton recoil ionization of bound electrons.
+Electron scattering opacity is \emph{not} turned off.
+
+\subsection{No CTHeat}
+
+This turns off heating due to charge transfer.
+\citet{KingdonFerland1999} describe the process.
+
+\subsection{No diffuse line pumping}
+
+The diffuse continuum produced by gas within the cloud is included as
+a general line-excitation mechanism.
+This turns it off and is useful as
+a check on the importance of the process.
+(This command is currently disabled. The code will issue 
+a statement to that effect and exit if this command
+is entered.  Pumping by local diffuse emission
+is not included.  Pumping by diffuse emission from previous, downstream
+zones is always included.)
+
+\subsection{No FeII pumping}
+
+This turns off \hi\ L$\alpha $ pumping of \feii.
+
+\subsection{No file opacity}
+
+The code can generate a file of stored opacities with the
+\cdCommand{compile opacity} command.
+This file will be used to generate the opacities in later
+calculations.
+The \cdCommand{no file opacity} command tells the code to ignore this
+opacity file even if it exists.
+
+\subsection{No fine structure line optical depths}
+
+Fine structure lines, such as the $^3P\ 52,\ 88 \micron$ lines of [\oiii],
+can become optically thick under certain high-luminosity conditions
+(see, for example, \citealp{Rubin1983}).
+They can absorb the incident continuum and be a significant
+heating source for photodissociation regions
+(\citealp{Tielens1985a}).
+Radiative transfer effects, including stimulated and maser emission, are
+fully treated for all lines.
+This turns off optical depths and line transfer
+for fine structure lines by setting the line opacity to zero.
+
+\emph{This command does not turn off line heating}---which
+will then be maximized
+since the lines will remain optically thin.
+The \cdCommand{no induced processes} command
+turns continuum pumping off for all lines
+and should be included to disable heating due to line absorption of the
+continuum.
+
+The line transfer arrays are permanently injured by the
+\cdCommand{no fine structure} command.
+Subsequent runs with the same core load in a grid will still have
+the line optical depths disabled.
+
+\subsection{No fine opacities}
+
+The code uses a fine continuum and opacity grid to automatically account
+for line overlap.
+Figure 20 of \citet{Shaw2005} shows an example of this
+fine mesh.
+Multi-grid techniques are used to propagate this fine mesh back
+onto the coarse mesh that is used to evaluate photo rates.
+This fine grid
+can be turned off using this command.
+
+\subsection{No free free}
+
+Free-free heating, cooling, and emission are turned off with this command.
+
+\subsection{No grain [process]}
+
+This series of commands disables various processes involving grains.
+\begin{description}
+\item[no grain electrons]   This turns off the effects of grain charging, either
+negative or positive, on the overall charge balance in the gas.  This
+violates charge conservation.
+
+\item[no grain gas collisional energy exchange]   Collisional energy exchange
+between grains and the gas is treated as in \citet{VanHoof2004} and \citet{Abel2005}.   This processes acts to bring the grains and gas toward
+the same temperature.  The two temperatures will be equal if collision energy
+exchange is fast.  Often the gas is hotter than the grains in the \hplus\ region
+and this process heats the grains and cools the gas.  In fully molecular
+regions typically the reverse is true as the remaining continuum is very
+ineffective in heating the gas, but can still heat the grains. This command
+disables this physics.
+
+\item[no grain molecules]  Condensation of molecules onto cold grain surfaces
+was added by Nick Abel and is treated using the formalism outlined by
+\citet{Hasegawa1992} and \citet{Hasegawa1993}.  This turns off that
+process.
+
+\item[no grain neutralization]  Ions can become neutralized or ionized, by
+several stages of ionization, following a collision with a grain.
+The treatment of these collisions is described in \citet{VanHoof2004}.
+It is partially based on \citet{Draine1987}'s description of
+Coulomb interactions between the grains and gas.
+The effects of grain neutralization upon the ionization
+balance of the gas are turned off with this command although grain charging
+is still computed.  This is not self consistent.
+
+\item[no grain physics]  This turns off all grain physics.  The only remaining
+effect of grains is their continuous opacity.  The resulting simulation
+will be much faster but incorrect.  This is only intended to provide a method
+to do quick and dirty calculations. The spectrum emitted by the grains is
+not calculated so this command violates energy conservation.
+
+\item[no grain qheat]   This turns off quantum heating for all grain species.
+
+\item[no grain x-ray treatment]  This turns off the
+extensive treatment of inner
+shell X-ray processes within grains.
+This makes the X-ray physics more
+like \citet{Weingartner2001a}.
+\end{description}
+
+\subsection{No induced processes}
+
+This turns off induced recombination and its cooling, stimulated
+two-photon emission and absorption (\citealp{Bottorff2006}), continuum
+fluorescent excitation, and stimulated emission of all lines.
+
+\subsection{No ionization reevaluation}
+
+This tells the code to not constantly reevaluate the ionization rates.
+This option can only be set when constant density is assumed.
+
+\subsection{No isotropic continua report}
+\label{sec:no_isotropic_continua}
+
+By default, the code reports the total outward flux emitted
+by a cloud, including any attenuated isotropic continua.
+This is effectively what telescopes observe in the optical
+through X-ray bands.
+However, in the infrared through radio bands, it is customary
+(if not automated) to remove any background radiation with a
+variety of methods (e.g., source or frequency switching).
+This is part of the {\em Herschel} pipeline, for instance.
+
+\par
+This command removes isotropic continua from the {\it reported}
+continua and band fluxes, to ease comparison against observations
+at longer than IR wavelengths.
+This only affects the output:
+Isotropic sources of radiation are still included in the physics
+problem \Cloudy\ solves.
+
+\par
+This command affects the output produced by some \cdCommand{save continuum} commands,
+as described in section \ref{sec:save_cont_no_isotropic_option},
+as well as the fluxes through the bands described in
+Section~\ref{Hazy2-sec:Radiation-field-integrated-over-wavelengths}
+\cdSectionTitle{\refname{Hazy2-sec:Radiation-field-integrated-over-wavelengths}},
+and defined in the file ``data/continuum\_bands.ini''.
+It has no effect on the continua reported in time-dependent
+integrations.
+
+\subsection{No line transfer}
+
+This turns off line transfer for all lines except the
+\la\ transitions
+of the species treated with the iso-sequences.
+This is the approximation
+made in most codes designed to consider classical nebulae and may be
+appropriate in some cases.
+This command also turns off line radiation pressure.
+
+
+\subsection{No lines isotropic continuum subtraction}
+\label{sec:no-lines-isotropic-continuum-subtraction}
+
+By default, reported line intensities are modified by the diminution factor
+due to pumping by isotropic continuum radiation, most notably the CMB.
+The physics of the diminution is explained in detail in \citet{Chatzikos2013},
+in connection to the escape probability formalism.
+The main effect is best understood in a two-level atom, where isotropic
+continuua sustain an upper level population that reduces the number of
+spontaneous deexcitations relative to the non-isotropic pumping case,
+which is driven by collisions.
+This diminution factor has been computed in connection to hyperfine structure
+lines by \citet{DCruz1998}, and has been invoked ad hoc by \citet{Goldreich1974}.
+
+\par
+With this command the correction is not applied.
+This command affects the output of
+\cdCommand{save lines cumulative},
+\cdCommand{save lines intensity},
+and \cdCommand{save linelist}.
+
+
+\subsection{No Lya 21cm pumping}
+
+Pumping of the \hi\ 21 cm line by L$\alpha $ is treated
+as in \citet{Deguchi1985}.
+This turns off the process.
+All three keywords must match.
+
+\subsection{No OTS [options]}
+\begin{description}
+\item[no Lya OTS]  This turns off \hi\ \la\ OTS rates.
+
+\item[no HeII OTS]  This turns off He~II \la\ and recombination continua OTS rates.
+
+\item[no line OTS]  This turns off all line OTS rates.
+\end{description}
+
+\subsection{No level 2 lines}
+
+This turns off the large block of Opacity Project (``level 2'') lines.
+This should only be done in exploratory ``quick look'' calculations.
+The lines should be included for final results.
+These lines should not
+be disabled at higher densities since they may carry a large fraction of
+the cooling as the cloud approaches the black-body limit.
+They are
+important in UV photoexcitation of excited levels within
+split ground terms like \oi* or \cii*.
+Excited-state column densities will not be predicted if
+the level 2 lines are disabled.
+
+\subsection{No molecules [ heavy ]}
+
+\Cloudy\ includes a chemistry network for predicting molecular abundances that
+is described in \citet{Abel2005} and \citet{Roellig2007}. The \cdCommand{no
+  molecules} command will completely turn off this network. If the keyword
+\cdCommand{heavy} is also present on the command line, the chemistry network
+will be severely limited by excluding any molecular species containing
+elements heavier than hydrogen.
+
+\subsection{No on the spot}
+
+This turns on all ground-state recombination coefficients and turns off
+ionization by helium resonance lines.
+This last variable is then used to
+deduce the ionization efficiency of lines and continua.
+
+\subsection{No opacity reevaluation}
+
+Opacities are normally reevaluated every time the cooling function is
+reevaluated.
+When this is set opacities are only evaluated one time per zone.
+
+\subsection{No outward [options]  }
+\begin{description}
+\item[no outward lines]  This turns off the outward-only (\citealp{Tarter1967})
+contribution by lines.
+
+\item[no outward continuum]  This turns off the outward-only contribution by
+continua.
+\end{description}
+
+\subsection{No photoionization}
+
+This turns off photoionization of the ground states of all elements.
+It is designed to test the code in the collisional-ionization equilibrium
+limit.
+
+This command can cause problems.
+Several iso-sequences are treated as
+full multi-level atoms.
+This includes all processes that affect internal
+excitations.
+The level-populations solver may have difficulty in finding
+a solution when photoionization is turned off with this command but the
+gas is very weakly collisionally ionized.
+Often internal continuum pumping
+of the Lyman lines will dominate excitations.
+When these radiative terms
+overwhelm the collisional-ionization term the ionization rates out of the
+ground state may underflow.
+In this case the solver will find negative
+level populations and the code will stop announcing a
+catastrophic failure.
+One solution is to turn off continuum pumping,
+with the \cdCommand{no induced processes} command.
+Only do this if the calculation fails.
+
+\subsection{No radiation pressure}
+
+This command turns radiation pressure completely off.
+Radiation pressure
+due to trapped lines will be counted in the total pressure when
+the constant pressure option is used.
+The default is for a constant-density model.
+Radiation pressure is not included if constant gas pressure is specified.
+
+\subsection{No recoil ionization}
+
+This command turns off Compton recoil ionization.
+Compton heating and
+cooling of free electrons is included,
+but this is the only remaining thermal
+effect of electron scattering.
+Bound-electron scattering opacity is still
+included when this command is issued.
+
+\subsection{No scattering opacity}
+
+This command turns off all scattering opacity sources in the calculation.  It is described in detail in
+Section \ref{sec:CommandNoScatteringOpacity} above.
+This can have a major effect on the physics of the simulation.
+
+\subsection{No scattering escape}
+
+This turns off line escape following scattering off a free electron.
+Free electrons move far more quickly in a thermal gas than nuclei.
+A line photon scattered off an electron will receive a large Doppler shift away
+from line center and escape the cloud.  This command turns off that process.
+
+\subsection{No absorption escape}
+
+Lines can be removed by absorption by background opacities such as grain
+or photoelectric absorption.  
+This is a true absorption process and the line energy goes into heating the
+grain or ionizing the gas. 
+This command turns off that process so line photons are no longer
+destroyed by absorption opacities.
+
+\subsection{No scattering intensity}
+
+Line escape following scattering off a free electron is still included as a photon escape mechanism
+but is not included in the reported line intensity due to it large line width.
+
+
+\subsection{No secondary ionizations}
+
+This command will turn off the effects of knock-on supra-thermal
+electrons.
+Normally these are treated as in \citet{Spitzer1968},
+\citet{Bergeron1971}, \citet{Shull1979}, \citet{Shull1985}, \citet{Xu1991},
+and \citet{Dalgarno1999}.
+This command
+will make X-rays 100\% effective in generating heat and
+produce no secondary
+ionizations or L$\alpha $ excitations.
+
+\subsection{No Stark broadening}
+
+Stark broadening (important for densities larger than
+$\sim 10^{10}\mathrm{cm}^{-3}$) is
+treated for hydrogen lines using the formalism described by
+\citet{Puetter1981}.
+This turns Stark broadening off.
+
+\subsection{No TePredictor}
+
+The code tries to predict the temperature of the next zone for constant
+density calculations.
+This stops the predictions from being used.
+
+\subsection{No static opacities}
+
+This forces all opacities to be reevaluated constantly within each zone.
+The default is to only evaluate minor opacities one time per zone.
+
+\subsection{No three body recombination}
+
+This turns off three-body recombination for the heavy elements that are
+treated as equivalent two-level systems.
+Three-body recombination for atoms
+and ions of the isoelectronic sequences is turned off by turning off
+collisional ionization (its time reversal) with the
+\cdCommand{database [H-like or He-like] collisional ionization off} command.
+
+\subsection{No times}
+
+This turns off printout that would introduce differences between 
+output files which have identical results.
+The code will not report execution times or one-time notices about initializing databases. 
+This allow exact text comparisons of results between models run at
+different times or on different machines.
+
+
+\subsection{No vary}
+
+This command turns off the \cdCommand{vary} option set on
+various optimization commands.
+
+\section{Monitor commands}
+\label{sec:CommandMonitor}
+
+These tell the code a set of results that are expected.
+At the end of
+the calculation the expected and actual results are compared and an error
+condition is returned if the two disagree by more than an uncertainty.
+This set of commands is the foundation for automated testing of the code.
+In Lexington the full test suite is computed every night and a log is kept
+of all monitored results.
+An email warning is sent if any monitor fail.
+This insures the reliability of the code and guarantees that bugs are caught
+almost as soon as they are introduced.
+
+If the characters ``$<$'' or ``$>$'' appear on the
+command line the expected result is taken as an upper or lower limit.
+The default is to check for equality.
+
+The relative error is the second optional number on the line.
+If this
+is not specified then a relative error of \ErrorDefault\ will be assumed.
+
+\subsection{Monitored results in the main output}
+
+The monitored quantities will be reported at the end of the main output, in the following format.
+\begin{verbatim}
+                   Label         line    computed     asserted Rel Err Set err
+ ChkMonitor        H  1      4861.36A   -11.2479 =   -11.2530  -0.012   0.050
+ ChkMonitor -      H  1      3889.07A     0.1084 =     0.1070  -0.013   0.050
+ ChkMonitor        Ca B      3889.07A     0.1046 =     0.1050   0.004   0.050
+ ChkMonitor -      He 1      5875.64A     0.1494 =     0.1470  -0.016   0.050
+ ChkMonitor        Q(H)      4861.36A     0.8953 >     0.7800  -0.148   0.050
+\end{verbatim}
+The \cdCommand{save monitors} command, described in section \ref{sec:SaveMonitorsCommand},
+can be used to save these in an external file.
+ 
+\subsection{Monitor set error 0.1}
+
+This provides a way to change the default relative error for all monitors
+of physics-based quantities that occur later in the input stream.
+The default error is normally the second optional number on each
+\cdCommand{monitor} command.
+The default is changed when this command is parsed so this should
+be the first \cdCommand{monitor} command in the input stream if
+you want to change the default error for all the monitors.
+
+The majority of the monitors confirm quantities that are related to
+predictions.
+There are a special set of \cdCommand{monitor} commands which
+track the code's performance.  
+The \cdCommand{monitor itrzn} command is an example.
+A default relative error of \ErrorDefaultPerformance\ is assumed for
+performance monitors.
+This default can be changed with the
+\cdCommand{Monitor set performance error xxx} command.
+
+\subsection{Monitor $\langle$subcommand$\rangle$ grid ``filename''}
+
+For each of the commands discussed below you can add the keyword
+\cdCommand{grid}. If this keyword appears, then a file name should be
+supplied between double quotes. This file should contain a series of
+quantities to be monitored. There must be one value for each grid point in a
+grid calculation (the \cdCommand{grid} command is described elsewhere). The
+numbers in the file have the same meaning as the number on the command line
+when the \cdCommand{grid} keyword is not used. See the discussion for each
+subcommand for further details. The file should not contain any other text,
+but may contain comments starting with ``\#''. The numbers should be separated by whitespace and/or
+newlines.
+
+\subsection{Monitor Case~B [H-like, He-like]  element error}
+
+The H and He recombination emission from lower density
+photoionized clouds
+that are optically thick in the Lyman continuum may be
+close to Case~B values (AGN3).
+This command uses stored tables of Case~B emission coefficients
+to compare the code's computed emission with Case~B expectations.
+Assuming that the cloud conditions are set up properly,
+and that certain physical processes are disabled,
+this provides a way to check the accuracy of models
+of some atoms.
+
+One of the iso-sequences, H-like or He-like, must be specified.
+The default
+relative error can be changed by specifying a number on the line.
+The code
+will compare Case~B with computed values for all lines that are included
+in the emission-line output
+and a botched monitor will be declared if any
+of the code's predictions differ from Case~B predictions by more than this
+error.
+A line will be printed that gives the mean error for the Case~B
+comparisons.
+\begin{description}
+\item[monitor Case~B H-like [element] error]  The H-like option will compare
+the code's predictions with the \citet{Storey1995} results.  An element
+name, any between hydrogen and oxygen, must also appear.
+
+\item[monitor Case~B He-like error]  This will compare the predictions with Case~B predictions for He~I emission given by 
+\citet{Porter.R12Improved-He-I-emissivities-in-the-case-B-approximation, Porter.R13-CaseB-erratum}.  
+The Case~B values have the label ``+Col'' in the main emission-line printout. The
+element name must still appear but currently only helium itself can be
+tested.
+
+\item[The range option]  The keyword \cdCommand{range}
+tells the code to only check the
+monitored values over a restricted wavelength range.
+The wavelengths of
+the lines are stored in Angstroms so the range must be given in
+the same units.
+This was added as a way to exclude the intensities of
+unobservable MIR - FIR lines.  These lines come from higher levels in the
+atom and generally have a larger error due to the finite size of the model.
+\end{description}
+
+\subsection{Monitor column ``species'' 18.9}
+
+This checks the predicted column density for the molecular species
+included in quotes.
+
+An alternative form with unquoted keywords \cdCommand{CO},
+\cdCommand{H-}, \cdCommand{H2}, \cdCommand{H2+}, \cdCommand{H3+},
+\cdCommand{H2g}, \cdCommand{H2*}, \cdCommand{HeH+}, \cdCommand{O2},
+\cdCommand{SiO}, \cdCommand{C2}, \cdCommand{C3}, \cdCommand{OH},
+\cdCommand{CN}, \cdCommand{CH+}, or \cdCommand{CH} is available at
+present but it is planned will be removed.  To use this form, the
+labels must be surrounded by spaces.  It is important that the log of
+the column density [cm$^{-2}$] appear \emph{after} the label because
+of the 2 in \cdCommand{H2} or \cdCommand{O2}, etc.
+
+The command accepts a \cdCommand{log} option to interpret
+the error as a log.
+The column density itself is always interpreted as a log.
+
+For \htwo\ there is a \cdCommand{levels} option which tells the code
+to return the column density in a specific $v$, $J$ level.
+This only works when the large \htwo\ molecule
+is included.
+The numbers on the line must appear in the following order:
+first the 2 in \cdCommand{H2}, then $v$,
+and then $J$, and finally log~$N$(\htwo).
+The ``wavelength'' of the
+monitored quantity will be $100v + J$.
+
+\subsection{Monitor csupra $-$17.09}
+
+The secondary ionization rate is given by the variable \emph{csupra}.
+This command checks the value of the secondary ionization rate.
+The number is the log of the secondary ionization rate [s$^{-1}$].
+
+\subsection{Monitor Ctot -12.5}
+
+This checks that the local cooling rate [\ergpccmps ]
+of the last zone is equal to the expected value.
+The argument is the log of the cooling rate.
+
+\subsection{Monitor departure coefficients  mean=1, error=0.04}
+
+This confirms that the departure coefficients predicted by one of the
+model atoms are correct.
+The computed quantity is the mean departure coefficient for all levels
+in the model atom and is the first number on the line.
+The maximum allowed error from the mean is the second number on the line.
+
+An alternative form for the command may be used to test against upper
+and lower limits for the departure coeffient.
+For example,\\
+%
+\cdCommand{monitor departure coefficients ``C[4]'' $>$ 0}\\
+\cdCommand{monitor departure coefficients ``C[4]'' $<$ 1}\\
+%
+\noindent
+may be used to test the usual case that the departure coefficient
+is within the range 0--1.
+No error is expected in this use case.
+
+\begin{description}
+
+\item[monitor departure coefficient ``C+4'']
+If a species (in chemical notation) is given in quotes,
+as \cdFilename{"O+6"} or \cdFilename{"H2O"},
+then departure coefficients for that species will be checked.
+The species designation may include a range of levels,
+e.g., ``C+4[3:10]'', or a specific level, e.g., ``C+4[3]''.
+The rules of Section~\ref{sec:SaveSpeciesLevelPopulations} apply.
+
+\item[monitor departure coefficients, H-like helium, error=0.08]
+The keyword
+\cdCommand{H-like} tells the code that the departure coefficients predicted by an atom
+of the hydrogenic isoelectronic sequence should be checked.  The name of
+one of the elements must also appear on the command line.
+
+If the keyword \cdCommand{excited} appears then the ground state will not be included.
+The keyword \cdCommand{ZeroOK} allows departure coefficients of exactly zero to pass
+the test.  This is useful in large grids of calculations where the species
+being monitored actually has zero abundance at some points in the grid.
+
+\item[monitor departure coefficients, He-like helium, error=0.08]
+The keyword \cdCommand{He-like} tells the code to check the predictions
+for the specified element of the helium isoelectronic sequence.
+It operates like the H-like keyword, and accepts the \cdCommand{excited}
+and \cdCommand{ZeroOK} keywords, as well.
+
+\item[monitor departure coefficient, hminus, error=0.08]
+The keyword \cdCommand{hminus} tells the code to check
+the departure coefficient of H$^-$.
+\end{description}
+
+\subsection{Monitor depth 13.2}
+
+This checks that the cloud's thickness [cm] is equal to the expected
+value.
+The argument is always the log of the depth.
+The thickness is the
+length between the illuminated and shielded faces of the cloud.
+
+\subsection{Monitor eden 9}
+
+The number is the log of the electron density [cm$^{-3}$] of the last zone.
+
+\subsection{Monitor grain potential}
+
+The grain bin number is the first number on the line.  Next comes the
+grain potential.
+This is linear eV and can be positive or negative.
+The third number is the optional error.
+
+\subsection{Monitor H2 grain rate -16.5}
+
+The number is the total rate [cm$^{-3}$~s$^{-1}$] that \htwo\ forms on grain surfaces
+for the last computed zone.
+The number is a log if it is negative.
+
+\subsection{Monitor H2 ortho/para ratio 2.02}
+
+This checks the ratio of the ortho to para \htwo\ densities in the last
+computed zone.
+This is only meaningful if the large \htwo\ molecule has been
+turned on.
+
+\subsection{Monitor Htot -13.2}
+
+This checks that the local heating rate [\ergpccmps ]
+of the last zone is equal to the expected value.
+The argument is the log of the heating rate.
+
+\subsection{Monitor HHeicf -0.013}
+
+This checks the helium---hydrogen ionization correction factor.
+The number is the linear difference between the atomic fractions
+of helium and hydrogen.
+
+\subsection{Monitor ionization fraction oxygen 3 -3.45, error 0.1, weight =
+radius}
+
+This checks the mean fractional ionization of an ionization stage of
+an element.
+An element name must appear somewhere on the line.
+The first
+number is the ionization stage, 1 for the atom, 2 for the first ion, etc.
+The second number is the expected ionization fraction.
+It is interpreted
+as a log if negative and as the linear ionization fraction if it is positive.
+The average can be with respect to radius or volume.
+The default is an
+average weighted with radius.
+If the keyword \cdCommand{volume} appears then the average
+will be weighted over volume.
+
+If the keyword \cdCommand{grid} appears then a file name should be supplied
+between double quotes. This file should contain a series of ionization
+fractions to be monitored. There must be one value for each grid point in a
+grid calculation (the \cdCommand{grid} command is described below). The file
+should not contain any other text, not even comments. The numbers should be
+separated by whitespace and/or newlines.
+
+An optional error may be supplied on the command line. The same error is
+assumed for each grid point.
+
+\subsection{Monitor molecular fraction H2 -3.45, error 0.1}
+
+This checks the mean molecular fraction.
+The label for a molecule,
+currently only \htwo, must appear somewhere on the line.
+The next number is
+the expected molecular fraction.
+If this number is $\le 0$ it is interpreted
+as a log and as the linear ionization fraction if it is positive.
+The
+average can be with respect to radius or volume.
+The default is an average
+weighted with radius but if the keyword \cdCommand{volume} appears then the average
+will be weighted over volume.
+
+\subsection{Monitor mpi}
+
+This checks that the code is running in MPI mode. The command is used
+in the \cdFilename{mpi} test suite. It has no additional parameters.
+
+\subsection{Monitor itrzn $<$ 3.5}
+
+This performance monitor checks the convergence properties of a calculation.
+The quantity
+is the number of iterations required to converge each zone.
+
+\subsection{Monitor line [Case B] ``H  1'' 4861.33 $<$ 1.01}
+
+This checks the emission in a line.
+The string that gives the line label must appear between
+two double quotes.
+The line wavelength is the first number after the label.
+Both label and wavelength must appear exactly as they do in the output
+produced by the \cdCommand{save line labels} command or
+in the standard emission-line output. These two entries may optionally
+be followed by additional information to disambiguate the line.
+The information given in Section~\ref{sec:SpecifySpectralLines} applies
+here as well, with the obvious exceptions that the line label should
+not start in the first column, and that additional information is
+required after the line information, as described below.
+
+If the keywords \cdCommand{Case B} appear,
+the code will compute the ratio of the intensity of the specified line
+over the Case B intensity of the same line, which is interpolated from
+the \citet{Storey1995} tables.
+Compared to \cdCommand{monitor Case~B [H-like, He-like]},
+which goes over all lines on the tables,
+this command allows for individual lines to be monitored.
+
+The sub-keyword is actually ``\cdCommand{line\_}'' to avoid
+confusion with the keyword ``\cdCommand{linear}'' that appears
+on some commands.
+The command will not be recognized if the trailing space is missing.
+
+The second number that appears in the command is the expected intensity of the line.
+Its meaning is as follows:
+%
+\begin{itemize}
+
+\item \emph{Relative intensities}
+
+If the keywords \cdCommand{luminosity} and \cdCommand{intensity} do not appear,
+the second number is interpreted as the emission line intensity relative to the
+normalization line intensity.
+It is always a {\it linear} quantity.
+
+\item \emph{Absolute intensities}
+
+If the keyword \cdCommand{luminosity} or \cdCommand{intensity} appears, then
+the absolute luminosity [erg s$^{-1}$] or intensity [erg cm$^{-2}$~s$^{-1}$]
+of the line is checked.
+The monitored quantity is the {\it log} of the luminosity or intensity of
+the transition, and not the intensity relative to the normalization line.
+For example,
+%
+\begin{verbatim}
+monitor line [luminosity intensity] "Q(H)" 4861 38.91
+\end{verbatim}
+%
+
+\item \emph{Line types: intrinsic, emergent, and cumulative}
+
+We predict four types of line intensities: intrinsic, emergent,
+and their cumulative (time-integrated) counterparts, i.e.,
+cumulative intrinsic, and cumulative emergent.
+The first two are described in Hazy 2, Section
+\ref{Hazy2-sec:LineIntensitiesDustyCloud}, 
+\cdSectionTitle{\refname{Hazy2-sec:LineIntensitiesDustyCloud}}.
+The cumulative intensities are integrated according to the
+weight set by the \cdCommand{set cumulative} command, described
+in full in Section \ref{sec:SetCumulativeCommand}.
+
+In the absence of any of these keywords, the monitored intensity is
+interpreted as \cdCommand{intrinsic}.
+If only the keyword \cdCommand{cumulative} appears, the intensity is
+interpreted as \cdCommand{cumulative intrinsic}.
+Checks against the (instantaneous, non-integrated) emergent intensity
+are issued with the \cdCommand{emergent} keyword, while checks against
+the time-integrated emergent intensity are issued with the
+\cdCommand{cumulative emergent} keywords.
+
+\item \emph{Upper or lower limits}
+
+Upper and lower limits may be requested by using the usual `$<$' and '$>$'
+symbols, respectively, in front of the desired value, as in:
+%
+\begin{verbatim}
+monitor line luminosity "Q(H)" 4861 < 38.91
+\end{verbatim}
+
+\end{itemize}
+
+\subsection{Monitor niter $<$ 4}
+
+This checks the number of iterations required in a calculation.
+This is usually an upper limit.
+
+\subsection{Monitor nothing 0}
+
+This will enter a clean monitor into the output.
+This is used for those
+simulations in the test suite which have nothing to
+monitor but are included
+for general testing.
+
+\subsection{Monitor nzone $<$ 135}
+
+This checks how many zones were needed.
+This is usually an upper limit.
+
+\subsection{Monitor pressure error $<$ 0.01}
+
+The number is the ratio of the standard deviation of the pressure to
+its mean value.
+It is interpreted as a log if it is negative.
+
+\subsection{Monitor PRadMax 0.34}
+
+The monitored quantity is the maximum ratio of radiation to gas pressure.
+
+\subsection{Monitor temperature ``species'' 4.02 volume, error 0.01}
+
+This checks the mean temperature of any species.
+An ionic or molecular species is expected within quotes,
+e.g., ``H'', ``He+2'', or ``CH2+''.
+If the species is recognized, the code will compare the computed mean
+temperature for that stage of ionization with the monitored value.
+The number on the line is the temperature, interpreted as a log if
+it is $\le 10$.
+It will be linear if the keyword \cdCommand{linear} appears.
+The last number is the relative error.
+
+The code computes means weighted over radius and over volume.
+If the keyword \cdCommand{volume} appears then the temperature will
+be compared with the volume-weighted mean.
+The default is weighting over radius.
+
+If the keyword \cdCommand{grid} appears, then a file name should be supplied
+between double quotes.
+\textit{The file name must be given before the double-quoted species.}
+The syntax is:
+%
+\begin{verbatim}
+monitor temperature grid "InputFile.txt" "species" 4.02 volume, error 0.01
+\end{verbatim}
+%
+This file should contain a series of temperatures to be monitored.
+There must be one value for each grid point in a grid calculation
+(the \cdCommand{grid} command is described elsewhere). The file should not contain
+any other text, not even comments. The numbers should be separated by whitespace
+and/or newlines.
+An optional error may be supplied on the command line; the same error is
+assumed for each grid point.
+For example,
+%
+\begin{verbatim}
+monitor temperature grid "ism_grid.dat" "H+" .05
+\end{verbatim}
+%
+
+\subsection{Monitor 21cm temperature [mean, spin, optical] 50 error 0.1}
+
+This monitors the temperature of the 21cm hyperfine transition of hydrogen.
+The \cdCommand{mean} option tracks the kinetic temperature of the gas
+weighted by hydrogen, \cdCommand{spin} tracks the spin temperature of the 21cm line,
+while \cdCommand{optical} tracks the temperature of the gas computed from the ratio
+of the optical depths in the \la{} and 21cm lines, see AGN3, section 5.5.
+
+The first number is the temperature, interpreted as a log if
+it is $\le 10$.
+It will be linear if the keyword \cdCommand{linear} appears.
+The last number is the relative error.
+
+\subsection{Monitor grain temperature index 2, temperature  234}
+
+If no element name appears but the keyword \cdCommand{grains}
+does then the code
+will compare the computed and monitored grain temperatures.
+The first number
+on the line is an index giving the grain type.
+This index is from the order
+in which the grains were specified in the input stream and
+is given in the output.
+The first grain that occurs in the input stream is number 1.
+The
+second number is the temperature and is interpreted as a
+log if $\le 10$.
+The
+\cdCommand{linear} keyword forces smaller numbers to be
+interpreted as linear quantities.
+The optional error is the third number on the line.
+The temperature is
+always averaged over radius.
+
+\subsection{Monitor temperature at face 11400K}
+
+This checks the temperature at the illuminated face of the cloud.
+
+\subsection{Monitor radius 18.2}
+
+This checks that the outer radius [cm] of the computed model is equal
+to the expected value.
+The radius is the distance from the center of the
+central object to the shielded face of the cloud.
+
+\subsection{Monitor thickness 13.2}
+
+This checks the thickness [cm] of the computed structure.
+The argument
+is always the log of the thickness.
+The thickness is the length between
+the illuminated and shielded faces.
+
+\subsection{Monitor velocity 7.6 km/s}
+
+This checks the final velocity of a wind model.
+The quantity is the
+expected final velocity in km s$^{-1}$.
+
+\section{Set commands}
+
+These commands change internal variables used by \Cloudy.
+These are mainly
+intended for testing and are not normally used.
+
+\subsection{Set Lya 21cm [excitation, kinetic, constant]}
+This changes the form of the Ly$\alpha$ source function $S_{\nu}$ at line center.
+The shape of the source function has a major impact on the excitation
+and resulting spin temperature of the 21 cm line.
+Three options are available.  The first two are characterized by a Planck function
+at one of the temperatures that are present, while the last shape assumes $S_{\nu} \sim constant$.
+
+The Ly$\alpha$ excitation temperature, as set by the $n(2p)/n(1s)$ population ratio, is the default
+and can be selected with the keyword \cdCommand{excitation}.
+The gas kinetic temperature is used if the keyword \cdCommand{kinetic} appears.
+A frequency-independent source function is assumed if the keyword \cdCommand{constant} appears.
+
+\subsection{Set 12C13C -3.2 -- DEPRECATED}
+
+This command has been deprecated.
+Use \cdCommand{element carbon isotopes} instead.
+
+\subsection{Set blend [ "Custom" ] [ 4622.23 ] [ quiet ]}
+
+With this command you can define a custom blend of lines. In order to identify
+the blend, you need to enter a label between double quotes and a wavelength.
+If the label is omitted, it will default to ``Blnd''. If it is too long, it
+will be truncated to \LabelLenMax\ characters. If the wavelength is omitted,
+it will default to the $g_k A_{ki}$-averaged wavelength of the blend
+components. The latter is only meaningful if the blend components are all from
+the same ion, which in general need not be the case.
+
+Each emission line included in the blend is entered on its own line. This list
+begins on the line after the \cdCommand{set blend} command and continues until
+a line with \cdCommand{end} in the first three columns appears. The format for
+entering the spectral lines is described in
+Section~\ref{sec:SpecifySpectralLines}. An arbitrary number of lines can be
+entered into the blend, and there is also no limit to the number of blends
+that can be defined in this way. An example is shown below.
+\begin{verbatim}
+set blend 3968
+Ne 3  3967.47
+H  1  3970.07
+end
+\end{verbatim}
+
+The blend components need to have type 't' as defined in the \cdCommand{save
+  line labels} output and also be associated to a transition. The latter can
+be recognized from the fact that the comment in the \cdCommand{save line
+  labels} output has entries for ``index'' and ``Elow''. The custom blends
+will be stored on the line stack and can be used like any other entry on that
+stack.
+
+If the keyword \cdCommand{quiet} appears on the \cdCommand{set blend} command
+line, and the database model for any of the species in the blend has been
+turned off, the blend will be quietly skipped rather than producing error
+messages about missing lines. This is useful if the \cdCommand{set blend}
+command is included in an init file that will be shared between many scripts.
+However, note that the code cannot discriminate between a species that has
+been disabled and a typo in the label, so make sure that the labels are
+correctly typed before using this keyword.
+
+An init file called \cdFilename{blends.ini} with commonly used multiplets and
+blends is included in the data directory\footnote{For \Cloudy\ versions C17 and
+  older these blends were hardwired into the source code.}. \Cloudy\ automatically
+parses this file unless you include the \cdCommand{no blends} command in your
+script. It is possible to modify this file to add your own blends (but note that
+this file is used by the test suite, so modifying or deleting existing blends
+could affect subsequent test suite runs). You can also use this file as a
+template to create your own init file with custom blends, or you can enter the
+blends directly in your script.
+
+\subsection{Set charge transfer -11.5}
+
+This command establishes the coefficient in the statistical hydrogen
+charge transfer rate coefficients used for species more than four times
+ionized (\citealp{Ferland1997}).
+If the number is negative then it is assumed
+to be the log of the coefficient,
+if zero then this estimate is turned off,
+and if positive the number is the coefficient itself.
+It is stored as the
+variable \cdVariable{HCTMin} and has the default of
+$1.92\times 10^{-9}$ cm$^3$ s$^{-1}$.
+This is used to
+set a rate coefficient of \cdVariable{HCTMin} \%$q$
+where $q$ is the excess charge of the heavy element.
+
+\subsection{Set chemistry}
+
+This changes some aspects of the chemistry network.
+\begin{description}
+\item[set chemistry Federman  [ON , OFF]]  This determines whether the rate
+coefficients derived by \citet{Zsargo2003} are used.
+Their
+chemical network consists of a small subset of reactions important to the
+formation of CH, CO, HCO$^+$, CH$_{2^{+}}$, and CH$_{3{^+}}$ in regions with large amounts
+of CH$^+$.
+The default is ``\cdCommand{ON}'', that is, to use these rates instead of UMIST
+in the reaction network.
+If \cdCommand{OFF} is specified then UMIST rates are used.
+
+\item[set chemistry non equilibrium] This uses the chemical model of \citet{Federman1996} to examine the effects of nonthermal chemistry on diffuse
+cloud chemistry.
+This command uses an effective kinetic temperature for
+a chemical reaction that is caused by ion / molecule slip
+when turbulence in present.
+The effective temperature is given by
+\begin{equation}
+T_{eff}  = \frac{3}{2}kT + \frac{1}{2}\mu \Delta u_{turb}^2
+\end{equation}
+where $k$ is Boltzmann's constant, $T$ is the gas kinetic temperature, $\mu$ is
+the reduced mass of the two reactants, and $\Delta u_{turb}$ is the turbulent velocity.
+\citet{Zsargo2003} summarize the physical mechanism of
+non-thermal chemistry as:
+\begin{quote}
+``The origin of the nonthermal motion is assumed to be the result of
+the propagation of Alfv\'en waves, constantly entering the cloud from the
+intercloud medium.
+The dissipation of these waves is concentrated primarily
+in a diffuse cloud boundary layer,
+the transition zone between the cloud
+and the intercloud medium.''
+\end{quote}
+   The effect of $T_{eff}$ is to increase the rates of those reactions which
+have a strong exp($-c/T$) temperature barrier.
+This command primarily effects
+the formation of CH$^+$ (the abundance of which cannot be explained by
+equilibrium chemistry models) by eliminating the temperature barrier for
+the C$^+$ + \htwo\ $\to$ CH$^+$ + H formation channel, allowing CH$^+$ to form.
+The formation of CH$^+$ has trickle down effects on the predicted abundances
+of other molecules,
+such as CH, C$_2$, CN, and OH (see equations 7 \& 8 of
+\citealp{Zsargo2003}).
+This option was added by Nick Abel.
+The keyword can
+be \cdCommand{non equilibrium} or \cdCommand{non-equilibrium}.
+
+\item[set chemistry non equilibrium neutrals [ON , OFF]]    If the option
+\cdCommand{neutrals off} is also included then $T_{eff}$ will equal $T$ for all neutral-neutral
+reactions, so non-equilibrium chemistry is not included for these species.
+The physical assumption is that neutrals are not coupled to the magnetic
+field and therefore do not experience the effects of nonthermal chemistry.
+This was used by \citet{Federman1996} to explain low OH abundances in
+regions with high CH$^+$, such as $\xi$ Per.
+By default, neutral-neutral reactions
+are included in the non-equilibrium chemistry.
+
+\item[set chemistry proton elimination  [ON , OFF]]  In ``proton elimination''
+reactions, an atom-molecule non-charge transfer reaction leads to the
+formation of either H or \hplus.
+An example is C$^+$ + OH which leads to either
+CO + \hplus\ or CO$^+$ + H.  \citet{Huntress1977} states that the energetics of the
+reaction makes the \hplus\ formation channel highly unlikely.
+This command sets
+the rates of these reactions leading to \hplus\ (which currently only includes
+the example) to zero.
+By default, proton elimination is included.
+\end{description}
+
+\subsection{Set check energy every zone}
+The code checks that it has not used more energy than
+is available in the incident radiation field when the calculation ends.
+This command will cause that check to occur for every zone. 
+This does slow down the calculation somewhat, so it a debugging
+tool to use when energy conservation problems occur.
+
+\subsection{Set collisional ionization [Dima, Hybrid]}
+The collisional ionization rates of \citet{Voronov1997},
+as implemented by Dima Verner soon after publication of that paper, 
+were used through version C10.
+These are complete over the range of temperatures considered by \Cloudy .
+\citet{Dere.K07Ionization-rate-coefficients-for-the-elements} 
+presents updated rates but these do not cover the temperature range we need.
+The \citet{Voronov1997} and \citet{Dere.K07Ionization-rate-coefficients-for-the-elements} 
+data are generally in excellent agreement.
+We scale the \citet{Voronov1997} rates by the ratio of the 
+\citet{Dere.K07Ionization-rate-coefficients-for-the-elements} to \citet{Voronov1997}
+to obtain updated rates over the full temperature range.  
+We refer to this as the hybrid scheme.
+The scaling factor for each species is the Dere coefficient from the 
+center of the temperature range given in 
+\citet{Dere.K07Ionization-rate-coefficients-for-the-elements} 
+divided by the 
+\citet{Voronov1997} coefficient at that same temperature.
+The \cdCommand{set collisional ionization Dima} uses the \citet{Voronov1997} rates
+while \cdCommand{set collisional ionization Hybrid}, the default, uses thsi scaling.
+
+\subsection{Set collision strength averaging on}
+
+This controls whether the $l$-mixing collision strengths
+used for hydrogenic
+levels are evaluated at $kT$ (the default) or are an average over
+the thermal Maxwellian.
+If the keyword \cdCommand{on} appears then averaging will be
+done---this
+is very slow due to the large number of levels and evaluations involved.
+Tests show that the default, the evaluation at a single energy of $kT$, is
+significantly faster and produces very similar predictions.
+
+\subsection{Set continuum options }
+\label{sec:CommandSetContinuumOptions}
+\begin{description}
+\item[set continuum resolution 0.1]  This changes the resolution of the coarse
+continuum energy mesh by a constant scale factor.  The resolution of the
+continuum mesh as a function of energy is defined by the data file
+\cdFilename{continuum\_mesh.ini}, which is located in the data directory.  Permanent
+changes to the continuum resolution should be made there.
+This command
+allows the continuum mesh to be changed by a temporary scale factor.
+The
+number on the command line multiplies the resolution used by the code.
+Factors less then unity make the cells smaller, for higher
+resolving power, while factors greater than unity make the resolution coarser.
+For instance, an entry of 0.1 would make the resolution ten times finer
+or the resolving power ten times greater.
+If the number is less than or equal to zero
+it is interpreted as the log of the resolution scale factor.
+
+This was originally added so that the entire continuum resolution
+could be improved by large factors when running some of the
+fundamental tests
+of hydrogenic and helium-like emission.
+The code's execution speed is
+affected by the number of coarse continuum cells due to the frequent
+reevaluations of the opacity and photo-interaction rates.
+For factors near
+unity the execution time will scale roughly inversely linearly.
+
+The code can be sped up by making the factor larger than unity.
+But
+there is a limit where the computed results will be strongly affected
+and the code may even no longer pass its internal sanity checks.
+A factor
+near 2 will cut the execution time by about 40\%.
+This will affect the
+predictions and should only be done in exploratory calculations.
+
+This will change the line to continuum contrast since emission lines are not resolved in the coarse continuum.
+See the discussion around Equation \ref{eqn:LineContinuumContrastFactor} for more details.
+
+\item[set continuum shielding] This changes the treatment of shielding
+  of the incident continuum by line optical depths.  There are several
+  options.  \cdCommand{Federman} is the default and uses the function
+  given in the appendix of \citet{Federman1979} with a bug fixed in
+  the wing shielding; \cdCommand{Fbug} uses the original function from
+  \citet{Federman1979} without the bug fix, as used by versions of
+  \Cloudy\ up to 13.02; \cdCommand{Ferland} uses the function given by
+  \citet{Ferland1992}; \cdCommand{Rodgers} uses a function derived
+  from \citet{Rodgers1974}, as used by \citet{Draine1996}.
+  \cdCommand{Integral} uses an explicit numerical integral over the
+  Voigt function, which should be highly accurate but is also very
+  slow. \cdCommand{Pesc} uses the inward-looking escape probability
+  (though note that the escape probability includes an integral over
+  which is not needed in this case). \cdCommand{None} turns off
+  self-shielding.
+
+\item[set FeII continuum]
+The command is obsolete.
+See \cdCommand{set species continuum}, Section~\ref{sec:SetSpeciesContinuum}.
+
+\label{sec:CommandSetFineContinuum}
+\item[set fine continuum]  This changes the logic used
+to determine the
+resolution of the fine continuum mesh.
+The command has two arguments.
+The name of an element must appear on the line---the a
+tomic weight of this
+element will be used to determine the narrowest lines
+that must be resolved.
+The number of resolution bins over a HWHM must also
+appear on the line.
+
+\begin{shaded}
+A \cdCommand{range} option can be used with the
+\cdCommand{set fine continuum} command.  The first number is
+interpreted as the lower limit (in Rydbergs) of the fine continuum.
+An optional second number modifies the default upper limit.  For both
+parameters, negative numbers are interpreted as logs.
+This command is experimental
+and can appreciably change results in conditions where line overlap
+is important.
+\end{shaded}
+
+\end{description}
+
+\subsection{Set convergence \dots}
+
+The error in the heating-cooling balance is set
+with the \cdCommand{set temperature
+convergence} command.
+The error in the electron
+density is set with the \cdCommand{set eden convergence} command.
+The error in the local pressure is set with the
+\cdCommand{set pressure convergence} command.
+In cases where the code
+is having trouble converging the \cdCommand{set presioniz} command
+will limit the number of ionization evaluations before declaring
+a failure.
+
+\subsection{Set coverage [fast]}
+
+This limits the number of zones and iterations that will be done so that
+the code runs more quickly.
+It allows quick runs of the test suite with
+tools such as \cdRoutine{Purify} and \cdRoutine{valgrind}.
+If the \cdCommand{fast} option appears then only
+one and one iteration will be performed.
+Otherwise up to ten zones and
+two iterations will be done.
+This limit is imposed on top of whatever other
+limits may exist in the input stream.
+
+\subsection{Set csupra = -12.34}
+
+This sets the \hO\ secondary ionization rate due to supra-thermal electrons
+to the number on the line.
+The number is the log of the rate [s$^{-1}$].
+The
+excitation rate of L$\alpha $ is assumed to be the same.
+This option is used to
+test the code in secondary-ionization dominated cases.
+Normally the
+secondary ionization rate is determined self-consistently from the
+high-energy radiation field or the cosmic ray density.
+
+\subsection{Set cumulative [ mass, flux, off ]}
+\label{sec:SetCumulativeCommand}
+
+Set the type of accumulation to be used for \cdCommand{save
+  cumulative} output.  Options are 
+\begin{itemize}
+\item \cdCommand{mass}, which is
+appropriate for single-element cooling calculations and generates
+output in $\rm erg\,g^{-1}$, 
+\item \cdCommand{flux}, which is
+appropriate for calculations on fixed domains and generates
+output in $\rm erg\,cm^{-2}$, and
+\item \cdCommand{off} which disables the cumulative calculation, and
+will generate an error if a 'save cumulative' output is encountered.
+\end{itemize}
+
+\subsection{Set D/H -3.2 -- DEPRECATED}
+
+This command is deprecated.
+Use \cdCommand{element hydrogen isotopes} instead.
+
+\subsection{Set density tolerance}
+
+Set the maximum relative error in the conservation of
+the gas phase density for each element, permitted
+by the ionization and molecular balance solvers.
+
+\subsection{Set didz 0.05 }
+
+The thickness of the first zone is chosen so that the largest continuous
+optical depth through it is one percent of the entered value.
+Thereafter
+the zone thickness is continuously adjusted by checking that the optical
+depth at the maximum continuum-gas interaction energy is set to this value.
+The default is 0.15.
+If the value is less than or equal to zero, then it
+is interpreted as the log of the quantity, and linear if greater than zero.
+
+\subsection{Set dielectronic recombination [keywords]}
+\label{sec:SetRecombination}
+
+This changes
+the treatment of various details of the ionic recombination physics.
+The \cdCommand{print recombination} command described on page
+\pageref{sec:PrintRecombination} prints a summary of the data in use.
+
+\begin{description}
+\item[set dielectronic recombination mean [options]]
+At present rate
+coefficients for dielectronic recombination through low-lying autoionizing
+states have not been computed for lower stages of ionization of most
+elements on the third row (of the periodic table) and higher.
+The \cdCommand{mean} option modifies the treatment
+of the estimates of the missing dielectronic recombination coefficients.
+
+The default is to use means of all existing DR rates for each ion stage
+to replace missing data for that stage.
+For instance, Fe$^+ \Rightarrow \mathrm{Fe}^0$ does not
+have reliable DR rates.
+Its rate will be the mean DR rate for all first
+ions of all elements with published rates.
+
+\item[set dielectronic recombination mean off]
+will turn off guesses for DR rates.
+These guesses are normally used for those ions that
+have no rate coefficients because no better can be done at present.
+
+\item[set dielectronic recombination mean scale]
+will multiply the DR guesses by scale factors.
+One or more scale factors may appear on the line, and each will
+multiply the mean rate for successive ions.
+If there are fewer scale factors than ions then the last
+scale factor entered will be used for all higher ions.
+The scale factors must be greater than or equal to zero.
+
+\item[set dielectronic recombination mean noise [dispersion]]
+will introduce Gaussian noise with the indicated dispersion.
+This provides
+a way to quantify the uncertainty caused by the need to use mean rates.
+This adds a component of Gaussian random noise to the means of the
+dielectronic recombination rate coefficients.
+The number on the line is the dispersion.
+The resulting random number will multiply the rate coefficient.
+As a result the same DR rates will be used throughout
+any single calculation but the noise multiplying the rate will change from
+run to run.
+
+\item[set dielectronic recombination suppression off]
+will turn off suppression of dielectronic recombination.
+The DR rate depends on both the gas temperature and density,
+such that as the density increases the DR rate decreases.
+This is parametrized as a suppression factor relative to the
+zero-density value, according to \citet{Badnell2013-DRsuppression}.
+Unless this command is issued, the suppression will be applied.
+\end{description}
+
+\subsection{Set dr 11.2}
+
+This forces the zone thickness to a prescribed value.
+A space is required after the ``\cdCommand{dr\_}''.
+The argument is interpreted as a logarithm by default.
+The argument is interpreted as the linear value if the
+keyword \cdCommand{linear} appears.
+If the keyword \cdCommand{relative} is present the
+value will be interpreted as a relative fraction of the current radius. In that
+case the value needs to be between 0 and 1. The default is that this command
+is not in effect and the adaptive stepsize algorithm will set the zone thickness
+in accordance with the local physical conditions.
+
+Use this command with great caution! Forcing the code to take steps that are too large
+can lead to inaccurate results, or even destabilize the code.
+
+\subsection{Set drmax 11.2}
+
+This sets the largest allowed zone thickness [cm].
+The zone thickness
+will not become larger than this.
+The argument is a logarithm
+if it is less than 38 or if the keyword \cdCommand{log} appears.
+It is linear if the keyword
+\cdCommand{linear} appears. If the keyword \cdCommand{relative} is present the
+value will be interpreted as a relative fraction of the current radius. In that
+case the value needs to be between 0 and 1.
+The default for the maximum zone thickness is $10^{30}$~cm.
+
+\subsection{Set drmin 11.2}
+
+This sets the minimum zone thickness [cm]. The zone thickness will not become
+smaller than this, except possibly in the last zone to avoid overshooting the
+outer radius. The argument is a logarithm if it is less than 38 or
+if the keyword \cdCommand{log} appears. It is linear if the keyword
+\cdCommand{linear} appears. If the keyword \cdCommand{relative} is present the
+value will be interpreted as a relative fraction of the current radius. In that
+case the value needs to be between 0 and 1.
+
+The keyword \cdCommand{depth} works similarly to the keyword \cdCommand{relative}
+but sets the minimum zone thickness relative to the depth into the cloud.  
+There is a default value of $10^{-5}$.  This minimum is not active if a
+\cdCommand{set dr} command is used. 
+
+The default for the minimum zone thickness is the greater of approximately 
+$1.2 \times 10^{-36}$~cm and the default relative to depth.
+
+Use this command with great caution! Forcing the code to take steps that are too large
+can lead to inaccurate results, or even destabilize the code.
+
+\subsection{Set dynamics commands}
+
+These commands change aspects of dynamical or time-dependent calculations.
+They are described in 
+\ref{Hazy1-sec:DynamicalTimeDependent}
+\cdSectionTitle{\refname{Hazy1-sec:DynamicalTimeDependent}} 
+
+\subsection{Set eden [options ....]}
+\label{sec:CommandSetEden}
+These commands provide several ways to set the electron density
+or change its convergence criterion.
+
+\begin{description}
+
+\item[set eden 2.3]   If no other keywords are recognized then this command
+sets the electron density.
+The number is the log of the density [$\pcc$].
+
+\item[set eden convergence 0.01]
+This sets the convergence criterion for the electron density.
+The number is the largest relative error in the electron density.
+It is interpreted as the log of the relative error if it is negative.
+The default value is 0.01.
+The old form of the command,
+\cdCommand{set eden error}, is also recognized.
+
+\item[set eden fraction 1e-3]
+This sets the electron fraction, $n_e / n(\mathrm{H})$,
+where $n(\mathrm{H})$ is the density of hydrogen in all forms.
+The number is the electron fraction and is interpreted as a log if it is is $\leq 0$.
+
+\item[set eden solver [ vWDB , SECAnt {]} ]
+Switch between vWDB electron density solver (the default) and experimental
+limited secant solver.
+
+\end{description}
+
+Note:  The \cdCommand{eden} command,
+described on page \pageref{sec:CommandEden}, add an extra source
+of electrons.
+These \cdCommand{set eden} commands set the electron density itself.
+These commands violate charge conservation.
+
+\subsection{Set flxfnt -20}
+
+The highest photon energy that must be considered is lower for relatively
+soft continua such as a star than for X-ray sources such as AGNs.
+The
+criterion used to choose the highest energy to be considered
+$\nu_{high}$ is that
+$\nu f_\nu (\nu_{high}) /\nu f_\nu (\nu_{peak}) < $ \cdTerm{flxfnt},
+where $\nu_{peak}$ is the frequency where
+the continuum reaches its maximum $\nu f_\nu$.
+\cdTerm{FluxFaint} is normally $10^{-10}$.
+This
+command changes the value of \cdTerm{FluxFaint}.
+The argument is the log of the value.
+
+\subsection{Set gbar off}
+\label{sec:Setgbar}
+By default the g-bar approximation is used for transitions in the 
+Chianti and Stout databases 
+which have no collision strengths.
+G-bar values are taken from \citet{Mewe1972} for both allowed and forbidden transitions.
+For simplicity, transitions with gf values greater than or equal to $10^{-8}$ are considered to be allowed.
+
+This command says not to use g-bar for any database transition. 
+If there is no collision data and gbar is turned off , 
+then $0.01$ is used for the collision strength.
+
+\subsection{Set grain heating factor 2.}
+
+This command allows you to enter a fudge factor to alter the amount of
+photoelectric heating from the grains (also when the \cdCommand{set PAH Bakes}
+command is in effect). The number you enter is a multiplicative factor and
+is always interpreted as a linear number. This command violates energy
+conservation and is intended for testing only.
+
+\subsection{Set H2 \dots}
+\label{sec:SetH2}
+
+This command changes some aspects of the \htwo\ molecule.
+Other aspects
+of this molecule are changed with the \cdCommand{database H2} command
+described on page \pageref{sec:AtomH2} above.
+
+\begin{description}
+\item[set H2 fraction]  This sets the ratio $n$(\htwo)/$n$(H).
+The number is
+interpreted as the log of the ratio if it is less then or equal to zero
+and as the linear ratio otherwise.
+An upper limit of 0.5 will be silently
+imposed.
+This command turns off the normal \htwo\ molecular network and forces
+the H2 density to the hydrogen density multiplied by this fraction.
+This
+is totally unphysical and is only intended to provide an easy way to test
+the \htwo\ molecule.
+
+\item[set H2 formation scale]  This scales the H2 formation rate
+(via three-body recombination). The number is
+interpreted as the log of the scaling factor if it is less then or equal to zero
+and as the linear factor otherwise.  In the fully molecular or fully
+ionized limits, this command should be used rather than the
+\cdCommand{set H2 fraction} command because it allows the same functionality without
+breaking numerous consistency checks.
+
+\item[set H2 Jura [TH85; CT02; SN99; ELRD]]  This changes the ``Jura rate'', the rate
+\htwo\ forms on grains \citep{Jura1975}.
+The default  rates  include the
+Eley-Rideal Effect \citep{LeBourlot12, Rollig13} as implemented by
+\citet{Rollig13}.
+These depend on grain temperature and abundance.
+The option \cdCommand{TH85} will use rates from \citet{Tielens1985a},  \cdCommand{SN99} 
+will use rates for \citet{Sternberg1999},  \cdCommand{CT02} uses \citet{Cazaux2002}.
+Finally, \cdCommand{ELRD} will use the rates that include the
+Eley-Rideal Effect \citep{LeBourlot12, Rollig13} and is the default.
+
+\item[set H2 Jura scale]   The number is a linear scale factor that
+multiplies the formation rate obtained by one of the above methods.  If
+the scale factor is negative or the keyword \cdCommand{log} appears then the number
+is interpreted as the log of the scale factor.
+\citet{Habart2004} suggest
+that the rate can vary across the galaxy by large factors.
+
+\item[set H2 Jura rate]  The number is the log of the \htwo\ grain
+formation rate $k$ [cm$^3$~s$^{-1}$].  This is used to give a simple grain formation
+rate $R = k\,n\left( {{\mathrm{H}}_{tot} } \right)n\left( {\hO } \right)$
+ [cm$^{-3}$~s$^{-1}$].  If no number appears on the line then the \citet{Jura1975} rate
+of $3 \times 10^{-17}$ will be assumed.
+
+\item[set H2 Solomon [BD96; TH85; ELWERT]]  This changes how the Solomon process
+is treated when the small \htwo\ molecule is used.  The fits to the dissociation
+rate derived by \citet{Elwert2006} are the default and will be used if
+the keyword \cdCommand{ELWERT} appears.  The keyword \cdCommand{BD96} will use \citet{Bertoldi1996} and the keyword \cdCommand{TH85} will use the \citet{Tielens1985a} rate.
+These rates differ by $\ge1$ dex for some \htwo\ column densities.  When the large
+\htwo\ molecule is used, as set with the \cdCommand{database H2} command,
+the Solomon
+process is treated in a self-consistent manner.
+\citet{Abel2004} show
+that \htwo\ column densities are quite sensitive to the correct
+treatment of this physics for translucent clouds.
+
+\item[set H2 continuum dissociation [Stancil; AD69]]  
+This command changes how direct photodissociation
+of \htwo\ is treated.  
+By default, \Cloudy\ computes the photodissociation rate 
+by integrating the cross-section
+for photodissociation over the energy range for dissociation.  
+The cross sections used for this process come from 
+Stancil et al. (in preparation) and are specified by the 
+keyword \cdCommand{Stancil}.  
+The other option 
+is to use a constant \htwo\ cross section for this process, 
+which comes for the work of \citet{Allison1969} and 
+is used when \cdCommand{AD69} appears on the command line.  
+This process, while not the dominant destruction
+process for \htwo\ in a PDR, may be important in some environments.
+
+\item[set H2 grain formation pumping]  This changes
+the distribution function
+for populations of $v$, $J$ levels of \htwo\ following formation on grain surfaces.
+There are several possible
+distributions: \citet[\cdCommand{Taka}, this is the default]{Takahashi2001};
+\citet[\cdCommand{DB96}]{Draine1996}; and thermal (\cdCommand{thermal}).
+
+The keyword \cdCommand{ OFF} will put all newly formed \htwo\ in the lowest ortho and
+para states with a 3:1 ratio.
+This can be used to test the importantence of grain formation pumping.
+For low to moderate temperatures in a purely collisional gas
+the higher levels within X may have no 
+source of populations when this is done.
+The code may then fail because the level population matrix will become ill conditioned.
+This option should only be used for experiments.
+
+\item[set H2 Tad 420]  This changes the binding energy,
+$T_{ad}$, in the formalism
+described by \citet{LeBourlot2000} to account for deexcitation
+of \htwo\ while on
+a grain surface.
+The number is the binding energy expressed as a
+temperature.
+The default value of 800 K maximizes the rates of \htwo\ collisional deexcitation and ortho-para conversion.
+If the number is
+$\le 10$ it is interpreted as a log of the temperature
+unless the keyword \cdCommand{linear} appears.
+\end{description}
+
+\subsection{Set HCORR}
+
+The density used in electronic collisions is actually $n_e  + 1.7 \times
+10^{4} n\left( {\hO } \right)f$.
+The second term is an approximate correction for collisions by neutral
+hydrogen.
+This is only a guestamite based on \citet{Drawin1969},
+(see also \citealp{Weisheit1974},
+\citealp{Steenbock1984}, \citealp{Lambert1993}, and \citealp{Kiselman2000}).
+The
+number on this command adjusts the scale factor~$f$.
+You can turn off the
+process by setting the number to zero.
+
+\subsection{Set HO charge transfer [chemistry; ionization]}
+
+This command is no longer supported.
+
+\subsection{Set ind2 [on, off]}
+
+This provides a way to turn off the affects of induced two-photon emission
+or absorption.
+One of the keywords \cdCommand{on} or \cdCommand{off} must appear
+to turn induced
+two-photon processes on or off.
+It is on by default.
+
+\subsection{Set ionization tolerance 0.01}
+
+Sets the allowed error tolerance on ionization solver solutions.
+
+\subsection{Set isotopes [ALL] -- DEPRECATED}
+
+This command has been deprecated.
+Use \cdCommand{element isotopes all} instead.
+
+\subsection{Set kshell energy 1e6}
+
+This changes the energy of the highest continuum point considered for
+photoelectric opacity.
+The default is 1 MeV, sufficiently high that Compton
+recoil and pair production are the dominant opacity sources and K-shell
+opacity may safely be ignored.
+Setting this limit to smaller values will
+save some compute time since the evaluation of the photoionization rate
+integrals will not extend to as high an energy.
+The argument is the energy
+in Rydbergs and it must be greater than 194 Ryd.
+If zero is entered then
+the high-energy limit of the continuum will be used.
+
+\subsection{Set Leiden hack}
+
+This replaces certain physical processes with the simple prescriptions
+that were specified for the 2004 Leiden PDR workshop
+(\citealp{Roellig2007}).
+These are only intended for testing and would not be used
+in a real calculation.
+If any \cdCommand{set Leiden hack} commands are entered the code will
+complain that a physical process has been disabled.
+
+This enables all hacks.
+Individual hacks can be turned on with additional keywords.
+They are:
+
+\begin{description}
+\item[set Leiden hack H2* off]  The chemistry network used in the workshop did
+not include \htwo* (see \citealp{Tielens1985a} for a definition).  This
+turns off reactions between that species and the CO network (although it
+is still present in the H-\htwo\ network).
+
+\item[set Leiden hack CR off]  This turns off cosmic-ray excitation for the
+large \htwo\ molecule.
+This is normally treated as in \citet{Dalgarno1999}.
+
+\item[set Leiden hack UMIST]  This forces the code to use parts of the UMIST
+database that (we feel) we do better with other methods.
+\end{description}
+
+\subsection{set monitor scientific notation}
+\cdCommand{monitors} are commands that
+tell the code what value for a predicted quantity to expect.  These are
+part of the test suite and allow automatic testing of the code's results.
+This command causes the printed monitored values to be printed in scientific
+notation rather than a float format.
+The \cdCommand{monitor} command is described on page
+\pageref{sec:CommandMonitor} above.
+
+\subsection{Set nchrg 3}
+
+The grain physics uses an \emph{n}-charge state model where, for each bin,
+the charge distribution is resolved in exactly $n$ charge states,
+independent of grain size.
+This is discussed in \citet{VanHoof2004}.
+The default
+value of $n$ is 2 but can be reset with this command
+to any value between 2 and 10.
+Higher values of $n$ will give more accurate results at the expense
+of greater compute time.
+
+\subsection{Set negopc}
+
+Negative opacities may occur during a calculation if a level happens
+to mase (\citealp{Ferland1993}).
+The code will generate a comment at the end if
+this happens.
+This command tells the code to save the optical depth array
+when negative opacities occur.
+The output will go to the file
+\cdFilename{negopc.txt}.
+
+\subsection{Set nend 500}
+
+This sets the default limit to the number of zones that will be computed.
+The preset default limiting number of zones is 1400 but more zones may be
+needed in large column density clouds or ones exposed to very intense
+radiation fields.
+
+The limit to the number of zones that will be computed can be set with
+either this command or with the s\cdCommand{top zone} command.
+The only difference
+is in the level of warning that will be generated if the code stops after
+reaching the limiting number of zones.
+If the code stops because it reached
+the number of zones set by the \cdCommand{stop zone} command
+then it thinks that this
+was the intended stopping criterion and no comment is generated.
+However
+the code generates a \cdTerm{warning} if it stops because
+it reaches the default
+limit to the number of zones since this probably \emph{was not} intended.  By using
+this command the limit can be increased while still retaining the checking
+and warnings that are generated if the code stops for an unintended reason.
+
+The code allocates memory to store a great deal of information for each
+zone.
+Increasing the number of zones will also increase the memory needed
+to run the code.
+
+\subsection{Set nFnu [options]}
+\label{sec:set:nfnu}
+
+By default, \Cloudy\ will print
+the continuum flux at certain wavelengths as a series of entries in the
+standard emission line array.
+The \cdCommand{set nFnu} command changes which parts of the
+radiation field  are included in the entry
+with the \emph{nFnu} label.
+There are four possible radiation fields, the transmitted
+and reflected incident radiation field,
+and the transmitted and reflected diffuse
+emission produced by the nebula.
+The default is to include only the 
+reflected incident radiation field
+and the transmitted and reflected diffuse
+emission.  The transmitted incident is not included by default.
+Any or all of these may be entered on the command line, but at least one must occur.
+Any component left off the command will not be included.
+
+The four keywords, and the component that is included, are the following:
+
+\cdCommand{incident reflected}  or \cdCommand{incident\_reflected} includes
+the incident reflected continuum.
+
+\cdCommand{incident transmitted}  or \cdCommand{incident\_transmitted} includes
+the incident transmitted continuum.
+
+\cdCommand{diffuse inward}  or \cdCommand{diffuse\_inward} includes the diffuse
+inward continuum.
+
+\cdCommand{diffuse outward}  or \cdCommand{diffuse\_outward} includes the
+diffuse outward continuum.
+
+\cdCommand{total}  includes all four components of the continuum.
+
+All desired components must be specified on a single \cdCommand{set nFnu} command.
+The following
+shows how to only include the outward incident and outward diffuse emission
+in the \emph{nFnu} entry in the printout:
+\begin{verbatim}
+set nFnu diffuse outward, incident transmitted
+\end{verbatim}
+
+This command
+does {\em not} change the quantities printed with the \emph{nInu} label---these
+are always the sum of the reflected plus transmitted incident continuum.
+
+\subsection{Set nFnu add 300 micron}
+\label{sec:set:nfnu:add}
+
+You can also add custom wavelengths or frequencies at which the \emph{nFnu}
+and \emph{nInu} entries in the emission-line printout are evaluated. You can
+do that by adding one \cdCommand{set nFnu add} command for each point. You can
+enter as many as you like. Each line must contain a number and a unit to identify
+the wavelength or frequency. Adding the unit is mandatory. The following keywords
+are supported: \cdCommand{eV}, \cdCommand{keV}, \cdCommand{MeV},
+\cdCommand{Hz}, \cdCommand{kHz}, \cdCommand{MHz}, \cdCommand{GHz},
+\cdCommand{Angstrom}, \cdCommand{nm}, \cdCommand{micron}, \cdCommand{mm},
+\cdCommand{cm} or \cdCommand{centimeter}, 
+\cdCommand{wavenumbers}, \cdCommand{erg}, \cdCommand{ryd}, \cdCommand{K} or
+\cdCommand{Kelvin}.
+Some examples are:
+\begin{verbatim}
+set nFnu add 22 GHz
+set nFnu add 350 micron
+set nFnu add 4200 angstrom
+\end{verbatim}
+
+\subsection{Set nmaps 50}
+
+This controls the number of steps in the heating-cooling map that results
+from either the \cdCommand{map} or \cdCommand{save map} commands.  Normally about 20 steps are
+taken between the lowest and highest temperatures.
+
+\subsection{Set numerical derivatives}
+
+This tells the code to use numerical rather than analytic derivatives
+of the heating and cooling functions.
+The default is to use the analytic derivatives.
+
+\subsection{Set PAH option}
+\label{sec:CommandSetPahOption}
+
+The \cdCommand{grains PAH} command described on 
+page \pageref{sec:GrainPAHcommands} adds PAHs to the calculation.
+These \cdCommand{set} commands change some details of their treatment.
+
+\begin{description}
+\item[set PAH constant or ``H'']
+This changes the function that describes how
+PAH abundances depend on physical conditions.  The default, which can also
+be specified with the string \verb|"H"|, is for the PAH abundance to
+scale as $n$(\hO ) / $n$(H$_{tot}$).  You can also specify the PAH abundance
+to scale as the total abundance of neutral atomic and molecular hydrogen
+with the string \verb|"H,H2"|.
+The abundance will be constant if the keyword
+\cdCommand{constant} appears.
+
+\item[set PAH Bakes] will replace our self-consistent
+treatment of photoelectric heating by all grains
+with the PAH photoelectric heating equation given by \citet{Bakes1994}.
+This command no longer guarantees energy conservation and is only intended for testing.
+\end{description}
+
+\subsection{Set phfit [1995, 1996]}
+
+The key \cdCommand{1995} tells the code to use photoionization
+cross sections from \citet{Verner1995}.
+The key \cdCommand{1996} is the default and uses
+\citet{VernerFerlandKorista1996}, which is partially based
+on Opacity Project cross sections.
+
+\subsection{Set pressure convergence 0.01}
+
+This sets the convergence criterion for the total pressure.
+The number
+is the largest relative error in the pressure.
+The number is interpreted
+as the linear error if it is positive and the log of this error if negative.
+The default value is 0.01.
+
+\subsection{Set pressure ionize 50}
+
+This sets a limit to the number of times the bottom ionization solver
+will be called from the top pressure solver within a zone.
+This is a debugging aid as well as a means to limit the time it
+takes the code to declare convergence failure.
+The limit has a default value of 3000.
+This is approximately 500 more calls than is ever needed in any test suite simulations.
+The vast majority ($\sim99\%$) of zones are converged in less than 100 calls.
+Users should exercise caution in increasing the limit.
+Encountering the default limit is a strong indication that something
+is wrong with the simulation.
+It is unlikely the simulation will converge if more calls are allowed.
+
+\subsection{Set save commands}
+
+Save output is the primary output mechanism for the code.
+This command sets various details about
+how this output is generated.
+
+\begin{description}
+\item[set save flush] will cause the file buffers to be flushed after every iteration.
+
+\item[set save hash ``newstring'']
+\label{sec:CommandSetSaveHash}
+When more than one iteration is saved
+into a file each ends with a series of hash marks that makes it easy to
+locate with an editor.
+This sets the hash string to something else.  A
+new string must appear within the pair of double quotes.
+
+The special string ``\cdCommand{return}'' is replaced
+with a single carriage return
+which translates into the pair of carriage returns that \cdTerm{gnuplot} uses to
+separate plots.
+The special string ``\cdCommand{time}'' will give the elapsed time
+since the start of time-dependent calculations, followed by a pair
+of carriage returns.
+In both cases the keyword
+must appear within the pair of double quotes.
+
+The hash can be completely turned off with the \cdCommand{no hash}
+option on the \cdCommand{save} command.
+
+\item[set save line width / resolving power, suppress, absorption]
+\label{sec:CommandSetSaveLWidth}
+The observed contrast between emission
+lines and the continuum depends on the intrinsic line width and,
+for an
+unresolved line, the resolution of the spectrometer.
+Lines are included
+in the radiation field produced by the \cdCommand{save continuum}
+commands. The default behavior is to do this in such a way that
+the energy is conserved in the resulting output.\footnote{In C90.00 the
+standard was to use a line width equal to the speed of light. In C90.04 the
+standard was changed to using a line width of $1000 \kmps$. Finally, in
+version C10 the standard was changed again to using energy conservation.
+Versions prior to C90.00 did not include emission lines in the saved
+spectral energy distribution.}
+This command allows you to adjust the contrast between the lines and continuum by,
+in effect, changing the velocity resolution of the spectrometer which views
+the unresolved lines.
+
+Lines and continua are stored separately throughout the code.
+They are
+combined only when the output from the \cdCommand{save continuum} command is produced using the expression
+\begin{equation}
+\nu F_\nu  ({\mathrm{total}}) = \nu F_\nu  ({\mathrm{continuum}}) +
+R \, I\left( {{\mathrm{line}}} \right)
+\label{eqn:LineContinuumContrastFactor}
+\end{equation}
+where $R \equiv \lambda/\Delta\lambda$ is the resolving power and $\Delta\lambda$ 
+is the resolution. 
+
+The
+default behavior is to match $R$ to the resolving power of the coarse continuum
+at the frequency of the line as set in the
+the file \cdFilename{continuum\_mesh.ini}. This assures energy
+conservation. If you want to boost weak lines in a plot, you can artificially
+change the resolution of the spectrum by using this command.
+
+When you use the \cdCommand{set save line width} command, you should supply a
+velocity width $\Delta v$ in km s$^{-1}$. This will set the resolving power $R = c/\Delta v$,
+where $c$ is the speed of light. If you use the alternative 
+\cdCommand{set  save resolving power} command, you can specify $R$ directly. 
+Supplying a smaller
+value of $\Delta v$ or a higher value of $R$ will increase the line-to-continuum
+ratio and thereby make lines appear stronger.
+\begin{verbatim}
+## set velocity resolution to 100 km/s => R = 3000 (approximately)
+set save line width 100
+## alternatively set spectral resolving power directly
+set save resolving power 3000
+\end{verbatim}
+
+Note that this command will {\em only} adjust the height of the line, not the
+width. The latter will always be the width of one cell in the coarse continuum mesh
+(even if the line is broader than that cell). This implies that
+the line flux in the continuum array is artificially changed by this command.
+Changing the spectral resolution can be useful to emphasize weak lines in a plot,
+but should never be used when energy conservation is important, e.g. when
+you want to fold the saved continuum with a photometric passband.
+
+If the keyword \cdCommand{absorption} occurs then the effects
+of absorption lines on the transmission of the incident continuum
+will be modified by the factor given in
+equation \ref{eqn:AbsLineContinuumContrastFactor}.
+The transmitted radiation field is changed as
+\begin{equation}
+\nu f_\nu   = \nu f_\nu ^0 \max \left[ {1 - \left( {1 - trans} \right)R\frac{\Delta\nu}{\nu}} , 0 \right]
+\label{eqn:AbsLineContinuumContrastFactor}
+\end{equation}
+where \cdVariable{trans} is the correct transmission factor as propagated
+from the fine to coarse mesh, and $\nu/\Delta\nu$ is the resolution of the coarse continuum mesh.
+The keyword \cdCommand{absorption} makes the effects of absorption appear larger than than
+actually are, but gives an impression their appearance would have if
+the spectrum were viewed at a higher resolution. This approach
+uses the opacities stored in the much higher resolution fine continuum.
+As is the case for emission lines, using this option will violate energy conservation.
+
+If you include the keyword \cdCommand{suppress} on the command line, then
+emission lines will not be included in the saved spectral energy distribution.
+If you combine the keywords \cdCommand{suppress} and \cdCommand{absorption}, then
+the effects of absorption lines will also be suppressed and only a pure continuum
+will be saved.
+
+The only effect of this command is to change the line-to-continuum
+contrast in output from all \cdCommand{save} commands
+except for that produced by the
+\cdCommand{save transmitted continuum} command.
+
+\item[set save luminosity old]  
+\label{sec:SetSaveLuminosity}
+In versions of Cloudy between
+roughly 1983 and C13 the \cdCommand{save continuum} output
+reported continuum and line luminosities per unit area of
+cloud at the inner radius when the luminosity case was used.
+This was to avoid exponential limits on floating point numbers.
+Today the code will report luminosities when appropriate.
+This command will use the old style for backwards compatibility.
+If this is used the \cdCommand{save continuum} output will be
+$\nu L_{\nu} / 4 \pi r_{inner}^2$ and have units $\ergpscmps$.
+
+\item[set save prefix ``test'']  This adds a prefix
+to all filenames and so
+provides an easy way to change all file names at one time.
+\label{sec:CommandSetSavePrefix}
+The prefix is any string that appears between the pair of
+double quotes on the command line. This command should precede
+all save commands.
+
+\end{description}
+
+\subsection{Set species gbar 0.01}
+This sets a default collision strength for database transitions that have 
+no collision or radiative data.
+You can turn this feature off by setting the value to zero.
+
+\subsection{Set species continuum}
+\label{sec:SetSpeciesContinuum}
+
+\par
+This changes the lower and upper bounds, and the resolution,
+of the species pseudo-continuum reported with the
+\cdCommand{save species continuum} command,
+Section \ref{sec:SaveSpeciesContinuum}.
+The species must be specified in double quotations, followed
+by three numbers: the short and long wavelength limits
+(both in \AA ) and the number of logarithmic bins to
+divide this into.
+All three numbers must be specified.
+The default are lower and upper wavelength limits of
+\speciesConWlLo\ and \speciesConWlHi,
+broken into \speciesConNbins\ bins.
+For example,
+%
+\begin{verbatim}
+set species "Fe+" continuum 3000 5000 200
+\end{verbatim}
+%
+would accumulate the Fe~{\sc ii} emission from 3000 \AA{}
+to 5000 \AA{} in 200 logarithmic bins.
+
+
+\subsection{Set temperature [floor, convergence]}
+\label{sec:SetTemperatureOptions}
+
+These commands change some details of the thermal solution.
+\begin{description}
+\item[set temperature floor]  This sets a lowest kinetic temperature
+to allow in a calculation.
+When the temperature falls below this floor the code
+goes over to a constant temperature solution at the floor temperature.
+This provides a way to mimic having a minimum temperature that
+is set by some external and unspecified source of heat.
+The temperature will be interpreted as a log if it is less than
+or equal to 10 or the keyword \cdCommand{log} is present, and as
+linear if the keyword \cdCommand{linear} is present.
+
+\item[set temperature convergence]  The gas kinetic temperature
+is set by the balance
+between the heating and cooling.
+This command sets the relative error
+allowed in the heating-cooling match.
+The number is the largest fractional
+error allowed.
+It is interpreted as the error itself if it is positive
+and the log of the error if it is less than or equal to zero.
+The default is 0.005.
+This will be the error allowed in each zone.
+The total error
+or energy conservation mismatch integrated over a cloud will be much smaller,
+usually of order ten times smaller than the tolerance specified.
+\end{description}
+
+\subsection{Set test}
+
+This sets the logical variable \cdVariable{lgTestCodeEnabled} to true.
+It provides
+the facility to conditionally run test code somewhere
+in the main body of \Cloudy.
+
+\subsection{Set trimming -9  [upper lower, off] [old, new]}
+
+The code saves execution time by not computing the population of stages
+of ionization with trivial abundances.
+The thresholds for excluding an
+ionization stage are chosen with photoionization equilibrium in mind.  These
+may not be appropriate for some other conditions or if your definition of
+trivial is different from mine.
+
+This command changes the limit for the smallest fractional abundance,
+$n(\mathrm{A}^{+x})/n(\mathrm{A})$, to consider.
+The smallest relative abundance to be considered
+for a stage of ionization higher than the ionization peak is changed with
+the \cdCommand{upper} keyword.
+The command \cdCommand{set trimming upper off} will turn off trimming
+of the highest stage of ionization.
+The smallest relative abundance of
+ions below the peak is changed with the \cdCommand{lower} keyword.
+The default relative
+ionization fractions are $10^{-6}$ and $10^{-10}$ respectively.
+If no keyword appears
+then both are changed to the number entered.
+The argument is the log of
+the lowest or highest ionization fraction to consider.
+
+Generally, line excitation energies for atoms with
+stages of ionization higher than the peak ionization will
+strongly exceed the ambient temperature
+so these ions will have little influence on the calculated
+temperature or spectrum.
+This is not true for lines formed by ions below the peak
+distribution.
+The keyword \cdCommand{off} sets the smallest abundance to just above
+the machine's floating precision limit.
+
+The keyword \cdCommand{old} resets the algorithm used for trimming to
+the legacy approach; the keyword \cdCommand{new} resets this to the
+revised approach (the default), which includes some hysteresis in the
+trimming controls to prevent zone-to-zone oscillations in the number
+of active ionization states.
+
+\subsection{Set tsqden 8}
+
+The code performs an analysis of the predicted emission-line spectrum
+at the end of the calculation.
+This analysis will find the structural $t^2$
+as well as a $t^2$ deduced from the [\oiii] and \hi\ spectrum
+(\citealp{KingdonFerland1995} discuss this at length).
+Such an analysis only makes sense for
+densities below the critical density of the [\oiii] atom,
+which is $\sim 10^5$~cm$^{-3}$.
+The results of this analysis will not be printed if the density is
+higher than the value of \cdVariable{tsqden}, currently $10^7 \mathrm{cm}^{-3}$.
+The number on the
+line is the log of the highest hydrogen density for which this analysis
+will be performed.
+
+\subsection{set update couplings every ion}
+
+This updates the couplings between the ionization networks fully after
+every ion balance solution, rather than only when all ions and the
+chemical network have been calculated.  This may be necessary to allow
+the solution to converge in cases where the coupling sources dominate
+collisional and radiative processes, but will increase run times in
+general.
+
+
+\subsection{Set UTA}
+\label{sec:SetUTA}
+
+\par
+This determines the UTA line data to be used.
+Data for several species are available.
+Most of them come from N.~Badnell's work
+\citep{BadnellSeaton2003,Badnell+2005},
+and they consist of data for all elements
+up to Zn along all iso-sequences from
+Li-like to Mg-like.
+In the case of iron, these data cover the ionization stages
+Fe$^{+14}$ through Fe$^{+23}$.
+
+\par
+There are two additional sets of UTA data
+for lower stages of ionization of iron.
+The data of Kisielius \citep{Kisielius2003,Ferland+2013}
+concern Fe$^{+13}$ though Fe$^{+15}$, and they are the data of
+preference, as described in \citet{CloudyReview13}, because
+of their higher accuracy and greater number of emission lines.
+The \citet{Gu2006} data concern Fe$^0$ through Fe$^{+15}$.
+By default, the Kisielius data are used instead of the Badnell
+and Gu data for the relevant ionization stages of iron.
+
+\par
+The following commands may be used to adjust the UTA data employed
+in a simulation:
+%
+\begin{description}
+\item[set UTA off] {\bf --} disable {\bf all} UTA lines.
+	This is provided as a debugging tool.
+	The simulation is considered unphysical when this
+	command is given.
+
+\item[set UTA Kisielius off] {\bf --} disable the \citet{Kisielius2003} data
+	for Fe$^{+13}$ though Fe$^{+15}$.  They are enabled by default.
+	When disabled, the Badnell data for Fe$^{+14}$ and Fe$^{+15}$,
+	and the Gu data for Fe$^{+13}$ are used instead.
+\end{description}
+
+\par
+To check which data set is used for each ionic species,
+see \cdCommand{print UTA references}, Section~\ref{sec:PrintUTAReferences}.
+
+
+\subsection{Set WeakHeatCool 0.02}
+
+This command sets the threshold for the weakest cooling or heating source
+included in output from the \cdCommand{save heating}
+or \cdCommand{save cooling} commands.
+The default is 0.05.
+The number entered is interpreted as a
+log if it is negative.
+
+\section{Table lines ``name.dat''}
+
+When the code is used as a subprogram for other, larger, codes,
+it is possible to read in a series of lines whose intensity will
+later be extracted
+by first calling \cdRoutine{cdGetLineList},
+then by calling \cdRoutine{cdLine}.
+The procedure is
+described in Part 2 of this document.
+A set of lines that occur within
+any of several data files is then read.
+This method is used in most of
+the large grid programs I use.
+
+This command provides a quick way to confirm that the list of lines in
+the line data files have valid names.
+The command takes the name of a file
+as its argument and checks that all lines can be found.
+This command can also be used to check the standard ``\cdFilename{LineList*.dat}''
+files that are part of the distribution.
+This is actually a form of the \cdCommand{monitor} command since
+it will announce a botched monitor if it cannot find any of the lines.
+Note that all 5 characters of the keyword \cdCommand{lines} need
+to be entered to avoid confusion with the keyword \cdCommand{linear}.
+See the discussion
+of \cdRoutine{cdGetLineList} in Part 2 for further information.
+
+\section{Test}
+
+This command runs a simple model to do a ``smoke test'', 
+a quick sanity check on the code.
+The single command produces a series of commands to run a two-zone
+constant-temperature model.
+
+\subsection{Test}
+The \cdCommand{table agn} command is used with the density
+and temperature constant at $10^4\ \K$.
+The ionization parameter is $U = 10^{-2}$ and the
+calculation stops after two zones and one iteration.
+Many \cdCommand{monitor} commands
+are used to verify predictions.
+The commands that set up the model will
+be printed if the keyword \cdCommand{print} occurs on the line.
+
+\subsection{Test large}
+
+When the \cdCommand{large} keyword appears the model hydrogen atom
+will be set to a large number of levels.
+
+\subsection{Test H2}
+
+This tests the large \htwo\ molecule.
+
+\subsection{Test molecular}
+
+This does a simulation that is cold and nearly fully molecular.
+The
+can be combined with the \cdCommand{H2} keyword to test the
+\htwo\ molecule in the fully molecular limit.
+
+\section{Performance speedups}
+
+It is possible to speed up the calculation at the loss of some physical
+fidelity or stability.
+This section outlines the commands that make this
+possible.
+Each command is described in greater detail in sections earlier
+in this document.
+
+Many of these options are included in the
+\cdFilename{fast.ini} initialization file.
+Using this \cdFilename{ini} file will decrease the execution time
+by roughly a factor of two.
+This is meant as a way to roughly explore vast ranges of parameters
+or as a debugging aid.
+
+\textbf{N.B.!!  The fidelity of the simulation is compromised!}
+These turn off significant physical processes.
+
+\subsection{Turn off minor elements}
+
+The ionization distribution and the effects of an element on the gas emission,
+cooling, and opacity are all determined self-consistently.
+This includes
+the first \LIMELM\ elements and many of these have trivial abundances.
+The
+calculation can be sped up with little loss of physical fidelity elements with
+very small abundances are turned off.
+This is done with the \cdCommand{element off} command.
+
+The \cdCommand{element limit off} command described on page 
+\pageref{sec:ElementLimitOffCommand}
+will turn off all elements which have an
+abundance smaller than a specified limit.
+The following will turn off all elements with abundances less than $10^{-7}$ of hydrogen.
+\begin{verbatim}
+element off limit -7
+\end{verbatim}
+
+Specific elements can be turned off by giving that element on the  \cdCommand{element off} command.
+The ini files \cdFilename{c84.ini},
+\cdFilename{fast.ini}, and \cdFilename{ism.ini},
+among others,
+include a set of \cdCommand{element off} commands to do this.
+
+Turning off an element will affect results if the opacity,
+heating, or cooling
+due to the element is significant.
+Minor elements can have major effects
+in very dense, optically thick, gas, where all coolants are thermalized and so are close to the
+black body limit.
+
+\subsection{Degrade the grain physics}
+
+The treatment of grain physics is today's state of the art
+(\citealp{VanHoof2001, VanHoof2004}) and can be CPU-intensive.
+Grains have several major effects.
+Elements locked up in solids are missing from the gas phase and so their
+cooling is also missing \citep{KingdonFerlandFeibelman1995}.
+Grains provide the dominant opacity across much
+of the optical, near IR, and UV spectrum.
+This absorbs the incident
+continuum, affects the radiative acceleration of the gas, and the transfer
+of optically thick lines.
+Radiative and collisional interactions between
+grains and the gas affect the gas temperature.
+In PDR and molecular regions,
+grains have an important effect on the charge balance of the gas.
+This
+affects both the ionization and chemistry (\citealp{Abel2005}).
+Grain surface
+reactions and molecular freeze-out change the chemistry and charge balance
+of the gas.
+
+The first effect can be included at no expense by setting the gas-phase
+abundance of an element to a depleted value.
+Gas-phase abundances can be
+decreased by typical ISM depletion factors using the
+\cdCommand{metals deplete} command.
+This does not turn on grains and applying a depletion
+factor has no impact on the execution time.
+
+\cdTerm{Turn off quantum heating}.  Quantum heating
+is the process where a grain's
+temperature spikes after absorbing a single photon.
+This temperature spiking
+has an effect on the Wien tail of the grain's emitted spectral energy
+distribution but no other effect.
+Quantum heating can be disabled with
+the \cdCommand{no qheat} option on the \cdCommand{grain} command if the thermal continuum is not
+something you need to predict.
+Quantum heating only affects the emitted
+spectrum so turning if off will not affect results if the emitted IR
+continuum does not affect the gas.
+The IR continuum will affect the gas
+if it is absorbed by the gas or dust, which can occur with some line, or
+if the source is optically thick in the near IR continuum.
+
+\cdTerm{Use single rather than distributed grains}.
+If the \cdCommand{single} keyword appears
+on the \cdCommand{grain} command then a single mean grain size
+will take be used instead
+of the size-resolved grain distribution.
+This affects the entire simulation,
+including the gas temperature and emission line spectrum,
+because the grain
+- gas interactions depend on the grain size.
+
+\subsection{Turn off the chemistry}
+
+The chemical network requires a fair amount of time due to the size of
+the matrix that must be solved.
+The chemical state is determined even in
+ionized regions to ensure continuity in the transition
+between the \hplus\ - \hO\ - \htwo\ regions.
+The chemistry can be ignored if the simulation only includes ionized regions.
+This is done with the \cdCommand{no molecules} command.
+
+\subsection{Turn off level 2 lines}
+
+This is done with the \cdCommand{no level2 lines} command.
+The level 2 lines are a large set of transitions that came
+from the Opacity Project.
+They are important in dense or very high
+ionization gas,
+and for pumping excited levels (such as \ci*\ or \cii*)
+of many heavy elements.
+
+\subsection{Degrade the continuum resolution }
+
+The resolution of the coarse continuum mesh affects the execution time
+since photoionization rates and opacities involve repeated sums over it.
+The resolution is changed with the \cdCommand{set continuum resolution} command.
+
+If you change the continuum resolution then the standard stellar SEDs and
+grains that are part of the code distribution will need to be recompiled.
+This is done with the \cdCommand{compile grains} 
+and  \cdCommand{compile stars} commands.
+
+\subsection{Make the iso-sequence model atoms as small as possible}
+
+The code treats several iso-sequences with a unified model atom.
+The
+execution time increases when the number of levels within the model atoms
+is increased.
+Less time will be used if the smallest possible number of
+levels is used.
+The number of levels is adjusted with the \cdCommand{levels} option
+on the \cdCommand{database} command.
+The
+\cdCommand{database levels} commands for the
+H-like and He-like atoms accepts the keywords \cdCommand{very small}
+to make the atom
+as compact as possible.
+The line spectrum predicted by these atoms is likely
+to be highly inaccurate,
+and Case~B intensities are far better when a compact model is used.
+

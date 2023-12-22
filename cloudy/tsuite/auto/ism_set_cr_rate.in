@@ -1,0 +1,90 @@
+title background cosmic ray ionization by suprathermal electrons only
+#
+# commands controlling continuum =========
+cosmic ray rate -16
+# this will be VERY faint black 50000
+ionization parameter -25
+black 50000 
+#
+# commands for density & abundances =========
+hden 5
+element hydrogen ionization 1 0.00000001
+#
+# commands controlling geometry  =========
+set dr 0 
+stop zone 1
+#
+# other commands for details     =========
+constant temperature 1000 K
+# turn off molecules to test only ions 
+# >>chng23 mar 04, add "heavy" option
+no molecules heavy 
+# must turn off charge transfer and its heating, which would dominate,
+# since we want to test cr heating and ionization
+no charge transfer
+no ctheat
+# must turn of  photoionization by recombining species,
+# since we want to test cr heating and ionization
+no photoionization
+# any time photoionization is turned off, it is best to also
+# turn off induced processes, which include pumping in the lyman lines
+no induced processes
+#
+# commands controlling output    =========
+print ages
+## >>chng 01 may 11, model was changed to test only secondary ionization,
+## its intended purpose
+save overview "ism_set_cr_rate.ovr"
+save performance "ism_set_cr_rate.per"
+save monitors "ism_set_cr_rate.asr" last
+#
+# commands giving the monitors    =========
+##
+## this is log of H0 ionization rate
+monitor csupra -16.00
+##
+## total heating
+## uncertain since depends on collider density
+## >>chng 11 nov 16, from -22.04 to -22, adjust newmole monitors
+monitor htot -22.00
+##
+## >>chng 11 nov 16, from -22.04 to -22, adjust newmole monitors
+monitor line "cr h" 0  luminosity -22
+## 
+## >>chng 08 jul 26, add two hyperfine stucture lines 
+## asserted values not yet set
+## >>chng 13 jul 24, wl from 21.10c to 21.1050c, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 21.1050c to 21.1207c, increased wl precision to 6 sig. fig.
+monitor line "H  1" 21.1207c  luminosity -26.696
+## >>chng 13 jul 30, wl from 16.00c to 16.7710c, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 1, from -35.662 to -35.7380, new data and calculations for hfs line
+monitor line "Mg 2" 16.7710c  luminosity -35.7380
+##
+monitor ionization helium 2 -4.14 error 0.1
+##
+## >>chng 06 mar 05, from -4.27 to -8.05, NA add C+ - (Mg0 Fe0) CT
+## >>chng 08 dec 18, from -8.05 to -4.27, prev chg reversed; CT now properly killed
+monitor ionization carbon 2 -4.27 error 0.1
+##
+## >>chng 06 mar 05, from -4.50 to -7.19, NA add C+ - (Mg0 Fe0) CT
+## >>chng 08 dec 18, from -7.19 to -4.50, prev chg reversed; CT now properly killed
+## >>chng 11 jul 12, from -4.5 to -4.304, update to head of branch, without new coll DR suppression
+## >>chng 12 jul 01, from -4.304 to -4.76, update Badnell DR to 13-electron iso sequence
+## >>chng 12 aug 24, from -4.76 to -4.836, BUGFIX r6603 DR rates not updated in const temp sim
+## >>chng 13 feb 01, from -4.836 to -4.967, BUGFIX, largely undo r6703
+monitor ionization silicon 2 -4.967 error 0.1
+##
+## >>chng 06 feb 07, from -4.02 to -3.97, add exp to low-T DR 
+## >>chng 11 apr 22, from -3.97 to -4.042, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -4.042 to -3.987, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -3.987 to -4.029, BUGFIX, largely undo r6703
+monitor ionization iron 2 -4.029 error 0.1
+##
+# ism_set_cr_rate.in
+# class limit 
+# ========================================
+# 
+
+This test conditions of cosmic ray ionization.  Molecules and charge transfer
+are disabled so that analytical estimates can be made.  
+

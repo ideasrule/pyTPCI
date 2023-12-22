@@ -1,0 +1,55 @@
+title coronal equilibrium
+# vary temperature in coronal equilibrium, monitor coolnd
+#
+# commands controlling continuum =========
+coronal 4 vary
+grid 1 9 0.25 sequential log
+#
+# commands for density & abundances =========
+hden 0
+abundances primordial
+#
+# must include cosmic ray background since going below 1e4 K
+# make it 1e-4 of the default rate
+cosmic ray background -4
+# 
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# commands controlling output    =========
+no blends
+save grid "grid_coronal_primal.grd" last no hash
+save monitors "grid_coronal_primal.asr" last
+save cooling "grid_coronal_primal.col" last no hash
+## >>chng 15 mar 07, 1st sim, from -33.6634 to -33.5604, merging newmesh branch
+## >>chng 16 nov 16, val 18 from -22.6429 to -22.6837, merging RydDep branch after fixing some bugs   
+## >>chng 16 nov 16, val 19 from -22.9777 to -23.0153, merging RydDep branch after fixing some bugs   
+## >>chng 16 nov 16, val 20 from -23.1739 to -23.2026, merging RydDep branch after fixing some bugs   
+monitor CTOT grid "grid_coronal_primal.dat" 0.05
+# 
+# grid_coronal_primal.in
+# class coronal 
+# ========================================
+# 
+*********
+
+This is a classical cooling function calculation - cosmic rays must be included
+for temperatures below 1e4 K to sustain chemistry.
+This is a coronal (collisional) ionization calculation.
+
+This version uses primordial abundances.  A small CR rate has to be set 
+for the low-T chemistry to work.  The possibility of primordial
+cosmic rays is rays is mentioned by 2014A&A...570L...3T although
+thiey are not part of standard primrodial chemistry networks.
+
+This is not a realistic model for several reasons.  First, it uses the approximate
+small H2 model - the large model invoked with ATOM H2 is better but slower.
+Second, primordial chemistry is time dependent - the Universe is typically not
+old enough, at a given z, for the chemistry to have reached steady state.
+This is a time-steady calculation.
+
+The purpose of the test is to demonstrate code behavior in the metal-free
+limit, over a wide range of temperature.  Gas-phase light-element
+chemistry is exercised, but with the trace amount of cosmic rays.
+

@@ -1,0 +1,44 @@
+title exercise full range of density, temperature
+#
+# modified from slow/grid_extreme.in
+# this version cycles through the corner models twice
+# to see if the second repetition exactly matches the first
+# checkall.pl calls test_grid.pl to check that output is identical
+# 
+element lithium off
+element berylium off
+element boron off
+## >>chng 12 apr 09, scale factor will result in CR rate for that meeting
+## old value maintained to keep history
+cosmic rays background linear 0.1266
+cmb
+iterate
+# 
+blackbody 6 
+energy density 6 vary
+grid 1 6 5 cycle sequential
+# -8 18 
+hden 2 vary
+grid -6 15 21
+stop zone 1
+# set to constant small thickness
+set dr -10
+#
+trace h-like full helium no print
+trace he-like full no print
+trace heavy no print
+trace convergence esource no print
+no time
+# 
+save performance no hash "func_test_cycle.per"
+save grid no hash "func_test_cycle.grd" last 
+save overview last no hash "func_test_cycle.ovr" last 
+save monitors last no hash "func_test_cycle.asr" last 
+save average "func_test_cycle.avr" last 
+temperature hydrogen 2
+end of average
+# 
+monitor temperature grid "func_test_cycle.dat" "H+"
+#
+# func_test_cycle.in limits
+ 

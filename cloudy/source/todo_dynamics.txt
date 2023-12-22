@@ -1,0 +1,24 @@
+orion flow does not go deep enough to fully form CO, so advective effects not fully tested
+	increase N(H) by at least 2x to form CO
+
+add test on conservation of C or O - test numbers coming in from upstream 
+
+CO cross terms in H chem are turned off when advection is done
+
+momle_h_step cross terms with co network turned off when advection is on - it not done the extensive printout due to non-conservations of protons
+
+mole_h_step.c - start line 4554, large block of reactions that are not used - rm these also from global name space - second block at 5278 - used these source and sink terms in bvec, also commented out
+
+pressure_total.c - line 710, EnthalphDensity cp vs cd cases - now set to get cd answer
+
+when co block of reactions is commented out in hmole dynamics very large residual in H sum new vs old at very start of second and later iteration  is almost certainly caused by dense.H_sum_in_CO not being right.- needs to be reset to zero 
+
+dynamics_orion_flow - co chem explicitly turned off in test script 
+
+======================
+time dep
+
+constant pressure, time dep, conflict, 
+	last command will have effect, overwriting previous
+	first iteration will not be constant 
+	in change pressure - logic should allow constant pressure on first iter, use dynamics after

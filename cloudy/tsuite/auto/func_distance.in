@@ -1,0 +1,55 @@
+title check that distance and "print flux earth" commands work 
+#
+# commands controlling continuum =========
+# luminosity in ionizing radiation, this and distance
+# were chosen so that flux at earth assocated with total
+# luminoisity of object is 1 erg cm-2 s-1 
+luminosity 40
+laser 2
+#
+# must test capabiliites somewhere
+# >>19 07 09, add abundances
+abundances "palme14-Sol.abn"
+#
+# commands for density & abundances =========
+hden 4
+# >>19 07 09, add abundances
+# init file "honly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+radius 17
+#
+# other commands for details     =========
+distance 19.450395
+constant temperature 4
+#
+# commands controlling output    =========
+# give flux at Earth
+print lines, flux at Earth
+save overview "func_distance.ovr"
+save performance "func_distance.per"
+save monitors "func_distance.asr" 
+#
+# commands giving the monitors    =========
+monitor line luminosity "inci" 0 0 
+# func_distance.in 
+# class function 
+# ========================================
+# 
+
+Normally the code predicts the intensity or luminosity of
+the emission lines.  This test confirms that it can predict
+the flux recieved at the Earth instead.  The model is the simplest
+and fastest that can be computed - a H-only constant temperature
+single zone.  The total luminosity is set to 1e40 erg/s, and the
+ionization source is a laser at 2 ryd.  With these set, the
+total luminosity in ionizing radiation, the total luminoisity in
+the incident continuum (the emission line labeled "Inci 0") will be 1e40.
+
+The code will predict the flux at the Earth if both the distance to the
+oject is specified with the distance command, and this is requested with
+the print flux earth command.  The distance was chosen so that the
+total flux at the Earth will be 1 erg/s.  This is asserted at the
+end of the calculation.
+

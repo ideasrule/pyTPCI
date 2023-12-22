@@ -1,0 +1,63 @@
+The LAMDA project, http://home.strw.leidenuniv.nl/~moldata/, does not use version numbers. 
+Instead they post notices of updates on the web site 
+http://home.strw.leidenuniv.nl/~moldata/database.history 
+
+This file describes revisions to the database.  When it is updated we must also update the citation to LAMDA
+in  ~data/citations_data.txt 
+
+The entire database can be downloaded with the command:
+wget --recursive  --reject="index.html*"  --no-parent  http://home.strw.leidenuniv.nl/~moldata/datafiles/ 
+Do this in a new directory and do a diff between that directory, and the trunk.
+
+====================
+
+2015, June 30, Nick Abel updated files.  
+
+Changes in the LAMDA web site:
+Two molecules, isotopes of CS (13CS and C34S)
+were removed between the previous version of LAMDA and the one now implemented.  
+Additionally, five new molecules were added to LAMDA
+OH+, H2S, H2CS, C2H, and NH2D.  
+
+The LAMDA level energies are not given to spectroscopic accuracy.
+We compute the wavelength by taking the energy difference between two 
+levels and setting it equal to h*c/wavelength, some wavelengths were identical.  This was not
+physical.  Rather, it was due to the energy separation between two levels being the same. 
+This was caused by not having enough significant figures for the low lying levels of molecules 
+with hyperfine structure, notably OH and HCN.  To rectify this, we went to the JPL website
+and sorted the transitions by wavenumber, instead of frequency, and used this output to add 
+extra digits to the energy levels and make the wavelengths unique.  
+
+The LAMDA data format had changed between 2010 and 2015.  
+
+For HCN, the ordering of the transitions did not match with the ordering of energy levels. Therefore, when the 
+energy levels were reorganized by energy, some LAMDA transitions had the upper level being a smaller number than
+the lower level, which is impossible.  In the HCN datafile, LAMDA had put the collision rates to zero, recognizing
+that such a transition is cannot generate light.  We simply deleted these collisional rates and reduced the
+number of collisional transitions in the datafile accordingly.
+
+For HCl, there was an extra space added in the datafile, so that the first character on an new line was a space.  This was deleted.
+
+Several of the datafiles have been reorganized so that the levels are not in order of increasing energy.  
+Our code was not designed to deal with this.
+However, the files where this was done belong to molecules that are not currently predicted by Cloudy, or
+molecules whose collisional data has not changed in five years.  We therefore used the older files
+(which have the energy ordering correct) for the molecules predicted by Cloudy.  
+
+There were significant changes in intensities of H2O and CS lines due to improved data.  These changed
+the temperature which resulted in changes in some high-J CO lines.
+
+====================
+2010 Dec 18
+
+We reference LAMDA by date of data retrieval.  The file ~data/citations_data.txt contains
+something like
+
+ Much of the molecular emission data is from LAMDA as accessed on Dec. 18, 2010. This database is described in:
+        Schoeier F.L., et al., A&A 432, 369 (2005) [http://adsabs.harvard.edu/abs/2005A%26A...432..369S]
+      This database is in part based on the work of the following groups:
+        JPL: Pickett H. M. et al., JQSRT, 60, 883 (1998). [http://adsabs.harvard.edu/abs/1998JQSRT..60..883P]
+        CDMS: Mueller H. S. et al., A&A 370, L49 (2001). [http://adsabs.harvard.edu/abs/2001A%26A...370L..49M]
+              Mueller H. S. et al., J. Mol. Struct. 742, 215 (2005). [http://adsabs.harvard.edu/abs/2005JMoSt.742..215M]
+ 
+When data files are updated this citation must be too.

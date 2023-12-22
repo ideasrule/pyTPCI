@@ -1,0 +1,745 @@
+\chapter{THE EMISSION LINES}
+% !TEX root = hazy2.tex
+\label{sec:EmissionLines}
+
+\section{Overview}
+
+The following sections outline the emission lines predicted by \Cloudy.
+Before version 90 of the code all lines were listed in the sub-section
+immediately following this section.  The code is being modified to bring
+all lines into a common line class, as the code moves to C++ and objects.
+This chapter will remain incomplete until this work is finished.
+
+
+\section{The main emission-line printout }
+
+The main emission line printout was briefly described
+in the Chapter \cdSectionTitle{OUTPUT}.
+This section
+goes into more detail.
+
+\cdCommand{Output organization}.  The printed list is sorted into four large groups
+of columns, with each large column sub-divided into four smaller sub-columns.
+The first sub-column is either the spectroscopic designation of the ion
+producing the line or an indication of how the line is formed.  The second
+sub-column is the line wavelength, with a 0 to indicate a continuum.  The
+third sub-column is the log of the power in the line, in the units given
+in the header (erg s$^{-1}$ into either $4\pi$ sr or cm$^{-2}$).  The last sub-column is
+the intensity of the line relative to the reference line,
+usually H$\beta$ , unless
+this is reset with the \cdCommand{normalize} command.
+
+These lines can be printed as a single large column, and can be sorted
+by wavelength or intensity.  These options are controlled by the
+\cdCommand{print line}
+command described in Part I of this document.
+
+\subsection{Intrinsic and emergent line intensities}
+
+See Section \ref{sec:LineIntensitiesDustyCloud}.
+
+\subsection{Units of Line wavelengths}
+These can be given in various units.
+Numbers ending
+in ``A'' are wavelengths in Angstroms (\AA ).
+For instance, H$\beta$ is given by ``H~~1  4861A''.
+Wavelengths in microns are indicated by ``m'', an example,
+the strong [O~III] IR line, is ``O~~3 51.80m''.
+
+Continua are usually
+indicated by a wavelength of zero.
+
+\subsection{Air vs vacuum wavelengths}
+
+The emission line wavelengths follow the convention that vacuum wavelengths
+are used for $\lambda < 2000$\AA\ and STP air wavelengths are used
+for $\lambda \ge 2000$\AA.
+The \cdCommand{print line vacuum} command tells the code use use vacuum wavelengths throughout.
+\cdCommand{Save continuum} output is always reported in vacuum wavelengths to avoid 
+a discontinuity at 2000\AA.
+
+\subsection{Blocks of lines in main output}
+
+Lines are organized by common origin with a comment, ending in a series
+of periods ``\dots'', beginning the section.
+As an example, the first
+commented block of lines begins with ``general properties\dots''.
+The
+following subsections give overviews of the lines.
+
+\subsection{General properties\dots}
+
+This mainly summarizes heating and cooling agents for the model.
+\begin{description}
+\item[H  1 4861 and H  1 1216,] are the total intensities of H$\beta$
+and L$\alpha $, as
+predicted by the multi-level H atom.
+These intensities are the results
+of calculations that include all collisional, radiative, and optical
+depth effects.
+
+\item[Inci]  The total energy in the incident continuum.
+This entry will not be included if the \cdCommand{aperture} command is in effect.
+
+\item[TotH and TotC] give the total heating and cooling.  These will be nearly
+equal in equilibrium.
+
+\item[BFH1 and BFHx] are the heating due to photoionization of ground state
+and excited state hydrogen respectively.
+
+\item[He1i, 3He1], heating due to ground state He and the triplets.
+
+\item[BFHe and TotM] are the heating due to helium and metal photoionization.
+
+\item[Pair] heating due to pair production.
+
+\item[ComH , ComC],  Compton heating, cooling.
+
+\item[CT H    CT C] charge transfer heating and cooling.
+
+\item[extH   extC]    ``extra'' heating or cooling added to model.
+
+\item[e-e+  511]  The positron line.
+
+\item[Expn], expansion, or adiabatic, cooling
+
+\item[H FB], H radiative recombination cooling
+
+\item[HFBc, HFBc], hydrogen net free-bound cooling and heating
+
+\item[Iind], cooling due to induced recombination of hydrogen
+
+\item[3He2], cooling due to induced recombination of fully ionized helium
+
+\item[Cycn], cyclotron cooling
+\end{description}
+
+\subsection{Continua\dots}
+
+These give intensities of various continua.  These are either the total
+integrated continuum or the product $\nu F_\nu$ at certain energies.
+
+\subsubsection{Continuum bands}
+The file \cdFilename{continuum\_bands.ini} in the data directory
+specifies a set of wavelength bands.
+The code will integrate over these bands to find the
+total radiated luminosity and enter this into the main emission-line stack.
+Currently this is a simple sum of the energy emitted between the upper and
+lower bounds of the band, and does not take into account the transmission function
+of particular instruments.
+The \cdFilename{continuum\_bands.ini} file can be edited to change 
+the number of bands or their detailed properties.
+Table \ref{tab:continuum_bands} lists the bands in the file at the
+time of this writing.
+The first and second columns give
+the label and wavelength as they appear in the printout.
+The last column
+gives the wavelength range for the integration.
+These entries will not be included if the \cdCommand{aperture} command is in effect.
+Please consult the file to see its current contents
+and feel free to add your own bands.
+
+%copied from ini file 2012 July 20
+% commented out code to print this is in cont_createpointers.cpp
+% search for string *hazy table*
+\begin{table}
+\centering
+\caption{\label{tab:continuum_bands}Default continuum bands}
+\begin{tabular}{lll}
+\hline
+Label& Wavelength&Wavelength Range\\
+\hline
+ FIR  & 83.00m & 40.00m -- 500.0m\\ 
+ TIR  &  1800m & 500.0m --  3100m\\ 
+ NIRa & 2.850m &  7000A -- 40.00m\\ 
+ NIRb & 3.000m & 10000A -- 5.000m\\ 
+ MIRa & 15.00m & 5.000m -- 25.00m\\ 
+ MIRb & 22.50m & 5.000m -- 40.00m\\ 
+ NMIR & 21.75m &  7000A -- 40.00m\\ 
+ TFIR & 611.2m & 122.5m --  1100m\\ 
+ TALL & 10000A & 0.010A -- 10000m\\ 
+ F12  & 12.00m & 8.500m -- 15.00m\\ 
+ F25  & 25.00m & 19.00m -- 30.00m\\ 
+ F60  & 60.00m & 40.00m -- 80.00m\\ 
+ F100 & 100.0m & 83.00m -- 120.0m\\ 
+ MIPS & 24.00m & 20.80m -- 26.10m\\ 
+ MIPS & 70.00m & 61.00m -- 80.00m\\ 
+ MIPS & 160.0m & 140.0m -- 174.0m\\ 
+ IRAC & 3.600m & 3.160m -- 3.920m\\ 
+ IRAC & 4.500m & 4.000m -- 5.020m\\ 
+ IRAC & 5.800m & 5.000m -- 6.400m\\ 
+ IRAC & 8.000m & 6.500m -- 9.300m\\ 
+ SPR1 & 250.0m & 212.0m -- 288.0m\\ 
+ SPR2 & 350.0m & 297.0m -- 405.0m\\ 
+ SPR3 & 500.0m & 414.0m -- 600.0m\\ 
+ PAC1 & 70.00m & 60.00m -- 82.00m\\ 
+ PAC2 & 100.0m & 84.00m -- 122.0m\\ 
+ PAC3 & 160.0m & 130.0m -- 198.0m\\ 
+ PAH  & 3.300m & 3.250m -- 3.350m\\ 
+ PAHC & 3.230m & 3.200m -- 3.250m\\ 
+ PAHC & 3.370m & 3.350m -- 3.400m\\ 
+ PAH  & 6.200m & 5.900m -- 6.400m\\ 
+ PAHC & 5.650m & 5.400m -- 5.900m\\ 
+ PAH  & 7.900m & 7.400m -- 8.400m\\ 
+ PAHC & 6.900m & 6.400m -- 7.400m\\ 
+ PAH  & 11.30m & 11.10m -- 11.50m\\ 
+ PAHC & 10.90m & 10.70m -- 11.10m\\ 
+ PAH  & 11.80m & 11.60m -- 12.30m\\ 
+ PAHC & 12.65m & 12.30m -- 13.00m\\ 
+ PAH  & 13.30m & 12.90m -- 13.70m\\ 
+ PAHC & 14.10m & 13.70m -- 14.50m\\ 
+ Bcon &  3640A & 911.6A --  3646A\\ 
+ Pcon &  5000A &  3646A --  8204A\\ 
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Other continua}
+
+\begin{description}
+\item[Bac  3646]  residual flux at head of Balmer
+continuum, $\nu F_\nu$. This entry will not be included if the \cdCommand{aperture}
+command is in effect.
+
+\item[cout 3646 cref 3646], outward, reflected continuum at peak of Balmer Jump.
+These entries will not be included if the \cdCommand{aperture} command is in effect.
+
+\item[thin 3646], residual flux at head of Balmer continuum, optically thin limit.
+This entry will not be included if the \cdCommand{aperture} command is in effect.
+
+\item[Inci 4860, Inci 1215], incident continua near \ha\ and \la.
+These entries will not be included if the \cdCommand{aperture} command is in effect.
+
+\item[Ba C    0], integrated Balmer continuum
+
+\item[PA C    0], integrated Paschen continuum
+
+\item[HeFF    0], He brems emission
+
+\item[HeFB    0], He recombination cooling
+
+\item[MeFB    0], heavy element recombination cooling
+
+\item[MeFF    0], metal brems emission
+
+\item[ToFF    0], total brems emission
+
+\item[FF x], part of H brems, in x-ray beyond 0.5KeV
+
+\item[eeff], electron - electron brems
+\end{description}
+
+\cdTerm{nFnu  122m},
+\cdTerm{nInu  122m},
+\cdTerm{InwT  122m},
+\cdTerm{InwC  122m},
+a large list of continua
+at selected wavelengths will be printed.
+These entries will not be included if the \cdCommand{aperture} command is in effect.
+The first is the sum of various continua at the wavelength,
+given as $\nu F_\nu$ (see the \cdCommand{set nFnu} command
+in Part~1 for a discussion of what is included in the \cdTerm{nFnu} entry).
+\cdTerm{nInu} is the transmitted and reflected incident continuum.
+\cdTerm{InwT} is the total reflected continuum.
+\cdTerm{InwC} is the reflected incident
+continuum.
+
+\subsection{Molecules\dots}
+
+\begin{description}
+
+\item[H2dC], is the cooling due to collisional dissociation of \htwo.
+
+\item[H2dH], heating by \htwo\ dissociation by Lyman continuum
+
+\item[H2vH], heating by coll deexcit of vib-excited \htwo\
+
+\item[H2vC], cooling by coll deexcit of vib-excited \htwo\
+
+\item[H2 v], line emission by vib-excited \htwo\
+
+\item[H-FB and H-FF] are the free-bound and free-free continua of the H- ion.
+
+\item[H-CT 6563], H-alpha produce by H- mutual neutralization
+
+\item[H- H]    0, H- heating
+
+\item[H-Hc]    0, H- heating
+
+\item[H2+] and HEH+ are the cooling due to formation of H$_2^+$ and HeH$^+$.
+
+\item[Codh], carbon monoxide photodissociation heating
+
+\item[CO C   12], C12O16 cooling
+
+\item[CO C   13], C13O16 cooling
+
+\end{description}
+
+
+\subsection{Species Bands\dots}
+\label{sec:SpeciesBands}
+
+Bands in which the emission of a certain species is accumulated are reported in
+the section of block of lines on the main output headlined with
+``\verb+bands....+''.
+User-specified bands may be provided with the \cdCommand{save species bands}
+command, described in Hazy 1, Section~\ref{Hazy1-sec:SaveSpeciesBands}.
+By default, the Fe~{\sc ii} bands defined in \cdFilename{data/FeII\_bands.ini},
+if iron is enabled in the model, even if not specified with such a command.
+
+Note that these bands are more fully explained in the output of the command
+\cdCommand{save line labels}, see Hazy 1, Section~\ref{Hazy1-sec:SaveLineLabels}.
+
+
+\subsection{Grains\dots}
+
+Information in this block concerns emission, absorption, heating, and
+cooling by any grains included in the calculation.
+
+\begin{description}
+\item[GrGH], gas heating by grain photoionization
+
+\item[GrTH], gas heating by thermionic emissions of grains
+
+\item[GrGC], gas cooling by collisions with grains
+
+\item[GraT], This is the total grain heating by all sources, lines, collisions,
+incident continuum.  If the grain emission is optically thin limit then
+this is equal to the total intensity in grain emission.
+
+\item[GraI], grain heating by incident continuum
+
+\item[GraL 1216], grain heating due to destruction of L$\alpha $
+
+\item[GraC], grain heating due to collisions with gas
+
+\item[GraD], grain heating due to diffuse fields, may also have grain emission
+\end{description}
+
+Grain emission is included in the predicted total emitted continuum.
+A machine readable form of the continuum can be produced with the \cdCommand{save continuum} command,
+also described in Part I of this document.
+
+\subsection{H-like iso-seq\ldots}
+
+This block includes all hydrogen-like isoelectronic species.
+The \cdCommand{atom H-like} command,
+described in Part 1 of this document, adjusts properties
+of this sequence.
+
+\begin{description}
+\item[HFFc    0], net free-free cooling, nearly cancels with cooling in lte
+
+\item[HFFh   0], net free-free heating, nearly cancels with cooling in lte
+
+\item[H FF   0], H brems (free-free) cooling
+
+\item[FF H    0], total free-free heating
+
+\item[Clin  912], total collisional cooling due to all hydrogen lines
+
+\item[Hlin  912], total collisional heating due to all hydrogen lines
+
+\item[Cool 1216], collisionally excited La cooling
+
+\item[Heat 1216], collisionally de-excited La heating
+
+\item[Crst  960], cooling due to n>2 Lyman lines
+
+\item[Hrst  960], heating due to n>2 Lyman lines
+
+\item[Crst 4861], cooling due to n>3 Balmer lines
+
+\item[Hrst 4861], heating due to n>3 Balmer lines
+
+\item[Crst    0], cooling due to higher Paschen lines
+
+\item[Hrst    0], heating due to higher Paschen lines
+
+\item[LA X 1216], L$\alpha $ contribution from suprathermal secondaries from ground
+
+\item[Ind2 1216], L$\alpha $ produced by induced two photon
+
+\item[Pump 4861], H$\beta$ produced by continuum pumping in optically thin ld limit
+
+\item[CION    0], net col ionz-3 body heat collision ionization cooling of
+hydrogen
+
+\item[3bHt    0], heating due to 3-body recombination
+
+\item[Strk 1216], Stark broadening component of line
+
+\item[Dest 1216], part of line destroyed by background opacities
+
+\item[Fe 2 1216], part of L$\alpha $ absorbed by Fe II
+
+\item[Q(H) 4861] is the intensity of H$\beta$ predicted from the total number of
+ionizing photons, Q(H$^0$), assuming that each hydrogen-ionizing photon produces
+one hydrogen atom recombination. This entry will not be included if the \cdCommand{aperture}
+command is in effect.
+
+\item[Q(H) 1216] indicates the L$\alpha $ intensity produced if each hydrogen ionizing
+photon results in one \la\  photon in the high density limit (i.e., no
+two-photon emission). This entry will not be included if the \cdCommand{aperture}
+command is in effect.
+
+\item[CaBo 4861] These are the ``old'' case B predictions, as printed in versions
+90 and before of the code.
+\end{description}
+
+\cdTerm{Ca B 6563A} The entries starting with ``Ca~~B''
+are the Case B intensities
+computed from the actual model ionization and temperature structure, but
+assuming that H$\beta$ emits with its Case~B emissivity.
+
+Next the predicted intensities of all lines of the hydrogenic
+iso-electronic sequence are given.
+The lines have labels that identify
+the species and stage of ionization,
+such as ``H~~1'', ``He~2'', ``Li~3'', ``C~~6'', etc.
+The entries with a wavelength of zero are the total intensities
+of the $2s-1s$ two-photon emission.
+
+\subsection{He iso-sequence\dots }
+
+Atoms and ions of the helium-like iso-electronic sequence are treated
+as multi-level atoms.  All species and stages of ionization are specified
+by labels like ``He~1'', ``Li~2'', ``C~~5'', etc.
+A wavelength of zero indicates the
+two-photon continuum.
+The $2\;^3P$ term is resolved into three levels.
+Emission of
+each line of the $2\;^3S - 2\;^3P$ and $1\;^1S - 2\;^3P$ multiplets
+is predicted along with the sum of
+the multiplets with label ``TOTL''.
+The \cdCommand{atom He-like} command, described in Part 1 of
+this document, adjusts properties of this sequence.
+Further details are
+given in \citet{Bauman2005}, \citet{Porter2005}, and \citet{PorterFerland2007}.
+
+\subsection{Recombination\dots}
+
+These are a set of heavy-element recombination lines that are predicted
+in the low-density limit assuming that the transitions are optically thin.
+This consists of all recombination lines of C, N., and O, with coefficients
+taken from \citet{Nussbaumer1984} and \citet{Pequignot1991}.
+
+These predictions are for optically thin pure recombination.
+These should
+be accurate for planetary nebulae and H II regions.
+They will not be
+accurate for dense environments where optical depths and collisional effects
+come into play.
+These are only included in the output if the electron
+density is less than $10^8 \pcc$,
+a rough upper limit to the range of validity
+in the original calculations of the coefficients.
+
+There are several instances where more than one line of an ion will have
+the same wavelength due to the integer Angstrom format used for wavelengths.
+The worst case is O~V 4953,
+where three lines of the same multiplet have
+the same wavelength.
+
+\subsection{Level 2 lines\dots }
+
+These are resonance lines that use Opacity Project wavelengths, which
+are generally accurate to about 10\%.
+These lines have g-bar collision
+strengths, which are not very accurate at all.
+
+\section{The transferred lines}
+\label{sec:TransferredLines}
+
+\subsection{Save line data output}
+
+The group of ``transferred lines'' includes all those that have been
+moved to the \cdFilename{EmLine} class.
+
+In older versions of this document a large list of emission lines
+appeared here.
+This list is now far too large to include here.
+Rather,
+the list can be generated by executing the code with the command \cdCommand{save line data ``filename.txt''} included.
+This will create a file that includes the
+full set of lines that are predicted.
+Note that the lines that are output
+are only those that exist when the code is run.
+It is possible to make
+many of the model atoms and molecules as large or small as you like,
+and
+the actual lines that exist when the \cdCommand{save} command
+is entered will be output.
+The test case \cdFilename{func\_lines.in} in the test suite
+includes this save command and generates a list of all transferred
+lines in the file \cdFilename{func\_lines.lis}.
+
+To generate a line list, set up a calculation with the atoms set to
+whatever size is desired (see the \cdCommand{atom} command in Part I).  Then execute
+this script with the \cdCommand{save line data} command included (described in Part I).
+The save output will include the line list.
+This will include the level 2, H and He iso-sequence,
+\htwo, CO, and recombination lines,
+but not the scalar forbidden lines.
+These are described in a list following this subsection.
+
+This contains several groups of lines.
+All quantities were evaluated at $10^4 \K$.
+The description of the command in Part I of this document explains
+how to evaluate the quantities at other temperatures.
+
+The ion is the first column of the table.
+This is in a uniform format,
+beginning with the two character element symbol and followed by an integer
+indicating the level of ionization.
+``C~~2'' is C$^+$ or C~II.
+This is
+followed by the integer wavelength label used to identify the line in the
+printout.
+The third column, with the label ``WL'', is the correct wavelength
+of the line, with units of microns (``m''), Angstroms (``A''),
+or cm (``c'').
+The remaining columns give the statistical weights of the lower and upper
+levels, the product of the statistical weight and the oscillator strength,
+and then the transition probability.
+
+The last column is the electron collision strength.
+Usually these collision strengths
+are for only the indicated transition, although in some cases (the Be
+sequence) the value is for the entire multiplet.
+
+\subsection{Output produced for the transferred lines}
+
+Because the lines have a common format within their storage vectors,
+the output has a common format too.
+Generally only the total intensity
+of the transition, the result of the solution of a multi-level atom with
+all processes included, is printed.
+The approach used to compute the level
+populations is described in Part II of \Hazy,
+and includes continuum pumping,
+destruction by background opacities, and trapping.
+
+The total intensity of the transition is printed in a form like ``C~~2 1335'', with the spectroscopic identification given by the first part,
+as found in the first column of the table, and the wavelength as indicated
+by the number in the second column of the table.
+
+In a few cases (for instance, the C~IV $\lambda \lambda $1548, 1551 doublet), a total
+intensity is also derived.
+In these cases the label ``Blnd'' will appear
+together with an average wavelength (1549 in this case).
+These lines are
+all explicitly shown in a following section.
+
+It is possible to break out various contributors to the lines with options
+on the \cdCommand{print line} command, described in Part I of this document and in the
+following.
+These contributors are printed following the total intensity.
+
+\cdCommand{print line heating}  An emission line will heat
+rather than cool the gas
+if it is radiatively excited but collisionally de-excited.
+The print out
+will include this agent, with the label ``Heat'',
+when this command is given.
+
+\cdCommand{print line collisions}  The collisional contribution
+to the lines will
+be printed, with the label ``Coll''.
+
+\cdCommand{print line pump}  The contribution to the total line, produced by continuum
+pumping, is printed with the label ``Pump''.   What is observed?  Whether
+or not this is a net emission process contributing to the observed line
+intensity depends on the geometry, mainly whether or not continuum source
+is in the beam. At some velocities within the line profile this can be a
+net emission process, due to absorption at other velocities.   If the
+continuum source is in the beam and gas covers it, this is not a net emission
+process, since photons are conserved.
+
+\cdCommand{print line inward}  The inwardly directed part of the total emission is
+printed with the label ``Inwd''.  This can be greater than half of the line
+intensity if the line is optically thick since these lines tend to be
+radiated from the hotter illuminated face of the cloud.
+
+\cdCommand{print line optical depths}  At the end of the calculation the optical
+depths for all optically thick lines will be printed.
+This is not done
+by default since it can be quite long.
+
+\section{Line identifications}
+
+The file \cdFilename{line\_labels.txt} in the docs directory of the distribution lists
+line identifications and a brief description of its origin.
+
+\section{Hydrogen recombination lines}
+
+Table \ref{tab:HydrogenEmissionLines} gives the strongest lines
+of the lowest series.
+All lines have the label ``H~~1''.
+The wavelength column gives
+the string as it appears in the printout.  ``m'' indicates a wavelength
+in $\mu$m and A in Angstroms.
+The Case B intensity is taken from the
+\cdFilename{limit\_caseb\_h\_hs87} test case.
+
+Some IR lines may have the same wavelength if the default line precision is used.
+The \cdCommand{set line precision} command can be used 
+to increase the number of significant figures in the
+line wavelength, which should make identification easier.
+
+% list update 17 02 18 gjf to fix error in Brackett line n'-n and improve wl
+\begin{table}
+\centering
+\caption{\label{tab:HydrogenEmissionLines}Hydrogen emission lines}
+\begin{tabular}{llll}
+\hline
+Series& $n'\to n$& Wavelength& $I$(Case B)\\
+\hline
+Lyman& 2--1& 1215.68A& - \\
+Balmer H$\alpha$& 3--2& 6562.85A     &2.8463\\
+H$\beta$& 4--2& 4861.36A     &1.0000\\
+H$\gamma$& 5--2& 4340.49A     &0.4692\\
+H$\delta$& 6--2& 4101.76A     &0.2596\\
+Paschen P$\alpha$& 4--3& 1.87511m   & 0.3319\\
+P$\beta$& 5--3& 1.28181m    &0.1617\\
+P$\gamma$& 6--3& 1.09381m    &0.0899\\
+P$\delta$& 7--3& 1.00494m    &0.0553\\
+Brackett Br$\alpha$& 5--4& 4.05116m &    0.0778\\
+Br$\beta$& 6--4& 2.62515m&     0.0445\\
+Br$\gamma$& 7--4& 2.16553m&     0.0274\\
+Br$\delta$& 8--4& 1.94456m&     0.0180\\
+Pfund& 6--5& 7.45781m& 0.0246\\
+Humphreys& 7--6& 12.3685m& 0.0098\\
+& 8--7& 19.0566m& 0.0042\\
+& 9--8& 27.7957m& 0.0020\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Molecular hydrogen lines}
+
+Table \ref{tab:MolecularHydrogenLines} gives some of the stronger
+or more frequently observed \htwo\ lines.
+These are only predicted when the large model \htwo\ molecule is
+included with the \cdCommand{atom H2} command.
+The wavelength column gives the string
+as it appears in the printout.  ``m'' indicated a wavelength in $\mu$m.
+All lines have the label ``H2~~''.
+
+Many lines will have the same wavelength if the default line precision is used.
+The \cdCommand{set line precision} command can be used 
+to increase the number of significant figures in the
+line wavelength, which should make identification easier.
+
+\begin{table}
+\centering
+\caption{\label{tab:MolecularHydrogenLines}Molecular hydrogen emission lines}
+\begin{tabular}{lllll}
+\hline
+Transition& $v_{hi},J_{hi}$& $v_{lo},J_{lo}$& $\lambda$(label)& $\chi$(hi,
+K)\\
+\hline
+0-0 S(0)& 0,2 & 0,0& 28.2130m & 509.8\\
+0-0 S(1)& 0,3 & 0,1& 17.0300m & 1015.1\\
+0-0 S(2)& 0,4 & 0,2& 12.2752m & 1681.6\\
+0-0 S(3)& 0,5 & 0,3& 9.66228m & 2503.8\\
+0-0 S(4)& 0,6 & 0,4& 8.02362m & 3474.3\\
+0-0 S(5)& 0,7 & 0,5& 6.90725m & 4586.2\\
+0-0 S(6)& 0,8 & 0,6& 6.10718m & 5829.5\\
+1-0 O(2)& 1,0 & 0,2& 2.62608m & 5986.9\\
+1-0 Q(1)& 1,1 & 0,1& 2.40594m & 6149.0\\
+1-0 O(3)& 1,1 & 0,3& 2.80176m & 6149.0\\
+1-0 S(0)& 1,2 & 0,0& 2.22269m & 6471.4\\
+1-0 Q(2)& 1,2 & 0,2& 2.41307m & 6471.4\\
+1-0 O(4)& 1,2 & 0,4& 3.00305m & 6471.4\\
+1-0 S(1)& 1,3 & 0,1& 2.12125m & 6951.3\\
+1-0 Q(3)& 1,3 & 0,3& 2.42307m & 6951.3\\
+1-0 O(5)& 1,3 & 0,5& 3.23411m & 6951.3\\
+0-0 S(7)& 0,9 & 0,7& 5.50996m & 7196.7\\
+1-0 S(2)& 1,4 & 0,2& 2.03320m & 7584.3\\
+1-0 Q(4)& 1,4 & 0,4& 2.43683m & 7584.3\\
+1-0 O(6)& 1,4 & 0,6& 3.50043m & 7584.3\\
+1-0 S(3)& 1,5 & 0,3& 1.95702m & 8365.0\\
+1-0 Q(5)& 1,5 & 0,5& 2.45408m & 8365.0\\
+1-0 O(7)& 1,5 & 0,7& 3.80648m & 8365.0\\
+0-0 S(8)& 0,10& 0,8& 5.05148m & 8677.0\\
+1-0 S(4)& 1,6 & 0,4& 1.89145m & 9286.3\\
+1-0 Q(6)& 1,6 & 0,6& 2.47510m & 9286.3\\
+0-0 S(9)& 0,11& 0,9& 4.69342m & 10261\\
+1-0 S(5)& 1,7 & 0,5& 1.83529m & 10341\\
+1-0 S(6)& 1,8 & 0,6& 1.78746m & 11521\\
+1-0 S(7)& 1,9 & 0,7& 1.74760m & 12817\\
+\hline
+\end{tabular}
+\end{table}
+
+The following is an example which predicts the emissivity of the \htwo\ 2.121 1-0 S(1) \micron\ line.
+\begin{verbatim}
+save line emissivity ``lines.ems''
+H2   2.121m
+end of lines
+\end{verbatim}
+
+A list of all H2 lines with their labels and excitation energies can
+be generated with the command \cdCommand{save H2 lines}.
+\href{http://jach.hawaii.edu/UKIRT/astronomy/calib/spec\_cal/h2\_s.html}{The Joint Astronomy Centre} in Hawaii give a
+summary of \htwo\ lines.
+
+\section{CO lines}
+
+Rotation transitions within the ground vibration level are included.  
+These are listed in Table \ref{tab:COLines} which gives the symbol
+``m'' to indicate $\micron$.
+
+\begin{table}
+\centering
+\caption{\label{tab:COLines}CO emission lines}
+\begin{tabular}{ll}
+\hline
+Label & wavelength \\
+\hline
+CO      & 2600.05m \\
+CO      & 1300.05m \\
+CO      & 866.727m \\
+CO  	& 650.074m \\
+CO  	& 520.089m \\
+CO  	& 433.438m \\
+CO  	& 371.549m \\
+CO  	& 325.137m \\
+CO  	& 289.041m \\
+CO  	& 260.169m \\
+CO  	& 236.549m \\
+CO  	& 216.868m \\
+CO  	& 200.218m \\
+CO  	& 185.949m \\
+CO  	& 173.584m \\
+CO  	& 162.767m \\
+CO  	& 153.225m \\
+CO  	& 144.745m \\
+CO  	& 137.159m \\
+CO  	& 130.333m \\
+CO  	& 124.160m \\
+CO  	& 118.548m \\
+CO  	& 113.427m \\
+CO  	& 108.733m \\
+CO  	& 104.416m \\
+CO  	& 100.433m \\
+CO  	& 96.7462m \\
+CO  	& 93.3237m \\
+CO  	& 90.1384m \\
+CO  	& 87.1666m \\
+CO  	& 84.3877m \\
+CO  	& 81.7835m \\
+CO  	& 79.3383m \\
+CO  	& 77.0375m \\
+CO  	& 74.8697m \\
+CO  	& 72.8231m \\
+CO  	& 70.8878m \\
+CO  	& 69.0557m \\
+CO  	& 67.3181m \\
+CO  	& 65.6684m \\
+\hline
+\end{tabular}
+\end{table}
+

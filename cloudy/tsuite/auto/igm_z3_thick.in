@@ -1,0 +1,87 @@
+title redshift 1000 recombination epoch
+#
+# commands controlling continuum =========
+# A true blackbody radiation field, in strict thermodynamic equilibrium.
+# This is a resolved variant of igm_z3, which should have uniform conditions.
+blackbody 3000 STE
+#
+# commands for density & abundances =========
+hden 0
+abundances primordial
+#
+# commands controlling geometry  =========
+# stop zone 1
+stop thickness 16
+stop temperature 0
+#
+# other commands for details     =========
+case b 
+iterate
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+normalize lines to "Ca B" 4861.32A
+print ages
+print departure coef element hydrogen
+print line faint -5
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save overview "igm_z3_thick.ovr"
+save performance "igm_z3_thick.per"
+save dr "igm_z3_thick.dr"
+save monitors "igm_z3_thick.asr"
+#
+# commands giving the monitors    =========
+## >>chng 13 jan 10, from 97.2 to 109.9, fix in-zone continuum shielding
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A 109.9
+##
+monitor "H+" temperature 3000
+##
+## >>chng 13 jan 10, from -0.909 to -0.5801, fix in-zone continuum shielding
+## >>chng 13 dec 18, from -0.5801 to -0.6275, fixes to Federman shielding
+monitor ionization hydrogen 2 -0.6275 error 0.06
+##
+## >>chng 13 may 23, from 0.305 to 0.291, move opac_update before cool_eval
+monitor line "ff h" 0 0.291
+##
+## >>chng 13 jan 10, from 0.032 to 0.0131, fix in-zone continuum shielding
+## >>chng 13 dec 18, from 0.0131 to 0.0152, fixes to Federman shielding
+monitor line "h- h" 0 0.0152
+##
+## >>chng 13 jan 10, from 0.028 to 0.0115, fix in-zone continuum shielding
+## >>chng 13 dec 18, from 0.0115 to 0.0133, fixes to Federman shielding
+monitor line "h-fb" 0 0.0133
+##
+## >>chng 13 jan 10, from 0.0175 to 0.0073, fix in-zone continuum shielding
+## >>chng 13 dec 18, from 0.0073 to 0.0084, fixes to Federman shielding
+monitor line "h2+ " 0 0.0084
+##
+monitor nzone 33
+##
+## >>chng 13 may 23, from 7.66 to 5.758, move opac_update before cool_eval
+## >>chng 13 nov 05, from 5.758 to 3.394, convergence branch changes
+## >>chng 13 nov 25, from 3.394 to 2.333, convergence branch changes
+monitor itrzn 2.333
+##
+# igm_z3_thick.in
+# class limit igm
+# ========================================
+# 
+
+This is a model of the universe near the recombination epoch, at
+a redshift of a thousand.  The gas is exposed to a true blackbody at
+3000 K, and the abundances are primordial.  
+
+This is a spatially-resolved variant of igm_z3, which should have uniform
+conditions throughout the depth.

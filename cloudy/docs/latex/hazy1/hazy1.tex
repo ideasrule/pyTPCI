@@ -1,0 +1,113 @@
+\documentclass[12pt]{book}
+% !TEX root = hazy1.tex
+%\includeonly{intro}
+%\includeonly{define}
+%\includeonly{cmdintro}
+%\includeonly{cont-def}
+%\includeonly{cont-lum}
+%\includeonly{cont-shp}
+%\includeonly{compos}
+%\includeonly{density}
+%\includeonly{geometry}
+%\includeonly{optdepth}
+%\includeonly{therm}
+%\includeonly{dynamics-time}
+%\includeonly{stopping}
+%\includeonly{conout}
+%\includeonly{optimize}
+%\includeonly{grid}
+%\includeonly{miscell}
+%\includeonly{latex_style}
+
+\input{../head_info}
+\input{../common/macros}
+\input{../variables}
+
+\begin{document}
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  title page
+\begin{titlepage}
+\begin{center}
+
+\Huge
+Hazy\\
+\Large
+\emph{a brief introduction to \Cloudy\ C\VERSION}\\
+\LARGE
+1. Introduction and commands
+
+\begin{figure}
+\begin{center}
+\hspace*{-1cm}
+\includegraphics[clip=on,width=\columnwidth,height=0.6\textheight,keepaspectratio]{federico-respini-sYffw0LNr7s-unsplash}
+\end{center}
+\end{figure}
+
+\vspace{10 mm }
+\LARGE
+\emph{Cloudy \& Associates} \\
+\Large
+\href{http://www.nublado.org}{www.nublado.org} \\
+\normalsize
+\today
+\end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% page with one figure and boilerplate text
+\clearpage
+\input{../frontis_common}
+\vspace{5mm}
+\noindent
+{\small
+{\em Cover image:}
+The dawn of a new day, representing Cloudy's migration between
+development platforms and new development plans.
+Photo by
+\href{https://unsplash.com/@federicorespini}{Federico Respini} on
+\href{https://unsplash.com/license}{Unsplash}.
+}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% table of contents page - only include top two levels
+\tableofcontents
+\listoffigures
+\listoftables
+
+\clearpage
+\mainmatter
+% proofed 1 - read over latex file, remove dead xrefs,
+% include figures, make xregs to figs and tables live
+% NB the equations have not been checked
+% proofed 2 - print document and read in detail
+\include{intro}      
+\include{define}     
+\include{cmdintro}   
+\include{cont-def}   
+\include{cont-lum}   
+\include{cont-shp}   
+\include{compos}     
+\include{density}    
+\include{geometry}   
+\include{optdepth}   
+\include{therm}      
+\include{ControllingModelAtoms}      
+\include{chemistry}      
+\include{dynamics-time}
+\include{stopping}   
+\include{conout}     
+\include{optimize}   
+\include{grid}       
+\include{miscell}    
+\appendix
+\include{vanhoof_grain_model}
+\include{vanhoof_atmosphere_grids}
+\include{latex_style}
+\backmatter
+\bibliographystyle{plainnat}
+\bibliography{../common/bibliography2}
+
+\end{document}

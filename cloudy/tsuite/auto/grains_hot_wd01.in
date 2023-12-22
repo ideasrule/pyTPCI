@@ -1,0 +1,78 @@
+title test temperature of gas and dust in high energy density environment
+#
+# commands controlling continuum =========
+table power law 
+energy density temp 550
+#
+# commands for density & abundances =========
+hden 5.0
+init "ism.ini"
+abundances orion no grains 
+grains orion no qheat 
+#
+# revert to WD01 treatment
+no grain x-ray treatment
+#
+# commands controlling geometry  =========
+stop zone 1
+set drmax 10
+#
+# other commands for details     =========
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 18.97A to 18.9732A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 18.9732A to 18.9709A, update Rydberg constant
+## >>chng 20 aug 22, wl from 18.9709A to 18.9696A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 18.9696A to 18.9689A, update NIST energies
+normalize to "O  8" 18.9689A
+save performance "grains_hot_wd01.per"
+save monitors "grains_hot_wd01.asr" last 
+save overview "grains_hot_wd01.ovr" last 
+#
+# commands giving the monitors    =========
+##
+monitor "H+" temperature 6.210
+##
+monitor grain potential  1 238.4 2
+monitor grain potential  4 278.2 2
+monitor grain potential  7 319.7 2
+monitor grain potential 10 364.7 2
+monitor grain potential 11 234.7 2
+monitor grain potential 14 300.6 2
+monitor grain potential 17 373.6 2
+monitor grain potential 20 417.0 2
+##
+monitor grain temperature  1 1099 0.02
+monitor grain temperature  4  998 0.02
+monitor grain temperature  7  863 0.02
+monitor grain temperature 10  712 0.02
+monitor grain temperature 11 1366 0.02
+monitor grain temperature 14 1201 0.02
+monitor grain temperature 17 1038 0.02
+monitor grain temperature 20  888 0.02
+##
+monitor line luminosity "GrGH" 0 -1.7525
+monitor line luminosity "GrCC" 0 -1.7578
+monitor line luminosity "GraI" 0  0.4165
+monitor line luminosity "GraT" 0  0.4243
+monitor line luminosity "GraC" 0 -1.3267
+## >>chng 11 aug 05, from -3.556 to -4.761, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 jul 01, from -4.761 to -4.741, update Badnell DR to 13-electron iso sequence
+## >>chng 13 nov 04, from -4.741 to -4.785, remove Lyman line TauIn hack
+monitor line luminosity "GraD" 0 -4.785
+##
+## >>chng 15 mar 07, from -5.3185 to -5.3413, merging newmesh branch
+## >>chng 19 sep 20, from -5.341 to -4.429, BUGFIX, add one and two electron Ka to total FeKa reported here
+monitor line luminosity "FeKa" 1.780 -4.429
+#
+# grains_hot_wd01.in
+# class limit 
+# ========================================
+# 
+
+This tests the grains in an extreme condition - irradiation by an AGN
+near the illuminated face of the molecular torus.  The gas is 
+predominantly heated by the grains. The grain treatment has been
+reverted to Weingartner & Draine, 2001, which is NOT appropriate
+for these conditions. It is however a good test whether the old
+treatment is not broken....

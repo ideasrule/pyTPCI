@@ -1,0 +1,67 @@
+title HII region with negative He/H ICF
+#
+# commands controlling continuum =========
+# this is the result of this command
+# table star mihalas 46000
+# and makes it possible to run these orion sims without
+# installing the stellar atmosphere files 
+table SED "star_mihalas_46000.dat" 
+ionization parameter -2.
+# add the CMB after hot star shape & luminosity specified
+CMB 
+#
+# commands for density & abundances =========
+hden 3
+init file "ism.ini"
+abundances ism no grains
+grains no qheat single 
+metals and grains 0.320
+#
+# commands controlling geometry  =========
+## >>chng 05 mar 13, from -4 to -3, had gone into mole cloud
+## precise stop depended on chemistry
+stop efrac -3
+stop temperature 15
+sphere
+#
+# other commands for details     =========
+failures 1
+#
+# commands controlling output    =========
+save performance "hii_icf.per"
+save overview "hii_icf.ovr" last
+save monitors "hii_icf.asr" last
+save dr "hii_icf.dr" last
+#
+# commands giving the monitors    =========
+## >>chng 04 jun 12, from -0.013 to -0.0038 chng cont shield fcn
+## >>chng 04 dec 08, from -0.0038 to -0.0137, co-ion feedback, check converg
+## >>chng 05 feb 18, from -0.0137 to -0.0038 incld outwrd cont in line pump
+## fast gets -0.0137, slow gets -0.0038 
+## >>chng 05 mar 13, from -0.0038 to -0.0141, chng stop criteria
+## >>chng 09 feb 23, from -0.0141 to -0.0119, remove otslin, otscon dampers (PR #84, r2758)
+monitor HHeicf -0.0119 error 0.002
+##
+## this was typical before grain recom put in
+## >>chng 04 sep 18, from 450 to 530, better mole conv chk
+## >>chng 05 mar 13, from 530 to 400, chng stop criteria
+## >>chng 08 dec 08, from 400 to 322, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 322 to 332, merging newsolvers branch
+## >>chng 09 jan 08, from 332 to 329, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, from 329 to 329 (error 0.02), average of 10 runs
+## >>chng 11 dec 18, from 329 to 335, adjust outstanding botches
+## >>chng 14 jan 05, from 335 to 326, N to external databases
+## >>chng 14 mar 26, from 326 to 334, Move oxygen data to stout and chianti files
+monitor nzone 334 error 0.02
+##
+# hii_icf.in
+# class hii 
+# ========================================
+
+
+This is an example of an H II region irradiated
+by a hard stellar continuum - one of the Mihalas NLTE stars.
+The hard continuum produces a negative He/H ionization
+correction factor, as discussed in Ballantyne, Ferland & Martin (2000).
+>>refer	HeI	icf by Ballantyne,D.R.,  Ferland, G.J., & Martin, P.G., 2000, ApJ 536, 773-777
+

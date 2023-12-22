@@ -1,0 +1,293 @@
+\chapter{INTRODUCTION}
+% !TEX root = hazy1.tex
+
+\section{Overview}
+
+\noindent \Cloudy\ is a microphysics code.
+It is designed to simulate physical conditions within clouds
+ranging from the intergalactic
+medium to the high-density LTE and STE limits.
+The range of temperatures extends from the CMB temperature
+up to \TEMPLIMITHIGH\ and the physical state
+ranges between fully molecular to bare nuclei.
+It predicts the thermal, ionization, and chemical structure
+of a cloud which lies with these limits, and
+predicts its observed spectrum.
+
+This document describes the input, output,
+and assumptions for the code.
+It fully defines the commands used to drive the
+program.
+Part 2 gives details about the program
+structure, its output, the computational environment, and how to call \Cloudy\
+as a sub-program of other programs.
+The methods, approximations, and assumptions used by \Cloudy\ are
+outlined in Part 3 of this document, although this part, like \Cloudy\ itself,
+is still under construction.
+The \emph{Quick Start Guide} summarizes these
+three volumes and gives a general overview of the simulations.
+
+Many environments are encountered in which dilute gas is heated and
+ionized by the radiation field striking the gas.  Under these
+circumstances it is possible to predict the physical conditions (that
+is, the distribution of ionization, density, and temperature) across
+the cloud, and its resulting spectrum, in a unique and self-consistent
+manner.  This is done by simultaneously solving the equations of
+statistical and thermal equilibrium, equations that balance
+ionization-neutralization processes, and heating-cooling processes,
+respectively.  The graduate text \citet[hereafter
+AGN3]{Osterbrock2006} describe the physics governing such environments
+and \citet{Ferland2003} provides additional details on current
+research topics.
+
+The instructions for downloading and
+setting up the code are on the web site
+\href{http://www.nublado.org}{www.nublado.org}.
+We maintain a discussion board at
+\href{https://cloudyastrophysics.groups.io}
+{cloudyastrophysics.groups.io}
+where questions can be posted.
+
+\section{What must be specified}
+
+\noindent
+One powerful asset of photoionization analysis is the large number of
+observables resulting from only a few input parameters.
+Intensities of a very large number of spectral lines\footnote{
+There is no limit to the number of spectral lines that the code can
+compute because there is no limit to the number of levels of atoms of the
+H-like (\hO, \heplus, etc) and He-like (\heO, Li$^+$, etc)
+isoelectronic sequences.
+Processor speed and memory limit the simulation to a few million lines in
+most applications with today's computers, however.}
+are predicted by \Cloudy.  These result
+from the specification of only a) the shape and intensity of the external
+radiation field striking a cloud,
+b) the chemical composition and grain content of the gas, and c) the geometry
+of the gas, including its radial extent and the dependence of density on
+radius.  The following subsections describe the general philosophy of the
+specification of each.
+
+\subsection{Incident radiation field}
+
+\noindent Both the shape and intensity of the external radiation field striking the cloud
+must be specified.
+Often this is the region's only source of heat and
+ionization.
+Different commands are usually used to specify the external radiation field
+shape and intensity, although a few commands specify both.
+
+\begin{description}
+
+\item[Shape of the external radiation field]
+The shape of the spectral energy distribution (SED)
+should be fully specified between a frequency
+of \emmmhz\ $(\lambda \approx$ \emmcm\ -- this is the lowest
+frequency observable with LOFAR) and an energy
+of \egamry\ $(h\nu =$ \egamrymev)
+if possible.\footnote{
+In much of the following discussion photon energies will
+be given in Rydbergs.  The ionization potential of hydrogen is nearly 1
+Rydberg.  See the discussion in Part 2 of this document for an exact
+definition and how to convert the Rydberg to other units.}
+A physically-motivated radiation field spanning the full energy range
+should be specified if possible.
+This can be specified as a fundamental
+form (such as blackbody emission, optically thin bremsstrahlung emission,
+or a power law with optional exponential cutoff), interpolated from tables
+of points, or as the radiation field transmitted through a cloud and
+predicted by previous calculations.
+Additionally, a set of built-in radiation fields
+(for instance, emission from many model atmospheres, the observed
+Crab Nebula spectral energy distribution (SED), or several typical AGN SEDs) can be specified as look-up tables.
+
+\item[Intensity or luminosity of the external radiation field]
+The intensity of the external radiation field striking the
+cloud must be specified.
+This can be given either as the flux striking a unit surface
+area of cloud or as luminosity  radiated by the central object into $4\pi$~sr.
+The code must be able to derive the flux of photons (cm$^{-2}$ s$^{-1}$) striking
+the illuminated face of the cloud.
+There are many commands that set these.
+Two cases, the intensity and luminosity cases, can be used to
+set the strength of the radiation field.
+These are described in the next Chapter.
+
+\item[Combining several radiation fields]
+Up to 100 different radiation fields can be included as part of
+the total field striking the cloud.
+There must be exactly the same number of shape and luminosity
+specifications.
+The code will stop if there are not.
+
+\end{description}
+
+\subsection{Chemical Composition}
+
+\noindent The program considers the lightest \LIMELM\ elements in detail.
+Grains are
+not part of the default composition but can be included.
+All stages of
+ionization are treated, and all published charge exchange, radiative
+recombination, and dielectronic recombination processes are included as
+recombination mechanisms.
+Photoionization from valence and inner shells
+and many excited states, as well as collisional ionization by
+both thermal and supra-thermal electrons, and charge transfer, are included as ionization mechanisms.
+The chemistry includes many molecules and will go to the fully
+molecular limit (H in \htwo\ and C or O in CO).
+Although the default composition
+is solar several other standard mixtures can easily be specified and an
+arbitrary composition can be entered.
+
+\subsection{Geometry}
+
+\noindent The geometry is always 1D spherical but can be made effectively plane
+parallel by making the inner radius much larger than the thickness of the
+cloud.  The default is for the gas to have constant density and to fully
+fill its volume
+Other pressure laws and strongly clumped clouds can be computed as well.
+
+\Cloudy\ normally assumes an \cdTerm{open geometry},
+or one in which the gas has
+a very small \cdTerm{covering factor}
+(these terms are defined in the following chapter
+and in section 5.9 of AGN3).
+This can be changed with
+the \cdCommand{sphere} (see section \ref{sec:CommandSphere}) command which sets the covering factor
+to a large enough value for light escaping
+the cloud in the direction towards the central object to always interact
+gas on the other side.
+This is a \cdTerm{closed geometry}.
+Line photons which
+cross the central hole interact with line-absorbing gas on the far side
+if \cdCommand{sphere static} is set but do not interact (because of a Doppler shift
+due to expansion) if \cdCommand{sphere expanding} is set.
+This case is the default when \cdCommand{sphere} is specified.
+
+\subsection{Velocity Structure}
+
+\noindent \Cloudy\ normally assumes that only thermal motions broaden spectral lines and that there is no internal velocity structure.
+These assumptions can be changed.
+A component of microturbulence can be added with the
+\cdCommand{turbulence} command.
+A flow can be computed with the \cdCommand{wind} command.
+
+\section{The input deck}
+
+\noindent \Cloudy\ is driven by a set of command lines.
+These normally reside in a small input file which the code reads
+when it starts.
+The commands are four-letter keywords (either
+upper or lower case) followed by free-format numbers that
+may be mixed with letters.  The input is dependent on case for items
+within quotation marks \verb|"|, such as file names (although the
+case of filenames may then be ignored on some operating
+systems).  Where the names of 
+molecular species are specified, these will often need to be in quotation
+marks, so that, for example, carbon monoxide (CO) and cobalt (Co) can be
+distinguished.
+
+When \Cloudy\ is executed as a stand-alone program standard input
+(\cdFilename{stdin}) is read for input and standard output
+(\cdFilename{stdout}) is used for output.  It may also be run using
+commands stored in an text input file.  As an example, create a small
+file (say, called \cdFilename{simple.in}) containing the following
+lines:
+
+\begin{verbatim}
+title example input
+hden 5 # log of hydrogen density, cm^-3
+blackbody 5e4 K # spectral shape is a 50000K blackbody
+# intensity of blackbody is set with
+# ionization parameter so starting radius is not needed
+ionization parameter -2
+\end{verbatim}
+Suppose that the code has been compiled to create the executable \cdFilename{cloudy.exe}.
+Then, the model described by the parameters in this input file could be
+computed by typing the following at the command prompt:
+\begin{verbatim}
+cloudy.exe -r simple
+\end{verbatim}
+Note that on many Linux systems the command will have to be written as
+\begin{verbatim}
+./cloudy.exe -r simple
+\end{verbatim}
+for system security.  
+The file \cdFilename{simple.in} will be read for input and the output will be in the file
+\cdFilename{simple.out}.  
+
+The \href{http://www.nublado.org}{www.nublado.org} web site has many more details
+about running this version of \Cloudy\ in the page
+\href{https://gitlab.nublado.org/cloudy/cloudy/-/wikis/RunCode}{RunCode}.
+
+It is also possible for a larger program to drive \Cloudy\ directly by
+treating it as a subroutine. 
+See \href{https://gitlab.nublado.org/cloudy/cloudy/-/wikis/RunCode}{RunCode} for more details.
+
+\section{What is computed and reported}
+
+The code creates an output file as the model is computed.
+The program begins by echoing the input commands (after stripping hidden
+comments, see Sect.~\ref{sec:CommentsInInput} for details).  Comments are
+always ignored by the parser.  The input stream ends with either a blank line or
+the end-of-file.  Some properties of the incident radiation field, such
+as luminosity and number of photons in certain frequency ranges, are then
+printed.
+
+\Cloudy\ works by dividing a cloud into a set of thin concentric shells
+referred to as zones. The zones are chosen to have thicknesses that are
+small enough for the physical conditions across them to be nearly constant.
+Adaptive logic continuously adjusts the physical thicknesses of these shells
+to ensure this.  Typically $\sim$100 to 200 zones are computed in an optically
+thick model of an H~II region.  The physical conditions in the first and
+last zones are always printed and intermediate zones may be printed if needed
+(this is governed by the \cdCommand{print every} command).
+The output for each zone begins with a line giving the zone number, its
+electron temperature, the distance from the center of the spherical nebula
+to the center of the zone, and some other properties of the solution.  The
+next line gives the relative contributions of various emission lines to
+the radiation pressure if this amounts to more than 5\% of the gas pressure.
+The remaining lines of output give the relative populations of
+ionization stages of the other elements.
+Many details about the conditions within the zone are
+intermixed with these relative populations.
+
+After the zone calculations are complete and the model is finished the
+code will explain why the calculation stopped.  It is very important to
+confirm that the calculation stopped for the intended reason.  Some warnings,
+cautions, or notes about the calculation may also be printed.  The code
+is designed to be autonomous and self aware.  This self checking will ensure
+that its range of validity is not exceeded. It will complain if it goes
+outside its range of validity, if it feels that some parameter has been
+incorrectly set, or if something surprising has happened during the
+calculation.  This is an essential core feature of the code since it is
+now often used to generate grids of thousands of models, making it impossible
+to validate individual models by hand.
+
+The final print out begins with a recapitulation of the entered commands
+followed by the predicted emission-line spectrum.  The first two columns
+of the emission-line spectrum give an identifying label and wavelength for
+each spectral line.  The third column is the log of the luminosity [erg
+s$^{-1}$] or intensity [erg cm$^{-2}$ s$^{-1}$] of the emission line, and the last column
+gives its intensity relative to the reference line.
+The reference line is H$\beta$ by default and other emission lines
+can be chosen with the \cdCommand{normalize} command.
+The third column will be either the luminosity or intensity.
+The luminosity (energy radiated by a shell of
+gas covering $\Omega$ sr of the central object) is predicted if the incident radiation field is
+specified as a luminosity.  The line intensity $4\pi J$ (the energy emitted per
+square centimeter of the gas slab) is predicted if the incident radiation field is specified
+as an intensity.  If the geometry is spherical but the incident radiation field is specified
+as an intensity then the line intensities will be expressed per unit area
+at the inner radius.  Only the strongest emission lines are printed; the
+relative intensity of the weakest line to print is adjusted with the
+\cdCommand{print faint} command.
+
+The last pages of the output gives some averages of the ionization
+fractions over the slab, the optical depths in various lines and continua,
+and other properties of the nebula.
+
+There is a vast amount of information that is computed but not given
+in the standard output file.  Special output files are created with the
+\cdCommand{save} commands described below.

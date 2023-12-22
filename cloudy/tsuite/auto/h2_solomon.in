@@ -1,0 +1,165 @@
+title H2 populations in solomon dominated limit
+# this is a pair with h2_hminus 
+#
+# commands controlling continuum =========
+# this is hot star continuum
+black 30000
+intensity  -5. range  0.4412 to 1 Ryd
+# this will remove all ionizing radiation
+extinguish 24 0
+# background CR ionization rate should be 2.5e-17 s^-1,
+# Tielens & Hollenbach 1985; McKee AstroPH 9901370
+cosmic rays, background
+#
+# commands for density & abundances =========
+abundances ism 
+hden 5
+#
+# commands controlling geometry  =========
+set dr 0 
+stop zone 5 
+stop temperature 400 
+#
+# other commands for details     =========
+# default is Takahashi 2001 - test thermal distribution here
+set h2 grain formation thermal pump 
+database h2 
+iterate
+constant temperature 500K
+#
+# commands controlling output    =========
+# don't print so many lines
+print line faint 10 
+print line column
+print line sort wavelength
+print column density 
+print ages
+save performance "h2_solomon.per"
+save overview "h2_solomon.ovr" last
+save h2 lines "h2_solomon.lin" limit -10 last all electronic all
+save h2 rates "h2_solomon.rat" last
+save h2 column density "h2_solomon.col" last
+save continuum units microns "h2_solomon.con" last
+save monitors "h2_solomon.asr" last
+save dominant rates "h2_solomon.h2" "H2" last 
+save chemistry rates "h2_solomon.h2d" "H2" destruction
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 05 feb 12, added grains - had not been included
+## only H- was creating H2 - everything changed
+## >>chng 05 nov 22, from 5.37 to 4.67, NA add freeze out onto grains
+## >>chng 05 dec 17, from 4.67 to 5.37, do not stop due to ices
+monitor h2 column 5.37 error 0.1
+##
+## >>chng 05 nov 22, from 1.99 to -1.04, NA add freeze out onto grains
+## >>chng 05 nov 22, from -1.04 to -1.74, NA add freeze out onto grains
+## >>chng 05 dec 17, from -1.74 to -1.04, do not stop due to ices
+## >>chng 05 dec 17, from -1.04 to -0.87, NA increase C chemistry
+## >>chng 06 jan 04, from -0.87 to -0.77, NA C chem restore missed block reacts
+## >>chng 06 jan 12, from -0.77 to 2.02, add term thermal dest ices
+monitor CO column 2.02 error 0.1
+##
+monitor H2 ortho 3.0
+## 
+## >>chng 05 nov 22, from 4.27 to 3.58, NA add freeze out onto grains
+## >>chng 05 dec 17, from 3.58 to 4.28, do not stop due to ices
+monitor H2 column density level v=0 J=0 N=4.28 error 0.1
+## 
+## >>chng 05 nov 22, from 5.08 to 4.38, NA add freeze out onto grains
+## >>chng 05 dec 17, from 4.38 to 5.08, do not stop due to ices
+monitor H2 column density level v=0 J=1 N=5.08 error 0.1
+## 
+## >>chng 05 nov 22, from 4.53 to 3.83, NA add freeze out onto grains
+## >>chng 05 dec 17, from 3.83 to 4.53, do not stop due to ices
+monitor H2 column density level v=0 J=2 N=4.53 error 0.1
+## 
+## >>chng 05 nov 22, from 4.71 to 4.02, NA add freeze out onto grains
+## >>chng 05 dec 17, from 4.02 to 4.72, do not stop due to ices
+monitor H2 column density level v=0 J=3 N=4.72 error 0.1
+## 
+## >>chng 05 nov 22, from 3.75 to 3.06, NA add freeze out onto grains
+## >>chng 05 dec 17, from 3.06 to 3.76, do not stop due to ices
+monitor H2 column density level v=0 J=4 N=3.76 error 0.1
+## 
+## >>chng 05 nov 22, from 3.52 to 2.83, NA add freeze out onto grains
+## >>chng 05 dec 17, from 2.83 to 3.53, do not stop due to ices
+monitor H2 column density level v=0 J=5 N=3.53 error 0.1
+##
+## >>chng 05 dec 17, add this assert - this is expected num zones
+## was stopping earlier due to ices
+monitor nzone 5 error 0.01
+##
+## >>chng 13 jun 27, from -3.4460 to -19.4088, add H2 2.1215m line luminosity
+## >>chng 13 jun 27, from -19.4088 to -19.2637, fix the errors in mole_h2_coll.cpp
+## >>chng 13 jul 24, wl from 2.1215m to 2.12125m, increased wl precision to 6 sig. fig.
+monitor line luminosity "H2  " 2.12125m  -19.2637 error 0.1
+##
+## >>chng 13 jun 27, from -8.869 to -19.31, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 27, from -19.31 to -19.2, fix the error in mole_h2_coll.cpp
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -19.2 to -19.23, fix double-counting of big-H2 Solomon rate
+## >>chng 15 aug 03, from -19.23 to -18.99, update LAMDA to 2015
+monitor "H2O " 538.142m line intensity -18.99
+## >>chng 13 jun 27, from -7.357 to -22.46, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -22.46 to -22.24, fix double-counting of big-H2 Solomon rate
+## >>chng 20 sep 06, from -22.24 to -22.22, further update to McCall CR-related rate
+## >>chng 21 sep 11, from -22.22 to -22.68, LAMDA update
+monitor "HNC " 1652.90m  line intensity -22.68
+## >>chng 13 jun 27, from -8.563 to -23.58, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 27, from -23.58 to -23.56, fix the error in mole_h2_coll.cpp
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -23.56 to -23.54, fix double-counting of big-H2 Solomon rate
+## >>chng 21 sep 11, from -23.54 to -23.42, LAMDA update
+## >>chng 21 nov 04, from -23.42 to -23.5, update mole co data
+monitor "HCS+" 1755.88m  -23.5 line intensity
+## >>chng 13 jun 27, from -7.453 to -22.84, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -22.84 to -22.87, update LAMDA to 2015
+## >>chng 21 sep 11, from -22.87 to -22.32, LAMDA update
+## >>chng 23 may 15, from -22.32 to -22.37, GS updates 21 reactions to UMIST 2012
+monitor "CS  " 3058.86m  -22.37 line intensity
+## >>chng 13 jun 27, from -7.288 to -21.64, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 2600.05m  -21.64 line intensity
+## >>chng 13 jun 27, from -6.463 to -20.13, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 1300.05m  -20.13 line intensity
+## >>chng 13 jun 27, from -6.149 to -19.24, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+monitor "CO  " 866.727m  -19.24 line intensity
+## >>chng 13 jun 27, from -6.177 to -18.62, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+monitor "CO  " 650.074m  -18.62 line intensity
+## >>chng 13 jun 27, from -6.485 to -18.17, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+monitor "CO  " 520.089m  -18.17 line intensity
+## >>chng 13 jun 27, from -6.954 to -17.84, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+monitor "CO  " 433.438m  -17.84 line intensity
+## >>chng 13 jun 27, from -7.48 to -17.61, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+monitor "CO  " 371.549m  -17.61 line intensity
+## >>chng 13 jun 27, from -8.049 to -17.47, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+monitor "CO  " 325.137m  -17.47 line intensity
+## >>chng 13 jun 27, from -7.522 to -20.83, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+monitor "^13CO" 906.599m  -20.83 line intensity
+## >>chng 13 jun 27, from -8.247 to -21.64, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -21.64 to -21.69, fix double-counting of big-H2 Solomon rate
+## >>chng 21 sep 11, from -21.69 to -22.85, LAMDA update
+## >>chng 21 sep 15, from -22.85 to -21.63, go back to unresolved model
+monitor "CN  " 880.858m  -21.63  line intensity
+##
+# h2_solomon.in
+# class limit  
+# ========================================
+# 
+
+This test H2 in case of grain formation and solomon destruction
+

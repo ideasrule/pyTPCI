@@ -1,0 +1,52 @@
+title test H and He ionization in optically thin limit
+#
+# commands controlling continuum =========
+laser 4.3 Ryd
+phi(h) 10
+#
+# commands for density & abundances =========
+hden 1
+abundances all -10
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+iterate  to convergence 
+constant temperature = 4
+#
+# commands controlling output    =========
+save overview "limit_laser_3.ovr"
+save performance "limit_laser_3.per"
+save monitors "limit_laser_3.asr" last
+#
+# commands giving the monitors    =========
+monitor ionization hydrogen 1 -2.37
+monitor ionization helium   1 -6.32
+monitor ionization helium   2 -2.77
+monitor niter 3 error 0.01
+# limit_laser_3.in
+# class limit 
+# ========================================
+# 
+
+This checks the calculation of the hydrogen and helium photoionization
+equilibrium.  The continuum is a laser peaked at 4.3 Ryd, where it
+can fully ionize both hydrogen and helium. 
+
+Checks:
+-	The hydrogen neutral fraction is nearly 4.18*10-4
+	(not exact since laser has finite width).
+-	Helium ion: The ratio He+/He++ should be 1.69*10-3 and
+	the ratio Heo/He+ should be 2.86*10-4.
+-	Hb emissivity should be close to high-density case A.  The predicted
+	H  1 4861 intensity should be nearly 2.2 times the expected
+	case B intensity.
+
+H cross section is 1.0E-18 cm^2, rec coef is 4.18E-13
+answer is n(Ho)/n(H+)=4.18e-3
+HeI cross section is 1.51E-18 cm^2, rec coef is 4.32e-13
+answer is n(Heo)/n(He+)=2.86e-4, so Heo/He = 4.83e-7
+HeII cross section is 1.30E-18 cm^2, rec coef is 2.20e-12
+answer is n(He+)/n(He2+)=1.69e-3

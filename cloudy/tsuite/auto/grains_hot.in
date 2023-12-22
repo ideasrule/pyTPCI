@@ -1,0 +1,72 @@
+title test temperature of gas and dust in high energy density environment
+#
+# commands controlling continuum =========
+table power law 
+# intensity of incident radiation field set by its energy density
+energy density temp 550 K
+#
+# commands for density & abundances =========
+hden 5.0
+init "ism.ini"
+# Orion grains and abundances
+abundances orion 
+#
+# commands controlling geometry  =========
+stop zone 1
+set drmax 10
+#
+# other commands for details     =========
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 18.97A to 18.9732A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 18.9732A to 18.9709A, update Rydberg constant
+## >>chng 20 aug 22, wl from 18.9709A to 18.9696A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 18.9696A to 18.9689A, update NIST energies
+normalize to "O  8" 18.9689A
+save performance "grains_hot.per"
+save monitors "grains_hot.asr" last 
+save overview "grains_hot.ovr" last 
+#
+# commands giving the monitors    =========
+## >>chng 07 dec 15, from 6.212 to 6.049, X-ray grain merge
+monitor "H+" temperature 6.049
+##
+monitor grain potential  1  96.1 2
+monitor grain potential  4  96.8 2
+monitor grain potential  7  93.3 2
+monitor grain potential 10  86.3 2
+monitor grain potential 11 100.0 2
+monitor grain potential 14 103.4 2
+monitor grain potential 17 102.7 2
+monitor grain potential 20  97.6 2
+##
+monitor grain temperature  1 1099 0.02
+monitor grain temperature  4  998 0.02
+monitor grain temperature  7  863 0.02
+monitor grain temperature 10  712 0.02
+monitor grain temperature 11 1366 0.02
+monitor grain temperature 14 1201 0.02
+monitor grain temperature 17 1039 0.02
+monitor grain temperature 20  889 0.02
+##
+monitor line luminosity "GrGH" 0 -2.1261
+monitor line luminosity "GrCC" 0 -2.1319
+monitor line luminosity "GraI" 0  0.4222
+monitor line luminosity "GraT" 0  0.4243
+monitor line luminosity "GraC" 0 -1.8988
+## >>chng 11 aug 05, from -3.318 to -4.538, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 11 nov 16, from -4.538 to -4.513, adjust newmole monitors
+## >>chng 13 nov 04, from -4.513 to -4.559, remove Lyman line TauIn hack
+monitor line luminosity "GraD" 0 -4.559
+##
+## >>chng 19 sep 20, from -3.907 to -3.832, BUGFIX, add one and two electron Ka to total FeKa reported here
+monitor line luminosity "FeKa" 1.78 -3.832
+#
+# grains_hot.in
+# class limit 
+# ========================================
+# 
+
+This tests the grains in an extreme condition - irradiation by an AGN
+near the illuminated face of the molecular torus.  The gas is 
+predominantly heated by the grain electron photo-ejection.

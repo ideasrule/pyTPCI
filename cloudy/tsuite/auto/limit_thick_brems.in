@@ -1,0 +1,64 @@
+title optically thick brems
+#
+# check that optically thick brems emission approaches the RJ limit
+#
+# commands controlling continuum =========
+blackbody 2e5
+#
+# we need to test this command in at least one sim
+Xi 3
+#
+# commands for density & abundances =========
+hden 6
+#
+# commands controlling geometry  =========
+stop column density 20
+#
+# other commands for details     =========
+constant temperature 1e4
+iterate 3
+set nFnu diffuse outward
+set nFnu add 2e-8 ryd
+set nFnu add 5e-8 ryd
+set nFnu add 1e-7 ryd
+set nFnu add 2e-7 ryd
+set nFnu add 5e-7 ryd
+set nFnu add 1e-6 ryd
+set nFnu add 2e-6 ryd
+set nFnu add 5e-6 ryd
+set nFnu add 1e-5 ryd
+set nFnu add 2e-5 ryd
+set nFnu add 5e-5 ryd
+#
+# commands controlling output    =========
+print line faint -10
+save monitors "limit_thick_brems.asr" last
+save continuum "limit_thick_brems.con" last units microns
+save optical depth "limit_thick_brems.opd" last
+save overview "limit_thick_brems.ovr"
+save dr "limit_thick_brems.dr"
+#
+# commands giving the asserts    =========
+monitor line luminosity "nFnu" 455.634c  -8.3899
+monitor line luminosity "nFnu" 182.253c  -7.1812
+monitor line luminosity "nFnu" 91.1267c  -6.2305
+monitor line luminosity "nFnu" 45.5634c  -5.2841
+monitor line luminosity "nFnu" 18.2253c  -4.0743
+monitor line luminosity "nFnu" 9.11267c  -3.2828
+monitor line luminosity "nFnu" 4.55634c  -2.8005
+monitor line luminosity "nFnu" 1.82253c  -2.3875
+monitor line luminosity "nFnu" 9112.67m  -2.1159
+monitor line luminosity "nFnu" 4556.33m  -1.8537
+monitor line luminosity "nFnu" 1822.53m  -1.5150
+#
+monitor line luminosity "inci" 1215A  6.2787
+#
+# limit_thick_brems.in
+# class limit
+# ========================================
+# 
+
+At some point we had a major bug affecting the optically thick part of the
+radio free-free emission. This sim checks that the optically thick emission
+from a plane-parallel slab has the correct Rayleigh-Jeans shape. This implies
+that at long wavelengths nuFnu should vary as lambda^3.

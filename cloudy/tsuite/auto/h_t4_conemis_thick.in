@@ -1,0 +1,204 @@
+title H I continuous emissivity, used for plot in hazy
+#
+# commands controlling continuum =========
+black 5
+ionization parameter -2
+#
+# commands for density & abundances =========
+# high density to suppress two-photon emission
+hden 7
+# turn off all elements, except for hydrogen, so that
+# we really test hydrogen emission 
+init file= "honly.ini"
+#
+# commands controlling geometry  =========
+# this is necessary to stop model at H ionization front
+# constant temperature models will go on to infinity without this 
+stop efrac -0.8
+#
+# other commands for details     =========
+turbulence 200 km/s ## needed to keep balmer lines thin
+# increase continuum resolution by factor of ten
+set continuum resolution 0.1
+# line fluorescense would be very important with above turbulence,
+# turn it off 
+no induced processes
+# need large atom to get the many Rydgerg levels in the infrared
+# atom h-like levels resolved 10
+# what full outward flux so use spherical geometry
+sphere 
+constant temperature 4
+#
+# commands controlling output    =========
+# results will be relative to interplated Hummer&Storey Hbeta 
+# this tests hydrogen atom too 
+# output the predicted continuum
+save overview "h_t4_conemis_thick.ovr"
+save performance "h_t4_conemis_thick.per"
+save emitted continuum last iteration "h_t4_conemis_thick.con" units micron
+save dr last "h_t4_conemis_thick.dr"
+save monitors last "h_t4_conemis_thick.asr"
+#
+# commands giving the monitors    =========
+## >>chng 07 nov 17, from 1.00 to 0.93, changes in r1512
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, change to testing "Ca B" 4861.36A (was "H  1" 4861.36A).
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A 1.075
+## >>chng 07 jul 27, from 1.000 to 1.057, repair common error in several collision routines
+## >>chng 08 mar 20, from 1.057 to 1.008, value drifted but did not throw assert
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 1.008 to 1.07, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A 1.07
+## >>chng 02 may 27, from 0.2256 to 0.247, improved brems gaunt factors
+## >>chng 02 jun 21, from 0.247 to 0.222, improved brems gaunt factors
+## >>chng 13 jul 25, wl from 9.325m to 9.32488m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.222 to 0.2415, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu" 9.32488m  0.2415
+## >>chng 02 may 27, from 0.6927 to 0.734, improved brems gaunt factors
+## >>chng 02 jun 21, from 0.734 to 0.691, improved brems gaunt factors
+## >>chng 13 jul 25, wl from 2.324m to 2.32440m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.691 to 0.7488, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu" 2.32440m  0.7488
+## >>chng 13 jul 25, wl from 1.480m to 1.48022m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.9508 to 1.02, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu" 1.48022m  1.02
+## >>chng 13 jul 25, wl from 1.436m to 1.43649m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 1.456 to 1.555, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu" 1.43649m  1.555
+## >>chng 13 jul 25, wl from 8330 to 8329.68A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 1.249 to 1.327, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu"  8329.68A  1.327
+## >>chng 13 jul 25, wl from 8079 to 8078.61A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 3.268 to 3.481, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu"  8078.61A  3.481
+## >>chng 13 jul 25, wl from 4885 to 4885.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 1.784 to 1.885, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu"  4885.36A  1.885
+## >>chng 13 jul 25, wl from 3704 to 3704.34A, increased wl precision to 6 sig. fig.
+## >>chng 17 sep 09, from 0.964 to 1.009, fix bug in high n collisional excitation rates for H-like iso-sequences
+monitor line "nFnu"  3704.34A  1.009
+## >>chng 13 jul 25, wl from 3588 to 3587.67A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 15.32 to 16.34, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu"  3587.67A  16.34
+## there is some two-photon emission clearly present at this wl
+## >>chng 02 may 18, increase error from 0.1 to 0.15
+## >>chng 07 dec 06, from 0.323 to 0.258, changes in h-like collisions
+## >>chng 13 jul 25, wl from 1585 to 1585.12A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  1585.12A  0.258 error 0.15
+##
+## >>chng 07 oct 22, from 2.772 to 2.5825, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 2.583 to 2.777, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "H  1" 6562.80A  2.777
+## >>chng 07 nov 17, from 0.4773 to 0.4394, changes in r1512
+## >>chng 13 jul 25, wl from 4340 to 4340.49A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.4394 to 0.471, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 4340.49A to 4340.46A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4340.46A to 4340.47A, update NIST energies
+## >>chng 21 aug 18, wl from 4340.47A to 4340.46A, revert to PvH energies for H
+monitor line "H  1" 4340.46A  0.471
+##
+## >>chng 07 oct 22, from 0.3048 to 0.2663, resolve l-levels of h-like sequence
+## >>chng 07 nov 17, from 0.2663 to 0.2797, changes in r1512
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.2797 to 0.2976, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "H  1"  1.87510m  0.2976      
+## 
+## >>chng 06 jul 18, from 0.155 to 0.147 RP major upgrade VS coll strengths
+## >>chng 07 jul 27, from 0.147 to 0.156, repair common error in several collision routines
+## >>chng 07 oct 22, from 0.156 to 0.141, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 1.282m to 1.28181m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.141 to 0.1532, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1.28181m to 1.28180m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.28180m to 1.28181m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1"  1.28181m  0.1532      
+## 
+## >>chng 07 oct 22, from 0.0879 to 0.0826, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 1.094m to 1.09381m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.0826 to 0.0886, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1.09381m to 1.09380m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.09380m to 1.09381m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1"  1.09381m  0.0886
+##
+## >>chng 07 oct 22, from 0.0683 to 0.0571, resolve l-levels of h-like sequence
+## >>chng 07 nov 17, from 0.0571 to 0.0600, changes in r1512
+## >>chng 13 jul 25, wl from 4.051m to 4.05113m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.06 to 0.0649, change normalizing line to "H  1" 4861.36A.
+## >>chng 16 may 13, from 0.0649 to 0.0695, "PS64 only dipole l-changing calculations"
+## >>chng 17 may 25, wl from 4.05113m to 4.05113m, up Rydberg constant
+## >>chng 17 sep 09, from 0.0695 to 0.0652, fix bug in high n collisional excitation rates for H-like iso-sequences
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "H  1"  4.05115m  0.0652      
+## 
+## >>chng 06 jul 18, from 0.0407 to 0.0389 RP major upgrade VS coll strengths
+## >>chng 07 jul 27, from 0.0389 to 0.0414, repair common error in several collision routines
+## >>chng 07 oct 22, from 0.0414 to 0.0352, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 2.625m to 2.62515m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 27, from 0.0352 to 0.0372, PS64 fixes
+## >>chng 15 dec 15, from 0.0372 to 0.0394, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 2.62515m to 2.62513m, up Rydberg constant
+## >>chng 20 aug 22, wl from 2.62513m to 2.62515m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.62515m to 2.62514m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.62514m to 2.62515m, revert to PvH energies for H
+monitor line "H  1"  2.62515m  0.0394      
+## 
+## >>chng 06 jul 18, from 0.0255 to 0.0243 RP major upgrade VS coll strengths
+## >>chng 07 mar 13, from 0.0243 to 0.0255, change in lines_service to fix cache errors
+## >>chng 07 oct 22, from 0.0255 to 0.0229, resolve l-levels of h-like sequence
+## >>chng 08 apr 03, do not predict lines from collapsed levels
+## assert line "H  1"  2.166m  0.0229      
+##
+## >>chng 07 oct 22, from 0.0208 to 0.0168, resolve l-levels of h-like sequence
+## >>chng 11 nov 16, from 0.0168 to 0.0176, adjust newmole monitors
+## >>chng 13 jul 25, wl from 7.458m to 7.45781m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.0176 to 0.0191, change normalizing line to "H  1" 4861.36A.
+## >>chng 16 may 13, from 0.0191 to 0.0213, "PS64 only dipole l-changing calculations"
+## >>chng 16 aug 07, from 0.0213 to 0.0202, Marios bug fixes
+## >>chng 17 may 25, wl from 7.45781m to 7.45777m, up Rydberg constant
+## >>chng 20 aug 22, wl from 7.45777m to 7.45782m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 7.45782m to 7.45780m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 7.45780m to 7.45782m, revert to PvH energies for H
+monitor line "H  1"  7.45782m  0.0202
+## >>chng 07 jul 27, from 0.0137 to 0.0144, repair common error in several collision routines      
+## >>chng 07 oct 22, from 0.0144 to 0.0114, resolve l-levels of h-like sequence
+## >>chng 08 apr 03, do not predict lines from collapsed levels
+## assert line "H  1"  4.653m  0.0114      
+## 
+## >>chng 06 jul 18, from 0.0093 to 0.0088 RP major upgrade VS coll strengths
+## >>chng 07 mar 13, from 0.0088 to 0.0093, change in lines_service to fix cache errors
+## >>chng 07 oct 22, from 0.0093 to 0.0080, resolve l-levels of h-like sequence
+## >>chng 08 apr 03, do not predict lines from collapsed levels
+## assert line "H  1"  3.740m  0.0080      
+## 
+# h_t4_conemis_thick.in
+# class limit 
+# ========================================
+# 
+
+This checks that the predicted hydrogen continuum is in good agreement
+with exact results in the optically thin nebular limit.
+
+Checks:
+-	This output was used to generate figure h_t4_conemis_thick in Part I of HAZY. 
+-	Continuum relative to Hbeta should agree with Ferland (1980)
+	filter averaged results.
+-	Hbeta should agree with Case B predictions, and Q(H) 4861.
+

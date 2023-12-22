@@ -1,0 +1,63 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=6 were downloaded using ADM.
+#
+ 1  0  1  0 0
+ 2  0  3 -1 19602076
+ 2  1  3  0 19734314
+ 2  1  3  1 19737521
+ 2  0  1  0 19745473
+ 2  1  3  2 19750573
+ 2  1  1  1 19846285
+ 3  0  3 -1 23193163
+ 3  0  1  0 23231087
+ 3  1  3 -1 23232596.5555556
+ 3  2  3 -1 23255347.5333333
+ 3  2  1  2 23257195
+ 3  1  1  1 23260416
+ 4  0  3 -1 24431101
+ 4  0  1  0 24446439
+ 4  1  3 -1 24447429.7777778
+ 4  2  3 -1 24456829.8666667
+ 4  2  1  2 24457576
+ 4  3  3 -1 24457889
+ 4  1  1  1 24458842
+ 5  0  3 -1 24999972
+ 5  0  1  0 25007605
+ 5  1  3 -1 25008238.1111111
+ 5  2  3 -1 25013024.9333333
+ 5  2  1  2 25013407
+ 5  3  3 -1 25013562
+ 5  4  3 -1 25013723
+ 5  1  1  1 25014007
+ 6  0  3 -1 25307614
+ 6  0  1  0 25312000
+ 6  1  3 -1 25312382.3333333
+ 6  2  3 -1 25315136.6
+ 6  2  1  2 25315357
+ 6  3  3 -1 25315445
+ 6  4  3 -1 25315534
+ 6  5  3 -1 25315589
+ 6  1  1  1 25315693
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L12128 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=12128&comment_code=&amp;element=S&amp;spectr_charge=15&amp;ref=12128&amp;type=E
+# PUBCON    Title: QED Calculation of the n = 1 and n = 2 Energy Levels in He-like Ions
+# PUBCON  Authors: A. N. Artemyev, V. M. Shabaev, V. A. Yerokhin, G. Plunien, and G. Soff
+# PUBCON  Journal: Phys. Rev. A 71, 062104 (2005)
+# PUBCON      DOI: https://doi.org/10.1103/PhysRevA.71.062104
+# 
+# PUB     Refcode: L7237 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=7237&comment_code=&amp;element=S&amp;spectr_charge=15&amp;ref=7237&amp;type=E
+# PUBCON    Title: Energy Levels of Sulfur, S I through S XVI
+# PUBCON  Authors: W. C. Martin, R. Zalubas, and A. Musgrove
+# PUBCON  Journal: J. Phys. Chem. Ref. Data 19, 821–880 (1990)
+# PUBCON      DOI: https://doi.org/10.1063/1.555862

@@ -1,0 +1,4 @@
+title this should crash with g++ >= 4.8.0
+crash bounds stack
+test
+

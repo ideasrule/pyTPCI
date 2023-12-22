@@ -1,0 +1,22 @@
+CO,PHOTON=>C,O,PHOTON:co_lnu_c_o_lnu:1.:0.:0.#  Inner shell photoionization -- why only UMIST??  
+C,CRPHOT=>C+,e-:hmrate:0.:0.:0. # Switch off this rate for UMIST comparison 
+C+,OH=>CO+,H:hmrate:2.7e-9:-0.3508:0 # UMIST; Dubernet et al. 1992, ApJ, 239, 855	 
+C+,OH=>CO,H+:hmrate:2.7e-9:-0.3508:0 # UMIST; Dubernet et al. 1992, ApJ, 239, 855	 
+H2,H+=>H3+:hmrate:1.0e-16:0.:0. 		# >>refer	H2	chemistry	Galli,D., & Palla, F. 1998, A&A, 335, 403-420 
+H2,H+=>H2+,H:hmrate:2.45e-10:0.:21237.15 	# simpler form that recovers Savin et al. 2004 fit to ~7% in effective range
+H,H3+=>H2,H2+:hmrate:2.08e-9:0.:1.88e4
+H2,H3+=>H2,H2+,H:hmrate:3.41e-11:0.5:7.16e4
+H2,H3+=>H+,H2,H2:hmrate:3.41e-11:0.5:5.04e4
+H2+,H+=>H,H+,H+:hmrate:6.48e-20:3.:0. # Janev et al. 
+H2+,e-=>H,H+,e-:hmrate:2e-7:0.:30720. 	# Janev et al. 
+# >>chng 03 feb 10, increase rate by factor of 13.6 to agree with
+# >>refer	H3+	DR	McCall, B.J., et al. 2003, Nature, in press (astro-ph 0302106)
+# >>chng 03 feb 13, extra 0.8 since 80% of these go to 3H, Stancil private comm 
+# e-,H3+=>H2,H:hmrate:1.78e-8:-0.5:0.	# >>chng 06 jan 23, Stancil's rate is divided by 2.25 to match McCall's rate, GS
+# e-,H3+=>H,H,H:hmrate:7.11e-8:-0.5:0.	# >>chng 06 jan 23, Stancil's rate is divided by 2.25 to match McCall's rate, GS
+# >>above two reactions have been updated and moved to mole_co_base.dat, GS, 09/05/2020
+H2+,e-=>H,H:hmrate:4.37e-8:-0.37:0.
+H2+,H2=>H,H+,H2:hmrate:1.73e-11:0.5:30720.
+H2+,He=>HeH+,H:hmrate:3e-10:0.:6717.
+HeH+,H=>H2+,He:hmrate:1e-10:0.:0.   # >> chng 05 aug 05, NPA comment.  Turn off HeH+ for the Leiden comparison.*/
+HeH+,H2=>H3+,He:hmrate:1.3e-9:0.:0.  # >>refer	HeH+	k	Galli, D., & Palla, F. 1998, A&A,335,403-420; UMIST: 1.5e-9 

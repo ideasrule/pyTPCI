@@ -1,0 +1,55 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=5 were downloaded using ADM.
+#
+ 1  0  1  0 0
+ 2  0  3 -1 10736136
+ 2  1  3  0 10831989
+ 2  1  3  1 10832818
+ 2  1  3  2 10836388
+ 2  0  1  0 10838778
+ 2  1  1  1 10906612
+ 3  0  3 -1 12691170
+ 3  1  3 -1 12718286.8888889
+ 3  0  1  0 12718304
+ 3  2  3 -1 12733392.3333333
+ 3  2  1  2 12734298
+ 3  1  1  1 12738006
+ 4  0  3 -1 13361991
+ 4  0  1  0 13372977
+ 4  1  3 -1 13373168.2222222
+ 4  2  3 -1 13379472.6
+ 4  2  1  2 13379830
+ 4  3  3 -1 13379893
+ 4  3  1  3 13379898
+ 4  1  1  1 13381265
+ 5  0  3 -1 13669618
+ 5  0  1  0 13675137
+ 5  1  3 -1 13675269.2222222
+ 5  2  3 -1 13678467.1333333
+ 5  2  1  2 13678680
+ 5  3  3 -1 13678692
+ 5  4  3 -1 13678742
+ 5  1  1  1 13679363
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L12128 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=12128&comment_code=&amp;element=Mg&amp;spectr_charge=11&amp;ref=12128&amp;type=E
+# PUBCON    Title: QED Calculation of the n = 1 and n = 2 Energy Levels in He-like Ions
+# PUBCON  Authors: A. N. Artemyev, V. M. Shabaev, V. A. Yerokhin, G. Plunien, and G. Soff
+# PUBCON  Journal: Phys. Rev. A 71, 062104 (2005)
+# PUBCON      DOI: https://doi.org/10.1103/PhysRevA.71.062104
+# 
+# PUB     Refcode: L4995 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=4995&comment_code=&amp;element=Mg&amp;spectr_charge=11&amp;ref=4995&amp;type=E
+# PUBCON    Title: Energy Levels of Magnesium, Mg I through Mg XII
+# PUBCON  Authors: W. C. Martin, and R. Zalubas
+# PUBCON  Journal: J. Phys. Chem. Ref. Data 9, 1–58 (1980)
+# PUBCON      DOI: https://doi.org/10.1063/1.555617

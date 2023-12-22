@@ -1,0 +1,8 @@
+table crab davidson
+luminosity total 38.14
+radius 2 linear parsecs
+hden 0
+init "honly.ini"
+stop zone 1
+constant temperature 4
+save continuum "CrabSED_Davidson.con" units Hz

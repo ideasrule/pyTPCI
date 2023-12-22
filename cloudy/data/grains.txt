@@ -1,0 +1,21 @@
+there are two basic types of grain files included here:
+
+*.szd - grain size distribution files, currently
+	0m010.szd single size - 0.01 micron only
+	0m100.szd single size - 0.1 micron
+	1m000.szd single size - 1 micron 
+	ism.szd interstellar nrm distribution
+	orion.szd modified to reproduce orion ratio of total to selective extinction
+
+*.rfi - grain refractive index distributions
+	ac1-amcarb.rfi - amorphous carbon
+	be1-amcarb.rfi - amorphous carbon
+	draine-gra.rfi - graphite
+	graphite.rfi - graphite
+	grey.rfi - grey grain
+	silicate.rfi - silicate
+	vacuum.rfi - vacuum
+
+These were developed by Peter van Hoof in collaboration with Peter G. Martin
+in support of the "new" distributed grains in cloudy.
+

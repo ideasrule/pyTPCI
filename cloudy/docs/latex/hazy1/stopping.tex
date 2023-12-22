@@ -1,0 +1,738 @@
+\chapter{STOPPING CRITERIA}
+% !TEX root = hazy1.tex
+\label{sec:StoppingCriteria}
+
+\section{Overview}
+
+\Cloudy\ will stop at some depth into the cloud.
+The physics that sets
+this depth is important since it can directly affect predicted quantities.
+This chapter describes various stopping criteria.
+
+Two geometries, matter bounded and radiation bounded, can be identified
+for an ionized gas.
+
+A radiation-bounded cloud is one where the outer edge of the emitting
+gas is a hydrogen ionization front.
+In this case the calculation stops
+because nearly all ionizing radiation has been attenuated and the temperature
+falls below \TEMPSTOPDEFAULT, the default lowest-allowed kinetic temperature.
+This
+choice of lowest temperature was made with optical emission lines in mind.
+Setting another outer limit is not necessary unless molecules or lines with
+very low ionization and excitation potentials (i.e., the [C II] or [O I]
+far infrared lines) are of interest.
+You lower
+the stopping temperature with the \cdCommand{stop temperature} command.
+
+In a matter-bounded cloud the gas is optically thin to energetic radiation
+and the outer radius of the cloud must be specified.
+This could be a column
+density, physical thickness in cm, or optical depth.
+More than one stopping
+criterion can be specified and the calculation will stop when the first
+one is met.
+
+\Cloudy\ will say why it stopped after the results of the last zone
+calculation are printed.
+It is very important to make sure that the
+calculation stopped for the reason you intended.
+
+If no stopping criteria are set the calculation will usually stop because
+the default lowest temperature (\TEMPSTOPDEFAULT) or the default greatest number of
+zones (1400) was reached.
+
+\section{Danger!  Understand why the calculation stopped!}
+
+Sometimes the predicted emission-line spectrum will depend strongly on
+the thickness of the cloud.
+The cloud thickness is set by the stopping
+criteria.
+The predicted intensity will depend on thickness if the outer
+edge of the cloud is within a line's creation region.
+This is often the
+case for some lines in an X-ray irradiated gas and for any radiation field
+and molecular or low-ionization infrared lines.
+
+There are several checks that should be made to confirm that the spectrum
+is the one expected and not an artifact of the cloud thickness or stopping
+criteria.
+The first and most important is to understand \emph{why} the calculation
+stopped.
+This is explained in the first comment after the last zone is
+printed.
+First locate the print out for the last zone.
+The following
+example, from the \cdFilename{pn\_paris} simulation, shows the printout that includes
+the last zone's results and the start of the calculation's summary.
+The
+first line after the ionization distribution of iron gives the title for
+the model and the line after that gives the reason that the calculation
+stopped.
+In this case the calculation stopped because the kinetic
+temperature fell below the lowest temperature, which was left at its
+default of \TEMPSTOPDEFAULT.
+This occurs very near the hydrogen \hplus\ - \hO\ ionization front.
+Optical and UV lines form at higher temperatures so the calculation would
+include all contributors to the optical/UV spectrum.
+Lines such as [C II]
+158$\mu$ or [Si~II] 34.8$\mu$ form in cool neutral gas,
+so these lines would become
+stronger if the calculation went more deeply, into cold neutral gas.
+
+{\setverbatimfontsize{\tiny}
+\begin{verbatim}
+####150  Te:3.978E+03 Hden:3.000E+03 Ne:1.276E+02 R:4.062E+17 R-R0:3.062E+17 dR:5.658E+13 NTR:  5 Htot:4.094E-19 T912: 9.97e+07###
+ Hydrogen      9.70e-01 2.97e-02 H+o/Hden 1.00e+00 3.57e-09 H-    H2 1.57e-07 5.07e-10 H2+ HeH+ 8.59e-08 Ho+ ColD 3.27e+19 8.86e+20
+ Helium        8.77e-01 1.23e-01 1.81e-04 He I2SP3 4.78e-08 5.43e-16 Comp H,C 1.39e-26 3.59e-27 Fill Fac 1.00e+00 Gam1/tot 6.57e-01
+ Carbon        2.50e-04 9.97e-01 3.12e-03 0.00e+00 0.00e+00 0.00e+00 0.00e+00 H2O+/O   0.00e+00 OH+/Otot 0.00e+00 Hex(tot) 0.00e+00
+ Sulphur    0  7.02e-05 9.64e-01 3.56e-02 2.36e-06 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00
+ Argon      0  7.82e-01 1.96e-01 2.24e-02 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00
+ Iron       0  9.25e-06 9.97e-01 2.80e-03 3.42e-06 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00
+    parispn.in Meudon Planetary nebula
+   Calculation stopped because lowest Te reached.    Iteration  1 of  1
+   The geometry is spherical.
+  !Some input lines contained [ or ], these were changed to spaces.
+  !Non-collisional excitation of [OIII] 4363 reached   2.35\% of the total.
+  !AGE: Cloud age was not set.  Longest timescale was 3.68e+012 s = 1.17e+005 years.
+   Suprathermal collisional ionization of H reached 9.48\% of the local H ionization rate.
+   Charge transfer ionization of H reached 8.94\% of the local H ionization rate.
+\end{verbatim}
+}
+
+Left on its own, the code will probably stop when the temperature falls
+below the default lowest temperature of \TEMPSTOPDEFAULT.  This is what happened in
+the preceding example.  This temperature was chosen for two reasons; a)
+collisionally excited optical and ultraviolet lines generally form in gas
+hotter than this (but infrared lines will form at far lower temperatures)
+and b) more than one thermal solution is possible for temperatures around
+3000~K (\citealp{Williams1967}), so thermal instabilities may result if the gas
+extends to cooler temperatures.
+
+It is a good idea to check whether the predictions would change if the
+model were made thicker or thinner.  It is safe to assume that a line's
+intensity does not depend on the thickness of the cloud if the final
+temperature is well below the excitation potential of the line or the gas
+is more neutral than the species of interest.
+
+The chapter \cdSectionTitle{Output} in Part 2 of this document
+lists all possible reasons for stopping.
+
+\section{Radius inner =18 [thickness =16; parsec; linear]}
+
+The optional
+second number on the \cdCommand{radius} command
+sets the thickness or outer radius of the cloud.
+
+\section{Stop Av 12.1 [point, extended]}
+\label{sec:CommandStopAv}
+
+This stops a calculation at a specified visual extinction $A_V$.
+The value
+is the extinction in magnitudes at the isophotal wavelength of the $V$ filter
+(5500\AA ).
+The number is the linear extinction in magnitudes unless it
+is negative, when it is interpreted as the log of the extinction.
+Note
+that there must be spaces before and after the key ``\cdCommand{AV}.''
+
+Properties of grains are determined by the \cdCommand{grains} command.
+The distinction between the extinction for a point
+versus an extended source is described in
+section 7.6 of AGN3.
+By default the $A_V$ specified with this command will
+be for a point source,
+which is the quantity measured in extinction studies
+of stars.
+The extended-source extinction, appropriate for extinction
+of a spatially-resolved emission-line region,,
+is specified with the keyword \cdCommand{extended}.
+
+\section{Stop column density = 23 [neutral; ionized; total; \dots]}
+
+This stops the calculation at the specified hydrogen column density
+$N$(H) [cm$^{-2}$].
+There are several optional keywords which determine whether the
+column density is the total (the default), the ionized hydrogen column
+density, the neutral hydrogen column density, or several other column
+densities.
+The default stopping column density is $10^{30}\ \mathrm{cm}^{-2}$.
+
+By default the number on the line is interpreted as the
+log of the column density.
+The keyword \cdCommand{linear} forces that interpretation.
+
+\subsection{Stop column density 23  }
+
+The number is the log of the total hydrogen column density (atomic, ionic,
+and all molecular forms), defined as the integral
+\begin{equation}
+N\left( {\mathrm{H}} \right) = \int {\left\{ {n\left( {{\mathrm{H}}^0 } \right)
++ n\left( {{\mathrm{H}}^ +  } \right) + 2n\left( {{\mathrm{H}}_2 } \right) +
+\sum\limits_{other} {n\left( {{\mathrm{H}}_{other} } \right)} } \right\}}
+\,f\left( r \right)\,dr
+\,[\mathrm{cm}^{-2}]% (69)
+\end{equation}
+where $f(r)$ is the filling factor.
+
+\subsection{Stop neutral column density 23  }
+
+The number is the log of the atomic hydrogen column density
+\begin{equation}
+N\left( {{\mathrm{H}}^0 } \right) = \int {n\left( {{\mathrm{H}}^0 } \right)f\left(
+r \right)\,dr}
+\, [\mathrm{cm}^{-2}].% (70)
+\end{equation}
+
+\subsection{Stop ionized column density 23  }
+
+The number is the log of the ionized hydrogen column density
+\begin{equation}
+N\left( {{\mathrm{H}}^ +  } \right) = \int {n\left( {{\mathrm{H}}^ +  }
+\right)f\left( r \right)\,dr}
+\,[\mathrm{cm}^{-2}] .% (71)
+\end{equation}
+
+\subsection{Stop atomic column density 21.3}
+
+In some PDR literature the atomic hydrogen column density is defined
+as the sum of \hO\ and \htwo.
+This command allows the calculation to stop as
+this summed column density, defined~as
+\begin{equation}
+N\left( {{\mathrm{H}}^0  + 2{\mathrm{H}}_2 } \right) = \int {\left[ {n\left(
+{{\mathrm{H}}^0 } \right) + 2n\left( {{\mathrm{H}}_2 } \right)} \right]f\left( r
+\right)\,dr}
+\,[\mathrm{cm}^{-2}] .% (72)
+\end{equation}
+This command was added by Nick Abel.
+Note that this counts each \htwo\ as two
+hydrogen atoms.
+
+\subsection{Stop H/TSpin column density 17.2}
+
+This calculation stops at the specified integral
+\begin{equation}
+N\left( {{\mathrm{H}}^0 } \right)/T_{spin}  = \int {\frac{{n\left( {{\mathrm{H}}^0
+} \right)}}{{T_{spin} }}f\left( r \right)\,dr}
+\,[\mathrm{K^{-1}\, cm}^{-2}] .
+\end{equation}
+Note that $T_{spin}$ is computed self-consistently
+including the effects of
+pumping by the background continuum (usually the CMB)
+and the local \la\ radiation field.
+
+\subsection{Stop H2 column density 19.2}
+
+The calculation stops at the specified molecular hydrogen column density
+\begin{equation}
+N\left( {{\mathrm{H}}_2 } \right) = \int {n\left( {{\mathrm{H}}_2 } \right)f\left(
+r \right)\,dr}
+\,[\mathrm{cm}^{-2}] .% (74)
+\end{equation}
+The 2 in \cdCommand{H2} must come before the log of the
+column density in the command.
+This is really the \htwo\ column density, not twice it.
+
+\subsection{Stop CO column density 19.2}
+
+The calculation stops at the specified column density in CO
+\begin{equation}
+N\left( {{\mathrm{CO}}} \right) = \int {n\left( {{\mathrm{CO}}} \right)f\left( r
+\right)\,dr}
+\,[\mathrm{cm}^{-2}] .% (75)
+\end{equation}
+This command was added by Nick Abel.
+
+\subsection{Stop column density ``OH'' 19.2}
+The calculation stops at the specified column density in the species given in quotes.  If the species is not recognized, the command will have no effect.  
+Species are described on page \pageref{sec:SpeciesDefine}.
+
+\subsection{Stop effective column density 23  }
+
+This is actually a form of the \cdCommand{stop optical depth} command.
+Usually, low-energy cutoffs in X-ray spectra are
+parameterized by the equivalent column density of a cold neutral absorber
+with cosmic abundances.
+Actually what is measured is an optical depth at
+some energy, generally around 1.0 keV.
+If the gas is ionized then a much
+larger column density will be needed to produce the observed absorption.
+The difference can be more than an order of magnitude.
+This command stops
+the calculation when the incident continuum has been attenuated by the
+appropriate absorption at 1.0 keV.
+The calculation stops when the absorption
+optical depth at 1.0 keV (neglecting scattering opacities)
+reaches a value of
+\begin{equation}
+\tau _{abs} \left( {1.0\;{\mathrm{keV}}} \right) = N_{effec} 2.14 \times 10^{
+- 22}
+\, [\mathrm{Napier}]
+\end{equation}
+at 73.5 Ryd.
+The argument of this command is the log of the effective column
+density $N_{effec}$.
+The absorption cross-section per proton for cold neutral
+gas is taken from \citet{Morrison1983}.
+Scattering opacities \emph{are not} included in this optical depth.
+No attempt is made to use realistic
+physical conditions or absorption cross sections---this command follows
+the Morrison \& McCammon paper.
+
+If the gas is highly ionized then the actual column density will be
+greater than the effective column density.
+It will be less if the abundances
+of the heavy elements are greatly enhanced.
+
+\section{Stop continuum flux 200 micron 65 Jansky}
+
+This commands allows you to stop the calculation when an observed continuum
+flux or surface brightness at an arbitrary wavelength is reached. Note that
+both the keywords \cdCommand{continuum} and \cdCommand{flux} need to be
+present on the command line. The first parameter must be the wavelength or
+frequency of the observation. The second must be the flux or surface
+brightness. The syntax for these parameters is exactly the same as for the
+\cdCommand{optimize continuum flux} command described in
+Section~\ref{sec:opt:cont:flux}. If the flux is $\leq$ 0, or the keyword
+\cdCommand{log} appears on the line, it will be assumed that the flux is
+logarithmic (but not the wavelength or frequency!).
+
+The code will implicitly behave as if a \cdCommand{set nFnu add} command had
+been given to add the requested frequency point.
+Observed fluxes must be dereddened for any extinction inbetween the
+source and the observer. The same normalization will be used as in the rest of
+the Cloudy output. So if you include the \cdCommand{print line flux at earth}
+command, you should enter the observed flux at Earth here. See
+Section~\ref{sec:line:flux:earth} for further details. See also
+Section~\ref{sec:set:nfnu} for a discussion of the components that are
+included in the continuum flux prediction.
+
+There is no limit to the number of \cdCommand{stop continuum flux}
+commands. The following gives some examples of its use:
+\begin{verbatim}
+# make sure we normalize the flux as observed
+print line flux seen at earth
+# and set the distance
+distance 980 linear parsec
+
+# stop when a dust continuum flux, e.g. measured by IRAS is reached
+stop continuum flux 60 micron 220 Jy
+
+# stop when a measured radio continuum flux is reached
+stop continuum flux 6 cm 50 mJy
+# same for an OCRA measurement...
+stop continuum flux 30 GHz 0.1 jansky
+
+# this will stop on a flux of 1e-21 erg s^-1 cm^-2 Hz^-1 (100 Jy) at 100 micron
+stop continuum flux 100 micron -21 erg/s/sqcm/Hz
+\end{verbatim}
+
+\section{Stop depth \dots}
+
+This is another name for the \cdCommand{stop thickness} command
+described on page \pageref{sec:CommandStopThckness} below.
+
+\section{Stop eden 3 [linear]}
+
+The calculation stops when the electron density falls below the
+indicated value.
+The number is the log of the electron density [cm$^{-3}$].
+The optional
+keyword \cdCommand{linear} will force the argument to be interpreted as the quantity
+itself, not its log.
+This command is one way to stop constant-temperature
+models.
+For instance, the calculation can be forced to stop at the
+\hplus\ - \hO\
+ionization front by setting the stopping electron density to approximately
+half of the hydrogen density.
+
+The following examples show a case that will stop
+near the
+He$^{2+}$-He$^+$
+ionization front and a case that will stop near
+the \hplus-\hO\ ionization front
+for solar abundances.
+\begin{verbatim}
+#
+# stop at the He++ - He+ ionization front
+hden 9
+stop eden 9.06 # stop when helium (10\% by number) is He+
+
+#
+# stop at H+ - H0 ionization front
+hden 5
+stop eden 4.5 # stop when electron dens falls below H density
+\end{verbatim}
+The default is an electron density of $-10^{30}$~cm$^{-3}$.
+(The negative sign
+is not a typo.)
+
+\section{Stop efrac = 1.05}
+
+The model will stop when the electron fraction, defined as the ratio
+of electron to total hydrogen densities, falls below the indicated value.
+This is another way to stop calculations at ionization fronts.  This is
+useful if the hydrogen density there is not known beforehand as occurs in
+constant-pressure calculations.  The argument is the fraction itself if
+it is greater than zero and the log of the fraction if it is $\le 0$.
+
+The default is an electron fraction of $-10^{37}$~cm$^{-3}$.
+(The negative sign is not a typo.)
+
+\section{Stop line "C  2" 157.6m reaches 0.2 rel to  "O  3" 5006.84}
+
+The calculation will stop when the emission line with the label given
+within the first pair of quotes and the wavelength given by
+the first number
+exceeds an intensity given by the second number, relative to an optional
+second emission line.
+In this example the calculation will stop when the
+intensity of [C II] 158 $\mu $m reaches 0.2 relative to [O III] $\lambda$5006.84.
+If a second
+optional line is not entered it will be H$\beta^{30}$.\footnote{The scaling of the line intensities can be changed with the
+\cdCommand{normalize}
+command.
+That command can change both the
+normalization line (usually H$\beta$) and its relative intensity
+(usually 1).
+If the second line is not set with the \cdCommand{stop line} command
+then
+H$\beta$ is the
+denominator in the ratio.
+The \cdCommand{stop line} command always uses the ratio of
+the two line intensities on the scale that is set with the
+\cdCommand{normalize} command.
+In versions C07.02 and before the \cdCommand{normalize} command
+did not interact with
+the stop line command.}
+This can be a useful way
+to stop matter-bounded models.
+The results of this command are not exact;
+the final intensity ratio will be slightly larger than the ratio specified.
+
+Intrinsic intensities are used by default.
+Emergent intensities will be used if the keyword
+\cdCommand{emergent} appears on the command line.
+
+The line label and wavelength should be entered exactly as it appears
+in the emission-line output.
+The line label within the quotes must have
+the same number of spaces as in the output.
+``C~2'' and ``C~~2'' are not the same (the first has only one space
+and the second is correct with two spaces).
+The wavelength is assumed to be in Angstroms if no letter
+follows it.
+The wavelength can be changed to microns or centimeters by immediately
+following the wavelength with 'm' or 'c' so that
+the [\cii ] $157.6\micron$ would be written as ``157.6m''.
+
+Up to 10 different \cdCommand{stop line} commands may be entered.
+If more than one
+\cdCommand{stop line} command is entered then the code
+will stop when any limit is reached.
+
+\section{Stop mass 32.98}
+
+The calculation will stop when the total mass of the computed structure
+exceeds the quantity entered.  If the inner radius is specified (the
+luminosity case) then the entered number is the log of the mass in gm.
+If the inner radius is not specified (the intensity case) then it is the
+log of the mass per unit area, gm cm$^{-2}$.
+
+At the current time no attempt is made to make the computed mass exactly
+equal to the entered number.
+The calculation will stop after the zone where
+the mass is first exceeded.
+
+\section{Stop mfrac = 0.5}
+
+The calculation stops when the hydrogen molecular fraction, defined as
+$2n(\mathrm{H}2)/n(\mathrm{H}_{tot}$), exceeds the indicated value.
+This is a way to stop
+calculations within a PDR.
+The argument is interpreted as the molecular
+fraction itself if it is greater than zero and as the log of the fraction
+if it is less than or equal to zero.
+
+The default is a molecular fraction of $10^{37} \mathrm{cm}^{-3}$.
+
+\section{Stop molecule depletion -2}
+
+Nick Abel incorporated the condensation of molecules onto grain surfaces.
+Currently CO, \water, and OH condensation are treated.
+The density of molecules
+on grains is given as a species with the molecule's usual label, ``CO'',
+``H2O'', or ``OH'', followed by the string ``gr''.
+The rates of UV and
+cosmic ray desorption along with accretion come from \citet{Hasegawa1992} and \citet{Hasegawa1993}.
+The grain surface chemistry
+mentioned in these papers is not included so our treatment of condensation
+is closer to the work of \citet{Bergin1995}, who also use
+the Hasegawa et al. rates.
+Use the \cdCommand{no grain molecules} command
+to turn off this condensation.
+
+\section{Stop optical depth -1 at 2.3 Ryd}
+
+This command stops the calculation at an arbitrary continuum absorption
+optical depth.
+The first number is the log of the optical depth.
+The optical depth is interpreted as a log by default.
+If the \cdCommand{linear} keyword
+occurs then the number is interpreted as the linear value.
+The optical
+depth is only for absorption and does not include scattering opacities.
+The second number is the energy in Rydbergs.
+It is interpreted as a log
+if it is negative, as linear if positive, and must be within the energy
+bounds considered by the code (presently \emm\ to
+\egamry).
+At present only one stopping optical depth can be specified.
+If more than
+one is entered then only the last is honored.
+
+It is traditional in X-ray astronomy to characterize low-energy cut-offs
+as the equivalent \emph{completely neutral} column density
+for \emph{solar} abundances.
+This is not correct when the gas is ionized
+(since the high-energy absorption
+opacity is diminished) or when the abundances of the heavy elements are
+enhanced (since the high-energy opacity is increased).
+For extreme cases
+these effects can change the opacity by more than an order of magnitude.
+The deduced column density is underestimated by the same amount.
+It is
+better to convert the deduced column density back into an optical depth
+at 0.5 or 1 keV (this is actually the observed quantity)
+and use this optical
+depth and energy as the stopping criteria than to use the deduced column
+density as a stopping criterion.
+Either this command, or the \cdCommand{stop effective
+column density} command (which is actually a form of the
+\cdCommand{stop optical depth} command can be used to stop
+the calculation
+at an X-ray optical depth corresponding to a certain low-energy absorption.
+
+The optical depth used in this command is the absorption optical depth
+and does not include scattering opacities.
+In general, the effects of
+scattering opacities are much more geometry dependent than absorption
+opacities.
+
+\subsection{Stop Balmer optical depth $= -.$3}
+
+This command is a special case of the \cdCommand{stop optical depth}
+command in which the energy does not need to be specified
+but the keyword \cdCommand{Balmer} is given.
+It will stop the calculation when the log of the absorption
+optical depth
+at the Balmer continuum threshold ($\nu = 0.250$ Ryd)
+reaches the specified value.
+The default is $\tau_{Bac} = 10^{20}$ and the optical depth
+is always interpreted as a log.
+This is the \emph{total absorption} optical depth at the Balmer edge
+and includes all computed absorption opacity sources such as grains or
+free-free absorption, but neglects scattering.
+
+\subsection{Stop Lyman optical depth = 5}
+
+This is a special case of the \cdCommand{stop optical depth} command
+in which the
+energy does not need to be specified but the keyword \cdCommand{Lyman} is given.
+The
+number is the log of the Lyman limit optical depth, $\tau_{912}$.
+The default value
+is $\tau_{912} = 10^{20}$.
+The stopping criterion is \emph{really} the
+\emph{total} $912$\AA\ \emph{absorption}
+optical depth and \emph{not} the hydrogen Lyman limit optical depth at $912$\AA.
+These are not exactly the same, especially when grains
+are present or the
+abundances of the heavy elements are enhanced.
+
+\subsection{Stop 21cm optical depth = linear 3}
+
+This stops the calculation when the \emph{line center} optical depth of \hi\ $\lambda$21~cm reaches the entered value.
+The populations of the hyperfine levels
+are determined by solving the full level populations with the effects of
+pumping by \la\ and the external continuum included.
+The calculation stops
+when the optical depth from the continuum source to the outer edge of the
+cloud exceeds the entered value.
+The actual optical depth with be greater
+than or equal to the indicated value.
+
+Note that \Cloudy\ always uses the dimensionless \emph{line center}
+optical depth.
+The \emph{integrated} optical depth is the standard used
+in radio astronomy.
+The
+\emph{integrated} optical depth is called the \emph{mean} optical depth in optical
+spectroscopy.
+The dimensionless mean optical depth is $\sqrt \pi  $
+larger than the line center optical depth.
+In radio astronomy, the
+integrated optical depth is often given in velocity units, km~s$^{-1}$.
+
+\section{Stop pfrac = 0.23}
+
+The calculation will stop when the proton fraction, defined as the ratio
+of proton (ionized hydrogen) to total hydrogen densities, falls below the
+indicated value.
+This is another way to stop calculations at ionization
+fronts and is useful if the hydrogen density there is not known beforehand.
+This occurs in constant pressure calculations, for instance.
+The argument
+is interpreted as the fraction itself if it is greater than zero
+and the
+log of the fraction if it is less than or equal to zero.
+
+The default is an proton fraction of $-10^{37}$~cm$^{-3}$.
+(The negative sign is not a typo.)
+
+\section{Stop radius 17.3 [parsec; linear; 17.6 on sec iter] }
+
+This sets an upper limit to the radius of the cloud.
+The argument
+is interpreted as the log of the radius unless the keyword
+\cdCommand{linear} appears.
+The default unit is centimeter but it will be interpreted
+as the log
+of the radius in parsec if the keyword \cdCommand{parsec}
+appears on the line.
+
+The \cdCommand{stop radius} command has the same effect
+as the optional second
+number on the \cdCommand{radius} command.
+
+Any number of radii may be entered on the command line.
+Each will
+be the ending radius for consecutive iterations.
+The limit to the number
+of stopping values is set by the limit to the number of iterations that
+can be performed.
+If fewer numbers are entered than iterations performed
+then the last number will be used for all further iterations.
+
+This command is useful if you want to vary the inner radius in an optimizer
+run, but want to keep the outer radius fixed. If you do so, make sure that you
+set the upper limit of the inner radius to a value less than the outer radius.
+You can do this with the \cdCommand{optimize range} command. If you did not
+set an upper limit and the optimizer would try to move the inner radius beyond
+the outer radius, the code would abort.
+
+\section{Stop temperature 1e3 K [linear, exceeds]}
+\label{sec:CommandStopTemperature}
+
+The calculation will stop when the kinetic temperature drops below
+$T_{low}$, the argument of this command.
+The argument is interpreted as the log of
+the temperature if $\le 10$ and as the linear temperature
+if $> 10$ or if the \cdCommand{linear} keyword appears.
+
+The default value is $T_{low} =$~\TEMPSTOPDEFAULT.
+Gas cooler than this produces little
+optical emission, but may be a strong emitter of infrared lines such as
+the [C II] 158 $\mu$m or the [O I]$^3P$ lines.
+The lowest temperature allowed,
+$T_{low}$, should be adjusted with this command
+so that the excitation potential
+$h\nu$ is $\cong kT_{low}$ for the lowest excitation potential
+transition considered.
+Note that more than one temperature is sometimes possible
+when $T \approx 10^3$~K
+(\citealp{Williams1967}) so thermal stability problems may develop
+if $T_{low}$ is lowered
+below a few thousand degrees Kelvin.
+This issue is discussed further in
+the section \cdSectionTitle{Problems} in Part 2 of this document.
+
+If the keyword \cdCommand{exceeds} appears on the line
+then the specified temperature
+will be the highest allowed temperature.
+The calculation stops if the
+temperature exceeds the value on the command.
+This might be necessary when
+a grid of models is computed but those in the high
+temperature phase (i.e.,
+$T > 10^5$~K) are not of interest.
+The other rules for the command are
+unchanged.
+
+If no number appears on the command line,
+but the keyword \cdCommand{off} does,
+then temperature will not be used as a stopping criterion.
+
+\section{Stop thickness 9.3 [parsec; linear; 23 on sec iter] }
+\label{sec:CommandStopThckness}
+
+This sets an upper limit to the thickness of the cloud.
+The thickness is the distance [cm] between the illuminated
+and shielded faces.
+The argument
+is interpreted as the log of the thickness unless the keyword
+\cdCommand{linear} appears.
+The default units are centimeters but it will be interpreted
+as the log
+of the thickness in parsec if the keyword \cdCommand{parsec}
+appears on the line.
+
+The \cdCommand{stop thickness} command has the same effect
+as the optional second
+number on the \cdCommand{radius} command.
+This command makes
+it possible to set a cloud thickness when the inner radius
+is not specified,
+such as when the ionization parameter is given.
+
+Any number of thicknesses may be entered on the command line.
+Each will
+be the ending thickness for consecutive iterations.
+The limit to the number
+of stopping values is set by the limit to the number of iterations that
+can be performed.
+If fewer numbers are entered than iterations performed
+then the last number will be used for all further iterations.
+
+The keyword \cdCommand{depth} can be used instead of \cdCommand{thickness}.
+
+\section{Stop velocity $<$ 1 km/s}
+
+The calculation will stop if the absolute value of the wind velocity
+falls below the value.
+The stopping velocity is entered in km s$^{-1}$ but is
+converted to cm s$^{-1}$ within the code.
+
+\section{Stop zone 123 [21 on sec iteration,\dots]}
+
+This sets a limit to the number of zones that are computed on each
+iteration.
+It is not normally used.
+In this example the calculation will
+stop after computing 123 zones.
+The default value is 1400.
+Any number
+of zones may be entered, each being the ending zone for consecutive
+iterations.
+This limit is set by the limit to the number of iterations
+that can be performed.
+If fewer numbers are entered than iterations
+performed then the last number will be used for all further iterations.
+
+The code checks that it did not stop because the default number of zones
+was reached.
+A warning will be generated if this happens since it was
+probably not intended.
+Use the \cdCommand{set nend} command to increase the default number
+of zones while keeping this checking active.
+
+The code allocates memory to store a great deal of information for the
+limiting number of zones.
+Increasing the number of zones will also increase
+the memory needed to run the code.
+Don't do this unless you really need
+to use the zones.
+
+

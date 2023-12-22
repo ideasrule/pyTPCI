@@ -1,0 +1,66 @@
+title test compton recoil ionization of hydrogen 
+#
+# commands controlling continuum =========
+laser 2000 ryd
+ionization parameter -5
+#
+# commands for density & abundances =========
+hden 0
+init "honly.ini"
+#
+# commands controlling geometry  =========
+set dr 14
+stop zone 10
+#
+# other commands for details     =========
+iterate
+no secondary ionization 
+constant temperature 1000
+#
+# commands controlling output    =========
+save overview "limit_recoil_ion.ovr"
+save performance "limit_recoil_ion.per"
+save monitors "limit_recoil_ion.asr" last
+#
+# commands giving the monitors    =========
+## >>chng 02 nov 05, from -3.197 to 3.504, contin norm was not exact
+## >>chng 02 dec 21, from -3.504 to -3.261, new hmole
+## >>chng 03 jan 21, from -3.261 to -3.214, better hmole converge
+## >>chng 03 feb 13, from -3.214 to -3.256, new H3+ + e => 3H
+## >>chng 03 aug 30, from -3.526 to -3.332, more zones, chng H2* rate
+## >>chng 03 sep 16, from -3.332 to -3.274, more zones, chng H2* rate
+## >>chng 04 jun 28, from -3.274 to -3.671, include mole in ion frac sum
+## >>chng 05 nov 25, from -3.67 to -3.59, H2 photo cs to dalgarno vals
+## >>chng 13 aug 20, from -3.59 to -3.022, enable D chem by default
+## >>chng 13 sep 17, from -3.022 to -3.589, D chem off by default
+monitor hydrogen ionization 2 -3.589 error 0.1
+##
+## this is very sensitive to the reaction H2 + H+ => H3+ HNU
+## >>chng 02 dec 21, from -2.293 to -0.469, new hmole
+## >>chng 03 feb 13, from -0.469 to -0.504, new H3+ + e => 3H
+## >>chng 03 aug 30, from -0.504 to -0.527, more zones, chng H2* rate
+## >>chng 05 nov 25, from -0.53 to -0.59, H2 photo cs to dalgarno vals
+## >>chng 13 aug 20, from -0.59 to -0.4548, enable D chem by default
+## >>chng 13 sep 17, from -0.4548 to -0.5905, D chem off by default
+monitor H2 molecular fraction -0.5905 error 0.1
+##
+## >>chng 05 nov 25 add next two asserts
+## >>chng 05 nov 25, from 5.26 to 5.33, H2 photo cs to dalgarno vals
+## >>chng 07 jan 07, from 5.33 to 5.68, enable McCall et al. H3+ rate
+## >>chng 13 aug 20, from 5.68 to 5.448, enable D chem by default
+## >>chng 13 sep 17, from 5.448 to 5.681, D chem off by default
+## >>chng 20 sep 06, from 5.681 to 5.841, further update to McCall CR-related rate
+monitor column density H3+ 5.841 error 0.1
+##
+## >>chng 05 nov 25, from 3.94 to 4.17, H2 photo cs to dalgarno vals
+## >>chng 13 aug 20, from 4.17 to 4.294, enable D chem by default
+## >>chng 13 sep 17, from 4.294 to 4.173, D chem off by default
+monitor column density H2+ 4.173 error 0.1
+# 
+# limit_recoil_ion.in
+# class limit 
+# ========================================
+# 
+
+H ionization is totally due to recoil ionization in this model.
+The assert checks the final hydrogen ionization. 

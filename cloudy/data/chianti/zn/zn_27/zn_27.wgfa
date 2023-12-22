@@ -1,0 +1,30 @@
+    1    3        217.655      2.863e-03      1.343e+08 
+    2    3       2000.280      0.000e+00      2.485e+03 
+    2    4        433.154      0.000e+00      7.078e+00 
+    3    4        552.877      0.000e+00      6.906e+04 
+    1    5        104.674      1.448e-01      2.936e+10 
+    3    6        145.986      4.931e-02      1.542e+10 
+    5    6        528.849      8.348e-04      1.990e+07 
+    2    7        112.703      6.148e-02      1.076e+10 
+    3    7        119.432      4.104e-02      6.394e+09 
+    4    7        152.340      5.569e-02      5.332e+09 
+    5    7        292.918      8.407e-04      2.177e+07 
+    3    8        111.639      8.564e-02      9.162e+09 
+    4    8        139.885      1.122e-01      7.645e+09 
+    5    8        250.101      3.633e-02      7.744e+08 
+    3    9         88.965      6.282e-03      1.058e+09 
+    4    9        106.026      9.680e-02      1.148e+10 
+    5    9        159.203      1.475e-01      7.759e+09 
+    5   10        114.793      9.643e-02      4.879e+10 
+ -1
+%filename: zn_27.wgfa
+%Observed energy levels: Edlen, B., Phys. Scr., 1983, 28, 51.
+%Allowed transitions oscillator strengths: Zhang, Sampson, 1992, ADNDT, 52, 143
+%produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+% Enrico Landi 1997
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

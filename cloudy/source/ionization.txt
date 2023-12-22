@@ -1,0 +1,61 @@
+ionization balance is set up in series of IonElementname routines.
+
+these are called by ionize
+
+===========================================
+in each IonElementname routine
+
+ion_zero zeroes out the balance array
+
+===========================================
+
+Photoionization is evaluated in two routines, iso_photo and photoionize
+
+ionization and recombination arrays
+ionbal.PhotoRate_Ground[nelem][nion][ns][0] photo rate for shell ns
+ionbal.PhotoRate_Ground[nelem][nion][ns][1] heating rate for same shell, not causing sec ion
+ionbal.PhotoRate_Ground[nelem][nion][ns][2] heating that can sec ion
+
+bound electron compton scattering
+evaluated in highen, should be added only to ground state photo and heat rates
+ionization rate per atom, is added to PhotoRate_Ground
+ionbal.CompRecoilIonRate[nelem][ion]
+heating rate, is secondary-capable heating, should be added to high-energy heating
+ionbal.CompRecoilHeatRate[nelem][ion]
+
+collisional ionization 
+ionbal.CollIonRate_Ground[nelem][ion][0] is collisional ionization rate
+ionbal.CollIonRate_Ground[nelem][ion][1] is cooling due to this
+
+ion_recomb
+fills in recombination array
+RecomRate.RecombinRate[ion][NELEM-1]
+
+===================================================
+
+ion_solver
+
+to print photo ion rates for all shells of an ion and element
+GammaPrtRate(
+	/* io unit we will write to */
+	FILE * ioFILE, 
+	/* stage of ionization on C scale, 0 for atom */
+	long int ion ,
+	/* 0 for H, etc */
+	long int ipZ)
+
+===================================================
+
+charge transfer
+
+everthing is in chargtran.c and atmdat.h
+
+with hydrogen evaluated in atmdat
+
+this is the charge ionization, recom array that goes into the ionization balance
+[0][ion] is ionization, 
+[1][ion] is recombination 
+this has all charge transfer rates 
+EXCEPT those for hydrogen those are in HCharExcIon and HCharExcRec
+
+CharExc.CTHeavy[direction][species]

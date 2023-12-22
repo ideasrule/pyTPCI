@@ -1,0 +1,14 @@
+#
+# commands controlling continuum =========
+blackbody 1e5
+Q(H) 52
+#
+# commands for density & abundances =========
+hden 3
+#
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+iterate

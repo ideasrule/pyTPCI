@@ -1,0 +1,61 @@
+title test low-T Compton energy exchange
+#
+# commands controlling continuum =========
+black linear 3 lte
+brems 5
+ionizat -5
+#
+# commands for density & abundances =========
+hden -10
+init file "hheonly.ini"
+eden -3
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+set temperature convergence 0.0001
+iterate 3
+#
+# commands controlling output    =========
+save overview "limit_compton_lo_t.ovr"
+save performance "limit_compton_lo_t.per"
+save monitors last "limit_compton_lo_t.asr"
+#
+# commands giving the monitors    =========
+monitor temperature "H+" 3 linear error 0.01
+##
+## >>chng 01 may 07, chng in He+ H ct rate, from -44.962 to -44.610
+## >>chng 02 nov 03, from -44.610 to -45.6454, new H2+ rate and high abund
+## so much less atomic H
+## >>chng 02 dec 10, from -45.645 to -45.835, better convergence, incr error
+## >>chng 02 dec 21, from -45.835 to -44.612, new hmole
+## >>chng 04 feb 21, from -44.612 to -47.819, add on CT recom with H-
+## >>chng 07 oct 22, from -47.819 to -47.654, resolve l-levels of h-like sequence
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 14 nov 05, from -47.654 to -45.980, lower electron density to 1e-3 cm^-3
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "h  1" 4861.32A -45.980 error 0.2
+##
+## >>chng 04 jun 28, from -11.850 to -15.097, include H2 in fraction
+## >>chng 05 nov 25, from -15.097 to -15.075, NA add mole grain freeze out
+## >>chng 14 nov 05, from -15.075 to -10.410, lower electron density to 1e-3 cm^-3
+monitor ioniz hydrogen 2 -10.410
+# limit_compton_lo_t.in
+# class limit 
+# ========================================
+# 
+
+This tests the code in the low temperature Compton limit.  The gas is
+illuminated by a 3 K blackbody in thermodynamic equilibrium. 
+The equilibrium temperature should be exactly 3 K. 
+It is necessary to add an extra component of free electrons to
+test the code in this limit with the eden command.  
+If eden is pushed up too high, ee brems cooling will be artificially
+boosted compared to other cooling terms and start cooling the gas below 3 K.
+This is why eden was set to 1e-3 cm^-3 on 20141105.

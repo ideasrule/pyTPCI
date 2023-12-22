@@ -1,0 +1,100 @@
+ConvPresTempEdenIoniz1	479.85	l:	0	nH:	552470	ne:	176.33	PCurnt:	2.00E-08	PCorct:	2.84E-08	err:	-29.86%	dP/dn:	1.00E+00	Te:	2.78E+02	Osc:	F
+ConvPresTempEdenIoniz1	479.87	l:	1	nH:	569040	ne:	181.62	PCurnt:	2.05E-08	PCorct:	2.84E-08	err:	-27.93%	dP/dn:	1.00E+00	Te:	2.78E+02	Osc:	F
+ConvPresTempEdenIoniz1	479.89	l:	2	nH:	586110	ne:	187.07	PCurnt:	2.11E-08	PCorct:	2.84E-08	err:	-25.96%	dP/dn:	1.00E+00	Te:	2.78E+02	Osc:	F
+ConvPresTempEdenIoniz1	479.92	l:	3	nH:	603700	ne:	192.46	PCurnt:	2.16E-08	PCorct:	2.84E-08	err:	-23.92%	dP/dn:	1.00E+00	Te:	2.78E+02	Osc:	F
+ConvPresTempEdenIoniz1	479.94	l:	4	nH:	621810	ne:	198.23	PCurnt:	2.22E-08	PCorct:	2.84E-08	err:	-21.84%	dP/dn:	1.00E+00	Te:	2.78E+02	Osc:	F
+ConvPresTempEdenIoniz1	480.07	l:	5	nH:	640460	ne:	204.18	PCurnt:	2.36E-08	PCorct:	2.84E-08	err:	-17.21%	dP/dn:	1.00E+00	Te:	2.86E+02	Osc:	F
+ConvPresTempEdenIoniz1	481.55	l:	6	nH:	659680	ne:	210.30	PCurnt:	4.44E-08	PCorct:	2.84E-08	err:	56.123% d	P/dn:1	0.00E+00	Te:5	.2085e+002 O	sc:F	
+ConvPresTempEdenIoniz1	481.57	l:	7	nH:	639890	ne:	204.00	PCurnt:	4.32E-08	PCorct:	2.84E-08	err:	51.854% d	P/dn:5	0.00E+00	Te:5	.2085e+002 O	sc:T	
+ConvPresTempEdenIoniz1	481.62	l:	8	nH:	630290	ne:	200.94	PCurnt:	4.19E-08	PCorct:	2.84E-08	err:	47.396% d	P/dn:5	0.00E+00	Te:5	.1302e+002 O	sc:T	
+ConvPresTempEdenIoniz1	481.69	l:	9	nH:	620830	ne:	198.12	PCurnt:	4.09E-08	PCorct:	2.84E-08	err:	43.842% d	P/dn:5	0.00E+00	Te:5	.0786e+002 O	sc:T	
+ConvPresTempEdenIoniz1	481.73	l:	10	nH:	611520	ne:	195.15	PCurnt:	3.95E-08	PCorct:	2.84E-08	err:	38.904% d	P/dn:5	0.00E+00	Te:4	.9770e+002 O	sc:T	
+ConvPresTempEdenIoniz1	481.79	l:	11	nH:	602350	ne:	192.22	PCurnt:	3.86E-08	PCorct:	2.84E-08	err:	35.762% d	P/dn:5	0.00E+00	Te:4	.9337e+002 O	sc:T	
+ConvPresTempEdenIoniz1	481.89	l:	12	nH:	593310	ne:	189.34	PCurnt:	3.73E-08	PCorct:	2.84E-08	err:	31.010% d	P/dn:5	0.00E+00	Te:4	.8309e+002 O	sc:F	
+ConvPresTempEdenIoniz1	482.02	l:	13	nH:	584410	ne:	186.50	PCurnt:	3.57E-08	PCorct:	2.84E-08	err:	25.539% d	P/dn:5	0.00E+00	Te:4	.6976e+002 O	sc:F	
+ConvPresTempEdenIoniz1	482.18	l:	14	nH:	575650	ne:	183.70	PCurnt:	3.40E-08	PCorct:	2.84E-08	err:	19.543% d	P/dn:5	0.00E+00	Te:4	.5394e+002 O	sc:F	
+ConvPresTempEdenIoniz1	482.46	l:	15	nH:	567010	ne:	180.95	PCurnt:	3.15E-08	PCorct:	2.84E-08	err:	10.762% d	P/dn:5	0.00E+00	Te:4	.2695e+002 O	sc:F	
+ConvPresTempEdenIoniz1	484.07	l:	16	nH:	558510	ne:	178.23	PCurnt:	2.02E-08	PCorct:	2.84E-08	err:	-28.83%	dP/dn:	5.00E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.09	l:	17	nH:	566880	ne:	180.91	PCurnt:	2.05E-08	PCorct:	2.84E-08	err:	-27.85%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	T
+ConvPresTempEdenIoniz1	484.11	l:	18	nH:	571140	ne:	182.26	PCurnt:	2.07E-08	PCorct:	2.84E-08	err:	-27.36%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	T
+ConvPresTempEdenIoniz1	484.13	l:	19	nH:	575420	ne:	183.63	PCurnt:	2.08E-08	PCorct:	2.84E-08	err:	-26.86%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	T
+ConvPresTempEdenIoniz1	484.15	l:	20	nH:	579730	ne:	185.01	PCurnt:	2.09E-08	PCorct:	2.84E-08	err:	-26.36%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	T
+ConvPresTempEdenIoniz1	484.17	l:	21	nH:	584080	ne:	186.39	PCurnt:	2.11E-08	PCorct:	2.84E-08	err:	-25.85%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	T
+ConvPresTempEdenIoniz1	484.19	l:	22	nH:	588460	ne:	187.79	PCurnt:	2.12E-08	PCorct:	2.84E-08	err:	-25.34%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.21	l:	23	nH:	592880	ne:	189.20	PCurnt:	2.14E-08	PCorct:	2.84E-08	err:	-24.83%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.23	l:	24	nH:	597320	ne:	190.62	PCurnt:	2.15E-08	PCorct:	2.84E-08	err:	-24.31%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.25	l:	25	nH:	601800	ne:	192.05	PCurnt:	2.17E-08	PCorct:	2.84E-08	err:	-23.79%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.28	l:	26	nH:	606320	ne:	193.29	PCurnt:	2.18E-08	PCorct:	2.84E-08	err:	-23.27%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.3	l:	27	nH:	610860	ne:	194.74	PCurnt:	2.20E-08	PCorct:	2.84E-08	err:	-22.74%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.32	l:	28	nH:	615450	ne:	196.20	PCurnt:	2.21E-08	PCorct:	2.84E-08	err:	-22.21%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.34	l:	29	nH:	620060	ne:	197.67	PCurnt:	2.23E-08	PCorct:	2.84E-08	err:	-21.68%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.36	l:	30	nH:	624710	ne:	199.15	PCurnt:	2.24E-08	PCorct:	2.84E-08	err:	-21.14%	dP/dn:	2.50E-01	Te:	2.79E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.41	l:	31	nH:	629400	ne:	200.65	PCurnt:	2.28E-08	PCorct:	2.84E-08	err:	-19.96%	dP/dn:	2.50E-01	Te:	2.81E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.45	l:	32	nH:	634120	ne:	202.15	PCurnt:	2.30E-08	PCorct:	2.84E-08	err:	-19.01%	dP/dn:	2.50E-01	Te:	2.82E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.49	l:	33	nH:	638870	ne:	203.67	PCurnt:	2.36E-08	PCorct:	2.84E-08	err:	-16.97%	dP/dn:	2.50E-01	Te:	2.88E+02	Osc:	F
+ConvPresTempEdenIoniz1	484.54	l:	34	nH:	643670	ne:	205.20	PCurnt:	2.39E-08	PCorct:	2.84E-08	err:	-15.85%	dP/dn:	2.50E-01	Te:	2.90E+02	Osc:	F
+ConvPresTempEdenIoniz1	485.94	l:	35	nH:	648490	ne:	206.74	PCurnt:	4.30E-08	PCorct:	2.84E-08	err:	51.187% d	P/dn:2	5.00E-02	Te:5	.1277e+002 O	sc:F	
+ConvPresTempEdenIoniz1	485.96	l:	36	nH:	643630	ne:	205.19	PCurnt:	4.27E-08	PCorct:	2.84E-08	err:	50.156% d	P/dn:1	2.50E-02	Te:5	.1277e+002 O	sc:T	
+ConvPresTempEdenIoniz1	485.98	l:	37	nH:	641220	ne:	204.42	PCurnt:	4.26E-08	PCorct:	2.84E-08	err:	49.643% d	P/dn:1	2.50E-02	Te:5	.1277e+002 O	sc:T	
+ConvPresTempEdenIoniz1	486	l:	38	nH:	638810	ne:	203.65	PCurnt:	4.24E-08	PCorct:	2.84E-08	err:	49.132% d	P/dn:1	2.50E-02	Te:5	.1277e+002 O	sc:T	
+ConvPresTempEdenIoniz1	486.02	l:	39	nH:	636420	ne:	202.89	PCurnt:	4.23E-08	PCorct:	2.84E-08	err:	48.623% d	P/dn:1	2.50E-02	Te:5	.1277e+002 O	sc:T	
+ConvPresTempEdenIoniz1	486.04	l:	40	nH:	634030	ne:	202.12	PCurnt:	4.21E-08	PCorct:	2.84E-08	err:	48.116% d	P/dn:1	2.50E-02	Te:5	.1277e+002 O	sc:T	
+ConvPresTempEdenIoniz1	486.06	l:	41	nH:	631650	ne:	201.37	PCurnt:	4.20E-08	PCorct:	2.84E-08	err:	47.610% d	P/dn:1	2.50E-02	Te:5	.1277e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.08	l:	42	nH:	629280	ne:	200.61	PCurnt:	4.18E-08	PCorct:	2.84E-08	err:	47.107% d	P/dn:1	2.50E-02	Te:5	.1277e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.1	l:	43	nH:	626920	ne:	199.86	PCurnt:	4.17E-08	PCorct:	2.84E-08	err:	46.604% d	P/dn:1	2.50E-02	Te:5	.1277e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.16	l:	44	nH:	624570	ne:	199.31	PCurnt:	4.11E-08	PCorct:	2.84E-08	err:	44.331% d	P/dn:1	2.50E-02	Te:5	.0686e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.18	l:	45	nH:	622230	ne:	198.56	PCurnt:	4.09E-08	PCorct:	2.84E-08	err:	43.838% d	P/dn:1	2.50E-02	Te:5	.0686e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.2	l:	46	nH:	619900	ne:	197.82	PCurnt:	4.08E-08	PCorct:	2.84E-08	err:	43.348% d	P/dn:1	2.50E-02	Te:5	.0686e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.24	l:	47	nH:	617570	ne:	197.08	PCurnt:	4.04E-08	PCorct:	2.84E-08	err:	42.152% d	P/dn:1	2.50E-02	Te:5	.0448e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.28	l:	48	nH:	615260	ne:	196.34	PCurnt:	4.01E-08	PCorct:	2.84E-08	err:	41.038% d	P/dn:1	2.50E-02	Te:5	.0234e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.32	l:	49	nH:	612950	ne:	195.60	PCurnt:	3.98E-08	PCorct:	2.84E-08	err:	39.925% d	P/dn:1	2.50E-02	Te:5	.0019e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.36	l:	50	nH:	610650	ne:	194.87	PCurnt:	3.95E-08	PCorct:	2.84E-08	err:	38.828% d	P/dn:1	2.50E-02	Te:4	.9806e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.38	l:	51	nH:	608360	ne:	194.14	PCurnt:	3.94E-08	PCorct:	2.84E-08	err:	38.354% d	P/dn:1	2.50E-02	Te:4	.9806e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.42	l:	52	nH:	606080	ne:	193.41	PCurnt:	3.90E-08	PCorct:	2.84E-08	err:	37.063% d	P/dn:1	2.50E-02	Te:4	.9523e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.46	l:	53	nH:	603810	ne:	192.68	PCurnt:	3.87E-08	PCorct:	2.84E-08	err:	36.067% d	P/dn:1	2.50E-02	Te:4	.9339e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.5	l:	54	nH:	601540	ne:	191.96	PCurnt:	3.84E-08	PCorct:	2.84E-08	err:	34.994% d	P/dn:1	2.50E-02	Te:4	.9126e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.54	l:	55	nH:	599290	ne:	191.24	PCurnt:	3.81E-08	PCorct:	2.84E-08	err:	33.943% d	P/dn:1	2.50E-02	Te:4	.8919e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.58	l:	56	nH:	597040	ne:	190.52	PCurnt:	3.78E-08	PCorct:	2.84E-08	err:	32.879% d	P/dn:1	2.50E-02	Te:4	.8705e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.62	l:	57	nH:	594800	ne:	189.81	PCurnt:	3.75E-08	PCorct:	2.84E-08	err:	31.812% d	P/dn:1	2.50E-02	Te:4	.8487e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.68	l:	58	nH:	592570	ne:	189.10	PCurnt:	3.71E-08	PCorct:	2.84E-08	err:	30.319% d	P/dn:1	2.50E-02	Te:4	.8116e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.72	l:	59	nH:	590350	ne:	188.39	PCurnt:	3.68E-08	PCorct:	2.84E-08	err:	29.225% d	P/dn:1	2.50E-02	Te:4	.7883e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.78	l:	60	nH:	588130	ne:	187.68	PCurnt:	3.64E-08	PCorct:	2.84E-08	err:	27.802% d	P/dn:1	2.50E-02	Te:4	.7530e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.82	l:	61	nH:	585930	ne:	186.98	PCurnt:	3.60E-08	PCorct:	2.84E-08	err:	26.727% d	P/dn:1	2.50E-02	Te:4	.7299e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.88	l:	62	nH:	583730	ne:	186.28	PCurnt:	3.56E-08	PCorct:	2.84E-08	err:	25.317% d	P/dn:1	2.50E-02	Te:4	.6944e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.93	l:	63	nH:	581540	ne:	185.58	PCurnt:	3.52E-08	PCorct:	2.84E-08	err:	23.861% d	P/dn:1	2.50E-02	Te:4	.6568e+002 O	sc:F	
+ConvPresTempEdenIoniz1	486.98	l:	64	nH:	579360	ne:	184.88	PCurnt:	3.48E-08	PCorct:	2.84E-08	err:	22.427% d	P/dn:1	2.50E-02	Te:4	.6197e+002 O	sc:F	
+ConvPresTempEdenIoniz1	487.03	l:	65	nH:	577190	ne:	184.19	PCurnt:	3.44E-08	PCorct:	2.84E-08	err:	21.005% d	P/dn:1	2.50E-02	Te:4	.5827e+002 O	sc:F	
+ConvPresTempEdenIoniz1	487.1	l:	66	nH:	575020	ne:	183.50	PCurnt:	3.39E-08	PCorct:	2.84E-08	err:	19.224% d	P/dn:1	2.50E-02	Te:4	.5320e+002 O	sc:F	
+ConvPresTempEdenIoniz1	487.16	l:	67	nH:	572870	ne:	182.81	PCurnt:	3.34E-08	PCorct:	2.84E-08	err:	17.488% d	P/dn:1	2.50E-02	Te:4	.4824e+002 O	sc:F	
+ConvPresTempEdenIoniz1	487.24	l:	68	nH:	570720	ne:	182.12	PCurnt:	3.28E-08	PCorct:	2.84E-08	err:	15.427% d	P/dn:1	2.50E-02	Te:4	.4202e+002 O	sc:F	
+ConvPresTempEdenIoniz1	487.32	l:	69	nH:	568580	ne:	181.44	PCurnt:	3.22E-08	PCorct:	2.84E-08	err:	13.075% d	P/dn:1	2.50E-02	Te:4	.3464e+002 O	sc:F	
+ConvPresTempEdenIoniz1	487.44	l:	70	nH:	566450	ne:	180.76	PCurnt:	3.11E-08	PCorct:	2.84E-08	err:	9.497% d	P/dn:1	2.50E-02	Te:4	.2253e+002 O	sc:F	
+ConvPresTempEdenIoniz1	489.16	l:	71	nH:	564320	ne:	180.08	PCurnt:	2.05E-08	PCorct:	2.84E-08	err:	-27.87%	dP/dn:	1.25E-01	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.18	l:	72	nH:	566440	ne:	180.76	PCurnt:	2.06E-08	PCorct:	2.84E-08	err:	-27.62%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	T
+ConvPresTempEdenIoniz1	489.2	l:	73	nH:	567500	ne:	181.10	PCurnt:	2.06E-08	PCorct:	2.84E-08	err:	-27.50%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	T
+ConvPresTempEdenIoniz1	489.22	l:	74	nH:	568560	ne:	181.44	PCurnt:	2.07E-08	PCorct:	2.84E-08	err:	-27.37%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	T
+ConvPresTempEdenIoniz1	489.24	l:	75	nH:	569630	ne:	181.78	PCurnt:	2.07E-08	PCorct:	2.84E-08	err:	-27.25%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	T
+ConvPresTempEdenIoniz1	489.26	l:	76	nH:	570700	ne:	182.12	PCurnt:	2.07E-08	PCorct:	2.84E-08	err:	-27.12%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	T
+ConvPresTempEdenIoniz1	489.28	l:	77	nH:	571770	ne:	182.46	PCurnt:	2.08E-08	PCorct:	2.84E-08	err:	-27.00%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.3	l:	78	nH:	572840	ne:	182.80	PCurnt:	2.08E-08	PCorct:	2.84E-08	err:	-26.87%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.32	l:	79	nH:	573920	ne:	183.14	PCurnt:	2.08E-08	PCorct:	2.84E-08	err:	-26.75%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.34	l:	80	nH:	574990	ne:	183.49	PCurnt:	2.09E-08	PCorct:	2.84E-08	err:	-26.62%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.36	l:	81	nH:	576070	ne:	183.83	PCurnt:	2.09E-08	PCorct:	2.84E-08	err:	-26.50%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.38	l:	82	nH:	577150	ne:	184.18	PCurnt:	2.09E-08	PCorct:	2.84E-08	err:	-26.37%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.4	l:	83	nH:	578230	ne:	184.52	PCurnt:	2.10E-08	PCorct:	2.84E-08	err:	-26.24%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.42	l:	84	nH:	579320	ne:	184.87	PCurnt:	2.10E-08	PCorct:	2.84E-08	err:	-26.12%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.44	l:	85	nH:	580400	ne:	185.21	PCurnt:	2.11E-08	PCorct:	2.84E-08	err:	-25.99%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.46	l:	86	nH:	581490	ne:	185.56	PCurnt:	2.11E-08	PCorct:	2.84E-08	err:	-25.86%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.48	l:	87	nH:	582580	ne:	185.91	PCurnt:	2.11E-08	PCorct:	2.84E-08	err:	-25.74%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.5	l:	88	nH:	583670	ne:	186.26	PCurnt:	2.12E-08	PCorct:	2.84E-08	err:	-25.61%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.52	l:	89	nH:	584770	ne:	186.61	PCurnt:	2.12E-08	PCorct:	2.84E-08	err:	-25.48%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.54	l:	90	nH:	585860	ne:	186.96	PCurnt:	2.12E-08	PCorct:	2.84E-08	err:	-25.35%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.56	l:	91	nH:	586960	ne:	187.31	PCurnt:	2.13E-08	PCorct:	2.84E-08	err:	-25.23%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.58	l:	92	nH:	588060	ne:	187.66	PCurnt:	2.13E-08	PCorct:	2.84E-08	err:	-25.10%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.6	l:	93	nH:	589170	ne:	188.01	PCurnt:	2.13E-08	PCorct:	2.84E-08	err:	-24.97%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.62	l:	94	nH:	590270	ne:	188.36	PCurnt:	2.14E-08	PCorct:	2.84E-08	err:	-24.84%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.64	l:	95	nH:	591380	ne:	188.72	PCurnt:	2.14E-08	PCorct:	2.84E-08	err:	-24.71%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.66	l:	96	nH:	592490	ne:	189.07	PCurnt:	2.15E-08	PCorct:	2.84E-08	err:	-24.58%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.68	l:	97	nH:	593600	ne:	189.43	PCurnt:	2.15E-08	PCorct:	2.84E-08	err:	-24.45%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.7	l:	98	nH:	594710	ne:	189.78	PCurnt:	2.15E-08	PCorct:	2.84E-08	err:	-24.32%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F
+ConvPresTempEdenIoniz1	489.72	l:	99	nH:	595820	ne:	190.14	PCurnt:	2.16E-08	PCorct:	2.84E-08	err:	-24.19%	dP/dn:	6.25E-02	Te:	2.80E+02	Osc:	F

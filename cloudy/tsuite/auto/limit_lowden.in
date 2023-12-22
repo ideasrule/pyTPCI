@@ -1,0 +1,104 @@
+title test optically thin model that extends to very low densities
+#
+# commands controlling continuum =========
+table agn
+ionization parameter 0
+#
+# commands for density & abundances =========
+hden -2 to the -2 power
+init file="ism.ini"
+#
+# commands controlling geometry  =========
+sphere
+# this will take density down to 1e-8, below stated limit
+radius 10 13 
+#
+# other commands for details     =========
+#
+# commands controlling output    =========
+save performance "limit_lowden.per"
+save overview "limit_lowden.ovr" last
+save monitors "limit_lowden.asr" last
+#
+# commands giving the monitors    =========
+## this model is optically thin in the Lyman lines and so pumping
+## is very important - 
+## >>chng 00 dec 06, change ionization parameter of model from 1 to 0
+## old value was on unstable part of cooling curve, and small changes in
+## cs of Fe13 lines changed temperature by 150% - with lower value
+## results are themally stable
+## >>chng 07 jan 25, from -19.014 to -19.045, use only Gu UTA data file
+## do not assert H lines since cloud is optically thin and takes
+## at least three iterations to converge optical depth scale, t
+## that is not the purpose of this sim
+## assert line luminosity "H  1" 4861 -19.045 error 0.07
+##
+## >>chng 04 jun 12, from 0.5998 to 0.552 chng cont shield fcn
+## >>chng 06 nov 29, rm since Badnell DR raises temp above case b table limit
+## assert line "ca b" 4861 0.552
+##
+## >>chng 03 nov 23, from 4.410 to 4.431, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from 4.431 to 4.453, guess dr to Badnell mean
+## >>chng 06 nov 29, from 4.453 to 4.480, Badnell DR now default
+monitor temperature "H+" 4.480
+##
+## model is highly spherical so these are not degenerate tests
+## large error is to accomodate usual limited precision unix box
+monitor ionization hydrogen 1 volume -5.359 error 0.25
+##
+## chng 00 jul 7, to get sgi and pc to agree
+monitor ionization hydrogen 1 radius -5.359 error 0.2
+##
+## >>chng 06 feb 03, from -3.333 to -3.358, guess dr to Badnell mean
+## >>chng 07 jan 25, from -3.358 to -3.384, use only Gu UTA data file
+monitor ionization helium 2 radius -3.384
+##
+monitor ionization Carbon 5  -0.175 
+##
+## >>chng 07 jan 25, from -0.520 to -0.497, use only Gu UTA data file
+monitor ionization Carbon 6  -0.497
+##
+## >>chng 06 feb 03, from -1.600 to -1.571, guess dr to Badnell mean
+## >>chng 06 nov 29, from -1.571 to -1.542, Badnell DR now default
+## >>chng 09 feb 24, from -1.542 to -1.52, botches due to r2763
+## >>chng 22 jul 09, from -1.52 to -1.544, upgrade to Chianti v10
+monitor ionization Carbon 7  -1.544
+##
+## >>chng 06 feb 03, from -1.394 to -1.420, guess dr to Badnell mean
+## >>chng 08 oct 18, from -1.42 to -1.446, include Badnell UTA data
+monitor ionization Nitrogen 5 -1.446 
+##
+monitor ionization Nitrogen 6 -0.087
+##
+## >>chng 06 nov 29, from -0.870 to -0.847, Badnell DR now default
+monitor ionization Nitrogen 7 -0.847
+## 
+## >>chng 06 nov 24, from -1.513 to -1.488, turn on Badnell RR
+## >>chng 06 nov 29, from -1.488 to -1.440, Badnell DR now default
+monitor ionization Oxygen   5 -1.440
+##
+## >>chng 06 feb 03, from -0.700 to -0.724, guess dr to Badnell mean
+## >>chng 08 oct 18, from -0.724 to -0.749, include Badnell UTA data
+monitor ionization Oxygen   6 -0.749
+##
+monitor ionization Oxygen   7 -0.144
+##
+## >>chng 06 jul 12, from -1.300 to -1.298, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -1.298 to -1.277, update to Badnell dr
+## >>chng 08 oct 18, from -1.277 to -1.256, include Badnell UTA data
+monitor ionization Oxygen   8 -1.256
+##
+# limit_lowden.in
+# class limit 
+# ========================================
+# 
+
+This model is optically thin, with density falling off as inverse square law,
+so ionization and temperature should be nearly constant.
+if outer radius increased by 2 dex problem with level3 will appear,
+several li seq lines (OVI, NeVIII) will fluctuate when density about
+1e-9
+
+We do not assert H lines since the cloud is optically thin and takes
+at least three iterations to converge optical depth scale, 
+That is not the purpose of this sim

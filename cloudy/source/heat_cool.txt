@@ -1,0 +1,36 @@
+temperature is converged when thermal.htot and thermal.ctot have a relative
+error that is smaller than conv.HeatCoolRelErrorAllowed
+
+conv.HeatCoolRelErrorAllowed is reset with set temperature error command
+
+function lgConvTemp() returns true is heating cooling is converged
+
+conv.lgConvTemp true if converged
+
+===================================================================
+
+heating cooling arrays
+
+local heating thermal.htot
+local cooling thermal.ctot
+
+===================================================================
+
+heating - main array 
+HeatingCom.heating[ipZ][ipZ]
+sumed in heatsum
+punched in heatpunch.f
+
+===================================================================
+
+cooling
+located in thermal.h
+4-char line labels stored in char*5 chCoolants.chClntLab[i]
+thermal.collam[i] is the wavelength
+thermal.cooling[i] is the actual cooling
+thermal.heatnt[i] contains coolant that acutally heats (negative cooling)
+
+CoolAdd - the cooling array is filled with coolants by calling routine CoolAdd by routines that
+	do level populations and spectrum
+
+CoolSum - all cooling added together in CoolSum

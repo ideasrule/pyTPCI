@@ -1,0 +1,160 @@
+title Leiden meeting model 2 with hacks
+# This is one of the tests in Rollig et al. 2007, A&A, 467, 187 
+#
+# commands controlling continuum =========
+# Use the Draine 1978 field, for a semi-infinite slab we have to use
+# half the requested value, so the actual value
+# they want for the model is actually twice the value below
+table draine 50000
+extinguish 24
+#
+# commands for density & abundances =========
+grains ism 1.16 no qheat
+#  hydrogen density 
+hden 3.
+#
+# commands controlling geometry  =========
+#
+# other commands for details     =========
+failures 3
+#  use leiden initialization file
+init file="pdr_leiden_hack.ini"
+#  This command defines the grain temperature to be a constant 20 Kelvin
+constant grain temperature 20 
+#  This sets the temperature to a constant 50 Kelvin
+constant temperature 50 linear
+#
+# commands controlling output    =========
+save performance "pdr_leiden_hack_f2.per"
+save leiden lines "pdr_leiden_hack_f2.lin"
+save leiden "pdr_leiden_hack_f2.lei"
+save dr "pdr_leiden_hack_f2.dr" 
+save grain physical conditions "pdr_leiden_hack_f2.grn"
+save overview "pdr_leiden_hack_f2.ovr"
+save monitors "pdr_leiden_hack_f2.asr"
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 11 nov 16, from 21.76 to 21.68, adjust newmole monitors
+monitor H2 column density 21.68 error 0.1
+## 
+## >>chng 05 mar 22, from 17.45 to 17.60, NA update CO chem net
+## >>chng 05 aug 18, from 17.60 to 17.46, NA add hack to not use C+ - OH rate
+## >>chng 05 sep 27, from 17.46 to 17.50, TE, GS update H chem, chr trn
+## >>chng 05 dec 17, from 17.50 to 17.58, NA increase C chemistry
+## >>chng 06 jun 02, from 17.58 to 17.51, NA refactor chem, bug fix
+## >>chng 20 aug 03, from 17.51 to 17.55, update H3+ rates Indriola+ 2012
+monitor CO column density 17.55 error 0.1
+## 
+## >>chng 05 aug 24, from 15.95 to 15.90, NA update CO cr ion rate
+## >>chng 13 nov 20, from 15.9 to 15.84, include H,H2+=>H+,H2 even when H2* is disabled
+## >>chng 20 aug 03, from 15.84 to 16.03, update H3+ rates Indriola+ 2012
+monitor O2 column density 16.03 error 0.1
+## 
+## >>chng 05 sep 27, from 15.17 to 15.11, TE, GS update H chem, chr trn
+## >>chng 05 dec 17, from 15.11 to 15.16, NA increase C chemistry
+## >>chng 06 jun 02, from 17.16 to 17.12, NA refactor chem, bug fix
+## >>chng 20 aug 03, from 15.12 to 15.29, update H3+ rates Indriola+ 2012
+monitor OH column density 15.29 error 0.1
+## 
+## >>chng 06 nov 28, add these lines
+## >>chng 13 dec 23, from -4.144 to -4.052, C to external databases
+monitor line luminosity "c  2" 157.636m -4.052
+## 
+## >>chng 06 nov 29, from -5.346 to -5.307, Badnell DR turned on
+## >>chng 13 dec 23, from -5.307 to -5.287, C to external databases
+## >>chng 20 aug 03, from -5.287 to -5.323, update H3+ rates Indriola+ 2012
+monitor line luminosity "c  1" 370.269m -5.323
+## 
+## >>chng 06 nov 29, from -5.721 to -5.688, Badnell DR turned on
+## >>chng 13 dec 23, from -5.688 to -5.621, C to external databases
+## >>chng 20 aug 03, from -5.621 to -5.658, update H3+ rates Indriola+ 2012
+monitor line luminosity "c  1" 609.590m -5.658
+## 
+## >>chng 14 mar 26, from -5.371 to -4.793, Move oxygen data to stout and chianti files
+monitor line luminosity "O  1" 63.1679m -4.793
+## 
+## >>chng 11 nov 16, from -6.948 to -7, adjust newmole monitors
+## >>chng 13 jul 24, wl from 145.5m to 145.495m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -7 to -6.18, Move oxygen data to stout and chianti files
+monitor line luminosity "O  1" 145.495m -6.18
+## 
+## >>chng 05 mar 28, from 7 to 4.5, impr mol converg
+## >>chng 08 dec 08, from 5 to 2.968, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 2.968 to 4.215, merging newsolvers branch
+## >>chng 09 jan 16, from 4.215 to 4.193, average of 10 runs
+## >>chng 09 feb 24, from 4.193 to 4.068, botches due to r2763
+## >>chng 09 apr 18, from 4.068 to 4.172, refactor evaluation of esc dest probs to occur with cooling
+## >>chng 09 oct 21, from 4.172 to 3.957, drift down
+## >>chng 13 nov 05, from 3.957 to 2.629, convergence branch changes
+## >>chng 14 apr 07, from 2.629 to 2.082, move H/C out of ConvBase loop
+monitor itrzn 2.082
+##
+## >>chng 08 dec 08, from 480 to 438, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 438 to 442, merging newsolvers branch
+## >>chng 09 jan 16, from 442 to 443, average of 10 runs
+## >>chng 11 nov 16, from 443 to 510, adjust newmole monitors
+## >>chng 13 nov 13, from 510 to 575, resolve face at all freqs
+## >>chng 14 apr 08, from 575 to 606, O excit state photo back in
+## >>chng 18 jun 17, from 606 to 557, improve zone 0 thermal relaxation
+monitor nzone 557
+##
+## >>chng 13 jun 27, from -8.869 to -7.788, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 20, from -7.788 to -7.822, include H,H2+=>H+,H2 even when H2* is disabled
+## >>chng 15 aug 03, from -7.822 to -7.66, update LAMDA to 2015
+## >>chng 20 aug 03, from -7.66 to -7.495, update H3+ rates Indriola+ 2012
+monitor "H2O " 538.142m line intensity -7.495
+## >>chng 13 jun 27, from -7.288 to -7.061, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 2600.05m  -7.061 line intensity
+## >>chng 13 jun 27, from -6.463 to -6.209, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -6.209 to -6.189, update H3+ rates Indriola+ 2012
+monitor "CO  " 1300.05m  -6.189 line intensity
+## >>chng 13 jun 27, from -6.149 to -5.819, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -5.819 to -5.794, update H3+ rates Indriola+ 2012
+monitor "CO  " 866.727m  -5.794 line intensity
+## >>chng 13 jun 27, from -6.177 to -5.702, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -5.702 to -5.667, update H3+ rates Indriola+ 2012
+monitor "CO  " 650.074m  -5.667 line intensity
+## >>chng 13 jun 27, from -6.485 to -5.848, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -5.848 to -5.797, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -5.797 to -5.839, LAMDA update
+## >>chng 21 nov 04, from -5.839 to -5.772, update mole co data
+monitor "CO  " 520.089m  -5.772 line intensity
+## >>chng 13 jun 27, from -6.954 to -6.238, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -6.238 to -6.175, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -6.175 to -6.228, LAMDA update
+## >>chng 21 nov 04, from -6.228 to -6.144, update mole co data
+monitor "CO  " 433.438m  -6.144 line intensity
+## >>chng 13 jun 27, from -7.48 to -6.767, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -6.767 to -6.702, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -6.702 to -6.756, LAMDA update
+## >>chng 21 nov 04, from -6.756 to -6.669, update mole co data
+monitor "CO  " 371.549m  -6.669 line intensity
+## >>chng 13 jun 27, from -8.049 to -7.336, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -7.336 to -7.272, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -7.272 to -7.325, LAMDA update
+## >>chng 21 nov 04, from -7.325 to -7.239, update mole co data
+monitor "CO  " 325.137m  -7.239 line intensity
+## >>chng 13 jun 27, from -7.522 to -6.996, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -6.996 to -6.952, update H3+ rates Indriola+ 2012
+monitor "^13CO" 906.599m  -6.952 line intensity
+# 
+# pdr_leiden_hack_f2.in
+# class pdr 
+# ========================================
+# 
+
+# This is one of the tests in Rollig et al. 2007, A&A, 467, 187 
+includes hacks to get standard answer.

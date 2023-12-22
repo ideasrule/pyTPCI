@@ -1,0 +1,18 @@
+  1 3s2.3p4               3  1 P  2.0  5          0.000       0.000000          0.000       0.000000 
+  2 3s2.3p4               3  1 P  1.0  3       1671.700       0.015234       1575.050       0.014353 
+  3 3s2.3p4               3  1 P  0.0  1       2321.200       0.021152       2174.540       0.019816 
+  4 3s2.3p4               1  2 D  2.0  5      16384.000       0.149302      16998.170       0.154899 
+  5 3s2.3p4               1  0 S  0.0  1      38546.300       0.351260      38805.870       0.353625 
+ -1
+%filename: k_4.elvlc
+% RSS 2015
+% Obs Elevels: Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2015).
+% NIST Atomic Spectra Database (ver. 5.3), [Online]. Available: http://physics.nist.gov/asd
+% [2015, November 3]. National Institute of Standards and Technology, Gaithersburg, MD.
+% Theory levels; MCHF/MCDHF Collection, v2.0 http://nlte.nist.gov/MCHF/ last updated 2010
+% created by Ralph Sutherland
+
+
+Reference:
+Chianti  2022-02-18
+ -1

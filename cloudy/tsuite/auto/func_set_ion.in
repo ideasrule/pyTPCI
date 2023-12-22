@@ -1,0 +1,47 @@
+title test impact of setting ionization 
+#
+# commands for density & abundances =========
+init "ism.ini" 
+hden 0 
+element hydrogen ionization 0 1 
+element helium ionization 0 1 0 
+element carbon ionization 0 1 
+element oxygen ionization 0 0.1 0.2 0.3 0.2 0.1 0.1  
+element iron ionization -9 -9 -9 -9 -9 -9 -9 -9 -9 -9 -9 -9 -9 0 -9 -9
+#
+# commands controlling continuum =========
+blackbody 5
+ionization parameter -2
+#
+# commands controlling geometry  =========
+# force model to be 1 cm thick
+set dr 0 
+#
+# other commands for details     =========
+constant temperature 4
+stop zone 1
+#
+# commands controlling output    =========
+normalize to "o  3"  5006.84 
+save overview "func_set_ion.ovr"
+save performance "func_set_ion.per"
+save monitors "func_set_ion.asr" 
+save dr "func_set_ion.dr" 
+#
+# commands giving the monitors    =========
+monitor ionization fraction helium 2 0 
+monitor ionization fraction carbon 2 0 
+monitor ionization fraction oxygen 2 0.1 
+monitor ionization fraction oxygen 3 0.2 
+monitor ionization fraction oxygen 4 0.3 
+monitor ionization fraction oxygen 5 0.2 
+monitor ionization fraction oxygen 6 0.1 
+monitor ionization fraction oxygen 7 0.1 
+# 
+# func_set_ion.in
+
+# class function 
+# ========================================
+# 
+ 
+this script exercies the option to specify the ionization of a species

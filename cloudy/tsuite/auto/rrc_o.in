@@ -1,0 +1,95 @@
+title he-like oxygen ion vs. Bautista & Kallman 2000 Table 1, column 3
+#
+# commands controlling continuum =========
+laser 100
+ionization -1
+#
+# commands for density & abundances =========
+hden 7
+# include lots of the element we are testing and set the ionization 
+# to be dominated by the correct ion stage
+## >>chng 10 aug 10 reset to O/H to produce ion densities before r4113
+## from -2 to -2.0969
+element oxygen abundance -2.0458
+## these do not add up to unity, so will be rescaled by code
+element oxygen ionization -1 -1 -1 -1 -1 -1 -1 -1 -1
+init file "ism.ini"
+element helium off
+element nitrogen off
+element carbon off
+element neon off
+element magnesium off
+element silicon off
+element sulphur off
+element argon off
+element iron off
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr -12
+#
+# other commands for details     =========
+constant temper 5
+iterate
+#
+# commands controlling output    =========
+print line faint -5
+save overview "rrc_o.ovr"
+save performance "rrc_o.per"
+save monitors "rrc_o.asr"
+save continuum "rrc_o.con" units Angstroms last
+## 
+## these are ground state RRC for O ions
+## >>chng 10 aug 12, from -24.17 to -24.07, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 10 aug 21, from -24.07 to -24.17, fix abundances to be original sim
+## >>chng 13 jul 24, wl from 910.4A to 910.420A, increased wl precision to 6 sig. fig.
+## >>chng 19 feb 20, wl from 910.420A to 910.310A, adjust photo edges (r12609).
+## >>chng 22 nov 09, wl from 910.310A to 910.440A, use NIST ionization potentials
+monitor line luminosity "O  1" 910.440A -24.17 
+## >>chng 10 aug 12, from -23.01 to -22.91, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 10 aug 21, from -22.91 to -23.01, fix abundances to be original sim
+## >>chng 13 jul 24, wl from 353.1A to 353.073A, increased wl precision to 6 sig. fig.
+## >>chng 19 feb 20, wl from 353.073A to 353.030A, adjust photo edges (r12609).
+## >>chng 22 nov 09, wl from 353.030A to 353.019A, use NIST ionization potentials
+monitor line luminosity "O  2" 353.019A -23.01
+## >>chng 10 aug 12, from -23.75 to -23.65, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 10 aug 21, from -23.65 to -23.75, fix abundances to be original sim
+## >>chng 13 jul 24, wl from 225.7A to 225.699A, increased wl precision to 6 sig. fig.
+## >>chng 19 feb 20, wl from 225.699A to 225.672A, adjust photo edges (r12609).
+## >>chng 22 nov 09, wl from 225.672A to 225.690A, use NIST ionization potentials
+monitor line luminosity "O  3" 225.690A -23.75
+## >>chng 10 aug 12, from -23.14 to -23.04, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 10 aug 21, from -23.04 to -23.14, fix abundances to be original sim
+## >>chng 13 jul 24, wl from 160.2A to 160.185A, increased wl precision to 6 sig. fig.
+## >>chng 19 feb 20, wl from 160.185A to 160.166A, adjust photo edges (r12609).
+## >>chng 22 nov 09, wl from 160.166A to 160.158A, use NIST ionization potentials
+monitor line luminosity "O  4" 160.158A -23.14 
+## >>chng 10 aug 12, from -23.6 to -23.5, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 10 aug 21, from -23.5 to -23.6, fix abundances to be original sim
+## >>chng 13 jul 24, wl from 108.9A to 108.867A, increased wl precision to 6 sig. fig.
+## >>chng 19 feb 20, wl from 108.867A to 108.854A, adjust photo edges (r12609).
+## >>chng 22 nov 09, wl from 108.854A to 108.855A, use NIST ionization potentials
+monitor line luminosity "O  5" 108.855A -23.6 
+## >>chng 10 aug 12, from -23.14 to -23.04, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 10 aug 21, from -23.04 to -23.14, fix abundances to be original sim
+## >>chng 13 jul 24, wl from 89.79A to 89.7895A, increased wl precision to 6 sig. fig.
+## >>chng 19 feb 20, wl from 89.7895A to 89.7786A, adjust photo edges (r12609).
+## >>chng 22 nov 09, wl from 89.7786A to 89.7663A, use NIST ionization potentials
+monitor line luminosity "O  6" 89.7663A -23.14 
+## >>chng 10 aug 12, from -21.68 to -21.57, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 10 aug 21, from -21.57 to -21.67, fix abundances to be original sim
+## >>chng 13 jul 24, wl from 16.77A to 16.7725A, increased wl precision to 6 sig. fig.
+## >>chng 15 mar 07, from -21.67 to -21.74, merging newmesh branch
+## >>chng 21 mar 16, from O 7 16.7725A to 16.7699A, update to NIST
+monitor line luminosity "O  7" 16.7699A -21.74
+## 
+# rrc_o.in
+# class limit 
+# ========================================
+# 
+
+test RRC of simple and iso model atoms.  The ionization is set to
+10% for all stages of ionization of O.  We monitor the ground
+state recombination emission.  This is an optically thin model.
+
+

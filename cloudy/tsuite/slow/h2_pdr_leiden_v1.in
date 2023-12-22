@@ -1,0 +1,547 @@
+title model 5 as defined in e-mail
+#
+# commands controlling continuum =========
+# Use the Draine 1978 field, for a semi-infinite slab we have to use half
+# the requested value, so the actual value
+# is half the requested value
+# they want for the model is actually twice the value below
+table draine 5
+# insure that no H-ionizing radiation strikes cloud
+extinguish 24 
+#
+# commands for density & abundances =========
+#  hydrogen density 
+hden 3.
+grains ism 1.16 no qheat
+#  add PAHs 
+grains PAH no qheat 3 function
+database h2 
+#
+# commands controlling geometry  =========
+#
+# other commands for details     =========
+failures 3
+#  use leiden initialization file
+init file="pdr_leiden.ini"
+#
+# commands controlling output    =========
+save performance "h2_pdr_leiden_v1.per"
+save overview "h2_pdr_leiden_v1.ovr"
+save leiden lines "h2_pdr_leiden_v1.lin"
+save leiden "h2_pdr_leiden_v1.lei"
+save dr "h2_pdr_leiden_v1.dr" 
+save grain dust temperature "h2_pdr_leiden_v1.grn"
+save monitors "h2_pdr_leiden_v1.asr"
+save chemistry rates destruction "h2_pdr_leiden_v1.H2d" "H2"
+save chemistry rates creation "h2_pdr_leiden_v1.H2c" "H2"
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+monitor H2 column density 21.914 error 0.1
+## 
+## >>chng 05 jul 02, from 16.82 to 16.77, A_V zoning was not exact
+## >>chng 05 jul 17, from 16.77 to 16.89 first run in 6 mo
+## >>chng 05 sep 08, from 16.89 to 16.61, first run in 2 mo
+## >>chng 05 dec 10, from 16.61 to 12.49, NA increase ices, H2O
+## >>chng 06 mar 02, from 12.49 to 12.45, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 mar 18, from 12.45 to 12.50, NA changes in chem
+## >>chng 06 nov 29, from 12.50 to 12.54, Badnell DR
+## >>chng 07 apr 07, from 12.54 to 12.48, update H2 cr to trip
+## >>chng 10 jun 22, from 12.48 to 12.42, fix botches after dBaseLines cooling/heating changes
+## >>chng 11 nov 16, from 12.42 to 12.52, adjust newmole monitors
+## >>chng 12 jun 08, from 12.52 to 12.62, Updates to grain chemistry
+## >>chng 13 dec 23, from 12.62 to 12.46, C to external databases
+## >>chng 20 aug 03, from 12.46 to 12.62, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from 12.62 to 12.67, further update to McCall CR-related rates from r14260
+## >>chng 23 may 15, from 12.67 to 12.57, GS updates 21 reactions to UMIST 2012
+monitor O2 column density 12.57 error 0.1
+## 
+## >>chng 05 jul 02, from 15.49 to 15.45, A_V zoning was not exact
+## >>chng 05 sep 08, from 15.45 to 15.33, first run in 2 mo
+## >>chng 05 dec 10, from 15.33 to 13.58, NA increase ices, H2O
+## >>chng 06 mar 18, from 13.58 to 13.64, NA changes in chem
+## >>chng 07 jan 10, from 13.64 to 13.76, H3+ to McCall rates
+## >>chng 10 jun 22, from 13.76 to 13.84, fix botches after dBaseLines cooling/heating changes
+## >>chng 20 aug 03, from 13.84 to 13.97, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from 13.97 to 14.01, further update to McCall CR-related rates from r14260
+## >>chng 21 sep 11, from 14.01 to 13.93, LAMDA update
+## >>chng 21 nov 04, from 13.93 to 14, update co mole data
+## >>chng 23 may 15, from 14 to 13.83, GS updates 21 reactions to UMIST 2012
+monitor OH column density 13.83 error 0.1
+## 
+## >>chng 05 jul 02, from 16.71 to 16.67, A_V zoning was not exact
+## >>chng 05 sep 08, from 16.67 to 16.51, first run in 2 mo
+## >>chng 05 dec 10, from 16.51 to 14.54, NA increase ices, H2O
+## >>chng 06 mar 02, from 14.54 to 14.68, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 mar 18, from 14.68 to 14.73, NA changes in chem
+## >>chng 07 jan 10, from 14.73 to 14.83, H3+ to McCall rates
+## >>chng 07 apr 08, from 14.83 to 14.78, update CR H2 singlet rates
+## >>chng 12 aug 21, from 14.78 to 14.83, fix CRPHOT botches and HD crash
+## >>chng 20 aug 03, from 14.83 to 14.91, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from 14.91 to 14.87, LAMDA update
+## >>chng 21 nov 04, from 14.87 to 14.92, update co mole data
+## >>chng 23 may 15, from 14.92 to 14.76, GS updates 21 reactions to UMIST 2012
+monitor SiO column density 14.76 error 0.1
+## 
+## >>chng 05 mar 22, from 17.96 to 18.03, NA update CO chem net
+## >>chng 05 mar 27, from 18.03 to 17.98, fix typo in above
+## >>chng 05 jun 07, from 17.98 to 17.62, NA add CO grain condensation
+## >>chng 05 dec 10, from 17.62 to 16.12, NA increase ices, H2O
+## >>chng 05 dec 18, from 16.62 to 16.33, NA update C2 chem
+## >>chng 06 jan 04, from 16.33 to 16.40, NA C chem restore missed block reacts
+## >>chng 06 mar 02, from 16.40 to 17.14, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 mar 18, from 17.14 to 17.19, NA changes in chem
+## >>chng 08 feb 20, bugfix r1803, from 17.19 to 17.13
+## >>chng 10 jun 22, from 17.13 to 17.2, fix botches after dBaseLines cooling/heating changes
+## >>chng 16 mar 21, from 17.2 to 17.1, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 aug 03, from 17.1 to 16.92, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from 16.92 to 16.14, LAMDA update
+## >>chng 21 nov 04, from 16.14 to 16.96, update co mole data
+## >>chng 23 may 15, from 16.96 to 17.23, GS updates 21 reactions to UMIST 2012
+monitor CO column density 17.23 error 0.1
+## 
+## >>chng 11 jul 16, add these
+## >>chng 11 jul 16, from 10 to 14.45, add column density monitors
+## >>chng 20 jul 21, from 14.45 to 14.5, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 sep 06, from 14.5 to 14.55, further update to McCall CR-related rates from r14260
+## >>chng 21 sep 11, from 14.55 to 14.46, LAMDA update
+## >>chng 21 nov 04, from 14.46 to 14.55, update co mole data
+monitor column density H3+  14.55 error 0.1
+## >>chng 11 jul 16, from 10 to 11.72, add column density monitors
+monitor column density H2+  11.72 error 0.1
+## >>chng 11 jul 16, from 10 to 9.705, add column density monitors
+## >>chng 11 nov 16, from 9.705 to 9.769, adjust newmole monitors
+## >>chng 14 dec 04, from 9.769 to 9.671, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 9.671 to 9.583, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density H-   9.583 error 0.1
+## >>chng 11 jul 16, from 10 to 21.89, add column density monitors
+monitor column density H2g  21.89 error 0.1
+## >>chng 11 jul 16, from 10 to 13.83, add column density monitors
+## >>chng 11 nov 16, from 13.83 to 13.78, adjust newmole monitors
+## >>chng 13 dec 23, from 13.78 to 13.74, C to external databases
+## >>chng 14 dec 04, from 13.74 to 13.79, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 13.79 to 13.73, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density H2*  13.73 error 0.1
+## >>chng 11 jul 16, from 10 to 8.049, add column density monitors
+## >>chng 11 nov 16, from 8.049 to 8.349, adjust newmole monitors
+## >>chng 12 jan 06, from 8.349 to 8.391, several H2 model changes
+## >>chng 13 mar 23, from 8.391 to 8.343, improve big h2/chemistry consistency
+## >>chng 13 dec 18, from 8.343 to 8.3, fixes to Federman shielding
+## >>chng 14 dec 04, from 8.3 to 7.968, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 7.968 to 7.914, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density HeH+ 7.914 error 0.1
+## >>chng 11 jul 16, from 10 to 14.17, add column density monitors
+## >>chng 16 mar 21, from 14.17 to 14.22, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 aug 03, from 14.22 to 14.27, update H3+ rates Indriola+ 2012
+monitor column density H2O  14.27 error 0.1
+## >>chng 11 jul 16, from 10 to 16.75, add column density monitors
+## >>chng 16 mar 21, from 16.75 to 16.86, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 jul 21, from 16.86 to 16.9, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 aug 03, from 16.9 to 17.02, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from 17.02 to 15.73, LAMDA update
+## >>chng 21 nov 04, from 15.73 to 17, update co mole data
+## >>chng 23 may 15, from 17 to 16.16, GS updates 21 reactions to UMIST 2012
+monitor column density C2   16.16 error 0.1
+## >>chng 11 jul 16, from 10 to 14.82, add column density monitors
+## >>chng 12 aug 21, from 14.82 to 14.87, fix CRPHOT botches and HD crash
+## >>chng 13 aug 22, from 14.87 to 14.83, enable D chem in r8030
+## >>chng 16 mar 21, from 14.83 to 15.06, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 jul 21, from 15.06 to 15.12, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 aug 03, from 15.12 to 15.27, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from 15.27 to 14.49, LAMDA update
+## >>chng 21 nov 04, from 14.49 to 15.43, update co mole data
+## >>chng 23 may 15, from 15.43 to 15.11, GS updates 21 reactions to UMIST 2012
+monitor column density C3   15.11 error 0.1
+## >>chng 11 jul 16, from 10 to 14.97, add column density monitors
+## >>chng 12 aug 21, from 14.97 to 15.01, fix CRPHOT botches and HD crash
+## >>chng 16 mar 21, from 15.01 to 15.06, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 aug 03, from 15.06 to 15.21, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from 15.21 to 14.11, LAMDA update
+## >>chng 21 nov 04, from 14.11 to 15.24, update co mole data
+## >>chng 23 may 15, from 15.24 to 14.72, GS updates 21 reactions to UMIST 2012
+monitor column density CN   14.72 error 0.1
+## >>chng 11 jul 16, from 10 to 15.88, add column density monitors
+## >>chng 20 aug 03, from 15.88 to 15.92, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from 15.92 to 15.98, further update to McCall CR-related rates from r14260
+## >>chng 21 sep 11, from 15.98 to 13.87, LAMDA update
+## >>chng 21 nov 04, from 13.87 to 15.91, update co mole data
+## >>chng 23 may 15, from 15.91 to 15.78, GS updates 21 reactions to UMIST 2012
+monitor column density CH   15.78 error 0.1
+##
+## >>chng 05 jun 22, from 30.8 to 29.2, update C2 Si2 cs to ApJ, 620, 537
+## >>chng 05 jun 26, from 29.2 to 35.3 make Federman chem the default
+## >>chng 05 jul 17, from 35.3 to 31.1 first run in 6 mo
+## >>chng 05 sep 08, from 31.1 to 43.1, first run in 2 mo
+## >>chng 07 may 27, from 43.1 to 31.2 add extinguish command - rm H-ion rad
+## >>chng 12 aug 21, from 31.2 to 37.36, fix CRPHOT botches and HD crash
+monitor temperature "H+" 37.36 error 0.15
+##
+## >>chng 05 jun 26, from -5.06 to -5.04 make Federman chem the default
+## >>chng 11 dec 12, from -5.062 to -5.009, bug-fix for updating grain opacity (r5759)
+monitor line intensity "C  2" 157.636m -5.009 error 0.1
+##
+## >>chng 05 jun 26, from -6.54 to -6.47 make Federman chem the default
+## >>chng 05 jul 17, from -6.47 to -6.42 first run in 6 mo
+## >>chng 05 dec 10, from -6.42 to -6.32, NA increase ices, H2O
+## >>chng 06 mar 18, from -6.32 to -6.36, NA changes in chem
+## >>chng 06 nov 29, from -6.36 to -6.29, Badnell DR
+## >>chng 07 apr 07, from -6.29 to -6.33 update H2 cr to trip
+## >>chng 11 jul 12, from -6.33 to -6.372, enable fit to Badnell DR suppression
+## >>chng 13 mar 23, from -6.372 to -6.335, improve big h2/chemistry consistency
+## >>chng 16 mar 21, from -6.335 to -6.296, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 21 sep 11, from -6.296 to -6.233, LAMDA update
+## >>chng 21 nov 04, from -6.233 to -6.302, update co mole data
+monitor line intensity "c  1" 609.590m -6.302 error 0.1
+##
+## >>chng 05 jun 26, from -6.85 to -6.79 make Federman chem the default
+## >>chng 07 dec 15, from -6.79 to -6.726, X-ray grain merge
+## >>chng 13 nov 03, from -6.726 to -6.438 update H2 - C II 158m collision
+## >>chng 13 dec 23, from -6.438 to -6.591 C to external databases
+## >>chng 14 mar 26, from -6.591 to -6.319, move O to external databases
+## >>chng 14 dec 04, from -6.319 to -6.361, fix double-counting of big-H2 Solomon rate
+monitor line intensity "o  1"  63.1679m -6.361 error 0.1
+## 
+## >>chng 05 jun 07, from 11.2 to 13.6, NA add CO grain condensation
+## >>chng 10 jun 22, from 13.6 to 10.94, fix botches after dBaseLines cooling/heating changes
+monitor temperature "H2" 10.94 error 0.15
+## 
+## these added 05 jul 03
+## >>chng 05 jul 17, from 21.67 to 21.88 first run in 6 mo
+monitor H2 column density level 0  0  21.88 error 0.1
+## 
+## >>chng 05 jul 17, from 21.14 to 20.30 first run in 6 mo
+## >>chng 05 sep 08, from 20.30 to 20.19, first run in 2 mo
+## >>chng 05 dec 10, from 20.19 to 20.06, NA increase ices, H2O
+## >>chng 06 mar 02, from 20.06 to 20.14, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 11 nov 16, from 20.14 to 20.24, adjust newmole monitors
+## >>chng 12 aug 21, from 20.24 to 20.29, fix CRPHOT botches and HD crash
+## >>chng 13 mar 23, from 20.29 to 20.34, improve big h2/chemistry consistency
+## >>chng 13 nov 03, from 20.34 to 20.38, update H2 - C II 158m collision
+## >>chng 14 aug 14, from 20.38 to 20.15, botches due to H2-H+ collision changes at low-T in r9436
+## >>chng 14 dec 04, from 20.15 to 20.2, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 20.2 to 20.11, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  1  20.11 error 0.1
+## 
+## >>chng 05 jul 17, from 17.99 to 16.68 first run in 6 mo
+## >>chng 11 nov 16, from 16.68 to 15.32, adjust newmole monitors
+## >>chng 12 jan 06, from 15.32 to 16.58, several H2 model changes
+## >>chng 13 mar 23, from 16.58 to 16.63, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 16.63 to 16.58, change H2/HD secondary scale factors
+## >>chng 13 nov 03, from 16.58 to 16.9, update H2 - C II 158m collision
+## >>chng 13 dec 18, from 16.9 to 16.96, fixes to Federman shielding
+## >>chng 13 dec 23, from 16.96 to 16.7, C to external databases
+## >>chng 14 mar 26, from 16.7 to 16.66, move O to external databases
+## >>chng 14 dec 04, from 16.66 to 16.86, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level 0  2  16.86 error 0.1
+## 
+## >>chng 05 jul 17, from 16.85 to 15.94 first run in 6 mo
+## >>chng 05 sep 08, from 15.94 to 15.85, first run in 2 mo
+## >>chng 07 apr 10, from 15.85 to 15.89, ORNL H2-He collisions
+## >>chng 11 apr 21, from 15.89 to 15.94, fix botches due to factor of 2 in r4946
+## >>chng 11 nov 16, from 15.94 to 15.1, adjust newmole monitors
+## >>chng 12 jan 06, from 15.1 to 15.95, several H2 model changes
+## >>chng 13 mar 23, from 15.95 to 16.03, improve big h2/chemistry consistency
+## >>chng 13 dec 23, from 16.03 to 15.97, C to external databases
+## >>chng 20 jul 21, from 15.97 to 15.87, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  3  15.87 error 0.1
+## 
+## >>chng 05 jul 17, from 15.94 to 15.14 first run in 6 mo
+## >>chng 05 sep 08, from 15.14 to 15.17, first run in 2 mo
+## >>chng 07 apr 07, from 15.98 to 15.09, update H2 cr to trip
+## >>chng 08 sep 25, from 15.09 to 15.05, remove damper on line pump (r2367)
+## >>chng 11 nov 16, from 15.05 to 14.98, adjust newmole monitors
+## >>chng 12 jan 06, from 14.98 to 15.03, several H2 model changes
+## >>chng 13 mar 23, from 15.03 to 15.09, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 15.09 to 14.99, change H2/HD secondary scale factors
+## >>chng 13 dec 18, from 14.99 to 14.93, fixes to Federman shielding
+## >>chng 19 jul 29, from 14.93 to 14.97, fix for PR #284
+## >>chng 20 jul 21, from 14.97 to 14.91, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  4  14.91 error 0.1
+## 
+## >>chng 05 jul 17, from 15.38 to 14.61 first run in 6 mo
+## >>chng 05 sep 08, from 14.61 to 14.49, first run in 2 mo
+## >>chng 07 apr 08, from 14.49 to 14.54, update CR H2 singlet rates
+## >>chng 11 nov 16, from 14.54 to 14.64, adjust newmole monitors
+## >>chng 12 jan 06, from 14.64 to 14.57, several H2 model changes
+## >>chng 13 mar 23, from 14.57 to 14.66, improve big h2/chemistry consistency
+## >>chng 13 dec 18, from 14.66 to 14.61, fixes to Federman shielding
+## >>chng 14 dec 04, from 14.61 to 14.55, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 14.55 to 14.42, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  5  14.42 error 0.1
+## 
+## >>chng 05 jul 17, from 14.52 to 13.79 first run in 6 mo
+## >>chng 07 apr 07, from 13.79 to 13.70, update H2 cr to trip
+## >>chng 11 nov 16, from 13.7 to 13.78, adjust newmole monitors
+## >>chng 13 jun 27, from 13.78 to 13.83, BUGFIX use g-bar for H2-H2 collisions
+## >>chng 13 oct 30, from 13.83 to 13.78, change H2/HD secondary scale factors
+## >>chng 14 dec 04, from 13.78 to 13.73, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 13.73 to 13.66, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  6  13.66 error 0.1
+## 
+## >>chng 05 jul 17, from 14.40 to 13.70 first run in 6 mo
+## >>chng 05 sep 08, from 13.70 to 13.56, first run in 2 mo
+## >>chng 07 apr 08, from 13.56 to 13.62, update CR H2 singlet rates
+## >>chng 11 nov 16, from 13.62 to 13.75, adjust newmole monitors
+## >>chng 12 jan 06, from 13.75 to 13.67, several H2 model changes
+## >>chng 13 mar 23, from 13.67 to 13.77, improve big h2/chemistry consistency
+## >>chng 13 dec 18, from 13.77 to 13.71, fixes to Federman shielding
+## >>chng 14 dec 04, from 13.71 to 13.62, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 13.62 to 13.48, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  7  13.48 error 0.1
+## 
+## >>chng 05 jul 17, from 13.63 to 12.92 first run in 6 mo
+## >>chng 05 sep 08, from 12.92 to 12.84, first run in 2 mo
+## >>chng 07 apr 07, from 12.84 to 12.79, update H2 cr to trip
+## >>chng 07 apr 08, from 12.79 to 12.83, update CR H2 singlet rates
+## >>chng 11 nov 16, from 12.83 to 12.96, adjust newmole monitors
+## >>chng 12 jan 06, from 12.96 to 12.91, several H2 model changes
+## >>chng 13 mar 23, from 12.91 to 12.98, improve big h2/chemistry consistency
+## >>chng 13 aug 05, from 12.98 to 13.03, SDIV->safe_div for H2 Boltzmann ratios
+## >>chng 13 dec 18, from 13.03 to 12.96, fixes to Federman shielding
+## >>chng 20 jul 21, from 12.96 to 12.84, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  8  12.84 error 0.1
+## 
+## >>chng 05 jul 17, from 13.77 to 13.04 first run in 6 mo
+## >>chng 05 sep 08, from 13.04 to 12.90, first run in 2 mo
+## >>chng 07 apr 08, from 12.90 to 12.96, update CR H2 singlet rates
+## >>chng 11 nov 16, from 12.96 to 13.1, adjust newmole monitors
+## >>chng 12 jan 06, from 13.1 to 12.98, several H2 model changes
+## >>chng 13 mar 23, from 12.98 to 13.11, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 13.11 to 13.07, change H2/HD secondary scale factors
+## >>chng 14 dec 04, from 13.07 to 12.97, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 12.97 to 12.82, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  9  12.82 error 0.1
+## 
+## >>chng 05 jul 17, from 13.19 to 12.25 first run in 6 mo
+## >>chng 05 sep 08, from 12.25 to 12.31, first run in 2 mo
+## >>chng 07 apr 07, from 12.31 to 12.23, update H2 cr to trip
+## >>chng 08 jul 08, from 12.23 to 12.18 damping wing pump rates
+## >>chng 11 nov 16, from 12.18 to 12.07, adjust newmole monitors
+## >>chng 13 mar 23, from 12.07 to 12.13, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 12.13 to 11.95, change H2/HD secondary scale factors
+## >>chng 13 dec 18, from 11.95 to 11.88, fixes to Federman shielding
+## >>chng 14 dec 04, from 11.88 to 11.98, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level 1  0  11.98 error 0.1
+## 
+## >>chng 05 jul 17, from 13.63 to 12.34 first run in 6 mo
+## >>chng 08 sep 25, from 12.34 to 12.29, remove damper on line pump (r2367)
+## >>chng 11 nov 16, from 12.29 to 12.21, adjust newmole monitors
+## >>chng 13 mar 23, from 12.21 to 12.26, improve big h2/chemistry consistency
+## >>chng 13 nov 03, from 12.26 to 12.32, update H2 - C II 158m collision
+## >>chng 13 dec 18, from 12.32 to 12.25, fixes to Federman shielding
+## >>chng 14 aug 14, from 12.25 to 12.21, botches due to H2-H+ collision changes at low-T in r9436
+## >>chng 14 dec 04, from 12.21 to 12.32, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level 1  1  12.32 error 0.1
+## 
+## >>chng 05 jul 17, from 13.67 to 12.66 first run in 6 mo
+## >>chng 05 sep 08, from 12.66 to 12.72, first run in 2 mo
+## >>chng 07 apr 07, from 12.72 to 12.64, update H2 cr to trip
+## >>chng 08 mar 17, from 12.64 to 12.59 line overlap??, not run recently
+## >>chng 11 nov 16, from 12.59 to 12.22, adjust newmole monitors
+## >>chng 12 jan 06, from 12.22 to 12.49, several H2 model changes
+## >>chng 13 mar 23, from 12.49 to 12.53, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 12.53 to 12.36, change H2/HD secondary scale factors
+## >>chng 13 dec 18, from 12.36 to 12.28, fixes to Federman shielding
+## >>chng 14 dec 04, from 12.28 to 12.38, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level 1  2  12.38 error 0.1
+## 
+## >>chng 05 jul 17, from 13.69 to 12.33 first run in 6 mo
+## >>chng 11 nov 16, from 12.33 to 12.22, adjust newmole monitors
+## >>chng 13 mar 23, from 12.22 to 12.28, improve big h2/chemistry consistency
+## >>chng 13 nov 03, from 12.28 to 12.36, update H2 - C II 158m collision
+## >>chng 13 dec 18, from 12.36 to 12.3, fixes to Federman shielding
+## >>chng 14 dec 04, from 12.3 to 12.35, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level 1  3  12.35 error 0.1
+# 
+## >>chng 05 jul 17, from 8 to 6 first run in 6 mo
+## >>chng 08 dec 08, from 6 to 3.995, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 3.995 to 10.43, merging newsolvers branch
+## >>chng 09 jan 16, from 10.43 to 10.49, average of 9 runs
+## >>chng 11 nov 16, from 10.49 to 8.4, adjust newmole monitors
+## >>chng 13 nov 05, from 8.4 to 6.45, convergence branch changes
+## >>chng 14 jan 05, from 6.45 to 5.284, N to external databases
+## >>chng 14 apr 07, from 5.284 to 4.28, move H/C out of ConvBase loop
+monitor itrzn 4.28
+# 
+## >>chng 05 sep 08, from 660 to 800 first run in 2 mo
+## >>chng 05 dec 10, from 800 to 950 (869) NA increase ices, H2O
+## >>chng 06 mar 02, from 950 to 1000 (983) NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 08 dec 08, from 1000 to 848, upper limit -> equals (r2515)
+## >>chng 11 nov 16, from 848 to 779, adjust newmole monitors
+monitor nzone 779
+##
+## >>chng 13 jun 27, from -3.4460 to -7.3070, add H2 2.121m line luminosity
+## >>chng 13 jul 26, wl from 2.1215m to 2.12125m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 03, from -7.307 to -7.23, update H2 - C II 158m collision
+## >>chng 13 dec 18, from -7.23 to -7.289, fixes to Federman shielding
+## >>chng 14 dec 04, from -7.289 to -7.235, fix double-counting of big-H2 Solomon rate
+monitor line luminosity "H2  " 2.12125m  -7.235 error 0.1
+##
+## >>chng 13 jun 27, from -8.869 to -9.77, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+monitor "H2O " 538.142m line intensity -9.77
+## >>chng 13 jun 27, from -7.357 to -7.984, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from -7.984 to -8.016, change H2/HD secondary scale factors
+## >>chng 13 dec 23, from -8.016 to -8.06, C to external databases
+## >>chng 16 mar 21, from -8.06 to -8.035, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 aug 03, from -8.035 to -7.979, update H3+ rates Indriola+ 2012
+## >>chng 21 apr 10, from -7.979 to -8.266, update chemistry and LAMDA
+## >>chng 21 apr 16, from -8.266 to -7.992, remove bad UMIST reaction
+## >>chng 21 sep 11, from -7.992 to -9.794, LAMDA update
+## >>chng 21 nov 04, from -9.794 to -9.133, update co mole data
+## >>chng 23 may 15, from -9.133 to -9.072, GS updates 21 reactions to UMIST 2012
+monitor "HNC " 1652.90m  line intensity -9.072
+## >>chng 13 jun 27, from -8.563 to -10.47, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 22, from -10.47 to -10.43, enable D chem in r8030
+## >>chng 13 sep 17, from -10.43 to -10.47, D chemistry off by default
+## >>chng 13 oct 30, from -10.47 to -10.55, change H2/HD secondary scale factors
+## >>chng 13 dec 23, from -10.55 to -10.64, C to external databases
+## >>chng 15 aug 03, from -10.64 to -10.67, update LAMDA to 2015
+## >>chng 16 mar 21, from -10.67 to -10.58, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 aug 03, from -10.58 to -10.48, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from -10.48 to -10.43, further update to McCall CR-related rates from r14260
+## >>chng 21 apr 16, from -10.43 to -10.48, remove bad UMIST reaction
+## >>chng 21 sep 11, from -10.48 to -10.93, LAMDA update
+## >>chng 21 nov 04, from -10.93 to -10.3, update co mole data
+monitor "HCS+" 1755.88m  -10.3 line intensity
+## >>chng 13 jun 27, from -7.453 to -7.952, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from -7.952 to -7.998, C to external databases
+## >>chng 15 aug 03, from -7.998 to -8.024, update LAMDA to 2015
+## >>chng 20 aug 03, from -8.024 to -7.976, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -7.976 to -8.172, LAMDA update
+## >>chng 21 nov 04, from -8.172 to -7.92, update co mole data
+monitor "CS  " 3058.86m  -7.92 line intensity
+## >>chng 13 jun 27, from -7.288 to -7.72, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from -7.72 to -7.763, C to external databases
+## >>chng 16 mar 21, from -7.763 to -7.793, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 aug 03, from -7.793 to -7.854, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -7.854 to -8.181, LAMDA update
+## >>chng 21 nov 04, from -8.181 to -7.847, update co mole data
+## >>chng 23 may 15, from -7.847 to -7.771, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 2600.05m  -7.771 line intensity
+## >>chng 13 jun 27, from -6.463 to -7.165, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from -7.165 to -7.193, change H2/HD secondary scale factors
+## >>chng 13 dec 23, from -7.193 to -7.239, C to external databases
+## >>chng 16 mar 21, from -7.239 to -7.288, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 aug 03, from -7.288 to -7.376, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -7.376 to -7.836, LAMDA update
+## >>chng 21 nov 04, from -7.836 to -7.371, update co mole data
+## >>chng 23 may 15, from -7.371 to -7.275, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 1300.05m  -7.275 line intensity
+## >>chng 13 jun 27, from -6.149 to -7.449, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from -7.449 to -7.508, change H2/HD secondary scale factors
+## >>chng 13 dec 23, from -7.508 to -7.594, C to external databases
+## >>chng 15 aug 03, from -7.594 to -7.617, update LAMDA to 2015
+## >>chng 16 mar 21, from -7.617 to -7.713, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 jul 21, from -7.713 to -7.745, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 aug 03, from -7.745 to -7.899, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -7.899 to -8.604, LAMDA update
+## >>chng 21 nov 04, from -8.604 to -7.893, update co mole data
+## >>chng 23 may 15, from -7.893 to -7.696, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 866.727m  -7.696 line intensity
+## >>chng 13 jun 27, from -6.177 to -8.644, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 22, from -8.644 to -8.623, enable D chem in r8030
+## >>chng 13 oct 30, from -8.623 to -8.762, change H2/HD secondary scale factors
+## >>chng 13 dec 23, from -8.762 to -8.927, C to external databases
+## >>chng 15 aug 03, from -8.927 to -8.977, update LAMDA to 2015
+## >>chng 16 mar 21, from -8.977 to -9.112, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 jul 21, from -9.112 to -9.162, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 aug 03, from -9.162 to -9.35, update H3+ rates Indriola+ 2012
+## >>chng 21 apr 16, from -9.35 to -9.415, remove bad UMIST reaction
+## >>chng 21 sep 11, from -9.415 to -10.03, LAMDA update
+## >>chng 21 nov 04, from -10.03 to -9.36, update co mole data
+## >>chng 23 may 15, from -9.36 to -9.13, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 650.074m  -9.13 line intensity
+## >>chng 13 jun 27, from -6.485 to -10.4, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 22, from -10.4 to -10.38, enable D chem in r8030
+## >>chng 13 sep 26, from -10.38 to -10.4, add Ar 1 stout
+## >>chng 13 oct 30, from -10.4 to -10.57, change H2/HD secondary scale factors
+## >>chng 13 nov 03, from -10.57 to -10.54, update H2 - C II 158m collision
+## >>chng 13 dec 23, from -10.54 to -10.79, C to external databases
+## >>chng 14 dec 04, from -10.79 to -10.81, fix double-counting of big-H2 Solomon rate
+## >>chng 15 aug 03, from -10.81 to -10.88, update LAMDA to 2015
+## >>chng 16 mar 21, from -10.88 to -11, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 jul 21, from -11 to -11.05, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 aug 03, from -11.05 to -11.16, update H3+ rates Indriola+ 2012
+## >>chng 21 apr 16, from -11.16 to -11.21, remove bad UMIST reaction
+## >>chng 21 sep 11, from -11.21 to -11.37, LAMDA update
+## >>chng 21 nov 04, from -11.37 to -11.17, update co mole data
+## >>chng 23 may 15, from -11.17 to -11.03, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 520.089m  -11.03 line intensity
+## >>chng 13 jun 27, from -6.954 to -11.91, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from -11.91 to -11.95, change H2/HD secondary scale factors
+## >>chng 13 nov 03, from -11.95 to -11.7, update H2 - C II 158m collision
+## >>chng 13 dec 23, from -11.7 to -11.92, C to external databases
+## >>chng 14 mar 26, from -11.92 to -11.96, move O to external databases
+## >>chng 14 dec 04, from -11.96 to -12.03, fix double-counting of big-H2 Solomon rate
+## >>chng 16 mar 21, from -12.03 to -12.05, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 sep 06, from -12.05 to -12.02, further update to McCall CR-related rates from r14260
+monitor "CO  " 433.438m  -12.02 line intensity
+## >>chng 13 jun 27, from -7.48 to -12.55, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 03, from -12.55 to -12.24, update H2 - C II 158m collision
+## >>chng 13 dec 23, from -12.24 to -12.47, C to external databases
+## >>chng 14 mar 26, from -12.47 to -12.52, move O to external databases
+## >>chng 14 dec 04, from -12.52 to -12.59, fix double-counting of big-H2 Solomon rate
+monitor "CO  " 371.549m  -12.59 line intensity
+## >>chng 13 jun 27, from -8.049 to -13.12, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 03, from -13.12 to -12.78, update H2 - C II 158m collision
+## >>chng 13 dec 23, from -12.78 to -13.03, C to external databases
+## >>chng 14 mar 26, from -13.03 to -13.1, move O to external databases
+## >>chng 14 dec 04, from -13.1 to -13.15, fix double-counting of big-H2 Solomon rate
+monitor "CO  " 325.137m  -13.15 line intensity
+## >>chng 13 jun 27, from -7.522 to -9.036, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from -9.036 to -9.103, change H2/HD secondary scale factors
+## >>chng 13 dec 23, from -9.103 to -9.197, C to external databases
+## >>chng 15 aug 03, from -9.197 to -9.224, update LAMDA to 2015
+## >>chng 16 mar 21, from -9.224 to -9.342, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 jul 21, from -9.342 to -9.386, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 aug 03, from -9.386 to -9.556, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -9.556 to -10.2, LAMDA update
+## >>chng 21 nov 04, from -10.2 to -9.55, update co mole data
+## >>chng 23 may 15, from -9.55 to -9.312, GS updates 21 reactions to UMIST 2012
+monitor "^13CO" 906.599m  -9.312 line intensity
+## >>chng 13 jun 27, from -8.247 to -10.83, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 26, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from -10.83 to -10.93, change H2/HD secondary scale factors
+## >>chng 13 dec 23, from -10.93 to -11.07, C to external databases
+## >>chng 15 aug 03, from -11.07 to -11.11, update LAMDA to 2015
+## >>chng 16 mar 21, from -11.11 to -10.99, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 jul 21, from -10.99 to -10.96, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 aug 03, from -10.96 to -10.77, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from -10.77 to -10.73, further update to McCall CR-related rates from r14260
+## >>chng 21 apr 16, from -10.73 to -10.79, remove bad UMIST reaction
+## >>chng 21 sep 11, from -10.79 to -13.41, LAMDA update
+## >>chng 21 sep 15, from -13.41 to -12.1, go back to unresolved model
+## >>chng 21 nov 04, from -12.1 to -10.75, update co mole data
+## >>chng 23 may 15, from -10.75 to -11.62, GS updates 21 reactions to UMIST 2012
+monitor "CN  " 880.858m  -11.62  line intensity
+#
+## >>chng 23 feb 25,GS add to test new chemistry, SiS emission model
+## >>chng 23 may 15, from -10.36 to -11.38, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -11.38 to -10.99, GS update UMIST to 2012 and set upper limit on T
+## >>chng 23 jul 15, adjust wavelength from 5503.08m to 5502.90m
+monitor "SiS " 5502.90m -10.99 line intensity
+# h2_pdr_leiden_v1.in
+# class pdr 
+# ========================================
+# 
+

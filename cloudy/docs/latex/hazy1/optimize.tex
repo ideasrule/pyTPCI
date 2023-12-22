@@ -1,0 +1,965 @@
+\chapter{THE OPTIMIZE COMMAND}
+% !TEX root = hazy1.tex
+\label{sec:CommandOptimize}
+
+\section{Running the optimizer}
+
+If you want to run the optimizer, it is {\em mandatory} to use one of the
+following commands
+\begin{verbatim}
+# non-MPI runs
+cloudy.exe -r optrun
+# alternative
+cloudy.exe -p optrun
+
+# MPI runs
+mpirun -np <n> /path/to/cloudy.exe -r optrun
+# alternative
+mpirun -np <n> /path/to/cloudy.exe -p optrun
+\end{verbatim}
+This assumes that the input script is in the file \cdFilename{optrun.in}. The
+normal input and output redirection shown elsewhere will not work in this case
+and \Cloudy\ will stop with an error message if you try to use it. The command
+line switches are described in a section of
+\Hazy~2. Using the \cdCommand{-r} or \cdCommand{-p} command line switches is
+necessary because the code needs to know the name of the input script in order
+to generate intermediate files with its name embedded. It is also necessary
+for the correct functioning of the code in MPI mode. Running in MPI mode is
+described further in Section~\ref{sec:OptPhymir}.
+
+\section{Overview}
+
+The \cdCommand{optimize} command and its keywords
+tell the code to vary one or more
+parameters to try to reproduce e.g.\ an observed emission-line spectrum,
+line
+flux or luminosity, a set of column densities, or temperatures, etc.
+R.F. Carswell wrote the original code and first implemented
+the method in \Cloudy\ 
+and Peter van Hoof extended the methods.
+The user can choose a minimization method (see Section~\ref{sec:optimization_methods}) to obtain a best fit
+to a set of
+observed quantities.
+The latter
+are specified by a series
+of \cdCommand{optimize} commands.
+These are described in Section~\ref{sec:observed_quantities}.
+The keyword \cdCommand{vary} can appear on many of the commands
+used to specify physical parameters
+(Table \ref{tab:CommandWithVaryOption}). This indicates
+that this parameter is to be varied in order to obtain a best fit to the observed quantities,
+and also sets the initial value for the parameter.
+Section~\ref{sec:CommandWithVary_notes}
+below discusses details of some commands.
+Other commands exist to influence the behavior of the optimizer, e.g. to
+set the initial stepsize, limit the range of a physical parameter,
+set the convergence tolerance, etc. See Section~\ref{sec:controlling_optimizer} for more details.
+
+\section{Commands with vary option}
+\label{sec:CommandsVaryOption}
+
+This section lists all commands which have the \cdCommand{vary} option.
+Table \ref{tab:CommandWithVaryOption} lists all commands, and
+Section \ref{sec:CommandWithVary_notes} gives notes concerning commands 
+with the \cdCommand{vary} option.
+
+\begin{table}
+\centering
+\caption{\label{tab:CommandWithVaryOption}Commands with vary option. Entries ``var'' are explained in Section~\ref{sec:CommandWithVary_notes}.}
+\begin{tabular}{lllll}
+\hline
+Command& Quantity varied& Min& Max& Inc.\\
+\hline
+abundances starburst& metallicity& $-3$& $\log(35.5)$& 0.2\\
+AGN& Big Bump temperature& $-\infty$& $+\infty$& 0.5\\
+blackbody& temperature& $-\infty$& $+\infty$& 0.5\\
+bremsstrahlung& temperature& $-\infty$& $+\infty$& 0.5\\
+constant pressure set& pressure& $-\infty$& $+\infty$& 0.1\\
+constant temperature& temperature& $\log(2.8)$& 10& 0.1\\
+coronal equilibrium& temperature& $\log(2.8)$& 10& 0.1\\
+cosmic rays& cosmic ray density& $-\infty$& $+\infty$& 0.2\\
+database H-like Lyman pumping scale & line blocking scale factor& $-\infty$& $+\infty$& 0.1\\
+distance& distance& $-\infty$& $+\infty$& 0.3\\
+dlaw& first dlaw parameter& $-\infty$& $+\infty$& 0.5\\
+eden& electron density& $-\infty$& 20 & 0.1\\
+element \ldots& abundance of an element& $-\infty$& $+\infty$& 0.2\\
+energy density& energy density temp& $-\infty$& $+\infty$& 0.1\\
+filling factor& filling factor& $-\infty$& 0& 0.5\\
+fudge& first fudge factor& $-\infty$& $+\infty$& var\\
+globule& density& $-\infty$& $+\infty$& 0.2\\
+grains& grain abundance& $-\infty$& $+\infty$& 1.0\\
+hden& hydrogen density& $-\infty$& $+\infty$& 1.0\\
+hextra& extra heating& $-\infty$& $+\infty$& 0.1\\
+illuminate& Angle of illumination& 0& $\pi/2$& 0.1\\
+intensity& intensity of source& $-\infty$& $+\infty$& 0.5\\
+ionization parameter& ionization parameter& $-\infty$& $+\infty$& 0.5\\
+luminosity& luminosity of source& $-\infty$& $+\infty$& 0.5\\
+magnetic field \ldots& magnetic field& $-\infty$& $+\infty$& 0.5\\
+metals& metallicity& $-\infty$& $+\infty$& 0.5\\
+metals deplete Jenkins 2009 Fstar 0.5 & Fstar & 0 & 1 & 0.1 \\
+phi(H)& photon flux& $-\infty$& $+\infty$& 0.5\\
+power law& see below& var& var& 0.2\\
+Q(H)& no.\ of ionizing photons& $-\infty$& $+\infty$& 0.5\\
+radius& inner radius& $-\infty$& $+\infty$& 0.5\\
+ratio& intensity ratio& $-\infty$& $+\infty$& 0.2\\
+ratio alphaox& power-law index& $-\infty$& $+\infty$& 0.2\\
+set H2 Jura scale& scale factor for Jura rate& $-\infty$& $+\infty$& 0.3\\
+set temperature floor& lowest allowed temperature& $\log(2.8)$& 10& 0.3\\
+stop \ldots column density& column density& $-\infty$& $+\infty$& 0.5\\
+stop mass & total mass& $-\infty$& $+\infty$& 0.5\\
+stop optical depth& optical depth at specified energy & $-\infty$& $+\infty$& 0.5\\
+stop radius& outer radius& $-\infty$& $+\infty$& 0.5\\
+stop thickness& cloud thickness& $-\infty$& $+\infty$& 0.5\\
+table Draine& scale factor& $-\infty$& $+\infty$& 0.2\\
+table ISM& scale factor& $-\infty$& $+\infty$& 0.2\\
+table star \ldots& usually temperature& var& var& 0.1\\
+turbulence& turbulent velocity& $-\infty$& $+\infty$& 0.1\\
+xi& ionization parameter& $-\infty$& $+\infty$& 0.5\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{What must be specified}
+
+At least one observed quantity must be given, e.g. the desired emission-line spectrum, a line luminosity,
+kinetic temperature, or a column density.
+You also specify
+which physical parameters should be varied.
+These parameters are specified by a
+keyword \cdCommand{vary} which may appear on any of the
+commands listed in
+Table \ref{tab:CommandWithVaryOption}.
+Up to 20 parameters may be varied at a time.
+Note that it makes no sense to vary more parameters than the number of observables.
+In that case there will be multiple solutions and the optimizer will not be able to
+converge. Preferably you should have significantly more observables than quantities
+to vary so that observational errors do not unduly influence the optimization process.
+The physical quantities
+are actually varied as logs within the code and increments
+(the first steps away from the initial guess)
+are also logarithmic. The only exceptions to this rule are the
+\cdCommand{illuminate} command, and commands taking varying a power-law index
+(\cdCommand{power law} and \cdCommand{ratio alphox}).
+They are varied as linear quantities.
+The parameters of the \cdCommand{dlaw} and \cdCommand{fudge} will
+have the meaning given to them by the user and may be either linear or
+logarithmic (though the user is strongly encouraged to make them logarithmic).
+
+Several examples of the \cdCommand{vary} option in action
+are given in the
+\cdFilename{optimize\_*.in} simulations in the test suite.
+A typical input stream follows:
+\begin{verbatim}
+# tell the code to vary the ionization parameter
+# and hydrogen density
+blackbody, 5e4 K
+hden 4 vary
+ionization parameter -2 vary
+stop zone 1
+#
+# the following specifies the observed emission lines, order is
+# label, wavelength, intensity relative to H-beta, tolerance
+optimize lines
+O  3 5006.84 intensity =13.8 error =0.1
+Blnd 3727 < 2.1 # (only upper limit)
+end of lines
+#
+\end{verbatim}
+This example tells the code to vary the density and ionization parameter
+to reproduce the observed intensities of two emission lines.
+
+Information concerning the optimization process is fed to the code
+as a series of keywords on the \cdCommand{optimize} command.
+These are described next.
+Only one keyword will be recognized per \cdCommand{optimize} command.
+
+\section{Observed quantities}
+\label{sec:observed_quantities}
+
+This section describes how to specify the observed properties we want
+to match.
+
+\subsection{Optimize column density}
+
+This specifies a set of column densities to be optimized.
+A series of species and constraints are read,
+ending with a line with the keyword \cdCommand{end} in columns 1 to 3,
+will be read
+in from subsequent lines.
+One species is entered per line and there is no limit to
+the number of entries.
+
+The species can be specified in one of two ways:
+
+\cdTerm{Atomic ions:}
+Columns 1 to 4 of the column density lines must
+contain the first four characters of the name of the element spelled as
+in the output from the zone results.
+The first number on the line is the
+ionization stage, 1 indicates Atom I, 3 indicates Atom III, etc.
+The second
+number on the line is the log of the column density [cm$^{-2}$]
+and the last
+optional number is the relative uncertainty.
+It has a default of 0.05 (5
+percent).
+A column density can be specified as an upper limit by entering
+$<$ anywhere on the line after column 4.
+
+The following gives an example of its use:
+\begin{verbatim}
+optimize column densities
+hydrogen 1  < 17 # make optically thin in H^0 Lyman continuum
+carbon 4 17.4 error =.001 # match the C+3 column density closely
+silicon 3 14.6 # The Si+2 column density
+end of column densities
+\end{verbatim}
+
+\cdTerm{Molecular and level column densities:}
+The species is specified as a quoted, case-sensitive string, and no ionization
+stage is specified.  (This is different from previous
+versions of Cloudy, where the species did not need to be quoted, but
+only the first 4 characters were used, and an ionization stage
+of 0 had to be specified.)
+The species names which are parsed from the lines giving the column density
+constraints
+are simply
+passed to routine \cdTerm{cdColm}.
+That routine is described in Part 2 of \Hazy.
+This optimization command accepts any species that
+\cdTerm{cdColm} recognizes.
+Column densities of molecules and excited states of some ions
+can be specified by special syntax, and one of the cases
+that is described where \cdTerm{cdColm} is shown in the example below.
+
+The following shows some examples of optimizing molecular and state column
+densities:
+\begin{verbatim}
+optimize column densities
+"H-"      < 17 # The H- column density is a limit
+"H2"      17.4 error =.001 # Match the total H_2 column density exactly
+"H2+"     14.6 # The H2+ molecular ion
+"O11*"    16.3 # This is an excited level within the O^0 ground term
+"He+[2]"  16.3 # This selects just one level from the He+ ion
+"CO[2]"   16.3 # This is a level in the CO molecule
+"CO[1:3]" 18.3 # This is the sum of levels 1,2,3 in the CO molecule
+end of column densities
+\end{verbatim}
+
+\subsection{Optimize, [intensity, luminosity]=36.425 [error =0.1]}
+
+This specifies the luminosity or intensity of a line.
+The code will
+try to match the predicted intensity or luminosity of the
+normalization line
+(usually H$\beta$ and set with the \cdCommand{normalize} command)
+match this value.
+The
+sub-keyword is either \cdCommand{intensity} or \cdCommand{luminosity}
+and both have exactly the
+same effect.
+The number is the log of either the intensity or luminosity
+of the line in the same units as found in the third column of
+the final print out.
+The second (optional) number is the fractional error for the
+fit between the observed and computed values.
+If a tolerance is not
+specified then a fractional uncertainty of 0.05 is assumed.
+
+By default the intrinsic luminosity of the line will be matched.
+If the keyword \cdCommand{emergent} appears then the
+emergent luminosity will be considered.
+
+Comments may be entered by placing any of the special characters
+described on page \pageref{sec:CommentsInInput} in column 1.
+
+The following gives some examples of its use:
+\begin{verbatim}
+# this will request an H beta intensity of 0.5 erg cm^-2 s^-1
+# it applies to Hbeta since this is the default normalization
+# line
+optimize intensity -0.3
+
+# the following resets the normalization line to 5006.84, then
+# asks the code to reproduce its luminosity
+normalize to "O  3"  5006.84
+# we want a 5006.84 luminosity of 10^34.8 erg / s
+optimize luminosity 34.8
+\end{verbatim}
+
+\subsection{Optimize continuum flux 350 micron 126 Jansky [error =0.1]}
+\label{sec:opt:cont:flux}
+
+This commands allows you to optimize an observed continuum flux or surface brightness at an
+arbitrary wavelength. Note that both the keywords \cdCommand{continuum} and
+\cdCommand{flux} need to be present on the command line. The first parameter
+must be the wavelength or frequency of the observation. The syntax for this
+parameter is exactly the same as for the \cdCommand{set nFnu add} command
+described in Section~\ref{sec:set:nfnu:add}. The code will implicitly behave
+as if a \cdCommand{set nFnu add} command had been given to add the requested
+frequency point. The second parameter
+on the command line is the observed flux. The unit of the flux should also
+be supplied. There are many choices. You can supply any combination of the
+following keywords separated by slashes: \cdCommand{erg/s} or \cdCommand{W}
+for the power unit, and \cdCommand{sqcm} (cm$^{-2}$) or \cdCommand{sqm}
+(m$^{-2}$) for the surface area unit. This will define a flux per decade $\nu
+F_\nu$. If you want to supply a flux density $F_\nu$, you can combine this
+with the keyword \cdCommand{Hz}, while for $F_\lambda$ you can use \cdCommand{A}
+(\AA), \cdCommand{nm} or \cdCommand{micron} ($\mu$m). If you want to supply a surface
+brightness you can combine this with \cdCommand{sr} or \cdCommand{sqas} (square arcsec),
+otherwise it will be assumed to be the intensity radiated into $4\pi$~sr.
+Some examples of valid units would be \cdCommand{erg/s/sqcm/Hz},
+\cdCommand{W/sqm/A}, or \cdCommand{W/sqcm/micron/sr}. Alternatively the
+following keywords are also recognized: \cdCommand{Jansky} or
+\cdCommand{Jy} (Jy), and \cdCommand{mJy} (mJy) for supplying a flux density $F_\nu$,
+while the keyword \cdCommand{MJy/sr} can be used for supplying a surface
+brightness. A keyword for the unit must be present.
+If the flux is $\leq$ 0, or the keyword
+\cdCommand{log} appears on the line, it will be assumed that the flux is
+logarithmic (but not the wavelength or frequency!). Observed fluxes must be
+dereddened for any extinction inbetween the source and the observer. The same
+normalization will be used as in the rest of the Cloudy output. So if you
+include the \cdCommand{print line flux at earth} command, you should enter the
+observed flux at Earth here. See Section~\ref{sec:line:flux:earth} for further
+details. See also Section~\ref{sec:set:nfnu} for a discussion of the
+components that are included in the continuum flux prediction. The third
+(optional) parameter on the command line is the relative uncertainty in the
+flux. If it is not specified then an uncertainty of 5\% is assumed. The optimizer
+will print both the model and observed flux in the same units as were used on the
+command line.
+A continuum flux can be specified as an upper limit by entering
+$<$ anywhere on the line after column 4.
+
+For wavelengths longer than 1~mm this command is counted in the
+absolute flux category, for shorter wavelengths in the photometry category (see
+Section~\ref{sec:conv:criteria}). This distinction is useful so that you can
+use a radio continuum flux measurement (e.g.\ at 6~cm) as a replacement for
+the H$\beta$ intensity, while you would not want the same to be done for dust
+continuum measurements since the latter do not scale with the number of
+ionizing photons.
+
+There is no limit to the number of \cdCommand{optimize continuum flux}
+commands. The following gives some examples of its use:
+\begin{verbatim}
+# make sure we normalize the flux as observed
+print line flux seen at earth
+# and set the distance
+distance 980 linear parsec
+
+# optimize a dust continuum flux, e.g. measured by IRAS
+# this will be counted in the photometry class
+optimize continuum flux 60 micron 220 Jy error 0.10
+
+# optimize a 6 cm radio continuum measurement
+# this will be counted in the absolute flux class
+optimize continuum flux 6 cm 50 mJy
+# an OCRA measurement...
+optimize continuum flux 30 GHz 0.1 jansky
+
+# this will set an upper limit of 1e-21 erg s^-1 cm^-2 Hz^-1 (100 Jy) at 100 micron
+optimize continuum flux < 100 micron -21 erg/s/sqcm/Hz
+\end{verbatim}
+
+\subsection{Optimize lines}
+
+This command tells the code to read a list of observed lines that it
+will try to reproduce.
+There is no limit to the number of lines that may be entered.
+\begin{verbatim}
+#
+# the following specifies observed emission lines, order is
+# label, wavelength, intensity relative to H-beta, tolerance
+optimize lines
+O  3 5006.84 intensity =13.8 error =0.1
+Blnd 3727 < 2.1 # (only upper limit)
+O  3 88.3323m 1.2
+O  1 145.495m 1.6
+H  1 4.65247m  Elow=105291.6  0.33
+end of lines
+#
+\end{verbatim}
+
+One emission line is specified per line and the line must contain
+information in a specific order.
+The line starts with a species label and wavelength.
+Optionally line disambiguation is supported. See Sect.~\ref{sec:SpecifySpectralLines} for details.
+The next quantity is the observed relative line intensity.
+This will be in the same units as the relative intensities printed at the
+end of the calculation.
+Intensities are normally given relative to H$\beta$,
+but can be changed to other reference lines with the
+\cdCommand{normalize} command.
+The last (optional) number is the
+relative error in the observed line.
+If an error is not specified then
+a fractional uncertainty of 0.05 (5\%) is assumed.
+A line can be specified
+as an upper limit by entering $<$ before the intensity.
+Nothing may be entered after the last number, except a comment starting with a comment character.
+The default is to use the intrinsic line intensities.
+If the keyword \cdCommand{emergent} appears than
+those will be used instead. This keyword needs to be added
+to the \cdCommand{optimize lines} command, as shown below.
+\begin{verbatim}
+optimize lines emergent
+O  3 88.33m 1.2
+O  1 145.5m 1.6
+end of lines
+\end{verbatim}
+
+The emission lines end with a line that has the keyword
+\cdCommand{end} in columns 1 to 3.
+If this end does not appear correctly then the code will continue
+reading lines until the end-of-file is encountered.
+
+Comments may be entered using any of the special characters in column
+1 that were described on page~\pageref{sec:CommentsInInput}.
+
+\subsection{Optimize temperature}
+
+This specifies a set of observed mean temperatures.
+Each of the lines
+that follow gives a species, ion stage, mean temperature, an error,
+and a specification of whether to weight the temperature with
+respect to radius or volume.
+The following is an example:
+\begin{verbatim}
+optimize temperature
+Hydrogen  1  36200K  volume
+H2   0   150K     radius
+end of temperatures
+\end{verbatim}
+
+This behaves as do the previous commands.
+The ``$<$'' option is
+recognized.
+Numbers $\le 10$ are interpreted as logs of the temperature.
+The
+keywords \cdCommand{volume} and \cdCommand{radius} specify how to
+weight the mean temperature.
+The default is to weight over radius and will be used if no keyword is
+recognized.
+The label for the element must appear in the first four columns.
+The ion stage follows with the temperature and an optional error coming
+next.
+An ion stage of zero indicates a molecule.
+
+This command simply copies the labels and parameters on the each line
+and passes them to \cdTerm{cdTemp},
+a routine that determines the mean temperature
+and is described in a section of Hazy 2.
+That documentation describes
+how to request mean temperatures for various ions, molecules, and derived
+quantities.
+
+\subsection{Optimize diameter}
+
+The specifies the (angular) diameter of the nebula, defined either as 2 times
+the Str\"omgren radius for an ionization bounded nebula, or 2 times the outer
+radius for a density bounded nebula. If the distance to the object is set with
+the \cdCommand{distance} command, the number will be interpreted as a linear
+diameter in arcsec. If the keyword \cdCommand{cm} is present, the number
+will be interpreted as a linear diameter in cm. The keyword \cdCommand{log}
+can be used to force interpretation as a logarithmic quantity. If the distance
+to the object is not set, the number will always be interpreted as a diameter
+in cm.
+A diameter can be specified as an upper limit by entering
+$<$ anywhere on the line after column 4.
+
+\section{Optimization methods}
+\label{sec:optimization_methods}
+
+Two optimization methods are in \Cloudy.
+The \cdTerm{phymir} method (\citealp{VanHoof1997}) is the default.
+
+\subsection{Optimize phymir [sequential mode] [8 cpu]}
+\label{sec:OptPhymir}
+
+This uses Peter van Hoof's \cdTerm{phymir} optimization method
+(\citealp{VanHoof1997}). In particular it tries to avoid being upset by the
+inevitable numerical noise that is present in any simulation. It has the
+further option of being able to run on multiple CPUs on multiprocessor UNIX
+machines, or in an MPI environment. This optimizer is the default.
+
+\cdTerm{Phymir} by default runs in parallel mode (using more than one CPU) on
+UNIX systems and in sequential mode on non-UNIX systems. When the code is
+compiled with MPI support enabled (see a section of Hazy 2), it will also run
+by default in parallel mode on any (distributed) MPI cluster. The keyword
+\cdCommand{sequential} forces \cdTerm{phymir} to sequential mode. On most
+systems phymir will be able to detect the number of available CPUs. By default
+it will use all these CPUs. The command parser searches for a number on the
+line. If one is present this will be the maximum number of CPUs that are used
+simultaneously. In MPI runs the number of CPUs will be picked up automatically
+from the MPI environment. In this case setting the number of CPUs on the
+command line will have no effect.
+
+\cdTerm{The continue option}. The \cdTerm{phymir} method includes an option to
+restart the optimization. During an optimization run, the code's state is
+regularly saved. The optimization can be
+restarted using this state file by including the command \cdCommand{optimize
+continue} described below.
+
+\subsection{Optimize Subplex}
+
+This uses the \citet{Rowan1990} implementation of the subspace-searching
+simplex optimization method. This method does not support the
+\cdCommand{continue} option described above.
+
+\section{Controlling the optimizer}
+\label{sec:controlling_optimizer}
+
+These commands change the behavior of the optimizer.
+
+\subsection{Optimize file= ``best.in''}
+\label{sec:optimize_file}
+
+At the end of the optimization process the derived input parameters are
+written into a file for later use.\footnote{This replaces the \cdCommand{optimize save} command, that was in versions 90
+and before.}  The default filename is
+``\cdFilename{optimal.in}'' but can be changed with this command.
+The file name must
+be valid for the system in use and must be enclosed in double quotes.
+
+It is possible to use this file to do later calculations in which various
+quantities might be saved for plotting.
+Also it is generally a good idea
+to confirm that a single run with \Cloudy\ does reproduce the same results
+as the many calls of the code made by the optimizer.
+The two should agree
+\emph{exactly} but might not if the code became corrupted
+during the many calls
+made during the process.
+
+\subsection{Optimize increment = 0.5 dex}
+
+Increments are the logarithmic quantities that will be added to or
+subtracted from the initial guess as the optimizer makes the first steps
+away from the initial value.
+The default increments preset in the code
+and listed in Table \ref{tab:CommandWithVaryOption} were chosen with
+typical conditions in mind.
+It may be necessary to change these if the process is
+unable to identify
+a solution.
+If a zero or no number is entered as an increment then
+the default increment will not be changed.
+
+The increments entered with this command affect
+\emph{only} the \emph{previously}
+entered \cdCommand{vary} command.
+The following gives some examples of changing the
+increments.
+\begin{verbatim}
+hden 4 vary
+optimize increments .1  # this sets .1 dex changes in hden
+brems 6 vary            # increments left at default
+radius 13.6 vary
+optimize increments .05 # this sets changes in radius
+\end{verbatim}
+
+\subsection{Optimize, iterations = 1200}
+
+This specifies the upper limit to the number of iterations to be
+performed.
+The default is 400.
+This command is quite similar to the
+\cdCommand{stop zone} command in that it is a fail-safe
+method to prevent runaway infinite
+loops.
+The optimization process should not stop because of this limit.
+It may be necessary to increase the limit if the process is still making
+progress at the end of the calculation.
+
+The number of iterations that the optimizer needs depends on the number
+of parameters that are varied.
+To work well there must be enough iterations to allow
+each of the free parameters to be varied over a wide range.
+Make sure that
+this happens by looking at why the optimization process ended.
+If it ran
+out of iterations then you should check whether all of the parameters been
+varied over a significant range.
+If they have not then you should increase
+the number of iterations or vary fewer parameters.
+If you are using the \cdTerm{phymir} method, it is possible to
+salvage a prematurely terminated run by increasing the number of
+iterations and adding the \cdCommand{optimize continue} command
+described below.
+\Cloudy\ will then continue where the previous run stopped.
+
+\subsection{Optimize range -2.3 to 3.9}
+
+The preset limits to the range over which parameters can be varied are
+indicated in Table \ref{tab:CommandWithVaryOption}.
+
+It is sometimes necessary to establish physical limits to parameters.
+For instance metallicities may be limited to the range
+$-1 \le \log(\mathrm{Z}) \le 0$ by
+observations or physical plausibility.
+This command sets the bounds that
+the optimizer will use.
+The arguments are the lower and upper limit to
+the range of variation of the \emph{previously} entered \cdCommand{vary} commands.
+Examples follow.
+\begin{verbatim}
+hden 4 vary
+# the following sets limits to range of density
+optimize range from 3 to 5
+# There will be no range for this one
+brems 6 vary
+radius 13.6 vary
+# this sets limits to radius
+optimize range from 13 to 14
+\end{verbatim}
+
+If the optimizer tries to go outside of the allowed range, a very large
+$\chi^2$ is returned without actually calculating the model. This should
+steer the optimizer back to the allowed range.
+
+\subsection{Optimize tolerance = 0.02}
+
+The tolerance is a measure of the desired fractional accuracy of the
+parameters that are varied and is set with this command.
+The default value
+of 0.10 should be sufficient for initial trial runs
+but the final values
+should be made lower for more precision.
+
+\subsection{Optimize continue}
+
+The \cdTerm{phymir} method includes an option to
+restart the optimization. During an optimization run, the code's state is
+regularly saved in the file \cdFilename{continue.pmr}. The optimization can be
+restarted by including the command \cdCommand{optimize continue}. In this case
+it does not start from scratch, but re-starts using information in the file
+\cdFilename{continue.pmr} instead. This can be useful when your machine
+crashed during a lengthy run, you hit the maximum number of iterations before
+the optimization was finished, or if you want to continue optimizing with a
+tighter tolerance. The code will be in exactly the same state when it
+continues as when it wrote the last state file.
+So in general you will need to edit the input script before you
+restart the calculation.
+For instance, the
+first optimization may have ended because it hit the limit to the number of
+iterations. If you restart an optimization with a \cdFilename{continue.pmr}
+file you will need to increase the maximum number of iterations in the input
+script. Otherwise the code would stop immediately, thinking it was already at the
+iteration limit.
+
+When you start a run with the \cdCommand{optimize continue} command, the code
+will immediately rename the file \cdFilename{continue.pmr} to
+\cdFilename{continue.bak} to avoid it being overwritten by the state files
+that are produced by the new run. So if you make a mistake, you can rename
+\cdFilename{continue.bak} to \cdFilename{continue.pmr} and try again.
+
+The \cdCommand{optimize continue} command is {\em only} supported by the \cdTerm{phymir}
+optimizer.
+
+\section{Convergence criteria}
+\label{sec:conv:criteria}
+
+Observables are placed into one of six categories - ``relative flux,''
+``column density,'' ``mean temperature,'', ``absolute flux'', ``photometry'', and ``diameter''
+(see \citealp{VanHoof1997}).
+For the $i^{th}$ observable the error estimate is
+\begin{equation}
+\chi _i^2  = \left( {\frac{{F_i^m  - F_i^0 }}{{\min \left( {F_i^m ,F^0 }
+\right)\sigma }}} \right)^2 % (78)
+\end{equation}
+where $F^m$ and $F^0$ are the model and observed values
+and $\sigma$ is the relative
+error in the observed value.
+The uncertainty $\sigma$ is specified when the
+observed quantities are entered and has a default value of 0.05.
+The average
+of the error estimate is computed for each category.
+The error estimate
+summed over all categories is minimized.
+
+\section{Other optimizer commands}
+
+\subsection{No vary}
+
+It is sometimes useful to be able to turn off the optimizer for a given
+input stream without having to change the (possibly many) occurrences of
+the \cdCommand{vary} keyword.
+If the \cdCommand{no vary} command is entered
+then the \cdCommand{vary} keyword
+on the other commands will be ignored and a single model will be computed.
+
+The \cdCommand{no vary} command can also be used with
+the \cdCommand{grid} command to tell the code to ignore the \cdCommand{grid} command and \cdCommand{vary}
+options.
+
+\subsection{Optimize, trace start 4}
+
+This turns on trace printout for the $n^{th}$ time the
+code is called by the
+optimizer.
+Specific aspects of the trace are still controlled by the
+\cdCommand{trace} command.
+
+\subsection{Optimize, trace flow}
+
+This turns on trace to follow the logical flow within the optimizer.
+
+\section{Notes concerning commands with vary option}
+\label{sec:CommandWithVary_notes}
+
+The keyword \cdCommand{vary} can appear on the commands in Table
+\ref{tab:CommandWithVaryOption}. All other keywords of the command (except
+\cdCommand{trace}) are supported (though in some cases there may be an
+implicit unit conversion, e.g.\ if you supply a radius in parsec, the
+optimizer will vary the equivalent radius in cm). If multiple parameters are
+entered on the command line, only the first parameter will be varied while the
+rest will be held fixed. The parameter will be varied as a logarithmic
+quantity. Any exceptions to these rules will be noted below.
+
+\subsection{AGN}
+
+Only the Big Bump temperature, the first parameter, can be varied.
+
+\subsection{Cosmic rays}
+
+All keywords except \cdCommand{equipartition} are supported.
+
+\subsection{Dlaw}
+
+The first parameter will be varied as entered by the user (i.e.\ no log will
+be taken). The user is however strongly encouraged to use logs in the
+definition of the command if the parameter is not of order 1.
+
+\subsection{Element}
+
+Only the keywords \cdCommand{scale} and \cdCommand{abundance} are supported.
+
+\subsection{Fudge}
+
+The first parameter will be varied as entered by the user (i.e.\ no log will
+be taken). The user is however strongly encouraged to use logs in the
+definition of the command if the parameter is not of order 1.
+
+The initial increment is set to 20\% of the initial estimate, or to 1 if the
+initial estimate is zero. Use the \cdCommand{optimize increment} command to
+override this default.
+
+\subsection{Illuminate}
+
+The illumination angle is varied as a linear quantity in radian.
+
+\subsection{Metals}
+
+The \cdCommand{grains} option can be used to vary the
+grain abundance with the metallicity. 
+The keyword \cdCommand{depletion} is not supported.
+
+\subsection{Power law}
+
+The \cdCommand{vary} keyword appears in three forms,
+\cdCommand{vary}, \cdCommand{varyb}, and \cdCommand{varyc}.
+If
+\cdCommand{vary} appears then the first parameter,
+the slope of the power law, is varied.
+If \cdCommand{varyb} appears then the second parameter,
+the high-energy cutoff temperature in
+Kelvin, is varied.
+If \cdCommand{varyc} appears then the last parameter, the low-energy
+cutoff, is varied.
+Only one parameter may be varied at a time. The power law index is
+varied as a linear quantity since it is usually negative.
+If either of the cutoff energies is varied, the optimizer limits
+will be set such that the lower cutoff cannot move beyond the upper
+cutoff, or vice versa.
+
+\subsection{Save output}
+
+It is not possible to use some of the save output options while
+optimizing.
+Save output is designed to save predictions so that they can
+be analyzed after the calculation is complete.
+It makes little sense to
+do this during an optimization run with its hundreds of calculations.  After
+the optimization is complete, rerun the optimal simulation with
+\cdCommand{save} commands included.
+
+Most \cdCommand{save} options will work during optimization.
+Those that read a
+series of lines to determine what quantities to output will not work.
+This is because the command parser is not used in its usual mode
+when commands
+are read during an optimization run.
+
+\subsection{Radius}
+\label{sec:RadiusVaryOptions}
+
+It is possible to specify the stopping radius or depth on the line but
+it is not possible to vary it.
+Only the starting radius is varied.
+
+
+There could be a major source of confusion if the second parameter is
+entered and the two numbers are of the same order of magnitude.
+The logic
+used to interpret the second number is described
+on page \pageref{sec:RadiusCommand} above.
+If the second number is greater than the first then it is interpreted as
+an outer radius; if less than, then the depth.
+As a result the
+interpretation of the second number can change while the first number is
+varied.
+It is safer to set an outer radius with the
+\cdCommand{stop thickness} or \cdCommand{stop radius} command
+rather than using the second number. If you vary the inner radius while
+keeping the outer radius fixed with the \cdCommand{stop radius} command,
+make sure that you use the \cdCommand{optimize range} command to keep the
+inner radius inside the outer radius. Failing to do so may result in premature
+termination of the optimization run.
+
+\subsection{Ratio alphox}
+
+The power law index is
+varied as a linear quantity since it is usually negative.
+
+\subsection{Stop thickness}
+
+Only one thickness can be specified. Additional parameters for the second
+and subsequent iterations will be ignored.
+
+\subsection{Stop radius}
+
+Only one radius can be specified. Additional parameters for the second and
+subsequent iterations will be ignored.
+
+If you want to vary the outer radius while keeping the inner radius fixed,
+make sure that you use the \cdCommand{optimize range} command to keep the
+outer radius outside the inner radius. Failing to do so may result in
+premature termination of the optimization run when the optimizer takes the
+outer radius inside the inner radius. Alternatively, you can also use a
+combination of the \cdCommand{radius} and \cdCommand{stop thickness} commands.
+
+If you want to vary the inner radius as well as the outer radius of a nebula,
+always use a combination of the \cdCommand{radius} and \cdCommand{stop
+  thickness} commands. Varying the inner and outer radius simultaneously can
+lead to premature termination of the run if the optimizer takes the inner
+radius outside the outer radius, and is therefore not recommended.
+
+\subsection{Table star \ldots}
+
+The first parameter on the command line will always be varied, even if that is
+not the temperature.
+The minimum and maximum of the varied parameter depend on the chosen grid and
+are set in accordance.
+
+\section{Notes concerning the optimization process}
+
+\subsection{Use physically motivated initial conditions}
+
+The algorithm will not be able to find a solution if one is not physically
+possible.
+For instance, an observed He~II $\lambda $4686/H$\beta$ intensity
+ratio of 0.5
+cannot be produced by a 2e4 K blackbody no matter how many other
+parameters are varied (it produces no He$^+$-ionizing radiation).
+It is
+probably necessary to start with parameters in the general area of the
+successful model.
+When far from the solution, it is also a good idea to
+use a large tolerance (using the \cdCommand{optimize tolerance} command)
+to stop it
+from over-optimizing a bad solution. Then do follow-up runs with a smaller
+tolerance once you have a better idea where the optimum solution is.
+
+\subsection{Change the increment size}
+
+The initial increment will often be the largest step ever taken during
+the optimization process.
+If the initial parameters are far from the
+solution then it may be wise to increase the increments.
+Depending on the
+optimization method used, it may not be possible to find solutions more
+than one or two increments away from the initial guess.
+If the increments
+are too big it may jump over valid solutions.
+
+\subsection{Set physically motivated limits to the variable quantities}
+
+The optimizer driver uses very simple methods and understands surprisingly
+little modern astrophysics.
+For instance, while trying to reproduce an
+observed He II $\lambda$4686/H$\beta$ intensity ratio of 0.5 by varying the temperature
+of a blackbody radiator, the algorithm may just as well examine the consequences
+of photoionization by a 100 K radiation field.
+Physically, it is known
+that He II emission only occurs for stars hotter than
+$\sim$5e4 K (AGN3 section 2.5), so there is little purpose
+in examining temperatures lower than this.
+The process will converge more quickly if
+reasonable bounds to the range
+of the varied quantities are set using
+the \cdCommand{optimize range} command.
+
+This advice is dangerous, of course, since you may limit yourself to
+solutions close to those you anticipate.
+Experiments should also be
+performed far from the anticipated solution.
+
+\subsection{Don't give up!}
+
+My experience is that this process works about a quarter of the time.
+The problem is that the algorithm can easily home in on a local minimum
+which is actually a very bad global solution.
+When this occurs the best
+idea is to restart the optimization process with a different
+set of initial conditions.
+Better yet is to start the process with parameters that give
+answers known to be close to the solution,
+although there is some danger
+of limiting the outcome to be what you expect.
+Finally, don't be afraid
+to use CPU time.
+
+\section{Other optimization methods}
+
+Much of astrophysics involves solving the inverse problem---knowing an
+answer (the spectrum) and trying to deduce the question (the conditions
+that caused it).
+However, optimizing a multi-dimensional function is more an art
+than a science.
+We would be interested in learning about,
+and possibly adopting, other promising efficient optimization methods
+(especially if they can be parallelized).
+BSD-compatible license code is necessary.
+
+\section{The optimizer test cases}
+
+The suite of test cases that comes with the code includes scripts to
+drive each of the optimizers.
+These scripts are \cdFilename{optimize\_*.in}.
+These were
+produced by first running the code at a hydrogen density of 10$^5$~cm$^{-3}$ and
+a temperature of 10$^4$ K.
+The spectrum of [\oii] and [\oiii] emission lines
+was taken from this calculation.
+Each optimizer starts at a density and
+temperature some distance away from this solution and tries to reproduce
+the spectrum.
+Table \ref{tab:OptimizerResults} shows the results of this test.
+
+\begin{table}
+\label{tab:OptimizerResults}
+\centering
+\caption{Optimizer results}
+\begin{tabular}{cccc}
+\hline
+Method& Iterations& Density& Temperature\\
+Initial
+condition& ---& 5& 4\\
+% done with r3246 of the mainline, and g++ 4.3.1 on AMD64 (optimized)
+Phymir& 50& 4.988& 3.998\\
+Subplex& 64& 5.001& 3.997\\
+\hline
+\end{tabular}
+\end{table}
+
+
+

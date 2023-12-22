@@ -1,0 +1,553 @@
+\chapter{LINE DETAILS }
+% !TEX root = hazy2.tex
+
+\section{Overview }
+
+The effects of optical depths, continuum pumping, collisions, and
+destruction by background opacity,
+are computed for \emph{all} permitted and
+intercombination lines.
+The cooling is usually distributed among many lines
+in high-density models, and these lines are usually optically thick.   This
+section describes the methods and data structures used within the code to
+accomplish this.
+
+\section{Line Boltzmann factors }
+
+The Boltzmann factor $h\nu/kT$ for a line with a known wavelength or
+energy is given by Table \ref{tab:LineBoltzmann}.
+The table lists the ratio $h\nu/k$ for various units of
+the line energy.
+Vacuum, not air, wavelengths, must be used for all
+quantities involving wavelengths.
+
+\begin{table}
+\centering
+\caption{\label{tab:LineBoltzmann}Line Boltzmann Factors }
+\begin{tabular}{ll}
+\hline
+Line Energy Units& $h\nu/k$ (K)\\
+\hline
+ Angstroms& 1.43877(+8)/$\lambda$(\AA)\\
+microns& 1.43877(+4)/$\lambda(\mu)$\\
+ wavenumbers& 1.43877$\times \sigma$\\
+ Rydbergs& 1.5788866(+5) $\times$E\\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Air vs vacuum wavelengths }
+
+The convention across physics and astronomy is to give line wavelengths
+in vacuum for $\lambda\le 2000$~\AA\ and in air for $\lambda > 2000$~\AA.
+There is no choice---if you observe visible light with
+HST the wavelengths must be quoted in air.
+
+Air wavelengths are smaller than vacuum wavelengths because the wavefronts
+are crushed as then enter the denser medium with its higher index of
+refraction.
+The frequency is unchanged.
+
+\section{The line escape probability functions }
+
+\subsection{Escape probability formalism vs exact radiative transfer }
+
+Radiative transport effects are approximated with the escape probability
+formalism (EPF).  This includes line pumping by the incident continuum,
+photon destruction by collisional deactivation or by continuous opacities,
+and line overlap in special cases.  This section describes how the escape
+probability is related to the net radiative bracket, the formally correct
+term in the transfer equation.
+
+The full balance equation for radiative losses and gains for the upper
+level of a two level atom is given by
+\begin{equation}
+{n_u}{A_{ul}} + {n_u}{B_{ul}}\bar J - {n_l}{B_{lu}}\bar J \equiv
+{n_u}{A_{ul}}{\rho _{ul}} \approx {n_u}{A_{ul}}{P_{ul}}% (1)
+\end{equation}
+where $A$ and $B$ are the Einstein coefficients, $\bar J$
+is the mean intensity averaged over the line,
+and $\rho_{\mathrm{ul}}$ is the net radiative bracket, defined as
+\begin{equation}
+{\rho _{ul}} \equiv 1 - \bar J/S% (2)
+\end{equation}
+where $S$ is the line source function.
+The essence of the EPF is to replace
+$\rho_{\mathrm{ul}}$ with the escape probability $P_{ul}$ on the argument that the difference
+between $J$ and $S$ is due to photons leaking away from the region.  (\citealp{Elitzur1983}; Sec 2.6) shows that this is exact
+if $S$ is constant across the
+line-forming region.
+In the code $\rho_{\mathrm{ul}}$ is replaced with $P_{ul}$.
+
+\subsection{Redistribution functions }
+
+At low densities, line scattering for a two-level atom is coherent in
+the atom's reference frame and the line profile function is described by
+the incomplete redistribution function.
+At high densities the Stark effect
+can broaden the line.
+When the radiation density is high, scattering within
+excited states can inhibit the broadening of resonance lines such as
+L$\beta$ (line
+interlocking), destroying the coherence of the scattering process.
+In these
+cases complete redistribution in a Doppler core more closely describes the
+scattering process.
+
+\Cloudy\ uses several escape probability functions to take these processes
+into account.
+Strong resonance lines are treated with partial redistribution
+with a Voigt profile.
+Subordinate lines are treated with complete
+redistribution in a Doppler core.
+
+\subsection{Incomplete redistribution }
+
+Incomplete redistribution is assumed for resonance transitions such as
+C~IV $\lambda$1549 and the \la\ transitions of hydrogen and helium.  Two studies of
+line formation using this approximation are those of \citet{Bonihala1979}
+and \citet{Hummer1980}.
+Both studies suggest escape probabilities of the form
+\begin{equation}
+{P_l}(\tau ) = {\left\{ {1 + b\left( \tau  \right)\,\tau } \right\}^{
+- 1}}% (3)
+\end{equation}
+but there is substantial disagreement in the form and value of the factor
+$b(\tau)$, sometimes by more than a factor of 2.
+(This is after due allowance
+for the different definitions of line opacities in the two papers.)  \Cloudy\
+uses the \citet{Hummer1980} results for \hi, \hei, and \heii\ \la\ and
+strong resonance lines such as C~IV $\lambda$1549.
+Their tabulated values were fitted
+by interpolation.
+
+\subsection{Damping constant }
+
+The damping constant $a$ is given by
+\begin{equation}
+a = \frac{\Gamma }{{4\pi \;\Delta {\nu _D}}} = \frac{{{\lambda _{cm}}\sum
+A }}{{4\pi \,{u_{Dop}}}} = \frac{{{\lambda _{cm}}7.958 \times {{10}^{ -
+2}}\sum {A\,} }}{{{u_{Dop}}}} = \frac{{{\lambda _{\mu m}}7.958 \times {{10}^{
+- 6}}\sum {A\,} }}{{{u_{Dop}}}}% (4)
+\end{equation}
+where $\Gamma$ is the inverse lifetime of the level
+(the sum of the $A$'s from the
+upper level), $\Delta {\nu _D}$
+is the Doppler width in frequency units \citep{Mihalas1978},
+$\lambda_{cm}$ and $\lambda_{\mu m}$ are
+the wavelengths in cm and microns respectively,
+and $u_{Dop}$ is the Doppler width in cm~s$^{-1}$.
+The ratio $\Gamma \lambda /4\pi $
+is stored in the line structures and the $a$'s are evaluated
+using this ratio
+and the current Doppler width.
+
+\subsection{Background opacity and Destruction probability }
+
+The ratio of continuous to total opacity is $X_c$ parameterized as
+\begin{equation}
+{X_c} = \frac{{\sum {{\kappa _c}\;{n_c}} }}{{{\kappa _l}{n_l} + \sum
+{{\kappa _c}\;{n_c}} }}% (5)
+\end{equation}
+where the $\kappa_l$'s are the line center absorption opacities and the $n$'s the number
+of absorbers.
+
+\subsection{Complete redistribution }
+
+Lines arising from excited states (hydrogen Balmer, Paschen, etc.) and
+Lyman lines with $n_u > 2$ are treated assuming complete redistribution in
+a Doppler core (i.e., the damping constant $a$ is assumed to be zero).  This
+assumption can be changed with the \cdCommand{atom redistribution} command.  If the
+total optical depth of the slab is $T$, then the escape probability at a
+depth $\tau$
+from the illuminated face is given by;
+\begin{equation}
+{P_{u,l}}(\tau ,\,T,\,{X_c}) = \left[ {1 - {X_c}F({X_c})}
+\right]\frac{1}{2}\left[ {{K_2}(\tau ,\,{X_c}) + {K_2}(T - \tau ,\,{X_c})}
+\right]\quad ,% (6)
+\end{equation}
+and the destruction probability is
+\begin{equation}
+{D_{u,l}}({X_c}) = {X_c}F({X_c}).% (7)
+\end{equation}
+The function is
+\begin{equation}
+F({X_c}) = \int_{ - \infty }^\infty  {\frac{{\varphi (x)}}{{{X_c} + \varphi
+(x)}}\;dx},% (8)
+\end{equation}
+where in these expressions (and in this part of the code) the
+\emph{mean opacity is used},
+and $\varphi(x)\approx \pi^{1/2} \exp(-x^2)$ is the Voigt
+function.
+$F(X_c)$ is interpolated
+from the tables presented by Hummer (1968).
+The function
+\begin{equation}
+{K_2}(\tau ,\,{X_c}) \equiv \frac{1}{{1 - {X_c}F({X_c})}}\int_{ - \infty
+}^\infty  {\frac{{{\varphi ^2}(x)}}{{{X_c} + \varphi (x)}}{E_2}\left[ {\left(
+{{X_c} + \varphi (x)} \right)\tau } \right]\;d\tau }
+\end{equation}
+is evaluated numerically.
+
+The complete redistribution escape probabilities are corrected for
+finite damping parameters by including a separate wing escape
+probability.  The resulting total escape probabilities have been
+tested against numerical integrations of the exact formulae in
+\cite{Avrett1966,Hummer1982b} -- note the different definitions of
+$K_2$ in these papers -- verified by comparison by the tabulations and
+fits in these papers.  The overall fit to the escape probability is in
+error by at most 25\% in the range $a=10^{-3}\mbox{--}10^3$, with the
+largest error at $\tau\simeq 1$, and correct asymptotic behaviour in
+the low $\tau$ and high $\tau$ limits.  This level of accuracy is
+thought to be sufficient, given the other approximations inherent in
+the escape probability method.
+
+\subsection{Masing lines }
+
+A line mases when its optical depth is negative.
+The escape probability is (\citealp{Elitzur1992}; p 32, see also
+\citealp{1990ApJ...363..628E,1990ApJ...363..638E})
+\begin{equation}
+{P_{u,l}} = \frac{{1 - \exp \left( { - \tau } \right)}}{\tau }.% (10)
+\end{equation}
+The code will generate a comment if strong maser action occurs for any
+transition.
+
+\subsection{Stark broadening }
+
+Distant collisions with charged particles broaden the upper levels of
+lines, and in the limit of very high densities this will make the scattering
+process completely non-coherent even for L$\alpha $ (i.e., complete redistribution
+obtains).
+Cloudy closely follows the treatment of \citet{Puetter1981} in treating
+Stark broadening.
+
+\subsection{Net escape probability }
+
+A total escape probability $P_{l, tot}$, given by
+\begin{equation}
+{P_{u,l}} = \min \left( {{P_{inc}} + {P_{Stark}}\;,\;{P_{com}}} \right),% (11)
+\end{equation}
+is defined for transitions described by incomplete redistribution.  The
+escape probabilities are those for incomplete, Stark, and complete
+redistribution respectively.  The total effective escape probability is
+not allowed to exceed the complete redistribution value for
+$\tau > a^{-1}$.
+
+If $\tau$ is the optical depth in the direction towards the source of ionizing
+radiation and $T$ is the total optical depth computed in a previous iteration,
+then the escape probability entering the balance equations is
+\begin{equation}
+{P_{u,l}}\left( {\tau ,T} \right) = \left\{ {{P_{u,l}}\left( \tau  \right)
++ {P_{u,l}}\left( {T - \tau } \right)} \right\}/2.
+\end{equation}
+In general the total optical depth $T$ is only known after the first iteration,
+so more than one iteration must be performed when radiative transfer is
+important.
+
+\section{Optical depths and the geometry }
+
+The terms open and closed geometry are defined in a section in Part I.
+The treatment of transfer in these two limits is described here.
+
+\subsection{Open geometry }
+
+This is the default.  During the first iteration the line optical depth
+is defined using only optical depths accumulated in the inward direction.
+This optical depth is initialized to a very small number at the start of
+the calculation.
+At the end of the first iteration the total optical depth
+is set to the optical depth accumulated in the inward direction.
+At the
+end of subsequent iterations the total optical depth is defined as a mean
+of the new and old inward optical depths.
+
+\subsection{Closed geometry overview }
+
+Continuum photons are assumed to interact with gas fully covering the
+continuum source.  At the end of the first iteration the total continuum
+optical depths are set equal to twice the computed optical depths, and the
+inner optical depths reset to the computed optical depths.
+The same recipe
+is followed on subsequent iterations, except that means of old and newly
+computed optical depths are used.
+
+\cdCommand{Closed expanding geometry}  This is the default if the
+\cdCommand{sphere} command
+is entered.  In this case it is assumed that line photons do not interact
+with lines on the ``other'' side of the expanding spherical nebula.  The
+treatment of line optical depths is entirely analogous to that described
+for an open geometry, since the presence of the distant material has no
+effect on line transfer.
+
+\cdCommand{Closed static geometry}  This is assumed if the \cdCommand{sphere static} command
+is entered.
+In this case line photons from all parts of the spherical shell
+do interact.
+As a result the optical depth scale is poorly defined on the
+first iteration, and more than one iteration is required.
+On second and
+later iterations the total line optical depth is set to twice the optical
+depth of the computed structure, and the optical depth at the illuminated
+face of the shell is set to half of this.
+The optical depth scale is only
+reliably defined after at least a second iteration.
+
+\subsection{Wind }
+
+The model is a large velocity gradient $(v\propto R$ Sobolev approximation) wind.
+This is described further in Part 2 of this document.
+
+\section{Collision strengths }
+
+I have tried to follow the Opacity Project notation throughout this
+document \citep{Lanzafame1993}.
+The energy-specific collision strength
+$\Omega_{lu}$ for a transition between upper and lower levels $u$ and $l$ is related to
+the excitation cross section $Q_{lu}$~by
+\begin{equation}
+{Q_{lu}} = \frac{{\pi {\Omega _{lu}}}}{{g_l \, k_{lu}^2}}
+\quad [\mathrm{cm}^2]
+\end{equation}
+where $k_{lu}^2$  is the wavenumber of the collision energy.
+If the collisions are with
+thermal electrons having a Maxwellian velocity distribution $f(u)$ and velocity
+$u$ then the rate coefficient $q_{lu}$ is given by
+\begin{equation}
+{q_{lu}} = \int_0^\infty  {f\left( u \right)} u{Q_{lu}}\,du = \frac{{2{\pi
+^{1/2}}{\hbar ^2}}}{{{g_l}{m_e}}}{a_o}\left( {\frac{{{R_\infty }}}{{kT}}}
+\right){\Upsilon _{lu}}\exp \left( { - \frac{{{E_{lu}}}}{{kT}}} \right)\sqrt
+{\frac{{2kT}}{{{m_e}}}}\quad
+[\mathrm{cm}^3 \mathrm{s}^{-1}].
+\end{equation}
+$E_{ul}$ is the transition energy in Rydbergs, $a_o$ is the Bohr radius,
+\begin{equation}
+{a_o} = \frac{{{\hbar ^2}}}{{{m_e}q_e^2}} = 0.529177249 \times {10^{ -
+8}}\;{\mathrm{cm}}
+\end{equation}
+and ${R_\infty }$ is the Rydberg energy.
+Then the thermally-averaged collision strength is given by
+\begin{equation}
+{\Upsilon _{lu}} = \int_0^\infty  {{\Omega _{lu}}\exp \left( { -
+\frac{\varepsilon }{{kT}}} \right)\;d\left( {\frac{\varepsilon }{{kT}}}
+\right)}.
+\end{equation}
+The rate coefficient for collisional de-excitation is then given by
+\begin{equation}
+{q_{ul}} = \frac{\Upsilon }{{{g_u}\sqrt {{T_e}} }}{\left( {\frac{{2\pi
+}}{k}} \right)^{1/2}}\frac{{{\hbar ^2}}}{{m_e^{3/2}}} = \frac{{\Upsilon
+\,8.6291 \times {{10}^{ - 6}}}}{{{g_u}\sqrt {{T_e}} }}
+\quad  [\mathrm{cm}^3 \mathrm{s}^{-1}].
+\end{equation}
+The rate coefficient for excitation follows from detailed balance:
+\begin{equation}
+{q_{lu}} = {q_{ul}}\frac{{{g_u}}}{{{g_l}}}\exp \left( { - \chi } \right)
+= \frac{{\Upsilon \,8.6291 \times {{10}^{ - 6}}}}{{{g_l}\sqrt {{T_e}} }}\exp
+\left( { - \chi } \right)\quad  [\mathrm{cm}^3 \mathrm{s}^{-1}].
+\end{equation}
+
+\section{Born approximation }
+
+The Born approximation is valid for energies much larger than the
+excitation energy of the transition.
+The energy specific collision strength
+is given by \citet{Bethe1930} as
+\begin{equation}
+{\Omega _{lu}} \approx \frac{{4{g_l}{f_{lu}}}}{{{E_{lu}}}}\ln \left(
+{\frac{{4\varepsilon }}{{{E_{lu}}}}} \right)
+\end{equation}
+where $f_{l,u}$ is the absorption oscillator strength of the permitted transition.
+
+\section{The g-bar approximation }
+
+The g-bar or \citet{VanRegemorter1962} approximation relates the collision
+strength to the transition probability $A_{ul}$ and wavelength $\lambda$ (in \micron).
+Here, the collision strength for the downward transition
+${\Upsilon _{ul}}$
+is approximately given by
+\begin{equation}
+\begin{array}{ccl}
+ {\Upsilon _{u,l}}& =& \frac{{2\pi }}{{\sqrt 3
+}}\frac{{{m^2}{e^2}}}{{{h^3}}}\lambda _{\mu m}^3{10^{ -
+12}}{g_u}{A_{u,l}}\bar g \\
+& \approx& 2.388 \times {10^{ - 6}}\lambda _{\mu m}^3{g_u}{A_{u,l}}\bar g \\
+& \approx& 159{\lambda _{\mu m}}{g_l}{f_{abs}}\bar g \\
+ \end{array}
+\end{equation}
+where $g_u$ and $g_l$ are the statistical weights of the
+upper and lower levels
+and $f_{abs}$ is the absorption oscillator strength.
+For energies of interest
+in astrophysical plasmas, where $kT<h\nu$, $\bar g$
+is approximately given by
+\begin{equation}
+\bar g \approx \left\{ {\begin{array}{*{20}{c}}
+   \hfill {0.2;} & \hfill {{\mathrm{positive}}\;{\mathrm{ions}}} \\
+   \hfill {\left( {{\mathrm{kT/h}}\nu } \right)/10;}\& \hfill {{\mathrm{neutrals}}}
+\\
+\end{array}} \right.
+\end{equation}
+(van Regemorter 1962).
+These approximations are generally accurate to better
+than 1 dex.
+\citet{Gaetz1983} give improved forms of the approximation.
+
+\section{The critical density }
+
+The critical density is defined as the density at which the radiative
+de-excitation rate $A_{ul}\, P_{ul}$ (where $A$ is the transition
+probability and $P$
+is the escape probability) equals the collisional de-excitation rate
+$q_{ul}n_e$.
+Setting
+\begin{equation}
+{A_{ul}}{P_{ul}} = {C_{ul}} = {q_{ul}}{n_e} = \Upsilon \frac{{8.629 \times
+{{10}^{ - 6}}}}{{{g_u}\sqrt {{T_e}} }}{n_e}\quad
+  [\mathrm{s}^{-1}]
+\end{equation}
+where $\Upsilon$ is the thermally averaged collision strength,
+the critical density
+is given by
+\begin{equation}
+{n_{crit}} \sim \frac{{{A_{ul}}{P_{ul}}{g_u}\sqrt {{T_e}} }}{{\Upsilon
+\,8.629 \times {{10}^{ - 6}}}}\quad
+  [\mathrm{cm}^{-3}].
+\end{equation}
+For an optically allowed transition, in which the g-bar approximation may
+apply, this density is approximately given by
+\begin{equation}
+{n_{crit}} = \frac{{4.8 \times {{10}^{10}}\sqrt {{T_e}} }}{{\lambda _{\mu
+m}^3\bar g}}\quad
+[\mathrm{cm}^{-3}].
+\end{equation}
+
+\section{Line thermalization length }
+
+Line radiative transfer will affect the thermal equilibrium of the gas
+when the collision time scale approaches an effective lifetime $\tau\sim
+A_{ul} /n_{scat} )^{-1}$, where $A_{ul}$ is the transition probability and
+$n_{scat}$ is the number
+of scatterings a line photon undergoes before escape.
+For permitted metal
+lines (which often have optical depths  $\sim10^4 - 10^6$) line thermalization
+becomes important at densities $n_e >10^{15} / \tau 10^{10} \mathrm{cm}^{-3}$.  These effects are
+important for hydrogen at considerably lower densities due to its greater
+abundance.  Additionally, continuum transfer affects the ionization and
+thermal equilibrium of the gas at all densities.
+
+\section{Averaging levels into terms  }
+
+\subsection{Collision strengths }
+
+Often cases are encountered in which a multiplet consisting of many lines
+can be treated as the equivalent two-level atom with a single transition.
+In these cases it is necessary to define ``effective'' collision strengths
+and transition probabilities.
+If the collision strength from an individual
+level $i$ is ${\Upsilon _i}$, and the statistical weights of the level and term are $g_i$ and $g_{tot}$
+respectively, then the effective collision strength ${\Upsilon _{eff}}$
+is related to ${\Upsilon _i}$  by a simple argument.
+The collision rate
+$q_i$ is proportional to the ratio
+\begin{equation}
+{n_i}\,{q_i} \propto {n_i}\frac{{{\Upsilon _i}}}{{{g_i}}}\quad
+  [\mathrm{s}^{-1}]
+\end{equation}
+so that
+\begin{equation}
+{n_{tot}}\,{q_{tot}} = \sum\limits_i {{n_i}\,{q_i}}  \propto \sum\limits_i
+{{n_i}\frac{{{\Upsilon _i}}}{{{g_i}}}}\quad
+  [\mathrm{s}^{-1}].
+\end{equation}
+In many cases it is valid to assume that the levels within the term are
+populated according to their statistical weight, viz.,
+\begin{equation}
+{n_i} = {n_{tot}}\frac{{{g_i}}}{{{g_{tot}}}}
+\quad  [\mathrm{cm}^{-3}].
+\end{equation}
+Then, the effective collision strength ${\Upsilon _{tot}}$
+is operationally defined by the relations
+\begin{equation}
+{n_{tot}}\frac{{{\Upsilon _{tot}}}}{{{g_{tot}}}} = \sum\limits_i
+{{n_i}\frac{{{\Upsilon _i}}}{{{g_i}}} = \,} {n_{tot}}\sum\limits_i
+{\frac{{{g_i}}}{{{g_{tot}}}}\frac{{{\Upsilon _i}}}{{{g_i}}}}  =
+{n_{tot}}\,\frac{{\sum\limits_i {{\Upsilon _i}} }}{{{g_{tot}}}}.
+\end{equation}
+So, the effective collision strength of the entire multiplet is
+\begin{equation}
+{\Upsilon _{tot}} = \sum\limits_i {{\Upsilon _i}}.
+\end{equation}
+
+\subsection{Transition probabilities }
+
+Under similar circumstances an effective transition probability
+$A_{eff}$ may be defined as
+\begin{equation}
+{n_{tot}}{\kern 1pt} {A_{tot}} = \sum\limits_i {{n_i}{A_i}}  =
+{n_{tot}}\sum\limits_i {\frac{{{g_i}}}{{{g_{tot}}}}{A_i}}
+\end{equation}
+so that the effective transition probability is
+\begin{equation}
+{A_{tot}} = \sum\limits_i {\frac{{{g_i}}}{{{g_{tot}}}}{A_i}}.
+\end{equation}
+So collision strengths are added, and transition probabilities averaged.
+
+\section{Level populations with collisions }
+
+Both escape and destruction probabilities enter in the calculation of
+a level population and line emissivity.
+The escape probability $P_{u,l}$ is
+the probability that a line photon will escape in a single scattering
+(\citealp{Elitzur1983}; \citealp{Elitzur1984}).
+The destruction probability $D_{u,l}$ is
+the probability that a line photon will be destroyed in a single scattering.
+
+The line de-excitation rate is given by
+\begin{equation}
+{\left( {\frac{{d{n_u}}}{{dt}}} \right)_{rad}} = {n_u}{A_{u,l}}\left(
+{{P_{u,l}} + {D_{u,l}}} \right) - {n_l}{A_{u,l}}\eta {\gamma _{u,l}} +
+{n_u}{C_{ul}} - {n_l}{C_{lu}}\quad
+ [\mathrm{cm}^{-3} \mathrm{s}^{-1}]
+\end{equation}
+where $\eta$ is the photon occupation number of the attenuated external radiation
+field, $C$ is the collision rate (s$^{-1}$), and $\gamma _{u,l}$
+is the fluorescence probability.
+
+The net emission from a transition between the level $n$ to a lower level
+$l$ and escaping to the surface is then
+\begin{equation}
+4\pi \,j(n,l) = {n_n}{A_{n,l}}\;h{\nu _{n,l}}\;{P_{u,l}}({\tau
+_{n,l}})\;f(r)\quad
+ [\mathrm{erg~cm}^{-3} \mathrm{s}^{-1}]
+\end{equation}
+where $f(r)$ is the filling factor.
+The total emission from the gas is then
+\begin{equation}
+e(n,l) = \int_V {{n_n}{A_{n,l}}\;h{\nu _{n,l}}\;{P_{u,l}}({\tau
+_{n,l}})\;f(r)} \,dV\quad
+ [\mathrm{erg~cm}^{-2} \mathrm{s}^{-1} \mathrm{or\, erg\, s}^{-1}]
+\end{equation}
+depending on whether the intensity or luminosity case is chosen.
+The local
+cooling rate (erg cm$^{-3}$~s$^{-1}$) due to the line is related
+to the level populations by
+\begin{equation}
+{\Lambda _{u,l}} = \left( {{n_l}{C_{l,u}} - {n_u}{C_{u,l}}}
+\right)\;f(r)\;h\nu \quad
+ [\mathrm{erg~cm}^{-3} \mathrm{s}^{-1}]
+\end{equation}
+and the local flux (cm$^{-2}$ s$^{-1}$) of ``on-the-spot'' (OTS)
+photons caused by
+line loss (used to compute heating or photoionization rates
+for the sources of the background opacity) is
+\begin{equation}
+{\varphi _{OTS}} = \frac{{{n_u}{A_{u,l}}{D_{u,l}}({X_c})}}{{\sum {{\kappa
+_c}\;n(c)} }}.
+\end{equation}
+
+The ratio of inward to total line intensity is then given by
+\begin{equation}
+\frac{{4\pi \,j(in)}}{{4\pi \,j(total)}} = \frac{{{P_{u,l}}\left( \tau
+\right)}}{{\left[ {{P_{u,l}}\left( \tau  \right) + {P_{u,l}}\left( {T -
+\tau } \right)} \right]}}.
+\end{equation}

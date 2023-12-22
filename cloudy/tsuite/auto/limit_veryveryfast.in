@@ -1,0 +1,90 @@
+title very fast simulation for Purify/valgrind
+#
+# commands controlling continuum =========
+table agn
+ionization parameter -2
+#
+no file opacity
+set dr 0 
+#
+# commands for density & abundances =========
+hden 9
+init file "hheonly.ini"
+element oxygen on  
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+no level 2
+constant temperature 4
+database h-like levels small
+database he-like levels small
+#
+# commands controlling output    =========
+save overview "limit_veryveryfast.ovr"
+save performance "limit_veryveryfast.per"
+save monitors last "limit_veryveryfast.asr"
+save dr last "limit_veryveryfast.dr"
+#
+# commands giving the monitors    =========
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminoisty "ca b" 4861.32A -6.772
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminoisty "ca a" 4861.32A -7.063
+## 
+## >>chng 06 nov 29, from -2.733 to -2.857, Badnell DR turned on
+## >>chng 11 jul 12, from -2.857 to -3.123, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -3.123 to -2.983, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -2.983 to -3.041, update DR suppression
+## >>chng 15 may 14, from -3.041 to -2.982, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -2.982 to -3.036, update DR suppression in r10716
+## >>chng 16 dec 20, from -3.036 to -2.972, add secondary autoionization to DR suppression
+monitor ionization oxygen 2 -2.972
+## 
+## >>chng 06 nov 29, from -0.762 to -0.817, Badnell DR turned on
+## >>chng 11 jul 12, from -0.817 to -0.9861, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.9861 to -0.9014, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -0.9014 to -0.9596, update DR suppression
+## >>chng 15 may 14, from -0.9596 to -0.9023, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -0.9023 to -0.9569, update DR suppression in r10716
+## >>chng 16 dec 20, from -0.9569 to -0.897, add secondary autoionization to DR suppression
+monitor ionization oxygen 3 -0.897
+## 
+## >>chng 06 nov 29, from -0.179 to -0.158, Badnell DR turned on
+## >>chng 11 jul 12, from -0.158 to -0.1331, enable fit to Badnell DR suppression
+monitor ionization oxygen 4 -0.1331
+## 
+## >>chng 06 nov 29, from -0.810 to -0.841, Badnell DR turned on
+## >>chng 11 jul 12, from -0.841 to -0.8155, enable fit to Badnell DR suppression
+## >>chng 12 nov 01, from -0.8155 to -0.7954, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -0.7954 to -0.8156, BUGFIX, largely undo r6703
+monitor ionization oxygen 5 -0.8156
+## 
+## >>chng 06 feb 03, from -2.132 to -2.153, guess dr to Badnell mean
+## >>chng 06 nov 29, from -2.153 to -2.194, Badnell DR turned on
+## >>chng 11 jul 12, from -2.194 to -2.165, enable fit to Badnell DR suppression
+## >>chng 12 nov 01, from -2.165 to -2.134, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -2.134 to -2.162, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -2.162 to -2.141, update DR suppression
+monitor ionization oxygen 6 -2.141
+# 
+# limit_veryveryfast
+# class limit   
+# ========================================
+# 
+
+This is meant to be a very fast calculation to 
+use when running extensive debug-enabled runtimes.
+
+

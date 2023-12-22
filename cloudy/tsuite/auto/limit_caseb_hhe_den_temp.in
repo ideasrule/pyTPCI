@@ -1,0 +1,45 @@
+title Test model H and He atoms in Case B limit
+# grid over nebular range of density and temperature to check Case B H & He
+#
+# commands controlling continuum =========
+# create H+ and He+
+laser 2 Ryd
+ionization parameter -2
+#
+# commands for density & abundances =========
+init "hheonly.ini"
+hden 2. vary
+grid 2 6 2 ncpus 4
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+print line precision 5
+database he-like element helium resolved levels 10
+database h-like element hydrogen resolved levels 15
+no scattering escape
+case b hummer no Pdest no photoionization
+constant temperature 4. vary
+grid 5000K to 20000K step 5000K linear
+#
+# commands controlling output    =========
+database H-like print levels
+save grid "limit_caseb_hhe_den_temp.grd"
+save overview "limit_caseb_hhe_den_temp.ovr"
+save performance "limit_caseb_hhe_den_temp.per"
+save monitors "limit_caseb_hhe_den_temp.asr"
+# 
+# commands giving the monitors    =========
+monitor Case B H-like  Hydrogen error 0.15 range 1000A to 40000A
+# Case B helium doesn't work well with Hummer option
+# monitor Case B He-like Helium   error 0.15 range 1000A to 15000A faint -2.2
+# 
+# limit_caseb_hhe_den_temp.in 
+# class limit 
+# ========================================
+# 
+
+this tests the predicted H I and He I spectra in the Case B limit.
+The grid is over both density and temperature.
+

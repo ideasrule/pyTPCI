@@ -1,0 +1,49 @@
+# optimize for 'nearby galaxy'
+table agn
+ionization parameter -5
+extinguish 24
+hden 2.27 vary
+#
+cosmic ray background
+cmb
+#
+stop CO column density 18.808 
+stop temperature off
+#
+iterate
+#
+## >>chng 13 aug 15, wl from 2600m to 2600.05m, wl precision now set 6 sig fig
+normalize to "CO  " 2600.05m
+set save prefix "optimize_leiden12_ng"
+save leiden ".lei" last
+save overview ".ovr" last
+save dr ".dr" last
+# optimize intensity -15.488 0.10
+optimize lines
+## >>chng 13 aug 15, wl from 2600m to 2600.05m, wl precision now set 6 sig fig
+CO    2600.05m	1.000	0.10
+## >>chng 13 aug 16, wl from 1300m to 1300.05m, wl precision now set to 6 sig-fig
+CO    1300.05m	7.169	0.10
+## >>chng 13 aug 16, wl from 866.7m to 866.727m, wl precision now set to 6 sig-fig
+CO   866.727m	19.354	0.20
+## >>chng 13 aug 16, wl from 650.1m to 650.074m, wl precision now set to 6 sig-fig
+CO   650.074m	44.615	0.30
+## >>chng 13 aug 16, wl from 520.1m to 520.089m, wl precision now set to 6 sig-fig
+CO   520.089m	70.462	0.30
+## >>chng 13 aug 16, wl from 433.4m to 433.438m, wl precision now set to 6 sig-fig
+CO   433.438m	59.692	0.30
+## >>chng 13 aug 16, wl from 371.5m to 371.549m, wl precision now set to 6 sig-fig
+CO   371.549m	74.462	0.30
+## >>chng 13 aug 16, wl from 325.1m to 325.137m, wl precision now set to 6 sig-fig
+CO   325.137m	85.231	0.30
+## >>chng 13 aug 16, wl from 289m to 289.041m, wl precision now set to 6 sig-fig
+CO     289.041m	81.538	0.30
+## >>chng 13 aug 16, wl from 260.2m to 260.169m, wl precision now set to 6 sig-fig
+CO   260.169m	99.385	0.30
+## >>chng 13 aug 16, wl from 236.5m to 236.549m, wl precision now set to 6 sig-fig
+CO   236.549m	46.462	0.30
+## >>chng 13 aug 16, wl from 216.9m to 216.868m, wl precision now set to 6 sig-fig
+CO   216.868m	64.923	0.30
+## >>chng 13 aug 15, wl from 200.2m to 200.218m, wl precision now set 6 sig fig
+CO   200.218m	58.769	0.30
+end of lines

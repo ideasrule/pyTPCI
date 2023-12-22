@@ -1,0 +1,84 @@
+\documentclass[12pt]{book}
+% !TEX root = hazy3.tex
+%\includeonly{isoseq}
+%\includeonly{hydroiso}
+%\includeonly{helikeiso}
+%\includeonly{molecules}
+%\includeonly{dheavy}
+%\includeonly{dtherm}
+%\includeonly{dgrain}
+%\includeonly{dother}
+%\includeonly{refer}
+
+\input{../head_info}
+\input{../common/macros}
+\input{../variables}
+
+\begin{document}
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  title page
+\begin{titlepage}
+\begin{center}
+
+\Huge
+Hazy\\
+\Large
+\emph{a brief introduction to \Cloudy\ C\VERSION}\\
+\LARGE
+3. Physics
+
+\begin{figure}
+\begin{center}
+\includegraphics[clip=on,keepaspectratio,scale=3.5]{he_like_atom.jpg}
+\end{center}
+\end{figure}
+
+\vspace{15 mm }
+\LARGE
+\emph{Cloudy \& Associates} \\
+\Large
+\href{http://www.nublado.org}{www.nublado.org} \\
+\normalsize
+\today
+\end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% page with one figure and boilerplate text
+\clearpage
+\input{../frontis_common}
+\vspace{5mm}
+\noindent
+{\small {\em Cover image:}
+He-like atomic structure for the $n=2, 3$ configurations.
+Figure 1 from \citet{Chakraborty2020b}.
+}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% table of contents page - only include top two levels
+\tableofcontents
+\listoffigures
+\listoftables
+
+\clearpage
+\mainmatter
+
+% proofed 1 - read over latex file, remove dead xrefs,
+% include figures, make xregs to figs and tables live
+% NB the equations have not been checked
+\include{isoseq}   %proof 1
+\include{hydroiso} %proof 1
+\include{helikeiso}%proof 1
+\include{molecules}%proof 1
+\include{dheavy}   %proof 1
+\include{dtherm}   %proof 1
+\include{dgrain}   %proof 1
+\include{dother}   %proof 1
+\backmatter
+\bibliographystyle{plainnat}
+\bibliography{../common/bibliography2}
+
+\end{document} 

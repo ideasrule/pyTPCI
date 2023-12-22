@@ -1,0 +1,346 @@
+title FeII emission in typical intermediate density photoionzied cloud
+#
+# commands controlling continuum =========
+black 5e5K
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden 8
+element iron abundance 2
+element iron ionization -7 0 -7
+#
+# commands controlling geometry  =========
+stop thickness 5
+#
+# other commands for details     =========
+constant temperature 4
+species "Fe+" levels=all
+iterate 3
+#
+# commands controlling output    =========
+print line precision 6
+print lines column 
+print line inward
+print line sort wavelength
+print line faint 0.1
+normalize "Fe 2b" 5270
+set save prefix "feii_t4n8_rt"
+save overview ".ovr"
+save performance ".per"
+save monitors ".asr" last
+save species continuum last ".con" "Fe+" units angstroms
+save species inward continuum last ".cin" "Fe+" units angstroms
+save species outward continuum last ".cout" "Fe+" units angstroms
+save species column density last ".col" "Fe+[:]"
+save species densities last ".pop" "Fe+[:]"
+save species optical depth last ".opt" "Fe+"
+save species lines last ".lin" "Fe+"
+save species bands ".fe2b" "FeII_bands.ini" "Fe+"
+save line emissivity ".ems"
+"Fe 2b" 2797
+"InwdBnd" 2797 
+end of lines
+#
+# commands giving the monitors    =========
+## >>chng 14 jul 01, from 1.454 to 1.656, use same guess values as stout, for missing atomic data
+## >>chng 16 mar 20, from 1.656 to 2.095, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 2.095 to 2.256, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1148 2.256
+##
+## >>chng 09 jun 16, from 0.2364 to 1.179, increase line precision to get correct FeII inward bands
+## >>chng 13 may 06, from 1.179 to -21.78, use Stout/Chianti for Al ions
+## >>chng 13 jun 14, from -21.78 to 1.171, findline fix for mis-identified lines
+## >>chng 14 jul 01, from 1.171 to 1.379, use same guess values as stout, for missing atomic data
+## >>chng 16 mar 20, from 1.379 to 1.816, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 1.816 to 1.98, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 1148 1.98
+##
+## >>chng 10 aug 12, from 0.7699 to 0.7497, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 0.7497 to 1.078, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 1.078 to 1.128, Get strunk closer to stout branch
+## >>chng 16 mar 20, from 1.128 to 1.21, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 1.21 to 2.059, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1212 2.059
+##
+## >>chng 09 jun 16, from -5.114 to 0.4731, increase line precision to get correct FeII inward bands
+## >>chng 10 aug 12, from 0.4731 to 0.4528, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 0.4528 to 0.7815, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 0.7815 to 0.8317, Get strunk closer to stout branch
+## >>chng 16 mar 20, from 0.8317 to 0.9137, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 0.9137 to 1.764, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 1212 1.764
+##
+## >>chng 14 jul 01, from -0.1053 to 0.685, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 0.685 to 0.912, Get strunk closer to stout branch
+## >>chng 16 mar 20, from 0.912 to 0.9581, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 0.9581 to 1.1, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1295 1.1
+##
+## >>chng 09 jun 16, from -1.329 to -0.4034, increase line precision to get correct FeII inward bands
+## >>chng 14 jul 01, from -0.4034 to 0.3924, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 0.3924 to 0.6186, Get strunk closer to stout branch
+## >>chng 16 mar 20, from 0.6186 to 0.6644, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 0.6644 to 0.8023, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 1295 0.8023
+##
+## >>chng 14 jul 01, from 0.9315 to 1.256, use same guess values as stout, for missing atomic data
+## >>chng 16 mar 20, from 1.256 to 1.3, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 1.3 to 1.507, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1365 1.507
+##
+## >>chng 09 jun 16, from -6.295 to 0.639, increase line precision to get correct FeII inward bands
+## >>chng 10 aug 12, from 0.639 to 0.6188, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 0.6188 to 0.962, use same guess values as stout, for missing atomic data
+## >>chng 16 mar 20, from 0.962 to 1.006, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 1.006 to 1.215, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 1365 1.215
+##
+## >>chng 14 jul 01, from 2.75 to 2.792, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 2.792 to 2.848, Get strunk closer to stout branch
+monitor line intensity "Fe 2b" 1485 2.848
+##
+## >>chng 09 jun 16, from -5.384 to -2.094, increase line precision to get correct FeII inward bands
+## >>chng 10 aug 12, from -2.094 to -2.117, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 13 jun 14, from -2.117 to 2.475, findline fix for mis-identified lines
+## >>chng 14 jul 01, from 2.475 to 2.513, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 2.513 to 2.569, Get strunk closer to stout branch
+monitor line intensity "InwdBnd" 1485 2.569
+##
+## >>chng 14 jul 01, from 3.132 to 3.02, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 3.02 to 3.043, Get strunk closer to stout branch
+## >>chng 23 jun 27, from 3.043 to 2.924, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1615 2.924
+##
+## >>chng 09 jun 16, from -2.086 to 2.855, increase line precision to get correct FeII inward bands
+## >>chng 14 jul 01, from 2.855 to 2.741, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 2.741 to 2.763, Get strunk closer to stout branch
+## >>chng 23 jun 27, from 2.763 to 2.652, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 1615 2.652
+##
+## >>chng 10 aug 12, from 2.037 to 2.017, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 2.017 to 1.964, use same guess values as stout, for missing atomic data
+## >>chng 16 mar 20, from 1.964 to 2.006, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 2.006 to 1.977, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1787 1.977
+##
+## >>chng 13 jun 14, from -2.276 to 1.737, findline fix for mis-identified lines
+## >>chng 14 jul 01, from 1.737 to 1.674, use same guess values as stout, for missing atomic data
+## >>chng 16 mar 20, from 1.674 to 1.716, change from Werner model to Stout model for Fe+
+## >>chng 23 jun 27, from 1.716 to 1.689, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 1787 1.689
+##
+## >>chng 10 aug 12, from 2.319 to 2.297, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 2.297 to 2.273, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 2.273 to 2.299, Get strunk closer to stout branch
+## >>chng 23 jun 27, from 2.299 to 2.457, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 1822 2.457
+##
+## >>chng 09 jun 16, from 0.2443 to 2.019, increase line precision to get correct FeII inward bands
+## >>chng 14 jul 01, from 2.019 to 1.976, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 1.976 to 2.002, Get strunk closer to stout branch
+## >>chng 23 jun 27, from 2.002 to 2.163, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 1822 2.163
+##
+## >>chng 23 jun 27, from 4.8 to 4.682, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2355 4.682
+##
+## >>chng 09 jun 15, from 2.418 to 2.393, gradual approach to outer edge
+## >>chng 09 jun 16, from 2.393 to 4.523, increase line precision to get correct FeII inward bands
+## >>chng 23 jun 27, from 4.523 to 4.406, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 2355 4.406
+##
+## >>chng 14 jul 12, from 4.179 to 4.232, Get strunk closer to stout branch
+## >>chng 23 jun 27, from 4.232 to 3.999, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2495 3.999
+##
+## >>chng 09 jun 16, from -3.388 to 3.888, increase line precision to get correct FeII inward bands
+## >>chng 14 jul 12, from 3.888 to 3.944, Get strunk closer to stout branch
+## >>chng 23 jun 27, from 3.944 to 3.709, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 2495 3.709
+##
+## >>chng 10 aug 12, from 3.619 to 3.598, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 3.598 to 3.657, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 3.657 to 3.718, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2695 3.718
+##
+## >>chng 10 aug 12, from 3.342 to 3.309, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 3.309 to 3.368, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 3.368 to 3.435, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 2695 3.435
+##
+## >>chng 12 oct 09, from 4.139 to 4.162, fix CRD esc prob
+monitor line intensity "Fe 2b" 2758 4.162
+##
+## >>chng 10 aug 12, from 3.907 to 3.875, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 12 oct 09, from 3.875 to 3.901, fix CRD esc prob
+monitor line intensity "InwdBnd" 2758 3.901
+##
+## >>chng 10 aug 12, from 2.068 to 2.04, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 2.04 to 2.645, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 2.645 to 2, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2797 2
+##
+## >>chng 09 jun 16, from -2.234 to 1.761, increase line precision to get correct FeII inward bands
+## >>chng 10 aug 12, from 1.761 to 1.741, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 1.741 to 2.355, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 2.355 to 1.7, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 2797 1.7
+##
+## >>chng 10 aug 12, from 3.868 to 3.832, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 12, from 3.832 to 3.858, Get strunk closer to stout branch
+## >>chng 23 jun 27, from 3.858 to 3.621, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 2935 3.621
+##
+## >>chng 10 aug 12, from 3.571 to 3.532, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 12, from 3.532 to 3.558, Get strunk closer to stout branch
+## >>chng 23 jun 27, from 3.558 to 3.329, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 2935 3.329
+##
+## >>chng 10 aug 12, from 2.466 to 2.436, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.436 to 2.95, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4255 2.95
+##
+## >>chng 10 aug 12, from 2.165 to 2.135, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.135 to 2.649, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 4255 2.649
+##
+## >>chng 10 aug 12, from 2.435 to 2.395, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.395 to 2.631, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4558 2.631
+##
+## >>chng 10 aug 12, from 2.134 to 2.094, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.094 to 2.33, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 4558 2.33
+##
+## >>chng 10 aug 12, from 1.136 to 1.114, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 1.114 to 1.149, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.149 to 1.28, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4743 1.28
+##
+## >>chng 09 jun 16, from -2.302 to 0.8272, increase line precision to get correct FeII inward bands
+## >>chng 14 jul 01, from 0.8272 to 0.8476, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 0.8476 to 0.9785, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 4743 0.9785
+##
+## >>chng 23 jun 27, from 1.461 to 1.742, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4855 1.742
+##
+## >>chng 09 jun 16, from -2.361 to 1.157, increase line precision to get correct FeII inward bands
+## >>chng 23 jun 27, from 1.157 to 1.441, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 4855 1.441
+##
+## >>chng 23 jun 27, from 0.9742 to 1.605, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4971 1.605
+##
+## >>chng 09 jun 16, from -6.52 to 0.6697, increase line precision to get correct FeII inward bands
+## >>chng 23 jun 27, from 0.6697 to 1.304, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 4971 1.304
+##
+## >>chng 10 aug 12, from 2.97 to 2.926, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.926 to 2.572, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 4975 2.572
+##
+## >>chng 09 jun 16, from -8.084 to 2.651, increase line precision to get correct FeII inward bands
+## >>chng 10 aug 12, from 2.651 to 2.625, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.625 to 2.271, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 4975 2.271
+##
+## >>chng 10 aug 12, from 2.524 to 2.486, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.486 to 2.674, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5143 2.674
+##
+## >>chng 09 jun 16, from -7.677 to 2.208, increase line precision to get correct FeII inward bands
+## >>chng 10 aug 12, from 2.208 to 2.186, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.186 to 2.373, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 5143 2.373
+##
+## >>chng 10 aug 12, from 2.241 to 2.208, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 23 jun 27, from 2.208 to 2.785, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5318 2.785
+##
+## >>chng 09 jun 16, from -4.485 to 1.926, increase line precision to get correct FeII inward bands
+## >>chng 12 oct 09, from 1.926 to 1.903, fix CRD esc prob
+## >>chng 14 jul 01, from 1.903 to 1.925, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.925 to 2.484, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 5318 2.484
+##
+## >>chng 10 aug 12, from 1.135 to 1.114, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 1.114 to 1.168, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.168 to 1.575, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 5865 1.575
+##
+## >>chng 09 jun 16, from -1.852 to 0.8282, increase line precision to get correct FeII inward bands
+## >>chng 14 jul 01, from 0.8282 to 0.8674, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 0.8674 to 1.274, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 5865 1.274
+##
+## >>chng 14 jul 01, from 2.039 to 1.752, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.752 to 2.209, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 6265 2.209
+##
+## >>chng 14 jul 01, from 1.738 to 1.451, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.451 to 1.908, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 6265 1.908
+##
+## >>chng 10 aug 12, from 1.901 to 1.879, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 1.879 to 2.077, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 2.077 to 2.014, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 6565 2.014
+##
+## >>chng 10 aug 12, from 1.6 to 1.579, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from 1.579 to 1.776, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.776 to 1.713, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 6565 1.713
+##
+## >>chng 14 jul 01, from 1.632 to 1.425, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.425 to 1.901, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 7445 1.901
+##
+## >>chng 14 jul 01, from 1.331 to 1.124, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.124 to 1.601, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 7445 1.601
+##
+## >>chng 10 aug 12, from -1.13 to -1.172, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from -1.172 to -1.078, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from -1.078 to -1.03, Get strunk closer to stout branch
+## >>chng 23 jun 27, from -1.03 to -1.349, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 7785 -1.349
+##
+## >>chng 10 aug 12, from -1.428 to -1.469, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 14 jul 01, from -1.469 to -1.379, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from -1.379 to -1.331, Get strunk closer to stout branch
+## >>chng 23 jun 27, from -1.331 to -1.65, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 7785 -1.65
+##
+## >>chng 14 jul 01, from 1.788 to 1.990, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.990 to 2.3534, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 18890A 2.3534
+##
+## >>chng 09 jun 16, from 0.219 to 1.487 increase line precision to get correct FeII inward bands
+## >>chng 14 jul 01, from 1.487 to 1.6889 , use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from 1.6889 to 2.0524, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 18890A 2.0524
+##
+## >>chng 14 jul 01, from 0.502 to -0.312, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from -0.3120 to 0.1324, update Fe+ model to Smyth+19
+monitor line intensity "Fe 2b" 22000A 0.1324
+##
+## >>chng 14 jul 01, from 0.021 to -0.613, use same guess values as stout, for missing atomic data
+## >>chng 23 jun 27, from -0.613 to -0.1686, update Fe+ model to Smyth+19
+monitor line intensity "InwdBnd" 22000A -0.1686
+##
+#
+# feii_t4.in
+# class function 
+# ========================================
+# 
+
+This model has a very high iron abundance, 100x H, and most Fe is
+in the form of Fe+. it has intermediate density and should produce
+and FeII spectrum something like an AGN.
+ 
+The set line precision 6 increases the number of significant figures
+in the wavelengths for each line.  This is needed to get the right
+FeII inward band.
+
+This has a finite thickness and so tests the RT, line overlap.

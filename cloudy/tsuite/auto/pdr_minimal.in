@@ -1,0 +1,78 @@
+title test physical conditions at the illuminated face of a PDR
+#
+# commands controlling continuum =========
+table draine 50000
+extinguish 24
+#
+# commands for density & abundances =========
+hden 5.5
+element helium abundance -1.00  
+element lithium     off  
+element beryllium   off 
+element boron       off
+element carbon      off
+element oxygen      off
+element fluorine    off 
+element neon        off  
+element sodium      off  
+element magnesium   off  
+element aluminum    off  
+element silicon     off
+element phosphorus  off 
+element sulphur     off
+element chlorine    off  
+element argon       off  
+element potassium   off 
+element calcium     off 
+element scandium    off  
+element titanium    off  
+element vanadium    off  
+element chromium    off  
+element manganese   off  
+element iron        off
+element cobalt      off 
+element nickel      off  
+element copper      off  
+element zinc        off
+#
+# other commands for details     =========
+constant temperature 50 linear
+set dr 1
+stop zone 2
+stop temperature off
+#
+# commands controlling output    =========
+set save prefix "pdr_minimal"
+save performance ".per" last
+save overview ".ovr" last
+save molecules ".mol" last
+save monitors ".asr" last
+save leiden ".lei" last
+save leiden lines ".lin" last
+#
+# commands giving the monitors    =========
+#
+# IF EITHER OF THESE MONITORS NEEDS TO BE ADJUSTED, CHECK THAT THE IONIZATION
+# CONDITIONS IN ZONE 1 AND 2 ARE IN VERY GOOD AGREEMENT!
+#
+## >>chng 19 feb 06, from -1 to -2.999, initial initialization of monitors
+monitor ionization hydrogen 2 -2.999
+## >>chng 19 feb 06, from -1 to -0.8773, initial initialization of monitors
+monitor ionization nitrogen 2 -0.8773
+##
+# pdr_minimal.in
+# class pdr
+# ========================================
+
+This model is derived from the F4 model from the Leiden workshop (Roellig et
+al. 2007, A&A, 467, 187). It has been reduced to a two-zone model in order to
+test the ionization conditions at the face of the PDR. Older versions of the
+code had a bug where the ionization in zone 1 was many dex lower than in zone
+2. The conditions in zone 1 were wrong and should have been similar to the
+conditions in zone 2. Here we test that the code doesn't regress. See also
+ticket #358: https://wiki.nublado.org/ticket/358
+
+The ionization in this sim is produced by continuum pumping of the metastable
+levels of N I, followed by photoionization out of the metastable levels of N I.
+See Ferland et al., 2012, ApJ, 757, 79. So this pumping and ionization mechanism
+is also tested by this sim.

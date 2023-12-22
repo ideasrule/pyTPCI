@@ -1,0 +1,120 @@
+
+==============================================================================
+
+populations, level of ionization, set in hydrolevel,
+form sum of all level populations, this adds up to inverse of HIonFraccom.HIonFrac[ipZ]
+
+==============================================================================
+
+hydrogen lines 
+space for lines is created in HydroCreate, 
+declared in taulines.h
+
+pointers set up in ContCreatePointers
+
+HydroLines[ipZ][[ipHi][ipLo].xxx
+optical depths incremented in tauinc by calling tauchn (just like all other lines)
+loops should be as follows:
+
+for( ipLo=IP1S; ipLo < iso.nLevels[ipSEQUENCE][ipELEMENT]; ipLo++ )
+{
+	for( ipHi=ipLo + 1; ipHi <= nhlevel; ipHi++ )
+	{
+		/* population of lower level rel to ion */
+		HydroLines[ipZ][ipHi][ipLo].xxx = 0.;
+	}
+}
+
+not that loop over all levels is from IP1S to <= nhlevel
+
+main driver is hydrogenic.c
+
+to check whether hydrogenic stages are populated
+		if( dense.IonHigh[ipZ] == ipZ + 2 )
+
+line printed into stack in linset1
+
+two-photon has wavelength of 0
+
+==============================================================================
+
+two photon emission 
+added to continuum in rtdiffuse
+rates stored in hydro.AsHy2nu[ipISO][ipZ][i]
+routines are stored in twophoton.c
+print statement, to print full continuum emission, in ContCreatePointers
+
+==============================================================================
+
+where hlife is defined.  now called iso_sp[ipISO][nelem].st[ipHi].lifetime() 
+this is used to make
+density dependent As in HydroPesc
+line opacity also defined in HydroPesc
+
+==============================================================================
+
+hydrogen continua 
+hydrogenic recombination continua are added to ThroOut.ThrowOut[i] in MakeDiffuse
+but not into active beams there
+
+ots lines and continua
+HydroOTS does ots lines and continua
+
+==============================================================================
+
+temperature limits for main matrix inversion routine:
+thlo.HydTempLimit* (ipZ+1) , set to 1000 in scalar
+changed with hydrogen lowest command
+
+==============================================================================
+
+hydrogen level populations
+phlevl.hn[ipZ][n]
+h.hi h.hii
+
+HydroLines[ipZ][ipHi][ipLo][IPLNPOPL-1]*abund.xIonFracs[ipZ+2][ipZ]
+phlevl.hn[ipZ][n]*abund.xIonFracs[ipZ+2][ipZ]
+
+==============================================================================
+
+case b
+interpolation is done by 
+double atmdat_HS_caseB( 
+/* general utility to read in line emissivities from the Storey & Hummer tables
+ of case B emissivities.  */
+	long int iHi,	/* the principal quantum numbers, . */
+	long int iLo,	/* upper and lower levels in any order*/
+	long int iZ,	/* charge of ion, only 1 and 2 for now*/
+	double TempIn,	/* temperature, must lie within the range of the table,
+						   which depends on 
+						   the ion charge, and is 500 - 30,000K for hydrogen */
+	double DenIn	/* the density and must lie within the range of the table*/
+	);
+
+GetData reads in the two files e1b.d and e2b.d, for H and He
+
+==============================================================================
+
+heating
+HPHeat.HPhotHeat[ipZ][n] has heating per atom in level n, evaluated in hydrophoto
+
+added to total heating in hydrocool
+ground state heating added as term HeatingCom.heating[ipZ][ipZ]
+excited state heating added for all nelem as HeatingCom.heating[1][0] in hydrocool
+
+====================================================================
+photoionization cross sections
+created in createopac and 2s and 2p are independent
+
+===========================================================================
+pointer array index indices
+are set in ContCreatePointers
+
+===========================================================================
+
+these level indices are defined in cddefines.h
+extern const int ipH1s;
+extern const int ipH
+===========================================================================
+2s;
+extern const int ipH2p;

@@ -1,0 +1,55 @@
+title h_caseb_n8 high density case B
+#
+# commands controlling continuum =========
+black body, T = 2.e5 K
+ionization parameter -1
+#
+# commands for density & abundances =========
+hden = 8
+init file="honly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+# this will not affect the main model, but will test CR heating rate
+cosmic ray background
+case b hummer no photoionization no Pdest 
+no scattering escape
+no induced processes (OK)
+constant temperature = 20000
+iterate 
+database h-like resolve levels 20
+#
+# commands controlling output    =========
+save overview "limit_caseb_h_n8.ovr"
+save performance "limit_caseb_h_n8.per"
+save results "limit_caseb_h_n8.rlt"
+save ionizing continuum "limit_caseb_h_n8.cion"
+save monitors "limit_caseb_h_n8.asr"
+#
+## >>chng 11 nov 16, from 0 to 0, adjust newmole monitors
+## >>chng 12 jul 01, from 0 to 0, update Badnell DR to 13-electron iso sequence
+monitor case b h-like element hydrogen 010 range 1000A to 40000A
+## >>chng 11 nov 16, from -18 to -11.21, adjust newmole monitors
+## >>chng 13 aug 20, from -11.21 to -11.28, enable D chem by default
+## >>chng 13 sep 17, from -11.28 to -11.19, D chem off by default
+## >>chng 13 nov 05, from -11.19 to -11.14, convergence branch changes
+monitor csupra -11.14 error 0.1
+#
+# limit_caseb_h_n8.in
+# class limit 
+# ========================================
+# 
+
+This test case compares the predictions of the multi-level hydrogen atom
+with the Storey and Hummer (1995) results.  The set dr command sets the
+zone thickness to 1 cm.  The case b command sets Lyman line optical depths
+to very large values. 
+Checks:
+-	Neutral fractions
+-	H* emissivity
+-	Relative line intensities
+
+high density causes disagreemeent with HS - collisions

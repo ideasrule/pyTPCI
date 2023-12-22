@@ -1,0 +1,13 @@
+17 09 05
+#
+##Column Listing##
+# "TEMP" identifies this as a temperature line.TEMP lines will only appear once unless the temperature range changes
+# Number of temperature values
+# The rest of the TEMP line are temperatures (K)
+#
+# "CS	ELECTRON" identifies this as an electron collision strength line
+# Lower Level
+# Uppder Level
+# The rest are collision strengths which correspond to the temperatures from the nearest TEMP line above.
+*****************
+#Reference

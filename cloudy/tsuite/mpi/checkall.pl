@@ -1,0 +1,1 @@
+../auto/checkall.pl

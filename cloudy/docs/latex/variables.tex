@@ -1,0 +1,125 @@
+%
+% this is a list of the macros the word version of hazy knew about
+% these were dynamic links to the values in the code
+%
+% these have been incorporated in the latex
+% most of the names had underscores and were in ALL CAPS
+% latex does not like this, so CamelCase is used instead
+
+% current version of Cloudy
+\def\VERSION{23} 
+
+% in cddefines.h
+\def\LIMELM{30} % number of elements
+
+% these are in phycon.h
+\def\TEMPLIMITLOW{{$2.8 \K$}}    % lowest allowed temperature
+\def\TEMPLIMITHIGH{{$1.001 \times 10^{10} \K$}}   % highest allowed temperature
+\def\TEMPSTOPDEFAULT{{$4000 \K$}} % default stop temperature
+
+% rfield.h
+\def\emm{{$3.040 \times 10^{-9} \Ryd$}} %low energy limit to continuum in Ryd
+\def\emmmhz{{10~MHz}} %low energy limit to continuum in MHz
+\def\emmcm{{29.98 m}} %low energy limit to continuum in meters
+
+\def\egamry{{$7.354\times 10^6 \Ryd$}} %high energy limit to continuum in Ryd
+\def\egamrymev{{$100 \MeV$}} %high energy limit to continuum in MeV
+
+% feii.h
+% short, long wavelength limits of save feii continuum,
+% and number of cells to break this into
+% changed with set feii continuum command
+
+\def\speciesConWlLo{{1000 \AA}} % short wavelength limit
+\def\speciesConWlHi{{7000 \AA}} % long wavelength limit
+\def\speciesConNbins{{1000}} % number of bins
+
+\def\FeIIfeconwlLo{{1000 \AA}} % short wavelength limit
+\def\FeIIfeconwlHi{{7000 \AA}} % long wavelength limit
+\def\FeIInfecon{{1000}} % number of bins
+
+% default error, changed with MONITOR SET ERROR
+\def\ErrorDefault{{0.05}}
+% default performance monitor, changed with MONITOR SET PERFORMANCE ERROR
+\def\ErrorDefaultPerformance{{0.2}}
+
+%conv.h
+%fraction convergence on iterate to convergence command
+\def\autocv{{0.20}} 
+
+%atmdat.h
+%Default limits for the number of levels to use
+\def\nDefaultPhotoLevelsFe{{25}}
+\def\nDefaultPhotoLevels{{15}}
+\def\nDefaultCollLevelsFe{{100}}
+\def\nDefaultCollLevels{{50}}
+\def\nDefaultMolLevels{{70}}
+\def\nDefaultResLevelsHlike{{10}}
+\def\nDefaultColLevelsHlike{{15}}
+\def\nDefaultResLevelsHlikeall{{5}}
+\def\nDefaultColLevelsHlikeall{{2}}
+%nhlvl	15	default number of levels in H atom
+%nhydro_small_level	10	Number of h levels with small option
+%nhydro_large_level	50	Number of h levels with large option
+%NHYDRO_MAX_LEVEL	400	Largest possible number of H levels
+\def\nHydroMaxLevel{{400}}
+\def\INPUTLINELENGTH{{2000}}
+\def\LabelLenMax{{9}}
+
+% variables above this line have been converted in all three volumes of hazy
+
+% these have not
+%BackgroundT	2.725	Temperature of background
+%BackgroundTError	0.002	Uncertainty in tempeature of background
+%C12_C13_isotope_ratio	30	C12 / C13 isotope ratio
+%capots	1.5	
+%colend	1030 cm-2	
+%colpls	1030 cm-2	
+%colnut	1030 cm-2	
+%cylind	1035 cm	
+%D2H_ratio	1.65  times10-5	Deuterium to hydrogen abundance ratio
+%date	09.02
+%Field giving date in format yy.mm
+%didz	0.15	optical depth at interaction max, used for nextdr
+%ehixray	100 keV	highest energy called "x-ray"
+%EdenError	0.01	error in electron density
+%faint	10-3	
+%flxfnt	10-10	
+%hazy	HAZY	
+%H2_to_H_limit	10-8	Smallest H2/H ratio where large H2 mole computed, %in h2
+%nIterOptim	20	limit to number off iterations, optimizer
+%limfal	20	limit to number of thermal failures
+%limLevelN	20	limit to number of levels in leveln
+%limspc	100	limit to number of continua with table/interpolate
+%limTabD	500	limit to number of pairs in dlaw table command
+%limpar	20	limit to number of parameters to vary
+%line_length	200	limit to length of input line
+%lmhlvl	400	limit to number of levels of H atom
+%lyman_extra	100	Number of extra lyman line in iso atoms
+%ncell	130000	dimension of continuum arrays
+%ndust	500	Limit number of grains bins
+%Ndplot	10	number of plots
+%limelm	30	total number of elements
+%limpun	100	limit to number of save comnd
+%NCOROTATE	20	Default number of CO rotation levels
+%nelemMH	29	number of elem, minus H
+%nend	1400	limit to number of zones, nEndDflt in code
+%nFe2LevN	371	number of levels in large FeII atom
+%n_initial_relax	2	Number of iterations to relax dynamical %calculation
+%NCOLLM	100	Number of column den in optimize cod
+%nlines	106	number of emission lines
+%nobslm	100	limit to number of observations in vary
+%npunlm	100	limit to number of lines in save lines cum struc
+%nrdsum	30	lim to #lines in stoy sum
+%Optim_def_error	0.05	Default error on quantities in optimization %cmnd
+%PressureError	0.01	Largest relative error in pressure
+%PrtTauFnt	0.1	faintest line tau to print
+%Resolution	matched to Cloudy mesh	Resolution for save file contrast
+%rdfalt	1030 cm	default inner radius
+%router	1031 cm	default outer radius
+%toler	0.005	Fractional error in heating-cooling mismatch
+%tsqden	107 cm-3	highest value to print Peimbert analysis of t2
+%vtoler	0.10	default tolerance for optimizer
+%mxstpl	10	number of stop line commands
+%nmaps	20	number of steps in heating cooling map
+%WeakHeatCool	0.05	Faintest heating or cooling agent to save, set %with set WeakHeatCool command

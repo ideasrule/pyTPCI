@@ -1,0 +1,26 @@
+#
+# Created: Oct 21, 2020
+# Author: M. Chatzikos
+#
+
+File hydro_tpnl.dat is a symbolic link to the file that holds the transition
+probabilities for nl-resolved transitions up to a certain principal quantum
+number, n.  By default, the file points to hydro_tpnl_n100.dat, which contains
+data up to n=100.  Data up to n=2000 are also available in hydro_tpnl_n2000.dat.
+To switch between the two, the script hydro_tpnl_switch.pl may be used:
+
+$ ./hydro_tpnl_switch.pl 2000
+ 
+The data for n=2000 are zipped; the script first decompresses the file (to 450 MB),
+and then forces the link file to point to it.
+
+To switch back to the original, the command is:
+
+$ ./hydro_tpnl_switch.pl 100
+
+If you do that and wish to compress the big file again, make sure to use xz
+-- that's the compression the script expects to find.
+
+$ xz hydro_tpnl_n2000.dat
+
+NB NB NB This can take a while.  On my machine, it took about 5 minutes.

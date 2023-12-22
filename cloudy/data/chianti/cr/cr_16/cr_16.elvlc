@@ -1,0 +1,15 @@
+  1 2s2.2p5               2  1 P  1.5  4          0.000       0.000000          0.000       0.000000 
+  2 2s2.2p5               2  1 P  0.5  2      70892.000       0.646015      71647.453       0.652900 
+  3 2s.2p6                2  0 S  0.5  2     937940.000       8.547138     958116.562       8.731001 
+ -1
+%filename: cr_16.elvlc
+%energy levels: Martin, W.C., Sugar, J., Musgrove, A., Dalton, G.R., 1995,
+  NIST Database for Atomic Spectroscopy, Version 1.0, NIST Standard Reference Database 61.
+% theoretical energy levels: extrapolated using S VIII, Ca XII, Fe XVIII, Ni XX.
+%produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+% Enrico Landi 1997
+
+Reference:
+Chianti  2022-02-18
+ -1

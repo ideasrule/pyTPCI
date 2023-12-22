@@ -1,0 +1,21 @@
+    1    2     203252.030      0.000e+00      2.140e-03 
+    1    3      74521.200      0.000e+00      2.700e-07 
+    2    3     117660.900      0.000e+00      8.250e-03 
+    1    4       7263.430      0.000e+00      1.540e-05 
+    2    4       7532.616      0.000e+00      7.234e-02 
+    3    4       8047.836      0.000e+00      1.786e-01 
+    2    5       3119.560      0.000e+00      2.470e+00 
+    3    5       3204.522      0.000e+00      2.620e-02 
+    4    5       5324.757      0.000e+00      2.800e+00 
+ -1
+%filename: cl_4.wgfa
+%observed energy levels: Version 3.0.3 of the NIST online database. http://physics.nist.gov/PhysRefData/ASD/index.html
+%A-values: Mendoza, C. & Zeippen, C.J., 1982, MNRAS, 199, 1025
+% produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+%   Peter Young -  20-Jun-2006
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

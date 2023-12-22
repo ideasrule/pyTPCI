@@ -1,0 +1,82 @@
+title test open geometry 
+##TODO put continuum points - esp pick up two-photon continuum,
+## which should be strong in this model due to low density
+#
+# commands controlling continuum =========
+ionization -2
+blackbody 40000
+#
+# commands for density & abundances =========
+hden 0
+init file "honly.ini"  
+#
+# commands controlling geometry  =========
+stop efrac 0.05 ##stop when 5 percent ionized 
+filling 0.01
+#
+# other commands for details     =========
+diffuse outward
+iterate
+database h-like levels resolved 15
+no level2
+no induced processes (OK) 
+constant temper 4
+#
+# commands controlling output    =========
+# normally will not print out inward parts of lines
+print line inward
+save performance "h_outopen.per"
+save overview  "h_outopen.ovr" last
+save monitors  "h_outopen.asr" last
+save dr  "h_outopen.dr" last
+#
+# commands giving the monitors    =========
+# this is an open geometry, so do not expect H atom to exactly be case B
+# due to Lyman line leakage.  we iterated, so have a good estimate of
+# inward and outward fractions, which we test 
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A > 1. error 0.02 ##>1 due to lyman line leaking
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, change to testing "Ca B" 4861.36A (was "H  1" 4861.36A).
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A = 1 error 0.02 ##no surprise if not unity, since open
+## 
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Inwd" 4861.32A =0.5 error 0.02 
+## 
+## >>chng 01 sep 24, from 24.8 to 23.4, 2s 2p br -> 2nu chng
+## >>chng 03 may 16, from 23.4 to 21.9, h line rt cleanup
+## >>chng 03 may 16, from 21.9 to 20.5, damp pump, 1 per zone
+## >>chng 07 jan 20, from 20.5 to 22.0 e2 bug
+## >>chng 09 jun 26, from 22 to 23.29, remove several dampers
+## >>chng 13 jul 25, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line "H  1" 1215.67A 23.29 ## lya alpha
+## 
+## >>chng 08 may 01 rm lots of redundant tests
+# h_outopen.in
+# class limit 
+# ========================================
+# 
+
+
+This tests the total emission from an open geometry, 
+hydrogen Stromgren sphere,
+using the outward only approximation.  The conservation of the total number
+of ionizing photons, and the emitted spectrum, are all checked.
+
+

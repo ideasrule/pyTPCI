@@ -1,0 +1,7097 @@
+{
+ "li_1" : {
+  "element" : "li",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-11-08"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ]
+    }
+   }
+  },
+ "be_1" : {
+  "element" : "be",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "be_2" : {
+  "element" : "be",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-11-08"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ]
+    }
+   }
+  },
+ "b_1" : {
+  "element" : "b",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ]
+    }
+   }
+  },
+ "b_2" : {
+  "element" : "b",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "b_3" : {
+  "element" : "b",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "c_1" : {
+  "element" : "c",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1987JPhB...20.2553J",
+       "name" : "Johnson, C. T., Burke, P. G., & Kingston, A. E. 1987, J. Phys. B, 20, 2553"
+      },
+      {
+       "bibcode" : "1983IAUS..103..143M",
+       "name" : "Mendoza, C. 1983, in IAU Symp. 103, Planetary refercon Nebulae, ed. D.R. Flower, (Dordrecht, Holland: D. Reidel Publishing Co.), 143."
+      },
+      {
+       "bibcode" : "2007ApJ...654.1171A",
+       "name" : "Abrahamsson,+ 2007  "
+      },
+      {
+       "bibcode" : "1990A&A...236..515R",
+       "name" : "Roueff, E. & Le Bourlot, J. 1990, A&A, 236, 515"
+      },
+      {
+       "bibcode" : "1991JPhB...24.2487S",
+       "name" : "Schroder, K., et al. 1991, J. Phys.B, 24, 2487"
+      },
+      {
+       "bibcode" : "1991JPhB...24.2343S",
+       "name" : "Staemmler, V., & Flower, D. R. 1991, J. Phys. B, 24, 2343"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "c_2" : {
+  "element" : "c",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2012ApJS..203...13G",
+       "name" : "Goldsmith, P.F., Langer, W.D., Pineda, J.L., & Velusamy, T. 2012, ApJS, 203, 13"
+      },
+      {
+       "bibcode" : "2014ApJ...780..183W",
+       "name" : "Wiesenfeld "
+      },
+      {
+       "bibcode" : "2008A&A...486..629T",
+       "name" : "Tayal, S. S. 2008, A&A, 486, 629"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "c_3" : {
+  "element" : "c",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-11-08"
+      },
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ]
+    }
+   }
+  },
+ "c_4" : {
+  "element" : "c",
+  "ion" : "4",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "n_1" : {
+  "element" : "n",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2006ApJS..163..207T",
+       "name" : "Tayal, S. S. 2006, ApJS, 163, 207"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-12-05"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2004ADNDT..87....1F",
+       "name" : "Froese Fischer, C. & Tachiev, G. 2004, ADNDT, 87, 1"
+      },
+      {
+       "name" : "NIST  2013-12-05"
+      }
+     ]
+    }
+   }
+  },
+ "n_2" : {
+  "element" : "n",
+  "ion" : "2",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "n_3" : {
+  "element" : "n",
+  "ion" : "3",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2017-10-05"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2017-10-05"
+      }
+     ]
+    }
+   }
+  },
+ "n_4" : {
+  "element" : "n",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2017JPhB...50f5203F"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      },
+      {
+       "bibcode" : "2017JPhB...50f5203F"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2017JPhB...50f5203F"
+      }
+     ]
+    }
+   }
+  },
+ "n_5" : {
+  "element" : "n",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-12-05"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-12-05"
+      }
+     ]
+    }
+   }
+  },
+ "o_1" : {
+  "element" : "o",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1998MNRAS.293L..83B",
+       "name" : "Bell, K. L., Berrington, K. A., & Thomas, M. R. J. 1998, MNRAS, 293, L83"
+      },
+      {
+       "bibcode" : "2007A&A...462..781B",
+       "name" : "Barklem, P.S. 2007, A&A, 462, 781"
+      },
+      {
+       "bibcode" : "2007ApJ...654.1171A",
+       "name" : "Abrahamsson, E., Krems, R. V., & Dalgarno, A. 2007, ApJ, 654, 1171"
+      },
+      {
+       "bibcode" : "2006ApJ...647.1531K",
+       "name" : "Krems, R. V., Jamieson, M. J., & Dalgarno, A. 2006, ApJ, 647, 1531"
+      },
+      {
+       "bibcode" : "1987MNRAS.228..101M",
+       "name" : "Monteiro, T. S., & Flower, D. R. 1987, MNRAS, 228, 101"
+      },
+      {
+       "bibcode" : "1992JPhB...25..285J",
+       "name" : "Jaquet et al. 1992, J.Phys.B, 25, 285"
+      },
+      {
+       "bibcode" : "1990A&A...231..499P",
+       "name" : "Pequignot, D. 1990, A&A, 231, 499"
+      },
+      {
+       "bibcode" : "1992JPhB...25.5461W",
+       "name" : "Wang, S., & McConkey, J. W. 1992, J Phys B, 25, 5461"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-01-09"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-01-09"
+      }
+     ]
+    }
+   }
+  },
+ "o_2" : {
+  "element" : "o",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2009MNRAS.397..903K",
+       "name" : "Kisielius, R., Storey, P. J., Ferland, G. J., & Keenan, F. P.,2009, MNRAS, 397, 903"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-01-26"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2004ADNDT..87....1F",
+       "name" : "Froese Fischer, C., & Tachiev, G. 2004, At. Data Nucl. Data Tables, 87, 1"
+      },
+      {
+       "name" : "NIST  2014-01-26"
+      }
+     ]
+    }
+   }
+  },
+ "o_3" : {
+  "element" : "o",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1983ApJS...52..387A",
+       "name" : "Aggarwal, K. M. 1983, ApJSS, 52, 387"
+      },
+      {
+       "bibcode" : "1985A&A...146..149A",
+       "name" : "Aggarwal, K. M. 1985, A&A, 146, 149"
+      },
+      {
+       "bibcode" : "1993ADNDT..54..133B",
+       "name" : "Bhatia, A. K., Kastner, S.O. 1993, ADNDT, 54, 133"
+      },
+      {
+       "bibcode" : "1994A&AS..103..273L",
+       "name" : "Lennon, D. J., & Burke, V. M. 1994, A&ASS, 103, 273"
+      },
+      {
+       "bibcode" : "2014MNRAS.441.3028S"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST"
+      },
+      {
+       "bibcode" : "1997A&AS..123..159G",
+       "name" : "Galavis, M. E., Mendoza, C., Zeippen, C. J. 1997, A&AS, 123, 159"
+      },
+      {
+       "bibcode" : "2000MNRAS.312..813S",
+       "name" : "Storey, P. J., & Zeippen, C. J. 2000, MNRAS, 312, 813"
+      },
+      {
+       "bibcode" : "2001CaJPh..79..955T",
+       "name" : "Tachiev, G., & Froese Fischer, C. 2001, Canadian Journal of Physics, 79, 955"
+      }
+     ]
+    }
+   }
+  },
+ "o_5" : {
+  "element" : "o",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      },
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ]
+    }
+   }
+  },
+ "o_6" : {
+  "element" : "o",
+  "ion" : "6",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "f_2" : {
+  "element" : "f",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1994A&AS..108....1B",
+       "name" : "Butler, K., & Zeippen, C.J., 1994, A&AS, 108, 1"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "f_3" : {
+  "element" : "f",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "f_4" : {
+  "element" : "f",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1994A&AS..103..273L",
+       "name" : "Lennon, D.J. Burke, V.M. 1994, A&AS, 103, 273"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "f_5" : {
+  "element" : "f",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "f_6" : {
+  "element" : "f",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      },
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A%26A...566A.104F"
+      }
+     ]
+    }
+   }
+  },
+ "f_7" : {
+  "element" : "f",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ne_1" : {
+  "element" : "ne",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ne_2" : {
+  "element" : "ne",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2001JPhB...34.4401G",
+       "name" : "Griffin,D.C., Mitnik,D.M. & Badnell, N. R.,2001,JPhB,34,4401"
+      },
+      {
+       "bibcode" : "2019ApJ...881....3W"
+      },
+      {
+       "bibcode" : "2017MNRAS.469.1225W"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ne_3" : {
+  "element" : "ne",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2011JPhB...44q5206M",
+       "name" : "McLaughlin, B. M., et al. 2011, J Phys. B, 44, 175206"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST"
+      },
+      {
+       "bibcode" : "2011JPhB...44q5206M",
+       "name" : "McLaughlin, B. M., et al. 2011, J Phys. B, 44, 175206"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2011JPhB...44q5206M",
+       "name" : "McLaughlin, B. M., et al. 2011, J Phys. B, 44, 175206"
+      }
+     ]
+    }
+   }
+  },
+ "ne_4" : {
+  "element" : "ne",
+  "ion" : "4",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ne_5" : {
+  "element" : "ne",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ne_7" : {
+  "element" : "ne",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ne_8" : {
+  "element" : "ne",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "na_1" : {
+  "element" : "na",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "name" : "Verner, private communication"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "na_2" : {
+  "element" : "na",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "na_3" : {
+  "element" : "na",
+  "ion" : "3",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "na_4" : {
+  "element" : "na",
+  "ion" : "4",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "na_5" : {
+  "element" : "na",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "na_6" : {
+  "element" : "na",
+  "ion" : "6",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "na_7" : {
+  "element" : "na",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "na_8" : {
+  "element" : "na",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "na_9" : {
+  "element" : "na",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mg_1" : {
+  "element" : "mg",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2012A&A...541A..80B",
+       "name" : "Barklem, P.S., Belyaev, A.K., Guitou, M., Feautrier, N. 2012, A&A, 541, A80"
+      },
+      {
+       "bibcode" : "2015A&A...579A..53O",
+       "name" : "Osorio, Y., Barklem, P. S., Lind, K., et al. 2015, A&A, 579, A53"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2017-10-09"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2017-10-09"
+      }
+     ]
+    }
+   }
+  },
+ "mg_2" : {
+  "element" : "mg",
+  "ion" : "2",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mg_3" : {
+  "element" : "mg",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2010A&A...518A..64L",
+       "name" : "Liang, G. Y., & Badnell, N. R. 2010, A&A, 518, 64"
+      },
+      {
+       "name" : "NIST 2013-09-07"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "mg_4" : {
+  "element" : "mg",
+  "ion" : "4",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mg_5" : {
+  "element" : "mg",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mg_6" : {
+  "element" : "mg",
+  "ion" : "6",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mg_7" : {
+  "element" : "mg",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mg_8" : {
+  "element" : "mg",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mg_9" : {
+  "element" : "mg",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mg_10" : {
+  "element" : "mg",
+  "ion" : "10",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2011A&A...528A..69L"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2018-01-09"
+      },
+      {
+       "bibcode" : "2011A%26A...528A..69L"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2011A&A...528A..69L"
+      }
+     ]
+    }
+   }
+  },
+ "al_1" : {
+  "element" : "al",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2017-10-09"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2017-10-09"
+      }
+     ]
+    }
+   }
+  },
+ "al_2" : {
+  "element" : "al",
+  "ion" : "2",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "al_3" : {
+  "element" : "al",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2009A%26A...500.1263L"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2018-01-13"
+      },
+      {
+       "bibcode" : "2009A%26A...500.1263L"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2009A%26A...500.1263L"
+      }
+     ]
+    }
+   }
+  },
+ "al_4" : {
+  "element" : "al",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "al_5" : {
+  "element" : "al",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "al_6" : {
+  "element" : "al",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1994A&AS..108....1B",
+       "name" : "Butler, K., & Zeippen, C. J. 1994, A&AS, 108, 1"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-05-24"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-05-24"
+      }
+     ]
+    }
+   }
+  },
+ "al_7" : {
+  "element" : "al",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "al_8" : {
+  "element" : "al",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "al_9" : {
+  "element" : "al",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "al_10" : {
+  "element" : "al",
+  "ion" : "10",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "al_11" : {
+  "element" : "al",
+  "ion" : "11",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "si_1" : {
+  "element" : "si",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1989ApJ...342..306H",
+       "name" : "Hollenbach, D. & McKee, C.F. 1989, ApJ, 342, 306"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "si_2" : {
+  "element" : "si",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014MNRAS.442..388A",
+       "name" : "Aggarwal, K.M., & Keenan, F. 2014, MNRAS, 442, 388"
+      },
+      {
+       "bibcode" : "2005ApJ...620..537B",
+       "name" : "Barinovs, G., van Hemert, M., Krems, R. & Dalgarno, A. 2005, ApJ, 620, 537"
+      },
+      {
+       "bibcode" : "2016MNRAS.455.3405L"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-08-01"
+      },
+      {
+       "bibcode" : "2016MNRAS.455.3405L"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2016MNRAS.455.3405L"
+      }
+     ]
+    }
+   }
+  },
+ "si_3" : {
+  "element" : "si",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., et al. 2014, A&A, 572, 115 "
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., et al. 2014, A&A, 572, 115 "
+      },
+      {
+       "name" : "NIST"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "1983PhRvA..27.3040K",
+       "name" : "Kwong, H. S., et al. 1983, Phys. Rev. A, 27, 3040"
+      },
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., et al. 2014, A&A, 572, 115 "
+      }
+     ]
+    }
+   }
+  },
+ "si_4" : {
+  "element" : "si",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2009A&A...500.1263L",
+       "name" : "Liang, G. Y., Whiteford, A. D., & Badnell, N. R. 2009b, A&A, 500, 1263"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "si_5" : {
+  "element" : "si",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "si_6" : {
+  "element" : "si",
+  "ion" : "6",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "si_7" : {
+  "element" : "si",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1994A&AS..108....1B",
+       "name" : "Butler, K., & Zeippen, C.J. 1994, A&AS, 108, 1"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-05-24"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-05-24"
+      }
+     ]
+    }
+   }
+  },
+ "si_8" : {
+  "element" : "si",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "si_9" : {
+  "element" : "si",
+  "ion" : "9",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1994A&AS..103..273L",
+       "name" : "Lennon, D.J., & Burke, V.M. 1994, A&AS, 103, 273"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "si_10" : {
+  "element" : "si",
+  "ion" : "10",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "si_11" : {
+  "element" : "si",
+  "ion" : "11",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "si_12" : {
+  "element" : "si",
+  "ion" : "12",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "p_1" : {
+  "element" : "p",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ]
+    }
+   }
+  },
+ "p_2" : {
+  "element" : "p",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2004ApJS..150..465T"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "p_3" : {
+  "element" : "p",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1970RSPSA.318..531K",
+       "name" : "Krueger, T.K., and Czyzak, S.J., 1970, Proc Roy Soc London A, 318, 531"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "p_4" : {
+  "element" : "p",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "p_5" : {
+  "element" : "p",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "p_6" : {
+  "element" : "p",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "p_7" : {
+  "element" : "p",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "p_8" : {
+  "element" : "p",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "p_9" : {
+  "element" : "p",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "p_12" : {
+  "element" : "p",
+  "ion" : "12",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "p_13" : {
+  "element" : "p",
+  "ion" : "13",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_1" : {
+  "element" : "s",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1989ApJ...342..306H",
+       "name" : "Hollenbach, D. & McKee, C.F. 1989, ApJ, 342, 306"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "s_2" : {
+  "element" : "s",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2010ApJS..188...32T"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST Data 13-2-28"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014ApJ...780...76K"
+      }
+     ]
+    }
+   }
+  },
+ "s_3" : {
+  "element" : "s",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2012ApJ...750...65H",
+       "name" : "Hudson, C.E., Ramsbottom, C.A., Scott, M.P. 2012, ApJ, 750, 65"
+      }
+     ],
+     "energy" : [],
+     "trans" : [
+      {
+       "bibcode" : "2006ADNDT..92..607F",
+       "name" : "Froese Fischer, C., Tachiev, G., Irimia, A. 2006, ADNDT, 92, 607"
+      },
+      {
+       "bibcode" : "1997ADNDT..67..331T",
+       "name" : "Tayal, S.S. 1997, ADNDT, 67, 331"
+      },
+      {
+       "bibcode" : "2009JPCRD..38..171P",
+       "name" : "Podobedova, L.I., Kelleher, D.E., Wiese, W.L. 2009, J.Phys.Chem.Ref.Data, 38, 171"
+      },
+      {
+       "bibcode" : "1995ApJ...451L..41H",
+       "name" : "Heise, C., Smith, P.L., Calamai, A.G. 1995, ApJ, 451, 41"
+      }
+     ]
+    }
+   }
+  },
+ "s_4" : {
+  "element" : "s",
+  "ion" : "4",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_5" : {
+  "element" : "s",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A%26A...572A.115F"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2018-01-12"
+      },
+      {
+       "bibcode" : "2014A%26A...572A.115F"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A%26A...572A.115F"
+      }
+     ]
+    }
+   }
+  },
+ "s_6" : {
+  "element" : "s",
+  "ion" : "6",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_7" : {
+  "element" : "s",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_8" : {
+  "element" : "s",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_9" : {
+  "element" : "s",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_10" : {
+  "element" : "s",
+  "ion" : "10",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_11" : {
+  "element" : "s",
+  "ion" : "11",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_12" : {
+  "element" : "s",
+  "ion" : "12",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_13" : {
+  "element" : "s",
+  "ion" : "13",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "s_14" : {
+  "element" : "s",
+  "ion" : "14",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cl_1" : {
+  "element" : "cl",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1989ApJ...342..306H",
+       "name" : "Hollenbach, D. & McKee, C.F. 1989, ApJ, 342, 306"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "cl_2" : {
+  "element" : "cl",
+  "ion" : "2",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cl_3" : {
+  "element" : "cl",
+  "ion" : "3",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cl_4" : {
+  "element" : "cl",
+  "ion" : "4",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cl_5" : {
+  "element" : "cl",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cl_6" : {
+  "element" : "cl",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST"
+      },
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ]
+    }
+   }
+  },
+ "cl_7" : {
+  "element" : "cl",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2009A&A...500.1263L",
+       "name" : "Liang, G. Y., Whiteford, A. D., & Badnell, N. R. 2009, A&A, 500, 1263"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2009A&A...500.1263L",
+       "name" : "Liang, G. Y., Whiteford, A. D., & Badnell, N. R. 2009, A&A, 500, 1263"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2009A&A...500.1263L",
+       "name" : "Liang, G. Y., Whiteford, A. D., & Badnell, N. R. 2009, A&A, 500, 1263"
+      }
+     ]
+    }
+   }
+  },
+ "cl_8" : {
+  "element" : "cl",
+  "ion" : "8",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2010A&A...518A..64L",
+       "name" : "Liang, G. Y. & Badnell, N. R. 2010, A&A, 518, A64+"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2010A&A...518A..64L",
+       "name" : "Liang, G. Y. & Badnell, N. R. 2010, A&A, 518, A64+"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2010A&A...518A..64L",
+       "name" : "Liang, G. Y. & Badnell, N. R. 2010, A&A, 518, A64+"
+      }
+     ]
+    }
+   }
+  },
+ "cl_9" : {
+  "element" : "cl",
+  "ion" : "9",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1998A&AS..129..161B",
+       "name" : "Berrington,K.A.,Saraph, H.E. & Tully, J.A. 1998, A&AS, 129, 161"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "cl_10" : {
+  "element" : "cl",
+  "ion" : "10",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ar_1" : {
+  "element" : "ar",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-11-08"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ar_2" : {
+  "element" : "ar",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..110..209P",
+       "name" : "Pelan, J., & Berrington, K. A. 1995, A&AS, 110, 209"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ar_3" : {
+  "element" : "ar",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..111..347G",
+       "name" : "Galavis, M. E., Mendoza, C., & Zeippen, C. J. 1995, A&AS, 111, 347"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ar_4" : {
+  "element" : "ar",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1997MNRAS.284..754R",
+       "name" : "Ramsbottom et al 1997, MNRAS, 284, 754"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ar_5" : {
+  "element" : "ar",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..111..347G",
+       "name" : "Galavis, M. E., Mendoza, C., & Zeippen, C. J. 1995, A&AS, 111, 347"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ar_6" : {
+  "element" : "ar",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1996A&AS..115..151S",
+       "name" : "Saraph, H. E., & Storey, P. J. 1996, A&AS, 115, 151"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ar_7" : {
+  "element" : "ar",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ar_8" : {
+  "element" : "ar",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ar_9" : {
+  "element" : "ar",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ar_10" : {
+  "element" : "ar",
+  "ion" : "10",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ar_11" : {
+  "element" : "ar",
+  "ion" : "11",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ar_13" : {
+  "element" : "ar",
+  "ion" : "13",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ar_14" : {
+  "element" : "ar",
+  "ion" : "14",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_1" : {
+  "element" : "k",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "k_2" : {
+  "element" : "k",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_3" : {
+  "element" : "k",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..110..209P",
+       "name" : "Pelan, J., & Berrington, K.A. 1995, A&A Suppl, 110, 209"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "k_4" : {
+  "element" : "k",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..111..347G",
+       "name" : "Galavis, M.E., Mendoza, C., & Zeippen, C.J. 1995, A&AS, 111, 347"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "k_5" : {
+  "element" : "k",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_6" : {
+  "element" : "k",
+  "ion" : "6",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_7" : {
+  "element" : "k",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1996A&AS..115..151S",
+       "name" : "Saraph, H.E., & Storey, P.J. 1996, A&AS, 115, 151"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "k_8" : {
+  "element" : "k",
+  "ion" : "8",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST"
+      },
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ]
+    }
+   }
+  },
+ "k_9" : {
+  "element" : "k",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_10" : {
+  "element" : "k",
+  "ion" : "10",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_11" : {
+  "element" : "k",
+  "ion" : "11",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_12" : {
+  "element" : "k",
+  "ion" : "12",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_13" : {
+  "element" : "k",
+  "ion" : "13",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_14" : {
+  "element" : "k",
+  "ion" : "14",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_15" : {
+  "element" : "k",
+  "ion" : "15",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_16" : {
+  "element" : "k",
+  "ion" : "16",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "k_17" : {
+  "element" : "k",
+  "ion" : "17",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2017-10-05"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2017-10-05"
+      }
+     ]
+    }
+   }
+  },
+ "ca_1" : {
+  "element" : "ca",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ca_2" : {
+  "element" : "ca",
+  "ion" : "2",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_3" : {
+  "element" : "ca",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_4" : {
+  "element" : "ca",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..110..209P",
+       "name" : "Pelan, J., & Berrington, K. A. 1995, A&AS, 110, 209"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ca_5" : {
+  "element" : "ca",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_6" : {
+  "element" : "ca",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_7" : {
+  "element" : "ca",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_8" : {
+  "element" : "ca",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_10" : {
+  "element" : "ca",
+  "ion" : "10",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_11" : {
+  "element" : "ca",
+  "ion" : "11",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_12" : {
+  "element" : "ca",
+  "ion" : "12",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_13" : {
+  "element" : "ca",
+  "ion" : "13",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ca_15" : {
+  "element" : "ca",
+  "ion" : "15",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_1" : {
+  "element" : "sc",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ]
+    }
+   }
+  },
+ "sc_2" : {
+  "element" : "sc",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2011ApJS..196...24W",
+       "name" : "Wasson, I.R., Ramsbottom, C.A. and Scott, M.P., 2011, ApJS, 196, 24"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "sc_3" : {
+  "element" : "sc",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "sc_4" : {
+  "element" : "sc",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_5" : {
+  "element" : "sc",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..110..209P",
+       "name" : "Pelan, J., & Berrington, K.A. 1995, A&A Suppl, 110, 209"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "sc_6" : {
+  "element" : "sc",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "sc_7" : {
+  "element" : "sc",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_8" : {
+  "element" : "sc",
+  "ion" : "8",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_9" : {
+  "element" : "sc",
+  "ion" : "9",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_10" : {
+  "element" : "sc",
+  "ion" : "10",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST"
+      },
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ]
+    }
+   }
+  },
+ "sc_11" : {
+  "element" : "sc",
+  "ion" : "11",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_12" : {
+  "element" : "sc",
+  "ion" : "12",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_13" : {
+  "element" : "sc",
+  "ion" : "13",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1994A&AS..107...29S",
+       "name" : "Saraph, H.E. & Tully, J.A. 1994, A&AS, 107, 29"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "sc_14" : {
+  "element" : "sc",
+  "ion" : "14",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_15" : {
+  "element" : "sc",
+  "ion" : "15",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_16" : {
+  "element" : "sc",
+  "ion" : "16",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_17" : {
+  "element" : "sc",
+  "ion" : "17",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "sc_18" : {
+  "element" : "sc",
+  "ion" : "18",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_3" : {
+  "element" : "ti",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ti_4" : {
+  "element" : "ti",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_5" : {
+  "element" : "ti",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_6" : {
+  "element" : "ti",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..110..209P",
+       "name" : "Pelan, J., & Berrington, K.A. 1995, A&A Suppl, 110, 209"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ti_7" : {
+  "element" : "ti",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_8" : {
+  "element" : "ti",
+  "ion" : "8",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_9" : {
+  "element" : "ti",
+  "ion" : "9",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_10" : {
+  "element" : "ti",
+  "ion" : "10",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_11" : {
+  "element" : "ti",
+  "ion" : "11",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_12" : {
+  "element" : "ti",
+  "ion" : "12",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_13" : {
+  "element" : "ti",
+  "ion" : "13",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_14" : {
+  "element" : "ti",
+  "ion" : "14",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_15" : {
+  "element" : "ti",
+  "ion" : "15",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_16" : {
+  "element" : "ti",
+  "ion" : "16",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_17" : {
+  "element" : "ti",
+  "ion" : "17",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_18" : {
+  "element" : "ti",
+  "ion" : "18",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_19" : {
+  "element" : "ti",
+  "ion" : "19",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ti_20" : {
+  "element" : "ti",
+  "ion" : "20",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_4" : {
+  "element" : "v",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "Ralchenko, Yu., Kramida, A.E., Reader, J., and NIST ASD Team (2011)."
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "Ralchenko, Yu., Kramida, A.E., Reader, J., and NIST ASD Team (2011)."
+      }
+     ]
+    }
+   }
+  },
+ "v_6" : {
+  "element" : "v",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_7" : {
+  "element" : "v",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..110..209P",
+       "name" : "Pelan, J., & Berrington, K.A. 1995, A&A Suppl, 110, 209"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "Ralchenko, Yu., Kramida, A.E., Reader, J., and NIST ASD Team (2011)."
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "Ralchenko, Yu., Kramida, A.E., Reader, J., and NIST ASD Team (2011)."
+      }
+     ]
+    }
+   }
+  },
+ "v_8" : {
+  "element" : "v",
+  "ion" : "8",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_9" : {
+  "element" : "v",
+  "ion" : "9",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_10" : {
+  "element" : "v",
+  "ion" : "10",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_11" : {
+  "element" : "v",
+  "ion" : "11",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_12" : {
+  "element" : "v",
+  "ion" : "12",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ]
+    }
+   }
+  },
+ "v_13" : {
+  "element" : "v",
+  "ion" : "13",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_15" : {
+  "element" : "v",
+  "ion" : "15",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1998A&AS..129..161B",
+       "name" : "Berrington,K.A.,Saraph, H.E. & Tully, J.A. 1998, A&AS, 129, 161"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "Ralchenko, Yu., Kramida, A.E., Reader, J., and NIST ASD Team (2011)."
+      },
+      {
+       "name" : "NIST Atomic Spectra Database (ver. 4.1.0), [Online]. Available: http://physics.nist.gov/asd [2012, May 1]."
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "Ralchenko, Yu., Kramida, A.E., Reader, J., and NIST ASD Team (2011)."
+      },
+      {
+       "name" : "NIST Atomic Spectra Database (ver. 4.1.0), [Online]. Available: http://physics.nist.gov/asd [2012, May 1]."
+      }
+     ]
+    }
+   }
+  },
+ "v_16" : {
+  "element" : "v",
+  "ion" : "16",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_17" : {
+  "element" : "v",
+  "ion" : "17",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_18" : {
+  "element" : "v",
+  "ion" : "18",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_19" : {
+  "element" : "v",
+  "ion" : "19",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_20" : {
+  "element" : "v",
+  "ion" : "20",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "v_21" : {
+  "element" : "v",
+  "ion" : "21",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_2" : {
+  "element" : "cr",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2012MNRAS.424.2461G",
+       "name" : "Grieve, M.F.R., & Ramsbottom, C.A. 2012, MNRAS, 424, 2461"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "cr_4" : {
+  "element" : "cr",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "cr_5" : {
+  "element" : "cr",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "cr_7" : {
+  "element" : "cr",
+  "ion" : "7",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_9" : {
+  "element" : "cr",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_10" : {
+  "element" : "cr",
+  "ion" : "10",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_11" : {
+  "element" : "cr",
+  "ion" : "11",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_12" : {
+  "element" : "cr",
+  "ion" : "12",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_13" : {
+  "element" : "cr",
+  "ion" : "13",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_14" : {
+  "element" : "cr",
+  "ion" : "14",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_15" : {
+  "element" : "cr",
+  "ion" : "15",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_16" : {
+  "element" : "cr",
+  "ion" : "16",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_17" : {
+  "element" : "cr",
+  "ion" : "17",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_18" : {
+  "element" : "cr",
+  "ion" : "18",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_19" : {
+  "element" : "cr",
+  "ion" : "19",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_20" : {
+  "element" : "cr",
+  "ion" : "20",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_21" : {
+  "element" : "cr",
+  "ion" : "21",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cr_22" : {
+  "element" : "cr",
+  "ion" : "22",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_1" : {
+  "element" : "mn",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2013-11-08"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ]
+    }
+   }
+  },
+ "mn_2" : {
+  "element" : "mn",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_5" : {
+  "element" : "mn",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_6" : {
+  "element" : "mn",
+  "ion" : "6",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_8" : {
+  "element" : "mn",
+  "ion" : "8",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_9" : {
+  "element" : "mn",
+  "ion" : "9",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_10" : {
+  "element" : "mn",
+  "ion" : "10",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_11" : {
+  "element" : "mn",
+  "ion" : "11",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_12" : {
+  "element" : "mn",
+  "ion" : "12",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_13" : {
+  "element" : "mn",
+  "ion" : "13",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_14" : {
+  "element" : "mn",
+  "ion" : "14",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST"
+      },
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ]
+    }
+   }
+  },
+ "mn_15" : {
+  "element" : "mn",
+  "ion" : "15",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_16" : {
+  "element" : "mn",
+  "ion" : "16",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_17" : {
+  "element" : "mn",
+  "ion" : "17",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_18" : {
+  "element" : "mn",
+  "ion" : "18",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_19" : {
+  "element" : "mn",
+  "ion" : "19",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_20" : {
+  "element" : "mn",
+  "ion" : "20",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_21" : {
+  "element" : "mn",
+  "ion" : "21",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_22" : {
+  "element" : "mn",
+  "ion" : "22",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "mn_23" : {
+  "element" : "mn",
+  "ion" : "23",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_1" : {
+  "element" : "fe",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1989ApJ...342..306H",
+       "name" : "Hollenbach, D., & McKee, C.F. 1989, ApJ, 342, 306"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-18"
+      }
+     ]
+    }
+   }
+  },
+ "fe_2" : {
+  "element" : "fe",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2019MNRAS.483..654S"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2019MNRAS.483..654S"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2019MNRAS.483..654S"
+      }
+     ]
+    },
+    "Bautista18" : {
+     "coll" : [
+      {
+       "bibcode" : "2015ApJ...808..174B"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2015ApJ...808..174B"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2015ApJ...808..174B"
+      }
+     ]
+    },
+    "Smyth19" : {
+     "coll" : [
+      {
+       "bibcode" : "2019MNRAS.483..654S"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2019MNRAS.483..654S"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2019MNRAS.483..654S"
+      }
+     ]
+    },
+    "Tayal18" : {
+     "coll" : [
+      {
+       "bibcode" : "2018PhRvA..98a2706T"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2018PhRvA..98a2706T"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2018PhRvA..98a2706T"
+      }
+     ]
+    },
+    "Verner99" : {
+     "coll" : [
+      {
+       "bibcode" : "1999ApJS..120..101V"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "1999ApJS..120..101V"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "1999ApJS..120..101V"
+      }
+     ]
+    }
+   }
+  },
+ "fe_3" : {
+  "element" : "fe",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014ApJ...785...99B"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST 2016"
+      },
+      {
+       "bibcode" : "2014ApJ...785...99B"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014ApJ...785...99B"
+      },
+      {
+       "bibcode" : "2017ApJ...841....3L"
+      }
+     ]
+    }
+   }
+  },
+ "fe_4" : {
+  "element" : "fe",
+  "ion" : "4",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    },
+    "Henderson18" : {
+     "coll" : [
+      {
+       "name" : "ADAS"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "ADAS"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "ADAS"
+      }
+     ]
+    }
+   }
+  },
+ "fe_5" : {
+  "element" : "fe",
+  "ion" : "5",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_6" : {
+  "element" : "fe",
+  "ion" : "6",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_7" : {
+  "element" : "fe",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2008A&A...481..543W",
+       "name" : "Witthoeft et al 2008, A&A, 481, 543"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2008A&A...481..543W",
+       "name" : "Witthoeft et al 2008, A&A, 481, 543"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2008A&A...481..543W",
+       "name" : "Witthoeft et al 2008, A&A, 481, 543"
+      }
+     ]
+    }
+   }
+  },
+ "fe_9" : {
+  "element" : "fe",
+  "ion" : "9",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A%26A...565A..77D"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      },
+      {
+       "bibcode" : "2014A%26A...565A..77D"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A%26A...565A..77D"
+      }
+     ]
+    }
+   }
+  },
+ "fe_10" : {
+  "element" : "fe",
+  "ion" : "10",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_11" : {
+  "element" : "fe",
+  "ion" : "11",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_13" : {
+  "element" : "fe",
+  "ion" : "13",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_14" : {
+  "element" : "fe",
+  "ion" : "14",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_15" : {
+  "element" : "fe",
+  "ion" : "15",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_16" : {
+  "element" : "fe",
+  "ion" : "16",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_17" : {
+  "element" : "fe",
+  "ion" : "17",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "name" : "ADAS  2021-07-22"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "ADAS  2021-07-22"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "ADAS  2021-07-22"
+      }
+     ]
+    }
+   }
+  },
+ "fe_18" : {
+  "element" : "fe",
+  "ion" : "18",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_19" : {
+  "element" : "fe",
+  "ion" : "19",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_20" : {
+  "element" : "fe",
+  "ion" : "20",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_21" : {
+  "element" : "fe",
+  "ion" : "21",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_22" : {
+  "element" : "fe",
+  "ion" : "22",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_23" : {
+  "element" : "fe",
+  "ion" : "23",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "fe_24" : {
+  "element" : "fe",
+  "ion" : "24",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_2" : {
+  "element" : "co",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2015arXiv150903164S"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      },
+      {
+       "bibcode" : "2015arXiv150903164S"
+      }
+     ]
+    }
+   }
+  },
+ "co_3" : {
+  "element" : "co",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2016MNRAS.459.2558S"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      },
+      {
+       "bibcode" : "2016MNRAS.459.2558S"
+      }
+     ]
+    }
+   }
+  },
+ "co_8" : {
+  "element" : "co",
+  "ion" : "8",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_10" : {
+  "element" : "co",
+  "ion" : "10",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_11" : {
+  "element" : "co",
+  "ion" : "11",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1995A&AS..110..209P",
+       "name" : "Pelan, J., & Berrington, K.A. 1995, A&A Suppl, 110, 209"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "co_12" : {
+  "element" : "co",
+  "ion" : "12",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_13" : {
+  "element" : "co",
+  "ion" : "13",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_14" : {
+  "element" : "co",
+  "ion" : "14",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_15" : {
+  "element" : "co",
+  "ion" : "15",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_16" : {
+  "element" : "co",
+  "ion" : "16",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_17" : {
+  "element" : "co",
+  "ion" : "17",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_18" : {
+  "element" : "co",
+  "ion" : "18",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_19" : {
+  "element" : "co",
+  "ion" : "19",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_20" : {
+  "element" : "co",
+  "ion" : "20",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_21" : {
+  "element" : "co",
+  "ion" : "21",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_22" : {
+  "element" : "co",
+  "ion" : "22",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_23" : {
+  "element" : "co",
+  "ion" : "23",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_24" : {
+  "element" : "co",
+  "ion" : "24",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "co_25" : {
+  "element" : "co",
+  "ion" : "25",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_1" : {
+  "element" : "ni",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "1989ApJ...342..306H",
+       "name" : "Hollenbach, D. & McKee, C.F. 1989, ApJ, 342, 306"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ni_2" : {
+  "element" : "ni",
+  "ion" : "2",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2011ApJ...738....5C",
+       "name" : "Cassidy, C. M. et al. 2011, ApJ, 738, 5"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2013-10-01"
+      }
+     ]
+    }
+   }
+  },
+ "ni_3" : {
+  "element" : "ni",
+  "ion" : "3",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_4" : {
+  "element" : "ni",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_5" : {
+  "element" : "ni",
+  "ion" : "5",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_7" : {
+  "element" : "ni",
+  "ion" : "7",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_9" : {
+  "element" : "ni",
+  "ion" : "9",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_11" : {
+  "element" : "ni",
+  "ion" : "11",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A%26A...566A.123D"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      },
+      {
+       "bibcode" : "2014A%26A...566A.123D"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A%26A...566A.123D"
+      }
+     ]
+    }
+   }
+  },
+ "ni_12" : {
+  "element" : "ni",
+  "ion" : "12",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_13" : {
+  "element" : "ni",
+  "ion" : "13",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_14" : {
+  "element" : "ni",
+  "ion" : "14",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_15" : {
+  "element" : "ni",
+  "ion" : "15",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A%26A...567A..18D"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2014A%26A...567A..18D"
+      },
+      {
+       "name" : "NIST"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A%26A...567A..18D"
+      }
+     ]
+    }
+   }
+  },
+ "ni_16" : {
+  "element" : "ni",
+  "ion" : "16",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_17" : {
+  "element" : "ni",
+  "ion" : "17",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2012A&A...537A..12H",
+       "name" : "Hudson, C E, Norrington, P H, Ramsbottom, C A, & Scott, M P 2012, A&A, 537, A12"
+      }
+     ],
+     "energy" : [
+      {
+       "bibcode" : "2007ADNDT..93..615A",
+       "name" : "Aggarwal, K M, Tayal, V, Gupta, G P, & Keenan, F P 2007, ADNDT, 93, 615"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2007ADNDT..93..615A",
+       "name" : "Aggarwal, K M, Tayal, V, Gupta,  G P, & Keenan, F P 2007, ADNDT, 93, 615"
+      }
+     ]
+    }
+   }
+  },
+ "ni_18" : {
+  "element" : "ni",
+  "ion" : "18",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_19" : {
+  "element" : "ni",
+  "ion" : "19",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_20" : {
+  "element" : "ni",
+  "ion" : "20",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_21" : {
+  "element" : "ni",
+  "ion" : "21",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_22" : {
+  "element" : "ni",
+  "ion" : "22",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_23" : {
+  "element" : "ni",
+  "ion" : "23",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_24" : {
+  "element" : "ni",
+  "ion" : "24",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_25" : {
+  "element" : "ni",
+  "ion" : "25",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "ni_26" : {
+  "element" : "ni",
+  "ion" : "26",
+  "list" : "all",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_1" : {
+  "element" : "cu",
+  "ion" : "1",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_13" : {
+  "element" : "cu",
+  "ion" : "13",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_14" : {
+  "element" : "cu",
+  "ion" : "14",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_15" : {
+  "element" : "cu",
+  "ion" : "15",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_16" : {
+  "element" : "cu",
+  "ion" : "16",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_17" : {
+  "element" : "cu",
+  "ion" : "17",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_18" : {
+  "element" : "cu",
+  "ion" : "18",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST"
+      },
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ]
+    }
+   }
+  },
+ "cu_21" : {
+  "element" : "cu",
+  "ion" : "21",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_22" : {
+  "element" : "cu",
+  "ion" : "22",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_23" : {
+  "element" : "cu",
+  "ion" : "23",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_24" : {
+  "element" : "cu",
+  "ion" : "24",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "cu_25" : {
+  "element" : "cu",
+  "ion" : "25",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ],
+     "trans" : [
+      {
+       "name" : "NIST  2014-09-16"
+      }
+     ]
+    }
+   }
+  },
+ "zn_2" : {
+  "element" : "zn",
+  "ion" : "2",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2015ApJ...804...76K"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST data"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2015ApJ...804...76K"
+      }
+     ]
+    }
+   }
+  },
+ "zn_4" : {
+  "element" : "zn",
+  "ion" : "4",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [],
+     "energy" : [
+      {
+       "name" : "Ralchenko, Yu., Kramida, A.E., Reader, J., and NIST ASD Team (2011)."
+      }
+     ],
+     "trans" : []
+    }
+   }
+  },
+ "zn_19" : {
+  "element" : "zn",
+  "ion" : "19",
+  "list" : "default",
+  "ref" : {
+    "default" : {
+     "coll" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "energy" : [
+      {
+       "name" : "NIST"
+      },
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ],
+     "trans" : [
+      {
+       "bibcode" : "2014A&A...572A.115F",
+       "name" : "Fernandez-Menchero, L., Del Zanna, G., and Badnell, N. R. 2014, A&A, 572, A115"
+      }
+     ]
+    }
+   }
+  }
+}

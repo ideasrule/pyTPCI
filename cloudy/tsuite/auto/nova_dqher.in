@@ -1,0 +1,488 @@
+title cold nova shell
+# Ferland et al. 1984 DQ Her
+# model of room temperature ionized cloud arund old nova DQ Her
+# roughly that of 
+## >>refer	model	DQHER	Ferland et al. 1984 Ap.J. 281, 194.
+# tests behaviour of code at very low temperatures
+#
+# commands controlling continuum =========
+# flat continuum, followed by nu^-2 power law
+interpolate (0 0) (0.3 0) (8.e6 -14.8)
+luminosity total 34
+#
+# commands for density & abundances =========
+hden = 2.
+abundances nova
+grains no qheat single
+#
+# commands controlling geometry  =========
+filling factor 0.667
+covering factor 0.667
+radius 16.5682 , thickness = 16.14613
+# need this since gas is so cool 
+stop temp = 100
+#
+# other commands for details     =========
+## >>chng 06 aug 02, add cosmic rays, should always have been included
+cosmic rays background 
+iterate
+turbulence 300
+age 70 years ##it exploded in the 1930's
+database h-like element hydrogen levels resolved 15
+database h-like element helium levels resolved 15
+#
+# commands controlling output    =========
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+normalize to label="CaBo" 4861.32A intensity 1.169
+print line all
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save performance "nova_dqher.per"
+save monitors last "nova_dqher.asr"
+save overview last "nova_dqher.ovr"
+save results last "nova_dqher.rlt"
+save dr last "nova_dqher.dr"
+save transmitted continuum "nova_dqher.trn" last
+#
+# commands giving the monitors    =========
+## >>chng 02 dec 21, from 30.028 to 30.049, better he 1
+## >>chng 04 jun 12, from 30.049 to 30.094 chng cont shield fcn
+## >>chng 06 nov 24, from 30.128 to 30.108, turn on Badnell RR
+## >>chng 06 nov 29, from 30.108 to 30.077, Badnell DR turned on
+## >>chng 07 oct 22, from 30.077 to 30.141, resolve l-levels of h-like sequence
+## >>chng 11 nov 16, from 30.14 to 30.16, adjust newmole monitors
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 mar 07, from 30.16 to 30.18, merging newmesh branch
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "H  1" 4861.32A 30.18
+##
+## >>chng 03 aug 23, from 0.883 to 0.839, line overlap
+## >>chng 04 jun 12, from 0.839 to 0.938 chng cont shield fcn
+## >>chng 07 oct 22, from 0.938 to 1.107, resolve l-levels of h-like sequence
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 1.107 to 1.162, Marios bug fixes
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A 1.162
+##
+## >>chng 01 sep 24 from 27.9 to 26.18, 2s 2p branching ratio
+## >>chng 02 jun 15, from 26.2 to 24.2, stark broadening
+## >>chng 04 mar 04, from 24.2 to 27.6, better conv criteria
+## >>chng 06 nov 29, from 27.6 to 29.0 Badnell DR turned on
+## >>chng 07 oct 22, from 29.0 to 31.4, resolve l-levels of h-like sequence
+## >>chng 07 dec 06, from 31.4 to 33.9, changes in h-like collisions
+## >>chng 11 nov 16, from 33.9 to 35.58, adjust newmole monitors
+## >>chng 12 oct 22, from 35.58 to 33.02, zone tau in rt_line_one
+## >>chng 13 jan 10, from 33.02 to 35.16, fix in-zone continuum shielding
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 35.16 to 32.85, Marios bug fixes
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line "H  1" 1215.67A 32.85
+##
+## >>chng 02 dec 11, rm this line
+## assert line "totl" 5 876 0.274
+## >>chng 02 dec 11, add this line
+## >>chng 05 oct 01, from 0.148 to 0.129, RP update He levels
+## >>chng 05 dec 20, from 0.129 to 0.113, RP change default helium levels
+## >>chng 06 aug 02, from 0.113 to 0.119, update O+2, N+2 CT
+## >>chng 08 apr 19, from 0.119 to 0.125, changes in coll rate highest level,
+## incr error
+## >>chng 08 apr 30, from 0.119 to 0.147 H, He topoff change
+## >>chng 13 jul 24, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 06, wl from 5875.61A to 5875.64A, botched merge
+## >>chng 16 aug 07, from 0.147 to 0.1266, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 5875.66A 0.1266 error 0.1
+## 
+## >>chng 11 feb 07, from 0.21 to 0.2386, new Ca B extrapolates at low temperatures found here
+## >>chng 13 jul 24, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 25, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 5875.64A 0.2386 error 0.1
+##
+## >>chng 01 mar 02 increase error, changes in H RT 
+## >>chng 03 may 08, from 0.052 to 0.0581, convergence cleanup
+## >>chng 03 aug 23, from 0.0581 to 0.0490, line overlap
+## >>chng 04 jun 12, from 0.0490 to 0.0617 chng cont shield fcn
+## >>chng 06 aug 02, from 0.0617 to 0.056, update O+2, N+2 CT
+## >>chng 06 nov 29, from 0.056 to 0.064 Badnell DR turned on
+## >>chng 07 oct 22, from 0.064 to 0.051, resolve l-levels of h-like sequence
+## >>chng 08 apr 30, from 0.051 to 0.0778 H, He topoff change
+## >>chng 13 jul 24, wl from 4686 to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.0778 to 0.0493, Marios bug fixes
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+monitor line "he 2" 4685.68A 0.0493 error 0.1
+##
+## >>chng 01 jul 01, from  0.103 to 0.098, better diffuse fields
+## >>chng 06 aug 02, from 0.098 to 0.0926, update O+2, N+2 CT
+## >>chng 06 nov 29, from 0.0926 to 0.116 Badnell DR turned on
+## >>chng 11 jul 12, from 0.116 to 0.1097, enable fit to Badnell DR suppression
+## >>chng 13 mar 03, from 0.1097 to 0.1148, update atomic models for S II, S III
+monitor line "c  2" 157.636m 0.1148
+##
+## >>chng 00 aug 18, from 0.021 to 0.656 - line had been treated with
+## level3 which quit if too cold.  now level2 does it if cold but pumped.
+## line is predominantly pumped
+## >>chng 03 feb 04, from 0.656 to 0.616, better rec diffuse fields
+## >>chng 04 jun 12, from 0.616 to 0.684 chng cont shield fcn
+## >>chng 06 aug 02, from 0.684 to 0.050, update O+2, N+2 CT
+## >>chng 06 nov 29, from 0.684 to 0.804 Badnell DR turned on
+## >>chng 09 mar 27, from 0.804 to 0.751 improve rigor esc prob & pop defns
+## >>chng 09 apr 18, from 0.751 to 0.7954, refactor evaluation of esc dest probs to occur with cooling
+## >>chng 11 jul 12, from 0.7954 to 0.7493, enable fit to Badnell DR suppression
+## >>chng 13 mar 03, from 0.7493 to 0.7835, update atomic models for S II, S III
+## >>chng 13 dec 23, from 0.7835 to 0.8405, C to external databases
+## >>chng 14 mar 26, from 0.8405 to 0.7956, Move oxygen data to stout and chianti files
+monitor line "blnd" 1335 0.7956
+##
+## >>chng 03 aug 23, from 1.200 to 1.092 line overlap
+## >>chng 04 jun 12, from 1.092 to 1.352 chng cont shield fcn
+## >>chng 06 aug 02, from 1.352 to 1.204, update O+2, N+2 CT
+## >>chng 06 aug 17, from 1.204 to 1.183, HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from 1.18 to 1.31 Badnell DR turned on
+## >>chng 19 mar 01, change "Blnd" 977 -> "C  3" 977.02
+monitor line "C  3" 977.02 1.31 error 0.1
+##
+## >>chng 06 mar 13, rm this line, all recom, must update to new atom
+## >>chng 06 aug 02, add new NI line
+## >>chng 09 oct 05, from 0.0199 to 0.021, [NI] pumping changes
+## >>chng 09 nov 17, from 0.021 to 0.0333, N I changes (r3588)
+## >>chng 14 jan 05, from 0.0333 to 0.0314, N to external databases
+## >>chng 17 feb 10, from 0.0314 to 0.0334, default size of N 1 model atom set to 50
+## >>chng 19 mar 01, from 0.0334 to 0.002, remove recombination, etc, components from blends (#415)
+monitor line "blnd"  5199 0.002
+##
+## >>chng 06 feb 07, from 3.401 to 3.265 add exp to low-T DR 
+## >>chng 06 aug 02, from 3.26 to 3.72, update O+2, N+2 CT
+## >>chng 06 nov 29, from 3.72 to 4.20 Badnell DR turned on
+## >>chng 14 jan 05, from 4.2 to 3.919, N to external databases
+## >>chng 22 jul 09, wl from 121.767m to 121.769m, upgrade to Chianti v10
+monitor line "n  2"  121.769m 3.919
+## 
+## >>chng 04 sep 08, from 0.696 to 0.662, slow drift down
+## >>chng 06 aug 02, from 0.662 to 0.755, update O+2, N+2 CT
+## >>chng 06 nov 29, from 0.755 to 0.855 Badnell DR turned on
+## >>chng 14 jan 05, from 0.855 to 0.8128, N to external databases
+## >>chng 22 jul 09, wl from 205.244m to 205.283m, upgrade to Chianti v10
+monitor line "n  2"  205.283m 0.8128
+##
+## >>chng 03 feb 04, from 9.63 to 9.10 better rec diffuse fields
+## >>chng 06 aug 02, from 9.10 to 4.59, update O+2, N+2 CT
+## >>chng 06 aug 17, from 4.59 to 5.05 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from 5.05 to 5.51 Badnell DR turned on
+## >>chng 14 jan 05, from 5.51 to 7.291, N to external databases
+## >>chng 22 jul 09, from 7.291 to 5.66, upgrade to Chianti v10
+monitor line "n  3"  57.3238m 5.66 error 0.1
+##
+## >>chng 00 dec 12, cs  for [NII] lines, from 1.563 to 1.662
+## >>chng 00 dec 20, from 1.662 to 1.405, changed pumping treatment
+## >>chng 02 dec 13, from 1.304 to 1.233, zoning change
+## >>chng 04 jun 12, from 1.233 to 1.513 chng cont shield fcn
+## >>chng 06 aug 02, from 1.513 to 0.986, update O+2, N+2 CT
+## >>chng 06 aug 17, from 0.986 to 1.06 HN update fit O3 cs, incr err
+## >>chng 14 jan 05, from 1.06 to 1.188 N to external databases
+monitor line "blnd" 990 1.188 error 0.1
+##
+## >>chng 04 jul 03, from 0.308 to 0.284, NA update H, CO chem net
+## >>chng 04 sep 25, from 0.284 to 0.270 incr temp toler 0.02 to 0.005
+## >>chng 06 aug 02, from 0.270 to 0.050, update O+2, N+2 CT
+## >>chng 06 aug 17, from 0.270 to 0.25 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from 0.25 to 0.28 Badnell DR turned on
+## >>chng 13 aug 06, from 0.28 to 0.3559, improve 3727 underflow handling for 32/64 consistency
+## >>chng 19 mar 01, from 0.3559 to 0, remove recombination, etc, components from blends (#415)
+## monitor line "blnd"  3727 0 error 0.1
+##
+## >>chng 02 may 07, from 5.39 to 5.12, slow drift down
+## >>chng 04 jul 02, from 5.12 to 4.904, O H ct
+## >>chng 06 aug 02, from 4.90 to 7.58, update O+2, N+2 CT
+## >>chng 13 feb 01, from 7.58 to 7.204, BUGFIX, largely undo r6703
+## >>chng 14 jan 05, from 7.204 to 6.564, N to external databases
+## >>chng 15 nov 03, from 6.564 to 6.945, update O III CS to Storey+14
+## >>chng 22 jul 09, from 6.945 to 7.304, upgrade to Chianti v10
+monitor line "O  3"  88.3323m 7.304
+##
+## >>chng 02 apr 02, from 6.00 to 5.696, slow drift down
+## >>chng 04 jul 02, from 5.696 to 5.321, O H ct
+## >>chng 06 aug 02, from 5.32 to 8.04, update O+2, N+2 CT
+## >>chng 06 aug 17, from 8.04 to 7.09 HN update fit O3 cs, incr err
+## >>chng 14 jan 05, from 7.09 to 6.217, N to external databases
+## >>chng 15 oct 14, from 6.217 to 6.898, update Ne 3 cs to McLaughlin+11
+monitor line "O  3"  51.8004m 6.898 error 0.1
+## 
+## >>chng 06 jul 01, add these lines, cs changed, caused other changes
+## >>chng 06 aug 02, from 30.08 to 29.985, update O+2, N+2 CT
+## >>chng 06 aug 17, from 29.98 to 30.02 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from 30.02 to 30.14 Badnell DR turned on
+## >>chng 13 jul 26, wl from 12.81m to 12.8101m, increased wl precision to 6 sig. fig.
+## >>chng 16 sep 04, from 30.14 to 30.2, update low-T CS to Wang, Loch+16
+monitor line luminosity "Ne 2" 12.8101m  30.2 error 0.1
+##
+## >>chng 06 jul 06, from 30.180 to 30.383, update Ne cs
+## >>chng 06 aug 02, from 30.38 to 30.284 update O+2, N+2 CT
+## >>chng 06 aug 17, from 30.284 to 30.33 HN update fit O3 cs, incr err
+## >>chng 13 jul 24, from 30.33 to 30.37, Ne to external databases
+## >>chng 13 jul 26, wl from 15.55m to 15.5503m, increased wl precision to 6 sig. fig.
+## >>chng 14 jan 05, from 30.37 to 30.33, N to external databases
+## >>chng 15 oct 14, from 30.33 to 30.1, update Ne 3 cs to McLaughlin+11
+## >>chng 15 oct 15, wl from 15.5503m to 15.5509m, update Ne III energies
+## >>chng 16 sep 04, from 30.1 to 30.25, update low-T CS to Wang, Loch+16
+## >>chng 22 jul 09, from 30.25 to 30.29, upgrade to Chianti v10
+monitor line luminosity "Ne 3" 15.5509m  30.29 error 0.1
+##
+## >>chng 06 aug 02, from 29.16 to 29.004, update O+2, N+2 CT
+## >>chng 06 aug 17, from 29.004 to 29.08 HN update fit O3 cs, incr err
+## >>chng 13 jul 24, wl from 36.01m to 36.0140m, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 24, from 29.08 to 29.15, Ne to external databases
+## >>chng 13 jul 26, wl from 36.0140m to 36.0132m, increased wl precision to 6 sig. fig.
+## >>chng 14 jan 05, from 29.15 to 29.1, N to external databases
+## >>chng 15 oct 14, from 29.1 to 28.87, update Ne 3 cs to McLaughlin+11
+## >>chng 15 oct 15, wl from 36.0132m to 36.0036m, update Ne III energies
+## >>chng 16 sep 04, from 28.87 to 28.98, update low-T CS to Wang, Loch+16
+## >>chng 22 jul 09, from 28.98 to 29.02, upgrade to Chianti v10
+monitor line luminosity "Ne 3" 36.0036m  29.02 error 0.1 
+##
+## >>chng  00 mar 22 from .574 to .522 after changes in cont pumping
+## and continuum binning 
+## >>chng 00 oct 22, from 0.52 to 0.591 finer convergence, change in cont mesh
+## >>chng 01 jun 15, from 0.589 to .270 ct h ion/rec update
+## >>chng 01 dec 21, from 0.27 to 0.348, inner shell yield
+## >>chng 02 apr 02, from 0.348 to 0.272, bound compton better
+## >>chng 02 jun 21, from 0.272 to 0.235, better brems cooling, inc err to 0.15
+## >>chng 02 nov 08, from 0.235 to 0.283, recombin cooling
+## >>chng 03 feb 04, from 0.283 to 0.115 better rec diffuse fields
+## >>chng 03 feb 13, from 0.115 to 0.200 e + H3+ rate changed
+## fixit
+## NB this line is entirely pumped, and the emergent intensity is much
+## smaller than the pumped contribution.  need to find out why - its intensity
+## is obviously wildly chaotic
+## >>chng 03 mar 20, from 0.200 to 0.129, ? ?
+## >>chng 03 may 09, from 0.129 to 0.202, bimodal???
+## >>chng 03 may 18, from 0202 to 0.133, small change in pump eval
+## >>chng 03 dec 08, from 0.134 to 0.174, chng zones, ots
+## >>chng 04 jun 12, from 0.137 to 0.204 chng cont shield fcn
+## >>chng 04 jul 02, from 0.204 to 0.0227 O H ct
+## >>chng 04 jul 03, from 0.0227 to 0.145, NA update H, CO chem net
+## >>chng 04 jul 07, from 0.145 to 0.0155, oh ct integ
+## >>chng 04 sep 08, from 0.145 to 0., rewrite auger
+## assert line "blnd" 2798 0.0155 error .30
+##
+## >>chng 04 jul 02, from 0.866 to 0.804 O H ct
+## >>chng 06 jul 06, from 30.180 to 30.383, update Ne cs
+## >>chng 06 aug 02, from 0.804 to 0.749, update O+2, N+2 CT
+## >>chng 06 aug 17, from 0.749 to 0.79 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from 0.79 to 0.89 Badnell DR turned on
+## >>chng 15 aug 30, from 0.89 to 0.7824, update Si II stout to Laha+ 2015
+monitor line "Si 2"  34.8046m 0.7824 error 0.1
+##
+## >>chng 00 sep 12, from .2578 to .399, change in cs
+## >>chng 02 nov 20, from 0.358 to 0.3378, new he diff, ots
+## >>chng 04 jul 02, from 0.338 to 0.315 O H ct
+## >>chng 06 feb 07, from 0.315 to 0.337 add exp to low-T DR 
+## >>chng 06 jul 06, from 0.337 to 0.355, update Ne cs
+## >>chng 06 aug 02, from 0.355 to 0.296, update O+2, N+2 CT
+## >>chng 06 aug 17, from 0.296 to 0.33 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from 0.33 to 0.41 Badnell DR turned on
+## >>chng 07 apr 30, from 0.41 to 0.35 log DR average, use mix S DR
+## >>chng 10 mar 05, from 0.35 to 0.3084, changes caused by r3848 atomic data update
+## >>chng 10 mar 14, from 0.3084 to 0.3379, update As to NIST recommended values
+## >>chng 11 apr 22, from 0.3379 to 0.3831, update Ar sequence Badnell DR rates
+## >>chng 13 mar 04, from 0.3831 to 0.2095, botches after updating S  3, S  4 wavelengths
+## >>chng 13 jul 24, wl from 33.47m to 33.4704m, increased wl precision to 6 sig. fig.
+## >>chng 14 jan 05, from 0.2095 to 0.1906, N to external databases
+## >>chng 14 dec 14, from 0.1906 to 0.1304, update S2+ - S+ DR to Badnell+ 2015 ApJ
+## >>chng 23 may 11, from 0.1304 to 0.0963, update RR DR to 2022 Badnell wor
+monitor line "S  3"  33.4704m 0.0963 error 0.1
+##
+## total cooling due to FeII lines
+## >>chng 02 jul 19, from 0.134 to 0.132, better two photon
+## >>chng 03 aug 15, from 0.132 to 0.145, add guess of low-T dr
+## >>chng 04 jul 07, from 0.145 to 0.138, oh ct integ
+## >>chng 05 dec 04, from 0.138 to 0.174, now all FeII
+## >>chng 06 feb 07, from 0.174 to 0.163 add exp to low-T DR 
+## >>chng 06 aug 02, from 0.163 to 0.147, update O+2, N+2 CT
+## >>chng 06 aug 17, from 0.147 to 0.16 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from 0.16 to 0.175 Badnell DR turned on
+## >>chng 08 sep 22, from 0.175 to 0.1975, remove Ali et al. DR guess
+## >>chng 08 nov 13, from 0.1975 to 0.4098, fix Boltzmann factor in CT rates (r2455)
+## >>chng 11 jul 12, from 0.4098 to 0.3538, enable fit to Badnell DR suppression
+## >>chng 23 jun 27, from 0.3538 to 0.28, update Fe+ model to Smyth+19
+monitor line "Fe 2c"  0   0.28 error 0.1
+##
+## >>chng 03 mar 20, from 2.897 to 2.874, slow drift
+## >>chng 06 aug 02, from 2.874 to 2.788, update O+2, N+2 CT
+## >>chng 06 aug 17, from 2.788 to 2.82 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from 2.82 to 2.82 Badnell DR turned on
+## >>chng 06 nov 29, from 2.82 to 2.89 Badnell DR turned on
+## >>chng 14 mar 26, from 2.89 to 2.846, Move oxygen data to stout and chianti files
+monitor temperature "H+" 2.846 error 0.1
+##
+monitor temperature grains 1 36.1 ##graphite ism
+##
+monitor temperature grains 2 32.5 ##silicate ism
+##
+## >>chng 06 aug 02, from -1.230 to -1.189, update O+2, N+2 CT
+## >>chng 06 aug 17, from -1.189 to -1.21 HN update fit O3 cs, incr err
+## >>chng 09 feb 23, from -1.21 to -1.251, remove otslin, otscon dampers (PR #84, r2758)
+monitor ionization volume Hydrogen 1 -1.251 error 0.1
+##
+## >>chng 02 dec 11, from -0.852 to -0.892, new hei this line
+## >>chng 06 jul 06, from -0.892 to -0.912, update Ne cs
+## >>chng 06 aug 02, from -0.912 to -0.866, update O+2, N+2 CT
+## >>chng 06 nov 24, from -0.866 to -0.888, turn on Badnell RR
+## >>chng 06 nov 29, from -0.888 to -0.921 Badnell DR turned on
+## >>chng 09 feb 24, from -0.921 to -0.9012, botches due to r2763
+## >>chng 15 mar 07, from -0.9012 to -0.8756, merging newmesh branch
+monitor ionization volume Helium   1 -0.8756
+##
+monitor ionization volume Helium   2 -0.082
+## 
+## >>chng 04 sep 08, from -1.413 to -1.433 slow drift down
+## >>chng 06 aug 02, from -1.433 to -1.475, update O+2, N+2 CT
+## >>chng 06 aug 17, from -1.475 to -1.45 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from -1.45 to -1.41 Badnell DR turned on
+monitor ionization volume Helium   3 -1.41 error 0.1
+##
+## >>chng 00 mar 22 from .574 to .522 after changes in cont pumping
+## >>chng 01 may 10, from -2.253 to -2.203 ct network change
+## >>chng 06 aug 02, from 0.056 to 0.050, update O+2, N+2 CT
+## >>chng 06 aug 02, from -2.203 to -2.164, update O+2, N+2 CT
+## >>chng 06 nov 24, from -2.164 to -2.207, turn on Badnell RR
+## >>chng 06 nov 29, from -2.207 to -2.11 Badnell DR turned on
+## >>chng 11 jul 12, from -2.11 to -2.162, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -2.162 to -2.118, BUGFIX, largely undo r6703
+monitor ionization volume Carbon   1 -2.118 error 0.1
+##
+## >>chng 06 aug 02, from 0.056 to 0.050, update O+2, N+2 CT
+## >>chng 06 aug 02, from -0.288 to -0.257, update O+2, N+2 CT
+## >>chng 06 nov 29, from -0.257 to -0.223 Badnell DR turned on
+monitor ionization volume Carbon   2 -0.223
+## 
+## >>chng 06 aug 02, from -0.322 to -0.359, update O+2, N+2 CT
+## >>chng 06 nov 29, from -0.359 to -0.407 Badnell DR turned on
+monitor ionization volume Carbon   3 -0.407
+## 
+## >>chng 04 jul 07, from -2.524 to -2.545, oh ct integ
+## >>chng 06 aug 02, from -2.545 to -2.611, update O+2, N+2 CT
+## >>chng 06 aug 17, from -2.611 to -2.58 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from -2.58 to -2.66 Badnell DR turned on
+monitor ionization volume Carbon   4 -2.66 error 0.1
+##
+## >>chng 02 apr 02, from -1.923 to -1.901 bound compton better
+## >>chng 03 feb 04, from -1.901 to -1.878 better rec diffuse fields
+## >>chng 06 jul 07, from -1.878 to -1.904, Stancil N1 CT
+## >>chng 06 aug 02, from -1.904 to -1.763, update O+2, N+2 CT
+## >>chng 06 aug 17, from -1.763 to -1.79 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from -1.79 to -1.57 Badnell DR turned on
+## >>chng 11 jul 12, from -1.57 to -1.697, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -1.697 to -1.567, BUGFIX, largely undo r6703
+## >>chng 14 mar 26, from -1.567 to -1.524, Move oxygen data to stout and chianti files
+monitor ionization volume Nitrogen 1 -1.524 error 0.1
+##
+## >>chng 06 aug 02, from -0.180 to -0.094, update O+2, N+2 CT
+monitor ionization volume Nitrogen 2 -0.094
+##
+## >>chng 06 aug 02, from -0.500 to -0.765, update O+2, N+2 CT
+monitor ionization volume Nitrogen 3 -0.765
+##
+## >>chng 04 may 13, from -1.959 to -1.987, dest albedo chng
+## >>chng 06 aug 02, from -1.987 to -2.266, update O+2, N+2 CT
+## >>chng 06 aug 17, from -2.266 to -2.23 HN update fit O3 cs, incr err
+## >>chng 06 nov 24, from -2.23 to -2.27, turn on Badnell RR
+## >>chng 06 nov 29, from -2.27 to -2.42 Badnell DR turned on
+monitor ionization volume Nitrogen 4 -2.42 error 0.1
+##
+## >>chng 05 oct 01, from -1.158 to -1.177, RP update He levels
+## >>chng 06 aug 02, from -1.177 to -1.157, update O+2, N+2 CT
+## >>chng 06 aug 17, from -1.157 to -1.19 HN update fit O3 cs, incr err
+monitor ionization volume Oxygen   1 -1.19 error 0.1
+##
+## >>chng 06 aug 02, from -0.093 to -0.134, update O+2, N+2 CT
+## >>chng 14 mar 26, from -0.134 to -0.1148, Move oxygen data to stout and chianti files
+monitor ionization volume Oxygen   2 -0.1148
+##
+## >>chng 06 aug 02, from -0.911 to -0.711, update O+2, N+2 CT
+## >>chng 06 aug 17, from -0.711 to -0.69 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from -0.69 to -0.75 Badnell DR turned on
+monitor ionization volume Oxygen   3 -0.75 error 0.1
+##
+## >>chng 06 aug 02, from -2.905 to -2.768, update O+2, N+2 CT
+## >>chng 06 aug 17, from -2.768 to -2.72 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from -2.72 to -2.78 Badnell DR turned on
+## >>chng 14 jan 05, from -2.78 to -2.831, N to external databases
+monitor ionization volume Oxygen   4 -2.831 error 0.1
+##
+## >>chng 02 nov 20, from -1.675 to -1.647 new he diff, ots
+## >>chng 04 jul 02, from -1.647 to -1.623 O H ct
+## >>chng 06 aug 02, from -1.623 to -1.550, update O+2, N+2 CT
+## >>chng 06 aug 17, from -1.550 to -1.59 HN update fit O3 cs, incr err
+## >>chng 06 nov 29, from -1.59 to -1.48 Badnell DR turned on
+## >>chng 11 jul 12, from -1.48 to -1.558, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -1.558 to -1.483, BUGFIX, largely undo r6703
+## >>chng 14 mar 26, from -1.483 to -1.438, Move oxygen data to stout and chianti files
+monitor ionization volume Neon     1 -1.438 error 0.1
+##
+## >>chng 04 jul 02, from -0.311 to -0.285 O H ct
+## >>chng 06 aug 02, from -0.285 to -0.262, update O+2, N+2 CT
+## >>chng 06 nov 29, from -0.262 to -0.226 Badnell DR turned on
+monitor ionization volume Neon     2 -0.226
+##
+## >>chng 02 dec 13, from -0.307 to -0.329 zoning change
+## >>chng 06 aug 02, from -0.329 to -0.375, update O+2, N+2 CT
+## >>chng 06 nov 29, from -0.375 to -0.431 Badnell DR turned on
+## >>chng 11 jul 12, from -0.431 to -0.4104, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.4104 to -0.4367, BUGFIX, largely undo r6703
+## >>chng 14 mar 26, from -0.4367 to -0.4602, Move oxygen data to stout and chianti files
+monitor ionization volume Neon     3 -0.4602
+##
+## >>chng 06 aug 02, from -2.529 to -2.579, update O+2, N+2 CT
+## >>chng 06 nov 29, from -2.579 to -2.610 Badnell DR turned on
+## >>chng 14 jan 05, from -2.61 to -2.644, N to external databases
+## >>chng 23 mar 17, from -2.644 to -2.624, add SiS and Lamda model"
+monitor ionization volume Neon     4 -2.624
+##
+## >>chng 02 dec 13, from 20 to 30 zoning change
+## >>chng 08 dec 08, from 30 to 13, upper limit -> equals (r2515)
+## >>chng 09 jun 15, from 13 to 34, gradual approach to outer edge
+## >>chng 12 nov 28, from 34 to 35, Make HII dr limit symmetric
+## >>chng 15 mar 07, from 35 to 37, merging newmesh branch
+monitor nzone 37 error 0.01
+##
+## >>chng 02 dec 13, from 5.5 to 4.5, better conv
+## >>chng 03 may 17, from 4.5 to 5.5, actual is 4.9, reeval pump
+## >>chng 03 dec 08, from < 5.5 to < 6.5 chng zones, ots
+## >>chng 04 feb 15, from 6.5 to 7.5, sense changes in ion for all elem
+## >>chng 04 sep 25, from 7.5 to 8.5, incr temp toler 0.02 to 0.005
+## >>chng 05 dec 04, from 8.5 to 9.0 (8.57) unified FeII emissions
+## >>chng 06 nov 29, from -9.0 to -10 (9.1) Badnell DR turned on
+## >>chng 08 dec 08, from 10 to 9, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 9 to 16.69, merging newsolvers branch
+## >>chng 09 jan 08, from 16.69 to 17, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, disabled this assert since this model has too few zones for it to be reliable
+## assert itrzn 17 error 0.02
+##
+# nova_dqher.in
+# class nova 
+# ========================================
+# 
+
+This tests the code39s behavior in the limit posed by the
+metal rich low density nebula surrounding DQ Her (Ferland et al. 1984).
+Checks:
+-	Thickness exact 
+-	Thermal stability
+	High-Z gas
+	ionization at low temperature

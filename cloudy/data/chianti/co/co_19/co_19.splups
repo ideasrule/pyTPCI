@@ -1,0 +1,14 @@
+ 27 19  1  2  2 0.000e+00 1.111e+00 9.500e+00 4.137e-02 4.038e-02 3.942e-02 3.851e-02 3.765e-02 3.681e-02 3.481e-02 3.292e-02 2.964e-02 2.541e-02 2.179e-02
+ 27 19  1  3  1 2.376e-01 1.031e+01 2.100e+00 2.672e-01 2.540e-01 2.407e-01 2.249e-01 2.064e-01 1.879e-01 1.673e-01 1.466e-01 1.275e-01 1.098e-01 9.215e-02
+ 27 19  2  3  1 1.046e-01 9.203e+00 2.100e+00 1.346e-01 1.274e-01 1.202e-01 1.118e-01 1.023e-01 9.283e-02 8.280e-02 7.277e-02 6.330e-02 5.439e-02 4.547e-02
+ -1
+% filename: co_19.splups
+%oscillator strengths: interpolated using S VIII, Ca XII, Fe XVII, Ni XX
+% collision strengths: interpolated using S VIII, Ca XII, Fe XVII, Ni XX
+%produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+% Enrico Landi 1997
+
+Reference:
+Chianti  2022-02-18
+ -1

@@ -1,0 +1,200 @@
+title ionization in Auger-dominated limit
+#
+# commands controlling continuum =========
+laser 200 Ryd
+phi(h) 10
+#
+# commands for density & abundances =========
+hden 1
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+iterate  to convergence 
+constant temperature = 5
+#
+# commands controlling output    =========
+save overview "limit_laser_200.ovr"
+save performance "limit_laser_200.per"
+save monitors "limit_laser_200.asr" last
+#
+# commands giving the monitors    =========
+## >>chng 11 jul 12, from -2.237 to -2.264, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -2.264 to -2.235, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -2.235 to -2.194, BUGFIX, largely undo r6703
+monitor carbon ionization	2	-2.194
+## 
+## >>chng 06 nov 29, from -0.781 to -0.667, Badnell DR turned on
+monitor carbon ionization	3	-0.667
+## 
+## >>chng 06 nov 29, from -0.853 to -0.961, Badnell DR turned on
+monitor carbon ionization	4	-0.961
+## 
+monitor carbon ionization	5	-0.363
+monitor carbon ionization	6	-0.662
+monitor carbon ionization	7	-1.43
+## 
+## >>chng 06 nov 29, from -1.436 to -1.731, Badnell DR turned on
+## >>chng 11 jul 12, from -1.731 to -1.773, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.773 to -1.82, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -1.82 to -1.779, BUGFIX, largely undo r6703
+monitor oxygen ionization	2	-1.779
+## 
+## >>chng 06 nov 29, from -0.349 to -0.457, Badnell DR turned on
+monitor oxygen ionization	3	-0.457
+## 
+## >>chng 06 nov 29, from -0.682 to -0.620, Badnell DR turned on
+monitor oxygen ionization	4	-0.620
+## 
+## >>chng 06 nov 29, from -1.338 to -1.133, Badnell DR turned on
+monitor oxygen ionization	5	-1.133
+## 
+## >>chng 06 nov 29, from -1.443 to -1.47, Badnell DR turned on
+monitor oxygen ionization	6	-1.47
+## 
+## >>chng 06 nov 29, from -0.934 to -0.833, Badnell DR turned on
+monitor oxygen ionization	7	-0.833
+## 
+## >>chng 06 nov 29, from -1.069 to -0.966, Badnell DR turned on
+monitor oxygen ionization	8	-0.966
+## 
+## >>chng 06 nov 29, from -1.626 to -1.524, Badnell DR turned on
+monitor oxygen ionization	9	-1.524
+## 
+## >>chng 06 feb 03, from -3.130 to -2.320, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.320 to -2.229, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 24, from -2.229 to -2.205, turn on Badnell RR
+## >>chng 06 nov 29, from -2.205 to -1.615, Badnell DR turned on
+## >>chng 07 apr 30, from -1.615 to -1.930, log DR average, use mix S DR
+## >>chng 07 nov 29, from -1.930 to -1.870, update DR rates
+## >>chng 08 sep 19, from -1.87 to -1.648, new method for average Badnell DR
+## >>chng 11 apr 22, from -1.648 to -1.747, update Ar sequence Badnell DR rates
+## >>chng 11 sep 15, from -1.747 to -1.788, Chianti for Fe moderate to high ions
+monitor iron ionization	4	-1.788
+## 
+## >>chng 06 feb 03, from -2.861 to -2.051, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.051 to -1.957, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 24, from -1.957 to -1.933, turn on Badnell RR
+## >>chng 06 nov 29, from -1.933 to -1.344, Badnell DR turned on
+## >>chng 07 apr 30, from -1.344 to -1.659, log DR average, use mix S DR
+## >>chng 07 nov 29, from -1.659 to -1.599, update DR rates
+## >>chng 08 sep 19, from -1.599 to -1.377, new method for average Badnell DR
+monitor iron ionization	5	-1.377
+## 
+## >>chng 06 feb 03, from -2.336 to -1.695, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.695 to -1.603, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 24, from -1.603 to -1.579, turn on Badnell RR
+## >>chng 06 nov 29, from -1.579 to -0.989, Badnell DR turned on
+## >>chng 07 apr 30, from -0.989 to -0.893, log DR average, use mix S DR
+## >>chng 08 sep 19, from -0.893 to -0.9743, new method for average Badnell DR
+monitor iron ionization	6	-0.9743
+## 
+## >>chng 06 feb 03, from -1.865 to -1.512, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.512 to -1.409, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 24, from -1.409 to -1.385, turn on Badnell RR
+## >>chng 06 nov 29, from -1.385 to -0.477, Badnell DR turned on
+monitor iron ionization	7	-0.477
+## 
+## >>chng 06 feb 03, from -0.992 to -1.207, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.207 to -1.139, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 24, from -1.139 to -1.115, turn on Badnell RR
+## >>chng 06 nov 29, from -1.115 to -0.545, Badnell DR turned on
+monitor iron ionization	8	-0.545
+## 
+## >>chng 06 feb 03, from -0.289 to -0.374, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.374 to -0.295, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -0.295 to -0.929, Badnell DR turned on
+monitor iron ionization	9	-0.929
+## 
+## >>chng 06 feb 03, from -1.047 to -1.189, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.189 to -1.125, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -1.125 to -1.171, Badnell DR turned on
+monitor iron ionization	10	-1.171
+## 
+## >>chng 06 feb 03, from -0.998 to -1.126, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.126 to -1.088, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -1.088 to -1.823, Badnell DR turned on
+monitor iron ionization	11	-1.823
+## 
+## >>chng 06 feb 03, from -1.105 to -1.073, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.073 to -1.250, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -1.250 to -2.323, Badnell DR turned on
+monitor iron ionization	12	-2.323
+## 
+## >>chng 06 feb 03, from -1.360 to -1.051, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.051 to -1.254, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -1.254 to -1.338, update to Badnell dr
+## >>chng 06 nov 29, from -1.338 to -2.889, Badnell DR turned on
+monitor iron ionization	13	-2.889
+## 
+## >>chng 06 feb 03, from -1.822 to -1.431, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.431 to -1.742, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 11, from -1.742 to -1.704, new Badnell DR RR for Fe+13
+## >>chng 06 aug 17, from -1.704 to -1.754, update to Badnell dr
+## >>chng 06 nov 29, from -1.754 to -3.388, Badnell DR turned on
+monitor iron ionization	14	-3.388
+## 
+## >>chng 06 feb 03, from -2.111 to -1.528, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.528 to -1.804, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -1.804 to -1.902, update to Badnell dr
+## >>chng 06 nov 29, from -1.902 to -3.879, Badnell DR turned on
+## >>chng 07 apr 11, from -3.879 to -3.854, update Fe+14 DR Lukic et al 07
+## >>chng 11 apr 30, from -3.854 to -3.876, r4971 use badnell database dr rather than kuric+ ref, changes Fe14
+monitor iron ionization	15	-3.876
+## 
+## >>chng 06 feb 03, from -2.627 to -2.012, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.012 to -2.306, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 11, from -2.306 to -2.282, new Badnell DR RR for Fe+13
+## >>chng 06 aug 17, from -2.282 to -2.359, update to Badnell dr
+## >>chng 06 nov 29, from -2.359 to -3.940, Badnell DR turned on
+monitor iron ionization	16	-3.940
+## 
+## >>chng 06 feb 03, from -1.922 to -1.329, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.329 to -1.610, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -1.610 to -1.697, update to Badnell dr
+## >>chng 06 nov 29, from -1.697 to -3.539, Badnell DR turned on
+## >>chng 07 apr 30, from -3.539 to -3.514, log DR average, use mix S DR
+## >>chng 11 apr 30, from -3.514 to -3.536, r4971 use badnell database dr rather than kuric+ ref, changes Fe14
+monitor iron ionization	17	-3.536
+## 
+## >>chng 06 feb 03, from -2.110 to -1.945, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.945 to -2.229, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 12, from -1.945 to -2.225, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -2.225 to -2.312, update to Badnell dr
+## >>chng 06 nov 29, from -2.312 to -3.647, Badnell DR turned on
+## >>chng 07 apr 30, from -3.647 to -3.622, log DR average, use mix S DR
+## >>chng 11 apr 30, from -3.622 to -3.644, r4971 use badnell database dr rather than kuric+ ref, changes Fe14
+monitor iron ionization	18	-3.644
+## 
+## >>chng 06 feb 03, from -2.773 to -2.653, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.653 to -2.934, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -2.934 to -3.021, update to Badnell dr
+## >>chng 06 nov 29, from -3.021 to -4.007, Badnell DR turned on
+## >>chng 07 apr 30, from -4.007 to -3.982, log DR average, use mix S DR
+## >>chng 11 apr 30, from -3.982 to -4.004, r4971 use badnell database dr rather than kuric+ ref, changes Fe14
+monitor iron ionization	19	-4.004
+## 
+## >>chng 06 feb 03, from -3.871 to -3.505, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.505 to -2.229, use Savin & Gu DR to make mean DR
+## >>chng 06 jul 12, from -3.505 to -3.786, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -3.786 to -3.872, update to Badnell dr
+## >>chng 06 nov 29, from -3.872 to -4.904, Badnell DR turned on
+## >>chng 07 apr 30, from -4.904 to -4.879, log DR average, use mix S DR
+## >>chng 11 apr 30, from -4.879 to -4.901, r4971 use badnell database dr rather than kuric+ ref, changes Fe14
+monitor iron ionization	20	-4.901
+## 
+monitor niter 3 error 0.01
+# limit_laser_200.in
+# class limit 
+# ========================================
+# 
+
+This checks the calculation of ionization
+equilibrium.  The continuum is a laser peaked at 200 Ryd.
+It asserts ionization of C, O, and Fe.  their ionization is dominated
+by the Auger effect.
+
+Checks:
+Auger OK

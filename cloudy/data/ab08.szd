@@ -1,0 +1,6 @@
+# PAH and VSG size distribution from Abel et al., 2008, ApJ, 686, 1125
+2010403 # magic number for version control
+power  # choices are SSIZE, POWER, EXP1, EXP2, EXP3
+0.0004297278  # lower limit: 30 C atoms
+0.0010976816  # upper limit: 500 C atoms
+-3.5   # slope of power law distribution

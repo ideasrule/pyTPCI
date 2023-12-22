@@ -1,0 +1,19 @@
+title test the code recovers from abort in grid
+# 
+background
+extinguish 22
+#
+hden 0 vary
+grid 0 10 10
+#
+hextra -27 vary
+grid -27 -14 13
+#
+init "fast.ini"
+stop zone 1
+save grid "grid_corners.grd"
+save overview "grid_corners.ovr" no hash 
+
+The does a four model grid.  Two of the corners of the grid
+fail because the derived temperature is outside the temperature
+bounds of the code.  Models 0 and 3 are ok while models 1 and 2 abort.

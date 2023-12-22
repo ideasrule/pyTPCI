@@ -1,0 +1,145 @@
+commands:
+
+turn on large feii atom
+atom feii  
+sets flag FeII.lgFeIION
+
+options on atom feii command:
+levels xxx sets number of levels, xxx must be at least 16, 
+	but not greater than NFE2LEVN == 371
+slow, always evaluate the large atom in the cooling function, make no attempt to
+	avoid extra evaluations.  this slows things down by about5 - 10x, but puts the
+	model feii atom on the same par as all the other atoms
+
+=================================================================
+
+transition probabilities are in column 5 of fe2rad.dat
+dummy lines, have A = 1e-5
+
+=================================================================
+
+main array of lines
+EmLine Fe2LevN[ipHi][ilo]
+
+=================================================================
+
+punch feii lines command to produce large output file
+punch feii lines "file.txt" faintest, energy1 energy2
+file.txt is the name of the output file, it must be present and surrounded by double quotes
+the remaining three numbers are optional, and can be omitted from right to left
+first number is faintest line to punch relative to normalization line, log if negative
+	if not set then all lines will be punched
+second and third numbers are energies in rydbergs for the lines to be punched
+	if not set then all lines will be punched, if set then only lines that have wavelengths
+	corresponding to energies between these two will be punched
+	FeIIPunchLines does the actual work
+
+================================================================
+
+nFeIILevel_local - number of levels
+is currently set to NFE2LEVN=371 in declaration in FeIIZero
+NFE2LEVN is defined as 371 in atomfeii.h, this is largest possible atom
+	with current data
+
+nFeIILevel_local can be changed to smaller number before space is allocated
+	with the "atom feii levels xxx" command.  This command is totally
+	ignored after space is initially allocated, so in a grid calculation
+	only first command is honored.
+
+nFeIILevel_malloc is number of levels allocated when atom first set up.
+	when code recalled there after, nFeIILevel_local is reset to this
+
+nFeIILevel_local can be decreased as the calculation progresses as the temperature
+	becomes too small for Boltzmann factors to be evaluated 
+
+nFeIILevel_local can be reset to smaller values where FeIIBoltzmann is evaluated,
+	since for small temperatures upper levels can underflow to zero.  Atom
+	is trimmed down in this case
+
+================================================================
+
+FeII bands Bands 
+	/* [x][0] is center wavelength, [1] and [2] are upper and
+	 * lower bounds in Angstroms.  these are set in FeIIZero */
+	eff = FeIISumBand(FeII.iPredFe2[i][1],FeII.iPredFe2[i][2]);
+	/* emission from lage FeII atom, integrated over band */
+	linadd(eff,FeII.iPredFe2[i][0],"Fe2b",'i');
+
+fe2bands.dat has list of all bands
+
+all bands have line label Fe2b
+
+first number is an integer used as label in line output, should be center
+	wavelength in Angstroms
+second two labels are lower and upper range of band in Angstroms, vacuum
+	wavelength since simply converted to energy
+
+band data read into code in routine FeIIData
+
+band sums are done in FeIISumBand
+
+number of bands is variable 
+
+FeII binned continuum:
+	number of points nFeIIConBins
+	saved as FeII_Cont
+	output with punch feii continuum command 
+
+
+=================================================================
+
+punch feii departure coefficients "departure.txt" [ all]
+	punch departure coefficents for selected levels, 
+	optional keyword _all does all levels
+
+punch feii level populations "populations.txt" [ all]
+	punch level populations for selected levels, 
+	optional keyword _all does all levels
+
+===============================================================
+atomfeii.h has all includes
+all code is in pop371.c
+
+Fe2LevN[up][lo][ipnt] keeps track of atom
+Fe2SavN[hi][lo] save integrated intensities, incremented in FeIIAddLines
+
+/* this is the number of levels for the large FeII atom */
+#define	NFE2LEVN	371
+
+when atom turned on with feii verner command,
+fe2.chFeIIAtom is set to "Verner"
+and	fe2.lgFeIION is set true;
+
+FeII command parsed in ParseFeII
+pop371 called by cooliron.c
+
+final calls Fe2Lines to punch line set if set with punch verner command
+
+=================================================================
+
+data files read in when code initiates
+Cloudy calls atmdat_readin which calls FeIIData
+
+FeIIData actually reads in the files
+
+FeII_bands.ini contains list of feii bands
+
+fe2rad.dat :
+
+lower level number
+upper level number
+lower level statistical weight
+upper level statistical weight
+Einstein A coefficient, s**(-1)
+Energy, cm**(-1)
+type of transition (1 - allowed, 2 - semiforbidden, 3 - forbidden)
+
+fe2col.dat :
+
+lower level number
+upper level number
+collision strengths at 20 temperatures,
+1e3,3e3,5e3,7e3,1e4,12e3,15e3,17e3,2e4,25e3,3e4,35e3,4e4,45e3,5e4,6e4,7e4,8e
+4,9e4,1e5
+
+

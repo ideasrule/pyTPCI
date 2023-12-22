@@ -1,0 +1,86 @@
+    1    2        279.739      3.818e-02      1.570e+09 
+    1    3        223.018      9.797e-02      3.316e+09 
+    2    4         13.432      3.572e-02      6.622e+11 
+    3    4         13.598      7.044e-02      1.271e+12 
+    1    5         12.655      2.445e-01      5.093e+12 
+    1    6         12.613      4.909e-01      5.151e+12 
+    2    7         13.143      1.363e+00      1.320e+13 
+    3    7         13.302      2.691e-01      2.537e+12 
+    3    8         13.287      2.425e+00      1.528e+13 
+    2    9          9.873      7.260e-03      2.490e+11 
+    3    9          9.962      1.436e-02      4.830e+11 
+    5    9         38.692      8.320e-02      1.859e+11 
+    6    9         39.099      1.644e-01      3.590e+11 
+    1   10          9.499      5.994e-02      2.217e+12 
+    4   10         36.694      2.674e-01      6.624e+11 
+    7   10         39.040      4.267e-02      9.333e+10 
+    1   11          9.488      1.200e-01      2.225e+12 
+    4   11         36.542      5.374e-01      6.716e+11 
+    7   11         38.867      8.578e-03      9.473e+09 
+    8   11         38.996      7.692e-02      8.433e+10 
+    2   12          9.806      2.438e-01      4.236e+12 
+    3   12          9.895      4.828e-02      8.227e+11 
+    5   12         37.688      1.183e+00      1.391e+12 
+    6   12         38.074      2.339e-01      2.690e+11 
+    3   13          9.891      4.347e-01      4.942e+12 
+    6   13         38.023      2.108e+00      1.621e+12 
+    7   14        -38.559      4.062e+00      3.037e+12 
+    8   14        -38.697      2.891e-01      2.146e+11 
+    8   15        -38.668      5.787e+00      3.227e+12 
+    2   16          8.802      2.648e-03      1.142e+11 
+    3   16          8.873      5.242e-03      2.221e+11 
+    5   16         26.202      1.764e-02      8.585e+10 
+    6   16         26.389      3.499e-02      1.677e+11 
+   10   16         84.011      1.347e-01      6.384e+10 
+   11   16         84.821      2.666e-01      1.237e+11 
+    1   17          8.518      2.431e-02      1.118e+12 
+    4   17         25.401      6.984e-02      3.610e+11 
+    7   17         26.504      8.270e-03      3.926e+10 
+    9   17         79.796      2.973e-01      1.554e+11 
+   12   17         84.436      1.063e-01      4.972e+10 
+    1   18          8.514      4.864e-02      1.120e+12 
+    4   18         25.364      1.399e-01      3.628e+11 
+    7   18         26.463      1.657e-03      3.948e+09 
+    8   18         26.522      1.488e-02      3.526e+10 
+    9   18         79.428      5.977e-01      1.578e+11 
+   12   18         84.024      2.139e-02      5.055e+09 
+   13   18         84.277      1.919e-01      4.505e+10 
+    2   19          8.775      8.884e-02      1.927e+12 
+    3   19          8.846      1.761e-02      3.755e+11 
+    5   19         25.963      2.724e-01      6.746e+11 
+    6   19         26.146      5.405e-02      1.319e+11 
+   10   19         81.599      1.150e+00      2.883e+11 
+   11   19         82.363      2.276e-01      5.594e+10 
+   14   19        -83.764      5.085e-02      1.209e+10 
+    3   20          8.844      1.585e-01      2.254e+12 
+    6   20         26.133      4.867e-01      7.924e+11 
+   11   20         82.238      2.052e+00      3.373e+11 
+   14   20        -83.624      3.639e-03      5.785e+08 
+   15   20        -83.760      7.265e-02      1.151e+10 
+ -1
+%filename:  cr_22.wgfa
+
+Observed wavelengths:  Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2012). NIST Atomic Spectra Database (ver. 5.0), [Online]. Available: http://physics.nist.gov/asd [2012, September 14]. National Institute of Standards and Technology, Gaithersburg, MD.
+
+Theoretical energies, gf and A-values:  Autostructure calculation
+A Breit-Pauli distorted wave implementation for AUTOSTRUCTURE
+Badnell, N.R., 2011, Computer Physics Communications, 182, 1528
+ADSref:  http://adsabs.harvard.edu/abs/2011CoPhC.182.1528B
+
+wavelengths determined from energy levels
+
+wavelengths:  calculations of U. Safronova reported in Kato et al., 1997, ADNDT, 67, 225.
+ADS http://adsabs.harvard.edu/abs/1997ADNDT..67..225K
+updated by U. Safronova, 2001, private communication
+ theoretical energy levels corrected by Safronova data on an inner term basis
+ wavelengths of Safronova have been treated as "observed wavelengths" 
+
+ minimum branching ratio =   1.00e-05
+
+produced as a part of the 'CHIANTI' atomic database for astrophysical spectroscopy
+ K. Dere (GMU) - 2014 November 19
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

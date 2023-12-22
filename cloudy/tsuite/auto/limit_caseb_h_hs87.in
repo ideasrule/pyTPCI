@@ -1,0 +1,240 @@
+title "Case B from Hummer and Storey"
+init "honly.ini"
+laser 1.1
+ionization parameter -1
+constant temperature 4
+case b hummer no photoionization no pdest
+database h-like element hydrogen levels resolved 40
+database h-like element hydrogen collapsed levels 70
+no induced processes
+no level2
+no scattering escape
+set dr -20
+hden 4  
+stop zone 1
+iterate
+print populations h-like
+print departure h-like
+save overview "limit_caseb_h_hs87.ovr"
+save performance "limit_caseb_h_hs87.per"
+save monitors "limit_caseb_h_hs87.asr"
+# 
+## >>chng 11 nov 16, from 0 to 0, adjust newmole monitors
+monitor Case B H-like hydrogen error 0.15 range 1000 30000A
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A    1.0000 error 0.02
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A    1.0000 error 0.02
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "CaBo" 4861.32A    1.0000 error 0.02
+## >>chng 13 jul 24, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "H  1" 6562.80A    2.8500 error 0.02
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A    1.0000 error 0.02
+## >>chng 13 jul 24, wl from 4340 to 4340.49A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 4340.49A to 4340.46A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4340.46A to 4340.47A, update NIST energies
+## >>chng 21 aug 18, wl from 4340.47A to 4340.46A, revert to PvH energies for H
+monitor line "H  1" 4340.46A    0.4690 error 0.02
+## >>chng 13 jul 24, wl from 4102 to 4101.76A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 4101.76A to 4101.73A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4101.73A to 4101.74A, update NIST energies
+## >>chng 21 aug 18, wl from 4101.74A to 4101.73A, revert to PvH energies for H
+monitor line "H  1" 4101.73A    0.2600 error 0.02
+## >>chng 13 jul 24, wl from 3970 to 3970.09A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3970.09A to 3970.07A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3970.07A to 3970.08A, update NIST energies
+## >>chng 21 aug 18, wl from 3970.08A to 3970.07A, revert to PvH energies for H
+monitor line "H  1" 3970.07A    0.1590 error 0.02
+## >>chng 13 jul 24, wl from 3889 to 3889.07A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3889.07A to 3889.05A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3889.05A to 3889.06A, update NIST energies
+## >>chng 21 aug 18, wl from 3889.06A to 3889.05A, revert to PvH energies for H
+monitor line "H  1" 3889.05A    0.1050 error 0.02
+## >>chng 13 jul 24, wl from 3835 to 3835.40A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3835.40A to 3835.38A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3835.38A to 3835.39A, update NIST energies
+## >>chng 21 aug 18, wl from 3835.39A to 3835.38A, revert to PvH energies for H
+monitor line "H  1" 3835.38A    0.0734 error 0.02
+## >>chng 13 jul 24, wl from 3798 to 3797.92A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3797.92A to 3797.89A, up Rydberg constant
+## >>chng 20 aug 22, wl from 3797.89A to 3797.90A, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 3797.90A    0.0533 error 0.02
+## >>chng 13 jul 24, wl from 3771 to 3770.65A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3770.65A to 3770.63A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3770.63A to 3770.64A, update NIST energies
+## >>chng 21 aug 18, wl from 3770.64A to 3770.63A, revert to PvH energies for H
+monitor line "H  1" 3770.63A    0.0400 error 0.02
+## >>chng 13 jul 24, wl from 3750 to 3750.17A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3750.17A to 3750.15A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3750.15A to 3750.16A, update NIST energies
+## >>chng 21 aug 18, wl from 3750.16A to 3750.15A, revert to PvH energies for H
+monitor line "H  1" 3750.15A    0.0309 error 0.02
+## >>chng 13 jul 24, wl from 3734 to 3734.39A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3734.39A to 3734.36A, up Rydberg constant
+## >>chng 20 aug 22, wl from 3734.36A to 3734.37A, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 3734.37A    0.0244 error 0.02
+## >>chng 13 jul 24, wl from 3722 to 3721.96A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3721.96A to 3721.93A, up Rydberg constant
+## >>chng 20 aug 22, wl from 3721.93A to 3721.94A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 3721.94A to 3721.95A, update NIST energies
+## >>chng 21 aug 18, wl from 3721.95A to 3721.94A, revert to PvH energies for H
+monitor line "H  1" 3721.94A    0.0197 error 0.02
+## >>chng 13 jul 24, wl from 3712 to 3711.99A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3711.99A to 3711.97A, up Rydberg constant
+## >>chng 21 mar 16, wl from 3711.97A to 3711.98A, update NIST energies
+## >>chng 21 aug 18, wl from 3711.98A to 3711.97A, revert to PvH energies for H
+monitor line "H  1" 3711.97A    0.0162 error 0.02
+## >>chng 13 jul 24, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "H  1" 1.87510m  0.3320 error 0.02
+## >>chng 13 jul 24, wl from 1.282m to 1.28181m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.28181m to 1.28180m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.28180m to 1.28181m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.28181m  0.1620 error 0.02
+## >>chng 13 jul 24, wl from 1.094m to 1.09381m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.09381m to 1.09380m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.09380m to 1.09381m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.09381m  0.0901 error 0.02
+## >>chng 13 jul 24, wl from 1.005m to 1.00494m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.00494m to 1.00493m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.00493m to 1.00494m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.00494m to 1.00493m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 1.00493m to 1.00494m, revert to PvH energies for H
+monitor line "H  1" 1.00494m  0.0553 error 0.02
+## >>chng 13 jul 24, wl from 9546A to 9545.99A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 9545.99A to 9545.93A, up Rydberg constant
+## >>chng 20 aug 22, wl from 9545.93A to 9545.97A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9545.97A to 9545.95A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9545.95A to 9545.97A, revert to PvH energies for H
+monitor line "H  1" 9545.97A   0.0365 error 0.02
+## >>chng 13 jul 24, wl from 9229A to 9229.03A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 9229.03A to 9228.97A, up Rydberg constant
+## >>chng 20 aug 22, wl from 9228.97A to 9229.02A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9229.02A to 9229.00A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9229.00A to 9229.02A, revert to PvH energies for H
+monitor line "H  1" 9229.02A   0.0254 error 0.02
+## >>chng 13 jul 24, wl from 9015A to 9014.92A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 9014.92A to 9014.87A, up Rydberg constant
+## >>chng 20 aug 22, wl from 9014.87A to 9014.91A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9014.91A to 9014.89A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9014.89A to 9014.91A, revert to PvH energies for H
+monitor line "H  1" 9014.91A   0.0184 error 0.02
+## >>chng 13 jul 24, wl from 8863A to 8862.79A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 8862.79A to 8862.74A, up Rydberg constant
+## >>chng 20 aug 22, wl from 8862.74A to 8862.79A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8862.79A to 8862.77A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8862.77A to 8862.79A, revert to PvH energies for H
+monitor line "H  1" 8862.79A   0.0138 error 0.02
+## >>chng 13 jul 24, wl from 8750A to 8750.48A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 8750.48A to 8750.43A, up Rydberg constant
+## >>chng 20 aug 22, wl from 8750.43A to 8750.48A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8750.48A to 8750.46A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8750.46A to 8750.48A, revert to PvH energies for H
+monitor line "H  1" 8750.48A   0.0106 error 0.02
+## >>chng 13 jul 24, wl from 8665A to 8665.03A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 8665.03A to 8664.98A, up Rydberg constant
+## >>chng 20 aug 22, wl from 8664.98A to 8665.02A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8665.02A to 8665.00A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8665.00A to 8665.02A, revert to PvH energies for H
+monitor line "H  1" 8665.02A   0.0084 error 0.02
+## >>chng 13 jul 24, wl from 8598A to 8598.40A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 8598.40A to 8598.35A, up Rydberg constant
+## >>chng 20 aug 22, wl from 8598.35A to 8598.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8598.40A to 8598.38A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8598.38A to 8598.40A, revert to PvH energies for H
+monitor line "H  1" 8598.40A   0.0067 error 0.02
+## >>chng 13 jul 24, wl from 8545A to 8545.39A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 8545.39A to 8545.34A, up Rydberg constant
+## >>chng 20 aug 22, wl from 8545.34A to 8545.39A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8545.39A to 8545.37A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8545.37A to 8545.39A, revert to PvH energies for H
+monitor line "H  1" 8545.39A   0.0055 error 0.02
+## >>chng 11 nov 16, from 0.0777 to 0.0794, adjust newmole monitors
+## >>chng 13 jul 24, wl from 4.051m to 4.05113m, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.0794 to 0.0772, Fran bug fix
+## >>chng 17 may 25, wl from 4.05113m to 4.05113m, up Rydberg constant
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "H  1" 4.05115m  0.0772 error 0.02
+## >>chng 13 jul 24, wl from 2.625m to 2.62515m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 2.62515m to 2.62513m, up Rydberg constant
+## >>chng 20 aug 22, wl from 2.62513m to 2.62515m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.62515m to 2.62514m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.62514m to 2.62515m, revert to PvH energies for H
+monitor line "H  1" 2.62515m  0.0447 error 0.02
+## >>chng 13 jul 24, wl from 2.166m to 2.16553m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 2.16553m to 2.16551m, up Rydberg constant
+## >>chng 20 aug 22, wl from 2.16551m to 2.16553m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.16553m to 2.16552m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.16552m to 2.16553m, revert to PvH energies for H
+monitor line "H  1" 2.16553m  0.0275 error 0.02
+## >>chng 13 jul 24, wl from 1.945m to 1.94456m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.94456m to 1.94454m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.94454m to 1.94456m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.94456m to 1.94455m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 1.94455m to 1.94456m, revert to PvH energies for H
+monitor line "H  1" 1.94456m  0.0181 error 0.02
+## >>chng 13 jul 24, wl from 1.817m to 1.81741m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.81741m to 1.81740m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.81740m to 1.81741m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.81741m  0.0126 error 0.02
+## >>chng 13 jul 24, wl from 1.736m to 1.73621m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.73621m to 1.73620m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.73620m to 1.73621m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.73621m  0.0091 error 0.02
+## >>chng 13 jul 24, wl from 1.681m to 1.68065m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.68065m to 1.68064m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.68064m to 1.68065m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.68065m  0.0068 error 0.02
+## >>chng 13 jul 24, wl from 1.641m to 1.64072m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.64072m to 1.64071m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.64071m to 1.64072m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.64072m to 1.64071m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 1.64071m to 1.64072m, revert to PvH energies for H
+monitor line "H  1" 1.64072m  0.0052 error 0.02
+## >>chng 13 jul 24, wl from 1.611m to 1.61093m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.61093m to 1.61092m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.61092m to 1.61093m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.61093m  0.0041 error 0.02
+## >>chng 13 jul 24, wl from 1.588m to 1.58805m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.58805m to 1.58804m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.58804m to 1.58805m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.58805m  0.0033 error 0.02
+## >>chng 08 apr 30, from 0.0027 to 0.00265 H, He topoff change
+## >>chng 13 jul 24, wl from 1.570m to 1.57007m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.57007m to 1.57006m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.57006m to 1.57007m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.57007m to 1.57006m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 1.57006m to 1.57007m, revert to PvH energies for H
+monitor line "H  1" 1.57007m  0.00265 error 0.02
+#
+# limit_caseb_h_hs87.in
+# class limit
+

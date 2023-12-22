@@ -1,0 +1,43 @@
+title test energy conservation with vastly optically thick dust
+#
+# commands controlling continuum =========
+black 500 STE
+#
+# commands for density & abundances =========
+init "honly.ini"
+hden 0
+grains ism single graphite 
+#
+# commands controlling geometry  =========
+stop Av 1000
+sphere 
+stop temperature 100K
+#
+# other commands for details     =========
+iterate
+constant temper 500 K
+no grain gas collisional energy exchange
+no molecules 
+cosmic rays background 
+#
+# commands controlling output    =========
+save grain temperature "grains_conserve_pp.grntem"
+save overview "grains_conserve_pp.ovr"
+save dr "grains_conserve_pp.dr"
+save continuum units microns "grains_conserve_pp.con"
+save line cumulative "grains_conserve_pp.cum"
+TALL 10000A
+end of line
+#
+# commands giving the monitors    =========
+monitor grain temperature 1 500K
+monitor Tu 500K error 0.02
+#
+# grains_conserve_pp.in
+# class limit 
+# ========================================
+# 
+
+This tests that multiple absorption / reemission by dust conserves energy
+Energy density and grain temperatures should be exactly 500 K
+

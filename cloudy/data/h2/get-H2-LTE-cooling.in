@@ -1,0 +1,15 @@
+%
+% Run this sim to generate the file that contains the H2 LTE cooling per
+% molecule.  This is used by the small H2 model as the cooling at the high
+% density limit.
+%
+database H2 limit off
+coronal 3 K vary
+grid 0.45 10 0.025 log
+cosmic ray background -4
+abundances primordial
+hden 10
+set dr 0
+stop zone 1
+iterate to convergence
+save h2 cooling per molecule "lte_cooling.dat" last no hash

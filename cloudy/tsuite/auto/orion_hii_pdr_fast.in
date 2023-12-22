@@ -1,0 +1,378 @@
+title constant gas pressure H+ region/PDR
+# much faster due to physics disabled by fast.ini
+#
+# commands controlling continuum =========
+# the incident continuum is two parts
+# star and flux of photons striking it
+## >>chng 03 sep 12, now go deep into omc1 and cannot assume plane par geometry
+# this is the result of this command
+# table star kurucz 39600 K
+# and makes it possible to run these orion sims without
+# installing the stellar atmosphere files 
+table SED "star_kurucz_39600.dat" 
+Q(H) 49
+## >>chng 03 apr 30, add cosmic rays to model
+# add cosmic rays, which are important at depth
+cosmic rays, background
+# plus hot brems 
+brems 6
+phi(h) 10
+# 
+# commands for density & abundances =========
+hden 4
+init file="fast.ini"
+abundances hii region no grains
+# single sized grain with no quantum heating 
+grains orion no qheat single 
+#
+# commands controlling geometry  =========
+radius 17.4507
+sphere 
+# let it go into the molecular cloud
+stop temperature 10 linear
+# this is roughly the thickness of OMC1
+stop thickness 1 linear parsec 
+# mimic existence of unmodeled molecular gas with double command
+double 
+#
+# other commands for details     =========
+failures 3
+iterate
+# make constant gas pressure since fast turned off line radiation pressure
+constant gas pressure 
+# the observed microturbulence 
+turbulence 8 km/sec
+# we have a spherical geometry but want to simulate observing
+# through a spectrometer's slit.  use the aperture
+# command for this
+aperture beam 
+#
+# commands controlling output    =========
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+normalize to "CaBo" 4861.32A
+print line faint -4
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save performance "orion_hii_pdr_fast.per"
+save overview last "orion_hii_pdr_fast.ovr"
+save heating "orion_hii_pdr_fast.het"
+save cooling "orion_hii_pdr_fast.col"
+save dr last "orion_hii_pdr_fast.dr"
+save results last "orion_hii_pdr_fast.rlt"
+save continuum last "orion_hii_pdr_fast.con" units microns
+save ionizing continuum last "orion_hii_pdr_fast.ion"
+save hydrogen 21 cm last "orion_hii_pdr_fast.21cm"
+save hydrogen lya last "orion_hii_pdr_fast.lya" 
+save element silicon last "orion_hii_pdr_fast.sil" 
+save element sulphur last "orion_hii_pdr_fast.sul" 
+save monitors last "orion_hii_pdr_fast.asr"
+#
+# commands giving the monitors    =========
+## >>chng 04 jan 24, from -0.0096 to 0.0171, rescale orion dust to gas
+## >>chng 03 sep 12, from plan par to spherical geometry,
+## all lines changed, so removed history
+#
+## >>chng 06 nov 29, from 0.017 to 0.062, Badnell DR turned on
+## >>chng 11 jul 12, from 0.062 to 0.0888, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 0.0888 to 0.0628, BUGFIX, largely undo r6703
+monitor line luminosity "o  3" 51.8004m 0.0628
+##
+## >>chng 10 mar 05, from 0.7519 to 0.7729, changes caused by r3848 atomic data update
+## >>chng 11 jul 12, from 0.7729 to 0.7258, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 0.7258 to 0.7636, BUGFIX, largely undo r6703
+monitor line luminosity "blnd"  3727 0.7636
+##
+## >>chng 06 nov 29, from -1.715 to -1.552, Badnell DR turned on
+## >>chng 14 mar 26, from -1.552 to -1.65, Move oxygen data to stout and chianti files
+## >>chng 23 sep 12, from -1.65 to -1.682, update fast.ini
+monitor line luminosity "O  1"  6300.30 -1.682 
+##
+## >>chng 06 nov 29, from -0.0695 to -2.540 Badnell DR turned on
+## >>chng 08 apr 30, from -2.540 to -2.521 H, He topoff change
+## >>chng 11 jul 12, from -2.521 to -2.568, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -2.568 to -2.535, BUGFIX, largely undo r6703
+## >>chng 14 mar 26, from -2.535 to -2.427, Move oxygen data to stout and chianti files
+## >>chng 15 may 14, from -2.427 to -2.4, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -2.4 to -2.422, update DR suppression in r10716
+## >>chng 16 dec 20, from -2.422 to -2.4, add secondary autoionization to DR suppression
+## >>chng 23 sep 12, from -2.4 to -0.5578, update fast.ini
+monitor line luminosity "o  1" 63.1679m -0.5578 
+##
+## >>chng 06 nov 29, from -1.272 to -1.828, Badnell DR turned on
+## >>chng 07 jan 20, from -1.828 to -1.807, e2 bug
+## >>chng 07 oct 22, from -1.807 to -1.784, resolve l-levels of h-like sequence
+## >>chng 11 jul 12, from -1.784 to -1.894, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -1.894 to -1.78, BUGFIX, largely undo r6703
+## >>chng 14 mar 26, from -1.78 to -1.818, Move oxygen data to stout and chianti files
+## >>chng 15 may 14, from -1.818 to -1.796, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -1.796 to -1.816, update DR suppression in r10716
+## >>chng 16 dec 20, from -1.816 to -1.796, add secondary autoionization to DR suppression
+## >>chng 23 sep 12, from -1.796 to -1.314, update fast.ini
+monitor line luminosity "c  2" 157.636m -1.314 
+##
+## >>chng 06 nov 29, from -0.863 to -2.157, Badnell DR turned on
+## >>chng 07 nov 29, from -2.157 to -2.058 update DR rates
+## >>chng 11 jul 12, from -2.058 to -2.157, enable fit to Badnell DR suppression
+## >>chng 12 oct 13, from -2.157 to -2.069, Badnell revise DR collisional suppression fit
+## >>chng 12 nov 01, from -2.069 to -2.099, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 23 sep 12, from -2.099 to -1.566, update fast.ini
+monitor line luminosity "si 2" 34.8046m -1.566
+##
+## >>chng 06 nov 29, from 24.759 to 21.255 Badnell DR turned on
+## >>chng 11 jul 12, from 21.25 to 21.3, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from 21.3 to 21.24, adjust newmole monitors
+## >>chng 13 feb 01, from 21.24 to 21.19, BUGFIX, largely undo r6703
+## >>chng 14 aug 28, from 21.19 to 21.26, EleyRideal H2 formation
+## >>chng 23 sep 12, from 21.26 to 21.79, update fast.ini
+monitor h2 column density 21.79 error 0.1
+##
+## >>chng 06 nov 29, from 20.387 to 13.544 Badnell DR turned on
+## >>chng 11 jul 12, from 13.54 to 13.71, enable fit to Badnell DR suppression
+## >>chng 12 apr 09, from 13.71 to 13.79, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 feb 01, from 13.79 to 13.65, BUGFIX, largely undo r6703
+## >>chng 21 sep 11, from 13.65 to 13.76, LAMDA update
+## >>chng 21 nov 04, from 13.76 to 13.63, update mole co data
+## >>chng 23 may 15, from 13.63 to 13.79, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from 13.79 to 15.78, update fast.ini
+monitor co column density 15.78 error 0.15
+##
+## >>chng 21 jun 17, from 1 to 10.12, first run
+## >>chng 21 sep 11, from 10.12 to 8.467, LAMDA update
+## >>chng 21 nov 04, from 8.467 to 8.338, update mole co data
+## >>chng 23 sep 12, from 8.338 to 9.039, update fast.ini
+monitor "ArH+" column density 9.039 error 0.1
+##
+## >>chng 06 nov 29, from -3.164 to -7.428, Badnell DR turned on
+## >>chng 07 oct 11, from -7.428 to -7.450, finer zoning, inc err
+## >>chng 07 oct 22, from -7.450 to -7.394, resolve l-levels of h-like sequence
+## >>chng 10 mar 02, from -7.394 to -7.115, fix botches after CO model switch
+## >>chng 11 jul 12, from -7.115 to -7.047, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -7.047 to -6.987, adjust newmole monitors
+## >>chng 12 jul 01, from -6.987 to -6.949, update Badnell DR to 13-electron iso sequence
+## >>chng 13 feb 01, from -6.949 to -7.014, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 14, from -7.014 to -7.062, CollisSuppres, final version from Dragan Nikolic
+## >>chng 21 sep 11, from -7.062 to -6.939, LAMDA update
+## >>chng 21 nov 04, from -6.939 to -7.059, update mole co data
+## >>chng 23 may 15, from -7.059 to -6.911, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -6.911 to -5.846, update fast.ini
+monitor line luminosity "CO  " 650.074m  -5.846 error 0.1
+##
+## >>chng 06 nov 29, from -2.886 to -7.808, Badnell DR turned on
+## >>chng 07 oct 11, from -7.808 to -7.830, finer zoning, inc err
+## >>chng 07 oct 22, from -7.830 to -7.759, resolve l-levels of h-like sequence
+## >>chng 10 mar 02, from -7.759 to -7.327, fix botches after CO model switch
+## >>chng 11 nov 16, from -7.327 to -7.239, adjust newmole monitors
+## >>chng 12 oct 22, from -7.239 to -7.2, zone tau in rt_line_one
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 14 aug 28, from -7.2 to -7.271, EleyRideal H2 formation
+## >>chng 21 sep 11, from -7.271 to -7.159, LAMDA update
+## >>chng 21 nov 04, from -7.159 to -7.268, update mole co data
+## >>chng 23 may 15, from -7.268 to -7.139, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -7.139 to -6.51, update fast.ini
+monitor line luminosity "CO  " 520.089m  -6.51 error 0.1
+##
+## >>chng 06 nov 29, from -2.677 to -8.422, Badnell DR turned on
+## >>chng 07 oct 22, from -8.422 to -8.356, resolve l-levels of h-like sequence
+## >>chng 10 mar 02, from -8.356 to -7.734, fix botches after CO model switch
+## >>chng 11 jul 12, from -7.734 to -7.795, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -7.795 to -7.701, adjust newmole monitors
+## >>chng 12 apr 09, from -7.701 to -7.674, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 feb 01, from -7.674 to -7.597, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -7.597 to -7.622, Move oxygen data to stout and chianti files
+## >>chng 14 aug 28, from -7.622 to -7.696, EleyRideal H2 formation
+## >>chng 19 jul 30, from -7.696 to -7.676, split He I 2 ^3P_J
+## >>chng 21 sep 11, from -7.676 to -7.578, LAMDA update
+## >>chng 21 nov 04, from -7.578 to -7.677, update mole co data
+## >>chng 23 may 15, from -7.677 to -7.566, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -7.566 to -7.066, update fast.ini
+monitor line luminosity "CO  " 433.438m  -7.066
+##
+## assert line luminosity "CO  " 369.8m  -2.520
+## assert line luminosity "CO  " 323.6m  -2.410
+## assert line luminosity "CO  " 287.7m  -2.358
+## assert line luminosity "CO  " 258.9m  -2.366
+## assert line luminosity "CO  " 235.4m  -2.464
+## assert line luminosity "CO  " 215.7m  -2.863
+##
+## >>chng 05 dec 22, from 1000 to 800 (716), rationalize zone asserts
+## >>chng 07 oct 29, from 800 to 654, change from "<" to "="
+## >>chng 08 dec 13, from 654 to 642, merging newsolvers branch
+## >>chng 11 aug 06, from 642 to 538, add default min dr rel to depth
+## >>chng 11 nov 16, from 538 to 602, adjust newmole monitors
+## >>chng 14 aug 28, from 602 to 596, EleyRideal H2 formation
+## >>chng 15 mar 07, from 596 to 619, merging newmesh branch
+## >>chng 23 sep 12, from 619 to 737, update fast.ini
+monitor nzone 737 error 0.01
+##
+## >>chng 04 sep 16, from 11 to 16, incre edentrue convergence
+## >>chng 04 dec 08, from 16 to 19 co-ion feedback, check converg
+## >>chng 08 dec 08, from 19 to 11.63, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 11.63 to 34, merging newsolvers branch
+## >>chng 09 jan 16, from 34 to 34.29, average of 10 runs
+## >>chng 11 jun 14, from 34.29 to 31.2, new Te solver
+## >>chng 11 jun 22, from 31.2 to 30.59, tune Te solver
+## >>chng 11 aug 11, use default error, monitors were not being saved so
+## do not have a history of this
+## >>chng 11 nov 16, from 30.59 to 22.24, adjust newmole monitors
+## >>chng 13 nov 05, from 22.24 to 11.83, convergence branch changes
+## >>chng 14 apr 07, from 11.83 to 9.319, move H/C out of ConvBase loop
+monitor itrzn 9.319
+##
+## >>chng 13 jun 27, from -8.869 to -9.286, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -9.286 to -8.856, update LAMDA to 2015
+## >>chng 20 aug 03, from -8.856 to -8.758, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from -8.758 to -8.718, further update to McCall CR-related rate
+## >>chng 23 sep 12, from -8.718 to -6.309, update fast.ini
+monitor "H2O " 538.142m line intensity -6.309
+## >>chng 13 jun 27, from -7.357 to -9.282, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 14, from -9.282 to -9.312, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -9.312 to -9.286, update DR suppression in r10716
+## >>chng 16 dec 20, from -9.286 to -9.311, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -9.311 to -9.582, LAMDA update
+## >>chng 21 nov 04, from -9.582 to -9.671, update mole co data
+## >>chng 23 sep 12, from -9.671 to -7.725, update fast.ini
+monitor "HNC " 1652.90m  line intensity -7.725
+## >>chng 13 jun 27, from -8.563 to -9.845, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 14 aug 28, from -9.845 to -9.822, EleyRideal H2 formation
+## >>chng 21 sep 11, from -9.822 to -9.293, LAMDA update
+## >>chng 21 nov 04, from -9.293 to -9.591, update mole co data
+## >>chng 23 may 15, from -9.591 to -9.705, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -9.705 to -8.365, update fast.ini
+monitor "HCS+" 1755.88m  -8.365 line intensity
+## >>chng 13 jun 27, from -7.453 to -8.216, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 14, from -8.216 to -8.25, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 aug 03, from -8.25 to -8.279, update LAMDA to 2015
+## >>chng 15 oct 14, from -8.279 to -8.235, update DR suppression in r10716
+## >>chng 16 dec 20, from -8.235 to -8.277, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -8.277 to -7.762, LAMDA update
+## >>chng 21 nov 04, from -7.762 to -8.048, update mole co data
+## >>chng 23 may 15, from -8.048 to -8.17, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -8.17 to -6.61, update fast.ini
+monitor "CS  " 3058.86m  -6.61 line intensity
+## >>chng 13 jun 27, from -7.288 to -8.759, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 14 aug 28, from -8.759 to -8.785, EleyRideal H2 formation
+## >>chng 15 may 14, from -8.785 to -8.817, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -8.817 to -8.781, update DR suppression in r10716
+## >>chng 16 dec 20, from -8.781 to -8.819, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -8.819 to -8.671, LAMDA update
+## >>chng 21 nov 04, from -8.671 to -8.814, update mole co data
+## >>chng 23 may 15, from -8.814 to -8.642, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -8.642 to -6.573, update fast.ini
+monitor "CO  " 2600.05m  -6.573 line intensity
+## >>chng 13 jun 27, from -6.463 to -7.52, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 14 aug 28, from -7.52 to -7.548, EleyRideal H2 formation
+## >>chng 15 may 14, from -7.548 to -7.578, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -7.578 to -7.546, update DR suppression in r10716
+## >>chng 16 dec 20, from -7.546 to -7.58, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -7.58 to -7.439, LAMDA update
+## >>chng 21 nov 04, from -7.439 to -7.575, update mole co data
+## >>chng 23 may 15, from -7.575 to -7.405, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -7.405 to -5.583, update fast.ini
+monitor "CO  " 1300.05m  -5.583 line intensity
+## >>chng 13 jun 27, from -6.149 to -7.056, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 14 aug 28, from -7.056 to -7.095, EleyRideal H2 formation
+## >>chng 15 may 14, from -7.095 to -7.119, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -7.119 to -7.094, update DR suppression in r10716
+## >>chng 16 dec 20, from -7.094 to -7.119, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -7.119 to -6.987, LAMDA update
+## >>chng 21 nov 04, from -6.987 to -7.116, update mole co data
+## >>chng 23 may 15, from -7.116 to -6.954, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -6.954 to -5.448, update fast.ini
+monitor "CO  " 866.727m  -5.448 line intensity
+## >>chng 13 jun 27, from -6.177 to -6.99, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 14 aug 28, from -6.99 to -7.047, EleyRideal H2 formation
+## >>chng 15 sep 28, from -7.047 to -7.067, degeneration criteria and lifetime changes to higher initial level
+## >>chng 16 oct 21, from -7.067 to -7.045, new l-changing rates from Hlike_HS87 reintegration
+## >>chng 21 sep 11, from -7.045 to -6.939, LAMDA update
+## >>chng 21 nov 04, from -6.939 to -7.059, update mole co data
+## >>chng 23 may 15, from -7.059 to -6.911, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -6.911 to -5.846, update fast.ini
+monitor "CO  " 650.074m  -5.846 line intensity
+## >>chng 13 jun 27, from -6.485 to -7.192, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 14 aug 28, from -7.192 to -7.271, EleyRideal H2 formation
+## >>chng 21 sep 11, from -7.271 to -7.159, LAMDA update
+## >>chng 21 nov 04, from -7.159 to -7.268, update mole co data
+## >>chng 23 may 15, from -7.268 to -7.139, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -7.139 to -6.51, update fast.ini
+monitor "CO  " 520.089m  -6.51 line intensity
+## >>chng 13 jun 27, from -6.954 to -7.594, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -7.594 to -7.622, Move oxygen data to stout and chianti files
+## >>chng 14 aug 28, from -7.622 to -7.696, EleyRideal H2 formation
+## >>chng 19 jul 30, from -7.696 to -7.676, split He I 2 ^3P_J
+## >>chng 21 sep 11, from -7.676 to -7.578, LAMDA update
+## >>chng 21 nov 04, from -7.578 to -7.677, update mole co data
+## >>chng 23 may 15, from -7.677 to -7.566, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -7.566 to -7.066, update fast.ini
+monitor "CO  " 433.438m  -7.066 line intensity
+## >>chng 13 jun 27, from -7.48 to -8.159, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -8.159 to -8.198, Move oxygen data to stout and chianti files
+## >>chng 14 aug 28, from -8.198 to -8.282, EleyRideal H2 formation
+## >>chng 15 may 14, from -8.282 to -8.256, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -8.256 to -8.284, update DR suppression in r10716
+## >>chng 16 dec 20, from -8.284 to -8.252, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -8.252 to -8.155, LAMDA update
+## >>chng 21 nov 04, from -8.155 to -8.245, update mole co data
+## >>chng 23 may 15, from -8.245 to -8.152, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -8.152 to -7.481, update fast.ini
+monitor "CO  " 371.549m  -7.481 line intensity
+## >>chng 13 jun 27, from -8.049 to -8.857, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -8.857 to -8.91, Move oxygen data to stout and chianti files
+## >>chng 14 aug 28, from -8.91 to -9, EleyRideal H2 formation
+## >>chng 15 may 14, from -9 to -8.959, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -8.959 to -9.002, update DR suppression in r10716
+## >>chng 16 dec 20, from -9.002 to -8.953, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -8.953 to -8.863, LAMDA update
+## >>chng 21 nov 04, from -8.863 to -8.944, update mole co data
+## >>chng 23 may 15, from -8.944 to -8.865, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -8.865 to -7.89, update fast.ini
+monitor "CO  " 325.137m  -7.89 line intensity
+## >>chng 13 jun 27, from -7.522 to -8.589, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+## >>chng 14 aug 28, from -8.589 to -8.626, EleyRideal H2 formation
+## >>chng 15 may 14, from -8.626 to -8.651, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -8.651 to -8.626, update DR suppression in r10716
+## >>chng 16 dec 20, from -8.626 to -8.652, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -8.652 to -8.519, LAMDA update
+## >>chng 21 nov 04, from -8.519 to -8.649, update mole co data
+## >>chng 23 may 15, from -8.649 to -8.485, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -8.485 to -6.913, update fast.ini
+monitor "^13CO" 906.599m  -6.913 line intensity
+## >>chng 13 jun 27, from -8.247 to -9.211, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 14, from -9.211 to -9.241, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -9.241 to -9.206, update DR suppression in r10716
+## >>chng 16 dec 20, from -9.206 to -9.238, add secondary autoionization to DR suppression
+## >>chng 21 sep 11, from -9.238 to -10.28, LAMDA update
+## >>chng 21 sep 15, from -10.28 to -9.09, go back to unresolved model
+## >>chng 21 nov 04, from -9.09 to -9.296, update mole co data
+## >>chng 23 may 15, from -9.296 to -9.383, GS updates 21 reactions to UMIST 2012
+## >>chng 23 sep 12, from -9.383 to -8.706, update fast.ini
+monitor "CN  " 880.858m  -8.706  line intensity
+##
+# orion_hii_pdr_fast.in
+# class hii pdr 
+# ========================================
+# 
+
+Orion HII region and PDR, simialr to orion_hii_pdr but
+much faster because of fast.ini
+

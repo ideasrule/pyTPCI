@@ -1,0 +1,43 @@
+title log density case B, T=500 log n=2
+#
+# commands controlling continuum =========
+black body, T = 2.e5 K
+ionization parameter -1
+#
+# commands for density & abundances =========
+hden = 2
+init file="honly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+constant temperature = 500
+# want H and he fully stripped so we can check H He spectra
+case b hummer no photoionization no pdest
+no induced processes (OK) 
+iterate
+#
+# commands controlling output    =========
+#
+# does not agree with Hummer & Storey, as explained by Ferguson & Ferland
+# until 03 jun 02, used small atom, which had smaller differences
+# turn on large atom to get best answer
+database h-like levels resolved 20
+#
+save overview "limit_caseb_h_lot.ovr"
+save performance "limit_caseb_h_lot.per"
+save results "limit_caseb_h_lot.rlt" last
+save monitors "limit_caseb_h_lot.asr" last
+#
+## >>chng 13 nov 22, from 0 to 0, collapsed branch merge r8609
+monitor Case B H-like element hydrogen  005 range 1000 40000A
+
+# limit_caseb_h_lot.in
+# class limit 
+# ========================================
+# 
+
+This tests the ionization and emission line spectrum for 
+H case B at a low density and temperature.

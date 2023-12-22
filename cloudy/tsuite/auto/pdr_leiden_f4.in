@@ -1,0 +1,300 @@
+title Leiden meeting model 4
+# This is one of the tests in Rollig et al. 2007, A&A, 467, 187 
+#
+# commands controlling continuum =========
+#
+# commands for density & abundances =========
+grains ism 1.16 no qheat
+#
+# commands controlling geometry  =========
+# Use the Draine 1978 field, for a semi-infinite slab we have to use half
+# the requested value, so the actual value
+# they want for the model is actually twice the value below
+table draine 50000
+extinguish 24
+#
+# other commands for details     =========
+failures 3
+#  use leiden initialization file
+init file="pdr_leiden.ini"
+#  This command defines the grain temperature to be a constant 20 Kelvin
+constant grain temperature 20 
+#  This sets the temperature to a constant 50 Kelvin
+constant temperature 50 linear
+#  hydrogen density 
+hden 5.5
+#
+# commands controlling output    =========
+save performance "pdr_leiden_f4.per"
+save overview "pdr_leiden_f4.ovr"
+save continuum "pdr_leiden_f4.con"
+save leiden lines "pdr_leiden_f4.lin"
+save leiden "pdr_leiden_f4.lei"
+save dr "pdr_leiden_f4.dr" 
+save grain physical conditions "pdr_leiden_f4.grn"
+save monitors "pdr_leiden_f4.asr"
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 13 jul 01, from -1.974 to -4.373, add this monitor
+## >>chng 13 jul 15, from -4.373 to -4.308 move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 nov 20, from -4.308 to -4.236, no db level trim in zone 0
+## >>chng 13 dec 18, from -4.236 to -4.271, fixes to Federman shielding
+## >>chng 17 feb 10, from -4.271 to -4.294, default size of N 1 model atom set to 50
+monitor line luminosity "Si 2" 34.8046m  -4.294
+##
+## >>chng 10 aug 21, from -9.151 to -9.108, add these lines
+## >>chng 12 jun 07, from -9.108 to -8.96, bugfix, no satur'n in grn_photo
+## >>chng 12 jul 01, from -8.96 to -8.935, update Badnell DR to 13-electron iso sequence
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -8.935 to -8.819, update LAMDA to 2015
+## >>chng 20 aug 03, from -8.819 to -8.705, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from -8.705 to -8.66, further update to McCall CR-related rate
+monitor "H2O " 538.142m line intensity -8.66
+##
+## >>chng 10 aug 21, from -9.341 to -6.126, add these lines
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 21 apr 10, from -6.126 to -6.448, update chemistry and lamba
+## >>chng 21 apr 16, from -6.448 to -6.109, remove bad UMIST reaction
+## >>chng 21 sep 11, from -6.109 to -6.731, LAMDA update
+monitor "HNC " 1652.90m  line intensity -6.731 
+##
+## >>chng 10 aug 21, from -9.86 to -7.326, add these lines
+## >>chng 11 nov 16, from -7.326 to -7.469, adjust newmole monitors
+## >>chng 12 jun 07, from -7.469 to -7.581, vib_evap fix
+## >>chng 12 jul 01, from -7.581 to -7.559, update Badnell DR to 13-electron iso sequence
+## >>chng 13 feb 01, from -7.559 to -7.534, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -7.534 to -7.469, update H3+ rates Indriola+ 2012
+## >>chng 23 may 15, from -7.469 to -7.404, GS updates 21 reactions to UMIST 2012
+monitor "HCS+" 1755.88m  -7.404 line intensity
+## >>chng 10 aug 21, from -8.288 to -6.805, add these lines
+## >>chng 11 nov 16, from -6.805 to -6.889, adjust newmole monitors
+## >>chng 12 jun 07, from -6.889 to -6.966, vib_evap fix
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -6.966 to -6.938, update LAMDA to 2015
+## >>chng 20 aug 03, from -6.938 to -6.89, update H3+ rates Indriola+ 2012
+monitor "CS  " 3058.86m  -6.89 line intensity
+## >>chng 10 aug 21, from -8.887 to -7.716, add these lines
+## >>chng 11 nov 16, from -7.716 to -8.792, adjust newmole monitors
+## >>chng 12 jun 07, from -8.792 to -9.44, vib_evap fix
+## >>chng 12 jun 07, from -9.44 to -9.42, bugfix, no satur'n in grn_photo
+## >>chng 13 feb 01, from -9.42 to -9.45, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -9.45 to -9.509, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -9.509 to -9.376, LAMDA update
+monitor "CO  " 2600.05m  -9.376 line intensity
+## >>chng 10 aug 21, from -7.637 to -6.403, add these lines
+## >>chng 11 nov 16, from -6.403 to -7.393, adjust newmole monitors
+## >>chng 12 jun 07, from -7.393 to -8.033, vib_evap fix
+## >>chng 12 jun 07, from -8.033 to -8.013, bugfix, no satur'n in grn_photo
+## >>chng 13 feb 01, from -8.013 to -8.043, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -8.043 to -8.101, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -8.101 to -7.969, LAMDA update
+monitor "CO  " 1300.05m  -7.969 line intensity
+## >>chng 10 aug 21, from -7.173 to -5.747, add these lines
+## >>chng 11 nov 16, from -5.747 to -6.675, adjust newmole monitors
+## >>chng 12 jun 07, from -6.675 to -7.307, vib_evap fix
+## >>chng 12 jun 07, from -7.307 to -7.287, bugfix, no satur'n in grn_photo
+## >>chng 13 feb 01, from -7.287 to -7.317, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -7.317 to -7.375, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -7.375 to -7.244, LAMDA update
+monitor "CO  " 866.727m  -7.244 line intensity
+## >>chng 10 aug 21, from -7.114 to -5.364, add these lines
+## >>chng 11 nov 16, from -5.364 to -6.274, adjust newmole monitors
+## >>chng 12 jun 07, from -6.274 to -6.904, vib_evap fix
+## >>chng 12 jun 07, from -6.904 to -6.884, bugfix, no satur'n in grn_photo
+## >>chng 13 feb 01, from -6.884 to -6.914, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -6.914 to -6.972, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -6.972 to -6.84, LAMDA update
+monitor "CO  " 650.074m  -6.84 line intensity
+## >>chng 10 aug 21, from -7.324 to -5.146, add these lines
+## >>chng 11 nov 16, from -5.146 to -6.082, adjust newmole monitors
+## >>chng 12 jun 07, from -6.082 to -6.715, vib_evap fix
+## >>chng 12 jun 07, from -6.715 to -6.695, bugfix, no satur'n in grn_photo
+## >>chng 13 feb 01, from -6.695 to -6.725, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -6.725 to -6.784, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -6.784 to -6.652, LAMDA update
+monitor "CO  " 520.089m  -6.652 line intensity
+## >>chng 10 aug 21, from -7.731 to -5.056, add these lines
+## >>chng 11 nov 16, from -5.056 to -6.056, adjust newmole monitors
+## >>chng 12 jun 07, from -6.056 to -6.699, vib_evap fix
+## >>chng 12 jun 07, from -6.699 to -6.679, bugfix, no satur'n in grn_photo
+## >>chng 13 feb 01, from -6.679 to -6.709, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -6.709 to -6.768, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -6.768 to -6.635, LAMDA update
+monitor "CO  " 433.438m  -6.635 line intensity
+## >>chng 10 aug 21, from -8.299 to -5.102, add these lines
+## >>chng 11 nov 16, from -5.102 to -6.18, adjust newmole monitors
+## >>chng 12 jun 07, from -6.18 to -6.831, vib_evap fix
+## >>chng 12 jun 07, from -6.831 to -6.811, bugfix, no satur'n in grn_photo
+## >>chng 13 feb 01, from -6.811 to -6.841, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -6.841 to -6.9, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -6.9 to -6.766, LAMDA update
+monitor "CO  " 371.549m  -6.766 line intensity
+## >>chng 10 aug 21, from -8.997 to -5.293, add these lines
+## >>chng 11 nov 16, from -5.293 to -6.435, adjust newmole monitors
+## >>chng 12 jun 07, from -6.435 to -7.091, vib_evap fix
+## >>chng 12 jun 07, from -7.091 to -7.071, bugfix, no satur'n in grn_photo
+## >>chng 13 feb 01, from -7.071 to -7.101, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -7.101 to -7.16, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -7.16 to -7.026, LAMDA update
+monitor "CO  " 325.137m  -7.026 line intensity
+## >>chng 10 aug 21, from -9.336 to -6.676, add these lines
+## >>chng 10 dec 19, from -6.676 to -6.56, changes due to LAMDA update in r4457
+## >>chng 11 nov 16, from -6.56 to -6.837, adjust newmole monitors
+## >>chng 12 jun 07, from -6.837 to -7.07, vib_evap fix
+## >>chng 13 feb 01, from -7.07 to -7.045, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -7.045 to -6.921, update H3+ rates Indriola+ 2012
+## >>chng 21 apr 10, from -6.921 to -6.963, update chemistry and lamba
+## >>chng 21 apr 16, from -6.963 to -6.916, remove bad UMIST reaction
+## >>chng 21 sep 11, from -6.916 to -8.127, LAMDA update
+## >>chng 21 sep 15, from -8.127 to -7.436, go back to unresolved model
+## >>chng 21 nov 04, from -7.436 to -7.396, update mole co data
+## >>chng 23 may 15, from -7.396 to -7.572, GS updates 21 reactions to UMIST 2012
+monitor "CN  " 880.858m  -7.572  line intensity
+monitor H2 column density 21.840 error 0.1
+##
+## >>chng 05 oct 01, from 17.79 to 17.75, drift down
+## >>chng 05 nov 22, from 17.75 to 16.69, NA add freeze out onto grains
+## >>chng 05 dec 17, from 16.69 to 16.74, NA increase C chemistry
+## >>chng 06 jan 04, from 16.74 to 16.96, NA C chem restore missed block reacts
+## >>chng 06 mar 02, from 16.96 to 17.03, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 mar 06, from 17.03 to 16.72, PvH grain freeze out
+## >>chng 06 apr 15, from 16.72 to 16.78 NA added N2H+ to the chemistry
+## >>chng 07 jan 07, from 16.78 to 16.54, enable McCall et al. H3+ rate
+## >>chng 08 apr 30, from 16.54 to 16.49 H, He topoff change
+## >>chng 11 nov 16, from 16.49 to 15.36, adjust newmole monitors
+## >>chng 12 jun 07, from 15.36 to 14.71, vib_evap fix
+## >>chng 20 aug 03, from 14.71 to 14.64, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from 14.64 to 14.77, LAMDA update
+monitor CO column density 14.77 error 0.1
+##
+## >>chng 05 nov 22, from 15.26 to 10.84, NA add freeze out onto grains
+## >>chng 06 mar 06, from 10.84 to 10.65, PvH grain freeze out
+## >>chng 07 jan 07, from 10.65 to 10.59, enable McCall et al. H3+ rate
+## >>chng 11 nov 16, from 10.59 to 11.11, adjust newmole monitors
+## >>chng 12 jun 07, from 11.11 to 11.16, vib_evap fix
+## >>chng 12 jun 07, from 11.16 to 11.58, bugfix, no satur'n in grn_photo
+## >>chng 12 aug 21, from 11.58 to 11.54, fix CRPHOT botches and HD crash
+## >>chng 13 feb 01, from 11.54 to 11.49, BUGFIX, largely undo r6703
+## >>chng 20 aug 03, from 11.49 to 11.61, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from 11.61 to 11.67, further update to McCall CR-related rate
+monitor O2 column density 11.67 error 0.1
+##
+## >>chng 05 nov 22, from 12.88 to 11.46, NA add freeze out onto grains
+## >>chng 05 dec 08, from 11.46 to 11.37, update to Elwert Solomon rate
+## >>chng 06 mar 06, from 11.37 to 11.32, PvH grain freeze out
+## >>chng 07 jan 07, from 11.32 to 11.38, enable McCall et al. H3+ rate
+## >>chng 11 nov 16, from 11.38 to 11.59, adjust newmole monitors
+## >>chng 12 jun 07, from 11.59 to 11.67, bugfix, no satur'n in grn_photo
+## >>chng 20 aug 03, from 11.67 to 11.77, update H3+ rates Indriola+ 2012
+## >>chng 20 sep 06, from 11.77 to 11.82, further update to McCall CR-related rate
+monitor OH column density 11.82 error 0.1
+##
+## >>chng 05 nov 22, from 15.51 to 12.94, NA add freeze out onto grains
+## >>chng 06 mar 06, from 12.94 to 12.83, PvH grain freeze out
+## >>chng 07 jan 07, from 12.83 to 12.76, enable McCall et al. H3+ rate
+## >>chng 12 jun 07, from 12.76 to 12.8, vib_evap fix
+## >>chng 12 jun 07, from 12.8 to 13.08, bugfix, no satur'n in grn_photo
+## >>chng 12 jul 01, from 13.08 to 12.98, update Badnell DR to 13-electron iso sequence
+## >>chng 12 aug 24, from 12.98 to 12.94, BUGFIX r6603 DR rates not updated in const temp sim
+## >>chng 13 feb 01, from 12.94 to 12.84, BUGFIX, largely undo r6703
+## >>chng 20 sep 06, from 12.84 to 12.88, further update to McCall CR-related rate
+## >>chng 23 may 15, from 12.88 to 13.06, GS updates 21 reactions to UMIST 2012
+monitor SiO column density 13.06 error 0.1
+## 
+## >>chng 05 sep 30, add these 5
+monitor column density H2+  9.16 error 0.1
+## 
+## >>chng 05 nov 22, from 11.96 to 12.16, NA add freeze out onto grains
+## >>chng 06 apr 15, from 12.16 to 12.10 NA added N2H+ to the chemistry
+## >>chng 07 jan 07, from 12.10 to 12.16, enable McCall et al. H3+ rate
+## >>chng 11 nov 16, from 12.16 to 12.23, adjust newmole monitors
+## >>chng 12 jun 07, from 12.23 to 12.31, vib_evap fix
+## >>chng 21 apr 10, from 12.31 to 12.35, update chemistry and lamba
+## >>chng 21 sep 11, from 12.35 to 12.47, LAMDA update
+monitor column density H3+  12.47 error 0.1
+## 
+monitor column density H2g  21.84 error 0.1
+## 
+## >>chng 05 dec 08, from 16.89 to 16.27, update to Elwert Solomon rate
+## >>chng 11 nov 16, from 16.27 to 16.16, adjust newmole monitors
+monitor column density H2*  16.16 error 0.1
+## 
+## >>chng 05 dec 08, from 7.52 to 7.48, update to Elwert Solomon rate
+## >>chng 05 dec 20, from 7.48 to 6.82, RP change default helium levels
+## >>chng 07 nov 29, from 6.82 to 7.56, due to changes in r1579
+## >>chng 08 apr 30, from 7.56 to 7.61, H, He topoff change
+## >>chng 11 nov 16, from 7.61 to 7.504, adjust newmole monitors
+monitor column density HeH+ 7.504 error 0.1
+## 
+## >>chng 06 nov 28, add these lines
+## >>chng 13 dec 23, from -3.916 to -3.84, C to external databases
+monitor line luminosity "c  2" 157.636m -3.84
+## >>chng 11 nov 16, from -4.764 to -4.809, adjust newmole monitors
+## >>chng 12 jun 07, from -4.809 to -4.891, vib_evap fix
+## >>chng 13 dec 23, from -4.891 to -4.815, C to external databases
+## >>chng 20 aug 03, from -4.815 to -4.788, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -4.788 to -4.845, LAMDA update
+monitor line luminosity "c  1" 370.269m -4.845
+## >>chng 11 nov 16, from -5.368 to -5.414, adjust newmole monitors
+## >>chng 12 jun 07, from -5.414 to -5.5, vib_evap fix
+## >>chng 13 feb 01, from -5.5 to -5.481, BUGFIX, largely undo r6703
+## >>chng 13 dec 23, from -5.481 to -5.423, C to external databases
+## >>chng 20 aug 03, from -5.423 to -5.396, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -5.396 to -5.454, LAMDA update
+monitor line luminosity "c  1" 609.590m -5.454
+## >>chng 11 nov 16, from -3.662 to -3.64, adjust newmole monitors
+## >>chng 14 mar 26, from -3.64 to -3.265, Move oxygen data to stout and chianti files
+monitor line luminosity "O  1" 63.1679m -3.265
+## 
+## >>chng 07 jan 07, from -5.140 to -5.168, enable McCall et al. H3+ rate
+## >>chng 11 nov 16, from -5.168 to -5.081, adjust newmole monitors
+## >>chng 12 jun 07, from -5.081 to -5.058, bugfix, no satur'n in grn_photo
+## >>chng 13 jul 24, wl from 145.5m to 145.495m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -5.058 to -4.977, Move oxygen data to stout and chianti files
+monitor line luminosity "O  1" 145.495m -4.977
+##
+## >>chng 04 sep 21, from 5 to 6 - finer molec conver criteria
+## >>chng 05 mar 25, from 6 to 14 renorm H pops in level solver
+## >>chng 08 dec 08, from 4 to 2.593, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 2.593 to 3.935, merging newsolvers branch
+## >>chng 09 jan 16, from 3.935 to 3.93, average of 10 runs
+## >>chng 09 apr 19, from 3.93 to 3.97, refactor p esc dest with cooling
+## >>chng 13 nov 05, from 3.97 to 2.561, convergence branch changes
+## >>chng 13 nov 25, from 2.561 to 2.076, convergence branch changes
+monitor itrzn 2.076
+##
+## >>chng 05 dec 08, from 720 to 800 (737), add zone logic for ices
+## >>chng 08 dec 08, from 800 to 727, upper limit -> equals (r2515)
+## >>chng 11 nov 16, from 727 to 988, adjust newmole monitors
+monitor nzone 988
+##
+## >>chng 23 feb 25 GS add to test new SiS chemistry, model of internal structure#
+## >>chng 23 may 15, from -6.101 to -6.794, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -6.794 to -6.499, GS update UMIST to 2012 and set upper limit on T
+## >>chng 23 jul 15, adjust wavelength from 1179.49m to 1179.48m
+monitor "SiS " 1179.48m -6.499 line intensity
+## >>chng 23 feb 25 GS add to test new SiS chemistry, model of internal structure#
+## >>chng 23 may 15, from -6.117 to -6.705, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -6.705 to -6.481, GS update UMIST to 2012 and set upper limit on T
+monitor "SiS " 1270.17m -6.481 line intensity
+# 
+# pdr_leiden_f4.in
+# class pdr 
+# ========================================
+# 
+
+# This is one of the tests in Rollig et al. 2007, A&A, 467, 187 

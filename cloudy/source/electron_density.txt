@@ -1,0 +1,15 @@
+electron density is converged when the relative difference between dense.EdenTrue and phycon.eden 
+is less than conv.EdenErrorAllowed - the error allowed is reset with the set eden error command.
+
+lgConvEden() returns true when electron density is converged
+
+conv.lgConvEden is true when electron density is converged
+
+======================================================================
+
+current electron density is phycon.eden 
+
+true electron density is dense.EdenTrue as set in eden_sum (contained in ConvIonizeOpacityDo)
+
+ConvEdenIoniz converges the electron density
+

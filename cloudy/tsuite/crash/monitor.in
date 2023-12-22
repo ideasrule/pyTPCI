@@ -1,0 +1,19 @@
+blackbody 5
+ionization parameter -2
+stop thickess 10
+constant pressure
+iterate
+hden 4
+init "fast.ini"
+print last iteration
+# 
+monitor pressure error < 0.01
+monitor pressure error > 0.01
+# 
+monitor niter < 3
+monitor niter > 1
+monitor niter 2
+monitor niter > 2
+monitor niter < 2
+
+This checks that limits to various monitors behave properly.  

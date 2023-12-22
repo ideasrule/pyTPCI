@@ -1,0 +1,242 @@
+title test low-den continuous emission from H atom, 2-nu is important
+#
+# commands controlling continuum =========
+laser 2
+ionization -1
+#
+# commands for density & abundances =========
+hden -8
+element helium abundance log 3
+set eden -5
+init "hheonly.ini"
+#
+# commands controlling geometry  =========
+stop thickness log 10
+#
+# other commands for details     =========
+no scattering opacity
+# force all helium to be in He+ 
+element helium ionization -4 0 -4 
+case b 
+# increase default resolution stored in continuum_mesh.ini 
+set continuum resolution 0.1
+iterate
+constant temperature 4
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 4471 to 4471.47A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 4471.47A to 4471.49A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "he 1" 4471.49A to "Blnd" 4472.76A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 4472.76A to 4471.50A, adjust multiplet Blend WL for refraction index
+normalize to "Blnd" 4471.50A 
+print lines column  
+print lines column 
+save overview "heatomt10lon.ovr"
+save performance "heatomt10lon.per"
+save continuum "heatomt10lon.con" last units microns 
+save diffuse continuum "heatomt10lon.dif" last units microns 
+save two photon continuum "heatomt10lon.2nu" last
+save monitors "heatomt10lon.asr"
+#
+# commands giving the monitors    =========
+monitor line luminosity "nFnu" 122.4m -26.458
+## >>chng 13 jul 25, wl from 60.83m to 60.8322m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 60.8322m -26.217
+## >>chng 13 jul 25, wl from 41.22m to 41.2152m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 41.2152m -26.085
+## >>chng 13 jul 25, wl from 30.87m to 30.8695m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 30.8695m -25.987
+## >>chng 13 jul 25, wl from 24.78m to 24.7829m, increased wl precision to 6 sig. fig.
+## >>chng 14 apr 07, from -25.91 to -25.89, update of Gaunt free-free factors
+monitor line luminosity "nFnu" 24.7829m -25.89
+## >>chng 13 jul 25, wl from 24.30m to 24.2998m, increased wl precision to 6 sig. fig.
+## >>chng 14 apr 07, from -25.91 to -25.88, update of Gaunt free-free factors
+monitor line luminosity "nFnu" 24.2998m -25.88
+## >>chng 11 oct 12, from -25.89 to -25.86, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 25, wl from 22.83m to 22.8302m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 22.8302m -25.86
+## >>chng 11 oct 12, from -25.86 to -25.84, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 25, wl from 21.42m to 21.4199m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 21.4199m -25.84
+## >>chng 11 oct 12, from -25.86 to -25.84, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 25, wl from 21.12m to 21.1235m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 21.1235m -25.84
+## >>chng 02 nov 26, use bigger attom next 15 or so changed
+## >>chng 13 jul 25, wl from 19.62m to 19.6199m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 19.6199m -25.816
+## >>chng 13 jul 25, wl from 17.65m to 17.6534m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 17.6534m -25.777
+monitor line luminosity "nFnu" 17.37m -25.771
+## >>chng 13 jul 25, wl from 15.69m to 15.6901m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 15.6901m -25.738
+## >>chng 13 jul 25, wl from 14.60m to 14.6036m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 14.6036m -25.709
+monitor line luminosity "nFnu" 12.43m -25.651
+monitor line luminosity "nFnu" 11.40m -25.623
+monitor line luminosity "nFnu" 10.46m -25.587
+## >>chng 13 jul 25, wl from 9.480m to 9.48002m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 9.48002m -25.556
+## >>chng 13 jul 25, wl from 9.325m to 9.32488m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 9.32488m -25.550
+## >>chng 13 jul 25, wl from 8.210m to 8.21035m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 8.21035m -25.500
+monitor line luminosity "nFnu" 7.580m -25.475
+## >>chng 13 jul 25, wl from 7.050m to 7.05026m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 7.05026m -25.439
+## >>chng 13 jul 25, wl from 4.114m to 4.11370m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 4.11370m -25.233
+## >>chng 13 jul 25, wl from 2.324m to 2.32440m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 2.32440m -25.058
+## >>chng 13 jul 25, wl from 1.643m to 1.64313m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 1.64313m -24.924
+## >>chng 13 jul 25, wl from 1.480m to 1.48022m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 1.48022m -24.919
+## >>chng 13 jul 25, wl from 1.436m to 1.43649m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 1.43649m -24.774
+## >>chng 13 jul 25, wl from 1.119m to 1.11867m, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 1.11867m -24.737
+## >>chng 13 jul 25, wl from 8330A to 8329.68A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  8329.68A -24.778
+## >>chng 13 jul 25, wl from 8079A to 8078.61A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  8078.61A -24.500
+## >>chng 10 aug 12, from -24.43 to -24.45, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.45 to -24.42, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 6210A to 6209.66A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  6209.66A -24.42
+## >>chng 10 aug 12, from -24.52 to -24.59, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.59 to -24.52, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 4885A to 4885.36A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  4885.36A -24.52
+## >>chng 10 aug 12, from -24.62 to -24.83, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.83 to -24.62, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 3704A to 3704.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  3704.34A -24.62
+## >>chng 10 aug 12, from -24.25 to -24.34, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.34 to -24.25, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 3588A to 3587.67A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  3587.67A -24.25
+## >>chng 10 aug 12, from -23.87 to -23.97, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -23.97 to -23.86, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 2430A to 2430.05A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  2430.05A -23.86
+## >>chng 10 aug 12, from -23.89 to -23.99, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -23.99 to -23.88, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 2392A to 2392.03A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  2392.03A -23.88
+## >>chng 10 aug 12, from -24.02 to -24.26, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.26 to -24.01, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 2071A to 2071.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  2071.34A -24.01
+## >>chng 10 aug 12, from -24.03 to -24.28, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.28 to -24.02, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 2053A to 2052.68A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  2052.68A -24.02
+## >>chng 09 feb 24, from -24.09 to -24.06, botches due to r2763
+## >>chng 10 aug 12, from -24.06 to -24.57, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.57 to -24.06, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1793A to 1793.44A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1793.44A -24.06
+## >>chng 02 aug 19, most of remainder changed when proper He 2-nu dist put in
+## >>chng 10 aug 12, from -24.03 to -24.85, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.85 to -24.03, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1585A to 1585.12A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1585.12A -24.03
+## >>chng 10 aug 12, from -23.98 to -25.01, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.01 to -23.98, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1458A to 1458.33A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1458.33A -23.98
+## >>chng 10 aug 12, from -23.93 to -25.1, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.1 to -23.92, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1357A to 1356.96A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1356.96A -23.92
+## >>chng 10 aug 12, from -23.89 to -25.13, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.13 to -23.89, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1297A to 1297.29A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1297.29A -23.89
+## >>chng 10 aug 12, from -23.87 to -25.14, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.14 to -23.86, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1263A to 1262.79A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1262.79A -23.86
+## >>chng 10 aug 12, from -23.84 to -25.15, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.15 to -23.83, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1218A to 1218.08A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1218.08A -23.83
+## >>chng 10 aug 12, from -23.82 to -25.14, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.14 to -23.82, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1196A to 1196.33A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1196.33A -23.82
+## >>chng 10 aug 12, from -23.81 to -25.14, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.14 to -23.8, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1175A to 1175.06A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1175.06A -23.8
+## >>chng 10 aug 12, from -23.79 to -25.13, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.13 to -23.78, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1144A to 1143.64A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1143.64A -23.78
+## >>chng 10 aug 12, from -23.77 to -25.11, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.11 to -23.76, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1113A to 1113.22A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1113.22A -23.76
+## >>chng 10 aug 12, from -23.76 to -25.1, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.1 to -23.75, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1103A to 1103.23A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1103.23A -23.75
+## >>chng 10 aug 12, from -23.74 to -25.08, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.08 to -23.73, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1074A to 1073.86A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1073.86A -23.73
+## >>chng 10 aug 12, from -23.73 to -25.08, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.08 to -23.73, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1064A to 1064.34A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1064.34A -23.73
+## >>chng 10 aug 12, from -23.71 to -25.06, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.06 to -23.7, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 1036A to 1035.92A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu"  1035.92A -23.7
+## >>chng 10 aug 12, from -23.68 to -25.03, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.03 to -23.68, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+monitor line luminosity "nFnu"  1000A -23.68
+## >>chng 10 aug 12, from -23.63 to -24.96, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.96 to -23.63, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 925.1A to 925.144A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 925.144A -23.63
+## >>chng 10 aug 12, from -23.9 to -25.07, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.07 to -23.9, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+monitor line luminosity "nFnu" 897.8A -23.9
+## >>chng 10 aug 12, from -23.86 to -25.08, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.08 to -23.86, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 760.0A to 760.023A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 760.023A -23.86
+##
+## >>chng 04 may 19, from -23.889 to -23.914 RP update helike sequence
+## >>chng 10 aug 12, from -23.91 to -25.03, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -25.03 to -23.91, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 701.5A to 701.514A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 701.514A -23.91
+##
+## >>chng 06 oct 20, from -25.556 to -25.511, ? ?
+## >>chng 06 dec 18, from -25.511 to -25.559, bugfix in r730
+## >>chng 10 aug 12, from -25.56 to -24.94, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.94 to -25.55, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 608.2A to 608.160A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 608.160A -25.55
+## >>chng 09 jan 22, from -26.92 to -27.02, some minor botches as a result of r2655
+## >>chng 10 aug 12, from -27.02 to -24.9, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.9 to -27.02, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 575.1A to 575.146A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from -27.02 to -26.98, Marios bug fixes
+monitor line luminosity "nFnu" 575.146A -26.98
+## >>chng 09 jan 22, from -26.82 to -26.93, some minor botches as a result of r2655
+## >>chng 10 aug 12, from -26.93 to -24.8, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.8 to -26.93, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 25, wl from 511.9A to 511.948A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from -26.93 to -26.88, Marios bug fixes
+monitor line luminosity "nFnu" 511.948A -26.88
+## >>chng 13 jul 25, wl from 496.9A to 496.874A, increased wl precision to 6 sig. fig.
+monitor line luminosity "nFnu" 496.874A -22.210
+# heatomt10lon.in 
+# class limit 
+# ========================================
+# 
+
+This is a mate to hatomt10.in except that everything is He at low density

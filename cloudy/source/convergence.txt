@@ -1,0 +1,30 @@
+convergence
+
+conv.nTotalIoniz
+number of times bottom ionization routine called in this iteration,
+this is == zero the very first call in this iteration
+
+conv.nPres2Ioniz
+number of times bottom ionization routine called in this zone
+
+search phase
+conv.lgSearch
+
+=======================================================
+
+criteria are set with set convergence commands
+
+set eden convergence
+	conv.EdenErrorAllowed
+	default 0.01
+
+set temperature convergence
+	conv.HeatCoolRelErrorAllowed
+	default 0.02
+
+set pressure convergence
+	conv.PressureErrorAllowed
+	default 0.01
+
+=========================================================
+

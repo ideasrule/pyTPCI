@@ -1,0 +1,100 @@
+title He-like silicon emission
+#
+# commands controlling continuum =========
+laser 350
+ionization -1
+#
+# commands for density & abundances =========
+hden 7
+# include lots of the element we are testing and set the ionization 
+# to be dominated by the correct ion stage
+element silicon abundance -2
+element silicon ionization -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 0 -5
+init file "ism.ini"
+element helium off
+element carbon off
+element nitrogen off
+element oxygen off
+element neon off
+element magnesium off
+element sulphur off
+element chlorine off
+element argon off
+element iron off
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr -12
+#
+# other commands for details     =========
+database he-like resolved levels 10
+database he-like collapsed levels 20
+constant temper 5
+iterate
+#
+# commands controlling output    =========
+print he-like departure silicon
+print line faint -2
+save overview "helike_si.ovr"
+save performance "helike_si.per"
+save monitors "helike_si.asr"
+# This is Lyman alpha
+## >>chng 13 jul 24, wl from 6.648A to 6.64803A, increased wl precision to 6 sig. fig.
+normalize to "Si13" 6.64803A
+#
+# commands giving the monitors    =========
+## >>chng 05 sep 5, wl from 6.645 to 6.648
+## >>chng 10 aug 12, from -19.82 to -24.59, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.59 to -19.82, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 24, wl from 6.648A to 6.64803A, increased wl precision to 6 sig. fig.
+monitor line luminosity "Si13"  6.64803A -19.82
+##
+## 6.743a is 2^3S to ground
+## >>chng 05 sep 5, wl from 6.743 to 6.740
+## >>chng 06 aug 18, from 2.53 to 2.99, RP update trans prob 
+## >>chng 13 jul 25, wl from 6.740a to 6.74039A, increased wl precision to 6 sig. fig.
+monitor line "Si13"  6.74039A 2.99
+##
+## 6.688A is 2^3P to ground
+## >>chng 04 may 19, wl from 6.688 to 6.687, int from 1.87 to 1.88, 
+## >>chng 05 sep 5, wl from 6.687 to 6.688
+## RP update helike
+## >>chng 06 aug 18, from 1.88 to 1.39, RP update trans prob 
+## >>chng 13 jul 25, wl from 6.688A to 6.68828A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 6.68828A to "Blnd" 6.68828A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 6.68828A to 6.68827A, update NIST energies
+monitor line "Blnd"  6.68827A 1.39
+##
+## 5.680A is 3^1P to ground
+## >>chng 05 sep 5, wl from 5.680 to 5.681
+## >>chng 13 jul 25, wl from 5.681A to 5.68071A, increased wl precision to 6 sig. fig.
+monitor line "Si13"  5.68071A 0.215
+##
+## 36.36A is 3^3P to 2^3S
+## >>chng 03 may 24, from 0.108 to 0.0989, Ryan cleaned up some As
+## >>chng 05 sep 5, wl from 36.36 to 36.45
+## >>chng 13 jul 25, wl from 36.45A to 36.4466A, increased wl precision to 6 sig. fig.
+monitor line "Si13"  36.4466A 0.0989
+##
+## 37.88A is 3^3D to 2^3P
+## >>chng 13 jul 25, wl from 37.88A to 37.8829A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 37.8829A to 37.8666A, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 2, wl from 37.8666A to 37.7804A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "Si13" 37.7804A to "Blnd" 37.8344A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 37.8344A to 37.8345A, update NIST energies
+monitor line "Blnd"  37.8345A 0.28
+##
+## sum of 2^3P to 2^3S lines
+## >>chng 13 jul 25, wl from 852.8A to 852.828A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 852.828A to 865.144A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 865.144A to "Blnd" 836.734A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 836.734A to 836.701A, update NIST energies
+monitor line "Blnd" 836.701A 0.0146
+#
+# helike_si.in
+# class limit
+# 
+
+test He-like emission for silicon
+
+

@@ -1,0 +1,142 @@
+title simple warm absorber model
+set save prefix "agn_warm_absorber_hiU"
+#
+# commands controlling continuum =========
+table power law
+ionization parameter 150 linear
+#
+# commands for density & abundances =========
+hden 6
+abundances old solar 84 
+#
+# commands controlling geometry  =========
+stop column density 22
+#
+# commands controlling models =========
+database h-like element zinc collapsed levels 5
+#
+# other commands for details     =========
+iterate to convergence
+#
+# commands controlling output    =========
+print line column
+## >>chng 17 may 25, wl from 1.78198A to 1.78177A, up Rydberg constant
+## >>chng 20 aug 25, wl from 1.78177A to 1.77982A, switched from computed to tabulated energies for H and He isoseq
+normalize "Fe26"      1.77982A 
+save overview ".ovr"
+save performance ".per"
+save continuum ".con" last units kev
+save continuum ".conA" last units Angstroms
+save fine continuum ".finA" last units Angstroms range 7.6A to 15A merge 3
+save dr ".dr" last
+# this will be the default units, like the printout
+save line optical depths last ".lin"
+# this will be the same, in rygbergs
+save line optical depths last ".lin"  units rydberg
+save monitors last ".asr" 
+#
+# commands giving the monitors    =========
+##
+monitor line luminosity "toth" 0 5.235
+##
+monitor line luminosity "totm" 0 4.387
+##
+monitor line luminosity "Ne 9"      13.4471A  1.105
+##
+## >>chng 17 may 25, wl from 16.0086A to 16.0067A, up Rydberg constant
+## >>chng 20 aug 22, wl from 16.0067A to 16.0056A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 16.0056A to 16.0059A, up 1-e energies to np
+monitor line luminosity "O  8"      16.0059A  3.355  
+##
+## >>chng 21 march 16, wl from 16.7725A to 16.7699A, update to NIST energies
+monitor line luminosity "O  7"      16.7699A  -0.2209
+##
+monitor line luminosity "O  7"      17.7680A  -0.2335
+##
+monitor line luminosity "O  7"      18.6270A  0.1967 
+##
+## >>chng 17 may 25, wl from 18.9732A to 18.9709A, up Rydberg constant
+## >>chng 20 aug 22, wl from 18.9709A to 18.9696A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 18.9696A to 18.9689A, update NIST energies
+monitor line luminosity "O  8"      18.9689A  4.165  
+##
+monitor line luminosity "O  7"      21.6020A  0.9399
+##
+monitor line luminosity "O  7"      21.8070A  -0.4597 
+##
+## >>chng 18 feb 20, updated spectral label from "TOTL" 21.8070A to "Blnd" 21.8070A, update He-like triplet labels and wl
+monitor line luminosity "Blnd"      21.8070A  -0.4562   
+##
+monitor line luminosity "O  7"      22.1012A  0.1564  
+##
+## >>chng 17 may 25, wl from 24.7837A to 24.7807A, up Rydberg constant
+## >>chng 20 aug 22, wl from 24.7807A to 24.7819A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 24.7819A to 24.7810A, update NIST energies
+monitor line luminosity "N  7"      24.7810A  3.008
+##
+monitor line luminosity "N  6"      28.7870A  -0.5755  
+##
+## >>chng 20 aug 25, wl from 33.7372A to 33.7368A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 33.7368A to 33.7360A, update NIST energies
+monitor line luminosity "C  6"      33.7360A  3.256 
+##
+monitor line luminosity "C  5"      40.2678A  -0.7336
+##
+## >>chng 22 jul 09, wl from 88.1196A to 88.1170A, upgrade to Chianti v10
+monitor line luminosity "Ne 8"      88.1170A  -3.003  
+##
+monitor line luminosity "Fe25"      1.85951A  3.610 emergent
+##
+## >>chng 21 mar 16, wl from 1.85541A to 1.85540A, update NIST energies
+monitor line luminosity "Fe25"      1.85540A  3.258 emergent
+##
+monitor line luminosity "Fe25"      1.85040A  4.412 emergent
+##
+## >>chng 17 may 25, wl from 1.78198A to 1.78177A, up Rydberg constant
+## >>chng 20 aug 25, wl from 1.78177A to 1.77982A, switched from computed to tabulated energies for H and He isoseq
+monitor line luminosity "Fe26"      1.77982A  4.696 emergent
+##
+monitor line luminosity "Zn29"      1.38530A  1.337 emergent
+##
+monitor line luminosity "Zn29"      1.38092A  0.819 emergent
+##
+monitor line luminosity "Zn29"      1.37781A  2.026 emergent
+##
+## >>chng 17 may 25, wl from 1.33440A to 1.33424A, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.33424A to 1.33298A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 1.33298A to 1.33232A, update NIST energies
+monitor line luminosity "Zn30"      1.33232A  2.03 emergent
+##
+monitor temperature "H+" 6.927 error 0.1
+## 
+monitor carbon 6 ionization -4.405
+## 
+monitor carbon 7 ionization -0
+##
+monitor oxygen 8 ionization -3.55
+##
+monitor oxygen 9 ionization -0.0001
+## 
+monitor iron ionization 24 -2.776 error 0.1
+## 
+monitor iron ionization 25 -1.077 error 0.1
+## 
+monitor iron ionization 26 -0.429 error 0.1
+## 
+monitor zinc ionization 28 -1.817 error 0.1
+## 
+monitor zinc ionization 29 -0.5631 error 0.1
+## 
+monitor zinc ionization 30 -0.3456 error 0.1
+##
+monitor nzone 33
+## 
+# warrm_absorber
+# class nlr  
+# ========================================
+# 
+
+
+This is simple warm absorber model with a high ionization parameter,
+chosen to yield about 50% ionization fractions for H-like Fe and Zn.
+It generates a list of lines with significant optical depths.

@@ -1,0 +1,39 @@
+title test transmitted continuum in luminosity mode
+#
+# common commands 
+init file "func_trans_lumi.dat"
+#
+# commands controlling geometry  =========
+radius 21
+#
+# commands controlling output    =========
+set save prefix "func_trans_lumi"
+save overview ".ovr"
+save performance ".per"
+save ionization last ".ion"
+save continuum last ".con"
+#
+# commands giving the monitors    =========
+# this contains a large number of asserts that both tests use
+init file "trans_lumi.dat"
+# 
+# func_trans_lumi.in 
+# class function 
+# ========================================
+# 
+
+func_trans_lumi, func_trans_save_lumi, and func_trans_read_lumi_scale are a
+set of tests that check that the code can save a transmitted continuum in
+luminosity mode and then read it back in.
+
+func_trans_lumi.in: this sim is directly illuminated by a BB at Rin = 1e21.
+  Its predictions should be identical to func_trans_read_lumi_scale.in.
+
+func_trans_save_lumi.in: this sim is directly illuminated by a BB at Rin =
+  1e20. It saves the transmitted continuum and has no monitors.
+
+func_trans_read_lumi_scale.in: this sim is illiminated by the transmitted
+  continuum at Rin = 1e21. Its predictions should be almost identical to
+  func_trans_lumi.in. This tests that the transmitted continuum works
+  correctly in luminosity mode and also that spherical dilution is handled
+  correctly.

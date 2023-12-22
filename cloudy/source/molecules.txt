@@ -1,0 +1,9 @@
+heavy element molecules evaluated in comole.c
+
+hydrogen molecules evaluated in hmole.c
+
+molecular column densities are co.hevcol
+
+CO level populatins in CO_PopsEmisCool
+
+nelem is used to point to correct velocity,

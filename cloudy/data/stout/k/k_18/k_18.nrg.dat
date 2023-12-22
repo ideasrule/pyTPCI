@@ -1,0 +1,61 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=3 were downloaded using ADM.
+#
+# If no data exists for a given level, omit it in this table.
+# The value will be filled in using the quantum defect routine.
+#
+# helium
+# These energies from Drake 1996, except these divided by c
+#
+# lithium thru zinc
+# These energies are from CHIANTI 5, up to 5^1P 
+# >>refer He-like	Energies	Landi et al., 2005; ApJSS, in press 
+# >>refer He-like	Energies	Dere, K. P. et al. 1997, 
+# >>refercon	 Astronomy and Astrophysics Suppl. Ser., Vol. 125, pp. 149-173
+#
+# Ionization potentials (in Rydbergs) for each ion in the iso-seq up to Z=30.	
+# These are exactly what you get if you take Verner's numbers in atmdat_ph1(0,1,nelem,0) 
+# and multiply by (0.9998787/EVRYD)*RYD_INF, exactly as is done elsewhere in Cloudy
+#
+ 1  0  1  0        0      1  
+ 2  0  3 -1 28005899      1  
+ 2  1  3  0 28166731      1  
+ 2  1  3  1 28173110      1  
+ 2  0  1  0 28180867      1  
+ 2  1  3  2 28201500      1  
+ 2  1  1  1 28314166      1  
+ 3  0  3 -1 33151400 3000
+ 3  0  1  0 33197700   3000  
+ 3  1  3 -1 33202023 1972.03
+ 3  2  3 -1 33232268.8 1822.09
+ 3  2  1  2 33235300   3000  
+ 3  1  1  1 33236700   3000  
+ 4  0  1  0 34948420.00
+ 4  1  1  1 34964920.00
+ 5  0  3 -1 35747360.00
+ 5  0  1  0 35756712.00
+ 5  1  3 -1 35758032.00
+ 5  1  1  1 35765192.00
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L7139 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=7139&comment_code=&amp;element=K&amp;spectr_charge=18&amp;ref=7139&amp;type=E
+# PUBCON    Title: Energy Levels of He- and Li-like Ions (States 1snl, 1s^{2}nl with n=2-5)
+# PUBCON  Authors: L. A. Vainshtein, and U. I. Safronova
+# PUBCON  Journal: Phys. Scr. 31, 519–532 (1985)
+# PUBCON      DOI: https://doi.org/10.1088/0031-8949/31/6/012
+# 
+# PUB     Refcode: L8473 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=8473&comment_code=&amp;element=K&amp;spectr_charge=18&amp;ref=8473&amp;type=E
+# PUBCON    Title: Relativistic All-Order Many-Body Calculations of the n = 1 and n = 2 States of Heliumlike Ions
+# PUBCON  Authors: D. R. Plante, W. R. Johnson, and J. Sapirstein
+# PUBCON  Journal: Phys. Rev. A 49, 3519–3530 (1994)
+# PUBCON      DOI: https://doi.org/10.1103/PhysRevA.49.3519

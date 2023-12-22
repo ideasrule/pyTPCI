@@ -1,0 +1,17 @@
+title "Thin coronal model"
+coronal equilibrium 1e6K
+hden 0
+stop thickness 0
+iterate
+## This really means nzone should be 1
+## Any changes to this are incorrect
+## >>chng 13 feb 01, from 1 to 32, BUGFIX, largely undo r6703
+monitor nzone 32
+## While this *is* 32, the performance is a good way of seeing
+## where iterations are being wasted
+save performance "thin.per"
+# thin.in
+# ===========================
+
+This tests whether a layer with thickness much smaller than any
+relevant lengthscale is modelled in a single zone

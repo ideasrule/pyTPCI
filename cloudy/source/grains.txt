@@ -1,0 +1,43 @@
+Grains
+
+GrainsZero - called by zero before commands parsed, 
+GrainsInit - called by opacity create after commands are parsed
+
+the grains only exist after routine OpacityCreateAll is called 
+
+mie.c contains the Mie scattering code originally written by Peter Martin,
+and brought into Cloudy by Peter van Hoof, who is responsible for most of the 
+current implementation.  
+
+The .szd files are size distribution files. The 0m???.szd files define single
+sized grains, and ism.szd, orion.szd define the obvious size distributions. If
+you compile mie.c with
+
+cc -ansi -Ofast -DSTANDALONE mie.c -lm
+
+the executable will produce a file silicate_ism_20.opc. You can compare that
+with the version included in the distribution. If you compile mie.c without the -DSTANDALONE, it
+should link into Cloudy. If you run the following simple test run
+
+title jones test
+table ism
+extinguish column=22 leak=0
+hden 0
+constant density
+pgrains 0. type 18 binary "silicate_ism_20.opc"
+stop zone 1
+
+It should produce the attached output jones.out.
+
+=====================================================
+
+The total projected area (cm^2) in all grain species is
+area = 0;
+for(nd=0; nd<gv.nBin; ++nd)
+{
+	/* IntArea is area per grain size bin, cm+2
+	 * conv_H_pCM3 units cm-3 */
+	area += gv.bin[nd]->IntArea/4. * gv.bin[nd]->cnv_H_pCM3;
+}
+
+density of element ipX in grain species nd: 

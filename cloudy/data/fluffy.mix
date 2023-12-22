@@ -1,0 +1,9 @@
+# toy model of fluffy silicate; for test purposes only!
+4030103  # magic number for version control
+0.61     # default depletion
+2        # number of separate materials in grain
+#
+  50  "vacuum.rfi"
+  50  "silicate.rfi"
+#
+br35     # which EMT should be used?

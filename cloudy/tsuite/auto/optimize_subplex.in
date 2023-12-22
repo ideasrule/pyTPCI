@@ -1,0 +1,66 @@
+title test subplex optimizer
+# spectrum computed with hden 5, temp 4
+# subplex, phymir, amoeba, powell
+#
+# commands controlling continuum =========
+black 40000 K
+ionization par -3
+#
+# commands for density & abundances =========
+hden 4 vary
+init file "hheonly.ini"
+element oxygen on 
+#
+# commands controlling geometry  =========
+Case B
+stop zone 1
+#
+# other commands for details     =========
+constant temper 4.3 vary
+optimize subplex
+optimize iteration 100
+## >>chng 06 aug 11, add this since did not converge to correct value
+optimize tolerance 0.01
+# the following spectrum was derived by running this sim at hden 5 and t=4
+# resulting eden was 5.039 and T=4, which we shall assert that we find
+# >>chng 06 apr 03, backdate to old [OII] As and rederive spectrum
+## >>chng 07 oct 12, retune after adding Case B
+optimize lines
+O  2  3728.81 0.1567
+O  2  3726.03 0.4087
+Blnd  7323 0.4344
+Blnd  7332 0.3577
+O  3  5006.84 3.8117
+## >>chng 19 mar 01, change "Blnd" 4363 -> "O  3" 4363.21
+O  3  4363.21 0.0368
+end of lines
+#
+# commands controlling output    =========
+print line faint -2
+#
+# commands giving the monitors    =========
+## >>chng 5.042 to 5.055, change in H line pumpin
+## >>chng 06 aug 02, from 5.039 to 5.016 update O+2, N+2 CT
+## >>chng 06 nov 29, from 5.016 to 5.000, Badnell DR turned on
+## >>chng 07 oct 12, retune after adding Case B
+## >>chng 10 feb 14, from 5.05 to 5.085, update O atomic data
+## >>chng 11 jul 12, from 5.085 to 5.063, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 5.063 to 5.085, BUGFIX, largely undo r6703
+## >>chng 19 mar 01, from 5.085 to 5.05, remove recombination, etc, components from blends (#415)
+monitor eden 5.05 
+## 
+monitor temperature "H+" 4
+save overview "optimize_subplex.ovr"
+save performance "optimize_subplex.per"
+save monitors "optimize_subplex.asr"
+#
+# optimize_subplex.in
+# class optimizer 
+# ========================================
+# 
+
+This checks whether the optimizer can recover a known solution.  The line
+spectrum was calculated at T = 1e4 K and and n_H=1e5 cm^-3, 
+and resulted in the given electron 
+density.  The model optimize_phymir.in is a copy of this file.
+

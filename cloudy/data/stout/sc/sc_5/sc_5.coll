@@ -1,0 +1,17 @@
+17 09 05
+#
+##Column Listing##
+# "TEMP" identifies this as a temperature line.TEMP lines will only appear once unless the temperature range changes
+# Number of temperature values
+# The rest of the TEMP line are temperatures (K)
+#
+# "CS	ELECTRON" identifies this as an electron collision strength line
+# Lower Level
+# Uppder Level
+# The rest are collision strengths which correspond to the temperatures from the nearest TEMP line above.
+TEMP	1.58E+04	2.51E+04	3.98E+04	6.31E+04	1.00E+05	1.58E+05	2.51E+05	3.98E+05	6.31E+05	1.00E+06	1.58E+06		
+CS ELECTRON	1	2	6.35	6.00	5.49	4.95	4.39	3.77	3.07	2.41	1.84	1.39	1.07
+*****************
+#Reference
+#Pelan, J., & Berrington, K.A. 1995, A&A Suppl, 110, 209
+# http://adsabs.harvard.edu/abs/1995A&AS..110..209P

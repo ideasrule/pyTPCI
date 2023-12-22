@@ -1,0 +1,31 @@
+ots and diffuse rates are fundamentally different since ots must be
+constantly updated as the solution progresses, but diffuse needed only
+once per zone
+so they are done in two different sets of routines
+
+ots rates for all elements, done in RT_OTS.c
+
+diffuse, outward continua for all species done in  RT_diffuse
+
+add otslines
+
+hydrogen lines
+
+level1 lines
+
+atom_level2 lines
+
+forbidden lines
+
+===================================================
+
+RTMakeStat and RTMakeWind call escape prob routines, set pumping, etc.
+
+escape probabilities are in rtescprob.
+
+===================================================
+
+optical depths originally estimated in RT_tau_init
+optical depths are incremented in RT_Tau_inc
+at end of iteration optical depth scale is reset in RT_tau_reset (in rtoptdepthinit.c)
+

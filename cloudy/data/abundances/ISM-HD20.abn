@@ -1,0 +1,87 @@
+#typical ISM abundances, mean of Table 3, Cowie+Songaila, Ann Rev '86
+#also Table 5, Savage and Sembach, Ann Rev 1996
+# updated to Table 2 of Hensley&Draine  2020arXiv200900018H with previous values commented out
+grains ISM 
+Hydrogen	1
+Helium	0.098
+Lithium	5.40E-11
+#BERYLLIUM 1e-20--Element Off
+Boron	8.90E-11
+#Carbon	2.51E-04
+Carbon	1.98E-04
+Nitrogen	7.94E-05
+#>>chng >>01 feb 19, from 5.01e-4 to 3.19e-4, value from 
+#>>refer	O	abund	Meyers, D. M., Jura, M., & Cardelli, J. A. 1998, ApJ, 493, 222-229
+#they quote 3.19 +/- 0.14 e-4 
+#Oxygen	3.19E-04
+Oxygen	4.34E-04
+#chng 10 jul 22 -- NPA.  F abundance slightly depleted (0.1 to -0.6 dex) relative to the solar
+#F/H ratio of 3.6e-8 (reference below).  Use value of 3e-8 
+#refer	F abund Snow, T. P., Destree, J. D., & Jensen, A. G. 2007, ApJ, 655, 285 
+Fluorine	2.00E-08
+Neon	1.23E-04
+SODIUM	3.16E-07
+#MAGNESIUM	1.26E-05
+MAGNESIUM	7.10E-06
+#ALUMINIUM	7.94E-08
+ALUMINIUM	1.00E-07
+#SILICON	3.16E-06
+SILICON	6.60E-06
+PHOSPHORUS	1.60E-07
+#SULPHUR	3.24E-05
+SULPHUR	9.60E-06
+CHLORINE	1.00E-07
+ARGON	2.82E-06
+POTASSIUM	1.10E-08
+#CALCIUM	4.10E-10
+CALCIUM	1.00E-07
+#SCANDIUM 1.00E-20--Element off
+TITANIUM	5.80E-10
+VANADIUM	1.00E-10
+CHROMIUM	1.00E-08
+MANGANESE	2.30E-08
+#IRON	6.31E-07
+IRON	8.80E-07
+#chng 10 jul 22 -- NPA.  Co/H ratio in cold and warm phases towards rho Oph are derived by reference
+#below to be 6.4e-10 and 1.1e-8, respectively.  Average of two comes out to 5.8e-9 
+#refer	Co	abund	Mullman, K. L., et al. 1998, ApJ, 500, 1064
+COBALT	5.90E-09
+#NICKEL	1.82E-08
+NICKEL	4.00E-08
+COPPER	1.50E-09
+ZINC	2.00E-08
+***************************************
+
+below gives the summary before the update to
+Table 2 of Hensley&Draine  2020arXiv200900018H with previous values commented out
+
+The gas-phase abundances are an average from the work of
+Cowie and Songaila (1986) for the warm and cold phases
+of the interstellar medium together with numbers from the
+warm and cool phases towards x Oph (Savage and Sembach,
+1996). The oxygen abundance1 is from Meyer et al. (1998),
+F is from Snow et al. (2007), and Co is from Mullman et al.
+(1998). The grains are the interstellar medium grains defined
+by Mathis et al. (1977). The ISM, H II region, and Orion
+abundances are not the same, although one can make the case
+that they should be.
+
+L. L. Cowie and A. Songaila. High-resolution optical and ultraviolet absorption-line studies of interstellar
+gas. ARA&A, 24:499-535, 1986. doi: 10.1146/annurev.aa.24.090186.002435.
+
+B. D. Savage and K. R. Sembach. Interstellar Abundances from Absorption-Line Observations with the
+Hubble Space Telescope. ARA&A, 34:279-330, 1996. doi: 10.1146/annurev.astro.34.1.279.
+
+D. M. Meyer, M. Jura, and J. A. Cardelli. The Definitive Abundance of Interstellar Oxygen. ApJ, 493:
+222-+, January 1998. doi: 10.1086/305128.
+
+T. P. Snow, J. D. Destree, and A. G. Jensen. The Abundance of Interstellar Fluorine and Its Implications.
+ApJ, 655:285-298, January 2007. doi: 10.1086/510187.
+
+K. L. Mullman, J. E. Lawler, J. Zsargo, and S. R. Federman. Absolute Vacuum Ultraviolet Oscillator
+Strengths in CO II and the Interstellar Cobalt Abundance. ApJ, 500:1064, June 1998. doi:
+10.1086/305780.
+
+J. S. Mathis, W. Rumpl, and K. H. Nordsieck. The size distribution of interstellar grains. ApJ, 217:
+425-433, October 1977. doi: 10.1086/155591.
+

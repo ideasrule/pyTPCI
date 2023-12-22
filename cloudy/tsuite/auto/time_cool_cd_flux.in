@@ -1,0 +1,41 @@
+title constant density cooling cloud
+#
+# commands controlling continuum =========
+coronal 3.4e7 K init time 
+#
+# commands for density & abundances =========
+# want nT = 2e6 K cm-3
+hden 5.88e-2 linear
+#
+# commands controlling geometry  =========
+set dr 0 
+set nend 1
+stop zone 1
+#
+# other commands for details     =========
+# number of time steps
+iterate 300
+stop time when temperature falls below 1e7 K
+cosmic rays background
+#
+# commands controlling output    =========
+print line faint 2 log
+print line cumulative
+print ages
+set cumulative flux
+set save prefix "time_cool_cd_flux"
+save monitors ".asr" last
+#
+# commands giving the asserts    =========
+monitor line luminosity cumulative intrinsic "Fe24"      11.1710A   -11.42
+#
+# time_cool_cd_flux.in 
+# class dynamics 
+# ========================================
+# 
+
+Test time dependent cooling at constant density.
+In time_cool_cd.in, the line emission accumulation is done by default by mass.
+In this sim, the accumulation is done by flux (see 'set cumulative' above).
+This sim is meant simply to exercise the 'set cumulative flux' command, so a
+full run to low temperatures is deemed unnecessary.

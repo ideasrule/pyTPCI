@@ -1,0 +1,532 @@
+title test that energy is limit_conserved
+#
+# commands controlling continuum =========
+# primary continuum is a hot blackbody
+black body, temp=5.5
+intensity total -4
+# add cosmic background 
+background
+#
+# commands controlling geometry  =========
+# don't stop the calculation until all energy used up
+# in order to check energy conservation 
+stop temperature 3 linear
+# cloud will go very deep with temperature near 3K without this
+## >>chng 10 dec 25, stop just before cmb temp reached to make
+## model have this thickness - monitored results then more stable
+stop thickness 18.1 
+#
+# commands for density & abundances =========
+## lower Z by 3 to avoid major thermal front
+## in start of H+=H0 transition
+metals -0.5
+hden 1.0
+constant pressure
+#
+# other commands for details     =========
+iterate 
+# want a clean calculation
+failures 3
+# this allows for more molecular gas beyond what we model
+double optical depths
+#
+# commands controlling output    =========
+save performance "limit_conserve.per"
+save pressure "limit_conserve.pre"
+save pressure history "limit_conserve.his"
+save cooling "limit_conserve.col"
+save heating "limit_conserve.het" 
+save dr "limit_conserve.dr"
+save overview "limit_conserve.ovr1"
+save overview last "limit_conserve.ovr"
+save results "limit_conserve.rlt"
+save monitors "limit_conserve.asr"
+save element carbon "limit_conserve.car"
+save element neon "limit_conserve.ne" 
+save element magnesium "limit_conserve.mag"
+save element silicon "limit_conserve.sil"
+#
+# commands giving the monitors    =========
+##
+## >>chng 02 apr 03, added this
+## >>chng 02 may 05, from 1 -6.316 to -6.282 fix CT matrix
+## >>chng 02 oct 28, from -6.282 to -6.333, H2 + H =>H2 rate change
+## >>chng 02 nov 20, new stop criteria, from -6.333 to -6.441
+## >>chng 02 dec 11, from -6.441 to -6.414 new hei
+## >>chng 03 feb 13, from -6.414 to -6.505 new DR H3+ => 3H
+## >>chng 03 apr 14, from -6.505 to -6.560, hlowt bug
+## >>chng 03 jun 09, from -6.560 to -6.587, larger h atom by deault
+## >>chng 03 aug 28, from -6.587 to -6.415 Nick Abel co fix, let go to end
+## >>chng 03 oct 23, from -6.415 to -6.392, H chem update
+## >>chng 03 oct 25, from -6.392 to -6.366, update H mole net
+## >>chng 04 apr 17, from -6.677 to -6.329 mole conv
+## >>chng 04 may 15, from -6.329 to -6.352, update cal line rad pres
+## >>chng 04 dec 08, from -6.352 to -6.376, co-ion feedback, check converg
+## >>chng 05 dec 05, from -6.376 to -6.324, chng Z for stability
+## >>chng 06 may 08, from -6.324 to -6.302, RP update high-n As H-like
+## >>chng 07 oct 22, from -6.302 to -6.264, resolve l-levels of h-like sequence
+## >>chng 07 dec 06, from -6.264 to -6.230, secondaries prop to osc str, apply to iso species
+## >>chng 08 apr 30, from -6.230 to -6.256 H, He topoff change
+## >>chng 09 feb 23, from -6.256 to -6.228, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "H  1" 4861.32A -6.228
+##
+## >>chng 01 jun 15, from 0.59 to 0.621, full H ct network
+## >>chng 02 apr 03, from 0.621 to 0.797 bound compton
+## >>chng 02 may 05, from 1 0.797 to 0.738 fix CT matrix
+## >>chng 02 oct 28, from 0.738 to 0.831, H2 + H =>H2 rate change
+## >>chng 02 nov 20, new stop criteria, from 0.831 to 1.082
+## >>chng 02 dec 11, from 1.082 to 1.017 new hei
+## >>chng 03 feb 13, from 1.017 to 1.252 new DR H3+ => 3H
+## >>chng 03 apr 14, from 1.252 to 1.423, hlowt bug
+## >>chng 03 jun 09, from 1.423 to 1.511, larger h atom by deault
+## >>chng 03 aug 28, from 1.511 to 1.018 Nick Abel co fix, let go to end
+## >>chng 03 oct 23, from 1.018 to 0.967 H chem update
+## >>chng 03 oct 25, from 0.967 to 0.911, update H mole net
+## >>chng 04 apr 17, from 0.911 to 0.836 mole conv
+## >>chng 04 apr 28, from 0.836 to 0.879, He+ - H ct rate update
+## >>chng 04 jun 09, from 0.879 to 0.911, NA update H chem
+## >>chng 05 dec 05, from 0.911 to 0.816, chng Z for stability
+## >>chng 06 may 08, from 0.816 to 0.776, RP update high-n As H-like
+## >>chng 07 oct 22, from 0.776 to 0.711, resolve l-levels of h-like sequence
+## >>chng 07 dec 06, from 0.711 to 0.658, secondaries prop to osc str, apply to iso species
+## >>chng 08 apr 30, from 0.658 to 0.705 H, He topoff change
+## >>chng 09 feb 23, from 0.705 to 0.6617, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A 0.6617
+##
+## >>chng 01 may 10, from 27.4 to 29.05 ct network change
+## >>chng 01 sep 24, from 29.0 to 27.57 chng high-state branching ratio
+## >>chng 02 apr 03, from 27.575 to 25.55, bound compton
+## >>chng 02 nov 20, change to luminosity
+## >>chng 02 dec 09, from -4.917 to -4.850, after dublin
+## >>chng 02 dec 11, from -4.850 to -4.877 new hei
+## >>chng 03 feb 13, from -4.877 to -4.852, new DR H3+ => 3H rate
+## >>chng 03 feb 13, from -4.852 to -5.052 new DR H3+ => 3H
+## >>chng 03 apr 14, from -5.052 to -5.116, hlowt bug
+## >>chng 03 aug 28, from -5.116 to -4.866 Nick Abel co fix, let go to end
+## >>chng 03 oct 23, from -4.866 to -4.840 H chem update
+## >>chng 03 oct 25, from -4.840 to -4.808, update H mole net
+## >>chng 04 apr 17, from -4.808 to -4.780 mole conv
+## >>chng 04 jun 09, from -4.780 to -4.812, NA update H chem net
+## >>chng 05 dec 05, from -4.812 to -4.733, chng Z for stability
+## >>chng 07 dec 06, from -4.733 to -4.655, secondaries prop to osc str, apply to iso species
+## >>chng 09 feb 23, from -4.655 to -4.63, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 12 jul 01, from -4.63 to -4.653, update Badnell DR to 13-electron iso sequence
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+## >>chng 23 jun 27, from -4.653 to -4.628, update Fe+ model to Smyth+19
+monitor line "H  1" luminosity 1215.67A -4.628
+##
+## >>chng 01 may 10, from 26.7 to 28.19 ct network change
+## >>chng 02 nov 20, change to luminosity
+## >>chng 02 dec 11, from -4.950 to -4.886 new hei
+## >>chng 03 feb 28, from -4.886 to -4.865, drift down
+## >>chng 03 may 02, from -4.865 to -4.892, small changes
+## >>chng 03 aug 28, from -4.892 to -4.828 Nick Abel co fix, let go to end
+## >>chng 03 oct 23, from -4.828 to -4.807 H chem update
+## >>chng 03 oct 25, from -4.807 to -4.785, update H mole net
+## >>chng 04 jun 02, from -4.785 to -4.910, NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from -4.910 to -4.771, change chemistry, thickness
+## >>chng 05 aug 03, from -4.771 to -4.754, NA update CO, H chem net
+## >>chng 05 dec 05, from -4.754 to -5.039, chng Z for stability
+## >>chng 05 dec 08, from -5.039 to -5.084, FeII reset bug intro above fixed
+## >>chng 06 nov 29, from -5.084 to -5.063, Badnell DR turned on
+## >>chng 12 nov 08, from -5.063 to -5.043, fix e-,H2 dissociation rate
+## >>chng 13 dec 23, from -5.043 to -5.069, C to external databases
+## >>chng 14 mar 26, from -5.069 to -5.222, Move oxygen data to stout and chianti files
+## >>chng 15 may 30, from -5.222 to -5.25, updates after merge from mainline, r10248
+## >>chng 15 jun 03, from -5.25 to -5.122, exact LTE H2 cooling (not big model)
+## >>chng 16 mar 26, from -5.122 to -5.145, merge branch feii, new bands logic
+## >>chng 23 jul 06, from -5.145 to -5.168, update Fe+ model to Smyth+19
+monitor line "Si 2" luminosity 34.8046m -5.168
+##
+## >>chng 01 jun 15, from 18.2 to 19.25 full H ct network
+## >>chng 02 apr 03, from 19.25 to 14.09, bound compton
+## >>chng 02 may 05, from 14.09 to 15.106 fix CT matrix
+## >>chng 02 nov 20, change to luminosity
+## >>chng 02 dec 09, from -5.066 to -5.001, after dublin
+## >>chng 02 dec 11, from -5.001 to -5.106 new hei
+## >>chng 03 feb 13, from -5.106 to -5.514 new DR H3+ => 3H
+## >>chng 03 apr 14, from -5.514 to -5.611, hlowt bug
+## >>chng 03 may 02, from -5.611 to -5.648, small changes
+## >>chng 03 aug 28, from -5.648 to -5.083 Nick Abel co fix, let go to end
+## >>chng 03 oct 23, from -5.083 to -5.053 H chem update
+## >>chng 03 oct 25, from -5.053 to -5.013, update H mole net
+## >>chng 04 mar 24, from -5.013 to -5.036, small changes, incr error
+## >>chng 11 nov 16, from -5.036 to -5.082, adjust newmole monitors
+## >>chng 13 jul 26, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line luminosity "la x" 1215.67A -5.082 error 0.1
+##
+## >>chng 02 apr 03, from 3.54 to 4.16 bound compton
+## >>chng 02 oct 28, H2 + H =>H2 rate change to luminosity
+## >>chng 02 nov 20, from -5.683 to -5.456, new stop criteria, new he ots
+## >>chng 02 dec 09, from -5.456 to -5.294, after dublin
+## >>chng 02 dec 11, from -5.294 to -5.443 new hei
+## >>chng 03 feb 13, from -5.443 to -6.032 new DR H3+ => 3H
+## >>chng 03 apr 14, from -6.032 to -6.167, hlowt bug
+## >>chng 03 may 02, from -6.167 to -6.205, small changes
+## >>chng 03 may 18, from -6.205 to -6.183, chng cont pump rates, incr error
+## >>chng 03 aug 28, from -6.183 to -5.770 Nick Abel co fix, let go to end
+## >>chng 03 sep 25, from -5.770 to -5.819, better convergence
+## >>chng 05 dec 05, from -5.819 to -6.062, chng Z for stability
+## >>chng 06 mar 02, from -6.062 to -5.93, turn off molecules so can do deep
+## with no cr included, to preserve test on energy conservation
+## >>chng 10 dec 24, from -5.93 to -6.042, results with chemistry enabled
+## >>chng 13 dec 23, from -6.042 to -5.975, C to external databases
+monitor line luminosity "c  1" 609.590m -5.975 error 0.1
+##
+## >>chng 01 jun 15, from 1.16 to 1.263 full H ct network
+## >>chng 02 apr 03, from 1.263 to 1.47 bound compton
+## >>chng 02 jun 13, from 1.47 to 1.39, increase error
+## >>chng 02 oct 28, H2 + H =>H2 rate change to luminosity
+## >>chng 02 dec 09, from -6.141 to -6.104, after dublin
+## >>chng 03 jan 20, from -6.104 to -6.141, improve hmole solver
+## >>chng 03 aug 28, from -6.141 to -6.014 Nick Abel co fix, let go to end
+## >>chng 04 jun 09, from -6.014 to -6.040, NA update H chem
+## >>chng 05 feb 06, from -6.040 to -6.071, slow drift
+## >>chng 05 jul 06, from -6.07 to -6.11, drift down
+## >>chng 05 dec 05, from -6.11 to -5.60, chng Z for stability
+## >>chng 06 feb 07, from -5.60 to -5.66, add exp to low-T DR 
+## >>chng 06 feb 07, from -5.66 to -5.59, add exp to low-T DR 
+## >>chng 12 nov 08, from -5.59 to -5.637, fix e-,H2 dissociation rate
+## >>chng 15 jun 03, from -5.637 to -5.75, exact LTE H2 cooling (not big model)
+## >>chng 23 jun 27, from -5.75 to -5.671, update Fe+ model to Smyth+19
+monitor line luminosity "blnd" 9850 -5.671 error 0.1 ## ci line
+##
+## >>chng 01 may 10, from 5.15 to 5.425 ct network change
+## >>chng 02 apr 03, from 5.425 to 6.12 bound compton
+## >>chng 02 oct 28, H2 + H =>H2 rate change to luminosity
+## >>chng 02 nov 20, from -5.485 to -5.542, new stop criteria, new he ots
+## >>chng 02 dec 11, from -5.542 to -5.514 new hei
+## >>chng 03 feb 13, from -5.514 to -5.558 new DR H3+ => 3H
+## >>chng 03 apr 14, from -5.558 to -5.604, hlowt bug
+## >>chng 03 aug 28, from -5.604 to -5.470 Nick Abel co fix, let go to end
+## >>chng 04 jun 02, from -5.470 to -5.401, NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from -5.501 to -5.542, change chemistry, thickness
+## >>chng 04 jul 30, from -5.542 to -5.615, NA add N chem
+## >>chng 04 aug 01, from -5.615 to -5.552, improv C conervgence, inc err
+## >>chng 05 jul 06, from -5.55 to -5.52, drift down
+## >>chng 05 aug 03, from -5.52 to -5.64 NA update CO, H chem net
+## >>chng 05 dec 05, from -5.64 to -5.84, chng Z for stability
+## >>chng 05 dec 08, from -5.84 to -5.79, FeII reset bug intro above fixed
+## >>chng 06 feb 07, from -5.79 to -5.75, add exp to low-T DR 
+## >>chng 06 mar 02, from -5.75 to -5.69, turn off molecules so can do deep
+## with no cr included, to preserve test on energy conservation
+## >>chng 06 mar 05, from -5.69 to -5.83, NA add C+ - (Mg0 Fe0) CT
+## >>chng 06 nov 29, from -5.83 to -5.88, Badnell DR turned on
+## >>chng 13 feb 01, from -5.88 to -5.952, BUGFIX, largely undo r6703
+## >>chng 14 mar 26, from -5.952 to -6.036, Move oxygen data to stout and chianti files
+monitor line luminosity "c  2" 157.636m -6.036 er 0.1
+##
+## >>chng 01 jun 15, from 0.0758 to 0.084 full H ct network
+## >>chng 01 nov 08, from 0.084 to 0.077, impreoved pressure convergence
+## >>chng 02 apr 03, from 0.077 to 0.095 bound compton
+## >>chng 02 nov 20, from -5.308 to -5.360, new stop criteria, new he ots
+## >>chng 02 nov 20, change to luminosity
+## >>chng 02 dec 09, from -7.376 to -7.328, after dublin
+## >>chng 03 aug 28, from -7.328 to -7.041 Nick Abel co fix, let go to end
+## >>chng 04 may 15, from -7.041 to -7.090, update cal line rad pres
+## >>chng 04 may 22, from -7.090 to -7.048, update rad pres
+## >>chng 04 jun 02, from -7.048 to -6.581, NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from -6.581 to -7.095, change chemistry, thickness
+## >>chng 04 sep 25, from -7.095 to -7.138, chng te conv 0.02 to 0.005
+## >>chng 05 aug 03, from -7.14 to -7.18 NA update CO, H chem net
+## >>chng 05 dec 05, from -7.18 to -6.60, chng Z for stability
+## >>chng 05 dec 08, from -6.60 to -6.56, FeII reset bug intro above fixed
+## >>chng 06 jul 07, from -6.56 to -6.60, Stancil N1 CT
+monitor line luminosity "N  2"  6583.45 -6.60 error 0.1
+##
+## >>chng 01 jun 15, from 8.99 to 9.566 full H ct network
+## >>chng 02 nov 20, change to luminosity
+## >>chng 02 dec 11, from -5.399 to -5.357 new hei
+## >>chng 03 apr 14, from -5.357 to -5.399, hlowt bug
+## >>chng 03 aug 28, from -5.399 to -5.386 Nick Abel co fix, let go to end
+## >>chng 03 oct 25, from -5.386 to -5.350, update H mole net
+## >>chng 04 apr 28, from -5.350 to -5.372 He+ - H ct rate update
+## >>chng 04 jun 02, from -5.372 to -5.270, NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from -5.270 to -5.358, change chemistry, thickness
+## >>chng 05 dec 05, from -5.36 to -5.38, chng Z for stability
+## >>chng 05 dec 08, from -5.38 to -5.47, FeII reset bug intro above fixed
+## >>chng 09 feb 23, from -5.47 to -5.43, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 14 mar 26, from -5.43 to -5.184, Move oxygen data to stout and chianti files
+## >>chng 15 jun 03, from -5.184 to -5.106, exact LTE H2 cooling (not big model)
+monitor line luminosity "O  1" 63.1679m -5.106 error 0.1
+##
+## >>chng 00 oct 19, change ir continuum mesh, 0.244 0.229
+## >>chng 01 jan 31, 0.229 to 0.265 Pequignot CT rates
+## >>chng 01 may 10, from 0.265 to 0.282 ct network change
+## >>chng 01 jun 15, from 0.282 to 0.297 full H ct network
+## >>chng 01 sep 09, from 0.297 to 0.203, better Fe Lya dest converge, 1 level
+## >>chng 01 sep 09 in h loop off
+## >>chng 01 sep 24, from 0.203 to 0.187 chng high-state branching ratio
+## >>chng 02 apr 03, from 0.187 to 0.099 bound compton
+## >>chng 02 may 05, from 0.099 to 0.132 fix CT matrix
+## >>chng 02 jun 13, from 0.132 to 0.120 increase error
+## >>chng 02 oct 28, H2 + H =>H2 rate change to luminosity
+## >>chng 02 nov 20, from -7.300 to -8.419, diff stop criteria
+## >>chng 02 nov 24, from -8.419 to -8.3812, new he grnd rec
+## >>chng 02 dec 09, from -8.381 to -8.447, after dublin
+## >>chng 02 dec 21, from -8.447 to -8.538, new hmole
+## >>chng 03 may 22, from -8.538 to -9.223, Lya dest prob
+## >>chng 03 aug 28, from -9.223 to -7.292 Nick Abel co fix, let go to end
+## >>chng 04 apr 17, from -7.292 to -7.384 mole conv
+## >>chng 04 may 15, from -7.384 to -7.466, update cal line rad pres
+## >>chng 04 may 22, from -7.466 to -7.369, update rad pres
+## >>chng 04 jun 02, from -7.37 to -7.84, NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from -7.84 to -9.07 change chemistry, thickness
+## >>chng 05 dec 05, from -9.07 to -8.77, chng Z for stability
+## >>chng 05 dec 08, from -8.77 to -8.89, FeII reset bug intro above fixed
+## molecules now turned off
+## assert line luminosity "H- h" 0   -8.89 error 0.15
+##
+## >>chng 01 may 10, from 4.52 to 4.202 ct network change
+## >>chng 02 apr 03, from 4.202 to 4.744 bound compton
+## >>chng 02 nov 20, change to luminosity
+## >>chng 02 dec 09, from -5.717 to -5.761, after dublin
+## >>chng 03 feb 13, from -5.761 to -5.890 new DR H3+ => 3H
+## >>chng 03 apr 14, from -5.890 to -5.924, hlowt bug
+## >>chng 03 aug 28, from -5.924 to -5.803 Nick Abel co fix, let go to end
+## >>chng 03 sep 25, from -5.803 to -5.827, better convergence
+## >>chng 03 oct 03, from -5.827 to -5.799, merge co and ion solvers
+## >>chng 04 apr 17, from -5.799 to -5.775 mole conv
+## >>chng 04 jun 02, from -5.775 to -5.754 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from -5.754 to -5.730 change chemistry, thickness
+## >>chng 05 dec 05, from -5.73 to -6.03, chng Z for stability
+## >>chng 06 mar 02, from -6.03 to -5.94, turn off molecules so can do deep
+## with no cr included, to preserve test on energy conservation
+## >>chng 07 dec 19, from -5.94 to -6.02, changes in r1698
+## >>chng 10 dec 24, from -6.02 to -6.099, results with chemistry enabled
+monitor line luminosity "totm" 0   -6.099 error 0.1
+##
+## >>chng 01 jun 15, from 74.98 to 79.47 full H ct network
+## >>chng 02 apr 03, from 79.47 to 85.6 bound compton
+## >>chng 02 oct 28, H2 + H =>H2 rate change to luminosity
+## >>chng 02 nov 20, diff stop criteria, -4.373 to -4.402
+## >>chng 02 dec 11, from -4.402 to -4.368 new hei
+## >>chng 03 feb 13, from -4.368 to -4.419 new DR H3+ => 3H
+## >>chng 03 apr 14, from -4.419 to -4.442, hlowt bug
+## >>chng 03 aug 28, from -4.442 to -4.350 Nick Abel co fix, let go to end
+## >>chng 05 dec 05, from -4.350 to -4.333, chng Z for stability
+## >>chng 09 feb 23, from -4.333 to -4.31, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 15 jun 03, from -4.31 to -4.337, exact LTE H2 cooling (not big model)
+monitor line luminosity "toth" 0   -4.337
+##
+## new - fix these two 
+## >>chng 02 jan 17, from 0.11 to 0.117, add H_2 photoion opacity
+## >>chng 02 jul 19, from 0.117 to 0.131 better two photon
+## >>chng 02 oct 28, H2 + H =>H2 rate change to luminosity
+## >>chng 02 nov 13, from -7.173 to -7.510, ch chem network
+## >>chng 02 nov 20, diff stop criteria, -7.510 to -7.285
+## >>chng 02 dec 10, from -7.285 to -7.531, better conv, incr error
+## >>chng 02 dec 11, from -7.531 to -7.358 new hei
+## >>chng 03 feb 13, from -7.358 to -10.114 new DR H3+ => 3H
+## >>chng 03 apr 14, from -10.114 to -10.390, hlowt bug
+## >>chng 03 aug 28, from -10.390 to -7.492 Nick Abel co fix, let go to end
+## >>chng 03 sep 07, from -7.492 to -10.733 chng mole net
+## >>chng 03 sep 10, from -10.733 to -7.918, better H2*
+## >>chng 03 sep 25, from -7.918 to -6.545, better convergence
+## >>chng 03 oct 03, from -6.545 to -6.714, merge co and ion solvers
+## >>chng 03 nov 18, from -6.714 to -6.662, update mole net
+## >>chng 04 jun 08, from -6.662 to -6.441 change chemistry, thickness
+## assert line luminosity "CO12" 0   -6.441 error 0.25
+##
+## >>chng 02 jan 17, from 0.042 to 0.047, add H_2 photoion opacity
+## >>chng 02 oct 28, H2 + H =>H2 rate change to luminosity
+## >>chng 02 nov 13, from -7.642 to -8.4272 ch chem network
+## >>chng 02 nov 20, diff stop criteria, -8.427 to -8.767
+## >>chng 02 dec 10, from -8.767 to -8.983, better conv, incr error
+## >>chng 02 dec 11, from -8.983 to -8.841 new hei
+## >>chng 02 dec 21, from -8.841 to -8.78 new hmole
+## >>chng 03 feb 11, from -8.780 to -8.919 update H3+ DR
+## >>chng 03 feb 13, from -8.919 to -11.585 new DR H3+ => 3H
+## >>chng 03 feb 13, from -11.585 to -11.685 new DR H3+ => 3H
+## >>chng 03 apr 14, from -11.685 to -11.861, hlowt bug
+## >>chng 03 may 02, from -11.861 to -11.912 small changes
+## >>chng 03 may 21, from -11.912 to -11.862, chng in Lya transport
+## >>chng 03 aug 28, from -11.862 to -8.007 Nick Abel co fix, let go to end
+## >>chng 03 sep 07, from -8.007 to -12.182 chng mole net
+## >>chng 03 sep 10, from -12.182 to -8.253, better H2*
+## >>chng 03 sep 11, from -8.253 to -8.210, better H2*
+## >>chng 03 sep 25, from -8.210 to -6.954, better convergence
+## >>chng 03 sep 30, from =6.954 to -6.904, merge ion & mol solvers, incr err
+## >>chng 03 oct 03, from -6.904 to -7.053, merge co and ion solvers, incr err
+## >>chng 03 nov 18, from -7.053 to -6.969, update mole net
+## >>chng 04 jun 08, from -6.969 to -6.742 change chemistry, thickness
+## >>chng 04 jul 17, from -6.742 to -6.632, NA update chem net
+## >>chng 04 jul 30, from -6.632 to -6.788, NA add N chem
+## >>chng 04 aug 01, from -6.788 to -6.686, improv C conervgence
+## assert line luminosity "CO13" 0   -6.686 error 0.20
+##
+## >>chng 01 jan 31, 1.06 to 0.837 Pequignot CT rates
+## >>chng 01 apr 02, from 0.837 to 0.966, H atom improvements
+## >>chng 01 may 06, from 0.966 to 0.864, He+ - H ct rate change
+## >>chng 01 may 10, from 0.864 to 1.013 ct network change
+## >>chng 01 nov 08, from 1.013 to 1.187 impreoved pressure convergence
+## >>chng 02 jan 17, from 1.187 to 1.218 add H_2 photoion opacity
+## >>chng 02 apr 03, from 1.218 to 0.916 bound compton
+## >>chng 02 oct 28, H2 + H =>H2 rate change to luminosity
+## >>chng 02 dec 11, from -5.864 to -5.702 new hei
+## >>chng 03 jan 20, from -5.702 to -5.635, improve hmole solver
+## >>chng 03 feb 13, from -5.635 to -5.712 new DR H3+ => 3H
+## >>chng 03 aug 28, from -5.712 to -5.741 Nick Abel co fix, let go to end
+## >>chng 03 aug 29, from -5.741 to -5.814, Gargi Shaw add H2* reactions
+## >>chng 03 oct 23, from -5.814 to -5.995 H chem update
+## >>chng 03 oct 25, from -5.995 to -6.550, update H mole net
+## >>chng 04 mar 24, from -6.550 to -6.625, small changes
+## >>chng 04 jun 02, from -6.625 to -7.040 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jul 03, from -7.040 to -7.216, NA update H, CO chem net
+## >>chng 05 aug 03, from -7.22 to -7.12 NA update CO, H chem net
+## >>chng 05 dec 05, from -7.12 to -6.93, chng Z for stability
+## >>chng 05 dec 08, from -6.93 to -6.77, FeII reset bug intro above fixed
+## assert line luminosity "H2 l" 2m   -6.77 error 0.15
+##
+## >>chng 02 apr 03, from 3.519 to 3.553 bound compton
+## >>chng 02 nov 20, from 3.553 to 3.576 new stop criteria, new he ots
+## >>chng 03 may 02, from 3.576 to 3.599 small changes
+## >>chng 03 aug 28, from 3.599 to 3.637 Nick Abel co fix, let go to end
+## >>chng 04 jun 02, from 3.637 to 3.775 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from 3.775 to 3.617 change chemistry, thickness
+## >>chng 05 aug 03, from 3.617 to 3.599 NA update CO, H chem net
+## >>chng 05 dec 05, from -3.60 to -3.85, chng Z for stability
+## >>chng 23 jun 27, from 3.85 to 3.889, update Fe+ model to Smyth+19
+monitor temperature "H+" 3.889 error 0.1
+##
+## >>chng 02 jun 10, from 3.545 to 3.563, slow drift up 
+## >>chng 03 aug 28, from 3.563 to 3.624 Nick Abel co fix, let go to end
+## >>chng 04 jun 02, from 3.624 to 3.734 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from 3.734 to 3.606 change chemistry, thickness
+## >>chng 05 aug 03, from 3.606 to 3.587 NA update CO, H chem net
+## >>chng 05 dec 05, from -3.587 to -3.855, chng Z for stability
+## >>chng 14 mar 26, from 3.855 to 3.879, Move oxygen data to stout and chianti files
+monitor temperature "He+" 3.879
+##
+## >>chng 03 aug 28, from 3.616 to 3.684 Nick Abel co fix, let go to end
+## >>chng 04 jun 02, from 3.684 to 3.810 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from 3.810 to 3.676 change chemistry, thickness
+## >>chng 05 dec 05, from 3.676 to 3.887, chng Z for stability
+## >>chng 15 jun 03, from 3.887 to 3.911, exact LTE H2 cooling (not big model)
+monitor temperature "He+2" 3.911
+##
+## >>chng 02 dec 09, from 3.607 to 3.633 after dublin
+## >>chng 03 aug 28, from 3.633 to 3.685 Nick Abel co fix, let go to end
+## >>chng 04 jun 02, from 3.685 to 3.807 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from 3.807 to 3.675 change chemistry, thickness
+## >>chng 04 sep 25, from 3.675 to 3.654 incr temp toler 0.02 to 0.005
+## >>chng 05 dec 05, from 3.654 to 3.875, chng Z for stability
+## >>chng 15 jun 03, from 3.875 to 3.899, exact LTE H2 cooling (not big model)
+monitor temperature "O+" 3.899
+##
+## >>chng 03 aug 28, from 3.648 to 3.713 Nick Abel co fix, let go to end
+## >>chng 04 jun 02, from 3.713 to 3.847 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jun 08, from 3.847 to 3.707 change chemistry, thickness
+## >>chng 05 dec 05, from 3.707 to 3.916, chng Z for stability
+monitor temperature "O+2" 3.916
+##
+monitor pressure error < 0.003 ##this is ratio of std dev to mean 
+##
+## >>chng 04 jun 08, from 25.84 to 23.45 change chemistry, thickness
+## >>chng 04 jun 28, from 23.45 to 23.81 bug in particle count in pressure
+## >>chng 04 jul 17, from 23.81 to 23.68, NA update chem net
+## >>chng 04 jul 30, from 23.68 to 23.78, NA add N chem
+## >>chng 04 aug 01, from 23.78 to 23.85, improv C conervgence
+## >>chng 05 jul 06, from 23.85 to 23.77, drift down
+## >>chng 05 dec 05, from 23.77 to 24.40, chng Z for stability
+## >>chng 05 dec 08, from 24.40 to 23.19, FeII reset bug intro above fixed
+## asser H2 column 24.19 error 0.2
+##
+## >>chng 04 jun 08, from 22.53 to 20.46 change chemistry, thickness
+## >>chng 04 jun 28, from 20.46 to 20.68 bug in particle count in pressure
+## >>chng 05 jul 06, from 20.68 to 20.64, drift down
+## >>chng 05 dec 05, from 20.64 to 20.58, chng Z for stability
+## >>chng 05 dec 08, from 20.58 to 20.41, FeII reset bug intro above fixed
+## asser CO column 20.41 error 0.1
+##
+## >>chng 03 aug 28, from 200 to 550 Nick Abel co fix, let go to end
+## >>chng 03 oct 03, from 550 to 650 merge co and ion solvers, incr err
+## >>chng 03 dec 08, from < 650 to < 680, chng zones, ots
+## >>chng 04 mar 13, from 680 to 735, finer zone in molecular regions
+## >>chng 04 mar 31, from 735 to 800, finger dr, using changes in all co mole
+## >>chng 04 jun 02, from 800 to 850 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jul 17, from 850 to 1000, NA update chem net
+## >>chng 04 jul 30, from 1000 to 1200 NA add N chem
+## >>chng 04 jul 30, from 1200 to 1450 finer changes in co network
+## >>chng 04 oct 19, from 1450 to 1000, increase d(mole abund)d zone,
+## so fewer zones, but more itrzn error 0.02
+## >>chng 05 dec 05, from 1000 to 1100 chng Z for stability
+## >>chng 06 mar 02, from 1100 to 400, turn off molecules
+## >>chng 08 dec 08, from 400 to 406, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 406 to 402, merging newsolvers branch
+## >>chng 09 jan 08, from 402 to 407, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, from 407 to 403 (error 0.02), average of 10 runs
+## >>chng 09 apr 19, from 403 to 398, refactor p esc dest with cooling
+## >>chng 09 jun 15, from 398 to 422, gradual approach to outer edge
+## >>chng 10 dec 25, from 422 to 624, include chemistry
+## >>chng 12 mar 09, from 625 to 654, several renorms due to mid 5960s revisions
+## >>chng 14 mar 26, from 654 to 624, Move oxygen data to stout and chianti files
+## >>chng 21 nov 04, from 624 to 741, update mole co data
+monitor nzone 741
+##
+## >>chng 03 aug 28, from 25 to 20 Nick Abel co fix, let go to end
+## >>chng 03 dec 08, from < 20 to < 15, chng zones, ots
+## >>chng 04 mar 05, from 15 to 20, finer convergence
+## >>chng 04 jun 02, from 20 to 10 NA update Si, H+ networks, small 
+## efrac conver allowed
+## >>chng 04 jul 02, from 10 to 12, O H ct
+## >>chng 04 sep 25, from 12 to 16 incr temp toler 0.02 to 0.005
+## >>chng 04 sep 30, from 16 to 19, conv_base conv heat cool
+## >>chng 04 oct 19, from 19 to 22, increase d(mole abund)d zone,
+## so fewer zones, but more itrzn error 0.02
+## >>chng 05 feb 06, from 22 to 26 slow drift, actual 23.1
+## >>chng 08 dec 08, from 26 to 22.98, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 22.98 to 43.12, merging newsolvers branch
+## >>chng 09 jan 16, from 43.12 to 43.43, average of 10 runs
+## >>chng 09 jan 22, from 43.43 to 50.57, some minor botches as a result of r2655
+## >>chng 09 jun 15, from 50.57 to 48.81, gradual approach to outer edge
+## >>chng 09 jun 26, from 48.81 to 49.97, remove several dampers
+## >>chng 10 dec 24, from 49.97 to 41.8, results with chemistry enabled
+## >>chng 11 jun 14, from 41.8 to 38.13, new Te solver
+## >>chng 11 jun 22, from 38.13 to 36.75, tune Te solver
+## >>chng 11 jul 12, from 36.75 to 35.93, enable fit to Badnell DR suppression
+## >>chng 11 jul 12, from 35.93 to 36.40, enable fit to Badnell DR suppression
+## >>chng 13 nov 05, from 36.4 to 18.12, convergence branch changes
+## >>chng 14 apr 07, from 18.12 to 14.32, move H/C out of ConvBase loop
+monitor itrzn 14.32
+##
+# limit_conserve.in
+# class hii pdr  
+# ========================================
+
+This checks that energy is limit_conserved. The code always checks
+that it did not radiate more energy than was absorbed.  This
+calculation extends well past the photo-dissociation zone into
+fully molecular gas, so that all of the incident radiation is absorbed.  
+Grains, CMB, & CRs are not present so that only the incident radiation field
+powers the gas.
+
+Small changes can affect this model to surprising extents because 
+of the presence of a major thermal front at the H0 - H+ transition region.

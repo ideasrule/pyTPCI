@@ -1,0 +1,300 @@
+title Leiden meeting model 7
+# This is one of the tests in Rollig et al. 2007, A&A, 467, 187 
+#
+# commands controlling continuum =========
+# Use the Draine 1978 field, for a semi-infinite slab we have to use half
+# the requested value, so the actual value
+# they want for the model is actually twice the value below
+table draine 5
+extinguish 24
+#
+# commands for density & abundances =========
+# add PAHs and grains
+grains PAH no qheat 3 function
+grains ism 1.16 no qheat
+#  hydrogen density 
+hden 5.5
+#
+# commands controlling geometry  =========
+#
+# other commands for details     =========
+failures 3
+#  use leiden initialization file
+init file="pdr_leiden.ini"
+#
+# commands controlling output    =========
+save performance "pdr_leiden_v3.per"
+save overview "pdr_leiden_v3.ovr"
+save monitors "pdr_leiden_v3.asr"
+save leiden lines "pdr_leiden_v3.lin"
+save leiden "pdr_leiden_v3.lei"
+save dr "pdr_leiden_v3.dr" 
+save grain temperature "pdr_leiden_v3.grn"
+save heating "pdr_leiden_v3.het"
+save cooling "pdr_leiden_v3.col"
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 13 jul 01, from -1.974 to -6.351, add this monitor
+## >>chng 13 jul 15, from -6.351 to -6.324 move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 14 mar 26, from -6.324 to -6.484, Move oxygen data to stout and chianti files
+## >>chng 15 aug 30, from -6.484 to -6.512, update Si II stout to Laha+ 2015
+## >>chng 21 apr 10, from -6.512 to -6.565, update chemistry and lamba
+monitor line luminosity "Si 2" 34.8046m  -6.565
+## 
+monitor H2 column density 21.92 error 0.1
+##
+## >>chng 05 jul 02, from 18.21 to 18.15, AV stop was not exact
+monitor CO column density 18.15 error 0.1
+##
+## >>chng 05 jul 02, from 16.80 to 16.76, AV stop was not exact
+## >>chng 05 aug 03, from 16.76 to 16.57, NA update CO, H chem net
+## >>chng 05 aug 24, from 16.57 to 16.44, NA update CO cr ion rate
+## >>chng 05 dec 08, from 16.44 to 16.49, update to Elwert Solomon rate
+## >>chng 06 apr 15, from 16.49 to 16.37 NA added N2H+ to the chemistry
+## >>chng 08 feb 20, from 16.37 to 16.43, grain charge transfer changes in ion_solver and iso*
+## >>chng 10 mar 03, from 16.43 to 15.97, enable all LAMDA and increase max num levels
+## >>chng 10 jun 17, from 15.97 to 16.65, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from 16.65 to 15.23, bugfix r4165 & r4167
+## >>chng 11 nov 16, from 15.23 to 16.03, adjust newmole monitors
+## >>chng 15 aug 03, from 16.03 to 15.95, update LAMDA to 2015
+monitor O2 column density 15.95 error 0.1
+##
+## >>chng 05 jul 02, from 14.24 to 14.21, AV stop was not exact
+## >>chng 05 aug 24, from 14.21 to 14.13, NA update CO cr ion rate
+## >>chng 05 dec 08, from 14.13 to 14.05, update to Elwert Solomon rate
+## >>chng 06 apr 15, from 14.05 to 13.94 NA added N2H+ to the chemistry
+## >>chng 08 feb 20, from 13.94 to 14.15, grain charge transfer changes in ion_solver and iso*
+## >>chng 10 mar 03, from 14.15 to 14.37, enable all LAMDA and increase max num levels
+## >>chng 10 jun 17, from 14.37 to 13.6, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from 13.6 to 14.35, bugfix r4165 & r4167
+## >>chng 20 aug 03, from 14.35 to 14.4, update H3+ rates Indriola+ 2012
+monitor OH column density 14.4 error 0.1
+##
+## >>chng 05 aug 24, from 17.14 to 17.04, NA update CO cr ion rate
+## >>chng 05 dec 08, from 17.04 to 17.00, update to Elwert Solomon rate
+## >>chng 06 apr 15, from 17.00 to 16.95 NA added N2H+ to the chemistry
+## >>chng 08 feb 20, from 16.95 to 16.86, grain charge transfer changes in ion_solver and iso*
+## >>chng 10 mar 03, from 16.86 to 17, enable all LAMDA and increase max num levels
+## >>chng 10 jun 17, from 17 to 16.45, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from 16.45 to 16.97, bugfix r4165 & r4167
+## >>chng 12 aug 21, from 16.97 to 17.01, fix CRPHOT botches and HD crash
+monitor SiO column density 17.01 error 0.1
+## 
+## >>chng 05 mar 25, from 16.38 to 16.47 renorm H pops in level solver
+## >>chng 05 jun 19, from 16.47 to 16.42, small chng in chem net
+## >>chng 05 jun 26, from 16.42 to 16.56, make Federman chem the default
+## >>chng 05 aug 03, from 16.56 to 16.42, NA update CO, H chem net
+## >>chng 05 aug 24, from 16.42 to 16.37, NA update CO cr ion rate
+## >>chng 06 apr 15, from 16.37 to 16.31 NA added N2H+ to the chemistry
+## >>chng 08 feb 20, from 16.31 to 16.47, grain charge transfer changes in ion_solver and iso*
+## >>chng 10 jun 17, from 16.47 to 16.29, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from 16.29 to 16.43, bugfix r4165 & r4167
+## >>chng 11 nov 16, from 16.43 to 16.57, adjust newmole monitors
+monitor H2O column density 16.57 error 0.1
+## 
+## >>chng 05 jun 26, from 13.41 to 18.32, make Federman chem the default
+## >>chng 05 sep 27, from 18.326 to 17.25, TE, GS update H chem
+## >>chng 05 dec 08, from 17.25 to 18.14, update to Elwert Solomon rate
+## >>chng 10 mar 02, from 18.14 to 20.04, fix botches after CO model switch
+## >>chng 10 jun 17, from 20.04 to 25.5, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from 25.5 to 17.55, bugfix r4165 & r4167
+## >>chng 11 nov 16, from 17.55 to 23.62, adjust newmole monitors
+## >>chng 12 aug 21, from 23.62 to 37.39, fix CRPHOT botches and HD crash
+## >>chng 13 aug 20, from 37.39 to 29.16, enable D chem by default
+## >>chng 13 sep 17, from 29.16 to 38.44, D chem off by default
+monitor "H+" temperature 38.44
+## 
+## >>chng 05 mar 25, from 9.06 to 9.63 renorm H pops in level solver
+## >>chng 05 jun 26, from 9.63 to 10.10, make Federman chem the default
+## >>chng 05 dec 08, from 10.10 to 10.83, update to Elwert Solomon rate
+## >>chng 08 feb 20, from 10.83 to 10.21, grain charge transfer changes in ion_solver and iso*
+## >>chng 10 mar 02, from 10.21 to 11.03, fix botches after CO model switch
+## >>chng 10 mar 03, from 11.03 to 9.268, enable all LAMDA and increase max num levels
+## >>chng 10 jun 17, from 9.268 to 20.49, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from 20.49 to 7.175, bugfix r4165 & r4167
+## >>chng 11 nov 16, from 7.175 to 8.254, adjust newmole monitors
+monitor "H2" temperature 8.254 linear 
+## 
+## >>chng 05 sep 30, add these 5
+monitor column density H2+  9.22 error 0.1
+## 
+## >>chng 06 apr 15, from 12.33 to 12.29 NA added N2H+ to the chemistry
+## >>chng 08 feb 20, from 12.29 to 12.34, grain charge transfer changes in ion_solver and iso*
+## >>chng 20 aug 03, from 12.34 to 12.05, update H3+ rates Indriola+ 2012
+monitor column density H3+  12.05 error 0.1
+## 
+monitor column density H2g  21.90 error 0.1
+## 
+## >>chng 05 dec 08, from 14.10 to 13.96, update to Elwert Solomon rate
+## >>chng 11 nov 16, from 13.96 to 13.83, adjust newmole monitors
+monitor column density H2*  13.83 error 0.1
+## 
+## >>chng 05 dec 08, from 2.75 to 2.53, update to Elwert Solomon rate
+## >>chng 06 mar 02, from 2.53 to 2.49, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 2.496 to 2.56
+## >>chng 07 nov 29, from 2.56 to 2.60, due to changes in r1579
+## >>chng 11 nov 16, from 2.6 to 3.759, adjust newmole monitors
+## >>chng 12 jul 01, from 3.759 to 3.646, update Badnell DR to 13-electron iso sequence
+## >>chng 13 feb 01, from 3.646 to 3.556, BUGFIX, largely undo r6703
+## >>chng 16 mar 21, from 3.556 to 3.682, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+monitor column density HeH+ 3.682 error 0.1
+## 
+## >>chng 06 nov 28, add these lines
+## >>chng 06 nov 29, from -5.353 to -5.438, Badnell DR turned on
+## >>chng 07 apr 30, from -5.438 to -5.458, log DR average, use mix S DR
+## >>chng 08 sep 19, from -5.458 to -5.432, new method for average Badnell DR
+## >>chng 10 jun 17, from -5.432 to -5.372, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from -5.372 to -5.442, bugfix r4165 & r4167
+## >>chng 11 jul 12, from -5.442 to -5.394, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -5.394 to -5.294, adjust newmole monitors
+## >>chng 12 oct 22, from -5.294 to -5.315, zone tau in rt_line_one
+## >>chng 13 feb 01, from -5.315 to -5.369, BUGFIX, largely undo r6703
+## >>chng 13 dec 23, from -5.369 to -5.34, C to external databases
+## >>chng 15 mar 07, from -5.34 to -5.367, merging newmesh branch
+monitor line luminosity "c  2" 157.636m -5.367
+##
+## >>chng 08 apr 30, from -5.693 to -5.674 H, He topoff change
+## >>chng 10 mar 02, from -5.674 to -5.611, fix botches after CO model switch
+## >>chng 10 aug 25, from -5.611 to -5.711, bugfix r4165 & r4167
+## >>chng 11 nov 16, from -5.711 to -5.649, adjust newmole monitors
+## >>chng 12 jul 01, from -5.649 to -5.627, update Badnell DR to 13-electron iso sequence
+## >>chng 13 feb 01, from -5.627 to -5.608, BUGFIX, largely undo r6703
+## >>chng 13 dec 23, from -5.608 to -5.588, C to external databases
+monitor line luminosity "c  1" 370.269m -5.588
+##
+## >>chng 10 mar 02, from -6.067 to -6.033, fix botches after CO model switch
+## >>chng 10 aug 25, from -6.033 to -6.081, bugfix r4165 & r4167
+## >>chng 11 nov 16, from -6.081 to -6.048, adjust newmole monitors
+## >>chng 13 dec 23, from -6.048 to -6.005, C to external databases
+monitor line luminosity "c  1" 609.590m -6.005
+##
+## >>chng 06 nov 29, from -5.247 to -5.208, Badnell DR turned on
+## >>chng 07 dec 15, from -5.208 to -5.180, X-ray grain merge
+## >>chng 10 mar 02, from -5.18 to -5.12, fix botches after CO model switch
+## >>chng 10 jun 17, from -5.12 to -4.976, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from -4.976 to -5.233, bugfix r4165 & r4167
+## >>chng 11 jul 12, from -5.233 to -5.253, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -5.253 to -4.911, adjust newmole monitors
+## >>chng 12 jul 01, from -4.911 to -4.857, update Badnell DR to 13-electron iso sequence
+## >>chng 13 feb 01, from -4.857 to -4.806, BUGFIX, largely undo r6703
+## >>chng 13 nov 03, from -4.806 to -4.787, update H2 - C II collision rates
+monitor line luminosity "O  1" 63.1679m -4.787
+##
+## >>chng 06 nov 29, from -7.398 to -7.339, Badnell DR turned on
+## >>chng 07 apr 30, from -7.339 to -7.316, log DR average, use mix S DR
+## >>chng 08 apr 30, from -7.316 to -7.298 H, He topoff change
+## >>chng 10 mar 02, from -7.316 to -7.24, fix botches after CO model switch
+## >>chng 10 jun 17, from -7.24 to -7.055, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from -7.055 to -7.368, bugfix r4165 & r4167
+## >>chng 11 jul 12, from -7.368 to -7.399, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -7.399 to -6.909, adjust newmole monitors
+## >>chng 12 jul 01, from -6.909 to -6.845, update Badnell DR to 13-electron iso sequence
+## >>chng 13 feb 01, from -6.845 to -6.781, BUGFIX, largely undo r6703
+## >>chng 13 jul 15, from -6.781 to -6.754, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 jul 24, wl from 145.5m to 145.495m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -6.754 to -6.825, Move oxygen data to stout and chianti files
+## >>chng 21 sep 11, from -6.825 to -6.869, LAMDA update
+monitor line luminosity "O  1" 145.495m -6.869
+## 
+## >>chng 08 dec 08, from 9 to 5.987, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 5.987 to 10.64, merging newsolvers branch
+## >>chng 09 jan 16, from 10.64 to 10.61, average of 10 runs
+## >>chng 11 jun 22, from 10.61 to 10.25, tune Te solver
+## >>chng 11 nov 16, from 10.25 to 8.031, adjust newmole monitors
+## >>chng 12 mar 07, from 8.031 to 8.29, renorm to r5961 results
+## >>chng 12 apr 09, from 8.29 to 8.125, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 12 aug 06, from 8.125 to 7.971, bugfix - include Pelec_esc in several places
+## >>chng 12 aug 16, from 7.971 to 8.148, fix radasc bug from r6346
+## >>chng 12 aug 16, from 8.148 to 7.953, further fix of Rawlings H2 rates
+## >>chng 12 oct 13, from 7.953 to 8.149, Badnell revise DR collisional suppression fit
+## >>chng 12 dec 11, from 8.149 to 7.68, CX to ground state
+## >>chng 12 dec 15, from 7.68 to 8.121, more effects of cx/convergence changes
+## >>chng 13 jan 13, from 8.121 to 7.939, Pelec_esc change
+## >>chng 13 mar 07, from 7.939 to 8.014, mean gcc 64/32
+## >>chng 13 nov 05, from 8.014 to 6.237, convergence branch changes
+## >>chng 14 apr 07, from 6.237 to 4.386, move H/C out of ConvBase loop
+monitor itrzn 4.386 
+## 
+## >>chng 06 mar 02, from 620 to 660 (630) NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 08 dec 08, from 660 to 603, upper limit -> equals (r2515)
+## >>chng 09 jan 16, from 603 to 604, average of 10 runs
+## >>chng 10 mar 03, from 604 to 621, enable all LAMDA and increase max num levels
+## >>chng 10 jun 17, from 621 to 600, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 30, rom 628 to 000, drift, rm tiny error
+## >>chng 10 oct 18, from 600 to 628, replace faint brems with laser at high-energy limit of code in coronal cmmnd
+monitor nzone 628 
+##
+## >>chng 13 jun 27, from -8.869 to -6.767, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -6.767 to -6.829, update LAMDA to 2015
+## >>chng 20 aug 03, from -6.829 to -6.794, update H3+ rates Indriola+ 2012
+monitor "H2O " 538.142m line intensity -6.794
+## >>chng 13 jun 27, from -7.357 to -7.823, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -7.823 to -8.127, LAMDA update
+monitor "HNC " 1652.90m  line intensity -8.127
+## >>chng 13 jun 27, from -8.563 to -9.479, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -9.479 to -9.505, update LAMDA to 2015
+## >>chng 16 mar 21, from -9.505 to -9.465, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 20 aug 03, from -9.465 to -9.435, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -9.435 to -9.369, LAMDA update
+## >>chng 23 may 15, from -9.369 to -9.632, GS updates 21 reactions to UMIST 2012
+monitor "HCS+" 1755.88m  -9.632 line intensity
+## >>chng 13 jun 27, from -7.453 to -7.546, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -7.546 to -7.47, LAMDA update
+## >>chng 23 may 15, from -7.47 to -7.564, GS updates 21 reactions to UMIST 2012
+monitor "CS  " 3058.86m  -7.564 line intensity
+## >>chng 13 jun 27, from -7.288 to -7.109, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 2600.05m  -7.109 line intensity
+## >>chng 13 jun 27, from -6.463 to -6.247, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 1300.05m  -6.247 line intensity
+## >>chng 13 jun 27, from -6.149 to -5.867, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+monitor "CO  " 866.727m  -5.867 line intensity
+## >>chng 13 jun 27, from -6.177 to -5.746, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+monitor "CO  " 650.074m  -5.746 line intensity
+## >>chng 13 jun 27, from -6.485 to -5.864, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+monitor "CO  " 520.089m  -5.864 line intensity
+## >>chng 13 jun 27, from -6.954 to -6.177, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 15 mar 07, from -6.177 to -6.2, merging newmesh branch
+## >>chng 23 may 15, from -6.2 to -6.16, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 433.438m  -6.16 line intensity
+## >>chng 13 jun 27, from -7.48 to -6.546, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -6.546 to -6.574, Move oxygen data to stout and chianti files
+## >>chng 21 nov 04, from -6.574 to -6.616, update mole co data
+## >>chng 23 may 15, from -6.616 to -6.541, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 371.549m  -6.541 line intensity
+## >>chng 13 jun 27, from -8.049 to -6.95, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -6.95 to -6.996, Move oxygen data to stout and chianti files
+## >>chng 21 nov 04, from -6.996 to -7.042, update mole co data
+## >>chng 23 may 15, from -7.042 to -6.967, GS updates 21 reactions to UMIST 2012
+monitor "CO  " 325.137m  -6.967 line intensity
+## >>chng 13 jun 27, from -7.522 to -6.681, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+monitor "^13CO" 906.599m  -6.681 line intensity
+## >>chng 13 jun 27, from -8.247 to -8.541, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -8.541 to -9.42, LAMDA update
+## >>chng 21 sep 15, from -9.42 to -8.61, go back to unresolved model
+## >>chng 23 may 15, from -8.61 to -8.717, GS updates 21 reactions to UMIST 2012
+monitor "CN  " 880.858m  -8.717  line intensity
+# 
+# pdr_leiden_v3.in
+# class pdr 
+# ========================================
+# 
+

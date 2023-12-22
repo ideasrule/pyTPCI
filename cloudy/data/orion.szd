@@ -1,0 +1,8 @@
+# size distribution file for Orion grains
+# based on:
+#>>refer	grain	size distribution	Baldwin J.A., et al., 1991, ApJ, 374, 580
+2010403 # magic number for version control
+power  # choices are SSIZE, POWER, EXP1, EXP2, EXP3
+0.030  # lower limit for grain size (micron)
+0.250  # upper limit for grain size (micron)
+-3.5   # slope of power law distribution

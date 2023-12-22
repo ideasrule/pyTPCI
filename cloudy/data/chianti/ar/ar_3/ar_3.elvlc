@@ -1,0 +1,16 @@
+  1 3s2.3p4               3  1 P  2.0  5          0.000       0.000000          0.000       0.000000 
+  2 3s2.3p4               3  1 P  1.0  3       1112.175       0.010135          0.000       0.000000 
+  3 3s2.3p4               3  1 P  0.0  1       1570.229       0.014309          0.000       0.000000 
+  4 3s2.3p4               1  2 D  2.0  5      14010.004       0.127669          0.000       0.000000 
+  5 3s2.3p4               1  0 S  0.0  1      33265.724       0.303140          0.000       0.000000 
+ -1
+%filename: ar_3.elvlc
+%Observed energies: Ver. 3.0.3 of the online NIST database. http://physics.nist.gov/PhysRefData/ASD/index.html
+%Theoretical energies: No theoretical energies available.
+% produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+%  Peter Young   -   3-Jun-2006 
+
+Reference:
+Chianti  2022-02-18
+ -1

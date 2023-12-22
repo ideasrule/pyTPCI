@@ -1,0 +1,53 @@
+title Test model He atoms in Case B limit
+# grid over nebular range of density and temperature to check Case B H & He
+#
+# commands controlling continuum =========
+laser 5 Ryd
+ionization parameter -2
+#
+# commands for density & abundances =========
+init "hheonly.ini"
+hden 2. vary
+grid 6 2 -2 sequential
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+## >>chng 13 jul 24, wl from 4686 to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+normalize to "He 2" 4685.68A
+case b hummer no Pdest no photoionization
+no scattering escape 
+# prevent H I excited levels from being predicted
+database H-like element hydrogen resolved levels 3
+constant temperature 4. vary
+grid 5000K to 20000K step 5000K linear
+#
+# commands controlling output    =========
+database H-like print levels 
+database H-like resolved levels 20
+save grid "limit_caseb_he_den_temp.grd"
+save overview "limit_caseb_he_den_temp.ovr"
+save performance "limit_caseb_he_den_temp.per"
+save monitors "limit_caseb_he_den_temp.asr"
+# 
+# commands giving the monitors    =========
+monitor Case B H-like Helium   error 0.15 range 1000A to 10000A
+# 
+# limit_caseb_he_den_temp.in 
+# class limit 
+# ========================================
+# 
+
+this tests the predicted He II spectra in the Case B limit.
+
+this effectively turns off hydrogen to avoid the problem with every
+other heII line lying beneath an HI line.  this is done by reducing
+the number of levels for H I.
+
+this asserts the values are within 15% for a range of density and temperature.
+Actually they are all nearly within a few percent except at the lowest
+temperature.  The error greater than 10% occurs at the lowest temperature
+of 5000K.

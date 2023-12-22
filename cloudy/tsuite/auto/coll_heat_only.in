@@ -1,0 +1,198 @@
+title test code in limit where ONLY mechanical heating is present
+#
+# commands controlling continuum =========
+no photoionization
+blackbody 5000 STE 
+#
+# commands controlling geometry  =========
+stop column density 15 
+#
+# commands for density & abundances =========
+hden 10
+#
+# other commands for details     =========
+hextra -1.5
+iterate 
+#
+# commands controlling output    =========
+# this command must be tested somewhere
+print cooling, zone 5
+# output files
+save performance "coll_heat_only.per"
+save overview "coll_heat_only.ovr"
+save heating "coll_heat_only.het"
+save cooling "coll_heat_only.col"
+save monitors "coll_heat_only.asr" 
+save convergence reason "coll_heat_only.cvr"
+save dr "coll_heat_only.dr"
+save continuum "coll_heat_only.con"  units angstroms 
+#
+# commands giving the monitors    =========
+## >>chng 13 dec 23, from 6.546e+04 to 6.901e+04, C to external databases
+## >>chng 16 aug 18, 69010 to 74329, coll ion highest n iso sequences
+monitor temperature "H+" 74239
+##
+## remainder of asserts were mainly ion fracs - a big mistake - if heating
+## cooling changed then temp did too, driving ion changes.  this should
+## always have asserted coolants, the fundamental thing being tested
+## >>chng 06 jul 25, add these major coolants
+## >>chng 07 dec 29, from 2.918 to 2.939, drift up
+## >>chng 10 mar 14, from 2.939 to 2.917, update As to NIST recommended values
+## >>chng 13 mar 03, from 2.917 to 2.938, update atomic models for S II, S III
+## >>chng 13 dec 23, from 2.938 to 2.749, C to external databases
+## >>chng 16 jul 24, from 2.749 to 2.671 update C III to 2014A&A...566A.104F
+## >>chng 19 mar 01, change "Blnd" 977 -> "C  3" 977.02
+monitor line luminosity "C  3" 977.02  2.671
+## 
+## >>chng 07 dec 29, from 2.422 to 2.442, drift up
+## >>chng 10 mar 14, from 2.442 to 2.421, update As to NIST recommended values
+## >>chng 13 mar 03, from 2.421 to 2.443, update atomic models for S II, S III
+## >>chng 16 jul 24, from 2.443 to 2.391, update C III to 2014A&A...566A.104F
+## >>chng 16 aug 18, from 2.391 to 2.414, enhanced coll ion from highest n
+monitor line luminosity "Blnd" 1176  2.414
+## 
+## >>chng 06 nov 29, from 2.296 to 2.043, Badnell DR turned on
+## >>chng 10 mar 14, from 2.043 to 2.021, update As to NIST recommended values
+## >>chng 11 jul 12, from 2.021 to 2.275, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from 2.275 to 2.254, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from 2.254 to 2.204, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 jul 15, from 2.204 to 2.138, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 dec 23, from 2.138 to 2.164, C to external databases
+monitor line luminosity "si 4" 1393.75  2.164
+## 
+## >>chng 06 nov 29, from 2.266 to 2.196, Badnell DR turned on
+## >>chng 10 mar 14, from 2.196 to 2.168, update As to NIST recommended values
+## >>chng 11 jul 12, from 2.168 to 2.237, enable fit to Badnell DR suppression
+## >>chng 13 may 29, from 2.237 to 2.217, more Fe III default levels in stout
+## >>chng 13 jul 24, wl from 698.2 to 698.231A, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 2.217 to 2.275, C to external databases
+## >>chng 15 oct 14, from 1.131 to 1.152, update DR suppression in r10716
+## >>chng 16 jul 24, from 1.152 to 1.172, update C III to 2014A&A...566A.104F
+## >>chng 16 aug 18, from 1.172 to 1.222, enhanced coll ion from highest n
+monitor line luminosity "O  3" 702.337A  1.222
+##
+## >>chng 14 mar 26, add these two strong lines
+## >>chng 15 oct 14, from 1.771 to 1.792, update DR suppression in r10716
+## >>chng 16 aug 18, from 1.792 to 1.851, enhanced coll ion from highest n
+monitor line luminosity "O  3" 833.749A  1.851
+##
+## >>chng 14 mar 26, add these two strong lines
+## >>chng 15 oct 14, from 2.042 to 2.062, update DR suppression in r10716
+## >>chng 16 aug 18, from 2.062 to 2.121, enhanced coll ion from highest n
+monitor line luminosity "O  3" 835.289A  2.121
+## 
+monitor line luminosity "TotH"    0   3.500
+##
+monitor line luminosity "extH" 0  3.500
+## 
+## >>chng 05 mar 12, from -3.463 to -3.335 RP merge He-like code
+## >>chng 06 jul 25, small changes in cooling change ion fracs great deal
+## assert ionization Helium 1 -3.335
+## 
+## >>chng 07 dec 29, from -0.068 to -0.089, drift up
+## >>chng 13 dec 23, from -0.089 to -0.1351, C to external databases
+## >>chng 16 jul 24, from -0.1351 to -0.1732, update C III to 2014A&A...566A.104F
+## >>chng 16 aug 18, from -0.1732 to -0.5413, enhanced coll ion from highest n
+## >>chng 16 dec 15, from -0.5413 to -0.5084, fix bug on Hlike Percival annd Richard collisions
+## >>chng 19 aug 06, from -0.5084 to -0.4831, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor ionization Helium 2 -0.4831
+## 
+## >>chng 06 jul 25, from -0.840 to -0.783 HN update OIII collision data
+## >>chng 06 nov 29, from -0.783 to -0.760, Badnell DR turned on
+## >>chng 07 dec 23, from -0.760 to -0.734, small correction to h-like collision strengths
+## >>chng 08 nov 08, from -0.734 to -0.703, fix VS80 elec impact coll. str. (r2444)
+## >>chng 10 mar 14, from -0.703 to -0.7952, update As to NIST recommended values
+## >>chng 11 jul 12, from -0.7952 to -0.8272, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -0.8272 to -0.8075, Chianti for Fe moderate to high ions
+## >>chng 11 nov 16, from -0.8075 to -0.6928, adjust newmole monitors
+## >>chng 13 mar 03, from -0.6928 to -0.665, update atomic models for S II, S III
+## >>chng 13 may 07, from -0.665 to -0.7093, bnl_effective change
+## >>chng 13 dec 23, from -0.7093 to -0.5733, C to external databases
+## >>chng 14 mar 26, from -0.5733 to -0.5365, move O to external databases
+## >>chng 16 jul 24, from -0.5365 to -0.4833, update C III to 2014A&A...566A.104F
+## >>chng 16 aug 18, from -0.4833 to -0.1473, enhanced coll ion from highest n
+## >>chng 19 aug 06, from -0.1473 to -0.1732, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor ionization Helium 3 -0.1732
+## 
+## >>chng 06 jul 25, small changes in cooling change ion fracs great deal
+## assert ionization Carbon 1 -5.110
+## >>chng 06 jul 25, from -1.610 to -1.651 HN update OIII collision data
+## >>chng 06 nov 29, from -1.651 to -0.977, Badnell DR turned on
+## >>chng 10 mar 14, from -0.977 to -0.9509, update As to NIST recommended values
+## >>chng 11 jul 12, from -0.9509 to -1.509, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.509 to -1.47, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -1.47 to -1.42, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -1.42 to -1.275, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -1.275 to -1.43, update DR suppression
+## >>chng 13 dec 23, from -1.43 to -1.533, C to external databases
+## >>chng 14 mar 26, from -1.533 to -1.561, move O to external databases
+## >>chng 15 apr 28, from -1.561 to -1.508, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 16 jul 24, from -1.508 to -1.555, update C III to 2014A&A...566A.104F
+## >>chng 16 aug 18, from -1.555 to -1.651, enhanced coll ion from highest n
+## >>chng 22 jul 09, from -1.651 to -1.624, upgrade to Chianti v10
+monitor ionization Carbon 2 -1.624
+## 
+## >>chng 16 aug 18, from -0.06 to -0.0939, enhanced coll ion from highest n
+monitor ionization Carbon 3 -0.0939
+## 
+## >>chng 06 jul 25, from -0.985 to -0.921 HN update OIII collision data
+## >>chng 06 nov 29, from -0.921 to -1.722, Badnell DR turned on
+## >>chng 07 dec 23, from -1.722 to -1.693, small correction to h-like collision strengths
+## >>chng 10 mar 14, from -1.693 to -1.786, update As to NIST recommended values
+## >>chng 11 jul 12, from -1.786 to -1.065, enable fit to Badnell DR suppression
+## >>chng 12 nov 01, from -1.065 to -1.218, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -1.218 to -1.427, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -1.427 to -1.22, update DR suppression
+## >>chng 13 dec 23, from -1.22 to -1.045, C to external databases
+## >>chng 14 mar 26, from -1.045 to -1, move O to external databases
+## >>chng 15 apr 28, from -1 to -1.04, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 14, from -1.04 to -0.9722, CollisSuppres, final version from Dragan Nikolic
+## >>chng 16 jul 24, from -0.9722 to -0.9054, update C III to 2014A&A...566A.104F
+## >>chng 16 aug 18, from -0.9054 to -0.7723, enhanced coll ion from highest n
+## >>chng 19 aug 06, from -0.7723 to -0.7963, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor ionization Carbon 4 -0.7963
+## 
+## >>chng 06 jul 18, from -3.470 to -3.451 RP major upgrade VS coll strengths
+## >>chng 06 jul 25, small changes in cooling change ion fracs great deal
+## assert ionization Carbon 5 -3.451
+## 
+## >>chng 06 jul 25, from -0.465 to -0.496 HN update OIII collision data
+## >>chng 07 dec 29, from -0.496 to -0.517, drift up
+## >>chng 10 mar 14, from -0.517 to -0.4803, update As to NIST recommended values
+## >>chng 11 apr 22, from -0.4803 to -0.5981, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -0.5981 to -1.19, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.19 to -1.452, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -1.452 to -1.519, BUGFIX, largely undo r6703
+## >>chng 13 dec 23, from -1.519 to -1.685, C to external databases
+## >>chng 14 mar 26, from -1.685 to -1.726, move O to external databases
+## >>chng 16 jul 24, from -1.726 to -1.792, update C III to 2014A&A...566A.104F
+## >>chng 16 aug 07, from -1.792 to -1.757, Fran bug fix
+## >>chng 16 aug 18, from -1.757 to -1.918, enhanced coll ion from highest n
+## >>chng 18 jun 15, from -1.918 to -1.899, modified ion trimming scheme
+monitor ionization Iron   3 -1.899
+## 
+## >>chng 07 oct 26, from -0.190 to -0.170, very close to botch after recent changes
+## >>chng 11 apr 22, from -0.17 to -0.1379, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -0.1379 to -0.0644, enable fit to Badnell DR suppression
+## >>chng 13 dec 23, from -0.0644 to -0.1089, C to external databases
+## >>chng 16 jul 24, from -0.1089 to -0.1385, update C III to 2014A&A...566A.104F
+## >>chng 16 aug 18, from -0.1385 to -0.1841, enhanced coll ion from highest n
+monitor ionization Iron   4 -0.1841
+## 
+## >>chng 06 jul 25, from -1.967 to -1.873 HN update OIII collision data
+## >>chng 06 jul 25, small changes in cooling change ion fracs great deal
+## assert ionization Iron   5 -1.873
+## 
+## >>chng 06 feb 03, from -5.383 to -5.516, guess dr to Badnell mean
+## >>chng 06 jul 18, from -5.516 to -5.487 RP major upgrade VS coll strengths
+## >>chng 06 jul 25, small changes in cooling change ion fracs great deal
+## assert ionization Iron   6 -5.487
+#  
+# coll_heat_only.in
+# class coronal 
+# ========================================
+
+This test is an optically thin collisionally ionized gas with no
+photoionization at all. 
+
+

@@ -1,0 +1,117 @@
+title he-like carbon emission
+#
+# commands controlling continuum =========
+laser 50
+ionization -1
+#
+# commands for density & abundances =========
+hden 7
+# include lots of the element we are testing and set the ionization 
+# to be dominated by the correct ion stage
+element carbon abundance -2
+element carbon ionization -5 -5 -5 -5 -5 0 -5
+init file "ism.ini"
+element helium off
+element nitrogen off
+element oxygen off
+element neon off
+element magnesium off
+element silicon off
+element sulphur off
+element chlorine off
+element argon off
+element iron off
+#
+# commands controlling geometry  =========
+set dr -12
+stop zone 1
+#
+# other commands for details     =========
+database he-like resolved levels 10
+database he-like collapsed levels 20
+constant temper 5
+iterate
+#
+# commands controlling output    =========
+print he-like departure carbon
+print line faint -2
+save overview "helike_c.ovr"
+save performance "helike_c.per"
+save monitors "helike_c.asr"
+# This is Lyman alpha
+## >>chng 13 jul 24, wl from 40.27A to 40.2678A, increased wl precision to 6 sig. fig.
+normalize to "C  5" 40.2678A
+#
+monitor departure coefficient "C+4[3]" 2.2553
+monitor departure coefficient "C+4[29]" > 0
+monitor departure coefficient "C+4[29]" < 1
+# commands giving the monitors    =========
+## >>chng 07 apr 22, from -21.670 to -21.692 he-like proton collision bugfix
+## >>chng 08 mar 22, from -21.692 to -21.672, changed deltan=0 yrare A's
+## >>chng 10 aug 12, from -21.67 to -24.73, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.73 to -21.67, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 24, wl from 40.27A to 40.2678A, increased wl precision to 6 sig. fig.
+monitor line luminosity "C  5" 40.2678A -21.67
+## 
+## 41.47A is 2^3S to ground
+## >>chng 05 sep 5, wl from 41.48 to 41.47
+## >>chng 13 jul 25, wl from 41.47A to 41.4721A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 41.4721A to 41.4719A, update NIST energies
+monitor line "C  5"  41.4719A 4.45
+##
+## Totl is 2^3P to ground
+## >>chng 05 sep 5, wl from 40.74 to 40.73
+## >>chng 05 sep 5, from 0.35 to 0.37, changed wl's, some intens affected.
+## >>chng 08 mar 22,from 0.37 to 0.35, changed deltan=0 yrare A's
+## >>chng 13 jul 25, wl from 40.73A to 40.7307A, increased wl precision to 6 sig. fig.
+## >>chng 15 may 12, from 0.35 to 0.3875, coll. str. reduced mass scaling
+## >>chng 18 feb 20, updated spectral label from "TOTL" 40.7307A to "Blnd" 40.7307A, update He-like triplet labels and wl
+## >>chng 20 jan 13, from 0.3875 to 0.3605, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+## >>chng 21 mar 16, wl from 40.7307A to 40.7306A, update NIST energies
+monitor line "Blnd"  40.7306A 0.3605
+##
+## 34.97A is 3^1P to ground
+## >>chng 03 may 24, from 0.25 to 0.237, Ryan cleaned up some As
+## >>chng 05 sep 5, from 0.237 to 0.27, changed wl's, some intens affected.
+## >>chng 08 mar 22,from 0.27 to 0.24, changed deltan=0 yrare A's
+## >>chng 13 jul 25, wl from 34.97A to 34.9727A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 34.9727A to 34.9728A, update NIST energies
+monitor line "C  5"  34.9728A 0.24
+##
+## 227.3A is 3^3P to 2^3S
+## >>chng 05 sep 5, wl from 227.3 to 227.2
+## >>chng 05 sep 5, from 0.12 to 0.13, changed wl's, some intens affected.
+## >>chng 08 mar 22,from 0.13 to 0.12, changed deltan=0 yrare A's, widen
+## >>chng 13 jul 25, wl from 227.2A to 227.192A, increased wl precision to 6 sig. fig.
+monitor line "C  5"  227.192A 0.12 0.10
+##
+## 248.7A is 3^3D to 2^3P
+## >>chng 03 apr 25, wavelength form 248.3 to 248.4
+## >>chng 05 mar 12, from 0.22 to 0.208 RP merge He-like code
+## >>chng 05 sep 5, wl from 248.4 to 248.7
+## >>chng 05 sep 5, from 0.208 to 0.212
+## >>chng 13 jul 25, wl from 248.7A to 248.742A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 248.742A to 248.658A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 248.658A to 248.665A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "C  5" 248.665A to "Blnd" 248.705A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 248.705A to 248.708A, update NIST energies
+monitor line "Blnd"  248.708A 0.212
+##
+## the entire 2^3S - 2^3P multiplet
+## >>chng 13 jul 25, wl from 2275A to 2275.25A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 2275.25A to 2277.81A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 2277.81A to 2277.16A, now using middle multiplet wl
+## >>chng 15 may 12, from 0.0563 to 0.0598, coll. str. reduced mass scaling
+## >>chng 18 feb 20, updated spectral label from "TOTL" 2277.16A to "Blnd" 2274.23A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 2274.23A to 2273.52A, adjust multiplet Blend WL for refraction index
+## >>chng 20 jan 13, from 0.0598 to 0.0555, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+## >>chng 21 mar 16, wl from 2273.52A to 2273.63A, update NIST energies
+monitor line "Blnd"  2273.63A  0.0555
+#
+# helike_c.in
+# class limit 
+# ========================================
+# 
+
+test he-like carbon emission
+

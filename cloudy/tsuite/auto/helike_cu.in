@@ -1,0 +1,49 @@
+title He-like copper emission
+##
+database he-like resolved levels 10
+database he-like collapsed levels 20
+##
+print he-like departure copper 
+##
+constant temper 5
+iterate
+hden 7
+set dr -12
+init file "ism.ini"
+# must turn on since ism.ini turned it off
+element copper on  
+# then set abundance and ionization after turning it on
+element copper abundance -2
+element copper ionization -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 0 -5
+# now turn lots of elements off to save time
+element helium off
+element carbon off
+element nitrogen off
+element oxygen off
+element neon off
+element magnesium off
+element silicon off
+element sulphur off
+element chlorine off
+element argon off
+element iron off
+laser 1300
+ionization -1
+stop zone 1
+print line faint -2
+save overview "helike_cu.ovr"
+save performance "helike_cu.per"
+save monitors "helike_cu.asr"
+## 
+## >>chng 06 aug 18, from -18.387 to -18.292, RP update trans prob 
+## >>chng 10 aug 12, from -18.29 to -23.32, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -23.32 to -18.3, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 24, wl from 1.492A to 1.49175A, increased wl precision to 6 sig. fig.
+monitor line luminosity "Cu28" 1.49175A -18.3
+#
+# helike_cu.in
+# class limit 
+# ========================================
+# 
+
+test emission of He-like Cu

@@ -1,0 +1,97 @@
+title He-like nitrogen emission
+#
+# commands controlling continuum =========
+laser 75
+ionization -1
+#
+# commands for density & abundances =========
+hden 7
+element nitrogen abundance -2
+element nitrogen ionization -5 -5 -5 -5 -5 -5 0 -5
+init file "ism.ini"
+element helium off
+element carbon off
+element oxygen off
+element neon off
+element magnesium off
+element silicon off
+element sulphur off
+element chlorine off
+element argon off
+element iron off
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr -12
+#
+# other commands for details     =========
+database he-like resolved levels 10
+database he-like collapsed levels 20
+constant temper 5
+iterate
+#
+# commands controlling output    =========
+print he-like departure nitrogen
+print line faint -2
+save overview "helike_n.ovr"
+save performance "helike_n.per"
+save monitors "helike_n.asr"
+# This is Lyman alpha
+## >>chng 13 jul 24, wl from 28.79A to 28.7870A, increased wl precision to 6 sig. fig.
+normalize to "N  6" 28.7870A
+#
+# commands giving the monitors    =========
+## >>chng 05 mar 12, from -21.3 to -21.325, RP merge He-like code
+## >>chng 10 aug 12, from -21.32 to -24.78, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.78 to -21.32, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 24, wl from 28.79A to 28.7870A, increased wl precision to 6 sig. fig.
+monitor line luminosity "N  6" 28.7870A -21.32
+##
+## 29.53A is 2^3S to ground
+## >>chng 13 jul 25, wl from 29.53A to 29.5343A, increased wl precision to 6 sig. fig.
+monitor line "N  6"  29.5343A 3.97
+##
+## Totl is 2^3P to ground
+## >>chng 05 sep 5, wavelength from 29.09 to 29.08 
+## >>chng 13 jul 25, wl from 29.08A to 29.0840A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 29.0840A to "Blnd" 29.0840A, update He-like triplet labels and wl
+monitor line "Blnd"  29.0840A 0.73
+##
+## 24.90A is 3^1P to ground
+## >>chng 03 may 24, from 0.25 to 0.230, Ryan cleaned up some As
+## >>chng 07 apr 12, from 0.230 to 0.252, he-like proton collision bugfix
+## >>chng 08 mar 22, from 0.252 to 0.234, changed deltan=0 yrare A's
+## >>chng 13 jul 25, wl from 24.90A to 24.8980A, increased wl precision to 6 sig. fig.
+monitor line "N  6"  24.8980A 0.234
+##
+## 161.2A is 3^3P to 2^3S
+## >>chng 05 sep 5, wavelength from 161.6 to 161.2
+## >>chng 07 apr 22, from .120 to 126, he-like proton collision bugfix
+## >>chng 08 mar 22, from 0.126 to 0.119, changed deltan=0 yrare A's
+## >>chng 13 jul 25, wl from 161.2A to 161.220A, increased wl precision to 6 sig. fig.
+monitor line "N  6"  161.220A 0.119
+##
+## 174.0A is 3^3D to 2^3P
+## >>chng 03 apr 25, wavelength from 173.6 to 173.7
+## >>chng 05 sep 5, wavelength from 173.7 to 174.0
+## >>chng 07 apr 12, from 0.230 to 0.210, he-like proton collision bugfix
+## >>chng 08 mar 22, from 0.210 to 0.225, changed deltan=0 yrare A's
+## >>chng 13 jul 25, wl from 174.0A to 173.959A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 173.959A to 173.871A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "N  6" 173.871A to "Blnd" 173.920A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 173.920A to 173.919A, update NIST energies
+monitor line "Blnd"  173.919A 0.225
+## 
+## the entire 2^3S - 2^3P multiplet
+## >>chng 13 jul 25, wl from 1904A to 1903.86A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 1903.86A to 1907.26A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1907.26A to "Blnd" 1901.17A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 1901.17A to 1901.26A, update NIST energies
+monitor line "Blnd"  1901.26A  0.0391
+# helike_n.in
+# class limit  
+# ========================================
+# 
+
+test He-like emission for N
+

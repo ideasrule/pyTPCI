@@ -1,0 +1,53 @@
+title optimizer on stellar grids
+#
+# commands controlling continuum =========
+table star costar 36200 vary
+ionization par -3
+#
+# commands for density & abundances =========
+hden 4 vary
+init file "hheonly.ini"
+element oxygen on  
+#
+# commands controlling geometry  =========
+Case B
+stop zone 1
+#
+# other commands for details     =========
+optimize tolerance 0.03
+constant temper 4.3 vary
+optimize phymir sequential
+optimize iteration 500
+# the following spectrum was derived by running this sim at hden 5, t=4,
+# and T_star=51200
+# resulting eden was 5.041 and T=4, which we shall assert that we find
+optimize lines
+## >>chng 06 dec 01, change line intensities due to new Badnell DR rates
+## >>chng 07 oct 12, change intensities after case b entered
+## previous lines had intermediate H 1 spectrum
+O  2  3728.81   0.0365
+O  2  3726.03   0.0951
+Blnd  7323   0.1012
+Blnd  7332   0.0833
+O  3  5006.84  10.4461
+## >>chng 19 mar 01, change "Blnd" 4363 -> "O  3" 4363.21
+O  3  4363.21   0.1010
+end of lines
+#
+# commands controlling output    =========
+print line faint -2
+#
+# commands giving the monitors    =========
+monitor temperature "H+" 4
+save overview "stars_optimize2.ovr"
+save performance "stars_optimize2.per"
+save monitors "stars_optimize2.asr"
+#
+# optimize_phymir.in
+# class optimizer
+# ========================================
+#
+
+This checks whether the optimizer sets corrects limits for Teff.  The line
+spectrum was calculated at T = 1e4 K, n_H=1e5 cm^-3, T_star = 51200 K.
+

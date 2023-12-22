@@ -1,0 +1,16 @@
+    1    2       1410.596      0.000e+00      6.005e+03 
+    1    3        106.617      2.436e-01      7.144e+10 
+    2    3        115.334      1.102e-01      2.761e+10 
+ -1
+%filename: cr_16.wgfa
+%observed energy levels: Martin, W.C., Sugar, J., Musgrove, A., Dalton, G.R., 1995,
+    NIST Database for Atomic Spectroscopy, Version 1.0, NIST Standard Reference Database 61.
+% A values: interpolated using S VIII, Ca XII, Fe XVIII, Ni XX.
+%produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+% Enrico Landi 1997
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

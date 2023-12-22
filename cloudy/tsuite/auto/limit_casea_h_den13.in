@@ -1,0 +1,111 @@
+title case A
+# 
+# Seaton, M.J, 1959 MN 119, 90, 
+# 4pi j(beta) 5.56E-26
+# for this model total H-beta=4.745
+# b(2)=3.73E-3 (3)=3.69E-2 (4)=0.091 (5)=0.145 (6)=0.193
+# n.b. very different results if not l-mixed
+#
+# commands controlling continuum =========
+black body, T = 50000 K
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden = 13##
+init file="honly.ini"
+#
+# commands controlling geometry  =========
+stop lyman optical depth -6
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+no induced processes (OK) ##N.B. case A is a fiction; no incuded transitions
+database h-like collisions off ## must turn off all collisions 
+constant temperature = 10000 K
+iterate
+#
+# commands controlling output    =========
+# this should make the predicted totl Hbeta near unity for case a
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+normalize to "H  1" 4861.32A = 1.417
+print populations h-like 
+print departure coefficients
+save overview "limit_casea_h_den13.ovr"
+save performance "limit_casea_h_den13.per"
+save monitors "limit_casea_h_den13.asr" last
+#
+# commands giving the monitors    =========
+##
+## >>chng 07 oct 22, from 1.91 to 3.29, resolve l-levels of h-like sequence 
+## >>chng 08 apr 10, from 3.29 to 3.60, change default h-like levels, other minor changes
+## >>chng 11 dec 16, from 3.6 to 3.835, adjust botches due to recent iso recomb changes
+## >>chng 13 jul 24, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "H  1" 6562.80A 3.835
+##
+## >>chng 07 oct 22, from 1.00 to 1.30, resolve l-levels of h-like sequence 
+## >>chng 08 apr 10, from 1.30 to 1.38, change default h-like levels, other minor changes
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A 1.417
+##
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A 8.405
+##
+## >>chng 07 oct 22, from 0.589 to 0.640, resolve l-levels of h-like sequence 
+## >>chng 11 dec 16, from 0.64 to 0.6822, adjust botches due to recent iso recomb changes
+## >>chng 13 jul 24, wl from 4340 to 4340.49A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 4340.49A to 4340.46A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4340.46A to 4340.47A, update NIST energies
+## >>chng 21 aug 18, wl from 4340.47A to 4340.46A, revert to PvH energies for H
+monitor line "H  1" 4340.46A 0.6822
+## >>chng 13 jul 24, wl from 4102 to 4101.76A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 4101.76A to 4101.73A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4101.73A to 4101.74A, update NIST energies
+## >>chng 21 aug 18, wl from 4101.74A to 4101.73A, revert to PvH energies for H
+monitor line "H  1" 4101.73A 0.378
+## >>chng 07 mar 13, from -3.225 to -3.250, change in lines_service to fix cache errors
+## >>chng 07 jun 25, from -3.250 to -3.295, move h-like treatment to he-like methods.
+## >>chng 07 oct 22, from -3.295 to -3.341, resolve l-levels of h-like sequence 
+## >>chng 11 dec 16, from -3.341 to -3.308, adjust botches due to recent iso recomb changes
+monitor hydrogen 1 ionization -3.308
+# limit_casea_h_den13.in
+# class limit 
+# ========================================
+# 
+
+Case A is a mathematical fiction; when the Lyman lines are
+optically thin continuum pumping must be important if the gas
+is ionized.  Fluorescence is turned off with the
+no induced processes command.  The density is set to a
+very high value (1015 cm-3) so that the 2s-2p states are well l-mixed,
+in keeping with standard case A assumptions.  As a result,
+collisional excitation would dominate the level populations,
+and hydrogen collisions must be turned off with the hydrogen collisions off
+command.  The Ly* optical depth is set to a small value.
+The set dr command sets the zone thickness to 1 cm.
+The abundances are set to a very small value so that the
+electron density is equal to the hydrogen density. 
+Checks:
+-	Departure coefficients for H, He levels
+-	Neutral fractions
+-	H* emissivity
+

@@ -1,0 +1,27 @@
+    1    2        266.913      3.708e-02      1.740e+09 
+    1    3        206.930      9.633e-02      3.730e+09 
+ -1
+
+Observed energies:
+Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2012). 
+NIST Atomic Spectra Database (ver. 5.0), [Online]. Available: http://physics.nist.gov/
+
+Theoretical energies, gf and A-values:
+Liang, G. and Badnell, N.R., A&A 528, A69 (2011)
+DOI: 10.1051/0004-6361/201016417
+
+
+Note: only transitions with a branching ratio above 10^-5 
+have been retained.
+
+The autoionization rates have been calculated using AUTOSTRUCTURE v.24.24 and 
+the same set of scaling parameters used by Liang and Badnell
+
+Produced for the CHIANTI database v.8 by Giulio Del Zanna 10 Mar 2015
+
+ 
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

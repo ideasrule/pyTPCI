@@ -1,0 +1,39 @@
+#Nova Cyg 75 abundances, C, O, NE UP 20, NIT UP 100, REST SOLAR AR
+HYDROGEN	1
+HELIUM		0.098
+LITHIUM		2.04E-09
+BERYLLIUM	2.60E-11
+BORON		7.60E-09
+CARBON		9.40E-04
+NITROGEN	9.80E-03
+OXYGEN		1.70E-02
+FLUORINE	3.02E-08
+NEON		2.03E-03
+SODIUM		2.06E-06
+MAGNESIUM	3.80E-05
+ALUMINIUM	2.95E-06
+SILICON		3.55E-05
+PHOSPHORUS	3.73E-07
+SULPHUR		1.62E-05
+CHLORINE	1.88E-07
+ARGON		3.63E-06
+POTASSIUM	1.35E-07
+CALCIUM		2.29E-06
+SCANDIUM	1.22E-09
+TITANIUM	8.60E-08
+VANADIUM	1.05E-08
+CHROMIUM	4.84E-07
+MANGANESE	3.42E-07
+IRON		4.68E-05
+COBALT		2.24E-09
+NICKEL		1.76E-06
+COPPER		1.87E-08
+ZINC		4.52E-08
+********************************
+
+These are roughly those derived by Ferland and Shields
+(1978) for the classical nova V1500 Cygni. Abundances
+close to solar are assumed for those they did not measure.
+
+G. J. Ferland and G. A. Shields. Heavy element abundances of Nova Cygni 1975. ApJ, 226:172-185,
+November 1978. doi: 10.1086/156597.

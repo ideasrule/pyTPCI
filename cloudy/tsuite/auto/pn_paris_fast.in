@@ -1,0 +1,386 @@
+title Paris PN, fast version
+# standard" PN model of the Pequignot Meudon Conference
+#
+# commands controlling continuum =========
+black body, T = 150000 K, radius = 10
+#
+# commands for density & abundances =========
+hden = 3.4771213
+init file="fast.ini"
+abund he=-1 C=-3.523 N=-4. O=-3.222 ne=-3.824 mg=-4.523 
+continue si=-4.523 s=-4.824 ar=-10
+#
+# commands controlling geometry  =========
+sphere
+radius = 17
+#
+# other commands for details     =========
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+normalize to "Ca b" 4861.32A
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save performance "pn_paris_fast.per"
+save overview "pn_paris_fast.ovr"
+save physical conditions "pn_paris_fast.phy"
+save element nitrogen "pn_paris_fast.nit" 
+save monitors"pn_paris_fast.asr"
+save dr "pn_paris_fast.dr"
+#
+# commands giving the monitors    =========
+## >>chng 03 dec 08, from 35.433 to 35.377, chng ots, zoning
+## >>chng 06 mar 11, from 35.377 to 35.399, chng n prin quan from 4 to 5
+## when atom h-like levels smallest - this affects results!
+## >>chng 07 oct 22, from 35.399 to 35.431, resolve l-levels of h-like sequence
+## >>chng 09 feb 23, from 35.43 to 35.49, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from 35.49 to 35.46, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "ca b" 4861.32A luminosity 35.46
+##
+## >>chng 13 jul 25, wl from 4686 to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+monitor line "ca b" 4685.68A luminosity 34.966
+##
+## >>chng 09 feb 23, from 0.9 to 0.78, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A > 0.78
+##
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A < 1.1
+##
+## >>chng 05 oct 01, from 14.4 to 13.8 RP update he levels
+## >>chng 10 aug 12, from 13.8 to 14.74, fix botches related to r4125; star botches from recent continuum mesh changes
+monitor line "BaC " 3646 14.74
+##
+## >>chng 13 jul 25, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "ca b" 6562.80A 2.822 error 0.02
+##
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "ca b" 4861.32A 1. error 0.02
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "ca b"  1.87510m 0.32
+##
+## >>chng 11 feb 07, from 0.0968 to 0.1151, Ca B now includes collisions
+## >>chng 13 jul 25, wl from 5876 to 5875.64A, increased wl precision to 6 sig. fig.
+monitor line "ca b" 5875.64A 0.1151
+##
+## >>chng 09 feb 23, from 0.0352 to 0.0372, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 13 nov 25, from 0.0372 to 0.0052, collapsed branch merge
+## >>chng 13 nov 25, wl from 4471 to 4469.78, collapsed branch merge
+## >>chng 19 jan 10, from 0.0052 to 0.0386, fix bug in generating wl for Ca B lines
+## >>chng 19 jan 10, wl from 4469.78 to 4471.49, fix bug in generating wl for Ca B lines
+monitor line "ca b" 4471.49A 0.0386
+##
+## >>chng 05 oct 01, from 0.848 to 0.674, RP update he levels
+## >>chng 13 jul 25, wl from 10830 to 1.08299m, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 06, wl from 1.08299m to 1.08303m, botched merge
+## >>chng 16 aug 07, from 0.674 to 0.8116, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+## >>chng 19 jul 30, from 0.8116 to 0.5223, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.5223 to 0.4155, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+## >>chng 23 sep 12, from 0.4155 to 0.5135, update fast.ini
+monitor line "Blnd" 1.08302m 0.5135 error 0.2
+##
+## >>chng 03 dec 08, from 2.35 to 2.61 chng ots, zoning
+## >>chng 06 mar 11, from 2.61 to 2.49 chng n prin quan from 4 to 5
+## when atom h-like levels smallest - this affects results!
+## >>chng 07 oct 22, from 2.49 to 2.33, resolve l-levels of h-like sequence
+## >>chng 09 feb 23, from 2.33 to 2.111, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from 2.111 to 2.258, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 20 aug 22, wl from 1640.43 to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, up 1-e energies to np
+monitor line "Ca b" 1640.41A 2.258
+##
+## >>chng 03 dec 08, from 0.34 to 0.38 chng ots, zoning
+## >>chng 06 feb 03, from 0.38 to 0.362, guess dr to Badnell mean
+## >>chng 07 oct 22, from 0.36 to 0.34, resolve l-levels of h-like sequence
+## >>chng 09 feb 23, from 0.34 to 0.3049, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from 0.3049 to 0.3272, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 13 jul 25, wl from 4686 to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+monitor line "Ca b" 4685.68A 0.3272
+##
+monitor line "blnd" 2326 0.279 error 0.3
+##
+## >>chng 03 dec 08, from 1.733 to 2.07 chng ots, zoning
+## >>chng 09 feb 23, from 2.07 to 1.829, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from 1.829 to 2.231, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 16 jul 24, from 2.231 to 1.693, update C III to 2014A&A...566A.104F
+## >>chng 23 sep 12, from 1.693 to 1.367, update fast.ini
+monitor line "blnd" 1909 1.367 error 0.1
+##
+## >>chng 03 dec 08, from 2.46 to 3.09 chng ots, zoning
+## >>chng 09 feb 23, from 3.09 to 2.372, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 23 sep 12, from 2.372 to 1.484, update fast.ini
+monitor line "blnd" 1549 1.484 error 0.2
+##
+## >>chng 06 mar 11, from 0.842 to 1.01 chng n prin quan from 4 to 5
+## when atom h-like levels smallest - this affects results!
+monitor line "N  2"  6583.45 1.01 error 0.2
+##
+## >>chng 03 dec 08, from 0.11 to 0.14 chng ots, zoning
+## >>chng 06 oct 02, from 0.14 to 0.127, HM update OI cs to Barklem '06
+## >>chng 09 feb 23, from 0.127 to 0.1032, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from 0.1032 to 0.1285, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 15 mar 07, from 0.1285 to 0.1164, merging newmesh branch
+## >>chng 23 sep 12, from 0.1164 to 0.0949, update fast.ini
+monitor line "blnd"  1750 0.0949 error 0.1
+##
+monitor line "n  3"  57.3238m  0.126 error 0.2
+##
+## >>chng 03 dec 08, from 0.215 to 0.263 chng ots, zoning
+## >>chng 15 may 14, from 0.263 to 0.2145, CollisSuppres, final version from Dragan Nikolic
+## >>chng 17 jul 30, from 0.2145 to 0.3027, update N IV data to 2017JPhB...50f5203F
+## >>chng 23 sep 12, from 0.3027 to 0.1981, update fast.ini
+monitor line "blnd" 1486 0.1981 error 0.2
+##
+## >>chng 06 jul 06, from 0.158 to 0.175, update Ne cs
+## >>chng 06 aug 11, from 0.175 to 0.146, use Badnell DR RR, meudon06 update
+## >>chng 07 dec 19, from 0.146 to 0.161, changes in r1698
+## >>chng 08 apr 07, from 0.161 to 0.143, a number of mostly minor iso changes
+## >>chng 11 aug 05, from 0.143 to 0.1181, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 22 jul 09, from 0.1181 to 0.1316, upgrade to Chianti v10
+## >>chng 23 sep 12, from 0.1316 to 0.077, update fast.ini
+monitor line "blnd"  1240 0.077 error 0.1
+##
+## >>chng 04 jul 16, from 0.111 to 0.141, eval O, CO all time
+## >>chng 06 oct 02, from 0.141 to 0.176, HM update OI cs to Barklem '06
+## >>chng 14 mar 26, from 0.176 to 0.1286, Move oxygen data to stout and chianti files
+## >>chng 23 sep 12, from 0.1286 to 0.0979, update fast.ini
+monitor line "O  1"  6300.30 0.0979 error 0.25
+##
+## >>chng 06 mar 11, from 2.061 to 2.44 chng n prin quan from 4 to 5
+## when atom h-like levels smallest - this affects results!
+## >>chng 23 sep 12, from 2.44 to 1.974, update fast.ini
+monitor line "blnd"  3727 1.974 error 0.2
+##
+## >>chng 04 jul 16, from 15.96 to 18.1 eval O, CO all time
+monitor line "o  3"  5006.84 18.1 error 0.15
+##
+## >>chng 03 dec 08, from 0.157 to 0.201 chng ots, zoning
+## >>chng 19 mar 01, change "Blnd" 4363 -> "O  3" 4363.21
+monitor line "O  3"  4363.21 0.201 error 0.25
+##
+## >>chng 14 mar 26, from 1.305 to 1.465, Move oxygen data to stout and chianti files
+monitor line "O  3" 51.8004m  1.465 error 0.1
+##
+## >>chng 06 aug 11, from 3.52 to 4.15, use Badnell DR RR, meudon06 update
+## >>chng 15 may 14, from 4.15 to 3.367, CollisSuppres, final version from Dragan Nikolic
+## >>chng 22 jul 09, wl from 25.8832m to 25.8863m, upgrade to Chianti v10
+## >>chng 22 jul 09, from 3.367 to 4.061, upgrade to Chianti v10
+monitor line "o  4"  25.8863m  4.061 error 0.2
+##
+## >>chng 03 dec 08, from 0.199 to 0.220 chng ots, zoning
+## >>chng 07 oct 22, from 0.220 to 0.246, resolve l-levels of h-like sequence
+## >>chng 09 feb 23, from 0.246 to 0.2016, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from 0.2016 to 0.1777, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 16 jul 24, from 0.1777 to 0.1943, update C III to 2014A&A...566A.104F
+## >>chng 23 sep 12, from 0.1943 to 0.111, update fast.ini
+monitor line "blnd"  1402  0.111 error 0.1
+##
+## >>chng 06 jul 06, from 0.177 to 0.199, update Ne cs
+## >>chng 06 aug 11, from 0.199 to 0.170 use Badnell DR RR, meudon06 update
+## >>chng 07 dec 19, from 0.170 to 0.187, changes in r1698
+## >>chng 08 apr 07, from 0.187 to 0.166, a number of mostly minor iso changes
+## >>chng 11 aug 05, from 0.166 to 0.1369, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 15 oct 14, from 0.1369 to 0.1497, update Ne 3 cs to McLaughlin+11
+## >>chng 16 aug 17, from 0.1497 to 0.0866, botches due to bugfix at r11237
+## >>chng 16 aug 17, from 0.0866 to 0.1465, botches, in O 5, due to update to head of this branch
+## >>chng 22 jul 09, from 0.1465 to 0.1651, upgrade to Chianti v10
+## >>chng 23 sep 12, from 0.1651 to 0.0941, update fast.ini
+monitor line "blnd"  1218  0.0941 error 0.1
+##
+## >>chng 13 feb 01, from 0.0251 to 0.0298, BUGFIX, largely undo r6703
+## >>chng 13 jul 26, wl from 12.81m to 12.8101m, increased wl precision to 6 sig. fig.
+monitor line "Ne 2" 12.8101m  0.0298 error 0.2
+##
+## >>chng 13 jul 26, wl from 15.55m to 15.5503m, increased wl precision to 6 sig. fig.
+## >>chng 15 oct 14, from 1.88 to 1.425, update Ne 3 cs to McLaughlin+11
+## >>chng 15 oct 15, wl from 15.5503m to 15.5509m, update Ne III energies
+monitor line "Ne 3" 15.5509m  1.425
+##
+## >>chng 03 dec 08, from 2.03 to 2.36 chng ots, zoning
+## >>chng 09 feb 23, from 2.36 to 1.932, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from 1.932 to 2.307, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 13 jul 24, from 2.307 to 1.937, Ne to external databases
+## >>chng 13 jul 26, wl from 3869 to 3868.75A, increased wl precision to 6 sig. fig.
+## >>chng 15 oct 14, from 1.937 to 1.552, update Ne 3 cs to McLaughlin+11
+## >>chng 15 oct 15, wl from 3868.75A to 3868.76A, update Ne III energies
+monitor line "Ne 3" 3868.76A  1.552 error 0.15
+##
+## >>chng 06 jul 25, from 0.798 to 0.878 HN update OIII, OII collision data
+## >>chng 09 feb 23, from 0.878 to 0.7853, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 23 sep 12, from 0.7853 to 0.6075, update fast.ini
+monitor line "blnd" 2424  0.6075 error 0.1
+##
+## >>chng 06 jul 06, from 0.59 to 0.52, update Ne cs
+## >>chng 09 feb 23, from 0.52 to 0.4477, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 13 jul 26, wl from 3426 to 3426.03A, increased wl precision to 6 sig. fig.
+## >>chng 22 jul 09, wl from 3426.03A to 3425.88A, upgrade to Chianti v10
+## >>chng 23 sep 12, from 0.4477 to 0.3303, update fast.ini
+monitor line "Ne 5" 3425.88A  0.3303 error 0.1
+##
+## >>chng 22 jul 09, wl from 24.2065m to 24.3109m, upgrade to Chianti v10
+## >>chng 22 jul 09, from 1.019 to 0.8583, upgrade to Chianti v10
+monitor line "Ne 5" 24.3109m  0.8583 error 0.15
+##
+## >>chng 06 jul 25, from 2.203 to 2.705 HN update OIII, OII collision data
+## >>chng 09 feb 23, from 2.705 to 2.059, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 23 sep 12, from 2.059 to 1.006, update fast.ini
+monitor line "blnd" 2798  1.006 error 0.25
+##
+## >>chng 03 dec 08, from 0.122 to 0.132 chng ots, zoning
+## >>chng 06 mar 11, from 0.132 to 0.125 chng n prin quan from 4 to 5
+## when atom h-like levels smallest - this affects results!
+## >>chng 06 aug 11, from 0.125 to 0.141 use Badnell DR RR, meudon06 update
+## >>chng 09 feb 23, from 0.141 to 0.1285, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 13 nov 25, from 0.1285 to 0.136, convergence branch changes
+## >>chng 22 jul 09, wl from 4.48712m to 4.48711m, upgrade to Chianti v10
+## >>chng 22 jul 09, from 0.136 to 0.1099, upgrade to Chianti v10
+monitor line "mg 4" 4.48711m  0.1099
+##
+## >>chng 06 mar 11, from 0.161 to 0.177 chng n prin quan from 4 to 5
+## when atom h-like levels smallest - this affects results!
+## >>chng 11 jul 12, from 0.177 to 0.1602, enable fit to Badnell DR suppression
+monitor line "Si 2" 34.8046m  0.1602 error 0.1
+##
+## >>chng 06 mar 11, from 0.161 to 0.207 chng n prin quan from 4 to 5
+## when atom h-like levels smallest - this affects results!
+monitor line "Blnd" 2335  0.207 error 0.3
+##
+## >>chng 03 dec 08, from 0.440 to 0.65 chng ots, zoning
+## >>chng 09 jan 22, from 0.65 to 0.47, some minor botches as a result of r2655
+## >>chng 16 jul 24, from 0.47 to 0.6004, update C III to 2014A&A...566A.104F
+monitor line "Blnd" 1888  0.6004 error 0.3
+##
+## >>chng 03 dec 08, from 0.205 to 0.255 chng ots, zoning
+## >>chng 09 feb 23, from 0.255 to 0.1917, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from 0.1917 to 0.2143, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 23 sep 12, from 0.2143 to 0.1378, update fast.ini
+monitor line "Blnd" 1397  0.1378 error 0.1
+##
+## >>chng 03 dec 08, from 0.36 to 0.41 chng ots, zoning
+## >>chng 07 apr 30, from 0.41 to 0.59 log DR average, use mix S DR
+## >>chng 10 mar 05, from 0.59 to 0.512, changes caused by r3848 atomic data update
+## >>chng 11 jul 12, from 0.512 to 0.4208, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from 0.4208 to 0.4609, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 13 feb 01, from 0.4609 to 0.5148, BUGFIX, largely undo r6703
+## >>chng 13 mar 03, from 0.5148 to 0.4524, update atomic models for S II, S III
+## >>chng 14 dec 14, from 0.4524 to 0.5033, update S2+ - S+ DR to Badnell+ 2015 ApJ
+## >>chng 17 nov 20, from 0.5033 to 0.5526, Bug-fix in DR suppression (r11900)
+## >>chng 23 may 11, from 0.5526 to 0.6341, update RR DR to 2022 Badnell wor
+## >>chng 23 sep 12, from 0.6341 to 0.569, update fast.ini
+monitor line "Blnd" 6720  0.569 error 0.1
+##
+## >>chng 06 aug 11, from 0.555 to 0.606 use Badnell DR RR, meudon06 update
+## >>chng 10 mar 05, from 0.606 to 0.5491, changes caused by r3848 atomic data update
+## >>chng 10 mar 14, from 0.5491 to 0.6135, update As to NIST recommended values
+## >>chng 11 aug 05, from 0.6135 to 0.6437, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 jul 01, from 0.6437 to 0.6816, update Badnell DR to 13-electron iso sequence
+## >>chng 13 mar 04, from 0.6816 to 0.5291, botches after updating S  3, S  4 wavelengths
+## >>chng 13 jul 25, wl from 18.71m to 18.7078m, increased wl precision to 6 sig. fig.
+## >>chng 23 sep 12, from 0.5291 to 0.4964, update fast.ini
+monitor line "S  3"  18.7078m  0.4964
+##
+## >>chng 05 oct 01, from 1.178 to 1.236 RP update he levels
+## >>chng 06 aug 11, from 1.236 to 1.325 use Badnell DR RR, meudon06 update
+## >>chng 11 aug 05, from 1.325 to 1.429, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 jul 01, from 1.429 to 1.519, update Badnell DR to 13-electron iso sequence
+## >>chng 13 jul 25, wl from 9531 to 9530.62A, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 14, from 1.519 to 1.433, update S2+ - S+ DR to Badnell+ 2015 ApJ
+## >>chng 23 sep 12, from 1.433 to 1.359, update fast.ini
+monitor line "S  3"  9530.62A  1.359
+##
+## >>chng 06 aug 11, from 2.08 to 2.71 use Badnell DR RR, meudon06 update
+## >>chng 13 jul 25, wl from 10.51m to 10.5076m, increased wl precision to 6 sig. fig.
+## >>chng 23 sep 12, from 2.71 to 2.462, update fast.ini
+monitor line "S  4" 10.5076m  2.462 error 0.1
+##
+## >>chng 09 feb 24, from 0.673 to 0.7034, botches due to r2763
+monitor ionization fraction volume helium 2 0.7034
+##
+## >>chng 03 dec 08, from 200 to 250 chng ots, zoning
+## >>chng 08 dec 08, from 250 to 184, upper limit -> equals (r2515)
+## >>chng 09 jan 08, from 184 to 182, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, from 182 to 182.9, average of 10 runs
+## >>chng 09 feb 23, from 182.9 to 180, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 26, from 180 to 182, remove several dampers
+## >>chng 10 jun 30, use default error
+## >>chng 12 nov 08, from 182 to 192, fix e-,H2 dissociation rate
+## >>chng 23 sep 12, from 192 to 180, update fast.ini
+monitor nzone 180
+##
+## >>chng 04 jul 02, from 6.5 to 8
+## >>chng 04 sep 30, from 8 to 11, conv_base conv heat cool
+## >>chng 08 dec 08, from 11 to 9.94, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 9.94 to 22.16, merging newsolvers branch
+## >>chng 09 jan 16, from 22.16 to 21.96 (error 0.10), average of 10 runs
+## >>chng 12 mar 07, from 21.96 to 12.61, renorm to r5961 results
+## >>chng 13 nov 05, from 12.61 to 9.968, convergence branch changes
+## >>chng 14 mar 26, from 9.968 to 9.047, move O to external database
+## >>chng 23 sep 12, from 9.047 to 5.967, update fast.ini
+monitor itrzn 5.967 error 0.10
+##
+monitor temperature "H+" volume 12000 error 0.05
+##
+## >>chng 11 aug 05, from 1.42e+04 to 1.389e+04, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 23 sep 12, from 1.389e+04 to 1.319e+04, update fast.ini
+monitor temperature "He+2" volume 1.319e+04 0.02
+##
+monitor temperature face 18050
+##
+## >>chng 09 feb 23, from 17.6 to 17.63, remove otslin, otscon dampers (PR #84, r2758)
+monitor radius 17.63
+##
+monitor hheicf -0.042 error 0.01
+##
+# pn_paris_fast.in 
+# class pn 
+# ========================================
+# 
+
+
+This is one of the "standard" models computed at the Paris meeting on
+photoionization and shock calculations.  A table in Hazy compares the
+predictions of the current version of CLOUDY with predictions of a
+few of the other codes.
+
+The model is meant to represent a planetary nebula ionized by a very
+hot central object.  As a result there is a great deal of He++ and
+the associated line and continuum emission is very important.
+

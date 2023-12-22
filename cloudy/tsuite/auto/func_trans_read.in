@@ -1,0 +1,40 @@
+title second of func_trans_save/func_trans_read pair, use transmitted continuum
+# the transmitted continuum produced by func_trans_punch
+#
+# commands controlling continuum =========
+ionization parameter -1
+table read "func_trans_save.trn"
+brems 6
+ionization parameter -6
+#
+# commands for density & abundances =========
+hden 10
+#
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling output    =========
+# this contains a large number of asserts used by both commands
+init file "trans.dat"
+save overview "func_trans_read.ovr"
+save performance "func_trans_read.per"
+save ionization last "func_trans_read.ion"
+save monitors last "func_trans_read.asr"
+#
+# commands giving the monitors    =========
+## >>chng 04 sep 25, from 22840 to 22930 chng te cnvg fm 0.02 to 0.005
+monitor "H+" temperature 22930 K
+# 
+# func_trans_read.in
+# class function 
+# ========================================
+# 
+
+func_trans_save.in and func_trans_read.in are a pair of
+tests that check that the code can save a transmitted
+continuum then read it.
+

@@ -1,0 +1,150 @@
+===========================================================
+variable naming convention:
+
+The Fortran IV variable convention is followed:
+integers start with i, j, k, l, m, n
+they can be long or short
+other letters start floats or double
+
+character/string variables start ch, as in chName
+
+logical variables are int, and start lg, as in lgOK
+
+FILE* variables start with io, rest caps, as in ioFILE
+
+==============================================================
+routine naming:
+
+rule is Noun_Verb, so a routine that does a certain job will have a name like "job_do".  But there are exceptions.
+
+hydrogenic sequence routines start with Hydro....
+
+command parsing routines start with Parse....
+
+routines that create something, one time per coreload, start Create....
+
+==============================================================
+format within source files
+
+begin with list of all routines within file
+/*cdDrive main routine to call cloudy under all circumstances) */
+/*cdReasonGeo wrte why the model stopped and type of geometry on io file
+ * continue previous comment */
+#include "cddefines.h"
+ends with first include
+
+==========================================================
+routines start - end
+
+#	ifdef DEBUG_FUN
+	fputs( "<+>PresTotCurrent()\n", debug_fp );
+#	endif
+
+#	ifdef DEBUG_FUN
+	fputs( " <->PresTotCurrent()\n", debug_fp );
+#	endif
+
+==============================================================
+
+fortran common blocks became structures,
+the structure name is the name of the header file
+
+if variables a, b, and c are grouped together into a structure called group,
+each is referenced as group.a, group,b and group.c, and are located in the
+structure defined in 
+group.h
+
+==============================================================
+
+changes denoted by
+* >>chng 97 apr 05, remove .5 to get agreement with
+
+note:  only last two digits of year, space, three letters in lower case giving month,
+space, then two digit day (01, 09, 10, 30)
+
+reason:  it is then possible to discover all changes made in late may of 2001, with
+grep "01 may 2" *.c
+
+==============================================================
+TODO (tab) priority (tab) description
+
+tasks that must be done some day, but not an actual problem, are denoted by
+/*TODO priority description...... following fit to include new reference */
+the TODO token is automaticallly picked up by the dotnet task list (but only in c-sharp files)
+format - TODO tab priority tab description
+the priority ranges from a highest of 0 on to lower priority.  Very high priority issues should be
+a fixit(), which generates a comment in the final output
+
+==============================================================
+KLUDGE
+/*KLUDGE - why do this? */
+this is something that was added to fix some specific problem.  it could be removed
+as the full calculation becomes more stable
+
+
+==============================================================
+KEYWORD
+/*>>KEYWORD <tab> keyword; keyword; keyword */
+first tab then keywords separated by ;
+
+==============================================================
+fixit()
+
+something that needs to be fixed.  If this routine is ever called then the
+code will create a special comment at the end of the calculation saying so.  It should
+be used for problems that do affect predictions.
+
+fixit(); /* remove factor of pi from below */
+
+fixit is globally defined so no header is needed (in cddefines.h)
+
+==============================================================
+
+broken();
+
+this is used to indicate that something fundamental has been disturbed 
+in the code - I use it when some process has been set to zero (in the code)
+as a reminder to unset it.  A warning is generated in the comments if
+this routine is ever called.
+
+==============================================================
+
+CodeReview();
+CodeReview - placed next to code that needs to be checked 
+
+==============================================================
+print statements that require attention start with particular character strings that
+are then picked up by the perl scripts.  these include:
+
+DISASTER:
+the print for detection of a catastropic error starts with DISASTER
+
+PROBLEM:
+any problem discovered during a calculation, which results in a print of some kind,
+must have that print begin with the string PROBLEM so that the perl script that
+examines output from large grids can detect the problem automatically 
+
+NOTE:
+this is something that requires attention, but not urgently
+
+==============================================================
+references (atomic data, and methods)
+
+atomic data references denote as follows: ->  indicates a tab
+>>refer -> si2 -> cs -> Dufton, P.L., & Kingston, A.E., 1991, MNRAS, 248, 827
+>>refer -> fe22 -> as -> Dankwort, W., & Trefftz, E., 1978, A&A 65, 93-98
+
+where more than one line needed
+>>refer -> si2 -> cs -> Dufton, P.L., Keenan, F.P., Hibbert, A., 
+>>rerercon -> Stafford, R.P., Byrne, P.B., & Agnew, D., 1991, MNRAS, 253, 474
+
+old references, in for history, but no longer used
+>>referold -> si2 -> cs -> Dufton, P.L., Keenan, F.P., Hibbert, A., 
+>>rereroldcon -> Stafford, R.P., Byrne, P.B., & Agnew, D., 1991, MNRAS, 253, 474
+
+key for type of data is two-letter lower-case word
+collision strength cs
+transition probability as
+
+species indicated by lower case chemical symbol, followed by ionization stage with no space
+

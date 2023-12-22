@@ -1,0 +1,130 @@
+title FeII emission in typical intermediate density photoionzied cloud
+species "Fe+" dataset="Smyth19"
+database Stout print
+#
+# commands controlling continuum =========
+black 5e5K
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden 8
+element iron abundance 2
+element iron ionization -7 0 -7
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+constant temperature 4
+species "Fe+" levels=all
+#
+# commands controlling output    =========
+print lines column 
+print line inward
+print line sort wavelength
+print line faint 0.1
+normalize "Fe 2b" 5270
+set save prefix "feii_t4n8_Smyth19"
+save overview ".ovr"
+save performance ".per"
+save monitors ".asr" last
+save species continuum last ".con" "Fe+" units angstroms
+save species bands ".fe2b" "FeII_bands.ini" "Fe+" last no hash
+#
+# commands giving the monitors    =========
+## >>chng 19 jun 19, from -2.87 to -2.658, add new datasets
+monitor line intensity "Fe 2b" 1148 -2.658 error 0.1
+##
+## >>chng 19 jun 19, from -3.758 to -2.95, add new datasets
+monitor line intensity "Fe 2b" 1212 -2.95 error 0.1
+##
+## >>chng 19 jun 19, from -4.017 to -3.899, add new datasets
+monitor line intensity "Fe 2b" 1295 -3.899 error 0.1
+##
+## >>chng 19 jun 19, from -3.652 to -3.436, add new datasets
+monitor line intensity "Fe 2b" 1365 -3.436 error 0.1
+##
+## >>chng 19 jun 19, from -1.955 to -1.882, add new datasets
+monitor line intensity "Fe 2b" 1485 -1.882 error 0.1
+##
+monitor line intensity "Fe 2b" 1615 -1.88 error 0.1
+##
+monitor line intensity "Fe 2b" 1787 -3.079 error 0.1
+##
+## >>chng 19 jun 19, from -2.79 to -2.632, add new datasets
+monitor line intensity "Fe 2b" 1822 -2.632 error 0.1
+##
+## >>chng 19 jun 19, from -0.1962 to -0.2593, add new datasets
+monitor line intensity "Fe 2b" 2355 -0.2593 error 0.1
+##
+## >>chng 19 jun 19, from -0.7925 to -1.089, add new datasets
+monitor line intensity "Fe 2b" 2495 -1.089 error 0.1
+##
+## >>chng 19 jun 19, from -1.38 to -1.281, add new datasets
+monitor line intensity "Fe 2b" 2695 -1.281 error 0.1
+##
+## >>chng 19 jun 19, from -0.5638 to -0.7426, add new datasets
+monitor line intensity "Fe 2b" 2758 -0.7426 error 0.1
+##
+## >>chng 19 jun 19, from -2.309 to -3.242, add new datasets
+monitor line intensity "Fe 2b" 2797 -3.242 error 0.1
+##
+## >>chng 19 jun 19, from -1.814 to -1.626, add new datasets
+monitor line intensity "Fe 2b" 2935 -1.626 error 0.1
+##
+## >>chng 19 jun 19, from -2.907 to -2.338, add new datasets
+monitor line intensity "Fe 2b" 4255 -2.338 error 0.1
+##
+## >>chng 19 jun 19, from -3.325 to -3.049, add new datasets
+monitor line intensity "Fe 2b" 4558 -3.049 error 0.1
+##
+## >>chng 19 jun 19, from -4 to -3.747, add new datasets
+monitor line intensity "Fe 2b" 4743 -3.747 error 0.1
+##
+## >>chng 19 jun 19, from -3.603 to -3.291, add new datasets
+monitor line intensity "Fe 2b" 4855 -3.291 error 0.1
+##
+## >>chng 19 jun 19, from -4.116 to -3.403, add new datasets
+monitor line intensity "Fe 2b" 4971 -3.403 error 0.1
+##
+## >>chng 19 jun 19, from -3.223 to -3.116, add new datasets
+monitor line intensity "Fe 2b" 4975 -3.116 error 0.1
+##
+## >>chng 19 jun 19, from -3.308 to -2.839, add new datasets
+monitor line intensity "Fe 2b" 5143 -2.839 error 0.1
+##
+## >>chng 19 jun 19, from -3.214 to -2.743, add new datasets
+monitor line intensity "Fe 2b" 5318 -2.743 error 0.1
+##
+## >>chng 19 jun 19, from -3.972 to -3.472, add new datasets
+monitor line intensity "Fe 2b" 5865 -3.472 error 0.1
+##
+## >>chng 19 jun 19, from -3.299 to -2.828, add new datasets
+monitor line intensity "Fe 2b" 6265 -2.828 error 0.1
+##
+## >>chng 19 jun 19, from -2.971 to -3.077, add new datasets
+monitor line intensity "Fe 2b" 6565 -3.077 error 0.1
+##
+## >>chng 19 jun 19, from -3.686 to -3.222, add new datasets
+monitor line intensity "Fe 2b" 7445 -3.222 error 0.1
+##
+## >>chng 19 jun 19, from -6.363 to -6.81, add new datasets
+monitor line intensity "Fe 2b" 7785 -6.81 error 0.1
+##
+## >>chng 19 jun 19, from -3.014 to -2.651, add new datasets
+monitor line intensity "Fe 2b" 1.88900m -2.651 error 0.1
+##
+## >>chng 19 jun 19, from -5.317 to -4.873, add new datasets
+monitor line intensity "Fe 2b" 2.20000m -4.873 error 0.1
+##
+#
+# feii_t4n8_Tayal18.in
+# class function 
+# ========================================
+# 
+
+This model has a very high iron abundance, 100x H, and most Fe is
+in the form of Fe+. it has a low density and unit thickness
+
+The model is optically thin, no RT.

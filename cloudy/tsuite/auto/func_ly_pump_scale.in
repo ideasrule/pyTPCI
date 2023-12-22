@@ -1,0 +1,21 @@
+title test scaling of H lyman-line pumping
+sphere
+blackbody 30000
+q(h) 47
+hden 2.5
+radius 16
+stop zone 1
+database H-like Lyman pumping scale .2
+## >>chng 11 jun 14, from 24 to 14, new Te solver
+## >>chng 11 nov 16, from 14 to 16, adjust newmole monitors
+## >>chng 12 oct 22, from 16 to 11, zone tau in rt_line_one
+## >>chng 13 jan 08, from 11 to 16, remove duplicated factor in Pelec_esc
+## >>chng 13 nov 05, from 16 to 9, convergence branch changes
+## >>chng 14 apr 07, from 9 to 11, update of Gaunt free-free factors
+## >>chng 14 apr 19, from 11 to 9, Use Stout Ca 2
+## >>chng 14 may 29, from 9 to 11, fix lowered Lyman depths
+## >>chng 14 dec 08, from 11 to 9, enable Chianti proton collisional data
+monitor itrz 9
+
+This purpose of this test is just to exercise the option
+to scale the H lyman series pumping rates by some factor.

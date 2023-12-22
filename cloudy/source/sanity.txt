@@ -1,0 +1,124 @@
+several checks on the code's behavior are made in 
+CheckSanity.c
+
+NDEBUG is set when debugging is turned off, and is 
+undefined when the debug version is built
+#if !defined(NDEBUG)
+	ChkSumCon(0);
+#endif
+
+==================================================================
+
+MALLOC macro in cddefines.h, expanded as malloc or MyMalloc
+
+==================================================================
+pclint - command line points to std.lnt, which points to 
+co-msc60.lnt (ms vs c compiler)
+options.lnt (my options)
+
+edit options.lnt to change user options, like which routines do not return 
+
+pc lint tool
+command: c:\u\lint8\lint-nt.exe
+arguments -i"c:\u\lint8" -u std.lnt env-vc6.lnt $(FilePath) <= vc6
+arguments -i"c:\u\lint8" -i"c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\include" -u std.lnt env-vc7.lnt $(ItemPath) <= vc7
+arguments -i"c:\u\lint8" -i"C:\Program Files\Microsoft Visual Studio 8\VC\include" -u std.lnt env-vc7.lnt $(ItemPath) <= vc8
+arguments -i"c:\u\lint8" -i"C:\Program Files\Microsoft Visual Studio 9.0\VC\include" -u std.lnt env-vc7.lnt $(ItemPath) <= vc9
+
+initial directory $(FileDir) <= vc6
+initial directory $(ItemDir) <= vc7
+check "use output window"
+
+entire project, same except
+arguments -i"c:\u\lint8" -i"c:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\include" -u std.lnt env-vc7.lnt project.lnt
+arguments -i"c:\u\lint8" -i"C:\Program Files\Microsoft Visual Studio 8\VC\include" -u std.lnt env-vc7.lnt project.lnt <= vc8
+
+to test entire project, must have list of all files in project in file project.lnt, 
+to do this cd to source_hot dir and do
+ls *.cpp > project.lnt
+
+pc lint options:
+-passes(2) or -passes[2] do two passes on the source (section 9.2.2)
+-function( exit, cdEXIT ) cdEXIT exits, section 10.1, Function Mimicry (-function)
+
+==================================================================
+
+eluent tools
+C:\Program Files\Eluent Tools\ElReplace.exe
+use output wiindow
+
+==================================================================
+
+LC Lint arguments
+now called splint
+
+init file in .splintrc
+what dir must it go in?
+
+arguments on vs6
+command: C:\u\lclint-2.5q\bin\lclint.exe
+arguments: -weak -floatdouble -I$(FileDir) $(FilePath)
+init dir: $(FileDir)
+select use output window
+
+arguments on dotnet
++ignorequals -compdef -retvalint -predboolint -formatconst -realcompare +boolint +charintliteral $(ItemPath) 
+init dir: $(ItemDir)
+select use output window
+
+==================================================================
+unit integration checks:
+there are currently two.  The emission line array is tested in routine LineSet1
+where a fake emission line with local emissivty 1e-10, label "Unit", wavelength 1,
+is passed through the lines arrays.   It is then checked at the end of the calculation
+in routine PrtFinal.
+
+a similar test is done with the continuum transfer arrays.  the continuum is actually
+defined wth rfield.nflux points, the loops are always up to < rfield.nflux.  In metdif
+the local emissivty at [rfield.nflux] is set to 1e-10f, and then passed through the
+continuum transfer arrays.  This is also checked in PrtFinal.
+
+the number is actually 1e-10 so that it does not overflow on 32-bit machines.
+
+==================================================================
+/* following routine provides a debugging hook into the main line array 
+ * loops over whole array and finds every line that matches length,
+ * the wavelength, the argument to the function
+ * put breakpoint inside if test */
+long debugLine( long int length )
+
+
+==================================================================
+photoionization rate:
+ * GammaPrtRate will print photo rates for all shells of a ion and element 
+
+==================================================================
+trace convergence number
+number indicates level of trace, 
+ gt 3 includes ConvIoniz
+ 3 
+
+==================================================================
+all changes in code have timestamp like
+>>>chng 99 dec 06
+no space inside >>>chng but spaces all around date
+
+==================================================================
+lint
+
+lclint options
+lclint -weak -floatdouble -DSEEK_END <files>
+old options -retvalint +boolint $(FilePath)
+
+pclint 
+
+single file "arguments" -i"C:\U\PCLINT" -u std.lnt env-vc6.lnt $(FilePath)
+
+project
+	Command:            C:\LINT\LINT-NT.EXE
+    Arguments           -i"C:\LINT" std.lnt env-vc6.lnt project.lnt
+	Initial Directory   $(FileDir)
+
+    This will require that the file that you are currently editing reside
+    in a directory that contains a file called 'project.lnt'.
+	ls *.c >project.lnt

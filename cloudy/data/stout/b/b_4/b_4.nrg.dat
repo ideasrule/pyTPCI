@@ -1,0 +1,49 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=5 were downloaded using ADM.
+#
+ 1  0  1  0       0.000 20  
+ 2  0  3 -1 1601532.112 10  
+ 2  0  1  0 1635710.3   11  
+ 2  1  3  1 1636909.536 10  
+ 2  1  3  0 1636925.739 10  
+ 2  1  3  2 1636962.196 10  
+ 2  1  1  1 1657971.8   10  
+ 3  0  3 -1 1882740 8
+ 3  0  1  0 1891772     13  
+ 3  1  3 -1 1892223 2.62937
+ 3  2  3 -1 1896682 2.42945
+ 3  2  1  2 1896828      5  
+ 3  1  1  1 1898218     10  
+ 4  0  3 -1 1976434.2 1.4
+ 4  0  1  0 1980083.5   10  
+ 4  1  3 -1 1980288.2 0.657342
+ 4  2  3 -1 1982137.3 0.668098
+ 4  2  1  2 1982215      9  
+ 4  3  3 -1 1982230.7 11.857
+ 4  3  1  3 1982232.5    1.7
+ 4  1  1  1 1982775.5   10  
+ 5  0  3 -1 2018812.4 1.1
+ 5  0  1  0 2020638.6   10  
+ 5  1  3 -1 2020748.6 0.723076
+ 5  2  3 -1 2021686.5 0.425154
+ 5  2  1  2 2021727.1   10  
+ 5  3  3 -1 2021739.1 0.592852
+ 5  3  1  3 2021739.8    1.3
+ 5  4  3 -1 2021743.1 0.410744
+ 5  1  1  1 2022009.1   10  
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L12548 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=12548&comment_code=&amp;element=B&amp;spectr_charge=4&amp;ref=12548&amp;type=E
+# PUBCON    Title: Additions to the Spectrum and Energy Levels and a Critical Compilation of Helium-like and Hydrogen-like Boron, B IV and B V
+# PUBCON  Authors: A. E. Kramida, A. N. Ryabtsev, J. O. Ekberg, I. Kink, S. Mannervik, and I. Martinson
+# PUBCON  Journal: Phys. Scr. 78, 025302 (2008)
+# PUBCON      DOI: https://doi.org/10.1088/0031-8949/78/02/025302

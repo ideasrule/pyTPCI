@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="351px"
+   height="210px"
+   viewBox="0 0 351 210"
+   enable-background="new 0 0 351 210"
+   xml:space="preserve"
+   id="svg2"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="radiation_fields.svg"><metadata
+   id="metadata67"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs65" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1117"
+   inkscape:window-height="794"
+   id="namedview63"
+   showgrid="false"
+   inkscape:zoom="3.5028698"
+   inkscape:cx="183.96972"
+   inkscape:cy="104.4915"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg2" />
+	<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="-49.4653"
+   y1="851.3486"
+   x2="-137.5278"
+   y2="851.3486"
+   gradientTransform="matrix(0.6186 0 0 0.6186 255.9542 -421.1346)">
+		<stop
+   offset="0"
+   style="stop-color:#A7A9AC"
+   id="stop5" />
+		<stop
+   offset="1"
+   style="stop-color:#E6E7E8"
+   id="stop7" />
+	</linearGradient>
+	<rect
+   x="170.88"
+   y="19.008"
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="url(#SVGID_1_)"
+   width="54.476"
+   height="173.001"
+   id="rect9" />
+				
+	<line
+   clip-rule="evenodd"
+   stroke-miterlimit="2.4142"
+   x1="155.328"
+   y1="115.704"
+   x2="63"
+   y2="115.704"
+   id="line11"
+   stroke-width="2.448"
+   stroke="#000000"
+   fill-rule="evenodd"
+   fill="#939598" />
+	<polygon
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   points="169.643,115.704 154.539,123.254 154.539,108.149 169.643,115.704"
+   id="polygon13" />
+	
+	<line
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="#939598"
+   stroke="#000000"
+   stroke-width="2.448"
+   stroke-miterlimit="2.4142"
+   x1="310"
+   y1="118.8"
+   x2="248.714"
+   y2="118.8"
+   id="line15" />
+	<polygon
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   points="317.458,118.8 302.355,126.35 302.355,111.245 317.458,118.8"
+   id="polygon17" />
+				
+	<line
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="#939598"
+   stroke="#000000"
+   stroke-width="2.448"
+   stroke-miterlimit="2.4142"
+   x1="110.256"
+   y1="165.528"
+   x2="147.582"
+   y2="140.584"
+   id="line19" />
+	<polygon
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   points="98.355,173.481 106.717,158.813 115.109,171.371 98.355,173.481"
+   id="polygon21" />
+				
+	<line
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="#939598"
+   stroke="#000000"
+   stroke-width="2.448"
+   stroke-miterlimit="2.4142"
+   x1="111.768"
+   y1="61.128"
+   x2="150.653"
+   y2="92.308"
+   id="line23" />
+	<polygon
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   points="100.601,52.174 117.106,55.731 107.658,67.515 100.601,52.174"
+   id="polygon25" />
+				
+	<line
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="#939598"
+   stroke="#000000"
+   stroke-width="0.72"
+   stroke-miterlimit="2.4142"
+   x1="216.96"
+   y1="37.296"
+   x2="202.35"
+   y2="51.594"
+   id="line27" />
+	<polygon
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   points="219.969,34.352 218.348,39.045 215.24,35.87 219.969,34.352"
+   id="polygon29" />
+	
+	<line
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="#939598"
+   stroke="#000000"
+   stroke-width="0.72"
+   stroke-miterlimit="2.4142"
+   x1="215.592"
+   y1="66.24"
+   x2="203.344"
+   y2="61.251"
+   id="line31" />
+	<polygon
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   points="219.49,67.828 214.539,68.209 216.215,64.095 219.49,67.828"
+   id="polygon33" />
+				
+	<line
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="#939598"
+   stroke="#000000"
+   stroke-width="0.72"
+   stroke-miterlimit="2.4142"
+   x1="180.456"
+   y1="65.592"
+   x2="194.709"
+   y2="60.291"
+   id="line35" />
+	<polygon
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   points="176.51,67.06 179.899,63.43 181.448,67.594 176.51,67.06"
+   id="polygon37" />
+				
+	<line
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   fill="#939598"
+   stroke="#000000"
+   stroke-width="0.72"
+   stroke-miterlimit="2.4142"
+   x1="187.8"
+   y1="32.976"
+   x2="194.08"
+   y2="51.238"
+   id="line39" />
+	<polygon
+   fill-rule="evenodd"
+   clip-rule="evenodd"
+   points="186.431,28.994 189.975,32.473 185.773,33.918 186.431,28.994"
+   id="polygon41" />
+	<text
+   transform="matrix(1 0 0 1 49.3037 105.1523)"
+   font-family="'ArialMT'"
+   font-size="12"
+   id="text43">Incident</text>
+
+
+	<text
+   transform="matrix(1 0 0 1 91.6079 42.4795)"
+   font-family="'ArialMT'"
+   font-size="10"
+   id="text45">Reflected</text>
+
+
+	<text
+   transform="matrix(1 0 0 1 237.8398 51.4082)"
+   id="text47"><tspan
+     x="0"
+     y="0"
+     font-family="'ArialMT'"
+     font-size="10"
+     id="tspan49">Diffuse</tspan><tspan
+     x="0"
+     y="8.413"
+     font-family="'ArialMT'"
+     font-size="10"
+     id="tspan51"> </tspan></text>
+
+
+	<text
+   transform="matrix(1 0 0 1 249.0723 106.3438)"
+   id="text53"><tspan
+     x="0"
+     y="0"
+     font-family="'ArialMT'"
+     font-size="10"
+     id="tspan55">Transmitted</tspan><tspan
+     x="0"
+     y="8.413"
+     font-family="'ArialMT'"
+     font-size="10"
+     id="tspan57"> </tspan></text>
+
+
+	<text
+   transform="matrix(0,-1,1,0,0,0)"
+   id="text59"
+   font-size="10"
+   x="-155.80876"
+   y="182.52251"
+   style="font-size:10px;font-family:ArialMT">illuminated face</text>
+
+
+	<text
+   transform="matrix(0,-1,1,0,0,0)"
+   id="text61"
+   font-size="10"
+   x="-148.18117"
+   y="220.6953"
+   style="font-size:10px;font-family:ArialMT">shielded face</text>
+
+
+</svg>

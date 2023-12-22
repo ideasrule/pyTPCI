@@ -1,0 +1,232 @@
+title Orion's veil
+#
+# commands controlling continuum =========
+q(h) 50.000000 
+table SED "Rubin.sed"  
+# AGN & CMB background
+background z=0   
+cosmic rays background 
+# as a test this was tried - atomic temperature raised fm 100 to 140
+# but nothing really wrong
+## cosmic rays equipartition 
+# the observed magnetic field, roughly 100 micro Gauss
+magnetic field -4 
+#
+# commands for density & abundances =========
+## >>chng 04 may 7, update density to final paper model
+hden 3.1
+init "ism.ini"
+element calcium on 
+abundances orion no grains  
+grains orion no qheat 
+element magnesium isotopes (24, 3) (25, 1) (26, 1)
+#
+# commands controlling geometry  =========
+stop neutral hydrogen column density 21.6  
+radius 19.1
+stop temperature linear 5  
+# this will not be hit, but put it in to insure that we stop if
+# gas becomes totally molecular
+stop av 10 
+#
+# other commands for details     =========
+failures 3
+## uncomment to include large H2 molecule - results will CHANGE!
+## atom h2 
+turbulence 0.5 km/sec 
+sphere  
+# c this simulates Lyman lines in the stellar continuum
+# atom h-like lyman pumping off 
+#
+# commands controlling output    =========
+print line optical depths
+save overview "pdr_orion_veil.ovr"
+save performance "pdr_orion_veil.per"
+save PDR "pdr_orion_veil.pdr"
+save species column densities "pdr_orion_veil.fe2col" "Fe+"
+save hydrogen 21 cm "pdr_orion_veil.21cm"
+save molecules "pdr_orion_veil.mol"
+save overveiw "pdr_orion_veil.ovr"
+save species column densities "pdr_orion_veil.cden" all
+save heating "pdr_orion_veil.het"
+save cooling "pdr_orion_veil.col"
+save dr "pdr_orion_veil.dr"
+save H2 rates "pdr_orion_veil.h2rat"
+save pressure "pdr_orion_veil.pre"
+save wind "pdr_orion_veil.wnd"
+save continuum units microns "pdr_orion_veil.con" last 
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 04 jan 23, from 115.6 to 109.4, rescale orion dust to gas
+## >>chng 04 may 07, update density radius to published paper
+## >>chng 05 jul 05, from 95.4 to 94.2, tune up
+## >>chng 12 apr 09, from 94.2 to 100.9, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 dec 23, from 100.9 to 82.1, C to external databases
+## >>chng 14 mar 26, from 82.1 to 74.8, Move oxygen data to stout and chianti files
+monitor temperature "H" 74.8
+##
+## >>chng 04 may 07, update density radius to published paper
+monitor temperature "H+" 8330
+##
+## >>chng 03 aug 29, from 16.94 to 16.885, add H2* reactions
+## >>chng 03 aug 30, from 16.885 to 16.907, differnt resut debg rel
+## >>chng 03 sep 10, from 16.91 to 16.76 H2* resolution
+## >>chng 03 sep 11, from 16.76 to 16.43 better H2*
+## >>chng 03 nov 16, from 16.43 to 14.72, Solomon th85 -> bd96
+## >>chng 04 jan 23, from 14.72 to 14.50 rescale orion dust to gas
+## >>chng 04 feb 09, from 14.50 to 14.56, update H2 net
+## >>chng 04 feb 24, from 14.56 to 14.93, small changes, incr error
+## >>chng 04 may 07, update density radius to published paper, 17.81
+## >>chng 05 dec 08, from 17.94 to 15.30, update to Elwert Solomon rate
+## >>chng 15 mar 07, from 15.3 to 15.37, merging newmesh branch
+monitor H2 column density 15.37 error 0.2 
+##
+## >>chng 03 jul 20, from 7.097 to 6.86, cap diffuse field pump, incr error
+## >>chng 03 aug 01, from 6.86 to 7.05, ans very unstable, incr error
+## TODO above just diff between fst and debug compile,
+## aug 01, fst got 7.00, slo got 7.11
+## >>chng 03 aug 03, from 7.05 to 7.20, 2s-2p coll rate
+## >>chng 03 aug 22, from 7.02 to 9.78, Nick Abel rewrite co network
+## >>chng 03 sep 10, from 9.78 to 6.81, H2* resolution
+## >>chng 03 nov 16, from 6.81 to -305, Solomon th85 -> bd96, rm this assert
+## >>chng 04 may 07, update density radius to published paper
+## >>chng 04 may 29, from 7.996 to 8.31, NA update H chem
+## >>chng 04 jul 03, from 8.31 to 8.61, NA update H, CO chem net
+## >>chng 05 mar 22, from 8.61 to 9.125, NA update CO chem net
+## >>chng 05 jul 05, from 9.12 to 9.14, tune up
+monitor CO column density 9.14 error 0.3 
+## 
+## >>chng 05 sep 30, add these 5
+## >>chng 12 apr 09, from 10.49 to 10.61, update CR backbround to Indriolo+07, ~8x larger
+monitor column density H2+  10.61
+## 
+## >>chng 05 dec 08, from 7.69 to 5.10, update to Elwert Solomon rate
+## >>chng 07 jan 07, from 5.10 to 5.44, enable McCall et al. H3+ rate
+## >>chng 11 nov 16, from 5.44 to 5.376, adjust newmole monitors
+## >>chng 12 apr 09, from 5.376 to 6.161, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 mar 26, from 6.161 to 6.094, Move oxygen data to stout and chianti files
+## >>chng 20 sep 06, from 6.094 to 6.238, further update to McCall CR-related rate
+monitor column density H3+  6.238
+## 
+## >>chng 05 dec 08, from 17.69 to 15.20, update to Elwert Solomon rate
+## >>chng 14 mar 26, from 15.2 to 15.26, Move oxygen data to stout and chianti files
+## >>chng 15 mar 07, from 15.26 to 15.3, merging newmesh branch
+monitor column density H2g  15.3
+## 
+## >>chng 05 dec 08, from 15.15 to 14.60, update to Elwert Solomon rate
+monitor column density H2*  14.60
+## 
+## >>chng 08 mar 22, from 10.79 to 10.68 bugfix r1879
+## >>chng 11 nov 16, from 10.68 to 10.62, adjust newmole monitors
+## >>chng 12 apr 09, from 10.62 to 11.13, update CR backbround to Indriolo+07, ~8x larger
+monitor column density HeH+ 11.13
+## >>chng 21 jun 17, from 1 to 9.52, first run
+## >>chng 21 sep 11, from 9.52 to 8.416, LAMDA update
+## >>chng 21 nov 04, from 8.416 to 8.183, update mole co data
+monitor column density "ArH+" 8.183
+## 
+##
+## >>chng 03 nov 10, from 400 to 440, chng zoning, use He0
+## >>chng 05 jul 05, from 440 to 500 cdsqte err
+## >>chng 08 dec 08, from 500 to 410, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 410 to 432, merging newsolvers branch
+## >>chng 09 jan 16, from 432 to 431, average of 10 runs
+## >>chng 11 jun 22, from 431 to 411, tune Te solver
+## >>chng 14 mar 26, from 411 to 434, Move oxygen data to stout and chianti files
+monitor nzone 434
+##
+## >>chng 04 jul 02, from 6.5 to 7.5 O H ct
+## >>chng 04 sep 25, from 7.5 to 11, incr temp toler 0.02 to 0.005
+## >>chng 08 dec 08, from 11 to 9.554, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 9.554 to 21.3, merging newsolvers branch
+## >>chng 09 jan 16, from 21.3 to 21.3 (error 0.03), average of 10 runs
+## >>chng 09 jun 01, from 21.3 to 21.1, drift down, inc err
+## >>chng 12 mar 07, from 21.1 to 14.24, renorm to r5961 results
+## >>chng 13 nov 05, from 14.24 to 9.309, convergence branch changes
+## >>chng 14 apr 07, from 9.309 to 6.752, move H/C out of ConvBase loop
+monitor itrzn 6.752
+##
+## >>chng 13 jun 27, from -8.869 to 23.45, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 23.45 to 23.93, C to external databases
+## >>chng 14 mar 26, from 23.93 to 24.19, Move oxygen data to stout and chianti files
+## >>chng 15 aug 03, from 24.19 to 24.46, update LAMDA to 2015
+monitor "H2O " 538.142m line intensity 24.46
+## >>chng 13 jun 27, from -7.288 to 25.93, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 25.93 to 26.03, C to external databases
+## >>chng 14 mar 26, from 26.03 to 26.08, Move oxygen data to stout and chianti files
+monitor "CO  " 2600.05m  26.08 line intensity
+## >>chng 13 jun 27, from -6.463 to 27.08, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 27.08 to 27.13, C to external databases
+## >>chng 14 mar 26, from 27.13 to 27.16, Move oxygen data to stout and chianti files
+## >>chng 23 sep 08, from 27.16 to 27.12, fix SQRTPI in Lya destprob
+monitor "CO  " 1300.05m  27.12 line intensity
+## >>chng 13 jun 27, from -6.149 to 27.36, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 27.36 to 27.38, Move oxygen data to stout and chianti files
+monitor "CO  " 866.727m  27.38 line intensity
+## >>chng 13 jun 27, from -6.177 to 27.32, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 27.32 to 27.29, C to external databases
+## >>chng 14 mar 26, from 27.29 to 27.27, Move oxygen data to stout and chianti files
+## >>chng 23 sep 08, from 27.27 to 27.23, fix SQRTPI in Lya destprob
+monitor "CO  " 650.074m  27.23 line intensity
+## >>chng 13 jun 27, from -6.485 to 27.14, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 27.14 to 27.06, C to external databases
+## >>chng 14 mar 26, from 27.06 to 27.01, Move oxygen data to stout and chianti files
+## >>chng 23 sep 08, from 27.01 to 26.97, fix SQRTPI in Lya destprob
+monitor "CO  " 520.089m  26.97 line intensity
+## >>chng 13 jun 27, from -6.954 to 26.91, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 26.91 to 26.76, C to external databases
+## >>chng 14 mar 26, from 26.76 to 26.68, Move oxygen data to stout and chianti files
+## >>chng 23 sep 08, from 26.68 to 26.63, fix SQRTPI in Lya destprob
+monitor "CO  " 433.438m  26.63 line intensity
+## >>chng 13 jun 27, from -7.48 to 26.63, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 26.63 to 26.42, C to external databases
+## >>chng 14 mar 26, from 26.42 to 26.29, Move oxygen data to stout and chianti files
+monitor "CO  " 371.549m  26.29 line intensity
+## >>chng 13 jun 27, from -8.049 to 26.31, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 26.31 to 26.03, C to external databases
+## >>chng 14 mar 26, from 26.03 to 25.86, Move oxygen data to stout and chianti files
+monitor "CO  " 325.137m  25.86 line intensity
+## >>chng 13 jun 27, from -7.522 to 25.86, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 25.86 to 25.88, Move oxygen data to stout and chianti files
+monitor "^13CO" 906.599m  25.88 line intensity
+## >>chng 13 jun 27, from -8.247 to 23.84, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from 23.84 to 23.68, C to external databases
+## >>chng 14 mar 26, from 23.68 to 23.59, Move oxygen data to stout and chianti files
+## >>chng 21 sep 11, from 23.59 to 22.98, LAMDA update
+## >>chng 21 sep 15, from 22.98 to 23.74, go back to unresolved model
+monitor "CN  " 880.858m  23.74  line intensity
+##
+## >>chng 13 dec 18, from 29.05 to 29.19, fixes to Federman shielding
+## >>chng 17 nov 20, from 29.19 to 29.17, Bug-fix in DR suppression (r11900)
+monitor "H  1" 21.1207c  29.17 line intensity
+##
+## >>chng 13 aug 19, from 22.14 to 22.06, subtraction of isotropic continua
+monitor "H  1" 91.6354c  22.06 line intensity
+##
+## >>chng 13 aug 18, from 23.3101 to 23.6111, doubled isotope abundance
+monitor "Mg 2" 16.7710c  23.6111 line intensity
+##
+# pdr_orion_veil.in
+# class pdr 
+# ========================================
+# 
+
+This is Abel et al 2004 model of Orion's veil, the layer of gas in front
+of the Orion Nebula.  
+>>refer	Orion	Veil	Abel, N. P., Brogan, C. L.,  Ferland, G. J., 
+>>refercon	O'Dell, C. R., Shaw, G., & Troland, T. H. 2004
+

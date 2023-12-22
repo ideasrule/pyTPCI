@@ -1,0 +1,165 @@
+title Orion nebula blister with wind
+#
+# commands controlling continuum =========
+blackbody 40000
+phi(h) 13.0
+brems 6
+phi(h) 10
+#
+# commands for density & abundances =========
+hden 4
+abundances hii region no grains
+grains orion no qheat single 
+#
+# commands controlling geometry  =========
+wind velo 100 km/s advection
+# this accounts for matter beyond end of the model
+double optical depths
+sphere 
+## >>chng 06 jul 05, stop on AV rather than temperature */
+## >>chng 08 jul 01, from 15 to 5 
+stop AV 5 
+stop temperature linear 5  
+#
+# other commands for details     =========
+iterate 30
+magnetic field -4 
+cosmic rays background 
+# this has no effect on dynamics, but is to desaturate the lines as per flow
+turbulence 8 km/sec no pressure
+# try to speed up simulation without hurting dynamics
+init "fast.ini"
+# use Bakes & Tielens heating
+set PAH Bakes 
+set save hash "return"
+## init "c84.ini"
+## failures 5
+#
+# commands controlling output    =========
+# want to print line intensities are surface brightness, per arcsec^2
+print lines surface brightness arcsec
+print diffuse continuum 
+print line faint -1.5
+save overview "dynamics_orion_recom.ovr"
+save hydrogen 21 cm "dynamics_orion_recom.21cm"
+save dr "dynamics_orion_recom.dr"
+save continuum last "dynamics_orion_recom.con" units microns
+save monitors last "dynamics_orion_recom.asr"
+save pressure "dynamics_orion_recom.pre"
+save heating "dynamics_orion_recom.het"
+save cooling "dynamics_orion_recom.col"
+save molecules "dynamics_orion_recom.mol"
+save wind "dynamics_orion_recom.wnd" last 
+#
+# commands giving the monitors    =========
+## >>chng 06 mar 11, from -11.241 to -11.175, chng small H from 4 to 5 lev
+## >>chng 07 jun 25, from -11.175 to -11.328, old h-like topoff added indirect to n=4, new only to n=6, huge effect on 4861.
+## >>chng 07 oct 26, from -11.328 to -11.350, very close to botch after recent changes
+## >>chng 13 aug 15, wl from 4861 to 4861.36A, wl precision now set 6 sig fig
+monitor line "H  1" 4861.36A intensity -11.350
+##
+## >>chng 13 aug 15, wl from 4861 to 4861.36A, wl precision now set 6 sig fig
+monitor line "CaBo" 4861.36A 1.0
+##
+## >>chng 05 oct 01, from 0.103 to 0.082, RP update He levels
+## >>chng 07 dec 29, from 0.082 to 0.857, ddrift up
+## >>chng 08 apr 30, from 0.0857 to 0.0908 H, He topoff change
+## >>chng 13 aug 15, wl from 5876 to 5875.61A, wl precision now set 6 sig fig
+## >>chng 16 dec 10, wl from 5875.61A to 5875.64A, 
+monitor line "he 1" 5875.64A 0.0908
+## 
+## >>chng 13 aug 15, wl from 5876 to 5875.64A, wl precision now set 6 sig fig
+monitor line "Ca B" 5875.64A 0.127
+## 
+## >>chng 13 aug 15, wl from 3889 to 3888.63A, wl precision now set 6 sig fig
+monitor line "He 1" 3888.63A 0.0801
+## >>chng 13 aug 15, wl from 3889 to 3889.07A, wl precision now set 6 sig fig
+monitor line "Ca B" 3889.07A 0.105
+## 
+## >>chng 13 aug 15, wl from 7065 to 7065.18A, wl precision now set 6 sig fig
+## >>chng 16 dec 10, wl from 7065.18A to 7065.22A, 
+monitor line "He 1" 7065.22A 0.0273
+## >>chng 13 aug 15, wl from 7065 to 7065.22A, wl precision now set 6 sig fig
+monitor line "Ca B" 7065.22A 0.0331
+##
+## >>chng 08 apr 30, from 0.913 to 0.842 H, He topoff change
+## >>chng 13 aug 15, wl from 10830 to 1.08299m, wl precision now set 6 sig fig
+## >>chng 16 dec 10, wl from 1.08299m to 1.08303m, 
+monitor line "He 1" 1.08303m 0.842
+##
+## >>chng 06 mar 11, from 0.241 to 0.263, chng small H from 4 to 5 lev
+## >>chng 06 nov 29, from 0.263 to 0.221, Badnell DR turned on
+## >>chng 08 apr 30, from 0.221 to 0.250 H, He topoff change
+## >>chng 16 dec 10, label changed from "totl" to "Blnd"
+monitor line "Blnd" 2326 0.250 error 0.1
+##
+## >>chng 05 oct 01, from 0.200 to 0.223, RP update He levels
+## >>chng 07 oct 22, from 0.223 to 0.246, resolve l-levels of h-like sequence
+## >>chng 09 feb 23, from 0.246 to 0.2746, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 16 dec 10, label changed from "totl" to "Blnd"
+monitor line "totl" 1909 0.2746 error 0.1
+##
+## >>chng 05 oct 01, from 0.505 to 0.480, RP update He levels
+## >>chng 05 dec 20, from 0.480 to 0.516, RP change default helium levels
+## >>chng 06 nov 29, from 0.516 to 0.449, Badnell DR turned on
+## >>chng 08 apr 30, from 0.449 to 0.497 H, He topoff change
+## >>chng 16 dec 10, label changed from "n  2" to "N 2R"
+monitor line "N 2R" 6584 0.497 error 0.1
+##
+## >>chng 05 dec 20, from 0.621 to 0.655, RP change default helium levels
+## >>chng 06 nov 29, from 0.655 to 0.610, Badnell DR turned on
+## >>chng 08 apr 30, from 0.610 to 0.668 H, He topoff change
+## >>chng 16 dec 10, label changed from "totl" to "Blnd"
+monitor line "Blnd" 3727 0.668 error 0.1
+##
+## >>chng 05 oct 01, from 3.707 to 3.871, RP update He levels
+## >>chng 07 dec 06, from 3.871 to 4.133, changes in h-like collisions
+monitor line "o  3" 5007 4.133
+##
+## >>chng 06 jul 06, from 0.159 to 0.175, update Ne cs, CO chem now
+## includes dynamics but no cross talk between CO and H2 in H2 part
+## >>chng 07 dec 14, from 0.175 to 0.167 RP update is seq
+## >>chng 08 nov 04, from 0.167 to 0.1746, line RT bug fixes (r2429-35)
+## >>chng 13 aug 15, wl from 12.81m to 12.8101m, wl precision now set 6 sig fig
+monitor line "ne 2" 12.8101m 0.1746
+##
+## >>chng 05 dec 08, from 0.342 to 0.309 update to Elwert Solomon rate
+## >>chng 06 jul 06, from 0.309 to 0.484, sim goes much deeper, CO chem now
+## includes dynamics but no cross talk between CO and H2 in H2 part
+## >>chng 06 nov 29, from 0.484 to 0.561, Badnell DR turned on, no co in advec
+## >>chng 07 may 08, from 0.561 to 0.543, dyn logic changed to set stop 
+## thickness after relaxing 2 iter, increased to 4 interation in this
+## sim to get more dynamics logic tested
+## >>chng 08 jul 01, from 0.561 to 0.0161, Av from 15 to 5
+monitor HHeicf 0.0161 error 0.02
+##
+## some dynamic stuff
+monitor velocity -0.130
+##
+## monitor dynamics convergence error < xx 
+##
+## >>chng 05 mar 28, from 80 to 50, impr mol converg
+## >>chng 08 jul 01, from 50 to 65 (58) Av from 15 to 5
+## >>chng 08 dec 08, from 65 to 57.33, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 57.33 to 100.8, merging newsolvers branch
+## >>chng 09 jan 16, from 100.8 to 100.1, average of 10 runs
+monitor itrzn 100.1 error 0.02
+##
+## >>chng 06 jul 06, from 900 to 1000 sim goes much deeper, CO chem now
+## includes dynamics but no cross talk between CO and H2 in H2 part
+## >>chng 08 dec 08, from 1000 to 578, upper limit -> equals (r2515)
+## >>chng 09 jan 16, from 578 to 582, average of 10 runs
+monitor nzone 582 error 0.01
+##
+# dynamics_orion_recom.in
+# class dynamics hii pdr
+# ========================================
+# 
+
+This is a model similar in spirit to the blister geometry H+ region
+model computed by Baldwin et al. (1991), but with a D-critical flow.
+Many physical processes have been disabled to make this simulationn faster.
+Grain physics is not done so the gas temperature is incorrect.  The
+main purpose is to do a quick test of the dynamical flow with grain
+opacities included.  The slow directory contains a full simulation
+of a flow like Orion.

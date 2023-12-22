@@ -1,0 +1,32 @@
+title cooling of a collisionally ionized plasma
+#
+# commands controlling continuum =========
+cosmic rays, background
+coronal 4 vary
+grid 4 6 0.5 sequential
+database chianti "CloudyChiantiAll.ini" levels max
+species "Fe+" levels=all
+#
+# commands for density & abundances =========
+hden 0
+set eden 0
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0 
+#
+# other commands for details     =========
+#
+# commands controlling output    =========
+save overview "chianti_all_cool.ovr"
+save performance "chianti_all_cool.per"
+save grid "chianti_all_cool.grd" last no hash
+save cooling "chianti_all_cool.col" last no hash
+save emitted continuum "chianti_all_cool.con" units angstroms
+save monitors "chianti_all_cool.asr" last
+#
+# commands giving the monitors    =========
+## >>chng 11 apr 26, 2nd -18.86 to .83, 3rd -18.42 to .47, Ar seq recom rates
+## >>chng 11 apr 29, 2nd -18.83 to .86, 3rd -18.42 to .47, Ar seq recom rates
+monitor ctot grid "chianti_all_cool.dat"
+

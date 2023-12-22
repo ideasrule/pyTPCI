@@ -1,0 +1,22 @@
+/** FILENAME_PATH_LENGTH is the size of the string that holds the path.  The longest
+ * string that can be held is one less than this, due to the end
+ * end of string sentinel in C.  Increase this is a larger string
+ * is needed to hold the path on your system */
+#define FILENAME_PATH_LENGTH 200 
+
+/** twice the above, so that we can add file name to end of full path */
+#define FILENAME_PATH_LENGTH_2 (FILENAME_PATH_LENGTH*2) 
+
+/** this is limit to longest line of information that is scanned in,
+ * end of line char is actually at this +1, dim of vector is this + 1 
+ * all routines that scan in information should use this to dim vars */ 
+#define INPUT_LINE_LENGTH 200
+
+
+to mix C and C++ IO operations must be synchronized if both are to be used in same program
+C uses stdio IO streams,stdin, stdout, stderr
+C++ has iostreams, including cin, cout, cerr, clog
+
+std::ios_base::sync_sith_stdio
+
+commands echoed with pretty box in routine ParseCommands

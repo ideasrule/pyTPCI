@@ -1,0 +1,391 @@
+\chapter{LIMITS, ASSUMPTIONS, AND RELIABILITY}
+% !TEX root = hazy2.tex
+
+\section{Overview}
+
+This section outlines some of the assumptions and limits that define
+the range of validity of \Cloudy.
+The code is designed to be autonomous
+and self-aware, and to check that these limits are not exceeded during a
+calculation.
+This self-checking is a central feature of the code since
+it is designed to be used to compute large grids with thousands of models,
+where the examination of individual results would not be possible.
+\Cloudy\ should print a warning after the last zone results
+if any aspects of the calculation are in doubt.
+
+\section{Time steady}
+
+\Cloudy\ does not assume that the gas is in equilibrium.
+In most cases
+it does, however, assume that atomic processes occur on timescales that
+are much faster than other changes in the system,
+so that atomic rates have
+had time to become time-steady.
+It is possible to follow time-dependent
+conditions or an advective flow.
+
+In practice most calculations assume that the cloud is old enough
+for
+atomic processes to have become time steady.
+The \cdCommand{age} command (described
+in Part I of this document) should be used to
+specify the age of the cloud.
+The code will then confirm that the time-steady
+assumption is valid by
+comparing the system's age with a host of rates and timescales,
+and will
+generate a warning if the environment is not time-steady.
+
+Various time scales characterize the approach to equilibrium of an ionized
+gas (see \citealp{Spitzer1962}, and \citealp{Ferland1979}
+for a specific application).
+Generally, for an ionized gas with nebular temperatures
+$(T \sim 10^4 \K)$, the longest
+is the \hplus\ recombination time scale,
+\begin{equation}
+T_{rec}  = {1 \over {\alpha _A \left( {T_e } \right)\,n_e }} = 7.6\,t_4^{0.8}
+\;n_4^{ - 1} \;{\mathrm{years}} = 0.66\,t_4^{0.8} \;n_9^{ - 1} \;{\mathrm{hours}}%(1)
+\end{equation}
+where $t_4$ is the temperature in units of $10^4 \K$,
+$n_9$ is the electron density in units of $10^9 \pcc$,
+and case A recombination is assumed (AGN3).
+
+The time scales are far more ponderous in molecular regions.
+Generally
+among the longer of the time scales is the time to form \hminus,
+an important
+pacesetter for \htwo\ formation in grain-free environments.
+This time scale is roughly given~by
+\begin{equation}
+T_{molecule}  = {1 \over {\alpha _{rad} \left( {T_e } \right)\,n_e }} =
+0.3\,t_3^{ - 0.8} \;n_9^{ - 1} \;{\mathrm{years}}% (2)
+\end{equation}
+where $t_3$ is the temperature in units of $10^3 \K$.
+
+If the age of the cloud is not long enough for atomic processes
+to become time steady then a time-dependent calculation should
+be done.
+If the gas flow is fast enough for advection to add significant
+terms to the statistical equilibrium equations then a wind 
+calculation should be performed.
+Commands for these simulations are described in Chapter
+\ref{Hazy1-sec:DynamicalTimeDependent},
+\cdSectionTitle{\refname{Hazy1-sec:DynamicalTimeDependent}},
+in Hazy 1.
+
+\section{Atomic and molecular database}
+
+This section outlines some of the atomic and molecular physics issues
+that affect the reliability of numerical simulations of nebulae.
+These
+uncertainties were extensively discussed in the
+Lexington Plasma 2000 meeting
+(ASP Conf series 247,
+\cdSectionTitle{Spectroscopic challenges of photoionized plasmas,}
+Gary Ferland \& Daniel Savin, editors) and they underscore the importance
+of atomic and molecular physics for the interpretation of astrophysical
+spectroscopy.
+
+\subsection{Collisional processes}
+
+By its nature, the electron temperature of a photoionized gas is low
+compared with the ionization temperature of the mixture of atoms and ions,
+as defined by the Saha equation (if the two were comparable, the gas would
+be collisionally ionized).
+Because of this, the rate coefficients describing
+collisional effects, such as the production of cooling emission lines, are
+often dominated by the cross sections near threshold.  This is where
+laboratory experiments are difficult and \emph{ab initio} quantum theory
+must often be used.
+As a result, the collision strengths undergo constant revision,
+towards better and more reliable values.
+
+To cite one extreme example,
+the collision strength for transitions within
+the $^3P$ ground term of Ne$^{+4}$
+underwent three revisions between 1984 and 1991,
+each by a factor of 10,
+because of theoretical uncertainties in positions
+of autoionizing states with unknown energies
+\citep{Lennon1991}.  The
+intensities of all emission lines can be affected by major changes in the
+atomic data for only one line for some conditions.  This is because (in
+this case) the infrared fine structure lines of Ne$^{+4}$ can be important
+coolants in low-density high-ionization gasses such as planetary nebulae,
+and changing their cooling rate alters the thermal structure of the entire
+nebula.  Such changes often give even models of time-steady objects such
+as planetary nebulae certain time-dependent characteristics.
+
+At present, there are fairly reliable calculations of collision
+strengths and transition probabilities for the majority of the strong
+optical and ultraviolet lines in moderate ionization nebulae.  A
+series of papers by Oliva and collaborators (see \citealp{Oliva1996}
+and \citealp{VanHoof2000a})
+outline observational evidence concerning accuracies in collision
+strengths of moderate ionization far infrared lines.
+
+Some strong cooling lines of high ionization species do not have accurate
+collision rates.
+As an example, few of the ``level2'' lines included in
+the code have real collision strengths.
+Various forms of the ``g-bar''
+approximation are used for those lines that do not have accurate collision
+rates.
+
+\subsection{Photoionization cross sections}
+
+The photoionization cross-section database has undergone a dramatic
+improvement with the completion of the Opacity Project (\citealp{Seaton1987}) and
+its fitting with analytic approximations (\citealp{VernerFerlandKorista1996}).
+These
+are the photoionization cross sections used by \Cloudy\ and
+they should be
+as accurate as 10\%.
+All inner shell multi-electron processes are included
+(\citealp{Kaastra1993}) using distorted wave cross sections (referenced
+in Verner et al.).
+This part of the data base is in fairly good shape,
+although greater accuracy is always desired.
+
+``Fano profiles'', due to autoionization resonances, appear as large
+changes in photoionization cross section that occur over a narrow range
+of energy, are averaged over, as described by Verner et al.
+Their positions
+are not accurately known, and they could make a difference
+if sharp spectral
+features occur in the stellar continuum at the position of a resonance.
+The photoionization rate could be changed dramatically in this case.
+Experimental data would be needed to upgrade the photoionization data base
+to include Fano profiles.
+
+\subsection{Recombination rate coefficients}
+
+Recombination from closed shell species is accurately known (\citealp{VernerFerland1996}) since these are dominated by radiative recombination.
+Reliable
+dielectronic recombination coefficients do not now exist for most other
+stages of ionization.
+Currently there is no theory that can reproduce the
+best experiments (\citealp{Savin1999}).
+For these, \Cloudy\ uses the guestimates
+described in Part I of this document.
+This is clearly the greatest single
+gap in the atomic data base today.
+\citet{Savin2000} shows an example where
+this uncertainty has a direct impact on cosmological studies.
+
+\subsection{Charge transfer}
+
+The rate coefficients for charge transfer are another uncertainty in
+the atomic and molecular database.
+This process is sometimes the dominant
+neutralization mechanism for singly or doubly ionized heavy elements.
+At
+present many charge exchange rate coefficients are the result of
+Landau-Zenner calculations using semi-empirical potential curves (\citealp{Kingdon1996}, \citealp{Kingdon1998b}).
+These are thought to be no more accurate than
+a factor of three.
+Even the best quantal calculations are not thought to
+have an accuracy much better than 50 percent.
+Unpublished tests suggest
+that these uncertainties affect some line intensities at the
+$\sim$20\% level,
+and a few by more than this.
+
+\section{Continuous opacity}
+
+All significant continuous opacity sources are treated for the energy
+range considered by the code,
+\emm\ to \egamry .
+These opacity
+sources include inverse bremsstrahlung, grains (when present),
+\hminus\ absorption,
+electron scattering, the damping wings of strong resonance lines (i.e.,
+Rayleigh scattering), pair production,
+photoelectric absorption by the ground
+and excited states of all ions of the lightest \LIMELM\ elements,
+and photoabsorption by molecules.
+This treatment should be adequate as long
+as the optical depths to electron scattering are not large.
+\Cloudy\ is not
+now designed to simulate Compton-thick regimes.
+(A warning will be issued
+after the last zone calculation if the nebula is very optically thick to
+electron scattering.)
+
+\section{Temperature range}
+
+\Cloudy\ assumes that the electrons are non-relativistic, which limits
+it to temperatures below roughly 10$^9$~K.
+\Cloudy\ goes to the Compton
+temperature of the radiation field to great accuracy in the limit of very
+high levels of ionization for blackbody radiation fields with temperatures
+between \TEMPLIMITLOW\ and \TEMPLIMITHIGH.
+There is no formal lower temperature limit to
+its validity.
+Note that very cold gas is rarely in steady state, however,
+because of the very slow collision rates.
+Similarly, the collision
+timescales in very hot gas $(T \gg 10^8 \K)$ are not rapid enough
+to ensure that
+the electrons and ions have the same temperature,
+or that heating - cooling
+balance has become time steady (\citealp{Johnson2007}).
+Electron-ion
+decoupling is not now included.
+
+The range of validity of the code is approximately from 10~K to 10$^9$~K.
+Temperatures outside this range can still be treated,
+although with greater
+uncertainty.
+The code will not permit temperatures below \TEMPLIMITLOW\ or above
+\TEMPLIMITHIGH.
+
+\section{Density range}
+
+There is no formal lower limit to the density that \Cloudy\ can treat.
+The set of heavy element fine structure lines, which dominate cooling at
+low densities, is complete for astrophysically abundant elements, and fine
+structure line optical depths, continuum pumping, and maser effects are
+fully treated.
+
+There is no formal high-density limit, although the simulation is less
+complete at high $(n \cong 10^{10} \pcc$ densities.
+Line radiative transfer processes are fully treated with 
+either escape or Sobolev approximations 
+(see \citealp{Kalkofen1987} and  \citealp{Avrett1988})
+and collisional-radiative ionization
+processes for excited levels of the heavy elements are treated.
+All species of H-like
+and He-like isoelectronic sequences are treated as many-level atoms,
+including all of the physical processes that allow the approach
+to LTE (see, for example, \citealp{Mihalas1978}).
+Tests with a hydrogen density of $10^{19} \pcc$
+show that the hydrogen and helium atoms and the hydrogen molecules go to
+LTE at high densities.
+They go to strict thermodynamic equilibrium when
+exposed to a true black body.
+The treatment of Stark broadening for hydrogen
+lines follows \citet{Puetter1981},
+so line radiative transfer is treated correctly
+(in the context of the escape probability formalism) for densities above
+$\sim10^{10} \pcc$.
+
+The treatment of the other 28 isoelectronic sequences is presently not
+as complete as the H and He-like sequences.
+Three-body recombination is
+included as a general recombination process, so the treatment of these
+elements is approximately correct at high densities.
+
+\Cloudy\ has been tested at densities of $10^{-8} \pcc$
+and $10^{19} \pcc$ on 32-bit machines.
+The numerical (not physical) limit to the density will actually
+be set by the limits to the range of the floating point numbers allowed
+by the machine in use.
+The physics incorporated in the code imposes no
+lower limit to the density.
+The physical high-density limit is roughly
+$10^{15} \pcc$, and is set by the approximate treatment
+of three-body recombination - collisional ionization for the
+heavy elements.
+
+\section{Radiative transfer}
+
+Several tests presented in the test suite show that the continuum transfer
+methods are in excellent agreement with known exact results.
+
+Line intensities are predicted with stellar atmosphere conditions in
+mind.
+Radiative transfer effects, including continuum pumping and possible
+maser emission, are treated.
+Nebular approximations, such as the
+approximation that all atoms are in the ground state, are not made.
+Collisional effects, including excitation and de-excitation, continuum
+fluorescence, recombination, etc, are all included as general line
+excitation mechanisms.
+The treatment of level populations is designed to go to LTE
+in the high particle or photon density cases.
+
+The transfer of subordinate lines, those where both upper and lower
+level of the transition occur in excited state, of the H-like and
+He-like iso sequences at high ($n \gg 10^{10} \pcc$) densities
+is a concern.
+Resonance lines should be fine.
+
+\section{Reliability}
+
+Several issues affect the general question of the reliability of the
+code.
+The first is the effects of the bugs that surely must exist in a
+code the size of \Cloudy.
+I have seldom found bugs in sections of the code
+older than roughly two to three years.
+Younger sections of the code
+sometimes contain bugs that only manifest themselves in exceptional
+situations.
+The issue of reliability in the face of complexity will
+increasingly be the single major problem limiting the development of
+large-scale numerical simulations (\citealp{Ferland2001b}).
+New methods of writing
+code will have to be developed if we are to take full advantage of the power
+of future machines.
+Machines are getting faster more quickly than people
+are getting smarter.
+
+The second issue is the validity of the numerical methods used to simulate
+conditions in the plasma.
+Fundamental uncertainties arise for cases where
+the density is high $(n\gg 10^{10} \pcc$).
+The line radiative transfer techniques
+used by \Cloudy\ are approximate (see the discussion by \citealp{Avrett1988}).
+Unfortunately, no definitive calculation now exists for the complete
+non-LTE equilibrium and line emission for an intermediate density
+$\sim10^{13} \pcc$ cloud.
+For less extreme conditions $(n < 10^{10} \pcc)$ nebular
+approximations are valid.
+
+Test cases that are designed to exercise the code in well-posed limits
+and for certain standard nebulae are in the test suite.
+The code is well
+behaved and agrees with predictions of similar codes in these limits.
+The
+discussion presented in \citet{Ferland1995} and \citet{Pequignot2001}
+suggests that 10\% accuracy can be reached for the intensities of the
+stronger lines.
+
+The uncertainties can probably best be judged by looking at both the
+dispersions among the various photoionization calculations presented in
+\citet{Ferland1995} and \citet{Pequignot2001}, and by the changes
+in the test suite.
+Much of the dispersion is due to improvements in the
+atomic database.
+
+There can be little better way to close a discussion of reliability
+than to quote the warning included in the description by
+\cite[see page xiii]{Kurucz1970} of ATLAS5, a code more than an order of
+magnitude smaller than \Cloudy:
+
+\begin{quote}
+\cdTerm{WARNING}
+
+\noindent ``There is no way to guarantee that ATLAS5 does not contain errors.
+In fact, it is almost certain that it does, since the code is so long.\dots
+We also point out that the computation of a model atmosphere
+should be considered a physical experiment.  The program may not be able
+to calculate a model for conditions that do not occur in real stars or for
+conditions that violate the initial assumptions on which the program is
+based.''
+\end{quote}
+
+\section{The future}
+
+The eventual goal is for \Cloudy\ to give reliable results
+for all extremes
+of conditions between and including the intergalactic medium and stellar
+atmospheres.
+I estimate that the code is now well over halfway complete.
+
+Current work centers on taking advantage of parallel machines. Once
+finished, we will be able to use this additional computational power to
+improve the treatment of hydrodynamics, line radiative transfer, and
+higher-order dimensionality.

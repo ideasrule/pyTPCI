@@ -1,0 +1,102 @@
+title he-like magnesium emission
+#
+# commands controlling continuum =========
+laser 250
+ionization -1
+#
+# commands for density & abundances =========
+hden 7
+set dr -12
+element magnesium abundance -2
+element magnesium ionization -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 0 -5
+init file "ism.ini"
+element helium off
+element carbon off
+element nitrogen off
+element oxygen off
+element neon off
+element silicon off
+element sulphur off
+element chlorine off
+element argon off
+element iron off
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+database he-like resolved levels 10
+database he-like collapsed levels 20
+constant temper 5
+iterate
+#
+# commands controlling output    =========
+print he-like departure magnesium
+print line faint -2
+save overview "helike_mg.ovr"
+save performance "helike_mg.per"
+save monitors "helike_mg.asr"
+# This is Lyman alpha
+## >>chng 13 jul 24, wl from 9.169A to 9.16875A, increased wl precision to 6 sig. fig.
+normalize to "Mg11" 9.16875A
+#
+# commands giving the monitors    =========
+## >>chng 05 sep 5, wl from 9.166 to 9.169
+## >>chng 10 aug 12, from -20.15 to -24.71, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.71 to -20.15, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 24, wl from 9.169A to 9.16875A, increased wl precision to 6 sig. fig.
+monitor line luminosity "Mg11"  9.16875A -20.15
+##
+## 9.314A is 2^3S to ground
+## >>chng 05 sep 5, wl from 9.317 to 9.314
+## >>chng 06 aug 18, from 3.05 to 3.286, RP update trans prob 
+## >>chng 13 jul 25, wl from 9.314A to 9.31434A, increased wl precision to 6 sig. fig.
+monitor line "Mg11"  9.31434A 3.286
+##
+## 9.231A is 2^3P to ground
+## >>chng 05 sep 5, wl from 9.232 to 9.231
+## >>chng 06 aug 18, from 1.41 to 1.21 RP update trans prob 
+## >>chng 13 jul 25, wl from 9.231A to 9.23121A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 9.23121A to "Blnd" 9.23121A, update He-like triplet labels and wl
+monitor line "Blnd"  9.23121A 1.21
+##
+## 7.851A is 3^1P to ground
+## >>chng 04 may 19, from 0.215 to 0.225, RP update he-like seq
+## >>chng 05 sep 5, wl from 7.850 to 7.851
+## >>chng 13 jul 25, wl from 7.851A to 7.85052A, increased wl precision to 6 sig. fig.
+monitor line "Mg11"  7.85052A 0.225 
+##
+## 50.45A is 3^3P to 2^3S
+## >>chng 05 sep 5, wl from 50.38 to 50.45
+## >>chng 13 jul 25, wl from 50.45A to 50.4502A, increased wl precision to 6 sig. fig.
+monitor line "Mg11"  50.4502A 0.108 
+##
+## 52.71A is 3^3D to 2^3P
+## >>chng 05 sep 5, wl from 52.67 to 52.71
+## >>chng 13 jul 25, wl from 52.71A to 52.7148A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 52.7148A to 52.7560A, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 1, wl from 52.7560A to 52.6157A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "Mg11" 52.6157A to "Blnd" 52.6680A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 52.6680A to 52.6679A, update NIST energies
+monitor line "Blnd"  52.6679A 0.27
+## 
+## total 2^3P to 2^3S
+## >>chng 13 jul 25, wl from 1025A to 1025.02A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 1025.02A to 1034.31A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1034.31A to "Blnd" 1013.82A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 1013.82A to 1013.84A, update NIST energies
+monitor line "Blnd"  1013.84A 0.0184
+## 
+## total 2^3P to 2^3S
+## >>chng 13 jul 25, wl from 997.5A to 997.455A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 997.455A to 997.486A, update NIST energies
+monitor line "Mg11" 997.486A 0.0152
+# 
+# helike_mg.in 
+# class limit 
+# ========================================
+# 
+
+test He-like Mg emission
+
+

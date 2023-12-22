@@ -1,0 +1,65 @@
+title high-ionization x-ray ionized cloud from Lexington 2000
+stop column density 16
+print lines column linear 
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+normalize to "H  1" 1215.67A
+print line faint -1
+hden 5
+iterate
+phi(h) 16.477 range 7.353 to 735.3
+interpolate (-8 -3)
+continue (-6 1.)
+continue (-2 14.5)
+continue (0.4771 12.7) 
+continue (0.8663 10.6)
+continue (3.8663 7.6)
+continue (6 1)
+continue (9 -3)
+element abundance helium  -1
+element abundance carbon -3.432
+element abundance nitrogen -3.959
+element abundance oxygen -3.097
+element abundance neon -3.959
+element abundance magnesium -4.4318
+element abundance silicon -4.456
+element abundance sulphur -4.7959
+element abundance argon -5.4318
+element abundance iron -4.398
+element lithium off
+element beryllium off
+element boron off
+element fluorine off
+element sodium off
+element aluminium off
+element phosphrous off
+element chlorine off
+element potasium off
+element calcium off
+element scandium off
+element titanium off
+element vanadium off
+element chromium off
+element manganese off
+element cobalt off
+element nickel off
+element copper off
+element zinc off
+##
+## >>chng 08 apr 20, remove "no induced" command, include UTA
+monitor temperature "H+" 1.64e6 K
+## 
+save overview "agn_lex00_u1.ovr"
+save performance "agn_lex00_u1.per"
+save transmitted continuum "agn_lex00_u1.trn" units keV 
+save monitors "agn_lex00_u1.asr" 
+#
+# agn_lex00_u1.in 
+
+This is one of the "warm absorber" simulations presented at the Lexington
+2000 meeting on nebulae.  Pequignot et al. summarized in 2001ASPC..247..533P.
+It is necessary to also include the command
+no induced processes
+to obtain the results presented there.  This disables UTA ionization,
+a process that was not included in the calculations presented in the paper.
+

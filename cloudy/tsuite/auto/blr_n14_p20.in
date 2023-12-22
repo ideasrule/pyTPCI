@@ -1,0 +1,97 @@
+title BLR model, density 1e14 cm-3, flux of H-ion phots 1e20 cm2 s-1
+# 
+# commands controlling continuum =========
+table agn
+phi(h) 20
+#
+# commands for density & abundances =========
+hden 14
+#
+# commands controlling geometry  =========
+stop column density 23
+#
+# other commands for details     =========
+iterate convergence 
+# these are to try to speed things up
+init "c84.ini"
+no level2 lines
+#
+# commands controlling output    =========
+print h-like departure hydrogen 
+print h-like departure helium 
+normalize to "H  1" 1215.67A 100 
+print line faint 1  ## get rid of lots of faint lines 
+save performance "blr_n14_p20.per"
+save monitors "blr_n14_p20.asr" last
+save convergence reason last "blr_n14_p20.cvr"
+save overview "blr_n14_p20.ovr" last
+save dr "blr_n14_p20.dr" last 
+#
+# commands giving the monitors    =========
+## strong blr lines
+## ion not present at this ionization parameter
+## monitor line luminosity "blnd"  1035 -37 0.10 ##total of sum of both O VI comp
+## 
+monitor line luminosity "H  1"  1215.67A 7.443  0.10 ##total Hydrogen Lyman-alpha 1215.67 
+## 
+## >>chng 18 jun 15, from -1.64 to -37, modified ion trimming scheme
+## >>chng 18 jun 16, remove monitor for trimmed-out blend with negligible abundance
+#monitor line luminosity "blnd"  1240 -37 ##total of sum of both N V comp
+## 
+## >>chng 19 aug 06, from 4.613 to 4.633, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor line luminosity "Blnd" 1397 4.633  ##total of sum of both Si IV comp
+## 
+## >>chng 19 mar 01, from -0.1026 to -0.5617, remove recombination, etc, components from blends (#415)
+## >>chng 19 aug 06, from -0.5617 to -0.5242, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor line luminosity "blnd"  1402 -0.5242 0.10  ##total O IV] 1402 
+## 
+## >>chng 19 jul 30, from 4.091 to 4.112, split He I 2 ^3P_J
+monitor line luminosity "blnd" 1549 4.112  ##total of sum of both C IV comp
+##
+## >>chng 19 feb 22, line no longer predicted
+## monitor line luminosity "Inwd" 1549 3.79, 
+##
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "H  1" 4861.32A 7.863 error 0.1 
+##
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "Inwd" 4861.32A 7.854, 
+## 
+## >>chng 20 aug 22, wl from 1640.43 to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, up 1-e energies to np
+monitor line luminosity "he 2"  1640.41A 5.917 error 0.2  ##total He II Balmer-alpha 1640
+## 
+## >>chng 19 mar 01, from 3.03 to 2.222, remove recombination, etc, components from blends (#415)
+monitor line luminosity "blnd"  1666 2.222 error 0.1  ##total O III] 1666
+##
+monitor line luminosity "blnd"  1909 2.947  ##total of sum of CIII] 1908.73+
+## 
+monitor line luminosity "Blnd" 1888 4.803 0.10  ##total of sum of Si III] 1892+
+## 
+## >>chng 19 aug 06, from 5.79 to 5.809, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor line luminosity "Blnd"  1860 5.809  ##total sum of both Al III comp
+##
+## >>chng 21 nov 02, from 5.292 to 5.242, fix bug with overresolving CS in isoseq
+monitor line luminosity "blnd" 2326 5.242 0.10 ##total C II] 2324.69 + 2328.12
+##
+monitor line luminosity "blnd" 2798 7.84  ##total of sum of both Mg II comp
+##
+## >>chng 18 jun 20, from 5.125 to 5.61, #bugfixes at front face r12134:12136
+monitor itrzn 5.61 error 0.10
+##
+monitor niter <5
+monitor niter >2
+##
+## >>chng 19 jul 02, from 407 to 390, reintegrate iso_collisions branch
+monitor nzone 390 error 0.060
+##
+# blr_n14_p20.in 
+# class blr 
+# ========================================
+

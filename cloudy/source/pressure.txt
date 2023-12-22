@@ -1,0 +1,19 @@
+pressure is converged when the relative error in pressure.PresTotlCurr - pressure.PresTotlCorrect
+is less than conv.PressureErrorAllowed, which is reset with set pressure error command.
+
+PressureChange
+sets conv.lgConvPres true when pressure is converged
+
+lgConvPres() returns true when pressure is converged (located in pressurechange.c)
+sets pressure.PresTotlCorrect
+
+header is pressure.h
+
+current total pressure is pressure.PresTotlCurr
+correct total pressure is pressure.PresTotlCorrect ;
+
+ConvPresTempEdenIoniz
+	called by cloudy, 
+	calls PressureChange to evaluate current pressure and then change pressure
+	to move toward correct value
+

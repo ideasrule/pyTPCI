@@ -1,0 +1,36 @@
+17 09 05
+1	0.000	2	"3s2.3p 2P*1/2"
+2	5761.100	4	"3s2.3p 2P*3/2"
+*********
+2014 dec 28, grid tests over extremes of conditions show level matix becomes ill conditions
+for very high ionization parameter, low kinetic temperature, models.  
+The limited TP data in NIST do not include transitions from 6 to ground, because of
+use of g-bar the CS is small, and hence the numerical problems.
+This is a Stout baseline model.
+3	143500.000	2	"3s.3p2 4P1/2"
+4	145622.000	4	"3s.3p2 4P3/2"
+5	148779.000	6	"3s.3p2 4P5/2"
+6	191609.300	4	"3s.3p2 2D3/2"
+7	191987.100	6	"3s.3p2 2D5/2"
+8	240361.400	2	"3s.3p2 2S1/2"
+9	255829.400	2	"3s.3p2 2P1/2"
+10	259153.700	4	"3s.3p2 2P3/2"
+11	313860.000	4	"3s2.3d 2D3/2"
+12	314214.000	6	"3s2.3d 2D5/2"
+13	383047.000	4	"3p3 4S*3/2"
+14	666259.000	2	"3s2.4s 2S1/2"
+15	822056.000	2	"3s.3p.(3P*).4s 4P*1/2"
+16	823985.000	4	"3s.3p.(3P*).4s 4P*3/2"
+17	827620.000	6	"3s.3p.(3P*).4s 4P*5/2"
+18	837212.000	4	"3s2.4d 2D3/2"
+19	837459.000	6	"3s2.4d 2D5/2"
+20	889330.000	6	"3s2.4f 2F*5/2"
+21	889384.000	8	"3s2.4f 2F*7/2"
+22	979930.000	2	"3s2.5s 2S1/2"
+23	1070740.000	4	"3s2.5d 2D3/2"
+24	1070850.000	6	"3s2.5d 2D5/2"
+25	1095200.000	6	"3s2.5f 2F*5/2"
+26	1095250.000	8	"3s2.5f 2F*7/2"
+**************
+#Reference:
+#NIST  2014-09-16

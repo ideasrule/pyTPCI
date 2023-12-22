@@ -1,0 +1,43 @@
+title test energy conservation with vastly optically thick dust, sphere geometry
+#
+# commands controlling continuum =========
+black 500 STE
+#
+# commands for density & abundances =========
+init "honly.ini"
+hden 3.25 -2
+grains ism single graphite 
+#
+# commands controlling geometry  =========
+radius from 21 to 26
+## stop Av 1000
+sphere 
+stop temperature 100K
+#
+# other commands for details     =========
+iterate
+constant temper 500 K
+no grain gas collisional energy exchange
+no grain electrons 
+no molecules 
+cosmic rays background  -10
+#
+# commands controlling output    =========
+save grain temperature "grains_conserve_sp.grntem"
+save overview "grains_conserve_sp.ovr"
+save dr "grains_conserve_sp.dr"
+save continuum units microns "grains_conserve_sp.con"
+#
+# commands giving the monitors    =========
+monitor Tu 1.5811 K linear error 0.02
+#
+# grains_conserve_sp.in
+# class limit 
+# ========================================
+# 
+
+This tests that multiple absorption / reemission by dust conserves energy
+in a spherical geometry.
+Radiation density temperature in last zone should be 500 * sqrt(1e21/1e26) = 1.5811 K
+
+

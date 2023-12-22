@@ -1,0 +1,55 @@
+title H, He in STE
+# from Ferland and Rees 1988
+# this tests whether thermal processes go to STE
+#
+# commands controlling continuum =========
+black body, t = 50000 STE
+#
+# commands for density & abundances =========
+hden 10
+init file="hheonly.ini"
+#
+# commands controlling geometry  =========
+stop lyman optical depth -6
+set dr -10
+stop zone 1
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling output    =========
+print heating
+print populations h-like hydrogen
+print departure coef h-like hydrogen
+print departure coef he-like helium
+save overview "limit_ste_hhe_ste.ovr"
+save performance "limit_ste_hhe_ste.per"
+save monitors "limit_ste_hhe_ste.asr" last
+#
+# commands giving the monitors    =========
+monitor "H+" temperature 50000
+monitor "He+2" temperature 50000
+monitor h-like hydrogen depature coef, mean = 1
+##
+## >>chng 02 apr 24, increase error, H rec cool affected temp
+## >>chng 09 oct 22, increase error, drift away from 1
+monitor h-like helium depature coef, mean = 1 error 0.1
+##
+# limit_ste_hhe_ste.in
+# class limit 
+# ========================================
+# 
+
+This is the ultimate test of the behavior of the code in the
+strict thermodynamic equilibrium limit. The temperature is not
+held constant, so the resulting equilibrium temperature determines
+whether cooling processes are treated properly in the detailed balance limit.
+The equilibrium temperature should be exactly 5*104 K, and all
+departure coefficients should equal unity. A small amount of
+grains are included to check that the grain thermal balance is
+handled properly in this limit. 
+
+Checks:
+-	Electron temperature exactly 5*104 K.
+-	Departure coefficients unity.
+

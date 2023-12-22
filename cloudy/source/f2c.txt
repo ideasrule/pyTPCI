@@ -1,0 +1,32 @@
+Conversion from Fortran to C using Cobalt Blue Tools
+
+moved c:\u\cblue dir to c:\u\cbluebak so that chkdsk will run
+
+===========================================================
+fstruct
+
+converts F66/77 to F90, with enddo, break, etc
+
+fstruct filename 
+filename.for ==> filename.f
+fstruct filename.for (writes filename.f)
+                     (filename.f writes filename.fs)
+
+initialization file is 
+fstruct.cfg in cblue dir
+
+===========================================================
+forc
+
+converts F77 to ansi c
+
+configuration file is forc.cfg in cblue subdir
+
+doc is fctutor.doc in cblue subdir
+
+first make prototypes:
+
+-PRO - make prototypes
+-PRO=f (best) make prototypes based on functions themselves, 
+       then necessary to call several times to get prototypes right
+-PF=name.h specify different prototype name, default is project.h

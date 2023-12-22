@@ -1,0 +1,188 @@
+title test feii in continuum pumped limit
+#
+# commands controlling continuum =========
+black 25000 K
+ionization -5
+#
+# commands for density & abundances =========
+hden 10
+abundances old solar 84 
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+Case B
+iterate 
+constant tempera 4
+species "Fe+" levels=all 
+#
+# commands controlling output    =========
+set save prefix "feii_pump"
+save overview ".ovr"
+save performance ".per"
+save monitors ".asr"
+save species continuum ".con" "Fe+" units microns last  
+save species bands ".fe2b" "FeII_bands.ini" "Fe+" last
+#
+# commands giving the monitors    =========
+## >>chng 07 oct 12, all reset when Case B & itration added
+## >>chng 13 nov 22, from 2.924 to 2.668, collapsed branch merge r8609
+## >>chng 16 aug 07, from 2.668 to 3.071, Fran bug fix
+## >>chng 23 jun 27, from 3.071 to 2.479, update Fe+ model to Smyth+19
+monitor line "Fe 2c"     0      2.479 error 0.07
+##
+## >>chng 13 nov 22, from 0.0035 to 0.0032, collapsed branch merge r8609
+## >>chng 14 jul 12, from 0.0032 to 0.0034, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.0034 to 0.0038, Fran bug fix
+## >>chng 23 jun 27, from 0.0038 to 0.0143, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1067A     0.0143 error 0.07
+##
+## >>chng 13 nov 22, from 0.0088 to 0.0082, collapsed branch merge r8609
+## >>chng 14 jul 12, from 0.0082 to 0.0087, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.0087 to 0.0097, Fran bug fix
+## >>chng 23 jun 27, from 0.0097 to 0.0208, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1120A     0.0208 error 0.07
+##
+## >>chng 13 nov 22, from 0.0053 to 0.0049, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0049 to 0.0053, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.0053 to 0.0059, Fran bug fix
+## >>chng 23 jun 27, from 0.0059 to 0.011, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1148A     0.011 error 0.07
+##
+## >>chng 13 nov 22, from 0.0171 to 0.0156, collapsed branch merge r8609
+## >>chng 14 jul 12, from 0.0156 to 0.0185, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.0185 to 0.0207, Fran bug fix
+## >>chng 23 jun 27, from 0.0207 to 0.0295, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1485A     0.0295 error 0.07
+##
+## >>chng 13 nov 22, from 0.016 to 0.0146, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0146 to 0.0161, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 0.0161 to 0.0182, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.0182 to 0.0204, Fran bug fix
+## >>chng 23 jun 27, from 0.0204 to 0.0259, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1550A     0.0259 error 0.07
+##
+## >>chng 13 nov 22, from 0.0303 to 0.0277, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0277 to 0.0219, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.0219 to 0.0256, Fran bug fix
+## >>chng 23 jun 27, from 0.0256 to 0.0285, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1615A     0.0285 error 0.07
+##
+## >>chng 13 nov 22, from 0.0521 to 0.0476, collapsed branch merge r8609
+## >>chng 14 jul 12, from 0.0476 to 0.0511, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.0511 to 0.0572, Fran bug fix
+monitor line "Fe 2b"  1650A     0.0572 error 0.07
+##
+## >>chng 13 nov 22, from 0.0218 to 0.0199, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0199 to 0.0271, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 0.0271 to 0.0293, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.0293 to 0.0327, Fran bug fix
+## >>chng 23 jun 27, from 0.0327 to 0.0259, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1670A     0.0259 error 0.07
+##
+## >>chng 13 nov 22, from 0.0243 to 0.0222, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0222 to 0.0263, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.0263 to 0.0303, Fran bug fix
+## >>chng 23 jun 27, from 0.0303 to 0.0197, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1740A     0.0197 error 0.07
+##
+## >>chng 13 nov 22, from 0.0023 to 0.0021, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0021 to 0.0017, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.0017 to 0.0019, Fran bug fix
+## >>chng 23 jun 27, from 0.0019 to 0.0023, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1787A     0.0023 error 0.07
+##
+## >>chng 13 nov 22, from 0.0029 to 0.0026, collapsed branch merge r8609
+## >>chng 14 jul 12, from 0.0026 to 0.0028, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.0028 to 0.0031, Fran bug fix
+## >>chng 23 jun 27, from 0.0031 to 0.0045, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1822A     0.0045 error 0.07
+##
+## >>chng 13 nov 22, from 0.005 to 0.0046, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0046 to 0.005, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.005 to 0.0057, Fran bug fix
+## >>chng 23 jun 27, from 0.0057 to 0.008, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1870A     0.008 error 0.07
+##
+## >>chng 13 nov 22, from 0.0025 to 0.0023, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0023 to 0.0037, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.0037 to 0.0042, Fran bug fix
+## >>chng 23 jun 27, from 0.0042 to 0.0153, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  1930A     0.0153 error 0.07
+##
+## >>chng 13 nov 22, from 0.0202 to 0.0184, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0184 to 0.023, use same guess values as stout, for missing atomic data
+## >>chng 14 jul 12, from 0.023 to 0.0247, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.0247 to 0.0276, Fran bug fix
+## >>chng 23 jun 27, from 0.0276 to 0.0199, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2090A     0.0199 error 0.07
+##
+## >>chng 13 nov 22, from 1.106 to 1.01, collapsed branch merge r8609
+## >>chng 16 aug 07, from 1.01 to 1.116, Fran bug fix
+## >>chng 23 jun 27, from 1.116 to 0.9595, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2355A     0.9595 error 0.07
+##
+## >>chng 13 nov 22, from 2.32 to 2.118, collapsed branch merge r8609
+## >>chng 16 aug 07, from 2.118 to 2.396, Fran bug fix
+## >>chng 23 jun 27, from 2.396 to 1.909, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2430A     1.909 error 0.07
+##
+## >>chng 13 nov 22, from 0.2384 to 0.2176, collapsed branch merge r8609
+## >>chng 14 jul 12, from 0.2176 to 0.2543, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.2543 to 0.2846, Fran bug fix
+## >>chng 23 jun 27, from 0.2846 to 0.1455, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2495A     0.1455 error 0.07
+##
+## >>chng 13 nov 22, from 0.9536 to 0.8706, collapsed branch merge r8609
+## >>chng 16 aug 07, from 0.8706 to 0.9712, Fran bug fix
+## >>chng 23 jun 27, from 0.9712 to 0.7841, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2610A     0.7841 error 0.07
+##
+## >>chng 13 nov 22, from 0.0591 to 0.054, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.054 to 0.0619, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.0619 to 0.0719, Fran bug fix
+## >>chng 23 jun 27, from 0.0719 to 0.0901, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2695A     0.0901 error 0.07
+##
+## >>chng 13 nov 22, from 0.4424 to 0.4038, collapsed branch merge r8609
+## >>chng 16 aug 07, from 0.4038 to 0.4718, Fran bug fix
+## >>chng 23 jun 27, from 0.4718 to 0.3108, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2758A     0.3108 error 0.07
+##
+## >>chng 13 nov 22, from 0.516 to 0.471, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.471 to 0.502, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.502 to 0.5702, Fran bug fix
+## >>chng 23 jun 27, from 0.5702 to 0.4368, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2780A     0.4368 error 0.07
+##
+## >>chng 13 nov 22, from 0.0085 to 0.0078, collapsed branch merge r8609
+## >>chng 14 jul 12, from 0.0078 to 0.009, Get strunk closer to stout branch
+## >>chng 16 aug 07, from 0.009 to 0.0101, Fran bug fix
+## >>chng 23 jun 27, from 0.0101 to 0.0254, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2840A     0.0254 error 0.07
+##
+## >>chng 13 nov 22, from 0.0213 to 0.0195, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0195 to 0.0227, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.0227 to 0.0266, Fran bug fix
+## >>chng 23 jun 27, from 0.0266 to 0.0407, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2935A     0.0407 error 0.07
+##
+## >>chng 13 nov 22, from 0.0183 to 0.0167, collapsed branch merge r8609
+## >>chng 14 jul 01, from 0.0167 to 0.0182, use same guess values as stout, for missing atomic data
+## >>chng 16 aug 07, from 0.0182 to 0.0208, Fran bug fix
+## >>chng 23 jun 27, from 0.0208 to 0.0366, update Fe+ model to Smyth+19
+monitor line "Fe 2b"  2960A     0.0366 error 0.07
+##
+#
+# feii_pump.in
+
+This is a constant temperature low ionization
+cloud, with BLR-like densities, which includes the
+large FeII atom.  The tests check on the emission
+predicted in the Fe II bands.
+
+This model tests the large FeII model in the optically thin,
+continuum pumped limit.  The zone thickness is set to a
+small value (1 cm) so that full continuum hits atom.
+

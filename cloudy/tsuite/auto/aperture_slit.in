@@ -1,0 +1,44 @@
+title test aperture slit command with luminosity
+#
+# commands controlling continuum =========
+laser 2
+q(h) 31.5
+#
+# commands for density & abundances =========
+hden 0
+init file "honly.ini"
+#
+# commands controlling geometry  =========
+radius 9 10
+sphere
+aperture slit 
+#
+# other commands for details     =========
+constant temper 4
+#
+# commands controlling output    =========
+save overview "aperture_slit.ovr"
+save performance "aperture_slit.per"
+save monitors "aperture_slit.asr" 
+#
+# commands giving the monitors    =========
+## luminosity should area of \pi ( r_out^2 - r_in^2 )
+## div by 1e10
+monitor line luminosity "unit" 1 10.4928
+# aperture_slit.in
+# class geometry 
+# ========================================
+# 
+
+This is a homogeneous sphere that is especially simple.  The model
+is a test of the aperture command, a command that simulates observing
+part of an extended object.  In this case the aperture is a long
+slit contered on the center of the nebula, extending beyond the outer
+reaches of the matter.  
+
+The code carries along a dummy emission line ("Unit 1") with a constant intensity
+of 1e-10 erg cm-3 s-1.  The line goes through all of the code's infrastructure,
+and when the calculation is complete, the program confirms that the "luminosity"
+of the line is the emitting volume times 1e-10.  The aperture command
+is verified by asserting that the emission line has the correct "luminosity".
+

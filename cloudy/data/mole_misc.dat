@@ -1,0 +1,93 @@
+# Chemistry involving double ions 
+# Rate for S+2 + X comes from: 
+# >>refer	rate-coeff	Chen, Gao, & Kwong 2003, PhRvA, 68, 052703 
+# branching ratio forming HS+ unknown, for now assume 50% of S+2 reactions form SH+ 
+S+2,H2=>H2+,S+:hmrate:8e-10:0:0  
+S+2,H2=>HS+,H+:hmrate:8e-10:0:0  
+S+2,N2=>N2+,S+:hmrate:1.67e-9:0:0  
+S+2,CO=>CO+,S+:hmrate:1.78e-9:0:0  
+# Rate for C+2 + X comes from: 
+# >>refer	rate-coeff	Gao & Kwong 2003, PhRvA, 68, 052704 
+C+2,H2=>H2+,C+:hmrate:8.77e-11:0:0  
+C+2,CO=>CO+,C+:hmrate:4.58e-10:0:0  
+C+2,N2=>N2+,C+:hmrate:1.08e-10:0:0  
+# Rate for O+2 + X comes from: 
+# >>refer	rate-coeff	Fang & Kwong 1995, PhRvA, 51, 1321 
+O+2,H2=>H2+,O+:hmrate:2.36e-9:0:0  
+O+2,N2=>N2+,O+:hmrate:3.15e-9:0:0  
+O+2,CO=>CO+,O+:hmrate:3.4e-9:0:0  
+# Rate for N+2 + X comes from: 
+# >>refer	rate-coeff	Fang & Kwong 1997, PhRvA, 55, 440
+N+2,H2=>H2+,N+:hmrate:3.38e-11:0:0  
+N+2,N2=>N2+,N+:hmrate:2.1e-9:0:0  
+N+2,CO=>CO+,N+:hmrate:3.37e-9:0:0  
+# Argon Chemistry -- from database compiled by V. G. Anicich at http://ntrs.nasa.gov/search.jsp?R=781494&id=5&qs=N%3D4294878962 
+#H2+,Ar=>ArH+,H:hmrate:2.3e-9:0:0 
+H2+,Ar=>ArH+,H:hmrate:1.e-9:0:0 #Schilke et al. (2014)# GargiShaw 15thJune,2021
+#H3+,Ar=>ArH+,H2:hmrate:3.65e-10:0:0 
+H3+,Ar=>ArH+,H2:hmrate:8.5e-10:0:6400 #Schilke et al. (2014)# GargiShaw 15thJune,2021
+H2,Ar+=>ArH+,H:hmrate:8.4e-10:0.16:0 #Schilke et al. (2014)# GargiShaw 15thJune,2021
+ArH+,H2=>Ar,H3+:hmrate:8.e-10:0:0 #Schilke et al. (2014)# GargiShaw 15thJune,2021
+ArH+,CO=>Ar,HCO+:hmrate:1.25e-9:0:0 #Schilke et al. (2014)# GargiShaw 15thJune,2021
+ArH+,C=>Ar,CH+:hmrate:8.e-10:0:0 #Schilke et al. (2014)# GargiShaw 15thJune,2021
+ArH+,O=>Ar,OH+:hmrate:8.e-10:0:0 #Schilke et al. (2014)# GargiShaw 15thJune,2021
+#ArH+,PHOTON=>Ar+,H:hmrate:4.2e-12:0:3.27 #Roueff et al. (2014)# GargiShaw 15thJune,2021
+ArH+,PHOTON=>Ar+,H:th85rate:4.2e-12:0:3.27 #Roueff et al. (2014)# updated by GS on 18thOct2021, rate corrected to th85rate
+#
+# test these!
+#"ArH+,H=>H2+,Ar:hmrate:2.3e-9 * SAHA * 3.635e-5 * pow(300.,-1.50),-1.50,0 
+#"ArH+,H2=>H3+,Ar:hmrate:3.65e-10 * SAHA * 3.635e-5 * pow(300.,-1.50),-1.50,0 
+#
+N2+,Ar=>Ar+,N2:hmrate:3.65e-10:0:0  
+Ar+,H2=>Ar,H2+:hmrate:2.0e-12:0:0  
+#Ar+,H2=>ArH+,H:hmrate:8.72e-10:0:0  
+Ar+,CH4=>CH2+,Ar,H2:hmrate:1.4e-10:0:0  
+Ar+,CH4=>CH3+,Ar,H:hmrate:7.9e-10:0:0  
+Ar+,NH3=>Ar,NH3+:hmrate:1.6e-9:0:0  
+Ar+,N2=>N2+,Ar:hmrate:1.2e-11:0:0  
+Ar+,H2O=>H2O+,Ar:hmrate:1.3e-9:0:0  
+Ar+,O2=>O2+,Ar:hmrate:3.5e-11:0:0  
+Ar+,HCl=>HCl+,Ar:hmrate:2.9e-10:0:0  
+Ar+,HCl=>Cl,ArH+:hmrate:6.0e-11:0:0  
+Ar+,CO=>CO+,Ar:hmrate:2.8e-11:0:0  
+#ArH+,e-=>H,Ar:hmrate:1.0e-10:-0.50:0   # Guess based on typical electron recombination rate coefficients 
+ArH+,e-=>H,Ar:hmrate:1.0e-9:0:0 #Schilke et al. (2014)# GargiShaw 15thJune,2021
+# Neon Chemistry -- from database compiled by V. G. Anicich at 
+# http://ntrs.nasa.gov/search.jsp?R=781494&id=5&qs=N%3D4294878962 
+H2+,Ne=>NeH+,H:hmrate:2.3e-10:0:0  
+H3+,Ne=>NeH+,H2:hmrate:3.65e-10:0:0  
+HeH+,Ne=>NeH+,He:hmrate:1.25e-9:0:0  
+Ne+,CH4=>CH+,Ne,H2,H:hmrate:8.4e-13:0:0  
+Ne+,CH4=>CH2+,Ne,H2:hmrate:4.2e-12:0:0  
+Ne+,CH4=>CH3+,Ne,H:hmrate:4.7e-12:0:0  
+Ne+,CH4=>CH4+,Ne:hmrate:1.1e-11:0:0  
+Ne+,NH3=>NH+,Ne,H2:hmrate:4.5e-12:0:0  
+Ne+,NH3=>NH2+,Ne,H:hmrate:1.9e-10:0:0  
+Ne+,NH3=>NH3+,Ne:hmrate:2.7e-11:0:0  
+Ne+,N2=>N2+,Ne:hmrate:1.1e-13:0:0  
+Ne+,H2O=>H2O+,Ne:hmrate:8.0e-10:0:0  
+Ne+,O2=>O+,Ne,O:hmrate:6.0e-11:0:0  
+NeH+,H2=>H3+,Ne:hmrate:2.0e-11:0:0  
+NeH+,He=>HeH+,Ne:hmrate:3.8e-14:0:0  
+NeH+,e-=>H,Ne:hmrate:1.0e-7:-0.5:0   # Guess based on typical electron recombination rate coefficients 
+# various H reactions
+H2+,H-=>H2,H:hmrate:1.4e-7:-0.5:0. # >>refer	H2+	k	Stancil, P.C, & Lepp, S, & Dalgarno, A. 1998,ApJ, 509, 1-10 
+H2+,H-=>H,H,H:hmrate:1.4e-7:-0.5:0. # >>refer	H2+	k	Stancil, P.C, & Lepp, S, & Dalgarno, A. 1998,ApJ, 509, 1-10 
+H+,H-=>H,H+,e-:hmrate:2.27e-22:3.1:0. # >>refer	H-	k	Paolo Lenzuni, David F. Chernoff, Edwin E. Salpeter, 1991, ApJS, 76, 759L (table 5) 
+H2,H-=>H,H2,e-:hmrate:6.07e-12:2.:19870. # >>refer	H-	k	Paolo Lenzuni, David F. Chernoff, Edwin E. Salpeter, 1991, ApJS, 76, 759L (table 5) 
+H3+,H-=>H2,H2:hmrate:2.37e-7:-0.5:0.
+H,H2+=>H+,H2*:hmrate:6.4e-10:0.:0. # this process populates v=4,no J information assume into J=0 -> H2s not H2g 
+H3+,H-=>H2,H,H:hmrate:2.3e-7:-0.5:0.
+H2,e-=>H,H,e-:hmrate:1e-14:0.:51963.
+H2*,e-=>H,H,e-:hmrate:1e-14:0.:22953.
+He+,H=>HeH+,PHOTON:hmrate:1e-15:0.:0.  # >>refer	heh+	rate	Zygelman, B., and Dalgarno, A. 1990, ApJ 365, 239 
+He,H-=>He,H,e-:hmrate:3.7e-12:2.:19870. # >>refer H-	k	Paolo Lenzuni, David F. Chernoff, Edwin E. Salpeter, 1991, ApJS, 76, 759L, Table 5 
+He+,H2=>He,H+,H:hmrate:3.7e-14:0.:35. # UMIST  
+He+,H2=>He,H2+:hmrate:7.2e-15:0.:0. # UMIST 
+He,H+=>HeH+,PHOTON:hmrate:1e-20:0.:0.
+HeH+,e-=>He,H:hmrate:1e-9:0.:0.
+H3+,PHOTON=>H2+,H:th85rate:5e-13:0.:2.3 # UMIST 
+H3+,PHOTON=>H2,H+:th85rate:5e-13:0.:1.8 # UMIST 
+H2,H+=>H3+,PHOTON:hmrate:1.00E-020:0:0  # Gay et al. 2011, eqn 55
+H2+,H=>H3+,PHOTON:hmrate:1.50E-017:1.8:-20  # Gay et al. 2011, eqn 56
+H2+,H-=>H3+,e-:hmrate_exo:2.70E-010:-0.49:-31000  # Gay et al. 2011, eqn 57

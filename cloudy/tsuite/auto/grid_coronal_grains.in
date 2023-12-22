@@ -1,0 +1,36 @@
+title coronal equilibrium
+# vary temperature in coronal equilibrium, monitor coolnd
+#
+# commands controlling continuum =========
+coronal 4 vary
+grid 1 9 0.25 sequential log
+#
+# commands for density & abundances =========
+abundances ISM
+grains PAH 3
+hden 0
+#
+# must include cosmic ray background since going below 1e4 K
+cosmic ray background
+# 
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# commands controlling output    =========
+no blends
+save grid "grid_coronal_grains.grd" last no hash
+save monitors "grid_coronal_grains.asr" last
+save cooling "grid_coronal_grains.col" last no hash
+monitor CTOT grid "grid_coronal_grains.dat" 0.05
+# 
+# grid_coronal_grains.in
+# class coronal 
+# ========================================
+# 
+*********
+
+this is a classical cooling function calculation - cosmic rays must be included
+for temperatures below 1e4 K to sustain chemistry.
+This is a coronal (collisional) ionization calculation.
+This case uses ISM abundances, depleted heavy elements, with grains

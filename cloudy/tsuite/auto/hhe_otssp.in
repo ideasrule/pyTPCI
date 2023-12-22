@@ -1,0 +1,204 @@
+title spherical conservation and H-like emission for H and He
+#
+# commands controlling continuum =========
+blackbody 40000
+ionization -2
+#
+# commands for density & abundances =========
+hden 5
+init file "hheonly.ini"  
+#
+# commands controlling geometry  =========
+diffuse ots
+database h-like levels resolved 10 
+radius 13
+stop efrac 0.05 ##stop when 5 percent ionized
+sphere static
+#
+# other commands for details     =========
+constant temper 7500
+iterate
+no level2
+no induced processes (OK)
+#
+# commands controlling output    =========
+save performance "hhe_otssp.per"
+save overview "hhe_otssp.ovr"  last
+save monitor "hhe_otssp.asr"  last
+save dr "hhe_otssp.dr"  last
+#
+# commands giving the monitors    =========
+## >>chng 07 mar 20, from 1.000 to 1.010, due to chng in r987
+## >>chng 08 apr 07, from 1.010 to 0.992, a number of mostly minor iso changes
+## >>chng 08 apr 30, from 0.992 to 0.975 H, He topoff change
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, change to testing "Ca B" 4861.36A (was "H  1" 4861.36A).
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A = 1.026
+## 
+## >>chng 02 nov 20, from error 0.06 to 1.07, change assert to the value
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A = 1.07
+## 
+## >>chng 07 oct 22, from 0.3512 to 0.3235, resolve l-levels of h-like sequence
+## >>chng 08 apr 19, incr error since nl atom has more limited accuracy
+## >>chng 11 nov 16, from 0.324 to 0.3414, adjust newmole monitors
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 16 may 13, from 0.3414 to 0.3621, "PS64 only dipole l-changing calculations"
+## >>chng 16 aug 07, from 0.3621 to 0.324, Marios bug fixes
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "H  1" 1.87510m = 0.324 ##Paschen alpha
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "Ca B" 1.87510m = 0.349 ##Paschen alpha
+##
+## >>chng 07 oct 22, from 0.1693 to 0.1623, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 1.282m to 1.28181m, increased wl precision to 6 sig. fig.
+## >>chng 16 may 13, from 0.1623 to 0.1701, "PS64 only dipole l-changing calculations"
+## >>chng 17 may 25, wl from 1.28181m to 1.28180m, up Rydberg constant
+## >>chng 17 sep 09, from 0.1701 to 0.162, fix bug in high n collisional excitation rates for H-like iso-sequences
+## >>chng 20 aug 22, wl from 1.28180m to 1.28181m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.28181m = 0.162 ##Paschen beta
+## 
+## >>chng 06 may 08, from 0.0835 to 0.0858, RP update high-n As H-like
+## >>chng 07 oct 22, from 0.0858 to 0.0738, resolve l-levels of h-like sequence
+## >>chng 08 apr 07, from 0.0738 to 0.0721, a number of mostly minor iso changes
+## >>chng 08 apr 30, from 0.0721 to 0.0778 H, He topoff change
+## >>chng 13 jul 25, wl from 4.051m to 4.05113m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 27, from 0.0778 to 0.0823, PS64 fixes
+## >>chng 16 may 13, from 0.0823 to 0.0881, "PS64 only dipole l-changing calculations"
+## >>chng 16 aug 07, from 0.0881 to 0.0739, Marios bug fixes
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "H  1" 4.05115m = 0.0739 ##Bracket alpha
+## >>chng 13 jul 25, wl from 4.051m to 4.05113m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "Ca B" 4.05115m = 0.0830 ##Bracket alpha
+## 
+## >>chng 07 oct 22, from 0.0477 to 0.0440, resolve l-levels of h-like sequence
+## >>chng 11 nov 16, from 0.044 to 0.0465, adjust newmole monitors
+## >>chng 13 jul 25, wl from 2.625m to 2.62515m, increased wl precision to 6 sig. fig.
+## >>chng 16 may 13, from 0.0465 to 0.0486, "PS64 only dipole l-changing calculations"
+## >>chng 16 aug 07, from 0.0486 to 0.0443, Marios bug fixes
+## >>chng 17 may 25, wl from 2.62515m to 2.62513m, up Rydberg constant
+## >>chng 20 aug 22, wl from 2.62513m to 2.62515m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.62515m to 2.62514m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.62514m to 2.62515m, revert to PvH energies for H
+monitor line "H  1" 2.62515m = 0.0443 beta
+monitor line "BaC " 3646 = 18.26 ##Balmer continuum rel to h-beta
+##
+# helium lines
+## >>chng 02 dec 11, rm this line
+## assert line "He 1" 10830 0.983
+## >>chng 02 dec 11, add this line
+## >>chng 04 mar 24, from 0.9192 to 0.966, slow drift up
+## >>chng 13 jul 25, wl from 10830 to 1.08299m, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 1.08299m to 1.08303m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 12, from 0.966 to 1.099, coll. str. reduced mass scaling
+## >>chng 16 oct 21, from 1.099 to 1.162, new l-changing rates from Hlike_HS87 reintegration
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+## >>chng 19 jul 30, from 1.162 to 0.7119, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.7119 to 0.5053, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line "Blnd" 1.08302m 0.5053
+##
+## >>chng 02 dec 06, from 0.104 to 0.109, new he integ
+## assert line "TOTL" 5 876  0.109
+## >>chng 03 feb 28, from 0.0966 to 0.104, better hei coll
+## >>chng 05 mar 12, from 0.104 to 0.0974, RP merge He-like code
+## >>chng 05 oct 01, from 0.0974 to 0.0892, RP update levels
+## >>chng 05 dec 20, from 0.0892 to 0.0937, RP change default helium levels
+## >>chng 08 apr 30, from 0.0937 to 0.1037 H, He topoff change
+## >>chng 11 nov 16, from 0.1037 to 0.1091, adjust newmole monitors
+## >>chng 13 jul 25, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.1091 to 0.0921, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 5875.66A  0.0921
+## >>chng 13 jul 25, wl from 5876 to 5875.64A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 5875.64A  0.1037
+##
+## >>chng 04 may 19, from 0.034 to 0.0367, RP update helike sequence
+## >>chng 06 may 08, from 0.0367 to 0.0354, RP update high-n As H-like
+## >>chng 13 jul 25, wl from 4471 to 4471.49A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 4471.49A  0.0354
+##
+## >>chng 05 mar 12, from 0.0358 to 0.0341, RP merge He-like code
+## >>chng 11 nov 16, from 0.0341 to 0.0358, adjust newmole monitors
+## >>chng 13 jul 25, wl from 4471 to 4471.47A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 4471.47A to 4471.49A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.0358 to 0.034, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 4471.49A to "Blnd" 4472.76A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 4472.76A to 4471.50A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 4471.50A  0.034
+##
+## >>chng 08 apr 30, from 0.0781 to 0.0727 H, He topoff change
+## >>chng 13 jul 25, wl from 3889 to 3888.63A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.0727 to 0.0795, Marios bug fixes
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+monitor line "He 1" 3888.64A  0.0795
+## >>chng 13 jul 25, wl from 3888.5 to 3888.63A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+monitor line "Ca B" 3888.64A  0.0813
+##
+## >>chng 01 mar 02, change to sphere, from 0.028 to 0.030
+## >>chng 09 feb 24, from 0.03 to 0.0286, botches due to r2763
+## >>chng 13 jul 25, wl from 7065 to 7065.18A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 7065.18A to 7065.22A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 7065.22A to "Blnd" 7067.20A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 7067.20A to 7065.25A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 7065.25A  0.0286
+## >>chng 13 jul 25, wl from 7065 to 7065.22A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 7065.22A  0.0242
+##
+## >>chng 02 jan 05, from 0.026 to 0.024, HeI Lya redi fcn
+## >>chng 05 oct 01, from 0.024 to 0.0228, RP update levels
+## >>chng 05 dec 20, from 0.0228 to 0.024, RP change default helium levels
+## >>chng 13 jul 25, wl from 20580 to 2.05813m, increased wl precision to 6 sig. fig.
+monitor line "He 1"  2.05813m  0.0240
+##
+## >>chng 00 apr 01 vol aver bug from 0.651 to 0.517
+monitor hydrogen 2 ionization fraction 0.517 volume weighted
+##
+## >>chng 00 apr 01 vol aver bug from 0.350 to 0.350
+## >>chng 02 may 11, from 0.350 to 0..368, slow drift up
+## >>chng 11 nov 16, from 0.368 to 0.344, adjust newmole monitors
+monitor helium 2 ionization fraction 0.344 volume weighted
+##
+## >>chng 03 may 21, from 0.1552 to 0.1657, chng in Lya transport
+## >>chng 05 mar 12, from 0.1657 to 0.1446, RP merge He-like code
+## >>chng 05 dec 20, from 0.1446 to 0.1550, RP change default helium levels
+## >>chng 08 mar 22, from 0.1550 to 0.1646 bugfix r1879
+## >>chng 08 apr 30, from 0.1646 to 0.1781 H, He topoff change, inc err to 2%
+monitor HHeicf 0.1781 error 0.02
+##
+## >>chng 08 dec 08, from 5 to 3.338, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 3.338 to 4.417, merging newsolvers branch
+## >>chng 09 jun 26, from 4.417 to 3.958, remove several dampers
+## >>chnt 11 aug 13, use default error
+## >>chng 13 nov 05, from 3.958 to 3.229, convergence branch changes
+monitor itrzn 3.229
+##
+# hhe_otssp.in
+# class limit 
+# ========================================
+# 
+
+
+This tests the total emission from a spherical pure H + He-like Stromgren sphere
+using the outward only approximation.  The conservation of the total number
+of ionizing photons, and the emitted spectrum, are all checked.	The geometry is plane paralel.
+

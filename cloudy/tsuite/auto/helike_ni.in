@@ -1,0 +1,52 @@
+title he-like nickel emission
+##
+database he-like resolved levels 10
+database he-like collapsed levels 20
+##
+print he-like departure nickel
+##
+constant temper 5
+iterate
+hden 7
+set dr -12
+init file "ism.ini"
+# must turn on since ism.ini turned it off
+element nickel on  
+# then set abundance and ionization after turning it on
+element nickel abundance -2
+element nickel ionization -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 0 -5
+# now turn lots of elements off to save time
+element helium off
+element carbon off
+element nitrogen off
+element oxygen off
+element neon off
+element magnesium off
+element silicon off
+element sulphur off
+element chlorine off
+element argon off
+element iron off
+laser 1300
+ionization -1
+stop zone 1
+print line faint -2
+save overview "helike_ni.ovr"
+save performance "helike_ni.per"
+save monitors "helike_ni.asr"
+## 
+##>>chng 05 sep 5, wl from 1.602A to 1.604A
+## >>chng 06 aug 18, from -18.441 to -18.343, RP update trans prob 
+## >>chng 10 aug 12, from -18.34 to -23.38, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -23.38 to -18.35, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 24, wl from 1.604A to 1.60362A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 1.60362A to 1.60360A, update NIST energies
+monitor line luminosity "Ni27" 1.60360A -18.35
+## 
+#
+# helike_ni.in
+# class limit 
+# ========================================
+# 
+
+Test He-like Ni emission.

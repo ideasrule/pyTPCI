@@ -1,0 +1,48 @@
+Al_I	8
+Al_III	19
+Al_VI	5
+Ar_I	
+Ar_II	2
+Ar_III	5
+Ar_IV	5
+Ar_V	5
+Ar_VI	2
+C_I	5
+C_II	
+Ca_I	9
+Ca_IV	2
+Cl_I	2
+Cl_IX	2
+Co_XI	2
+Cr_II	101
+Cr_III	
+Cr_IV	19
+Cr_V	33
+F_II	5
+F_IV	6
+K_I	3
+K_III	2
+K_IV	3
+K_VII	2
+Mg_I	5
+Mg_III	27
+Na_I	3
+Ne_II	2
+Ni_I	6
+Ni_II	
+P_II	5
+P_III	2
+S_I	3
+Sc_II	88
+Sc_III	4
+Sc_V	2
+Sc_VI	5
+Sc_XIII	2
+Si_I	13
+Si_II	15
+Si_III	20
+Si_IV	32
+Si_IX	6
+Si_VII	5
+Ti_III	7
+Ti_VI	2

@@ -1,0 +1,46 @@
+title test of H ionization in optically thin limit
+#
+# commands controlling continuum =========
+laser 1.5 Ryd 
+phi(h) 10
+#
+# commands for density & abundances =========
+hden 1
+init file="hheonly.ini"
+#
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+constant temperature = 4
+iterate to convergence
+#
+# commands controlling output    =========
+save overview "limit_laser_1.ovr"
+save performance "limit_laser_1.per"
+save monitors "limit_laser_1.asr" last
+save convergence reason "limit_laser_1.cvr"
+#
+# commands giving the monitors    =========
+monitor ionization hydrogen 1 -3.699
+monitor niter 3 error 0.01
+# limit_laser_1.in
+# class limit 
+# ========================================
+# 
+
+This checks the calculation of the hydrogen photoionization equilibrium.
+The continuum is a laser peaked at 1.5 Ryd, where the hydrogen
+photoionization cross section is 2.09*10-18 cm-2. 
+
+Checks:
+-	The hydrogen neutral fraction is nearly 2.00*10-4 (not exact
+	since laser has finite width).
+-	Hb emissivity close to high density case A.  The predicted
+	H  1 4861 intensity should be nearly 2.2 times the expected
+	case B intensity.
+
+H cross section is 2.09E-18 cm^2, rec coef is 4.18E-14
+answer is neutral fraction 2.00E-4
+also checks that only 3 iterations needed

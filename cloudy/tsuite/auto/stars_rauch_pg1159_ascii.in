@@ -1,0 +1,102 @@
+title Rauch cool [WR] PN
+#
+# commands controlling continuum =========
+table star "rauch_pg1159.ascii" T=40000K g=7
+luminosity 4.5 solar
+constant temperature 15000 ## because we only want to test shape
+#
+# commands controlling geometry  =========
+sphere
+radius 18
+stop zone 1
+set dr 0
+#
+# commands for density & abundances =========
+abundances planetary 
+hden 3.0
+#
+# other commands for details     =========
+no level2
+set nfnu add 9.5 angstrom
+no blends
+#
+# commands controlling output    =========
+save performance "stars_rauch_pg1159_ascii.per"
+save overview last "stars_rauch_pg1159_ascii.ovr"
+save results last "stars_rauch_pg1159_ascii.rlt"
+save continuum last "stars_rauch_pg1159_ascii.con" units angstrom
+save monitors last "stars_rauch_pg1159_ascii.asr"
+#
+# commands giving the monitors    =========
+monitor line luminosity "nInu" 3.400c    21.9426
+monitor line luminosity "nInu" 122.4m    29.2770
+monitor line luminosity "nInu" 60.8322m  30.1846
+monitor line luminosity "nInu" 41.2152m  30.6926
+monitor line luminosity "nInu" 30.8695m  31.0704
+monitor line luminosity "nInu" 24.7829m  31.3570
+monitor line luminosity "nInu" 24.2998m  31.3831
+monitor line luminosity "nInu" 22.8302m  31.4613
+monitor line luminosity "nInu" 21.4199m  31.5438
+monitor line luminosity "nInu" 21.1235m  31.5655
+monitor line luminosity "nInu" 19.6199m  31.6610
+monitor line luminosity "nInu" 17.6534m  31.7956
+monitor line luminosity "nInu" 17.37m    31.8173
+monitor line luminosity "nInu" 15.6901m  31.9520
+monitor line luminosity "nInu" 14.6036m  32.0431
+monitor line luminosity "nInu" 12.43m    32.2559
+monitor line luminosity "nInu" 11.40m    32.3688
+monitor line luminosity "nInu" 10.46m    32.4817
+monitor line luminosity "nInu" 9.48002m  32.6077
+monitor line luminosity "nInu" 9.32488m  32.6294
+monitor line luminosity "nInu" 8.21035m  32.7944
+monitor line luminosity "nInu" 7.580m    32.8986
+monitor line luminosity "nInu" 7.05026m  32.9941
+monitor line luminosity "nInu" 4.11370m  33.6976
+monitor line luminosity "nInu" 2.32440m  34.4402
+monitor line luminosity "nInu" 1.64313m  34.8918
+monitor line luminosity "nInu" 1.48022m  35.0264
+monitor line luminosity "nInu" 1.43649m  35.0655
+monitor line luminosity "nInu" 1.11867m  35.3912
+monitor line luminosity "nInu" 8329.68A  35.7777
+monitor line luminosity "nInu" 8078.61A  35.8168
+monitor line luminosity "nInu" 6209.66A  36.1598
+monitor line luminosity "nInu" 4885.36A  36.4725
+monitor line luminosity "nInu" 3704.34A  36.8329
+monitor line luminosity "nInu" 3587.67A  36.8720
+monitor line luminosity "nInu" 2430.05A  37.3800
+monitor line luminosity "nInu" 2392.03A  37.4017
+monitor line luminosity "nInu" 2071.34A  37.5884
+monitor line luminosity "nInu" 2052.68A  37.6014
+monitor line luminosity "nInu" 1793.44A  37.7531
+monitor line luminosity "nInu" 1585.12A  37.7622
+monitor line luminosity "nInu" 1458.33A  37.9494
+monitor line luminosity "nInu" 1356.96A  38.0212
+monitor line luminosity "nInu" 1297.29A  38.0786
+monitor line luminosity "nInu" 1262.79A  38.0572
+monitor line luminosity "nInu" 1218.08A  37.7406
+monitor line luminosity "nInu" 1196.33A  37.8910
+monitor line luminosity "nInu" 1175.06A  37.1854
+monitor line luminosity "nInu" 1143.64A  38.0939
+monitor line luminosity "nInu" 1113.22A  38.1189
+monitor line luminosity "nInu" 1103.23A  38.1194
+monitor line luminosity "nInu" 1073.86A  38.2012
+monitor line luminosity "nInu" 1064.34A  38.2182
+monitor line luminosity "nInu" 1035.92A  38.2180
+monitor line luminosity "nInu" 1000A     37.9776
+monitor line luminosity "nInu" 925.144A  38.0660
+monitor line luminosity "nInu" 897.8A    38.0594
+monitor line luminosity "nInu" 760.023A  37.8949
+monitor line luminosity "nInu" 701.514A  37.3810
+monitor line luminosity "nInu" 608.160A  37.7009
+monitor line luminosity "nInu" 575.146A  37.7791
+monitor line luminosity "nInu" 511.948A  36.0288
+monitor line luminosity "nInu" 496.874A  35.7891
+monitor line luminosity "nInu" 399.153A  34.9684
+monitor line luminosity "nInu" 9.500A     7.5877
+# stars_rauch_pg1159_ascii.in
+# class stars 
+# ========================================
+
+This is a model of a cool PNCS, and checks that the code
+can correctly rebin a model with zero fluxes embedded.
+It also exercises reading directly from an ascii file.

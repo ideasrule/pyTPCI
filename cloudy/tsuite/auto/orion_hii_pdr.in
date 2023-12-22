@@ -1,0 +1,1061 @@
+title constant pressure H+ region/pdr
+#
+# commands controlling continuum =========
+# the incident continuum is two parts
+# star and flux of photons striking it
+## >>chng 03 sep 12, now go deep into omc1 and cannot assume plane par geometry
+## >>chng 11 dec 21, increase column density to go well past CO dissociation front
+# this is the photosphere of the OVI star, its temperature and Q(H)
+# this is the result of this command
+# table star kurucz 39600 K
+# and makes it possible to run these orion sims without
+# installing the stellar atmosphere files 
+table SED "star_kurucz_39600.dat" 
+Q(H) 49
+# this adds the observed hot brems, its temperature and the flux of 
+# photons striking the cloud
+brems 6
+phi(h) 10
+## >>chng 03 apr 30, add cosmic rays to model
+# add cosmic rays, which are important in the pdr
+cosmic rays, background
+#
+# commands controlling geometry  =========
+# this sets the separation from the star and the face of the cloud
+radius 17.4507
+## >>chng 00 oct 13, from 50 to 10
+## >>chng 04 nov 09, introduce off option
+# this turns off the stop temperature opption
+# the sim will not stop due to temperature
+stop temperature off
+# this is typical of a gmc, larson 1981
+## >>chng 11 dec 21, 22 to 22.5 to get well past CO dissociation front
+stop total hydrogen column density 23
+## >>chng 02 dec 21, change to set thickness, with new hmole
+## co hits asymptote at 0.9 and so does not stop due to co
+## >>chng 03 sep 12, co network cleaned up, reset thickness to
+## 1 parsec, roughly the width of the cloud
+# this sets the thickness of the HII region & PDR
+##>>chng 05 nov 22, from 1 to 0.5 pc, so stop before ices fully form
+stop thickness 0.5 linear parsec 
+# constant total pressure, so like orion_hii_open
+constant pressure 
+# this will result in a milli gauss B-field in molecular region
+magnetic field -5 gauss
+# the orion environment full covers the star, so turn on sphere
+sphere 
+# we have a spherical geometry but want to simulate observing
+# through a spectrometer's slit.  use the aperture
+# command for this
+aperture beam 
+#
+# other commands for details     =========
+# mimic existence of unmodeled molecular gas
+double 
+# iterate since lines optically thick
+iterate
+# the observed microturbulence, partially a flow, so not included in pressure
+turbulence 8 km/sec no pressure
+# set the line width so lines appear on the save continuum
+set save line width 10 km/s
+# there should be no failures at all
+failures 3
+#
+# commands for density & abundances =========
+# this is the log of the initial H density, cm-3
+hden 4
+# this will speed up the calculation a bit
+init file="ism.ini"
+# this uses HII region abundances, but no grains
+abundances hii region no grains
+# this turns on orion grains, but leaves quantum heating off to save time
+grains orion no qheat
+# turn on PAHs, with an abundance that depends on H0 fraction,
+# as suggested by long-slit observations of Orion bar,
+# with an abundance 3x larger than default built into the code
+grains PAH function 3
+# 
+# commands controlling output    =========
+normalize to "O  1" 63.1679m
+# print lots of faint CO lines
+print line faint -4
+save monitors "orion_hii_pdr.asr" last
+save performance "orion_hii_pdr.per"
+save overview last "orion_hii_pdr.ovr"
+save heating "orion_hii_pdr.het"
+save cooling "orion_hii_pdr.col"
+save dr last "orion_hii_pdr.dr"
+save results last "orion_hii_pdr.rlt"
+save lines, array "orion_hii_pdr.lina" last, units microns
+save continuum last "orion_hii_pdr.con" units microns
+save hydrogen 21 cm last "orion_hii_pdr.21cm"
+save hydrogen lya last "orion_hii_pdr.lya" 
+save element silicon last "orion_hii_pdr.sil" 
+##
+## these are for the grains
+save grain extinction last  "orion_hii_pdr.grnext"
+save grain charge last "orion_hii_pdr.grnchr" 
+save grain potential last "orion_hii_pdr.grnpot" 
+save grain temperature last "orion_hii_pdr.grntem" 
+#
+# commands giving the monitors    =========
+## >>chng 21 may 21, increase default error - this is more realistic
+monitor set error 0.1
+#
+#
+## >>chng 03 sep 12, from plan par to spherical geometry,
+## all lines changed, so removed history
+##
+## >>chng 04 apr 02, from 0.5978 to 0.6171, probably chng in grn abund
+## >>chng 04 may 10, from 0.617 to 0.648, ? ?
+## >>chng 06 aug 25, from 0.648 to 0.708, add mag field and stop col 22, 
+## >>chng 08 mar 17, from 0.708 to 0.732, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 jul 08, from 0.732 to 0.697 line radiation pressure
+## >>chng 08 jul 23, fromo 0.697 to 0.729 chng Pesc line radiation pressure
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "h  1" 4861.32A 0.729
+##
+## >>chng 04 jan 23, from -1.272 to -1.229, rescale orion dust to gas
+## >>chng 04 apr 23, from -1.229 to -1.247, slow drift
+## >>chng 04 jul 30, from -1.247 to -1.357, NA implement N chem
+## >>chng 04 aug 01, from -1.357 to -1.251, improv C converg
+## >>chng 04 sep 30, from -1.251 to -1.175, add pahs 
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from -1.175 to-1.153
+## >>chng 06 aug 25, from -1.153 to -1.196 add mag field and stop col 22, 
+## >>chng 11 dec 12, from -1.196 to -1.237, bug-fix for updating grain opacity (r5759)
+## >>chng 13 dec 23, from -1.237 to -1.18, C to external databases
+## >>chng 14 aug 28, from -1.18 to -1.2, EleyRideal H2 formation
+monitor line luminosity "c  2" 157.636m -1.2 
+##
+## >>chng 06 aug 25, from -0.953 to -1.778, add mag field and stop col 22, 
+## >>chng 06 oct 25, from -1.778 to -1.733, TE update H2 heating for sphere geo
+## >>chng 06 nov 29, from -1.733 to -1.625, Badnell DR turned on
+## >>chng 06 dec 25, from -1.625 to -2.905, mole CT reset bug
+## >>chng 08 feb 20, from -2.905 to -2.941, grain charge transfer changes in ion_solver and iso*
+## >>chng 09 jul 14, from -2.941 to -3.083 update NI atomic data
+## >>chng 09 oct 05, from -3.083 to -1.738, [NI] pumping changes
+## >>chng 11 dec 12, from -1.738 to -1.789, bug-fix for updating grain opacity (r5759)
+## >>chng 13 jan 10, from -1.789 to -1.757, fix in-zone continuum shielding
+## >>chng 14 jan 05, from -1.757 to -2.431, N to external databases
+## >>chng 14 jun 11, from -2.431 to -2.837, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+## >>chng 17 feb 10, from -2.837 to -1.768, default size of N 1 model atom set to 50
+monitor line luminosity "blnd"  5199A  -1.768
+##
+## >>chng 04 jan 23, from -0.0695 to -0.0398, rescale orion dust to gas
+## >>chng 04 mar 04, from -0.0398 to -0.0674, improv conv
+## >>chng 04 mar 24, from -0.0674 to 0.0221, add PAHs
+## >>chng 04 apr 17, from 0.0221 to -0.0667, grn recom, better mole conv
+## >>chng 04 jun 28, from -0.0667 to -0.0408, bug in part count for cons pres
+## >>chng 04 jul 29, from -0.0408 to -0.017, chng H conv, incr err
+## >>chng 04 sep 30, from -0.017 to 0.131, add pahs 
+## >>chng 06 aug 25, from 0.131 to 0.253 add mag field and stop col 22, 
+## >>chng 11 dec 12, from 0.253 to 0.1942, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 0.1942 to 0.1443, H column density 1e22 -> 1e23
+## >>chng 14 mar 26, from 0.1443 to 0.2014, Move oxygen data to stout and chianti files
+monitor line luminosity "O  1" 63.1679m 0.2014 erro 0.1 
+##
+## >>chng 04 feb 09, from -1.715 to -1.692, update H2 net
+## >>chng 04 mar 04, from -1.692 to -1.688, improv conv
+## >>chng 04 apr 20, from -1.688 to -1.721, Nick Abel improve CO post Leiden
+## >>chng 04 jul 03, from -1.721 to -1.681, NA update H, CO chem net
+## >>chng 06 jul 06, from -1.681 to -1.269, update Ne cs
+## >>chng 06 aug 12, from -1.269 to -1.37, dr from tau IR continuum, inc err
+## >>chng 06 aug 17, undo above zoning from grains, chng is error
+## >>chng 06 aug 25, from -1.27 to -1.40, add mag field and stop col 22, 
+## >>chng 06 oct 02, from -1.40 to -1.30 HM update OI cs to Barklem '06
+## >>chng 06 dec 25, from -1.30 to -1.37, mole CT reset bug
+## >>chng 14 mar 26, from -1.37 to -1.444, Move oxygen data to stout and chianti files
+monitor line luminosity "O  1"  6300.30 -1.444 error 0.15 
+##
+## >>chng 06 jul 06, from -0.0201 to -0.0004, update Ne cs
+## >>chng 06 jul 25, from -0.0004 to 0.0686 HN update OIII, OII collision data
+## >>chng 06 aug 25, from 0.069 to 0.208, add mag field and stop col 22, 
+## >>chng 06 nov 29, from 0.208 to 0.175, Badnell DR turned on
+## >>chng 07 dec 14, from 0.175 to 0.153 RP update is seq
+## >>chng 08 mar 17, from 0.153 to 0.188, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 jul 08, from 0.188 to 0.129 line radiation pressure
+## >>chng 08 jul 23, fromo 0.129 to 0.192 chng Pesc line radiation pressure
+## >>chng 10 feb 14, from 0.192 to 0.1213, update O atomic data
+## >>chng 11 jul 12, from 0.1213 to 0.0798, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 0.0798 to 0.1185, BUGFIX, largely undo r6703
+## >>chng 19 jul 30, from 0.1185 to 0.1462, split He I 2 ^3P_J
+monitor line luminosity "blnd"  7325 0.1462
+##
+## >>chng 06 jul 06, from 0.752 to 0.783, update Ne cs
+## >>chng 06 jul 25, from 0.783 to 0.808 HN update OIII, OII collision data
+## >>chng 06 nov 29, from -0.808 to -0.763, Badnell DR turned on
+## >>chng 08 jul 08, from 0.763 to 0.746 line radiation pressure
+## >>chng 08 jul 23, from 0.746 to 0.768 chng Pesc line radiation pressure
+## >>chng 11 jul 12, from 0.768 to 0.7368, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 0.7368 to 0.7754, BUGFIX, largely undo r6703
+## >>chng 19 jul 30, from 0.7754 to 0.7978, split He I 2 ^3P_J
+monitor line luminosity "blnd"  3727 0.7978
+##
+## >>chng 06 nov 29, from -1.248 to -1.273, Badnell DR turned on
+## >>chng 08 jul 08, from 1.273 to 1.250 line radiation pressure
+## >>chng 08 jul 23, from 1.250 to 1.275 chng Pesc line radiation pressure
+## >>chng 11 jul 12, from 1.275 to 1.311, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 1.311 to 1.289, BUGFIX, largely undo r6703
+## >>chng 19 jul 30, from 1.289 to 1.31, split He I 2 ^3P_J
+monitor line luminositry "o  3"  5006.84 1.31
+##
+## >>chng 04 may 10, from -1.094 to -1.155 ? ?
+## >>chng 06 jul 25, from -1.155 to -1.123 HN update OIII, OII collision data
+## >>chng 06 aug 25, from -1.123 to -1.101, add mag field and stop col 22, 
+## >>chng 06 nov 29, from -1.101 to -1.081, Badnell DR turned on
+## >>chng 08 jul 08, from -1.081 to -1.116 line radiation pressure
+## >>chng 08 jul 23, from -1.116 to -1.083 chng Pesc line radiation pressure
+## >>chng 09 feb 23, from -1.083 to -1.063, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 nov 16, from -1.063 to -1.043, adjust newmole monitors
+## >>chng 15 may 27, from -1.043 to -1.065, PS64 fixes
+## >>chng 16 jul 24, from -1.065 to -1.046, update C III to 2014A&A...566A.104F
+## >>chng 19 mar 01, change "Blnd" 4363 -> "O  3" 4363.21
+## >>chng 19 jul 30, from -1.046 to -1.019, split He I 2 ^3P_J
+monitor line luminosity "O  3"  4363.21 -1.019
+##
+## >>chng 04 jun 09, from -0.0096 to 0.0073, NA update H chem net
+## >>chng 06 aug 25, from 0.007 to -0.046, add mag field and stop col 22, 
+## >>chng 06 nov 29, from -0.046 to -0.016, Badnell DR turned on
+monitor line luminosity "o  3" 51.8004m -0.016
+##
+##>>chng 06 jul 06, add this line
+## >>chng 06 aug 25, from 0.169 to 0.233, add mag field and stop col 22, 
+## >>chng 08 jul 08, from 0.233 to 0.210 line radiation pressure
+## >>chng 08 jul 23, from 0.210 to 0.248 chng Pesc line radiation pressure
+## >>chng 13 jul 26, wl from 12.81m to 12.8101m, increased wl precision to 6 sig. fig.
+## >>chng 16 jul 24, from 0.248 to 0.2672, update C III to 2014A&A...566A.104F
+monitor line luminosity "Ne 2" 12.8101m 0.2672
+##
+## >>chng 03 sep 27, from -0.863 to -0.891, better conv
+## >>chng 03 oct 30, from -0.891 to -0.868, slow drift up
+## >>chng 03 nov 16, from -0.868 to -0.829, H2 solomon th85 -> bd96
+## >>chng 04 jan 23, from -0.829 to -0.785, rescale orion dust to gas
+## >>chng 04 feb 09, from -0.785 to -0.760, update H2 net
+## >>chng 04 feb 21, from -0.760 to -0.828, update chem, H- ct, grn recom
+## >>chng 04 mar 24, from -0.828 to 0.744, add PAHs
+## >>chng 04 apr 17, from -0.744 to -0.835, grn recom, better mole conv
+## >>chng 04 jun 28, from -0.835 to -0.808, bug in part count for cons pres
+## >>chng 04 sep 30, from -0.808 to -0.644, add pahs 
+## >>chng 05 aug 03, from -0.644 to -0.602, NA update CO, H chem net
+## >>chng 08 feb 20, from -0.602 to -0.560, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 jul 08, from -0.560 to -0.583 line radiation pressure
+## >>chng 11 dec 12, from -0.583 to -0.631, bug-fix for updating grain opacity (r5759)
+monitor line luminosity "Si 2" 34.8046m -0.631 error 0.1
+##
+## >>chng 04 jan 23, from 3.858 to 3.790, rescale orion dust to gas
+## >>chng 04 mar 04, from -3.858 to -3.821 improv conv
+## >>chng 04 mar 24, from 3.821 to 3.758, add PAHs
+## >>chng 04 apr 17, from 3.758 to 3.818, grn recom, better mole conv
+## >>chng 04 may 13, from 3.818 to 3.789, dest albedo chng
+## >>chng 04 may 29, from 3.789 to 3.485, NA update H chem
+## >>chng 04 jun 28, from 3.485 to 3.630, bug in part count for cons pres
+## >>chng 06 aug 12, from 3.630 to 3.653, dr from tau IR continuum, inc err
+## >>chng 06 aug 25, from 3.653 to 3.143 add mag field and stop col 22, 
+## >>chng 08 jul 08, from 3.143 to 3.122 line radiation pressure
+## >>chng 08 jul 23, from 3.122 to 3.149 chng Pesc line radiation pressure
+## >>chng 11 dec 21, from 3.149 to 3.276, H column density 1e22 -> 1e23
+monitor line luminosity "GraT" 0 3.276
+##
+## >>chng 04 mar 24, from 24.759 to 24.596 add PAHs
+## >>chng 04 apr 17, from 24.596 to 24.771, grn recom, better mole conv
+## >>chng 04 may 29, from 24.771 to 24.976, NA update H chem
+## >>chng 04 jun 28, from 24.976 to 25.462, bug in part count for cons pres
+## >>chng 05 nov 22, from 25.46 to 24.99 stop half thick to avoid grn freeze out
+## >>chng 06 aug 25, from 24.99 to 21.13 add mag field and stop col 22, 
+## >>chng 11 nov 16, from 21.13 to 21.06, adjust newmole monitors
+## >>chng 11 dec 12, from 21.06 to 21.22, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 21.22 to 22.67, H column density 1e22 -> 1e23
+monitor H2 column density 22.67 error 0.1
+##
+## >>chng 03 sep 27, from 21.391 to 21.527, better conv
+## >>chng 04 mar 24, from 21.527 to 21.373 add PAHs
+## >>chng 04 apr 17, from 21.373 to 21.549, grn recom, better mole conv
+## >>chng 04 may 29, from 21.549 to 21.750, NA update H chem
+## >>chng 04 jun 28, from 21.750 to 22.234, bug in part count for cons pres
+## >>chng 05 jun 07, from 22.23 to 21.90, NA add CO grain condensation
+## >>chng 05 nov 22, from 21.90 to 21.62 stop half thick to avoid grn freeze out
+## >>chng 05 dec 17, from 21.62 to 21.70, NA increase C chemistry
+## >>chng 06 aug 25, from 21.70 to 16.30 add mag field and stop col 22, 
+## >>chng 06 nov 29, from 16.30 to 16.45 Badnell DR turned on
+## >>chng 07 jan 15, from 16.45 to 16.37, small model H2 bugfix
+## >>chng 07 dec 06, from 16.37 to 16.46, changes in h-like collisions
+## >>chng 08 feb 20, from 16.46 to 16.25, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 mar 17, from 16.25 to 16.17, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 jul 08, from 16.17 to 16.27 line radiation pressure
+## >>chng 08 jul 23, from 16.27 to 16.17 chng Pesc line radiation pressure
+## >>chng 09 oct 05, from 16.17 to 16.28, [NI] pumping changes
+## >>chng 10 feb 14, from 16.28 to 16.34, update O atomic data
+## >>chng 10 mar 14, from 16.34 to 16.26, update As to NIST recommended values
+## >>chng 10 jul 26, from 16.26 to 16.29, icc mac, inc error
+## >>chng 11 jul 12, from 16.29 to 16.1, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from 16.10 to 16.17, add helike quadrupole transitions
+## >>chng 11 nov 16, from 16.17 to 14.16, adjust newmole monitors
+## >>chng 11 dec 12, from 14.16 to 14.49, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 14.49 to 19.39, H column density 1e22 -> 1e23
+monitor CO column density 19.39 error 0.20
+##
+## >>chng 04 apr 20, add these four
+## >>chng 04 may 19, from 18.11 to 18.04, NA add several moles, reactions
+## >>chng 04 may 29, from 18.04 to 17.99, NA update H chem
+## >>chng 04 jun 28, from 17.99 to 18.14, bug in part count for cons pres
+## >>chng 04 jul 03, from 18.14 to 18.31, NA update H, CO chem net
+## >>chng 04 jul 17, from 18.31 to 18.51, NA update chem net
+## >>chng 04 jul 30, from 18.51 to 18.65, NA implement N chem
+## >>chng 04 aug 01, from 18.65 to 18.77, improv C converg
+## >>chng 04 aug 09, from 18.77 to 18.81, small chng grn eden conv, inc err
+## >>chng 04 aug 15, from 18.81 to 18.52, NA adjust ion conv, inc err
+## >>chng 04 sep 08, from 18.52 to 18.42, rewrite auger/grain rec ion solver
+## >>chng 04 oct 19, from 18.42 to 18.50, small change in d Mole/ d Zone
+## >>chng 05 mar 25, from 18.50 to 18.59 renorm H pops in level solver
+## >>chng 05 jun 07, from 18.59 to 19.39, NA add CO grain condensation
+## >>chng 05 aug 03, from 19.39 to 18.91, NA update CO, H chem net
+## >>chng 05 nov 22, from 18.91 to 17.64 stop half thick to avoid grn freeze out
+## >>chng 06 mar 02, from 17.64 to 17.74, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 aug 12, from 17.74 to 17.83 dr from tau IR continuum, inc err
+## >>chng 06 aug 25, from 17.83 to 11.24 add mag field and stop col 22, 
+## >>chng 11 dec 21, from 11.24 to 16.01, H column density 1e22 -> 1e23
+## >>chng 12 apr 09, from 16.01 to 16.31, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 20 aug 03, from 16.31 to 16.46, update H3+ rates Indriola+ 2012
+monitor H2O column density 16.46 error 0.20
+## 
+## >>chng 04 may 19, from 20.27 to 19.29, NA add several moles, reactions
+## >>chng 04 may 29, from 19.29 to 18.85, NA update H chem
+## >>chng 04 jun 28, from 18.85 to 19.00, bug in part count for cons pres
+## >>chng 04 jul 03, from 19.00 to 19.27, NA update H, CO chem net
+## >>chng 04 jul 17, from 19.27 to 19.22, NA update chem net
+## >>chng 04 jul 30, from 19.22 to 19.08, NA implement N chem
+## >>chng 04 aug 01, from 19.08 to 19.16, improv C converg
+## >>chng 04 aug 15, from 19.16 to 19.20, NA adjust ion conv, inc err
+## >>chng 05 jun 07, from 19.20 to 19.87, NA add CO grain condensation
+## >>chng 05 jul 04, from 19.87 to 18.81 turn cl on
+## >>chng 05 aug 03, from 19.39 to 19.34, NA update CO, H chem net, inc err
+## >>chng 05 nov 22, from 19.34 to 18.12 stop half thick to avoid grn freeze out
+## >>chng 06 aug 25, from 18.12 to 10.71 add mag field and stop col 22, 
+## >>chng 07 jan 07, from 10.71 to 10.77, enable McCall et al. H3+ rate
+## >>chng 11 jul 12, from 10.77 to 10.67, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from 10.67 to 10.43, adjust newmole monitors
+## >>chng 11 dec 21, from 10.43 to 16.21, H column density 1e22 -> 1e23
+## >>chng 12 apr 09, from 16.21 to 16.41, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 20 aug 03, from 16.41 to 16.7, update H3+ rates Indriola+ 2012
+monitor O2 column density 16.7 error 0.2
+## 
+## >>chng 04 may 19, from 18.41 to 17.95, NA add several moles, reactions
+## >>chng 04 jun 09, from 17.95 to 17.87 NA update H chem net
+## >>chng 04 jun 28, from 17.87 to 18.21, bug in part count for cons pres
+## >>chng 04 jul 03, from 18.21 to 18.33, NA update H, CO chem net
+## >>chng 04 jul 17, from 18.33 to 18.62, NA update chem net
+## >>chng 04 jul 30, from 18.62 to 19.27, NA implement N chem
+## >>chng 04 aug 01, from 19.27 to 19.03, improv C converg
+## >>chng 04 aug 04, from 19.03 to 18.98, finer zones, smaller d CO net, inc err
+## >>chng 04 aug 09, from 18.98 to 19.09, small chng grn eden conv, inc err
+## >>chng 04 aug 15, from 19.09 to 18.68, NA adjust ion conv, inc err
+## >>chng 05 mar 25, from 18.68 to 18.84 renorm H pops in level solver
+## >>chng 05 jun 07, from 18.84 to 19.24, NA add CO grain condensation
+## >>chng 05 nov 22, from 19.24 to 18.16 stop half thick to avoid grn freeze out
+## >>chng 06 apr 15, from 18.16 to 18.27 NA added N2H+ to the chemistry
+## >>chng 06 aug 25, from 18.27 to 10.10 add mag field and stop col 22, 
+## >>chng 06 nov 29, from 10.10 to 10.25 Badnell DR turned on
+## >>chng 08 feb 20, from 10.25 to 10.11, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 jul 23, from 10.11 to 9.99 chng Pesc line radiation pressure
+## >>chng 09 feb 23, from 9.99 to 10.09, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 10 feb 14, from 10.09 to 10.18, update O atomic data
+## >>chng 11 jul 12, from 10.18 to 9.957, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from 9.957 to 9.56, adjust newmole monitors
+## >>chng 11 dec 12, from 9.56 to 9.796, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 9.796 to 15.87, H column density 1e22 -> 1e23
+## >>chng 12 apr 09, from 15.87 to 16.32, update CR backbround to Indriolo+07, ~8x larger
+monitor SiO column density 16.32 error 0.25
+## 
+## >>chng 04 may 19, from 15.60 to 15.43, NA add several moles, reactions
+## >>chng 04 may 29, from 15.43 to 15.28, NA update H chem
+## >>chng 04 jun 28, from 15.28 to 15.37, bug in part count for cons pres
+## >>chng 04 jul 03, from 15.37 to 15.61, NA update H, CO chem net
+## >>chng 04 jul 17, from 15.61 to 15.66, NA update chem net
+## >>chng 04 jul 30, from 15.66 to 15.49, NA implement N chem
+## >>chng 04 aug 01, from 15.49 to 15.62, improv C converg
+## >>chng 04 oct 19, from 15.62 to 15.68, larger step size in dMole/dZone
+## >>chng 05 jun 07, from 15.68 to 16.20, NA add CO grain condensation
+## >>chng 05 nov 22, from 16.20 to 14.94 stop half thick to avoid grn freeze out
+## >>chng 06 aug 12, from 14.94 to 15.01 dr from tau IR continuum, inc err
+## >>chng 06 aug 17, undo above zoning from grains, chng is error
+## >>chng 06 aug 25, from 14.94 to 12.71 add mag field and stop col 22, 
+## >>chng 08 mar 17, from 12.71 to 12.78, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 jul 08, from 12.78 to 12.70 line radiation pressure
+## >>chng 08 jul 23, from 12.70 to 12.77 chng Pesc line radiation pressure
+## >>chng 11 dec 12, from 12.77 to 12.55, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 12.55 to 13.03, H column density 1e22 -> 1e23
+## >>chng 12 apr 09, from 13.03 to 13.56, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 aug 28, from 13.56 to 13.62, EleyRideal H2 formation
+## >>chng 20 aug 03, from 13.62 to 13.75, update H3+ rates Indriola+ 2012
+monitor OH column density 13.75 error 0.15
+##
+## >>chng 03 oct 30, from -3.206 to -3.224, slow drift up
+## >>chng 04 mar 04, from -3.224 to -3.302 improv conv, incr error
+## >>chng 04 mar 24, from -3.302 to -3.128 add PAHs
+## >>chng 04 apr 02, from -3.138 to -3.094, update co photo dissoc rate
+## >>chng 04 apr 17, from -3.094 to -3.272, grn recom, better mole conv
+## >>chng 04 jun 09, from -3.272 to -3.242 NA update H chem net
+## >>chng 04 jun 28, from -3.24 to -3.13, bug in part count for cons pres
+## >>chng 04 jul 03, from -3.13 to -3.20, NA update H, CO chem net
+## >>chng 05 feb 18, from -3.20 to -3.17, incld outwrd cont in line pump
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from -3.17 to -3.08
+## >>chng 06 aug 25, from -3.08 to -4.01 add mag field and stop col 22, 
+## >>chng 04 sep 11, from -4.01 to -4.07, turn on CO net when H+/H<0.5, inc err
+## >>chng 06 nov 24, from -4.07 to -4.03, split diff betweeen icl, vs05, inc er
+## >>chng 06 nov 29, from -4.04 to -3.89 Badnell DR turned on
+## >>chng 08 feb 20, from -3.89 to -4.06, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 mar 20, from -4.06 to -4.15 value drifted but did not throw assert
+## >>chng 08 jul 08, from -4.15 to -4.02 line radiation pressure
+## >>chng 08 jul 23, from -4.02 to -4.15 chng Pesc line radiation pressure
+## >>chng 09 oct 05, from -4.15 to -4.052, [NI] pumping changes
+## >>chng 10 mar 02, from -4.052 to -3.97, fix botches after CO model switch
+## >>chng 11 jul 12, from -3.97 to -4.185, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -4.185 to -4.103, add helike quadrupole transitions
+## >>chng 11 nov 16, from -4.103 to -6.125, adjust newmole monitors
+## >>chng 11 dec 12, from -6.125 to -5.741, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from -5.741 to -2.921, H column density 1e22 -> 1e23
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+monitor line luminosity "CO  " 650.074m  -2.921 error 0.20
+##
+## >>chng 04 jan 23, from -2.935 to -2.960 rescale orion dust to gas
+## >>chng 04 mar 04, from -2.960 to -3.029 improv conv, incr error
+## >>chng 04 mar 24, from -3.029 to -2.838 add PAHs
+## >>chng 04 apr 02, from -2.838 to -2.806, update co photo dissoc rate
+## >>chng 04 apr 17, from -2.804 to -3.004, grn recom, better mole conv
+## >>chng 04 jun 28, from -3.00 to -2.86, bug in part count for cons pres
+## >>chng 04 jul 03, from -2.86 to -2.93, NA update H, CO chem net
+## >>chng 05 aug 03, from -2.93 to -2.90, NA update CO, H chem net, inc err
+## >>chng 06 mar 02, from -2.90 to -2.87, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from -2.87 to -2.80
+## >>chng 06 aug 25, from -2.80 to -3.72 add mag field and stop col 22, 
+## >>chng 04 sep 11, from -3.72 to -3.77, turn on CO net when H+/H<0.5, inc err
+## >>chng 06 nov 24, from -3.77 to -3.73, split diff betweeen icl, vs05, inc er
+## >>chng 06 nov 29, from -3.73 to -3.60 Badnell DR turned on
+## >>chng 08 feb 20, from -3.60 to -3.76, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 apr 03, from -3.76 to -3.90 include 10830 in fine opacity array
+## >>chng 08 jul 08, from -3.90 to -3.73 line radiation pressure
+## >>chng 08 jul 23, from -3.72 to -3.84 chng Pesc line radiation pressure
+## >>chng 09 oct 05, from -3.84 to -3.747, [NI] pumping changes
+## >>chng 10 mar 02, from -3.747 to -3.622, fix botches after CO model switch
+## >>chng 11 jul 12, from -3.622 to -3.83, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -3.83 to -3.754, add helike quadrupole transitions
+## >>chng 11 nov 16, from -3.754 to -5.764, adjust newmole monitors
+## >>chng 11 dec 12, from -5.764 to -5.429, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from -5.429 to -2.715, H column density 1e22 -> 1e23
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+monitor line luminosity "CO  " 520.089m  -2.715 error 0.20
+##
+## >>chng 04 mar 04, from -2.723 to -2.810 improv conv, incr error
+## >>chng 04 mar 24, from -2.810 to -2.607 add PAHs
+## >>chng 04 apr 02, from -2.607 to -2.585, update co photo dissoc rate
+## >>chng 04 apr 17, from -2.585 to -2.799, grn recom, better mole conv
+## >>chng 04 jun 28, from -2.80 to -2.66, bug in part count for cons pres
+## >>chng 04 jul 03, from -2.66 to -2.72, NA update H, CO chem net
+## >>chng 06 mar 02, from -2.72 to -2.66, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from -2.66 to -2.59
+## >>chng 06 aug 25, from -2.59 to -3.52 add mag field and stop col 22, 
+## >>chng 04 sep 11, from -3.52 to -3.57, turn on CO net when H+/H<0.5, inc err
+## >>chng 06 nov 24, from -3.57 to -3.54, split diff betweeen icl, vs05, inc er
+## >>chng 06 nov 29, from -3.54 to -3.43 Badnell DR turned on
+## >>chng 08 feb 20, from -3.43 to -3.56, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 apr 03, from -3.56 to -3.69 include 10830 in fine opacity array
+## >>chng 08 jul 08, from -3.69 to -3.55 line radiation pressure
+## >>chng 08 jul 23, from -3.55 to -3.63 chng Pesc line radiation pressure
+## >>chng 09 oct 05, from -3.63 to -3.544, [NI] pumping changes
+## >>chng 10 mar 02, from -3.544 to -3.385, fix botches after CO model switch
+## >>chng 11 jul 12, from -3.385 to -3.587, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.587 to -5.514, adjust newmole monitors
+## >>chng 11 dec 12, from -5.514 to -5.236, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from -5.236 to -2.587, H column density 1e22 -> 1e23
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+monitor line luminosity "CO  " 433.438m  -2.587 error 0.20
+##
+## >>chng 03 oct 03, from -2.565 to -2.529, integ co ion solvers
+## >>chng 04 jan 23, from -2.529 to -2.558 rescale orion dust to gas
+## >>chng 04 mar 04, from -2.558 to -2.623 improv conv, incr error
+## >>chng 04 mar 24, from -2.623 to -2.415 add PAHs
+## >>chng 04 apr 17, from -2.415 to -2.626, grn recom, better mole conv
+## >>chng 04 may 13, from -2.626 to -2.605, dest albedo chng, incr err
+## >>chng 04 may 29, from -2.605 to -2.646, NA update H chem
+## >>chng 04 jun 28, from -2.65 to -2.51, bug in part count for cons pres
+## >>chng 04 jul 03, from -2.51 to -2.56, NA update H, CO chem net
+## >>chng 05 feb 18, from -2.56 to -2.53, incld outwrd cont in line pump
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from -2.53 to -2.44
+## >>chng 06 aug 25, from -2.44 to -3.42 add mag field and stop col 22, 
+## >>chng 04 sep 11, from -3.42 to -3.46, turn on CO net when H+/H<0.5, inc err
+## >>chng 06 nov 24, from -3.46 to -3.44, split diff betweeen icl, vs05, inc er
+## >>chng 06 nov 29, from -3.44 to -3.33 Badnell DR turned on
+## >>chng 08 feb 20, from -3.33 to -3.44, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 apr 03, from -3.44 to -3.55 include 10830 in fine opacity array
+## >>chng 08 jul 08, from -3.55 to -3.44 line radiation pressure
+## >>chng 08 jul 23, from -3.44 to -3.50 chng Pesc line radiation pressure
+## >>chng 09 oct 06, from -3.5 to -3.422, [NI] pumping changes
+## >>chng 10 mar 02, from -3.422 to -3.232, fix botches after CO model switch
+## >>chng 11 jul 12, from -3.232 to -3.428, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.428 to -5.348, adjust newmole monitors
+## >>chng 11 dec 12, from -5.348 to -5.134, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from -5.134 to -2.526, H column density 1e22 -> 1e23
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+monitor line luminosity "CO  " 371.549m  -2.526 error 0.20
+##
+## >>chng 03 oct 03, from -2.429 to -2.377, integ co ion solvers
+## >>chng 04 jan 23, from -2.377 to -2.409 rescale orion dust to gas
+## >>chng 04 mar 04, from -2.409 to -2.473 improv conv, incr error
+## >>chng 04 mar 24, from -2.473 to -2.249 add PAHs
+## >>chng 04 apr 17, from -2.249 to -2.490, grn recom, better mole conv
+## >>chng 04 may 29, from -2.490 to -2.52, NA update H chem
+## >>chng 04 jun 28, from -2.52 to -2.40, bug in part count for cons pres
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from -2.40 to -2.33
+## >>chng 06 aug 25, from -2.33 to -3.38 add mag field and stop col 22, 
+## >>chng 06 nov 24, from -3.38 to -3.40, split diff betweeen icl, vs05, inc er
+## >>chng 06 nov 29, from -3.40 to -3.31 Badnell DR turned on
+## >>chng 07 dec 06, from -3.31 to -3.25, changes in h-like collisions
+## >>chng 08 feb 20, from -3.25 to -3.38, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 mar 20, from -3.38 to -3.44 value drifted but did not throw assert
+## >>chng 08 jul 23, from -3.44 to -3.44 chng Pesc line radiation pressure
+## >>chng 09 oct 05, from -3.44 to -3.368, [NI] pumping changes
+## >>chng 10 mar 02, from -3.368 to -3.148, fix botches after CO model switch
+## >>chng 11 jul 12, from -3.148 to -3.337, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -3.337 to -3.281, add helike quadrupole transitions
+## >>chng 11 nov 16, from -3.281 to -5.248, adjust newmole monitors
+## >>chng 11 dec 12, from -5.248 to -5.103, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from -5.103 to -2.546, H column density 1e22 -> 1e23
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -2.546 to -2.623, update H3+ rates Indriola+ 2012
+monitor line luminosity "CO  " 325.137m  -2.623 error 0.15
+##
+## >>chng 03 oct 03, from -2.316 to -2.263, integ co ion solvers
+## >>chng 04 jan 23, from -2.263 to -2.295 rescale orion dust to gas
+## >>chng 04 feb 21, from -2.295 to -2.270, update chem, H- ct, grn recom
+## >>chng 04 mar 04, from -2.270 to -2.365 improv conv, incr error
+## >>chng 04 mar 24, from -2.365 to -2.110 add PAHs
+## >>chng 04 apr 17, from -2.110 to -2.380, grn recom, better mole conv
+## >>chng 04 may 13, from -2.380 to -2.330, dest albedo chng, incr err
+## >>chng 04 may 29, from -2.33 to -2.41, NA update H chem
+## >>chng 04 jun 28, from -2.41 to -2.29, bug in part count for cons pres
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from -2.29 to -2.24
+## >>chng 06 aug 25, from -2.24 to -3.40 add mag field and stop col 22, 
+## >>chng 06 nov 24, from -3.40 to -3.42, split diff betweeen icl, vs05, inc er
+## >>chng 06 nov 29, from -3.42 to -3.35 Badnell DR turned on
+## >>chng 07 dec 06, from -3.35 to -3.28, changes in h-like collisions
+## >>chng 08 feb 20, from -3.28 to -3.39, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 apr 03, from -3.39 to -3.48 include 10830 in fine opacity array
+## >>chng 09 feb 23, from -3.48 to -3.422, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 10 feb 14, from -3.422 to -3.338, update O atomic data
+## >>chng 10 mar 02, from -3.338 to -3.124, fix botches after CO model switch
+## >>chng 10 aug 12, from -3.124 to -3.188, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 jul 12, from -3.188 to -3.306, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.306 to -5.201, adjust newmole monitors
+## >>chng 11 dec 12, from -5.201 to -5.127, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from -5.127 to -2.757, H column density 1e22 -> 1e23
+## >>chng 12 oct 22, from -2.757 to -2.834, zone tau in rt_line_one
+## >>chng 13 jul 24, wl from 289.0m to 289.041m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -2.834 to -2.902, update H3+ rates Indriola+ 2012
+monitor line luminosity "CO  " 289.041m  -2.902 error 0.15
+##
+## >>chng 03 oct 03, from -2.246 to -2.196, integ co ion solvers
+## >>chng 04 jan 23, from -2.196 to -2.224 rescale orion dust to gas
+## >>chng 04 feb 21, from -2.224 to -2.197, update chem, H- ct, grn recom
+## >>chng 04 mar 04, from -2.197 to -2.315 improv conv, incr error
+## >>chng 04 mar 24, from -2.315 to -2.002 add PAHs
+## >>chng 04 apr 17, from -2.002 to -2.323, grn recom, better mole conv
+## >>chng 04 may 13, from -2.323 to -2.251, dest albedo chng, incr err
+## >>chng 04 may 29, from -2.25 to -2.35, NA update H chem
+## >>chng 04 jun 28, from -2.35 to -2.21, bug in part count for cons pres
+## >>chng 06 aug 25, from -2.21 to -3.48 add mag field and stop col 22, 
+## >>chng 07 jan 15, from -3.48 to -3.41, small model H2 bugfix
+## >>chng 08 mar 17, from -3.41 to -3.50, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 jul 23, from -3.50 to -3.50 chng Pesc line radiation pressure
+## >>chng 09 oct 05, from -3.5 to -3.436, [NI] pumping changes
+## >>chng 10 mar 02, from -3.436 to -3.153, fix botches after CO model switch
+## >>chng 10 jun 17, from -3.153 to -3.22, fix botches due to recent dBase cooling changes
+## >>chng 11 jul 12, from -3.22 to -3.328, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.328 to -5.196, adjust newmole monitors
+## >>chng 11 dec 21, from -5.196 to -3.278, H column density 1e22 -> 1e23
+## >>chng 12 apr 09, from -3.278 to -3.352, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 jul 24, wl from 260.2m to 260.169m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -3.352 to -3.497, update H3+ rates Indriola+ 2012
+## >>chng 23 sep 08, from -3.497 to -3.439, fix SQRTPI in Lya destprob
+monitor line luminosity "CO  " 260.169m  -3.439 error 0.15
+##
+## >>chng 03 oct 03, from -2.245 to -2.201, integ co ion solvers
+## >>chng 04 mar 04, from -2.201 to -2.349 improv conv, incr error
+## >>chng 04 mar 24, from -2.349 to -1.930 add PAHs
+## >>chng 04 apr 17, from -1.930 to -2.353, grn recom, better mole conv
+## >>chng 04 may 13, from -2.353 to -2.239, dest albedo chng, incr err
+## >>chng 04 may 29, from -2.24 to -2.38, NA update H chem
+## >>chng 04 jun 28, from -2.38 to -2.19, bug in part count for cons pres
+## >>chng 06 aug 25, from -2.19 to -3.61 add mag field and stop col 22, 
+## >>chng 07 jan 15, from -3.61 to -3.53, small model H2 bugfix
+## >>chng 08 mar 17, from -3.53 to -3.60, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 jul 08, from -3.60 to -3.76 line radiation pressure
+## >>chng 08 jul 23, from -3.76 to -3.60 line radiation pressure bug
+## >>chng 10 feb 14, from -3.6 to -3.528, update O atomic data
+## >>chng 10 mar 02, from -3.528 to -3.231, fix botches after CO model switch
+## >>chng 10 jun 17, from -3.231 to -3.307, fix botches due to recent dBase cooling changes
+## >>chng 11 jul 12, from -3.307 to -3.397, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.397 to -5.222, adjust newmole monitors
+## >>chng 11 dec 16, from -5.222 to -5.29, adjust botches due to recent iso recomb changes
+## >>chng 11 dec 21, from -5.29 to -3.984, H column density 1e22 -> 1e23
+## >>chng 12 apr 09, from -3.984 to -4.07, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 jul 24, wl from 236.5m to 236.549m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -4.07 to -4.231, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -4.231 to -4.152, LAMDA update
+## >>chng 21 nov 04, from -4.152 to -4.234, update mole co data
+## >>chng 23 sep 08, from -4.234 to -4.154, fix SQRTPI in Lya destprob
+monitor line luminosity "CO  " 236.549m  -4.154 error 0.15
+##
+## >>chng 03 oct 03, from -2.310 to -2.285, integ co ion solvers
+## >>chng 04 mar 04, from -2.285 to -2.508 improv conv, incr error
+## >>chng 04 mar 24, from -2.508 to -1.904 add PAHs
+## >>chng 04 apr 17, from -1.904 to -2.518, grn recom, better mole conv
+## >>chng 04 may 13, from -2.518 to -2.312, dest albedo chng, incr err
+## >>chng 04 may 29, from -2.31 to -2.68, NA update H chem
+## >>chng 04 jun 28, from -2.68 to -2.27, bug in part count for cons pres
+## >>chng 05 feb 18, from -2.27 to -2.20, incld outwrd cont in line pump
+## >>chng 06 aug 25, from -2.20 to -3.79 add mag field and stop col 22, 
+## >>chng 07 jan 15, from -3.79 to -3.71, small model H2 bugfix
+## >>chng 08 apr 03, from -3.71 to -3.78 include 10830 in fine opacity array
+## >>chng 08 jul 08, from -3.78 to -3.85 line radiation pressure
+## >>chng 08 jul 23, from -3.85 to -3.76 line radiation pressure bug
+## >>chng 10 feb 14, from -3.76 to -3.699, update O atomic data
+## >>chng 10 mar 02, from -3.699 to -3.354, fix botches after CO model switch
+## >>chng 10 jun 17, from -3.354 to -3.437, fix botches due to recent dBase cooling changes
+## >>chng 11 jul 12, from -3.437 to -3.509, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -3.509 to -5.271, adjust newmole monitors
+## >>chng 11 dec 12, from -5.271 to -5.4, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from -5.4 to -4.67, H column density 1e22 -> 1e23
+## >>chng 12 apr 18, from -4.67 to -4.737, stout merge
+## >>chng 13 jul 24, wl from 216.9m to 216.868m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from -4.737 to -4.825, Move oxygen data to stout and chianti files
+## >>chng 21 sep 11, from -4.825 to -4.676, LAMDA update
+## >>chng 21 nov 04, from -4.676 to -4.861, update mole co data
+## >>chng 23 sep 08, from -4.861 to -4.746, fix SQRTPI in Lya destprob
+monitor line luminosity "CO  " 216.868m  -4.746 error 0.15
+## 
+## >>chng 05 sep 30, add these 5
+## >>chng 05 nov 22, from 11.19 to 10.99 stop half thick to avoid grn freeze out
+## >>chng 06 aug 25, from 10.99 to 10.77 add mag field and stop col 22, 
+## >>chng 08 feb 20, from 10.77 to 10.89, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 jun 25, from 10.89 to 10.77 (12.1) add source/sink to ioniz ladder
+## >>chng 08 dec 13, from 10.77 to 10.7, merging newsolvers branch
+## >>chng 09 oct 05, from 10.7 to 11.39, [NI] pumping changes
+## >>chng 11 dec 12, from 11.39 to 11.34, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 11.34 to 11.38 H column density 1e22 -> 1e23
+## >>chng 14 jan 05, from 11.38 to 10.64, N to external databases
+## >>chng 17 feb 10, from 10.64 to 11.29, default size of N 1 model atom set to 50
+monitor column density H2+  11.29 error 0.1
+## 
+## >>chng 05 nov 22, from 14.63 to 13.78 stop half thick to avoid grn freeze out
+## >>chng 06 jan 04, from 13.78 to 13.82, NA C chem restore missed block reacts
+## >>chng 06 apr 15, from 13.82 to 13.77 NA added N2H+ to the chemistry
+## >>chng 06 aug 25, from 13.77 to 9.04 add mag field and stop col 22, 
+## >>chng 07 jan 07, from 9.04 to 9.41, enable McCall et al. H3+ rate
+## >>chng 08 jun 25, from 9.41 to 9.36 (12.1) add source/sink to ioniz ladder
+## >>chng 08 jul 08, from 9.36 to 9.44 line radiation pressure
+## >>chng 08 jul 23, from 9.44 to 9.36 chng Pesc line radiation pressure
+## >>chng 09 feb 24, from 9.36 to 9.463, botches due to r2763
+## >>chng 09 oct 05, from 9.463 to 9.758, [NI] pumping changes
+## >>chng 11 nov 16, from 9.758 to 9.684, adjust newmole monitors
+## >>chng 11 dec 12, from 9.684 to 9.755, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 9.755 to 11.46, H column density 1e22 -> 1e23
+## >>chng 12 apr 09, from 11.46 to 12.33, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 20 aug 03, from 12.33 to 12.2, update H3+ rates Indriola+ 2012
+monitor column density H3+  12.2 error 0.1
+## 
+## >>chng 05 nov 22, from 25.47 to 24.99 stop half thick to avoid grn freeze out
+## >>chng 06 aug 25, from 24.99 to 21.13 add mag field and stop col 22, 
+## >>chng 11 nov 16, from 21.13 to 21.06, adjust newmole monitors
+## >>chng 11 dec 12, from 21.06 to 21.22, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 21.22 to 22.67, H column density 1e22 -> 1e23
+monitor column density H2g  22.67 error 0.1
+## 
+## >>chng 05 dec 08, from 17.25 to 16.63, update to Elwert Solomon rate
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 16.63 to 16.83
+## >>chng 06 aug 25, from 16.83 to 16.95 add mag field and stop col 22, 
+## >>chng 11 nov 16, from 16.95 to 16.28, adjust newmole monitors
+## >>chng 11 dec 16, from 16.28 to 16.24, adjust botches due to recent iso recomb changes
+## >>chng 11 dec 21, from 16.24 to 16.2, H column density 1e22 -> 1e23
+## >>chng 14 mar 26, from 16.2 to 16.25, Move oxygen data to stout and chianti files
+## >>chng 14 aug 28, from 16.25 to 16.36, EleyRideal H2 formation
+monitor column density H2*  16.36 error 0.1
+## 
+## >>chng 05 dec 08, add this temperature
+monitor temperature "H+" 8995
+## 
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 667 to 635
+## >>chng 06 aug 25, from 635 to 765 add mag field and stop col 22, 
+## >>chng 08 mar 19, from 765 to 790, open error, this value varies
+## over about 4% depending on compiler - asserted value is now near middle
+## of range
+## >>chng 08 dec 13, from 790 to 694.4, merging newsolvers branch
+## >>chng 09 feb 08, error 0.1 -> 0.05
+## >>chng 09 oct 05, from 694.4 to 1060, [NI] pumping changes
+## >>chng 11 dec 12, from 1060 to 997.5, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 997.5 to 1077, H column density 1e22 -> 1e23
+## >>chng 14 jan 05, from 1077 to 691.9, N to external databases
+## >>chng 14 mar 26, from 691.9 to 624.8, Move oxygen data to stout and chianti files
+## >>chng 14 jun 11, from 624.8 to 653.8, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+## >>chng 15 mar 07, from 653.8 to 685.1, merging newmesh branch
+## >>chng 17 feb 10, from 685.1 to 1031, default size of N 1 model atom set to 50
+monitor temperature "H" 1031
+## 
+## >>chng 06 aug 12, from 24.5 to 25.8 dr from tau IR continuum, inc err
+## >>chng 06 aug 17, undo above zoning from grains, chng is error
+## >>chng 06 aug 25, from 24.5 to 138 add mag field and stop col 22, 
+## >>chng 11 dec 12, from 138 to 113.9, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 113.9 to 30.24, H column density 1e22 -> 1e23
+monitor temperature "H2" 30.24 error 0.1
+## 
+## >>chng 06 aug 25, from 11.25 to 11.30 add mag field and stop col 22, 
+## >>chng 08 feb 20, from 11.30 to 11.50, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 jun 25, from 11.50 to 11.26 (12.1) add source/sink to ioniz ladder
+## >>chng 08 jul 08, from 11.26 to 11.21 line radiation pressure
+## >>chng 08 jul 23, from 11.21 to 11.26 chng Pesc line radiation pressure
+## >>chng 09 feb 24, from 11.26 to 11.21, botches due to r2763
+## >>chng 09 oct 05, from 11.21 to 11.28, [NI] pumping changes
+## >>chng 11 nov 16, from 11.28 to 11.2, adjust newmole monitors
+## >>chng 12 aug 06, from 11.2 to 11.12, bugfix - include Pelec_esc in several places
+## >>chng 14 jan 05, from 11.12 to 11.05, N to external databases
+monitor column density HeH+ 11.05 error 0.1
+## 
+## >>chng 21 apr 11 add all remaining molecules with N(x) > 1e10 cm-2
+## >>chng 21 apr 16, from 10.51 to 10.98, add molecular column densities
+## >>chng 21 sep 11, from 10.98 to 11.51, LAMDA update
+## >>chng 21 nov 04, from 11.51 to 10.98, update mole co data
+## >>chng 23 may 15, from 10.98 to 10.91, GS updates 21 reactions to UMIST 2012
+monitor column density "C2+"       10.91  
+## >>chng 21 apr 16, from 17.01 to 14.67, add molecular column densities
+## >>chng 21 sep 11, from 14.67 to 14.9, LAMDA update
+## >>chng 21 nov 04, from 14.9 to 14.68, update mole co data
+## >>chng 23 may 15, from 14.68 to 13.94, GS updates 21 reactions to UMIST 2012
+monitor column density "C2"        13.94  
+## >>chng 21 apr 16, from 10.68 to 10.37, add molecular column densities
+## >>chng 21 sep 11, from 10.37 to 10.82, LAMDA update
+## >>chng 21 nov 04, from 10.82 to 10.34, update mole co data
+## >>chng 23 may 15, from 10.34 to 10.27, GS updates 21 reactions to UMIST 2012
+monitor column density "C2H+"      10.27  
+## >>chng 21 apr 16, from 16.17 to 13.96, add molecular column densities
+## >>chng 21 sep 11, from 13.96 to 14.07, LAMDA update
+## >>chng 21 nov 04, from 14.07 to 13.9, update mole co data
+## >>chng 23 may 15, from 13.9 to 13.85, GS updates 21 reactions to UMIST 2012
+monitor column density "C2H"       13.85
+## >>chng 21 apr 16, from 12.9 to 13.25, add molecular column densities
+## >>chng 21 sep 11, from 13.25 to 10.75, LAMDA update
+## >>chng 21 nov 04, from 10.75 to 13.21, update mole co data
+monitor column density "C2H2"      13.21  
+## >>chng 21 apr 16, from 13.23 to 10.95, add molecular column densities
+## >>chng 21 sep 11, from 10.95 to 11.32, LAMDA update
+## >>chng 21 nov 04, from 11.32 to 10.93, update mole co data
+## >>chng 23 may 15, from 10.93 to 10.75, GS updates 21 reactions to UMIST 2012
+monitor column density "C2H2+"     10.75  
+## >>chng 21 apr 16, from 10.62 to 9.198, add molecular column densities
+## >>chng 21 sep 11, from 9.198 to 7.614, LAMDA update
+## >>chng 21 nov 04, from 7.614 to 9.232, update mole co data
+monitor column density "C2H3+"     9.232  
+## >>chng 21 apr 16, from 15.46 to 12.46, add molecular column densities
+## >>chng 21 sep 11, from 12.46 to 12.69, LAMDA update
+## >>chng 21 nov 04, from 12.69 to 12.35, update mole co data
+## >>chng 23 may 15, from 12.35 to 12.83, GS updates 21 reactions to UMIST 2012
+monitor column density "C3"        12.83  
+## >>chng 21 apr 16, from 12.28 to 10.62, add molecular column densities
+## >>chng 21 sep 11, from 10.62 to 10.92, LAMDA update
+## >>chng 21 nov 04, from 10.92 to 10.52, update mole co data
+## >>chng 23 may 15, from 10.52 to 10.45, GS updates 21 reactions to UMIST 2012
+monitor column density "C3H+"      10.45
+## >>chng 21 apr 16, from 13.94 to 13.49, add molecular column densities
+## >>chng 21 sep 11, from 13.49 to 11.13, LAMDA update
+## >>chng 21 nov 04, from 11.13 to 13.42, update mole co data
+## >>chng 23 sep 08, from 13.42 to 13.36, fix SQRTPI in Lya destprob
+monitor column density "C3H"       13.36  
+## >>chng 21 apr 16, from 10.42 to 10.47, new monitor added
+## >>chng 21 apr 16, from 10.47 to 10.59, add molecular column densities
+monitor column density "CCl+"      10.59  
+## >>chng 21 apr 16, from 11.96 to 11.46, new monitor added
+## >>chng 21 apr 16, from 11.46 to 6.858, add molecular column densities
+monitor column density "CCl"       6.858  
+## >>chng 21 apr 16, from 10.89 to 12.07, add molecular column densities
+monitor column density "CH+"       12.07  
+## >>chng 21 apr 16, from 16.11 to 14.55, add molecular column densities
+## >>chng 21 sep 11, from 14.55 to 14.91, LAMDA update
+## >>chng 21 nov 04, from 14.91 to 14.59, update mole co data
+## >>chng 23 may 15, from 14.59 to 14.54, GS updates 21 reactions to UMIST 2012
+monitor column density "CH"        14.54  
+## >>chng 21 apr 16, from 10.96 to 11.65, add molecular column densities
+## >>chng 21 sep 11, from 11.65 to 11.7, LAMDA update
+## >>chng 21 nov 04, from 11.7 to 11.65, update mole co data
+monitor column density "CH2+"      11.65  
+## >>chng 21 apr 16, from 15.55 to 14.11, add molecular column densities
+## >>chng 21 sep 11, from 14.11 to 14.06, LAMDA update
+## >>chng 23 sep 08, from 14.06 to 14.02, fix SQRTPI in Lya destprob
+monitor column density "CH2"       14.02  
+## >>chng 21 apr 16, from 13.41 to 12.08, add molecular column densities
+## >>chng 21 sep 11, from 12.08 to 11.95, LAMDA update
+monitor column density "CH3+"      11.95
+## >>chng 21 apr 16, from 15.2 to 12.41, add molecular column densities
+## >>chng 21 sep 11, from 12.41 to 12.53, LAMDA update
+## >>chng 21 nov 04, from 12.53 to 12.44, update mole co data
+## >>chng 23 sep 08, from 12.44 to 12.38, fix SQRTPI in Lya destprob
+monitor column density "CH3"       12.38  
+## >>chng 21 apr 16, from 10.12 to 6.262, add molecular column densities
+## >>chng 21 nov 04, from 6.262 to 6.161, update mole co data
+## >>chng 23 may 15, from 6.161 to 6.091, GS updates 21 reactions to UMIST 2012
+monitor column density "CH4+"      6.091  
+## >>chng 21 apr 16, from 15.14 to 14.84, add molecular column densities
+## >>chng 21 sep 11, from 14.84 to 12.82, LAMDA update
+## >>chng 21 nov 04, from 12.82 to 14.84, update mole co data
+monitor column density "CH4"       14.84  
+## >>chng 21 apr 16, from 11.76 to 9.322, add molecular column densities
+## >>chng 21 sep 11, from 9.322 to 9.255, LAMDA update
+## >>chng 21 nov 04, from 9.255 to 9.299, update mole co data
+monitor column density "CH5+"      9.299  
+## >>chng 21 apr 16, from 15.6 to 13.35, add molecular column densities
+## >>chng 23 may 15, from 13.35 to 13.21, GS updates 21 reactions to UMIST 2012
+monitor column density "CN"        13.21  
+## >>chng 21 apr 16, from 17.28 to 7.013, add molecular column densities
+monitor column density "COgrn"     7.013  
+## >>chng 21 apr 16, from 10.56 to 10.34, add molecular column densities
+## >>chng 21 sep 11, from 10.34 to 10.83, LAMDA update
+## >>chng 21 nov 04, from 10.83 to 10.51, update mole co data
+## >>chng 23 may 15, from 10.51 to 10.3, GS updates 21 reactions to UMIST 2012
+monitor column density "CS+"       10.3  
+## >>chng 21 apr 16, from 16.89 to 17.04, add molecular column densities
+## >>chng 21 sep 11, from 17.04 to 16.96, LAMDA update
+## >>chng 23 may 15, from 16.96 to 16.79, GS updates 21 reactions to UMIST 2012
+monitor column density "CS"        16.79  
+## >>chng 21 apr 16, from 12.001to 12.0392, new monitor added
+## >>chng 21 apr 16, from 12.04 to 12.32, add molecular column densities
+monitor column density "H2Cl+"     12.32  
+## >>chng 21 apr 16, from 10.42 to 10.85, add molecular column densities
+## >>chng 23 jun 27, from 10.85 to 10.89, update Fe+ model to Smyth+19
+## >>chng 23 sep 08, from 10.89 to 11.03, fix SQRTPI in Lya destprob
+monitor column density "H2O+"      11.03  
+## >>chng 21 apr 16, from 14.05 to 16.46, add molecular column densities
+## >>chng 23 may 15, from 16.46 to 16.4, GS updates 21 reactions to UMIST 2012
+monitor column density "H2O"       16.4  
+## >>chng 21 apr 16, from 11.41 to 12.91, add molecular column densities
+## >>chng 21 sep 11, from 12.91 to 12.98, LAMDA update
+monitor column density "H3O+"      12.98  
+## >>chng 21 apr 16, from 11.29 to 12.21, add molecular column densities
+monitor column density "HCl+"      12.21  
+## >>chng 21 apr 16, from 13.8 to 13.42, new monitor added
+## >>chng 21 apr 16, from 13.42 to 14.61, add molecular column densities
+monitor column density "HCl"       14.61  
+## >>chng 21 apr 16, from 15.17 to 13.81, add molecular column densities
+## >>chng 21 sep 11, from 13.81 to 14.16, LAMDA update
+monitor column density "HCN"       14.16  
+## >>chng 21 apr 16, from 12.61 to 10.27, add molecular column densities
+## >>chng 21 sep 11, from 10.27 to 10.56, LAMDA update
+monitor column density "HCNH+"     10.56  
+## >>chng 21 apr 16, from 12.65 to 13.49, add molecular column densities
+## >>chng 21 sep 11, from 13.49 to 13.56, LAMDA update
+monitor column density "HCO+"      13.56  
+## >>chng 21 apr 16, from 13.96 to 13.16, add molecular column densities
+## >>chng 21 sep 11, from 13.16 to 13.24, LAMDA update
+## >>chng 23 may 15, from 13.24 to 13.08, GS updates 21 reactions to UMIST 2012
+monitor column density "HCS+"      13.08 
+## >>chng 21 apr 16, from 15.85 to 14.56, add molecular column densities
+## >>chng 21 sep 11, from 14.56 to 14.13, LAMDA update
+monitor column density "HNC"       14.13
+## >>chng 21 apr 16, from 12.26 to 7.232, add molecular column densities
+## >>chng 23 sep 08, from 7.232 to 7.186, fix SQRTPI in Lya destprob
+monitor column density "HNO"       7.186  
+## >>chng 21 apr 16, from 12.97 to 11.73, add molecular column densities
+## >>chng 21 sep 11, from 11.73 to 11.79, LAMDA update
+monitor column density "HS+"       11.79  
+## >>chng 21 apr 16, from 14.71 to 11.88, add molecular column densities
+monitor column density "HS"        11.88  
+## >>chng 21 apr 16, from 12.49 to 10.83, add molecular column densities
+monitor column density "N2+"       10.83  
+## >>chng 21 apr 16, from 17.44 to 18.31, add molecular column densities
+monitor column density "N2"        18.31  
+## >>chng 21 apr 16, from 13.95 to 13.03, add molecular column densities
+## >>chng 21 sep 11, from 13.03 to 13.11, LAMDA update
+monitor column density "N2H+"      13.11
+## >>chng 21 apr 16, from 11.03 to 8.465, add molecular column densities
+monitor column density "N2O"       8.465
+## >>chng 21 apr 16, from 15.58 to 12.58, add molecular column densities
+monitor column density "NH"        12.58  
+## >>chng 21 apr 16, from 10.34 to 9.975, add molecular column densities
+monitor column density "NH2+"      9.975  
+## >>chng 21 apr 16, from 14.96 to 12.63, add molecular column densities
+monitor column density "NH2"       12.63  
+## >>chng 21 apr 16, from 12.45 to 10.69, add molecular column densities
+monitor column density "NH3+"      10.69
+## >>chng 21 apr 16, from 14.86 to 15.56, add molecular column densities
+## >>chng 21 sep 11, from 15.56 to 15.52, LAMDA update
+monitor column density "NH3"       15.52  
+## >>chng 21 apr 16, from 11.03 to 11.11, add molecular column densities
+## >>chng 21 sep 11, from 11.11 to 11.21, LAMDA update
+monitor column density "NH4+"      11.21  
+## >>chng 21 apr 16, from 13.76 to 15.13, add molecular column densities
+## >>chng 23 sep 08, from 15.13 to 15.08, fix SQRTPI in Lya destprob
+monitor column density "NO"        15.08
+## >>chng 21 apr 16, from 11.47 to 11.02, add molecular column densities
+## >>chng 21 sep 11, from 11.02 to 11.07, LAMDA update
+monitor column density "NS+"       11.07  
+## >>chng 21 apr 16, from 14.72 to 10.97, add molecular column densities
+## >>chng 23 may 15, from 10.97 to 12.01, GS updates 21 reactions to UMIST 2012
+monitor column density "NS"        12.01
+## >>chng 21 apr 16, from 11.9 to 8.208, add molecular column densities
+## >>chng 21 sep 11, from 8.208 to 7.075, LAMDA update
+## >>chng 23 sep 08, from 7.075 to 7.017, fix SQRTPI in Lya destprob
+monitor column density "OCN"       7.017  
+## >>chng 21 apr 16, from 10.98 to 16.82, add molecular column densities
+## >>chng 23 may 15, from 16.82 to 16.9, GS updates 21 reactions to UMIST 2012
+monitor column density "OCS"       16.9  
+## >>chng 21 apr 16, from 10.33 to 11.39, add molecular column densities
+## >>chng 23 sep 08, from 11.39 to 11.52, fix SQRTPI in Lya destprob
+monitor column density "OH+"       11.52  
+## >>chng 21 apr 16, from 14.95 to 1.704, add molecular column densities
+monitor column density "OHgrn"     1.704  
+## >>chng 21 apr 16, from 12.92 to 11.98, add molecular column densities
+## >>chng 23 mar 17, from 11.98 to 11.93, add SiS and Lamda model"
+## >>chng 23 may 15, from 11.93 to 11.38, GS updates 21 reactions to UMIST 2012
+monitor column density "SiH"       11.38  
+## >>chng 21 apr 16, from 10.19 to 9.611, add molecular column densities
+monitor column density "SiH2+"     9.611  
+## >>chng 21 apr 16, from 12.83 to 7.393, add molecular column densities
+## >>chng 23 may 15, from 7.393 to 7.452, GS updates 21 reactions to UMIST 2012
+monitor column density "SiN+"      7.452  
+## >>chng 21 apr 16, from 13.61 to 11.89, add molecular column densities
+## >>chng 23 mar 17, from 11.89 to 11.81, add SiS and Lamda model"
+## >>chng 23 may 15, from 11.81 to 11.51, GS updates 21 reactions to UMIST 2012
+monitor column density "SiN"       11.51  
+## >>chng 21 apr 16, from 11.25 to 11.98, add molecular column densities
+## >>chng 21 sep 11, from 11.98 to 12.08, LAMDA update
+monitor column density "SiOH+"     12.08
+## >>chng 21 apr 16, from 10.1 to 12.34, add molecular column densities
+## >>chng 21 sep 11, from 12.34 to 12.46, LAMDA update
+monitor column density "SO+"       12.46  
+## >>chng 21 apr 16, from 13.18 to 17.38, add molecular column densities
+## >>chng 23 may 15, from 17.38 to 17.42, GS updates 21 reactions to UMIST 2012
+monitor column density "SO"        17.42  
+## >>chng 21 jun 17, from 1 to 14.39, first run
+## >>chng 21 sep 11, from 14.39 to 9.766, LAMDA update
+## >>chng 21 nov 04, from 9.766 to 9.716, update mole co data
+monitor column density "ArH+"        9.716
+##
+## >>chng 04 mar 04, from < 1200 to <900 improv conv
+## >>chng 04 mar 31, from < 900 to <950 alter dr logic-test all chng hv mole
+## >>chng 04 apr 17, from 950 to 1050 grn recom, better mole conv
+## >>chng 04 jun 28, from 1050 to 1200, bug in part count for cons pres
+## >>chng 04 jul 17, from 1200 to 1400 NA update chem net
+## >>chng 05 jul 04, from 1400 to 1600 turn cl on
+## >>chng 05 nov 22, from 1600 to 1800 stop half thick to avoid grn freeze out
+## >>chng 06 aug 12, from 1800 to 2200 (2082) dr from tau IR continuum, inc err
+## >>chng 07 oct 29, from 2200 to 719, change from "<" to "="
+## >>chng 08 dec 08, from 719 to 705, upper limit -> equals (r2515)
+## >>chng 09 jan 08, from 705 to 713, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, from 713 to 711, average of 10 runs
+## >>chng 09 jun 01, from 711 to 719, drift up
+## >>chng 11 nov 16, from 719 to 646, adjust newmole monitors
+## >>chng 11 dec 12, from 646 to 692, bug-fix for updating grain opacity (r5759)
+## >>chng 11 dec 21, from 692 to 1211 H column density 1e22 -> 1e23
+## >>chng 13 feb 01, from 1211 to 1156, BUGFIX, largely undo r6703
+monitor nzone 1156 
+##
+## >>chng 03 oct 30, from 11 to 15, many fewer zone, larger itr/zn, faster
+## >>chng 03 nov 16, from 15 to 9, actual 7.44
+## >>chng 04 jun 28, from 9 to 14, bug in part count for cons pres
+## >>chng 04 aug 04, from 14 to 12, finer zones
+## >>chng 04 sep 16, from 12 to 16, incre edentrue convergence
+## >>chng 05 feb 06, from 16 to 18, actul 16.1
+## >>chng 08 dec 08, from 18 to 12.1, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 12.1 to 47.06, merging newsolvers branch
+## >>chng 09 jan 08, from 47.06 to 46.19, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, from 46.19 to 46.14 (error 0.04), average of 10 runs
+## >>chng 11 dec 21, from 46.14 to 30.36, H column density 1e22 -> 1e23
+## >>chng 13 nov 05, from 30.36 to 14.58, convergence branch changes
+## >>chng 14 apr 07, from 14.58 to 11.5, move H/C out of ConvBase loop
+monitor itrzn 11.5
+##
+## >>chng 08 jul 07, add radiation pressure
+## >>chng 08 jul 08, set to 0.163
+## >>chng 08 jul 23, from 0.163 to 0.0184 chng Pesc line radiation pressure
+## >>chng 12 oct 09, from 0.0184 to 0.0175, fix CRD esc prob
+## >>chng 13 jan 08, from 0.0175 to 0.0167, remove duplicated factor in Pelec_esc
+## >>chng 13 jul 24, from 0.0167 to 0.0176, Ne to external databases
+## >>chng 15 may 12, from 0.0176 to 0.0189, coll. str. reduced mass scaling
+## >>chng 19 jul 30, from 0.0189 to 0.0162, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.0162 to 0.0151, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+## >>chng 23 sep 08, from 0.0151 to 0.028, fix SQRTPI in Lya destprob
+monitor Pradmax 0.028
+##
+## >>chng 13 jun 27, from -8.869 to -2.929, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+monitor "H2O " 538.142m line intensity -2.929
+## >>chng 13 jun 27, from -7.357 to -4.581, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -4.581 to -4.651, update H3+ rates Indriola+ 2012
+## >>chng 21 sep 11, from -4.651 to -4.88, LAMDA update
+monitor "HNC " 1652.90m  line intensity -4.88
+## >>chng 13 jun 27, from -8.563 to -6.302, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -6.302 to -6.227, LAMDA update
+## >>chng 23 may 15, from -6.227 to -6.377, GS updates 21 reactions to UMIST 2012
+monitor "HCS+" 1755.88m  -6.377 line intensity
+## >>chng 13 jun 27, from -7.453 to -4.903, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -4.903 to -4.94, update H3+ rates Indriola+ 2012
+## >>chng 23 may 15, from -4.94 to -4.989, GS updates 21 reactions to UMIST 2012
+monitor "CS  " 3058.86m  -4.989 line intensity
+## >>chng 13 jun 27, from -7.288 to -4.69, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 2600.05m  -4.69 line intensity
+## >>chng 13 jun 27, from -6.463 to -3.743, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 1300.05m  -3.743 line intensity
+## >>chng 13 jun 27, from -6.149 to -3.239, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+monitor "CO  " 866.727m  -3.239 line intensity
+## >>chng 13 jun 27, from -6.177 to -2.923, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+monitor "CO  " 650.074m  -2.923 line intensity
+## >>chng 13 jun 27, from -6.485 to -2.72, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+monitor "CO  " 520.089m  -2.72 line intensity
+## >>chng 13 jun 27, from -6.954 to -2.597, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -2.597 to -2.619, update H3+ rates Indriola+ 2012
+monitor "CO  " 433.438m  -2.619 line intensity
+## >>chng 13 jun 27, from -7.48 to -2.544, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -2.544 to -2.574, update H3+ rates Indriola+ 2012
+monitor "CO  " 371.549m  -2.574 line intensity
+## >>chng 13 jun 27, from -8.049 to -2.578, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 03, from -2.578 to -2.623, update H3+ rates Indriola+ 2012
+monitor "CO  " 325.137m  -2.623 line intensity
+## >>chng 13 jun 27, from -7.522 to -3.645, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+monitor "^13CO" 906.599m  -3.645 line intensity
+## >>chng 13 jun 27, from -8.247 to -5.301, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 21 sep 11, from -5.301 to -5.954, LAMDA update
+## >>chng 21 sep 15, from -5.954 to -5.288, go back to unresolved model
+## >>chng 21 nov 04, from -5.288 to -5.352, update mole co data
+## >>chng 23 may 15, from -5.352 to -5.467, GS updates 21 reactions to UMIST 2012
+monitor "CN  " 880.858m  -5.467  line intensity
+##
+# orion_hii_pdr.in
+# class hii pdr  
+# ========================================
+
+This extends BFM from the H+ region into the PDR as in Abel et al 2005.
+This is the correct way to do a PDR calcualtion.
+
+>>refer	Orion	model	Baldwin, J., Ferland, G. J., 
+>>refercon	Martin, P. G., Corbin, M., Cota, S., Peterson, 
+>>refercon	B. M., & Slettebak, A. 1991, ApJ, 374, 580
+
+>>refer	physics	HII/PDR	Abel, N.P., Ferland, G.J., Shaw, G. & 
+>>refercon	van Hoof, P.A.M. 2005, ApJS, 161, 65

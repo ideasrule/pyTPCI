@@ -1,0 +1,26 @@
+Code reviews to be done
+
+put in check on whether eden was capped
+
+Format:
+date, routine, line
+what changed
+
+rt_line_one, line 64
+always use static rt solver, since only different is in dTau
+
+rt_cont shield
+check federman et al. pump
+
+coolargo.c line 261,
+collision strength for ar 14
+
+================================================
+#	ifdef DEBUG_FUN
+	fputs( "<+>atom_pop3()\n", debug_fp );
+#	endif
+
+
+#	ifdef DEBUG_FUN
+	fputs( " <->atom_pop3()\n", debug_fp );
+#	endif

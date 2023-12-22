@@ -1,0 +1,277 @@
+\chapter{THE GRID COMMAND}
+% !TEX root = hazy1.tex
+\label{sec:CommandGrid}
+
+\section{Introduction to grids}
+
+The \cdCommand{grid} command varies one or more of the input parameters
+to compute a grid of models.
+It is actually a form of the \cdCommand{optimize} command and uses much
+of the same code.
+It was added by Ryan Porter and its first use was
+described in \citet{Porter2006}.
+The grid models will be run in parallel on multi-core machines.
+
+In a typical setup one or more parameters will be varied and output saved.
+A typical \cdCommand{grid} run might look something like the following:
+\begin{verbatim}
+# set up a simple AGN calculation
+table agn
+# vary the ionization parameter
+ionization parameter -1 vary
+# this grid command says how to vary the value of the ionization parameter in the
+# preceding command.  Go from log U =-2 to log U = 0 in 0.5 dex steps
+grid -2 0 0.5
+stop column density 19
+hden 10
+iterate to convergence
+# save the grid points, the value of the ionization parameter of each model
+save grid "gridrun.grd" last no hash
+# save intensities of selected lines
+save line list "gridrun.lin" "LineList_BLR.dat" last no hash
+\end{verbatim}
+
+This script computes a series of AGN models in which the ionization parameter
+is varied between two limits.
+The \cdCommand{save grid} command saves the values of the ionization parameter
+and gives some information about the calculation.
+The \cdCommand{save line list} command saves a set of lines for each grid point.
+
+\section{Running the code with grids}
+
+\subsection{Command line setup}
+It is {\em mandatory} to run \Cloudy\ using one of the
+following commands to use the \cdCommand{grid} command:
+%
+\begin{verbatim}
+# non-MPI runs, using fork
+cloudy.exe -r gridrun
+# alternative
+cloudy.exe -p gridrun
+
+# MPI runs
+mpirun -np <n> /path/to/cloudy.exe -r gridrun
+# alternative
+mpirun -np <n> /path/to/cloudy.exe -p gridrun
+\end{verbatim}
+This assumes that the input script is in the file \cdFilename{gridrun.in}. 
+
+Using the \cdCommand{-r} or \cdCommand{-p} command line switches is
+necessary because the code needs to know the name of the input script in order
+to generate intermediate files with its name embedded. It is also necessary
+for the correct functioning of the code in MPI mode.
+The \cdCommand{-r} option is included in the recommended setup for
+running \Cloudy.
+
+\subsection{Grids on parallel machines}
+
+On most systems the \cdCommand{grid} command will run in parallel by default using all
+available cores / hyperthreads. This includes all UNIX systems, as
+well as Cygwin under Windows.
+On most machines there are twice as many threads as CPUs, and the
+additional threads do not add much computing power.
+Tests show that a Mac will become unresponsive if all threads are used, so for OS X
+we use all cores rather than all threads, by default.
+
+\emph{Grids on MPI machines}
+By default the \cdCommand{grid} command will use the UNIX fork function to 
+run multiple jobs, and nothing more need be done.
+MPI can be used to run grids on distributed systems.
+When the code is
+compiled with MPI support enabled (see a section of \Hazy~2),
+the \cdCommand{grid} command will run
+in parallel mode on any (distributed) MPI cluster. This is the preferred method if you
+want to run very large grids and you need more cores than a single node can provide.
+The second example above shows how to run on a typical MPI-capable machine.
+
+\subsection{Forcing sequential runs}
+You can disable the parallel behavior by adding
+the keyword \cdCommand{sequential} to the \cdCommand{grid} command. 
+The \cdCommand{sequential} option causes the grid to be executed using only a
+single core rather than in parallel mode. This option is ignored when running
+in MPI mode.
+
+\subsection{Specifying the number of CPUs}
+You can
+choose a different number of cores by adding the keyword \cdCommand{ncpus}
+at the end of the \cdCommand{grid} command. 
+The \cdCommand{ncpus} option allows you to set the number of cores that will
+be used in parallel grid runs. This option is only effective on systems that
+support parallelization based on the \cdRoutine{fork()} system call. It is
+ignored in MPI runs since the number of cores is set as an option to
+\cdCommand{mpirun} in that case. 
+The number of CPUs should be added as a fourth number on
+the command line, e.g. as follows:
+\begin{verbatim}
+blackbody 5.e4 vary
+grid 4 5 0.1 ncpus 4  ## limit # of cpus to 4
+\end{verbatim}
+
+\section{Grid start point, end point, increment [ linear ]}
+
+Parameters for those commands with the \cdCommand{vary} keyword
+(see Table \ref{tab:CommandWithVaryOption}
+on page \pageref{tab:CommandWithVaryOption}) can be varied
+within a grid.
+Each
+command with a \cdCommand{vary} option must be followed by a \cdCommand{grid} command.
+The value
+entered on the command with the \cdCommand{vary} option is
+ignored but must be given
+to satisfy the command parser.
+
+The \cdCommand{grid} command line must have three numbers.
+The first and second
+are the start and end points of the range of variation.
+The last number
+is the value of the increment for each step.
+The increment can be either positive or negative.
+This behaves much the same
+way as a \emph{do} loop in Fortran or a \emph{for} loop in C.
+The \cdCommand{grid} command always changes variables from the start point
+to the end point.
+In other words, the start point must be less than the end point when
+the increment is positive, while, when the increment is negative, the start
+point must be larger than the end point. Note that the
+grid points are calculated in random order, so it no longer
+matters if you use a positive or negative increment\footnote{In versions
+C10 and earlier of the code, the grid points were calculated in sequential
+order (at least for non-MPI runs) so it made a difference then. The option of
+choosing a negative increment is maintained for backward compatibility.}.
+The following varies the
+blackbody temperature over a range of $10^4$ to $10^6$~K with three points.
+\begin{verbatim}
+# the blackbody command with vary option, the 1e5 K is needed to
+# get past the command parser, but is otherwise ignored
+blackbody 1e5 K vary
+# this varies the blackbody temperature from 1e6 to 1e4 K with -1 dex
+# steps, so that 1e6K, 1e5K, and 1e4K will be computed
+grid, range from 6 to 4 with -1 dex increments
+\end{verbatim}
+The following is a 2D grid in which both the ionization parameter and
+metallicity are varied.
+There will be five values of the ionization
+parameter and three values of the metallicity computed.
+\begin{verbatim}
+ionization parameter -2 vary
+grid range from 0 to -4 with -1 dex steps
+metals 0 vary
+grid range from -1 to 1 with 1 dex steps
+\end{verbatim}
+
+For nearly all commands, the quantity will be varied logarithmically (current
+exceptions are the \cdCommand{illuminate}, \cdCommand{ratio alphox},
+\cdCommand{dlaw}, and \cdCommand{fudge} commands). If the quantity is varied
+logarithmically, the lower / upper limit and the step size also need to be
+given as logarithms, as shown above. If the keyword \cdCommand{linear} is
+included on the \cdCommand{grid} command, then these numbers will be
+interpreted as linear quantities. As an example, the following will produce a
+grid of models with a constant electron temperature of 5000, 10000, 15000, and
+20000~K.
+\begin{verbatim}
+constant temperature 4 vary
+grid range from 5000 to 20000 step 5000 linear
+\end{verbatim}
+
+For some commands the unit of the quantity will be implicitly changed by the
+grid code. An example is the \cdCommand{radius} command. You can enter a
+radius in parsec using the \cdCommand{parsec} keyword. However, the grid code
+will always vary the radius in cm. In this case the lower / upper limit will
+also need to be the (logarithm of) a radius in cm. There is currently no way
+to overrule this. In general the lower / upper limit needs to have the exact
+same units as are used on the command line that is generated by the grid,
+\emph{not} the command line as originally typed by the user.
+
+\section{Grid list [ linear ] ``filename''}
+
+This \cdCommand{list} keyword allows parameter values to be individually
+listed in an external file that must be given in quotes on the same line. The
+file should not contain any other text, but may contain comments starting with ``\#''. The numbers should
+be separated by whitespace and/or newlines. The numbers will be interpreted as
+log values unless the \cdCommand{linear} keyword is included. This option is
+useful when a regularly-spaced grid as outlined above is too restrictive.
+
+\section{Beware the grid command treatment of temperatures!!}
+\label{sec:GridTemperatureGotcha}
+%:GridTemperatureGotcha
+The following will crash with an fpe
+\begin{verbatim}
+constant temperature 4 vary
+grid range from 5000 to 20000 step 5000  ## wrong, this will crash!
+\end{verbatim}
+This is because of the rule stated above that the \cdCommand{grid} command
+treats temperature ranges as logs unless the keyword
+\cdCommand{linear} occurs.  
+
+\section{Grid output options}
+\label{sec:GridOutputOptions}
+
+Several \cdCommand{save} output
+options were developed to
+retrieve information from \cdCommand{grid} runs.
+The \cdCommand{save XSPEC} command
+will generate FITS files for input into XSPEC (\citealp{Porter2006}).
+The
+\cdCommand{save grid} and \cdCommand{save line list} commands
+save the grid points and emission-line intensities.
+
+When computing a grid, the default is for save files to not overwrite
+results of previous grid points (to not ``clobber'' themselves) and
+to append the results to the save file instead.
+Conversely, in optimizer runs the default
+is for save files to overwrite one another since you
+are usually not interested in output along the unpredictable convergence path.
+That way you only get the save output from the fully converged model.
+
+When you include the \cdCommand{separate} keyword on a \cdCommand{save}
+command, the output of each grid point will be written to a separate file. See
+Section~\ref{sec:save:separate} for further details.
+
+In the output from \cdCommand{save} commands the default behavior is to put
+separators consisting of hash marks in between the output from different
+iterations (unless the \cdCommand{no hash} option is used). In grid runs this
+behavior is slightly changed. There will be an additional separator at the
+very end of the output, which will also have the additional text
+``GRID\_DELIMIT'' appended, as well as the number of the grid point in the
+format ``grid000000000''. This makes it easy to find back the output from a
+specific grid point, as well as identify where there is output missing in case
+some of the grid points have serious problems.
+
+During a grid run the main output for each grid point will be written to a
+separate file with names like \cdFilename{grid000000000\_yoursimname.out},
+\cdFilename{grid000000001\_yoursimname.out}, etc. (assuming your input script
+is named \cdFilename{yoursimname.in}). The meaning of the grid index embedded
+in the filename can be found with the \cdCommand{save grid} command described
+in Section~\ref{sec:save:grid}. At the end of the grid run these files will be
+gathered into a big main output file called \cdFilename{yoursimname.out} and
+the intermediate files will be deleted. For huge grids this operation can take
+a very long time. However, if you include the \cdCommand{separate} option on
+any of the \cdCommand{grid} commands, the gathering step will be skipped and
+the main output will remain in separate files, thus speeding up the
+calculation considerably.
+
+\section{Other grid options}
+\label{grid:other:options}
+
+The \cdCommand{no vary} command can be used to ignore all
+occurrences of the \cdCommand{grid} command and \cdCommand{vary}
+option in an input stream.
+
+The \cdCommand{repeat} option on the \cdCommand{grid} command
+causes the expected number of grid
+steps to be computed but the initial value of the variable is not
+incremented.
+This is mainly a debugging aid. 
+
+The \cdCommand{cycle} option causes the grid to be executed multiple times. If
+no additional number is found on the command line, the grid will be executed
+twice. You can also add a fourth number on the command line, which will be the
+number of times the grid will be executed. That number needs to be at least
+two. This is a debugging aid and should never be used for production work.
+
+\section{Notes on various commands}
+
+\subsection{Constant temperature}
+Section \ref{sec:GridTemperatureGotcha}
+describes the rules governing how the temperature can
+appear on the \cdCommand{constant temperature} command.

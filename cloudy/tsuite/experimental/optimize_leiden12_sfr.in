@@ -1,0 +1,57 @@
+# optimize for 'star-forming region'
+table draine 3 log
+extinguish 24
+hden 6.576 vary 
+#
+cosmic ray background
+cmb
+#
+stop CO column density 18.919 vary
+stop temperature off
+#
+set 12C13 50
+iterate
+#
+## >>chng 13 aug 15, wl from 650.1m to 650.074m, wl precision set to 6 sig fig
+normalize to "CO  " 650.074m
+set save prefix "optimize_leiden12_sfr"
+save leiden ".lei" last
+save overview ".ovr" last
+save dr ".dr" last
+# optimize intensity -4.006 0.07
+optimize lines
+## >>chng 13 aug 15, wl from 650.1m to 650.074m, wl precision set to 6 sig fig
+CO   650.074m	1.000	0.07
+CO   520.1m	2.292	0.03
+CO   433.4m	4.087	0.02
+CO   371.5m	6.755	0.01
+CO   325.1m	9.878	0.01
+## >>chng 13 aug 16, wl from 289m to 289.041m, wl precision now set 6 sig fig
+CO     289.041m	13.286	0.02
+## >>chng 13 aug 16, wl from 260.2m to 260.169m, wl precision now set 6 sig fig
+CO   260.169m	16.734	0.01
+## >>chng 13 aug 16, wl from 236.5m to 236.549m, wl precision now set 6 sig fig
+CO   236.549m	19.574	0.01
+## >>chng 13 aug 16, wl from 216.9m to 216.868m, wl precision now set 6 sig fig
+CO   216.868m	22.211	0.01
+## >>chng 13 aug 16, wl from 200.2m to 200.218m, wl precision now set 6 sig fig
+CO   200.218m	23.935	0.01
+## >>chng 13 aug 16, wl from 544m to 544.012m, wl precision now set 6 sig fig
+13CO   544.012m	0.644	0.10
+## >>chng 13 aug 16, wl from 453.4m to 453.374m, wl precision now set 6 sig fig
+13CO 453.374m	1.075	0.06
+## >>chng 13 aug 16, wl from 388.6m to 388.637m, wl precision now set 6 sig fig
+13CO 388.637m	1.694	0.04
+## >>chng 13 aug 16, wl from 340.1m to 340.088m, wl precision now set 6 sig fig
+13CO 340.088m	2.312	0.03
+## >>chng 13 aug 16, wl from 302.3m to 302.332m, wl precision now set 6 sig fig
+13CO 302.332m	3.002	0.08
+## >>chng 13 aug 16, wl from 272.1m to 272.130m, wl precision now set 6 sig fig
+13CO 272.130m	3.103	0.08
+## >>chng 13 aug 16, wl from 247.4m to 247.423m, wl precision now set 6 sig fig
+13CO 247.423m	2.799	0.09
+## >>chng 13 aug 16, wl from 226.8m to 226.836m, wl precision now set 6 sig fig
+13CO 226.836m	2.252	0.11
+## >>chng 13 aug 16, wl from 209.4m to 209.419m, wl precision now set 6 sig fig
+13CO 209.419m	1.765	0.14
+end of lines

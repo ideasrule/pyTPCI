@@ -1,0 +1,102 @@
+title collisionally excited H in LTE limit
+#
+# commands controlling continuum =========
+black body, T = 50000 K
+ionization parameter -8
+#
+# commands for density & abundances =========
+## >>chng 06 jul 22, density from 18 to 20, large change in H-like
+## collision strengths, now much smaller.  Small densities result in extreme
+## unphysical departure coefficients in high n levels, with resulting
+## runaway maser.  This simulation is highly contrived to test only n-changing
+## collisions
+hden = 20
+init file="hheonly.ini"
+#
+# commands controlling geometry  =========
+stop lyman optical depth -6
+stop zone 1
+set dr 0
+## >>chng 06 jul 22, add this large change in H-like
+## collision strengths, now much smaller.  Small densities result in extreme
+## unphysical departure coefficients in high n levels, with resulting
+## runaway maser.  This simulation is highly contrived to test only n-changing
+## collisions - gas is now more neutral so even fewer collisions occur
+## setting high eden gets back to intended test
+set eden 20 
+#
+# other commands for details     =========
+no induced processes  (OK) 
+database h-like collisions l-mixing off 
+database he-like collapsed levels 20
+database he-like collisions l-mixing off 
+constant temperature = 50000 K
+iterate
+#
+# commands controlling output    =========
+print h-like departure coefficients hydrogen
+print h-like populations hydrogen
+print he-like departure coefficients helium
+##
+save overview "limit_lte_h_t50_coll.ovr"
+save performance "limit_lte_h_t50_coll.per"
+save monitors "limit_lte_h_t50_coll.asr" last
+#
+# commands giving the monitors    =========
+monitor h-like departure coef hydrogen  value 1 largest = 0.14
+## 
+## >>chng 02 nov 25, added this
+##TODO change assert command so have option to look at only high-n
+## assert he-like departure coef helium  value 1.006, largest = 0.14
+## >>chng 06 jul 22, from -0.163 to -0.0032, RP update H-like cs, now 
+## much smaller, ionization changed - note no coll ion in this sim
+## >>chng 06 aug 30, from -0.0032 to -0.592, RP H-like cont lowering
+## >>chng 06 dec 22, from -0.5920 to -0.4835, RP H-like cont lowering fix
+monitor hydrogen 1 ionization -0.4835
+## 
+## >>chng 06 jul 22, from -0.500 to -2.207, RP update H-like cs, now 
+## much smaller, ionization changed - note no coll ion in this sim
+## >>chng 06 aug 30, from -2.207 to -0.129, RP H-like cont lowering
+## >>chng 06 dec 22, from -0.129 to -0.1732, RP H-like cont lowering fix
+monitor hydrogen 2 ionization -0.1732
+## 
+## >>chng 02 dec 19, from -0.037 to -0.0161 new he atom
+## >>chng 04 jul 03, from -0.0161 to -0.0522, NA update H, CO chem net
+## >>chng 06 jul 22, from -0.0522 to -0.0154, RP update H-like cs, now 
+## much smaller, ionization changed - note no coll ion in this sim
+## >>chng 06 aug 24, turn on coll ionization from -0.0154 to -0.390
+monitor helium 1 ionization -0.390
+## 
+## >>chng 02 apr 29, from -1.302 to -1.091, chng coll dat highlevels hei
+## >>chng 02 dec 12, from -1.091 to -1.063, different conv criteria
+## >>chng 02 dec 19, from -1.063 to -1.44, new he atom
+## >>chng 03 feb 38, from -1.44 to -1.464, better hei coll
+## >>chng 03 mar 13, from -1.464 to -2.569, better hei coll splitting
+## >>chng 04 apr 17, from -2.569 to -2.460, better mole conv
+## >>chng 04 jul 03, from -2.460 to -0.946, NA update H, CO chem net
+## >>chng 06 jul 22, from -0.946 to -1.458, RP update H-like cs, now 
+## much smaller, ionization changed - note no coll ion in this sim
+## >>chng 06 aug 24, from -1.458 to -1.484, RP update H, He-like num lev local
+## increase error 
+## >>chng 06 aug 24, turn on coll ionization from -1.4844 to -0.227
+monitor helium 2 ionization -0.227 error 0.1
+## 
+# limit_lte_h_t50_coll.in
+# class limit 
+# ========================================
+# 
+
+This checks that the model H atom goes to LTE at high densities. 
+
+chng 06 aug 24, had not included collisional ionization, and so he-like
+departure coefficients were very large, around 202.  comments said there
+were problems.  turned on collisional ionization, no problems noted
+
+chng 06 jul 22
+with RP changes in high-n n-changing collisions the rates are now much
+smaller - needed to change density to be far higher and several 
+quantities changed.  at lower density (1e18 cm-3) the populations are very
+unphysical and runaway maser now occurs.  this is only a homework problem
+and intended to only test n-changing collisions.  with higher density
+this test is done.
+

@@ -1,0 +1,375 @@
+title conditions similar to Orion nebula blister
+# orion hii region with open geometry
+#
+# commands controlling continuum =========
+# SED of central star
+table SED "star_kurucz_39600.dat" 
+# its flux of H-ionizing photons
+phi(h) 13.0
+#
+# this is to include velocity field in radiative transfer
+turbulence 8 km/sec no pressure 
+#
+# commands for density & abundances =========
+hden 4
+abundances hii region no grains
+grains orion
+#
+# commands controlling geometry  =========
+cosmic rays, background
+constant pressure
+# this is the account for continued matter beyond i front 
+double optical depths
+#
+# other commands for details     =========
+iterate 2
+#
+# commands controlling output    =========
+print line faint -5
+# print lines as surface brightness
+print lines surface brightness arcsec 
+print line optical depths
+# want to print line intensities are surface brightness, per arcsec^2
+print lines surface brightness arcsec
+save performance "orion_hii_open.per"
+save overview last "orion_hii_open.ovr"
+save dr last "orion_hii_open.dr"
+save continuum last "orion_hii_open.con" units microns
+save transmitted continuum last "orion_hii_open.trn" 
+save monitors last "orion_hii_open.asr"
+save overview last "orion_hii_open.ovr"
+save fine opacity last "orion_hii_open.opc" range 0.7 0.9 ryd
+save element nitrogen last no hash "orion_hii_open.nit"
+save lines, array "orion_hii_open.lina" units microns last no hash
+## >>chng 18 apr 18 add lines that form in both H+ and H0 regions of a PDF
+save line emissivity "orion_hii_open.ems" last no hash emergent
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+H  1  4861.32A
+O  3  5006.84A
+Blnd  5199A
+O  1  6300.30A
+O  1  63.1679m 
+end of lines
+save linelist "orion_hii_open.lin" "LineList_HII.dat" last no hash emergent absolute
+#
+# commands giving the monitors    =========
+## >>chn 05 mar 07, add this to test suite 
+## >>chng 13 jul 26, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A intensity -11.253
+##
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A intensity -11.43 emergent
+## 
+## >>chng 13 jul 26, wl from 3889A to 3889.07A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3889.07A to 3889.05A, update Rydberg constant
+## >>chng 21 mar 16, wl from 3889.05A to 3889.06A, update NIST energies
+## >>chng 21 aug 18, wl from 3889.06A to 3889.05A, revert to PvH energies for H
+monitor line "H  1" 3889.05A 0.107
+##
+## >>chng 17 may 25, wl from 3889.07A to 3889.05A, update Rydberg constant
+## >>chng 21 mar 16, wl from 3889.05A to 3889.06A, update NIST energies
+## >>chng 21 aug 18, wl from 3889.06A to 3889.05A, revert to PvH energies for H
+monitor line "H  1" 3889.05A 0.107 emergent
+##
+## >>chng 13 jul 26, wl from 3889A to 3889.07A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 3889.07A to 3889.05A, update Rydberg constant
+## >>chng 21 mar 16, wl from 3889.05A to 3889.06A, update NIST energies
+## >>chng 21 aug 18, wl from 3889.06A to 3889.05A, revert to PvH energies for H
+monitor line "Ca B" 3889.05A 0.105
+##
+## >>chng 05 jun 05, from 0.143 to 0.137, RP update he-like iso seq
+## >>chng 05 oct 01, from 0.137 to 0.123, RP update He levels
+## >>chng 05 dec 22, from 0.123 to 0.129, RP incr levels he
+## >>chng 08 apr 30, from 0.129 to 0.147 H, He topoff change
+## >>chng 13 jul 26, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.147 to 0.1324, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 5875.66A 0.1324
+##
+## >>chng 16 aug 07, from 0.1568 to 0.139, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 5875.66A 0.139 emergent
+##
+## >>chng 13 jul 26, wl from 5876 to 5875.64A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 5875.64A 0.133
+## 
+## >>chng 08 may 16, from 0.0192 to 0.0196, line is sensitive to gradual underflow
+## >>chng 13 jul 26, wl from 3889 to 3888.63A, increased wl precision to 6 sig. fig.
+## >>chng 15 may 12, from 0.0196 to 0.0187, coll. str. reduced mass scaling
+## >>chng 16 aug 07, from 0.0187 to 0.0197, Marios bug fixes
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+monitor line "He 1" 3888.64A 0.0197
+##
+## >>chng 16 aug 07, from 0.0215 to 0.0227, Marios bug fixes
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+monitor line "He 1" 3888.64A 0.0227 emergent
+##
+## >>chng 13 jul 26, wl from 3888.5 to 3888.63A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+monitor line "Ca B" 3888.64A 0.114
+## 
+## >>chng 13 jul 26, wl from 7065 to 7065.18A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 7065.18A to 7065.22A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.099 to 0.1038, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 7065.22A to "Blnd" 7067.20A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 7067.20A to 7065.25A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 7065.25A 0.1038
+##
+## >>chng 18 feb 20, updated spectral label from "He 1" 7065.22A to "Blnd" 7067.20A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 7067.20A to 7065.25A, adjust multiplet Blend WL for refraction index
+## >>chng 19 jul 30, from 0.1094 to 0.1144, split He I 2 ^3P_J
+monitor line "Blnd" 7065.25A 0.1144 emergent
+##
+## >>chng 13 jul 26, wl from 7065 to 7065.22A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 7065.22A 0.0381
+## 
+## >>chng 13 jul 26, wl from 4471 to 4471.47A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 4471.47A to 4471.49A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.049 to 0.0455, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "He 1" 4471.49A to "Blnd" 4472.76A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 4472.76A to 4471.50A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 4471.50A 0.0455
+##
+## >>chng 16 aug 17, from 0.049 to 0.0455, botches due to bugfix at r11237
+## >>chng 18 feb 20, updated spectral label from "He 1" 4471.49A to "Blnd" 4472.76A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 4472.76A to 4471.50A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 4471.50A 0.0455 emergent
+##
+## >>chng 13 jul 26, wl from 4471 to 4471.49A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 4471.49A 0.0456
+## 
+## >>chng 09 feb 24, from 0.0377 to 0.0394, botches due to r2763
+## >>chng 13 jul 26, wl from 6678 to 6678.15A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.0394 to 0.0333, Marios bug fixes
+monitor line "He 1" 6678.15A 0.0333
+##
+## >>chng 16 aug 07, from 0.042 to 0.0363, Marios bug fixes
+monitor line "He 1" 6678.15A 0.0363 emergent
+##
+## >>chng 13 feb 12, from 0.0358 to 0.0385, changes due to r7242
+## >>chng 13 jul 26, wl from 6678 to 6678.15A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 6678.15A 0.0385
+##
+## >>chng 08 apr 03, from 0.591 to 0.428, include 10830 in fine opacity array
+## >>chng 12 aug 06, from 0.428 to 0.449, bugfix - include Pelec_esc in several places
+## >>chng 12 oct 09, from 0.449 to 0.510, fix CRD esc prob
+## >>chng 12 oct 19, from 0.510 to 0.453, coll suppression DR
+## >>chng 13 jul 26, wl from 10830 to 1.08299m, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 1.08299m to 1.08303m, increased wl precision to 6 sig. fig.
+## >>chng 15 may 12, from 0.453 to 0.5024, coll. str. reduced mass scaling
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+## >>chng 19 jul 30, from 0.5024 to 0.3019, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.3019 to 0.2354, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line "Blnd" 1.08302m 0.2354
+##
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+## >>chng 19 jul 30, from 0.6449 to 0.3892, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.3892 to 0.3034, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line "Blnd" 1.08302m 0.3034 emergent
+##
+## >>chng 13 jul 26, wl from 10830 to 1.08303m, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 1.08303m 1.276
+##
+## >>chng 05 oct 01, from 0.313 to 0.287, RP update He levels
+## >>chng 06 nov 29, from 0.287 to 0.244, Badnell DR turned on
+monitor line "blnd" 2326 0.244 error 0.1
+##
+## >>chng 10 mar 05, from 0.497 to 0.5488, changes caused by r3848 atomic data update
+## >>chng 16 jul 24, from 0.5488 to 0.3878, update C III to 2014A&A...566A.104F
+monitor line "blnd" 1909 0.3878 error 0.1
+## 
+## >>chng 06 nov 29, from -15.114 to -15.165, Badnell DR turned on
+## >>chng 09 jul 14, from -15.165 to -15.357 update NI atomic data
+## >>chng 09 nov 17, from -15.36 to -15.33, N I changes (r3588)
+## >>chng 11 jul 12, from -15.33 to -15.49, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -15.49 to -15.33, BUGFIX, largely undo r6703
+## >>chng 14 jan 05, from -15.33 to -14.69, N to external databases
+## >>chng 14 jun 11, from -14.69 to -15.39, BUGFIX 14 jan 05, N to external databases, did not include N I, Mg II excited state photo
+## >>chng 15 mar 07, from -15.39 to -15.37, merging newmesh branch
+## >>chng 17 feb 10, from -15.37 to -15.31, default size of N 1 model atom set to 50
+## >>chng 19 mar 01, from -15.31 to -15.33, remove recombination, etc, components from blends (#415)
+monitor line "blnd"  5199A luminosity -15.33
+##
+## >>chng 05 jun 05, from 0.549 to 0.521, RP update he-like iso seq
+## >>chng 05 oct 01, from 0.521 to 0.495, RP update He levels
+## >>chng 05 dec 22, from 0.495 to 0.519, RP incr levels he
+## >>chng 06 nov 29, from 0.519 to 0.446, Badnell DR turned on
+## >>chng 08 apr 30, from 0.446 to 0.474 H, He topoff change
+## >>chng 10 mar 05, from 0.474 to 0.4979, changes caused by r3848 atomic data update
+## >>chng 11 jul 12, from 0.4979 to 0.4745, enable fit to Badnell DR suppression
+## >>chng 13 mar 03, from 0.4745 to 0.4969, update atomic models for S II, S III
+## >>chng 14 jan 05, from 0.4969 to 0.4538, N to external databases
+## >>chng 15 mar 07, from 0.4538 to 0.4755, merging newmesh branch
+monitor line "N  2"  6583.45 0.4755
+##
+monitor line "N  2"  6583.45 0.5354 emergent
+##
+## >>chng 09 jun 18, add this
+## >>chng 10 mar 05, from 0.0384 to 0.0341, changes caused by r3848 atomic data update
+## >>chng 10 mar 14, from 0.0341 to 0.0319, update As to NIST recommended values
+## >>chng 11 jul 12, from 0.0319 to 0.0242, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 0.0242 to 0.0283, BUGFIX, largely undo r6703
+## >>chng 13 mar 03, from 0.0283 to 0.0233, update atomic models for S II, S III
+## >>chng 14 dec 14, from 0.0233 to 0.0282, update S2+ - S+ DR to Badnell+ 2015 ApJ
+## >>chng 16 dec 20, from 0.0282 to 0.0303, add secondary autoionization to DR suppression
+## >>chng 17 nov 20, from 0.0303 to 0.0324, Bug-fix in DR suppression (r11900)
+## >>chng 19 jul 18, from 0.0324 to 0.0385, update SII A to Podobedova, Kelleher,&Wiese 2009, JPCRD, Vol. 3 
+## >>chng 23 may 11, from 0.0385 to 0.043, update RR DR to 2022 Badnell wor
+monitor line "Blnd"  6720A 0.043
+##
+## >>chng 16 dec 20, from 0.0315 to 0.0338, add secondary autoionization to DR suppression
+## >>chng 17 nov 20, from 0.0338 to 0.0362, Bug-fix in DR suppression (r11900)
+## >>chng 19 jul 18, from 0.0362 to 0.043, update SII A to Podobedova, Kelleher,&Wiese 2009, JPCRD, Vol. 3 
+## >>chng 23 may 11, from 0.043 to 0.0479, update RR DR to 2022 Badnell wor
+monitor line "Blnd"  6720A 0.0479 emergent
+##
+## >>chng 09 jun 18, add this
+## >>chng 14 mar 26, from 0.0082 to 0.0066, Move oxygen data to stout and chianti files
+monitor line "O  1"  6300.30A 0.0066
+##
+monitor line "O  1"  6300.30A 0.0074 emergent
+##
+## >>chng 06 nov 24, from 1.360 to 1.426, turn on Badnell RR
+## >>chng 06 nov 29, from 1.426 to 1.273, Badnell DR turned on
+## >>chng 11 jul 12, from 1.273 to 1.178, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 1.178 to 1.304, BUGFIX, largely undo r6703
+## >>chng 20 jan 13, from 1.304 to 1.372, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line "blnd"  3727 1.372
+##
+## >>chng 06 jul 25, from 0.348 to 0.401 HN update OIII, OII collision data
+## >>chng 06 nov 29, from 0.401 to 0.361, Badnell DR turned on
+## >>chng 10 feb 14, from 0.361 to 0.3084, update O atomic data
+## >>chng 11 jul 12, from 0.3084 to 0.2766, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 0.2766 to 0.3062, BUGFIX, largely undo r6703
+## >>chng 19 jul 30, from 0.3062 to 0.3212, split He I 2 ^3P_J
+monitor line "blnd"  7325 0.3212
+##
+## >>chng 06 nov 29, from 3.585 to 3.814, Badnell DR turned on
+## >>chng 11 jul 12, from 3.814 to 4.102, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from 4.102 to 3.855, BUGFIX, largely undo r6703
+## >>chng 20 jan 13, from 3.855 to 4.048, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line "o  3"  5006.84 4.048
+##
+## >>chng 20 jan 13, from 3.855 to 4.09, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line "o  3"  5006.84 4.09 emergent
+##
+## >>chng 06 jul 06, from 0.335 to 0.368, update Ne cs
+## >>chng 13 jul 26, wl from 12.81m to 12.8101m, increased wl precision to 6 sig. fig.
+monitor line "ne 2" 12.8101m 0.368
+##
+monitor line "ne 2" 12.8101m 0.5501 emergent
+##
+## some grain properties
+## >>chng 07 dec 15, from 1.447 to 1.342, X-ray grain merge
+## >>chng 10 mar 05, from 1.342 to 1.403, changes caused by r3848 atomic data update
+monitor line "GrGH" 0 1.403
+##
+monitor line "GrCC" 0 0.546
+##
+## >>chng 07 oct 26, from 162.0 to 154.4, very close to botch after recent changes
+## >>chng 08 jul 08, from 154.4 to 162.3 line radiation pressure
+monitor line "GraT" 0 162.3
+##
+monitor line "GraI" 0 119.6
+##
+## >>chng 07 dec 06, from 25.02 to 28.82, changes in h-like collisions
+## >>chng 13 jul 26, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 15 sep 28, from 28.82 to 27.15, degeneration criteria and lifetime changes to higher initial level
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+## >>chng 23 sep 08, from 27.15 to 22.03, fix SQRTPI in Lya destprob
+monitor line "GraL" 1215.67A 22.03
+##
+## grain emission 
+## >>chng 13 jul 26, wl from 60.83m to 60.8322m, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  60.8322m  15.68
+##
+## >>chng 07 oct 26, from 148.2 to 141.2, very close to botch after recent changes
+## >>chng 08 jul 08, from 141.2 to 148.3 line radiation pressure
+## >>chng 13 jul 26, wl from 21.42m to 21.4199m, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  21.4199m 148.3
+##
+## >>chng 07 jan 20, from 49.9 to 47.2 e2 bug
+## >>chng 08 jul 08, from 47.2 to 49.7 line radiation pressure
+monitor line "nFnu"  12.43m  49.7
+##
+## >>chng 07 jan 20, from 6.15 to 5.68 e2 bug
+## >>chng 08 mar 20, from 5.68 to 5.94 value drifted but did not throw assert
+## >>chng 09 feb 23, from 5.94 to 6.471, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 23 sep 08, from 6.471 to 5.873, fix SQRTPI in Lya destprob
+monitor line "nFnu"  7.580m   5.873
+##
+## >>chng 13 jul 26, wl from 1.436m to 1.43649m, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  1.43649m   1.441
+##
+## >>chng 07 oct 26, from 0.0470 to 0.0508, due to changes in r1472
+## >>chng 07 dec 14, from 0.0508 to 0.0532 RP update is seq
+## >>chng 08 feb 20, from 0.0532 to 0.0457, grain charge transfer changes in ion_solver and iso*
+## >>chng 08 mar 17, from 0.0457 to 0.0219, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 apr 03, from 0.0219 to 0.0118, include 10830 in fine opacity array
+## >>chng 08 jul 08, from 0.0118 to 0.0781 line radiation pressure
+## >>chng 08 jul 23, fromo 0.0781 to 0.0323 chng Pesc line radiation pressure
+## >>chng 10 jul 30, from 0.0323 to 0.0297, lower te floor so column density stopping criterion is reached
+## >>chng 13 jan 08, from 0.0297 to 0.0281, remove duplicated factor in Pelec_esc
+## >>chng 13 sep 10, from 0.0281 to 0.0294, use Flower+00 simple HD cooling
+## >>chng 15 may 12, from 0.0294 to 0.0309, coll. str. reduced mass scaling
+## >>chng 19 jul 30, from 0.0309 to 0.0271, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.0271 to 0.0258, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+## >>chng 23 sep 08, from 0.0258 to 0.054, fix SQRTPI in Lya destprob
+monitor Pradmax 0.054
+## 
+## >>chng 05 oct 01, from 0.0702 to 0.0519, RP update He levels
+## >>chng 15 mar 07, from 0.0519 to 0.0718, merging newmesh branch
+monitor hheicf 0.0718 error 0.02
+##
+## >>chng 05 mar 28, from 26 to 18 impr mol converg
+## >>chng 08 dec 08, from 18 to 14.96, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 14.96 to 47.7, merging newsolvers branch
+## >>chng 09 jan 08, from 47.7 to 49.15, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, from 49.15 to 48.04 (error 0.08), average of 10 runs
+## >>chng 09 oct 05, from 48.04 to 43.63, [NI] pumping changes
+## >>chng 10 jun 26, from 43.6 to 45 results for three platforms
+## >>chng 11 nov 16, from 45 to 37.52, adjust newmole monitors
+## >>chng 12 mar 07, from 37.52 to 30.79, renorm to r5961 results
+## >>chng 13 nov 05, from 30.79 to 17.34, convergence branch changes
+## >>chng 13 nov 19, from 17.34 to 15.7, fix CT bug in mole_eval_balance
+## >>chng 14 apr 07, from 15.7 to 11.07, move H/C out of ConvBase loop
+monitor itrzn 11.07 error 0.10
+##
+## >>chng 08 dec 08, from 220 to 182, upper limit -> equals (r2515)
+## >>chng 09 jan 08, from 182 to 165, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, disable this assert because the values show a bimodal distribution over various platforms
+## assert nzone 165
+##
+# orion_hii_open.in
+# class hii 
+# ========================================
+
+This is a model similar in spirit to the blister geometry HII region
+model computed by Baldwin et al. (1991). 
+Size-resolved Orion grains are included.
+The constant pressure command does a
+hydrostatic equilibrium structure.  The predicted emission-line spectrum is
+affected by the reddening of the internal grains.  The resulting t2
+analysis produces artificial results as a result.
+This has an open geometry, the original BFM paper was a closed geometry.
+(This makes little difference).  Background cosmic rays are also included
+although these should have little effect on warm ionized gas.  The emission
+line spectrum is given in surface brightness units, as in the BFM paper.
+

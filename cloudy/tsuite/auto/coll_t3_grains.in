@@ -1,0 +1,88 @@
+title coronal equilibrium at 10^3 K, with grains to assist chemistry
+#
+# commands controlling continuum =========
+coronal 1e3K
+# add component of cosmic rays to drive chemistry 
+cosmic ray background
+# >>chng 20 sep 19 test updated ISM abundances
+abundances "ISM-HD20.abn"
+## use Jura's ermperical rate
+set H2 Jura rate
+#
+# other commands for details     =========
+iterate  
+#
+# commands controlling geometry  =========
+stop zone 1
+set DR 0  ## zone 1 cm thick
+stop temperature off ## disable code default stop T<4000 K
+#
+# commands for density & abundances =========
+hden 4  
+#
+# other commands for details     =========
+# this sim needs very precise convergence to get a reliable result
+set eden convergence tolerance 1e-4
+#
+# commands controlling output    =========
+save performance "coll_t3_grains.per"
+save monitors "coll_t3_grains.asr" 
+save overview "coll_t3_grains.ovr" 
+save continuum "coll_t3_grains.con"  units angstroms 
+#
+# commands giving the monitors    =========
+## 
+## >>chng 11 aug 21, from -13.91 to -10.44, initial values
+## >>chng 12 apr 09, from -10.44 to -9.448, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 12 aug 21, from -9.448 to -9.669, fix CRPHOT botches and HD crash
+## >>chng 21 sep 11, from -9.669 to -9.568, LAMDA update
+## >>chng 21 nov 04, from -9.568 to -9.688, update mole co data
+monitor ionization Hydrogen  2 -9.688 error 0.2
+## 
+## >>chng 11 aug 21, from -7.113 to -5.991, initial values
+## >>chng 12 apr 09, from -5.991 to -5.069, update CR backbround to Indriolo+07, ~8x larger
+monitor ionization Lithium   2 -5.069 error 0.2
+## 
+## >>chng 11 aug 21, from -7.497 to -30, initial values
+monitor ionization Beryllium 2 -30 error 0.2
+## 
+## >>chng 11 aug 21, from -7.424 to -5.895, initial values
+## >>chng 12 apr 09, from -5.895 to -4.973, update CR backbround to Indriolo+07, ~8x larger
+monitor ionization Boron     2 -4.973 error 0.2
+## 
+## >>chng 12 apr 09, from -5.732 to -4.753, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 21 sep 11, from -4.753 to -0.8165, LAMDA update
+## >>chng 21 nov 04, from -0.8165 to -1.03, update mole co data
+monitor ionization Sodium    2 -1.03 error 0.2
+## 
+## >>chng 12 apr 09, from -4.196 to -3.039, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 20 sep 19, from -3.039 to -3.317, update ISM abundances
+## >>chng 21 sep 11, from -3.317 to -2.735, LAMDA update
+## >>chng 21 nov 04, from -2.735 to -3.195, update mole co data
+monitor ionization Magnesium 2 -3.195 error 0.2
+## 
+## >>chng 11 aug 21, from -3.195 to -4.055, initial values
+## >>chng 12 apr 09, from -4.055 to -3.04, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 12 aug 21, from -3.04 to -3.26, fix CRPHOT botches and HD crash
+## >>chng 20 sep 19, from -3.26 to -3.315, update ISM abundances
+## >>chng 21 sep 11, from -3.315 to -3.092, LAMDA update
+## >>chng 21 nov 04, from -3.092 to -3.225, update mole co data
+monitor ionization Aluminium 2 -3.225 error 0.1
+## 
+## >>chng 11 aug 21, from 2.578 to -3.123, initial values
+## >>chng 11 nov 16, from -3.123 to -2.809, adjust newmole monitors
+## >>chng 12 apr 09, from -2.809 to -2.329, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 21 sep 11, from -2.329 to -2.421, LAMDA update
+## >>chng 21 nov 04, from -2.421 to -2.526, update mole co data
+monitor eden -2.526 error 0.1
+#
+# coll_t3_grains.in
+# class coronal  
+# ========================================
+
+This tests conditions of collisional equilibrium at low densities.
+This is one of a series of sims coll_t?.in which test ionization
+over a range of temperatures.  This one, unlike the others,
+includes cosmic rays and grains.  Chemistry is important at this low temperature
+and the chemical network will collapse without a source of ionization.
+The cosmic rays provide this source of ionization.

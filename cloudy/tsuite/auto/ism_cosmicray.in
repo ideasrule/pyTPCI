@@ -1,0 +1,119 @@
+title background cosmic ray ionization by suprathermal electrons only
+#
+# commands controlling continuum =========
+# background CR H0 ionization rate should be 2.5e-17 s^-1,
+# Williams et al. ApJ, 503, 689
+cosmic rays, background
+# this will be VERY faint black 50000
+ionization parameter -25
+black 50000 
+#
+# commands for density & abundances =========
+hden 5
+#
+# commands controlling geometry  =========
+set dr 0 
+stop zone 1
+#
+# other commands for details     =========
+iterate
+set temperature floor 1000 K
+# turn off molecules to test only ions 
+no molecules 
+# must turn off charge transfer and its heating, which would dominate,
+# since we want to test cr heating and ionization
+no charge transfer
+no ctheat
+# must turn of  photoionization by recombining species,
+# since we want to test cr heating and ionization
+no photoionization
+# any time photoionization is turned off, it is best to also
+# turn off induced processes, which include pumping in the lyman lines
+no induced processes
+#
+# commands controlling output    =========
+print ages
+## >>chng 01 may 11, model was changed to test only secondary ionization,
+## its intended purpose
+save overview "ism_cosmicray.ovr"
+save performance "ism_cosmicray.per"
+save monitors "ism_cosmicray.asr" last
+#
+# commands giving the monitors    =========
+## >>chng 04 jan 26, from -0.180 to 0.0683, update cr background
+## >>chng 12 apr 09, from 0.0683 to 0.5225, update CR backbround to Indriolo+07, ~8x larger
+monitor eden 0.5225 0.07
+##
+## this is log of rate in TH85, Table 10, including factor of 0.46,
+## since this is total H ionization, not exactly their value since
+## not exactly low-elec fraction limit
+## >>chng 02 apr 02, from -17.098 to -17.060, better bound compton
+## >>chng 04 jan 26, from -17.060 to -16.603 update cr background
+## >>chng 04 mar 26, from -16.602 to -16.633, update cr sec2prim ratio for 35 ev
+## >>chng 04 apr 16, from -16.633 to -16.60, chng scal fac for back, incr err
+## >>chng 12 apr 09, from -16.6 to -15.7, update CR backbround to Indriolo+07, ~8x larger
+monitor csupra -15.7 error 0.1
+##
+## total heating
+## uncertain since depends on collider density
+## >>chng 04 jan 26, from -23.750 to -23.289 update cr background
+## >>chng 04 jan 28, from -23.289 to -21.935 update cr heating background
+## >>chng 04 mar 24, from -21.935 to -22.676, heatef onto cr heat
+## >>chng 04 apr 16, from -22.676 to -22.65, chng scal fac for back, incr err
+## >>chng 11 nov 16, from -22.650 to -22.603, adjust newmole monitors
+## >>chng 12 apr 09, from -22.603 to -21.705  update CR backbround to Indriolo+07, ~8x larger
+monitor htot  -21.705  error 0.1
+##
+## >>chng 04 mar 15, add cr heating by itself
+## >>chng 04 mar 24, from -21.935 to -22.676, heatef onto cr heat
+## >>chng 04 apr 16, from -22.676 to -22.64, chng scal fac for back, incr err
+## >>chng 12 apr 09, from -22.64 to -21.7, update CR backbround to Indriolo+07, ~8x larger
+monitor line "cr h" 0  luminosity -21.7 error 0.1
+##
+## >>chng 04 jan 26, from -5.219 to -4.973 update cr background
+## >>chng 04 mar 24, from -4.773 to -4.973, update cr heating
+## >>chng 12 apr 09, from -4.973 to -4.522, update CR backbround to Indriolo+07, ~8x larger
+monitor ionization hydrogen 2 -4.522
+##
+## >>chng 02 dec 11, from -5.254 to -5.206, new hei
+## >>chng 04 jan 26, from -5.206 to -4.971 update cr background
+## >>chng 04 apr 16, from -4.971 to -4.94, chng scal fac for back, incr err
+## >>chng 12 apr 09, from -4.94 to -4.492, update CR backbround to Indriolo+07, ~8x larger
+monitor ionization helium 2 -4.492 error 0.1
+##
+## >>chng 04 jan 26, from -5.315 to -5.069 update cr background
+## >>chng 06 feb 07, from -5.069 to -5.036, add exp to low-T DR 
+## >>chng 06 mar 05, from -5.036 to -8.646, NA add C+ - (Mg0 Fe0) CT
+## >>chng 08 dec 15, from -8.646 to -5.080, prev chg reversed; CT now properly killed
+## >>chng 11 jul 12, from -5.08 to -5.049, enable fit to Badnell DR suppression
+## >>chng 12 apr 09, from -5.049 to -4.596, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 feb 01, from -4.596 to -4.632, BUGFIX, largely undo r6703
+monitor ionization carbon 2 -4.632
+##
+## >>chng 04 jan 26, from -5.544 to -5.297 update cr background
+## >>chng 06 mar 05, from -5.297 to -7.789, NA add C+ - (Mg0 Fe0) CT
+## >>chng 08 dec 15, from -7.789 to -5.296, prev chg reversed; CT now properly killed
+## >>chng 11 jul 12, from -5.296 to -5.11, update to head of branch, without new coll DR suppression
+## >>chng 11 jul 12, from -5.11 to -5.088, enable fit to Badnell DR suppression
+## >>chng 12 apr 09, from -5.088 to -4.636, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 12 jul 01, from -4.636 to -5.148, update Badnell DR to 13-electron iso sequence
+## >>chng 13 feb 01, from -5.148 to -5.314, BUGFIX, largely undo r6703
+monitor ionization silicon 2 -5.314
+##
+## >>chng 03 aug 15, from -4.969 to -5.055, add guess for low-T dr
+## >>chng 04 jan 26, from -5.055 to -4.826 update cr background
+## >>chng 06 feb 07, from -4.826 to -4.765, add exp to low-T DR 
+## >>chng 11 apr 22, from -4.765 to -4.847, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from -4.847 to -4.806, enable fit to Badnell DR suppression
+## >>chng 12 apr 09, from -4.806 to -4.352, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 feb 01, from -4.352 to -4.381, BUGFIX, largely undo r6703
+monitor ionization iron 2 -4.381
+##
+# ism_cosmicray.in
+# class limit 
+# ========================================
+# 
+
+This test conditions of cosmic ray ionization.  Molecules and charge transfer
+are disabled so that analytical estimates can be made.  
+

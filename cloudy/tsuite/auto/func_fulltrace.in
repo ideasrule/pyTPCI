@@ -1,0 +1,27 @@
+title test full trace output
+#
+# commands controlling continuum =========
+trace h-like hydrogen full no print
+# check that no uninitialized rates are printed (r2757) 
+print arrays ionization carbon only
+print arrays levels "C[1:5]"
+stop zone 1
+table agn
+ionization parameter -0.5
+#
+# commands for density & abundances =========
+hden 9.5
+init file="honly.ini"
+element carbon on 
+#
+# other commands for details     =========
+database h-like element hydrogen collapsed levels 1 
+#
+# commands controlling output    =========
+##
+monitor nothing
+# func_fulltrace.in
+# class function 
+# ========================================
+
+this checks that trace output functions correctly

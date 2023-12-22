@@ -1,0 +1,245 @@
+title H2 populations in H- dominated limit
+# this is one of a pair with h2_solomon.in 
+#
+# commands controlling continuum =========
+# this is hot star continuum
+black 30000
+intensity  -5. range  0.4412 to 1 Ryd
+# this will remove all ionizing radiation
+extinguish 24 0
+# background CR ionization rate should be 2.5e-17 s^-1,
+# Tielens & Hollenbach 1985; McKee AstroPH 9901370
+cosmic rays, background
+#
+# commands for density & abundances =========
+# no grains in this sim so H2 forms by H- route
+abundances ism no grains 
+hden 5
+#
+# commands controlling geometry  =========
+set dr 0 
+stop zone 5 
+stop temperature 400 
+#
+# other commands for details     =========
+# default is Takahashi 2001 - test thermal distribution here
+set h2 grain formation thermal pump 
+database h2 
+iterate
+constant temperature 500K
+#
+# commands controlling output    =========
+print column density 
+print ages
+save performance "h2_hminus.per"
+save overview "h2_hminus.ovr" last
+save h2 lines "h2_hminus.lin" last all 
+save h2 rates "h2_hminus.rat" last
+save h2 column density "h2_hminus.col" last
+save monitors "h2_hminus.asr" last
+save dominant rates "h2_hminus.h2" "H2" last 
+save chemistry rates "h2_hminus.h2d" "H2" destruction
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+##
+## >>chng 06 mar 02, add this assert
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 0.221 to 0.535
+## >>chng 07 apr 30, from 0.535 to 0.497, log DR average, use mix S DR
+## >>chng 08 sep 19, from 0.497 to 0.5227, new method for average Badnell DR
+## >>chng 11 nov 16, from 0.5227 to 0.5478, adjust newmole monitors
+## >>chng 12 apr 09, from 0.5478 to 0.5961, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 12 jul 01, from 0.5961 to 0.5493, update Badnell DR to 13-electron iso sequence
+## >>chng 13 feb 01, from 0.5493 to 0.5159, BUGFIX, largely undo r6703
+## >>chng 14 dec 04, from 0.5159 to 0.4738, fix double-counting of big-H2 Solomon rate
+## >>chng 23 may 11, from 0.4738 to 0.4076, update RR DR to 2022 Badnell wor
+monitor eden 0.4076
+## 
+## >>chng 05 feb 12, reset abundances to ism with no grains, to be
+## matched pair with h2_solomon, much changed
+## >>chng 05 aug 03, from 3.16 to 3.12, NA update CO, H chem net
+## >>chng 05 aug 09, from 3.12 to 3.18, NA update CO, H chem net
+## >>chng 06 mar 02, from 3.18 to 4.40, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 4.40 to 3.21
+## >>chng 11 nov 16, from 3.21 to 2.954, adjust newmole monitors
+## >>chng 12 jul 01, from 2.954 to 2.872, update Badnell DR to 13-electron iso sequence
+## >>chng 14 dec 04, from 2.872 to 3.094, fix double-counting of big-H2 Solomon rate
+## >>chng 23 may 11, from 3.094 to 3.031, update RR DR to 2022 Badnell wor
+monitor H2 column 3.031 error 0.1
+##
+## >>chng 05 aug 03, from 1.85 to 1.71, NA update CO, H chem net
+## >>chng 05 aug 09, from 1.71 to 1.75, NA update CO, H chem net
+## >>chng 06 mar 02, from 1.75 to 2.08, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 2.08 to 1.82
+## >>chng 11 nov 16, from 1.82 to 1.704, adjust newmole monitors
+## >>chng 12 apr 09, from 1.704 to 1.6, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 dec 04, from 1.6 to 1.731, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from 1.731 to 1.684, GS update UMIST to 2012 and set upper limit on T
+monitor CO column 1.684 error 0.1
+##
+monitor H2 ortho 3.0
+## 
+## >>chng 05 aug 03, from 2.06 to 2.02, NA update CO, H chem net
+## >>chng 05 aug 09, from 2.02 to 2.09, NA update CO, H chem net
+## >>chng 06 mar 02, from 2.09 to 3.31, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 3.31 to 2.11
+## >>chng 11 nov 16, from 2.11 to 1.859, adjust newmole monitors
+## >>chng 12 jul 01, from 1.859 to 1.777, update Badnell DR to 13-electron iso sequence
+## >>chng 14 dec 04, from 1.777 to 1.999, fix double-counting of big-H2 Solomon rate
+## >>chng 23 may 11, from 1.999 to 1.935, update RR DR to 2022 Badnell wor
+monitor H2 column density level v=0 J=0 N=1.935 error 0.1
+## 
+## >>chng 05 aug 03, from 2.87 to 2.83, NA update CO, H chem net
+## >>chng 05 aug 09, from 2.83 to 2.90, NA update CO, H chem net
+## >>chng 06 mar 02, from 2.90 to 4.11, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 4.11 to 2.92
+## >>chng 11 nov 16, from 2.92 to 2.665, adjust newmole monitors
+## >>chng 12 jul 01, from 2.665 to 2.583, update Badnell DR to 13-electron iso sequence
+## >>chng 14 dec 04, from 2.583 to 2.805, fix double-counting of big-H2 Solomon rate
+## >>chng 23 may 11, from 2.805 to 2.741, update RR DR to 2022 Badnell wor
+monitor H2 column density level v=0 J=1 N=2.741 error 0.1
+## 
+## >>chng 05 aug 03, from 2.32 to 2.28, NA update CO, H chem net
+## >>chng 05 aug 09, from 2.28 to 2.34, NA update CO, H chem net
+## >>chng 06 mar 02, from 2.34 to 3.56, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 3.56 to 2.37
+## >>chng 11 nov 16, from 2.37 to 2.115, adjust newmole monitors
+## >>chng 12 jul 01, from 2.115 to 2.033, update Badnell DR to 13-electron iso sequence
+## >>chng 14 dec 04, from 2.033 to 2.255, fix double-counting of big-H2 Solomon rate
+## >>chng 23 may 11, from 2.255 to 2.192, update RR DR to 2022 Badnell wor
+monitor H2 column density level v=0 J=2 N=2.192 error 0.1
+## 
+## >>chng 05 aug 03, from 2.50 to 2.46, NA update CO, H chem net
+## >>chng 05 aug 09, from 2.46 to 2.53, NA update CO, H chem net
+## >>chng 06 mar 02, from 2.53 to 3.75, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 3.75 to 2.55
+## >>chng 11 nov 16, from 2.55 to 2.297, adjust newmole monitors
+## >>chng 12 jul 01, from 2.297 to 2.215, update Badnell DR to 13-electron iso sequence
+## >>chng 14 dec 04, from 2.215 to 2.438, fix double-counting of big-H2 Solomon rate
+## >>chng 23 may 11, from 2.438 to 2.374, update RR DR to 2022 Badnell wor
+monitor H2 column density level v=0 J=3 N=2.374 error 0.1
+## 
+## >>chng 05 aug 03, from 1.54 to 1.50, NA update CO, H chem net
+## >>chng 05 aug 09, from 1.50 to 1.56, NA update CO, H chem net
+## >>chng 06 mar 02, from 1.56 to 2.78, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 2.78 to 1.59
+## >>chng 11 nov 16, from 1.59 to 1.333, adjust newmole monitors
+## >>chng 12 jul 01, from 1.333 to 1.251, update Badnell DR to 13-electron iso sequence
+## >>chng 14 dec 04, from 1.251 to 1.474, fix double-counting of big-H2 Solomon rate
+## >>chng 23 may 11, from 1.474 to 1.414, update RR DR to 2022 Badnell wor
+monitor H2 column density level v=0 J=4 N=1.414 error 0.1
+## 
+## >>chng 05 aug 03, from 1.31 to 1.27, NA update CO, H chem net
+## >>chng 05 aug 09, from 1.27 to 1.34, NA update CO, H chem net
+## >>chng 06 mar 02, from 1.34 to 2.55, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 2.55 to 1.36
+## >>chng 11 nov 16, from 1.36 to 1.128, adjust newmole monitors
+## >>chng 12 jul 01, from 1.128 to 1.046, update Badnell DR to 13-electron iso sequence
+## >>chng 14 dec 04, from 1.046 to 1.269, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level v=0 J=5 N=1.269 error 0.1
+##
+## >>chng 13 jun 27, from -3.4460 to -21.9095, add H2 2.1215m line luminosity
+## >>chng 13 jul 24, wl from 2.1215m to 2.12125m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -21.91 to -21.67, fix double-counting of big-H2 Solomon rate
+## >>chng 16 dec 29, from -21.67 to -21.59, uupdate H-H2 coll to Lique 15
+## >>chng 23 may 11, from -21.59 to -21.65, update RR DR to 2022 Badnell wor
+monitor line luminosity "H2  " 2.12125m  -21.65 error 0.1
+##
+## >>chng 13 jun 27, from -8.869 to -22.64, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -22.64 to -22.12, fix double-counting of big-H2 Solomon rate
+## >>chng 15 aug 03, from -22.12 to -21.8, update LAMDA to 2015
+## >>chng 23 may 15, from -21.8 to -21.75, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -21.75 to -21.83, GS update UMIST to 2012 and set upper limit on T
+monitor "H2O " 538.142m line intensity -21.83
+## >>chng 13 jun 27, from -7.357 to -26.87, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -26.87 to -26.35, fix double-counting of big-H2 Solomon rate
+## >>chng 21 sep 11, from -26.35 to -26.8, LAMDA update
+## >>chng 23 may 15, from -26.8 to -26.75, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -26.75 to -26.82, GS update UMIST to 2012 and set upper limit on T
+monitor "HNC " 1652.90m  line intensity -26.82
+## >>chng 13 jun 27, from -8.563 to -25.51, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -25.51 to -25.24, fix double-counting of big-H2 Solomon rate
+## >>chng 21 sep 11, from -25.24 to -25.29, LAMDA update
+## >>chng 23 may 11, from -25.29 to -25.39, update RR DR to 2022 Badnell wor
+## >>chng 23 jul 15, from -25.39 to -25.43, GS update UMIST to 2012 and set upper limit on T
+monitor "HCS+" 1755.88m  -25.43 line intensity
+## >>chng 13 jun 27, from -7.453 to -24.26, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -24.26 to -23.99, fix double-counting of big-H2 Solomon rate
+## >>chng 15 aug 03, from -23.99 to -24.05, update LAMDA to 2015
+## >>chng 21 sep 11, from -24.05 to -23.94, LAMDA update
+## >>chng 23 may 11, from -23.94 to -24.02, update RR DR to 2022 Badnell wor
+monitor "CS  " 3058.86m  -24.02 line intensity
+## >>chng 13 jun 27, from -7.288 to -22.2, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -22.2 to -22.06, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -22.06 to -22.11, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 2600.05m  -22.11 line intensity
+## >>chng 13 jun 27, from -6.463 to -20.7, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -20.7 to -20.56, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -20.56 to -20.61, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 1300.05m  -20.61 line intensity
+## >>chng 13 jun 27, from -6.149 to -19.83, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -19.83 to -19.69, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -19.69 to -19.73, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 866.727m  -19.73 line intensity
+## >>chng 13 jun 27, from -6.177 to -19.21, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -19.21 to -19.07, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -19.07 to -19.12, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 650.074m  -19.12 line intensity
+## >>chng 13 jun 27, from -6.485 to -18.75, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -18.75 to -18.61, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -18.61 to -18.66, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 520.089m  -18.66 line intensity
+## >>chng 13 jun 27, from -6.954 to -18.39, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -18.39 to -18.25, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -18.25 to -18.29, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 433.438m  -18.29 line intensity
+## >>chng 13 jun 27, from -7.48 to -18.11, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -18.11 to -17.96, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -17.96 to -18.01, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 371.549m  -18.01 line intensity
+## >>chng 13 jun 27, from -8.049 to -17.89, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -17.89 to -17.75, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -17.75 to -17.8, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 325.137m  -17.8 line intensity
+## >>chng 13 jun 27, from -7.522 to -21.41, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -21.41 to -21.27, fix double-counting of big-H2 Solomon rate
+## >>chng 23 jul 15, from -21.27 to -21.32, GS update UMIST to 2012 and set upper limit on T
+monitor "^13CO" 906.599m  -21.32 line intensity
+## >>chng 13 jun 27, from -8.247 to -22.58, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from -22.58 to -22.41, fix double-counting of big-H2 Solomon rate
+## >>chng 21 sep 11, from -22.41 to -23.42, LAMDA update
+## >>chng 21 sep 15, from -23.42 to -22.38, go back to unresolved model
+## >>chng 23 may 15, from -22.38 to -22.34, GS updates 21 reactions to UMIST 2012
+monitor "CN  " 880.858m  -22.34  line intensity
+## 
+# h2_hminus.in
+# class limit  
+# ========================================
+# 
+
+This tests large H2 model in limit of H- formation and Solomon destruction.
+

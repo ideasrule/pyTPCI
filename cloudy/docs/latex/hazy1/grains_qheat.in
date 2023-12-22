@@ -1,0 +1,33 @@
+title cool atomic ISM with Si grain quantum heating
+c
+c commands controlling continuum =========
+table draine
+extinguish 20
+c
+c commands for density & abundances =========
+hden 0
+c turns on grains with default abundance (log abundance ratio to ism = 0)
+c and with quantum heating enabled by default
+c (disabled with "no grains qheat" option)
+grains 0. "silicate_ism_10.opc"
+c
+c commands controlling geometry  =========
+stop zone 1
+set dr 0
+c
+c other commands for details     =========
+cosmic rays background
+iterate
+c
+c commands controlling output    =========
+normalize to "c  2" 157.636m 
+print line faint -2
+print line column
+set save line resolution suppress
+save continuum  "grains_qheat.con" units microns last
+c
+
+
+This sim produces dust emission with a Wein trail that is
+dominated by quantum heating emission.
+

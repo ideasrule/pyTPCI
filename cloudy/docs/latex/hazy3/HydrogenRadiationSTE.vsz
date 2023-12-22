@@ -1,0 +1,105 @@
+# Veusz saved document (version 1.9)
+# Date: Sat, 01 Oct 2011 19:31:22 +0000
+
+AddImportPath(u'C:\\Users\\Micheal\\Desktop\\REU\\Veusz SigmaPlot\\hazy3')
+ImportFileCSV(u'HydrogenRadiationSTE.TAB', linked=True, delimiter='\t')
+ImportString(u'`10^10_copy`(numeric)','''
+9.246000e+03
+1.022100e+04
+1.173000e+04
+1.405000e+04
+1.747000e+04
+2.243000e+04
+2.884000e+04
+3.431000e+04
+3.640000e+04
+3.683000e+04
+3.686000e+04
+3.683000e+04
+3.796000e+04
+4.468000e+04
+5.038000e+04
+''')
+ImportString(u'`10^15_copy`(numeric)','''
+6.153000e+03
+6.705000e+03
+7.200000e+03
+7.706000e+03
+8.211000e+03
+8.935000e+03
+9.732000e+03
+1.079000e+04
+1.230000e+04
+1.469000e+04
+1.837000e+04
+2.357000e+04
+3.003000e+04
+3.941000e+04
+5.016000e+04
+''')
+Add('page', name='page1', autoadd=False)
+To('page1')
+Add('graph', name='graph1', autoadd=False)
+To('graph1')
+Add('axis', name='x', autoadd=False)
+To('x')
+Set('label', u'T_u__(K)')
+Set('log', True)
+To('..')
+Add('axis', name='y', autoadd=False)
+To('y')
+Set('label', u'T_e__(K)')
+Set('max', 60000.0)
+Set('log', True)
+Set('direction', 'vertical')
+To('..')
+Add('xy', name='xy1', autoadd=False)
+To('xy1')
+Set('xData', u'temperature')
+Set('yData', u'N=10^5')
+Set('markerSize', u'0pt')
+To('..')
+Add('xy', name='xy2', autoadd=False)
+To('xy2')
+Set('xData', u'temperature')
+Set('yData', u'10^10_copy')
+Set('markerSize', u'0pt')
+Set('thinfactor', 1)
+To('..')
+Add('xy', name='xy3', autoadd=False)
+To('xy3')
+Set('xData', u'temperature')
+Set('yData', u'10^15_copy')
+Set('markerSize', u'0pt')
+To('..')
+Add('xy', name='xy4', autoadd=False)
+To('xy4')
+Set('xData', u'VAR5')
+Set('yData', u'VAR6')
+To('..')
+Add('label', name='label1', autoadd=False)
+To('label1')
+Set('label', u'LTE')
+Set('xPos', [0.82194791054727512])
+Set('yPos', [0.94267837700250368])
+To('..')
+Add('label', name='label2', autoadd=False)
+To('label2')
+Set('label', u'10^5^^ cm^-3')
+Set('xPos', [0.351099091371885])
+Set('yPos', [0.86621574824752579])
+To('..')
+Add('label', name='label3', autoadd=False)
+To('label3')
+Set('label', u'10^10^^ cm^-3')
+Set('xPos', [0.35914778913556689])
+Set('yPos', [0.55634088434577322])
+To('..')
+Add('label', name='label4', autoadd=False)
+To('label4')
+Set('label', u'10^15^^ cm^-3')
+Set('xPos', [0.47585390670895417])
+Set('yPos', [0.21024688050745227])
+To('..')
+To('..')
+To('..')

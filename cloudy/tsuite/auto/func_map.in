@@ -1,0 +1,119 @@
+title map of heating vs cooling
+#
+# commands controlling continuum =========
+table agn
+ionization parameter -2.5
+#
+# commands for density & abundances =========
+hden 0
+abundances old solar 84 
+#
+# commands controlling geometry  =========
+set dr 0
+stop lyman optical depth -7
+stop zone 1
+#
+# other commands for details     =========
+#
+# commands controlling output    =========
+# save map information to generate plot for hazy
+save overview "func_map.ovr"
+save performance "func_map.per"
+save map file="func_map.dta"
+set nmaps 100
+save monitors "func_map.asr"
+#
+# commands giving the monitors    =========
+monitor map heating     1173.3 -22.541  
+## 
+## >>chng 05 jul 05, from -23.082 to -23.070, fine tune
+## >>chng 06 jul 25, from -23.070 to -23.097 HN update OIII collision data
+## >>chng 06 nov 12, from -23.097 to -23.167, NA update [OIV] cs to Tayal 06
+## >>chng 15 oct 14, from -23.17 to -23.19, update Ne 3 cs to McLaughlin+11
+## >>chng 22 jul 09, from -23.19 to -23.12, upgrade to Chianti v10
+monitor map cooling     1173.3 -23.12 
+## 
+monitor map heating     9313.9 -23.038   
+## 
+## >>chng 06 nov 12, from -23.031 to -23.058, NA update [OIV] cs to Tayal 06
+## >>chng 15 nov 03, from -23.06 to -23.08, update O III CS to Storey+14
+## >>chng 22 jul 09, from -23.08 to -23.01, upgrade to Chianti v10
+monitor map cooling     9313.9 -23.01 
+## 
+## >>chng 06 nov 29, from -23.823 to -23.850, Badnell DR turned on
+monitor map heating    90959. -23.850  
+## 
+## >>chng 10 mar 14, from -21.3 to -21.27, update As to NIST recommended values
+## >>chng 16 jul 24, from -21.27 to -21.3, update C III to 2014A&A...566A.104F
+monitor map cooling    90959. -21.3 
+##
+## >>chng 03 nov 23, from -26.100 to -26.078 Kraemer et al. guess of dr
+## >>chng 07 jan 25, from -26.078 to -26.049, use only Gu UTA data file
+monitor map heating   888290. -26.049  
+##
+## >>chng 02 apr 27, from -21.741 to -21.687, enabled he-iso cooling
+## >>chng 02 aug 19, from -21.687 to -21.726, better he-like cs
+## >>chng 05 jul 05, from -21.726 to -21.710, fine tune
+## >>chng 06 nov 29, from -21.710 to -21.739, Badnell DR turned on
+## >>chng 11 sep 15, from -21.74 to -21.78, Chianti for Fe moderate to high ions
+## >>chng 11 oct 04, from -21.78 to -21.75, Chianti for line-less ions of P and heavier elements
+## >>chng 12 oct 15, from -21.75 to -21.77, experimental Chianti levels
+## >>chng 16 jul 04, from -21.77 to -21.8, upgrade Fe 9 and Ni 11 to Stout
+## >>chng 22 jul 09, from -21.8 to -21.75, upgrade to Chianti v10
+monitor map cooling   888290. -21.75 
+##
+## >>chng 02 jun 14, from -27.338 to 27.231
+## >>chng 02 nov 20, from -27.231 to -27.269, noisy, increase error
+## >>chng 03 nov 23, from -27.269 to -27.157 Kraemer et al. guess of dr
+## >>chng 03 dec 08, from -27.157 to -27.244 zones, ots
+## >>chng 06 feb 03, from -27.244 to -27.352, guess dr to Badnell mean
+monitor map heating  8674900. -27.352 error 0.1 
+##
+## >>chng 02 apr 02, from -22.487 to -22.512, bound compton, slow drift
+## >>chng 02 apr 27, from -22.512 to -22.356, enabled he-iso cooling
+## >>chng 02 aug 19, from -22.356 to -22.438, better he-like cs
+## >>chng 02 nov 08, from -22.438 to -22.462, recom cooling fix
+## >>chng 03 nov 23, from -22.462 to -22.343 Kraemer et al. guess of dr
+## >>chng 03 nov 23, from -22.343 to -22.327 drift up
+## >>chng 05 jun 05, from -22.327 to -22.305, RP update he-like iso seq
+## >>chng 06 feb 03, from -22.305 to -22.388, guess dr to Badnell mean
+## >>chng 06 jul 18, from -22.388 to -22.442 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from -22.442 to -22.464, Badnell DR turned on
+## >>chng 08 nov 08, from -22.464 to -22.443, fix VS80 elec impact coll. str. (r2444)
+## >>chng 11 sep 15, from -22.44 to -22.4, Chianti for Fe moderate to high ions
+## >>chng 11 oct 04, from -22.4 to -22.43, Chianti for line-less ions of P and heavier elements
+## >>chng 13 nov 22, from -22.43 to -22.45, collapsed branch merge r8609
+monitor map cooling  8674900. -22.45 
+##
+## >>chng 02 jun 14, from -27.8896 to -27.773
+## >>chng 02 jul 19, from -27.773 to -27.795, better two photon
+## >>chng 02 nov 20, from -27.795 to -27.772 noisy, increase error
+## >>chng 03 mar 13, from -27.772 to -27.832, ?
+## >>chng 03 nov 23, from -27.832 to -27.479 Kraemer et al. guess of dr
+## >>chng 03 dec 08, from -27.479 to -27.596 zones, ots
+## >>chng 06 feb 03, from -27.596 to -28.006, guess dr to Badnell mean
+monitor map heating 84718000. -28.006 error 0.1
+##
+## >>chng 02 apr 27, from -22.519 to -22.440, enabled he-iso cooling
+## >>chng 02 may 27, from -22.440 to -22.390, improved brems gaunts
+## >>chng 02 jun 21, from -22.390 to -22.421, improved brems gaunts
+## >>chng 02 aug 19, from -22.421 to -22.476, better he-like cs
+## >>chng 03 mar 13, from -22.476 to -22.500, better he-like cs and coll ion splitting
+## >>chng 03 nov 23, from -22.500 to -22.121 Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -22.121 to -22.448, guess dr to Badnell mean
+## >>chng 06 jul 18, from -22.448 to -22.497 RP major upgrade VS coll strengths
+## >>chng 07 jul 27, from -22.497 to -22.471, repair common error in several collision routines
+## >>chng 17 sep 01, from -22.47 to -22.49, fix bug in high n collisional excitation rates for He-like iso-sequences
+monitor map cooling 84718000. -22.49
+# map.in
+# class function 
+# ========================================
+# 
+
+This is a test of the continuity of the code over a very large range
+of temperature. It was used to produce one of the thermal maps shown in Hazy.
+
+Checks:
+-	No breaks in the heating and cooling curves where
+	various approximations change.
+

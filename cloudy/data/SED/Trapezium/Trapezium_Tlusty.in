@@ -1,0 +1,37 @@
+title The Trapezium cluster
+set save prefix "Trapezium_Tlusty"
+% Stellar parameters for C, A, D are from Simón-Díaz \cite{2006A&A…448..351S}
+% th1C 
+table star tlusty OBstar 3-dim 38950 g=4.10 z=-0.1
+luminosity total solar 5.31 
+%
+% th1D 
+table star tlusty OBstar 3-dim 32000 g=4.20 z=-0.1
+luminosity total solar 4.47 
+%
+% th1A 
+table star tlusty OBstar 3-dim 30000 g=4.00 z=-0.1
+luminosity total solar 4.45 
+%
+% th1C2
+table star tlusty OBstar 3-dim 25000 g=3.86 z=-0.1
+luminosity total solar 4.20 
+%
+% th1B 
+table star tlusty OBstar 3-dim 18000 g=4.10 z=-0.1
+luminosity total solar 3.25 
+%
+brems, 1.6e7K
+luminosity 2.3e33 linear
+%
+hden 0
+radius 17
+stop zone 1
+set dr 0
+%
+save continuum ".con" units microns
+save transmitted continuum ".tran"
+******************
+
+see readme.txt for details.
+

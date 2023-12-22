@@ -1,0 +1,337 @@
+title TH85 PDR with Orion grains
+##>>refer Tielens, A.G.G.M., & Hollenbach, D., 1985, ApJ, 291, 747-754
+#
+# commands controlling continuum =========
+# cosmic background
+background
+# galactic cosmic ray background 
+cosmic rays, background
+# first continuum is FIR hot grain continuum produced in 
+# unmodeled HII Region
+blackbody, t = 75 K
+intensity 2.7 (total)
+# this is the attenuated hot stellar continuum
+black 30000
+intensity  2.204 range  0.4412 to 1 Ryd
+# this will remove all ionizing radiation
+extinguish 24 0
+#
+# commands for density & abundances =========
+hden 5.362
+init file="ism.ini"
+grains orion, abundance log 0.16 no qheat 
+abundances he=-1.01 c=-3.52 n=-8 o=-3.30 ne=-8 mg=-5.89
+continue si= -6.10 s= -5.10 cl=-7 ar=-8 fe= -6.60
+#
+# commands controlling geometry  =========
+# simulate effects of gas we do not model 
+double
+sphere
+# stopping criteria
+# this should be the one actually used
+# >>chn 04 mar 13, from 10 to 36.3, bug in AV had stopped at this depth,
+# so change it to this to keep model the same
+stop AV 36.3 extended 
+# stop when gas is fully neutral
+stop efrac -10
+# stop when gas is cold
+stop temperature 10 linear
+# stop at thickness so that would make results very
+# detail dependent
+## >>chng 03 mar 08, from 16.5 to 16.3, so both th85orion, th85ism,
+## stop for thickness, not C fully molecular
+## >>chng 03 aug 28, stop at a few parsecs
+stop thickness 19
+#
+# other commands for details     =========
+turbulence 2.7 km/sec
+iterate
+failures 3 
+# 
+# this is done to not allow pumping and subsequent photoionization
+# of H by Balmer continuum in keeping with std pdr assumptions 
+## >>chng 16 apr 14, had been case B, this gets same effect with
+## no large Lyman optical depths
+Database H-like Lyman pumping off
+#
+# commands controlling output    =========
+normalize to "c  2" 157.636m 
+# uv lines are strongly pumped by stellar continuum, break out contribution
+print line pump
+print line optical depths
+print ages
+#
+save performance "pdr_th85orion.per"
+save overview "pdr_th85orion.ovr"
+save pdr last "pdr_th85orion.pdr"
+# this only outputs major molecules 
+save molecules last "pdr_th85orion.mol"
+save dr "pdr_th85orion.dr"
+# this is to get all of H molecules 
+save hydrogen physical conditions last "pdr_th85orion.hyd" 
+save results last "pdr_th85orion.rlt"
+save monitors last "pdr_th85orion.asr"
+save continuum units microns last "pdr_th85orion.con"
+save ionizing continuum last "pdr_th85orion.ion"
+save heating last "pdr_th85orion.het"
+save cooling last "pdr_th85orion.col"
+save hydrogen 21 cm last "pdr_th85orion.21cm"
+# these are for the grains
+save grain extinction last  "pdr_th85orion.grnext"
+save grain potential last   "pdr_th85orion.grnpot"
+save grain temperature last "pdr_th85orion.grntem"
+save grain charge last "pdr_th85orion.grnchr"
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 01 apr 11, changed all lines to luminosity, lots changed
+## with revised grain physics
+## >>chng 01 mar 07, from -1.707 to -1.664, change in grain physics
+## >>chng 01 apr 11, from -1.664 to -1.715, change in grain physics
+## >>chng 02 jan 07, broke out H2 grain formation onto each species
+##   and revised D_H to agree with fa in Hollenbach & McKee 79
+##   more H2, gas tends to be warmer
+## >>chng 02 jan 07 from -1.715 to -1.785
+## >>chng 03 aug 28, from -1.785 to -1.776, Nick Abel fix of CO, incr depth
+## >>chng 04 jan 24, from -1.776 to -1.753, rescale orion dust to gas
+## >>chng 04 feb 21, from -1.753 to -1.798, chem update
+## >>chng 04 jul 07, from -1.798 to -1.767, oh ct integ
+## >>chng 05 jul 05, from -1.767 to -1.78, tune up
+## >>chng 13 dec 23, from -1.78 to -1.667, C to external databases
+## >>chng 14 mar 26, from -1.667 to -1.74, Move oxygen data to stout and chianti files
+monitor line luminosity "c  2" 157.636m -1.74 err 0.1 
+##
+## >>chng 02 jan 07 from -1.841 to -0.849
+## >>chng 02 dec 31, from -0.849 to -0.924, do not iterate
+## >>chng 03 mar 08, from -0.924 to -1.943, bugs in solomon, grn surf recom
+## >>chng 03 may 23, from -1.943 to -2.033, corr bug intro above
+## >>chng 03 jun 02, from -2.033 to -2.01, larger def H atom
+## >>chng 03 jun 08, from -2.01 to -2.03, ? ?, increase error to 0.1
+## >>chng 03 jun 10, from -2.03 to -2.347, chng solomon process
+## >>chng 03 aug 03, from -2.347 to -2.303, chng 2s-2p rates
+## >>chng 03 aug 28, from -2.303 to -1.823, Nick Abel fix of CO, incr depth
+## >>chng 03 sep 13, from -1.823 to -1.923, chng H2* rates
+## >>chng 03 sep 23, from -1.923 to -1.973, better convergence, incr error
+## >>chng 03 nov 16, from -1.973 to -2.638, solomon th85 -> db96
+## >>chng 04 feb 09, from -2.638 to -2.92, more th85 -> db96
+## >>chng 04 feb 21, from -2.92 to -3.29 chem update, incr error
+## >>chng 04 mar 24, from -3.29 to -3.02, small changes
+## >>chng 04 may 13, from -3.02 to -2.92, dest albedo chng
+## >>chng 04 jul 02, from -2.92 to -2.80, O H ct
+## >>chng 05 jul 05, from -2.80 to -2.88, add Cl to elem, HCl was important
+## >>chng 05 jul 05, from -2.88 to -2.96, cdsqte err
+## >>chng 05 dec 08, from -2.96 to -3.18, update to Elwert Solomon rate
+## >>chng 11 nov 16, from -3.18 to -3.41, adjust newmole monitors
+## >>chng 14 mar 26, from -3.41 to -4.049, Move oxygen data to stout and chianti files
+## >>chng 14 aug 28, from -4.049 to -3.944, EleyRideal H2 formation
+## >>chng 15 may 30, from -3.944 to -4.105, updates after merge from mainline, r10248
+monitor line luminosity "H2 l" 2.000m -4.105 error 0.2
+##
+## >>chng 02 jan 07 from -0.632 to -0.499
+## >>chng 02 dec 31, from -0.499 to -0.449, do not iterate
+## >>chng 03 mar 08, from -0.449 to -0.664, bugs in solomon, grn surf recom
+## >>chng 03 jun 10, from -0.664 to -0.630 chng solomon process
+## >>chng 04 feb 21, from -0.630 to -0.662 chem update, incr error
+## >>chng 04 may 13, from -0.662 to -0.641, dest albedo chng inr crr
+## >>chng 04 sep 10, from -0.641 to -0.596, rewrite ion solver, auger, grn rec
+monitor line luminosity "o  1" 63.1679m -0.596 error 0.1
+##
+## >>chng 02 jan 07 from -1.771 to -1.555
+## >>chng 03 mar 08, from -1.555 to -1.811, bugs in solomon, grn surf recom
+## >>chng 03 may 23, from -1.811 to -1.856, corr bug intro above
+## >>chng 03 jun 10, from -1.856 to -1.907 chng solomon process
+## >>chng 03 aug 28, from -1.907 to -1.848, Nick Abel fix of CO, incr depth
+## >>chng 03 set 23, from -1.848 to -1.787, better convergence
+## >>chng 04 jul 07, from -1.787 to -1.745, oh ct integ
+## >>chng 05 jul 05, from -1.75  to -1.79, cdsqte err
+## >>chng 13 jul 24, wl from 145.5m to 145.495m, increased wl precision to 6 sig. fig.
+monitor line luminosity "o  1" 145.495m -1.79 error 0.1
+##
+## >>chng 02 jan 07 from -0.517 to -0.275
+## >>chng 03 mar 08, from -0.275 to -0.563, bugs in solomon, grn surf recom
+## >>chng 03 aug 28, from -0.563 to -0.447, Nick Abel fix of CO, incr depth
+## >>chng 03 set 23, from -0.447 to -0.508, better convergence
+## >>chng 04 feb 21, from -0.508 to -0.541 chem update, incr error
+## >>chng 04 jul 07, from -0.541 to -0.515, oh ct integ
+## >>chng 04 dec 08, from -0.515 to -0.540, co-ion feedback, check converg
+## >>chng 05 jul 05, from -0.540 to -0.531 cdsqte err
+## >>chng 14 mar 26, from -0.531 to -0.51, Move oxygen data to stout and chianti files
+monitor line luminosity "toth" 0 -0.51 tune up 
+##
+## >>chng 04 jun 12, add this line
+## >>chng 04 jul 07, from -2.006 to -1.982, oh ct integ
+## >>chng 04 dec 08, from -1.982 to -2.011, co-ion feedback, check converg
+## >>chng 05 jul 05, from -2.011 to -1.993 tune up
+## >>chng 07 dec 15, from -1.993 to -1.974, X-ray grain merge
+## >>chng 14 mar 26, from -1.974 to -2.187, Move oxygen data to stout and chianti files
+monitor line luminosity "Si 2" 34.8046m  -2.187
+##
+## >>chng 03 mar 08, from 2.397 to 2.366, bugs in solomon, grn surf recom
+## >>chng 03 aug 28, from 2.366 to 3.526, Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from 3.526 to 2.619, change stop to Av
+## >>chng 04 jun 30, from 2.619 to 2.643, slow rift up
+## >>chng 04 jul 07, from 2.643 to 2.674, oh ct integ
+## >>chng 04 dec 08, from 2.674 to 2.634, co-ion feedback, check converg
+monitor line luminosity "grat" 0 2.634
+#
+## >>chng 02 jan 07 from -0.004 to -0.066
+## >>chng 03 mar 08, from -0.341 to -0.000 bugs in solomon, grn surf recom
+## >>chng 03 aug 28, from 0.000 to -2.364 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from -2.364 to -0.735 change stop to Av
+## >>chng 03 nov 18, from -0.735 to -0.688, update co network
+## >>chng 04 jan 27, from -0.688 to -0.643, update cosmic ray background
+## >>chng 04 feb 13, from -0.643 to -0.619, add H2 + He+ ->
+## >>chng 04 feb 14, from -0.619 to -0.589, update H2+ + CO rate
+## >>chng 04 feb 21, from -0.589 to -0.394 chem update, incr error
+## >>chng 04 apr 19, from -0.394 to -0.475, Nick Abel update CO aft Leiden
+## >>chng 04 jun 30, from -0.475 to -0.526 slow rift up
+## >>chng 04 jul 17, from -0.526 to -0.461, NA update chem net
+monitor ionization silicon 2 -0.461 error 0.1 
+## 
+## >>chng 04 feb 14, add this, important for H2 and CO dest
+## >>chng 04 mar 24, from -8.244 to -8.800 small changes, incr err
+## >>chng 04 apr 02, from -8.800 to -8.869, update co photo diss rate
+## >>chng 04 apr 17, from -8.869 to -8.254, grn surf recom, better h mole conv
+## >>chng 04 may 13, from -8.254 to -8.211, dest albedo chng inr crr
+## >>chng 04 may 09, from -8.211 to -8.118, NA update H chem net
+## >>chng 04 jul 03, from -8.118 to -8.342, NA update H, CO chem net
+## >>chng 05 aug 03, from -8.34 to -8.27, NA update CO, H chem net
+## >>chng 05 oct 01, from -8.27 to -8.32, RP update He levejs
+## >>chng 07 dec 03, from -8.32 to -8.26, RP changes iso sequences
+## >>chng 11 nov 16, from -8.26 to -8.352, adjust newmole monitors
+## >>chng 12 apr 09, from -8.352 to -7.46, update CR backbround to Indriolo+07, ~8x larger
+monitor ionization helium 2 -7.46 error 0.15
+##
+## >>chng 02 jan 07 from -0.092 to -0.341
+## >>chng 03 mar 08, from -0.341 to -0.017 bugs in solomon, grn surf recom
+## >>chng 03 aug 28, from -0.017 to -2.567 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from -2.567 to -0.936 change stop to Av
+## >>chng 04 feb 21, from -0.936 to -0.512 chem update, incr error
+## >>chng 04 mar 24, from -0.512 to -0.610 small changes, incr err
+## >>chng 04 apr 17, from -0.610 to -0.673, grn surf recom, better h mole conv
+## >>chng 04 jul 17, from -0.673 to -0.620, NA update chem net
+## >>chng 04 jul 17, from -0.620 to -0.667, chng conv chem net, inc err
+## >>chng 06 mar 02, from -0.67 to -0.49, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 12 apr 09, from -0.49 to -0.4063, update CR backbround to Indriolo+07, ~8x larger
+monitor ionization magnesium 2 -0.4063 error 0.15
+##
+## >>chng 02 jan 07 from 214 to 455
+## >>chng 02 dec 31, from 455 to 427, do not iterate
+## >>chng 03 mar 08, from 427 to 237 bugs in solomon, grn surf recom
+## >>chng 03 aug 28, from 237 to 254 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from 254 to 241 change stop to Av
+## >>chng 04 feb 21, from 241 to 166 chem update, incr error
+## >>chng 04 jun 12, from 166 to 178 chng cont shield fcn
+## >>chng 05 jul 05, from 178 to 178 tune up
+## >>chng 06 nov 29, from 178 to 187 Badnell DR turned on
+## >>chng 14 mar 26, from 187 to 140.4, Move oxygen data to stout and chianti files
+monitor temperature "C+" 140.4
+##
+## >>chng 03 may 23, from 21.30 to 21.213, corr bug in solomon process
+## >>chng 03 jun 10, from 21.213 to 21.005 chng solomon process
+## >>chng 03 aug 28, from 21.005 to 24.061 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from 24.061 to 22.406 change stop to Av
+## >>chng 04 jan 23, from 22.406 to 22.464, rescale orion dust to gas
+monitor h2 column density 22.464 error 0.1
+##
+## >>chng 03 jun 10, from 13.09 to 12.865 chng solomon process
+## >>chng 03 aug 28, from 12.865 to 20.471 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 10, from 20.471 to 20.365, better H2* resolution
+## >>chng 03 sep 11, from 20.365 to 20.512, better H2* resolution
+## >>chng 03 sep 16, from 20.512 to 20.839, Nick Abel fix conserv, add mol ion
+## >>chng 03 sep 29, from 20.839 to 19.104 change stop to Av
+## >>chng 03 oct 25. from 19.104 to 19.057, update H chem net
+## >>chng 04 jan 23, from 19.057 to 19.115, rescale orion dust to gas
+## >>chng 04 apr 02, from 19.115 to 19.207, update co photo diss rate
+## >>chng 04 jul 03, from 19.207 to 19.146, NA update H, CO chem net
+monitor CO column density 19.146 error 0.1
+## 
+## >>chng 05 sep 30, add these 5
+## >>chng 12 apr 09, from 9.96 to 10.85, update CR backbround to Indriolo+07, ~8x larger
+monitor column density H2+  10.85 error 0.1
+## >>chng 12 apr 09, from 12.84 to 13.71, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 20 aug 03, from 13.71 to 13.58, update H3+ rates Indriola+ 2012
+monitor column density H3+  13.58 error 0.1
+monitor column density H2g  22.45 error 0.1
+## 
+## >>chng 05 dec 08, from 17.10 to 16.40, update to Elwert Solomon rate
+## >>chng 11 nov 16, from 16.4 to 16.32, adjust newmole monitors
+## >>chng 14 aug 28, from 16.32 to 16.39, EleyRideal H2 formation
+monitor column density H2*  16.39 error 0.1
+## 
+## >>chng 05 dec 08, from 8.27 to 8.33, update to Elwert Solomon rate
+## >>chng 06 mar 02, from 8.33 to 8.37, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 11 nov 16, from 8.37 to 8.241, adjust newmole monitors
+## >>chng 12 apr 09, from 8.241 to 9.138, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 aug 28, from 9.138 to 9.092, EleyRideal H2 formation
+monitor column density HeH+ 9.092 error 0.1
+## 
+##
+## >>chng 03 mar 08, all following about 15% warmer, bugs solomon grn surf rec
+## >>chng 03 aug 28, from 106 to 43.85 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from 43.85 to 55.83 change stop to Av
+monitor grain 01 temperatuer 55.83
+##
+## >>chng 03 aug 28, from 98.4 to 43.8 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from 43.8 to 55.04 change stop to Av
+monitor grain 03 temperature 55.04 
+##
+## >>chng 03 aug 28, from  74.5 to 43.6 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from 43.6 to 52.47 change stop to Av
+monitor grain 09 temperature 52.47
+##
+## >>chng 03 aug 28, from  83.6 to 43.9 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from 43.9 to 56.16 change stop to Av
+monitor grain 11 temperature 56.16 
+##
+## >>chng 03 aug 28, from  68.3 to 43.8 Nick Abel fix of CO, incr depth
+## >>chng 03 sep 29, from 43.8 to 54.75 change stop to Av
+monitor grain 19 temperature 54.75 
+##
+## >>chng 02 jan 07 from 220 to 280
+## >>chng 02 jun 13, from 280 to 320, finer i front
+## >>chng 02 jul 25, from 320 to 330, better convergence 
+## >>chng 03 jun 08, from 330 to 200, ? finer stability?
+## >>chng 03 aug 28, from  200 to 600 Nick Abel fix of CO, incr depth
+## >>chng 04 jun 03, from  600 to 660 finer check on change in mole with r 
+## >>chng 04 jul 17, from 660 to 850 NA update chem net
+## >>chng 05 jul 05, from 850 to 900 cdsqte err
+## >>chng 08 dec 08, from 900 to 815, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 815 to 830, merging newsolvers branch
+## >>chng 09 jan 16, from 830 to 832, average of 10 runs
+## >>chng 09 ocrt 24 from 832 to 826, drift down, rm small error
+## >>chng 12 oct 22, from 826 to 787, zone tau in rt_line_one
+## >>chng 12 nov 28, from 787 to 832, Make HII dr limit symmetric
+## >>chng 14 mar 26, from 832 to 872, Move oxygen data to stout and chianti files
+monitor nzone 872 
+##
+## >>chng 03 aug 28, from  5.5 to 5 Nick Abel fix of CO, incr depth
+## >>chng 08 dec 08, from 5 to 3.793, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 3.793 to 10.68, merging newsolvers branch
+## >>chng 09 jan 16, from 10.68 to 10.72 (error 0.04), average of 10 runs
+## >>chng 09 oct 12, from 10.72 to 11.13, extend fine continuum to lower limit of code by default
+## >>chng 12 apr 02, from 11.13 to 8.473, Chianti 7 change, gcc 4.4.6 wolkje
+## >>chng 13 nov 05, from 8.473 to 4.653, convergence branch changes
+## >>chng 14 apr 07, from 4.653 to 3.64, move H/C out of ConvBase loop
+monitor itrzn 3.64
+##
+# pdr_th85orion.in
+# class pdr  
+# ========================================
+
+This is the Tielens and Hollenbach (1985a, b) standard model of
+the Orion photodissociation region (PDR).  Specifically,
+this is my attempt at their Table 2 of paper 2, ApJ 291,  p749.
+The Database H-like Lyman pumping off command appears because the Lyman lines are
+vastly optically thick in this environment. 
+If the command is removed the Lyman lines will be optically thin,
+which will result in fast fluorescent excitation of the
+(nearly totally neutral) hydrogen atom.
+
+# >>refer	model	pdr	Tielens, A. G. G. M., & Hollenbach, D. 1985a, ApJ, 291, 722
+# >>refer	model	pdr	Tielens, A. G. G. M., & Hollenbach, D. 1985b, ApJ, 291, 746
+  

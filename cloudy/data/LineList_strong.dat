@@ -1,0 +1,53 @@
+#
+# This is a minimal list of lines 
+#
+C  3	977
+N  3	991
+# >>chng 17 may 26, wl from 1215.68 to 1215.67A, update Rydberg constant
+H  1	1215.67A
+nFnu    1218.08A
+blnd  1240
+blnd 1549
+blnd  1666
+blnd 1909
+c  3	2296.90
+ne 3  3342.18
+nFnu	3645
+nFnu	3647
+blnd  3727
+ne 3  3868.76
+## >>chng 19 mar 01, change "Blnd" 4363 -> "O  3" 4363.21
+O  3  4363.21
+# >>chng 17 may 26, wl from 4861.36 to 4861.33A, update Rydberg constant
+# >>chng 20 aug 22, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+# >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+# >>chng 21 april 7, H I wl from 4861.33 to 4861.34A, replacing average energy with np energies
+# >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+H  1	4861.32A
+nFnu	4885.36
+O  3	5006.84
+O  1	5577.34
+# >>chng 22 jul 09, wl from 5754.61 to 5754.59A, upgrade to Chianti v10
+N  2  5754.59A
+# >>chng 13 jul 30, wl from 5875.61 to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+Blnd	5875.66A
+blnd  6300
+n  2  6583.45
+blnd  7325
+blnd    7306A
+S  3   33.4704m
+n  3  57.3238m
+O  3   51.8004m
+# >>chng 13 jul 26, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+# >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+# >>chng 20 aug 22, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+# >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+# >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+# >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+Q(H)    4861.32A #total intensity in Hbeta is nothing else absorbs ionizing radiation
+GraT       0 # total emission in grain IR, zero if no grains 
+# the file ends with the end of file, or a cr in the first col
+
+

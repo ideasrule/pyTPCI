@@ -1,0 +1,41 @@
+title test very soft continuum, very hot gas
+#
+# commands controlling continuum =========
+table agn
+ionization parameters -2
+#
+# commands for density & abundances =========
+hden 1.
+#
+# commands controlling geometry  =========
+stop zone 1
+# specify a thin cell of gas - 1 cm thick
+set dr 0 
+#
+# other commands for details     =========
+# set constant temperature to high-T limit
+constant temperature, t=10 log 
+# iterate since gas is optically thin
+iterate
+#
+# commands controlling output    =========
+save overview "func_t10.ovr"
+save performance "func_t10.per"
+save monitors last "func_t10.asr"
+#
+# commands giving the monitors    =========
+## >>chng 11 sep 15, from -11.02 to -10.98, Chianti for Fe moderate to high ions
+monitor ionization Hydrogen 1 -10.98 error 0.1
+monitor ionization Helium 2   -9.34 error 0.1
+monitor ionization Carbon 6   -6.39 error 0.1
+monitor ionization Oxygen 8   -5.56 error 0.1
+## >>chng 11 sep 15, from -2.09 to -2.34, Chianti for Fe moderate to high ions
+monitor ionization Iron  26   -2.34 error 0.1
+# 
+# func_t10.in
+# class limit 
+# ========================================
+# 
+
+This is a test of the highest temperature the code can do.
+

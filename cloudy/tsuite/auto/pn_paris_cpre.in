@@ -1,0 +1,310 @@
+title "Paris meeting PN with constant pressure"
+# standard" PN model of the Pequignot Meudon Conference
+#
+# commands controlling continuum =========
+black body, T = 150000 K, radius = 10
+#
+# commands for density & abundances =========
+hden = 3.4771213
+constant pressure
+init file="ism.ini"
+# these elements were not part of the workshop models
+element chlorine off
+element argon off
+element iron off
+abund he=-1 C=-3.523 N=-4. O=-3.222 ne=-3.824 mg=-4.523 
+continue si=-4.523 s=-4.824 cl=-7 ar=-10 fe=-10 
+#
+# commands controlling geometry  =========
+radius = 17
+sphere
+#
+# other commands for details     =========
+age 10^2^2 years
+#
+# commands controlling output    =========
+print lines sort wavelength
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+normalize to "Ca b" 4861.32A 
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+print line optical depths 
+print ages 
+print column densities 
+save performance "pn_paris_cpre.per"
+save overview "pn_paris_cpre.ovr"
+save transmitted continuum "pn_paris_cpre.trn"
+save continuum units microns "pn_paris_cpre.con"
+save element carbon  "pn_paris_cpre.car"
+save physical conditions "pn_paris_cpre.phy"
+save element nitrogen "pn_paris_cpre.nit" 
+save monitors"pn_paris_cpre.asr"
+save dr "pn_paris_cpre.dr"
+save temperature "pn_paris_cpre.tem"
+save lines emissivity "pn_paris_cpre.ems"
+## >>chng 13 jul 25, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+h  1 6562.80A
+Blnd  6720
+end of lines
+save averages "pn_paris_cpre.avr" last
+temperature hydrogen 1 
+end of averagers
+#
+# commands giving the monitors    =========
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A luminosity 35.45
+## >>chng 13 jul 25, wl from 4686 to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 35 to 34.88, Marios bug fixes
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+monitor line "He 2" 4685.68A luminosity 34.88
+## >>chng 13 jul 25, wl from 4686 to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+monitor line "Ca B" 4685.68A luminosity 34.97
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A > 0.8
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A < 1.1
+monitor line "BaC " 3646 14.6
+## >>chng 13 jul 25, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 2.868 to 2.802, Marios bug fixes
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "H  1" 6562.80A 2.802 error 0.02
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A 1. error 0.02
+## >>chng 13 jul 25, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 15 may 27, from 36.8 to 34.42, PS64 fixes
+## >>chng 15 sep 28, from 34.42 to 32.04, degeneration criteria and lifetime changes to higher initial level
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line "H  1" 1215.67A 32.04
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.327 to 0.2977, Marios bug fixes
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "H  1"  1.87510m 0.2977
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "Ca B"  1.87510m 0.318
+## >>chng 13 jul 25, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 06, wl from 5875.61A to 5875.64A, botched merge
+## >>chng 16 aug 07, from 0.1217 to 0.1138, Marios bug fixes
+## >>chng 18 feb 20, updated spectral label from "he 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 5875.66A 0.1138
+## >>chng 13 feb 12, from 0.1132 to 0.1204, changes due to r7242
+## >>chng 13 jul 25, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 25, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 5875.64A 0.1204
+## >>chng 13 jul 25, wl from 3889 to 3888.63A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.0508 to 0.054, Marios bug fixes
+## >>chng 21 mar 16, wl from 3888.63A to 3888.64A, update NIST energies
+monitor line "he 1" 3888.64A 0.054
+## >>chng 13 jul 25, wl from 4471 to 4471.47A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 06, wl from 4471.47A to 4471.49A, botched merge
+## >>chng 18 feb 20, updated spectral label from "he 1" 4471.49A to "Blnd" 4472.76A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 4472.76A to 4471.50A, adjust multiplet Blend WL for refraction index
+monitor line "Blnd" 4471.50A 0.0391
+## >>chng 13 jul 25, wl from 4471 to 4471.47A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 25, wl from 4471.47A to 4471.49A, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 4471.49A 0.0388
+## >>chng 13 jul 25, wl from 20580 to 2.05813m, increased wl precision to 6 sig. fig.
+monitor line "He 1"  2.05813m  0.0168
+## >>chng 13 jul 25, wl from 1.083m to 1.08299m, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 06, wl from 1.08299m to 1.08303m, botched merge
+## >>chng 15 may 12, from 1.135 to 1.27, coll. str. reduced mass scaling
+## >>chng 16 oct 21, from 1.27 to 1.33, new l-changing rates from Hlike_HS87 reintegration
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+## >>chng 19 jul 30, from 1.33 to 0.8043, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 0.8043 to 0.6343, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line "Blnd" 1.08302m 0.6343
+## >>chng 13 jul 25, wl from 1.083m to 1.08303m, increased wl precision to 6 sig. fig.
+monitor line "Ca B" 1.08303m 1.062
+## >>chng 16 aug 07, from 2.314 to 2.103, Marios bug fixes
+## >>chng 20 aug 22, wl from 1640.43 to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, up 1-e energies to np
+monitor line "He 2" 1640.41A 2.103
+## >>chng 20 aug 22, wl from 1640.43 to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, up 1-e energies to np
+monitor line "Ca B" 1640.41A 2.274
+## >>chng 13 jul 25, wl from 4686 to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.3494 to 0.2665, Marios bug fixes
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+monitor line "He 2" 4685.68A 0.2665
+## >>chng 13 jul 25, wl from 4686 to 4685.64A, increased wl precision to 6 sig. fig.
+## >>chng 20 aug 25, wl from 4685.64A to 4685.70A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 4685.70A to 4685.68A, up 1-e energies to np
+monitor line "Ca B" 4685.68A 0.3285
+monitor line "blnd" 2326 0.289 error 0.1
+## >>chng 16 jul 24, from 2.35 to 1.77, update C III to 2014A&A...566A.104F
+monitor line "blnd" 1909 1.77 error 0.1
+## >>chng 14 mar 26, from 2.3 to 2.141, Move oxygen data to stout and chianti files
+## >>chng 16 jul 24, from 2.141 to 2.239, update C III to 2014A&A...566A.104F
+monitor line "blnd" 1549 2.239
+## >>chng 14 jan 05, from 1.058 to 0.9638, N to external databases
+monitor line "N  2"  6583.45 0.9638
+## >>chng 14 mar 26, from 0.1393 to 0.1256, Move oxygen data to stout and chianti files
+monitor line "blnd"  1750 0.1256 error 0.1
+monitor line "n  3"  57.3238m  0.081
+## >>chng 17 jul 30, from 0.2122 to 0.287, update N IV data to 2017JPhB...50f5203F
+monitor line "blnd" 1486 0.287 error 0.1
+monitor line "blnd"  1240 0.1291 error 0.1
+## >>chng 14 mar 26, from 0.1715 to 0.1374, Move oxygen data to stout and chianti files
+monitor line "O  1"  6300.30 0.1374
+## >>chng 16 aug 07, from 1.783 to 1.864, Fran bug fix
+monitor line "blnd"  3727 1.864
+## >>chng 19 aug 06, from 0.5932 to 0.621, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+monitor line "o  2"  3728.81A  0.621
+## >>chng 16 aug 07, from 1.172 to 1.226, Fran bug fix
+monitor line "o  2"  3726.03A  1.226
+## >>chng 14 mar 26, from 0.1653 to 0.1765, Move oxygen data to stout and chianti files
+monitor line "blnd"  2471A  0.1765
+## >>chng 15 nov 03, from 0.1165 to 0.1219, update O III CS to Storey+14
+monitor line "blnd"  7323A  0.1219
+## >>chng 14 apr 07, from 0.0941 to 0.0984, move H/C out of ConvBase loop
+monitor line "blnd"  7332A  0.0984
+## >>chng 15 oct 14, from 17.19 to 18.07, update Ne 3 cs to McLaughlin+11
+monitor line "o  3"  5006.84 18.07
+## >>chng 16 jul 24, from 0.1883 to 0.1992, update C III to 2014A&A...566A.104F
+## >>chng 19 mar 01, change "Blnd" 4363 -> "O  3" 4363.21
+monitor line "O  3"  4363.21 0.1992
+## >>chng 14 mar 26, from 0.8564 to 0.9137, Move oxygen data to stout and chianti files
+monitor line "O  3" 51.8004m  0.9137
+## >>chng 14 mar 26, from 3.11 to 2.896, Move oxygen data to stout and chianti files
+## >>chng 22 jul 09, wl from 25.8832m to 25.8863m, upgrade to Chianti v10
+## >>chng 22 jul 09, from 2.896 to 3.29, upgrade to Chianti v10
+monitor line "o  4"  25.8863m  3.29
+monitor line "blnd"  1402  0.2057 error 0.1
+## >>chng 16 aug 17, from 0.1485 to 0.0904, botches due to bugfix at r11237
+## >>chng 16 aug 17, from 0.0904 to 0.1531, botches, in O 5, due to update to head of this branch
+## >>chng 22 jul 09, from 0.1531 to 0.1696, upgrade to Chianti v10
+monitor line "blnd"  1218  0.1696 error 0.1
+## 
+## >>chng 13 feb 01, from 0.0392 to 0.042, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, from 0.042 to 0.0448, Ne to external databases
+## >>chng 13 jul 26, wl from 12.81m to 12.8101m, increased wl precision to 6 sig. fig.
+## >>chng 19 sep 25, from 0.0448 to 0.041, update Ne II H0 CS
+monitor line "Ne 2" 12.8101m  0.041
+## 
+## >>chng 13 jul 26, wl from 15.55m to 15.5503m, increased wl precision to 6 sig. fig.
+## >>chng 15 oct 14, from 1.766 to 1.382, update Ne 3 cs to McLaughlin+11
+## >>chng 15 oct 15, wl from 15.5503m to 15.5509m, update Ne III energies
+monitor line "Ne 3" 15.5509m  1.382
+## >>chng 13 jul 24, from 2.194 to 1.848, Ne to external databases
+## 
+## >>chng 13 jul 26, wl from 3869 to 3868.75A, increased wl precision to 6 sig. fig.
+## >>chng 15 oct 14, from 1.848 to 1.484, update Ne 3 cs to McLaughlin+11
+## >>chng 15 oct 15, wl from 3868.75A to 3868.76A, update Ne III energies
+monitor line "Ne 3" 3868.76A  1.484
+monitor line "blnd" 2424  0.7827 error 0.1
+## >>chng 13 jul 26, wl from 3426 to 3426.03A, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 0.4662 to 0.4224, Move oxygen data to stout and chianti files
+## >>chng 22 jul 09, wl from 3426.03A to 3425.88A, upgrade to Chianti v10
+monitor line "Ne 5" 3425.88A  0.4224 error 0.1
+## 
+## >>chng 13 feb 01, from 0.9091 to 0.8424, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, from 0.8424 to 0.9339 Ne to external databases
+## >>chng 22 jul 09, wl from 24.2065m to 24.3109m, upgrade to Chianti v10
+## >>chng 22 jul 09, from 0.9339 to 0.7386, upgrade to Chianti v10
+monitor line "Ne 5" 24.3109m  0.7386
+## 
+## >>chng 12 oct 26, from 1.576 to 1.184, adjust montiors to this branch
+## >>chng 13 nov 25, from 1.184 to 1.128, remove jump from Federman shielding fn
+## >>chng 13 dec 18, from 1.128 to 1.184, fixes to Federman shielding
+## >>chng 22 jul 09, from 1.184 to 1.276, upgrade to Chianti v10
+monitor line "blnd" 2798  1.276
+## 
+## >>chng 13 sep 12, from 0.1292 to 0.1364, database Mg
+## >>chng 22 jul 09, wl from 4.48712m to 4.48711m, upgrade to Chianti v10
+## >>chng 22 jul 09, from 0.1364 to 0.1101, upgrade to Chianti v10
+monitor line "mg 4" 4.48711m  0.1101
+monitor line "Blnd" 2335  0.1853
+## >>chng 14 mar 26, from 0.5483 to 0.4845, Move oxygen data to stout and chianti files
+## >>chng 15 nov 16, from 0.4845 to 0.5594, update Si III, 1888 TP now 3x smaller
+monitor line "Blnd" 1888  0.5594 error 0.1
+## >>chng 13 jul 15, from 0.2205 to 0.2061, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 14 mar 26, from 0.2061 to 0.1963, Move oxygen data to stout and chianti files
+## >>chng 16 jul 24, from 0.1963 to 0.2067, update C III to 2014A&A...566A.104F
+monitor line "Blnd" 1397  0.2067
+## 
+## >>chng 13 feb 01, from 0.3599 to 0.4034, BUGFIX, largely undo r6703
+## >>chng 13 mar 03, from 0.4034 to 0.3449, update atomic models for S II, S III
+## >>chng 14 dec 14, from 0.3449 to 0.3865, update S2+ - S+ DR to Badnell+ 2015 ApJ
+## >>chng 16 dec 20, from 0.3865 to 0.4094, add secondary autoionization to DR suppression
+## >>chng 19 jul 18, from 0.4094 to 0.4715, update SII A to Podobedova, Kelleher,&Wiese 2009, JPCRD, Vol. 3 
+## >>chng 23 may 11, from 0.4715 to 0.4952, update RR DR to 2022 Badnell wor
+monitor line "Blnd" 6720  0.4952
+## 
+## >>chng 12 jul 01, from 0.5409 to 0.573, update Badnell DR to 13-electron iso sequence
+## >>chng 13 mar 04, from 0.573 to 0.4355, botches after updating S  3, S  4 wavelengths
+## >>chng 13 jul 25, wl from 18.71m to 18.7078m, increased wl precision to 6 sig. fig.
+monitor line "S  3"  18.7078m  0.4355
+## 
+## >>chng 12 jul 01, from 1.456 to 1.544, update Badnell DR to 13-electron iso sequence
+## >>chng 13 jul 25, wl from 9531 to 9530.62A, increased wl precision to 6 sig. fig.
+monitor line "S  3"  9530.62A  1.544
+## 
+## >>chng 12 jul 01, from 2.397 to 2.262, update Badnell DR to 13-electron iso sequence
+## >>chng 13 jul 25, wl from 10.51m to 10.5076m, increased wl precision to 6 sig. fig.
+## >>chng 18 jan 17, from 2.262 to 2.139, update Badnell RR, DR to http://dx.doi.org/10.1051/0004-6361/201731243
+monitor line "S  4" 10.5076m  2.139
+monitor ionization fraction volume helium 2 0.6122
+## 
+## >>chng 12 nov 08, from 182 to 199, fix e-,H2 dissociation rate
+monitor nzone 199
+## >>chng 13 nov 05, from 38.3 to 17.27, convergence branch changes
+## >>chng 14 apr 07, from 17.27 to 13.09, move H/C out of ConvBase loop
+monitor itrzn 13.09
+monitor temperature "H+" volume 1.252e+04 0.02
+monitor temperature "He+2" volume 1.425e+04 0.02
+monitor temperature "He+2" radius 1.497e+04 error 0.02
+## >>chng 22 jul 09, from 1.833e+04 to 1.886e+04, upgrade to Chianti v10
+monitor temperature face 1.886e+04 error 0.02 
+monitor radius 17.48
+monitor hheicf -0.0290 error 0.003
+##
+# pn_paris_cpre.in 
+# class pn 
+# ========================================
+# 
+
+
+This is one of the "standard" models computed at the Paris meeting on
+photoionization and shock calculations, modified by assuming constant
+pressure within the nebula.
+

@@ -1,0 +1,153 @@
+title PN with density propt R^-2 and filling factor
+# this is an optically thin model, which will have a broad range
+# of density but the same ionization parameter across the model.  
+# the physical condtions should not vary by much across the structure
+#
+# commands controlling continuum =========
+# continuum is hot blackbody at ~Ledd for solar mass
+blackbody, t=5 luminosity=38
+#
+# commands for density & abundances =========
+# the density will fall off as the inverse square of the radius, hence the name
+hden 5 -2
+init file "ism.ini"
+# use default PN abundances but turn off quantum heating since
+# we are not going to save the predicted near IR continuum
+abundances planetary no qheat 
+#
+# commands controlling geometry  =========
+# small filling factor so that region will be optically thin
+filling factor -2
+# set inner and outer radius 
+radius 16 18
+sphere
+#
+# other commands for details     =========
+iterate
+# 
+# commands controlling output    =========
+print line faint 1 
+save performance "pn_sqrden.per"
+save overview "pn_sqrden.ovr" last
+save monitors "pn_sqrden.asr" last
+save dr "pn_sqrden.dr" last
+save molecules "pn_sqrden.mol" 
+#
+# commands giving the monitors    =========
+##
+## >>chng 01 mar 02, from 31.973 to 31.883 change H RT
+## >>chng 04 jun 12, from 31.883 to 31.918, chng cont shield fcn
+## >>chng 07 oct 22, from 31.918 to 31.831, resolve l-levels of h-like sequence
+## >>chng 07 dec 15, from 31.831 to 31.871, X-ray grain merge
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "H  1" 4861.32A 31.871
+##
+## >>chng 01 dec 21, inner shell yields, from 38.4 to 34.9
+## >>chng 03 aug 22, to luminosity
+## >>chng 07 dec 15, from 33.459 to 33.392, X-ray grain merge
+monitor line luminosity "blnd" 1549A 33.392 error 0.1
+##
+## >>chng 01 dec 21, inner shell yields, from 73.1 to 65.1
+## >>chng 03 aug 22, to luminosity
+## >>chng 07 dec 15, from 33.692 to 33.570, X-ray grain merge
+monitor line luminosity "blnd"  1240A 33.570 error 0.1
+##
+## >>chng 02 jun 15, from 299.75 to 283.3, line pump shielding
+## >>chng 03 may 17, from 283.3 to 56.9, update pump more often 
+## >>chng 03 aug 22, to luminosity
+## >>chng 03 oct 30, from 33.647 to 33.624, diff zoning
+## >>chng 04 mar 04, from 33.624 to 34.13, improv conv
+## >>chng 09 mar 27, from 34.13 to 34.07 improve rigor esc prob & pop defns
+## >>chng 09 apr 18, from 34.07 to 34.12, refactor evaluation of esc dest probs to occur with cooling
+## >>chng 12 oct 22, from 34.12 to 33.62, zone tau in rt_line_one
+## >>chng 13 jan 10, from 33.62 to 33.72, fix in-zone continuum shielding
+## >>chng 16 oct 21, wl from 629.733A to 629.732A, update
+monitor line luminosity "o  5" 629.732A 33.72 error 0.1
+##
+## >>chng 01 dec 21, inner shell yields, most changed by 5-7%
+## >>chng 07 dec 15, from 4.353 to 4.319, X-ray grain merge
+monitor temperature "H+" volume 4.319
+##
+## >>chng 01 dec 21, inner shell yields, most changed by 5-7%
+## >>chng 04 may 10, from -4.957 to -4.982, slow drift
+## >>chng 07 dec 15, from -4.982 to -4.942, X-ray grain merge
+monitor ionization volume element Hydrogen 1 -4.942
+##
+monitor ionization volume element Hydrogen 2 -0.000
+##
+## >>chng 02 jul 23, from -2.824 to -2.799, slow drift
+monitor ionization volume element Helium   2 -2.799
+##
+monitor ionization volume element Helium   3 -0.001
+##
+## >>chng 01 aug 23 from -3.505 to -3.478
+## >>chng 06 nov 24, from -3.478 to -3.454, turn on Badnell RR
+## >>chng 06 nov 29, from -3.454 to -3.303, Badnell DR turned on
+## >>chng 11 jul 12, from -3.303 to -3.332, enable fit to Badnell DR suppression
+monitor ionization volume element Carbon  3 -3.332
+##
+## >>chng 07 dec 15, from -1.568 to -1.521, X-ray grain merge
+monitor ionization volume element Carbon  4 -1.521
+##
+monitor ionization volume element Carbon  5 -0.011
+##
+## >>chng 04 may 10, from -4.968 to -4.991, slow drift
+## >>chng 07 dec 15, from -4.991 to -4.955, X-ray grain merge
+monitor ionization radius element Hydrogen 1 -4.955
+##
+monitor ionization radius element Hydrogen 2 -0.000 
+##
+## >>chng 07 dec 15, from -2.835 to -2.798, X-ray grain merge
+monitor ionization radius element Helium   2 -2.798
+##
+monitor ionization radius element Helium   3 -0.001
+##
+## >>chng 01 aug 23 from -3.573 to -3.546
+## >>chng 06 nov 24, from -3.546 to -3.520, turn on Badnell RR
+## >>chng 06 nov 29, from -3.520 to -3.295, Badnell DR turned on
+## >>chng 11 jul 12, from -3.295 to -3.366, enable fit to Badnell DR suppression
+## >>chng 12 nov 01, from -3.366 to -3.42, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -3.42 to -3.327, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -3.327 to -3.388, update DR suppression
+monitor ionization radius element Carbon  3 -3.388
+##
+## >>chng 07 dec 15, from -1.579 to -1.532, X-ray grain merge
+monitor ionization radius element Carbon  4 -1.532
+##
+monitor ionization radius element Carbon  5 -0.011
+##
+## >>chng 03 aug 22, from 17 to 25, line overlap
+## >>chng 04 feb 15, from 25 to 15
+## >>chng 04 sep 16, from 15 to 40 (!), incr edentrue convergence
+## >>chng 08 dec 08, from 40 to 31.9, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 31.9 to 47.76, merging newsolvers branch
+## >>chng 09 jan 16, from 47.76 to 47.39, average of 10 runs
+## >>chng 09 feb 23, from 47.39 to 45.72, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 15, from 45.72 to 44, gradual approach to outer edge
+## >>chng 09 jun 26, from 44 to 45.77, remove several dampers
+## >>chng 11 jun 14, from 45.77 to 57.6, new Te solver
+## >>chng 11 jun 22, from 57.6 to 50.38, tune Te solver
+## >>chng 11 aug 05, from 50.38 to 52.26, rescale low-lying HeI thresh photo cross sections
+## >>chng 11 aug 05, from 52.26 to 50.66, fix mistake in r5333
+## >>chng 12 mar 07, from 50.66 to 41.51, renorm to r5961 results
+## >>chng 13 nov 05, from 41.51 to 22.6, convergence branch changes
+## >>chng 13 nov 25, from 22.6 to 7.281, convergence branch changes
+## >>chng 14 apr 07, from 7.281 to 5.904, move H/C out of ConvBase loop
+monitor itrzn 5.904
+##
+## >>chng 08 dec 08, from 160 to 136, upper limit -> equals (r2515)
+## >>chng 09 jun 15, from 136 to 146, gradual approach to outer edge
+monitor nzone 146 error 0.01
+# pn_sqrden.in
+# class pn 
+# ========================================
+
+Checks:
+-	Zone thickness budgeting handled OK.
+-       physical conditions nearly constant across computed structure
+

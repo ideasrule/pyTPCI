@@ -1,0 +1,160 @@
+title Ly alpha forest cloud
+#
+# commands controlling continuum =========
+# ionized by cosmic background
+# plus quasar/starburst continuum 
+## background, z=2 ; this includes both black body and AGN parts
+## >>chng 05 aug 29, from background to cmb plus hm05 to test hm05
+cmb z=2
+table hm05 z = 2
+#
+# commands for density & abundances =========
+hden -2
+metals -1.5  ##reduce all heavy elements by 1.5 dex
+#
+# commands controlling geometry  =========
+stop neutral column density 15
+double  ## mimic two-sided photoionization
+#
+# other commands for details     =========
+iterate to convergence## must iterate since optically thin
+#
+# commands controlling output    =========
+print line faint -1
+no lines isotropic continuum subtraction
+set save prefix "igm_lalpha_noisosub"
+save performance ".per"
+save overview last ".ovr"
+save dr last ".dr"
+save results last ".rlt"
+#
+# commands giving the monitors    =========
+# on 05 aug 29 changed from old background command to
+# cmb 2 plus hm05 z=2 background - all results changed substantially
+monitor thickness 19.721
+monitor temperature "H+" 4.270
+monitor ionization hydrogen 1 -2.721
+monitor ionization Helium 1 -2.726
+monitor ionization Helium 2 -0.236
+monitor ionization Helium 3 -0.380
+##
+## >>chng 06 nov 29, from -3.939 to -4.007, Badnell DR turned on
+monitor ionization Oxygen 1  -4.007
+## 
+## >>chng 06 nov 29, from -1.239 to -1.300, Badnell DR turned on
+monitor ionization Oxygen 2  -1.300
+## 
+monitor ionization Oxygen 3  -0.096
+## 
+## >>chng 06 nov 29, from -0.865 to -0.785, Badnell DR turned on
+monitor ionization Oxygen 4  -0.785
+##
+## >>chng 06 nov 24, from -4.719 to -4.749, turn on Badnell RR
+## >>chng 06 nov 29, from -4.749 to -4.685, Badnell DR turned on
+monitor ionization Carbon 1  -4.685 
+##
+## >>chng 06 nov 29, from -1.091 to -1.173, Badnell DR turned on
+monitor ionization Carbon 2  -1.173 
+##
+monitor ionization Carbon 3  -0.089 
+##
+## >>chng 06 nov 29, from -1.039 to -1.093, Badnell DR turned on
+monitor ionization Carbon 4  -1.093 
+##
+## >>chng 06 nov 29, from -1.881 to -1.906, Badnell DR turned on
+monitor ionization Carbon 5  -1.906
+## 
+## >>chng 06 jun 06, add these after query from Jane Charlton
+## Mg0 column densities did vary greatly between c90 and c94 but
+## no sims detected this 
+## >>chng 06 nov 24, from -3.956 to -4.063, turn on Badnell RR
+## >>chng 06 nov 29, from -4.063 to -3.557, Badnell DR turned on
+## >>chng 08 oct 18, from -3.557 to -3.655, include Badnell UTA data
+## >>chng 11 sep 15, from -3.655 to -3.511, Chianti for Fe moderate to high ions
+## >>chng 15 mar 07, from -3.511 to -3.492, merging newmesh branch
+monitor ionization Magnesium 1  -3.492
+## 
+## >>chng 06 nov 24, from -1.461 to -1.572, turn on Badnell RR
+## >>chng 06 nov 29, from -1.572 to -1.618, Badnell DR turned on
+## >>chng 08 oct 18, from -1.618 to -1.717, include Badnell UTA data
+monitor ionization Magnesium 2  -1.717
+## 
+## >>chng 06 nov 29, from -0.075 to -0.116, Badnell DR turned on
+monitor ionization Magnesium 3  -0.116 
+## 
+## >>chng 06 nov 29, from -0.926 to -0.714, Badnell DR turned on
+monitor ionization Magnesium 4  -0.714 
+## 
+## >>chng 06 nov 29, from -2.227 to -1.813, Badnell DR turned on
+monitor ionization Magnesium 5  -1.813 
+## 
+## >>chng 06 nov 29, from -3.830 to -3.487, Badnell DR turned on
+monitor ionization Magnesium 6  -3.487
+##
+## >>chng 07 nov 29, from -5.209 to -5.307 update DR rates
+## >>chng 08 oct 18, from -5.307 to -5.327, include Badnell UTA data
+## >>chng 11 jul 12, from -5.327 to -6.259, update to head of branch, without new coll DR suppression
+## >>chng 12 jul 01, from -6.259 to -5.563, update Badnell DR to 13-electron iso sequence
+## >>chng 15 mar 07, from -5.563 to -5.538, merging newmesh branch
+monitor ionization Silicon 1  -5.538
+##
+## >>chng 07 nov 29, from -1.193 to -1.316 update DR rates
+monitor ionization Silicon 2  -1.316
+##
+## >>chng 08 oct 18, from -0.149 to -0.1742, include Badnell UTA data
+monitor ionization Silicon 3  -0.1742
+##
+## >>chng 06 nov 29, from -0.863 to -0.778, Badnell DR turned on
+## >>chng 08 oct 18, from -0.778 to -0.7361, include Badnell UTA data
+monitor ionization Silicon 4  -0.7361
+##
+## >>chng 08 oct 18, from -1.064 to -1.018, include Badnell UTA data
+monitor ionization Silicon 5  -1.018
+##
+## >>chng 06 feb 07, from -2.844 to -2.869, add exp to low-T DR 
+## >>chng 08 sep 22, from -2.869 to -3.106, remove Ali et al. DR guess
+monitor ionization Iron 2  -3.106
+##
+## >>chng 08 sep 22, from -0.827 to -1.017, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -1.017 to -0.9689, update Ar sequence Badnell DR rates
+monitor ionization Iron 3  -0.9689
+##
+monitor ionization Iron 4  -0.178
+##
+## >>chng 06 nov 26, from -0.819 to -0.797, use Gu et al. UTA data
+## >>chng 08 sep 22, from -0.797 to -0.6945, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -0.6945 to -0.7175, update Ar sequence Badnell DR rates
+monitor ionization Iron 5  -0.7175
+##
+## >>chng 07 apr 30, from -1.511 to -1.485, log DR average, use mix S DR
+## >>chng 07 nov 29, from -1.485 to -1.513, update DR rates
+## >>chng 08 sep 22, from -1.513 to -1.457, remove Ali et al. DR guess
+## >>chng 11 apr 22, from -1.457 to -1.502, update Ar sequence Badnell DR rates
+monitor ionization Iron 6  -1.502
+##
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line emergent intensity "H  1" 1215.67A -6.741
+##
+## >>chng 07 jan 20, from 5 to 8 (6.33) e2 bug
+## >>chng 08 dec 08, from 8 to 5.833, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 5.833 to 13.08, merging newsolvers branch
+## >>chng 09 jan 08, from 13.08 to 14, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, disabled this assert since this model has too few zones for it to be reliable
+## assert itrzn 14 error 0.02
+##
+# igm_lalpha_noisosub.in
+# class igm 
+# ========================================
+# 
+  
+This example demonstrates the behavior of the code in the low-density limit. 
+The ionizing source is the cosmic background at a redshift of z = 2. 
+The cloud is assumed to be optically thin to ionizing radiation,
+in keeping with the Gunn-Peterson test, so the double command is included,
+and an iteration is performed to converge the optical depth scale. 
+Continuum fluorescent excitation of lines is important because the cloud
+is optically thin.
+
+This sim computes line intensities not corrected for isotropic continua
+(see the "no lines..." command above).  Its sister sim, igm_lalpha.in,
+computes intensities corrected for isotropic continua.

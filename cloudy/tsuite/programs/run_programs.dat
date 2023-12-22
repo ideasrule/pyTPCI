@@ -1,0 +1,11 @@
+# this is a list of directory names
+# within each directory is a program of the same name, ending in .cpp
+# the perl script will march through all directories and execute the programs
+collcool
+collion
+comp4
+hazy_coolingcurve
+hazy_kmt
+hizlte
+vary_nete
+varyn

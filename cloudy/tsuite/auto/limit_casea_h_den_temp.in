@@ -1,0 +1,47 @@
+title Test model H in Case A limit
+# grid over nebular range of density and temperature to check Case A H
+#
+# commands controlling continuum =========
+# create H+ 
+laser 2 Ryd
+ionization parameter -2
+#
+# commands for density & abundances =========
+init "honly.ini"
+hden 2. vary
+grid 2 6 2 sequential
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+no scattering escape
+case A hummer no Pdest no photoionization
+no induced processes
+constant temperature 4. vary
+grid 5000K to 20000K step 5000K linear
+#
+# commands controlling output    =========
+database H-like print levels
+database H-like resolved levels 20
+database H-like collapsed levels 30
+save grid "limit_casea_h_den_temp.grd"
+save overview "limit_casea_h_den_temp.ovr"
+save performance "limit_casea_h_den_temp.per"
+save monitors "limit_casea_h_den_temp.asr"
+# 
+# commands giving the monitors    =========
+# fixit the wavelength range is adjusted to avoid the Lyman lines
+# the Lyman a / 2 photon ratio is wrong at high Temperature -
+# is there a temperature dependent branching ratio to n=2 out
+# of the collapsed level?
+monitor Case A H-like  Hydrogen error 0.15 range 1000A to 25000A
+# 
+# limit_casea_h_den_temp.in 
+# class limit 
+# ========================================
+# 
+
+this tests the predicted H I and He I spectra in the Case B limit.
+The grid is over both density and temperature.
+

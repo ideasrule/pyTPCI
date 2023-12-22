@@ -1,0 +1,39 @@
+#mix from Cameron 1982, in "Essays on Nuclear Astro"
+#
+HYDROGEN	1
+HELIUM		0.0677
+LITHIUM		2.20E-09
+BERYLLIUM	4.50E-11
+BORON		3.40E-10
+CARBON		4.22E-04
+NITROGEN	8.72E-05
+OXYGEN		6.93E-04
+FLUORINE	2.90E-08
+NEON		9.77E-05
+SODIUM		2.25E-06
+MAGNESIUM	3.98E-05
+ALUMINIUM	3.20E-06
+SILICON		3.76E-05
+PHOSPHORUS	2.40E-07
+SULPHUR		1.88E-05
+CHLORINE	1.78E-07
+ARGON		3.99E-06
+POTASSIUM	1.30E-07
+CALCIUM		2.35E-06
+SCANDIUM	1.16E-09
+TITANIUM	9.00E-08
+VANADIUM	9.50E-09
+CHROMIUM	4.80E-07
+MANGANESE	3.50E-07
+IRON		3.38E-05
+COBALT		8.27E-08
+NICKEL		1.80E-06
+COPPER		2.00E-08
+ZINC		4.70E-08
+***************************
+
+These are from Cameron (1982). Note that the helium abundance
+is very low, either it or the Big Bang is wrong.
+
+A. G. W. Cameron. Elemental and Nuclidic Abundances in the Solar System. In Essays in Nuclear
+Astrophysics, pages 23–+, 1982.

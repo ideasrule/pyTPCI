@@ -1,0 +1,16 @@
+#
+# This file is used to print the Cloudy citation in the main Cloudy output
+# all lines starting with '#' are comments and will be ignored.
+# all other lines are copied verbatim to the output, except that XXXX will be replaced by the actual version number.
+#
+#   DO NOT ALTER THE "XXXX" STRING!
+#
+# Be careful not add empty lines at the end since these will be copied to the output as well...
+#
+ Cloudy is a research project that involves the creative efforts of many people.  It should be cited as follows:
+   "Calculations were performed with version XXXX of Cloudy (Chatzikos et al. 2023)."
+
+ The reference is:
+   M. Chatzikos, S. Bianchi, F. Camilloni, P. Chakraborty, C. M. Gunasekera,
+   F. Guzmán, J. S. Milby, A. Sarkar, G. Shaw, P. A. M. van Hoof, G. J. Ferland
+   2023, RMxAA, 59, 327

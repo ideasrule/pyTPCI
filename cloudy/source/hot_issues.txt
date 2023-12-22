@@ -1,0 +1,191 @@
+HOT ISSUES
+
+ming gu dr data received 2007 feb 8, incorporate into cloudy
+
+table starburst - write claus
+
+table stars in hazy is wrong
+
+check e2 function at line 300 of service.cpp
+check thirdparty.cpp
+e2 function error
+I traced the source of the discrepancy to lines 385 thru 419 of iter_startend.cpp. There opac.TauAbsFace is set to opac.taumin, but opac.ExpmTau is initialized from opac.opacity_abs*radius.drad_x_fillfac/2., which can be vastly different. Reading the comments and variable names suggests that all should be the optical depth to the illuminated face or functions thereof. So this appears to be a bug, but I am not sure if you can trust the comments...
+I am also not completely sure about what happens further down between lines 1145 and 1198.
+
+NI pumping
+
+what happened with e2
+
+uta code query, get out of conv_base
+
+rename lines.in
+
+hmi.H2_H2g_to_H2s_rate_used - make multiple occurances like rest
+review H2_Solomon* in hmi.h
+also mole_h_drive.cpp around line 880
+mole_h_step.cpp line 610
+
+but make sure all "used" are saved and rest
+
+
+purify crash in func_trans_read after trans write
+
+bad malloc h_lrg_atom 
+
+comp4 memory violation - numb of species in co increased for second sim - grains brought in ice?
+
+CI, OI excitation by H0, add abrahamsson et al. 07 rates (in atomic data folder in literature directory)
+
+C+ - C0 DR badnell email from Hagai - check L shell rates for ions of fe
+
+cloudy should be changed to lgCloudy since now bool
+cdDrive behaves as bool but is int, do something?
+
+move to cddefines.h, broke.h, cloudy.h, fudge.h, hydrooscilstr.h, hydro.h, ligbar.h, mewecoef.h numderiv.h 
+put continuum negative into continuum.h
+
+review description in path.cpp to make sure makes sense to novice
+
+agn_lex00*.in series of input scripts do not following convention of comments and order as rest of test suite
+explain why induced processes are turned off, or better yet, turn them on
+
+code review - behar - gu uta data read in atmdat_readin.cpp
+
+co network fails in leiden f3 when badnell recombination coefficients are used
+test on CO/C > 1 never appears to converge - it is at line 375 of mole_co_drive - better to let exit with problem so that ionization solver will also be called?  try removing test
+also, limt to number of inner convergence loops may be too large since does not appear to converge.  this is var LUPMAX_CODRIV used in line 619 of same file, setting to 10 seems to have little effect
+
+document
+iterate advection, Make convergence error smaller on each iteration until smaller than discretization error.  Then decrease discretization error.
+
+TABLE STAR <grid> LIST - this lists the contents of that grid.
+
+TABLE STAR AVAIL - this lists the available grids with parameters (but not the user-defined grids of course).
+
+conv_ioniz.c line 106 add conv_fail - this caused many conv failures in short time dep model
+
+mole_h_step.c, TE introduce change in G0 face when spherical geometry in place to get around
+problem with non-conservation of energy in very spherical case.  
+all changes are in mole_h_step.c okn 06 oct 24
+But approximation at line 6196 is not continuous - will be sudden drop in heating
+
+mole_co_drive.c line 475 do not do co network if H+/Htot > 0.5
+turned off advection in co network, mole_co_solve.c, line 85 routine CO_solve
+
+papers dynamics timedep cden has cd.in which does not converge co chem with ioniz 
+
+Gu - new UTSs
+
+CII 1335 check recom in code - use old NS value
+==================================
+
+orly email - 
+of 6/25/2006 includes plot that shows temp vs time for cp - rapid fall is at about 3.5e13 sec.  the old cp.tim file does get this answer, the current code cools at 4.3e13 sec using the 3/2 branch.  if the 5/2 branch is used instead the cooling time goes down to ~2.5e13 sec.  shown in variouis.xls in orly dir.  in this spreadsheet the red curve is the "old cloudy" result (from 6/2006) and seems to agree with orly ps file, the short and long curves are the 5/2 and 3/2 branches.
+
+===============================
+
+he1n2t4.in - sets line precision and columns of intensiteis no longer line up
+list_routines.pl in source and source_hot dirs no longer works
+==================================
+Nick continuum bands caper
+Nick - continuum has problems in very dusty high U environment - commented out zoning on tau - dust - instead perhaps should predict total emission that escapes - this would not include incidient continuum or emitted continuum that will be absorbed down stream - would only include net emission that escapes
+continuum components
+attenuated incudent continuum
+emitted and escaping in inner direction
+emitted in outer direction
+
+rt_diffuse.c does this continuum interaction
+defines local var DiffuseEscape which is locally emitted which escapes zone?
+rfield.ConEmitLocal is total local emission - this should be used in source function for true RT
+read todo near line 53 of rt_diffuse for next step, off on branch
+
+=================================
+go over all chem questions and updates from Robin Williams
+
+jon savin underscore comments should be ok, probably also underscore within double quotes
+
+agn_lex00_u*.in scripts for new models are not in proper internal format
+
+grazina subdir in bugs/converge has three models with problems
+
+trick to get grains to work, does not work
+
+remove ferguson vriens & smeets collision strengths - Hion_colldeexc_cs
+
+doxygen search web interface, print doxygen manual
+
+add test case to detect Jane Charlton's column densites
+
+======================
+combine headers
+cloudy.h
+fudgec.h 
+helike_ several - could be brought together
+hydroeinsta - one routine
+numderiv.h - one var - nothing else
+tabden - one var
+
+======================
+http://xxx.lanl.gov/PS_cache/astro-ph/pdf/0606/0606275.pdf gives data for Ni II
+
+problem with helium recombination rates printed with 'print arrays' command
+run the func_test case with print arrays included
+recom rates do not add up, example,
+ He Recom total  7.03e-008 2.60e-008
+ He radiati rec  5.16e-009 2.60e-008
+ He drBadnel rec 1.16e-025 0.00e+000
+ He chr trn rec  4.04e-014 8.98e-014
+apparently radiative recom rate save in rr used array is not actually the rate used
+
+add cr pressure somewhere hextra.cr_energydensity
+
+billow - grains qheat bounds exception in purify
+
+line 309 prt_lines_lv1_li_ne - use pequignot rate
+
+move HD best model into slow
+
+document case b he-like emission does not include collisional n-changing or l-mixing - in ldl with 2 ^3S added on
+
+atomleveln do not do malloc until after checking whether code will return with no work
+
+hazy1 reread atom H-like lyman pumping discussion of optdepth 
+
+64 bit machines have assert in dynamics.c - look at alpha recom in tests
+
+helike dr use badnell dr instead of recomputing it ionbal.DR_Badnell_rate_coef[nelem][ion]
+
+rt line one line 59 change apr 05, return if pop is zero
+
+fix slow run files, also put in a time dependent model
+
+negative wind velocity used to determine what sets line width, line 35 rt line one tauinc, and line 11678 rt esc prob - should be continuous range from somolev to tau
+
+hazy, say line critical density only meaningful for single lines, only include cs down for that one line - or include other transitions
+
+hazy rewrite chap 2 on running from command line, show windows, show simple script
+
+emergent lines
+include geometry.covrt in emission?
+
+test state code in test suite 
+
+discuss intrinsic vs emergent spectrum in quick start guide, intro to hazy 1
+
+print line xx should have emergent and intrinsic keywords
+
+gu uta data
+
+check all occur of emline save struct
+check [0] vs [1]
+check var within []
+review lineadd linedst putline
+
+======================================
+
+turbulent and ram pressure terms at line 199 of pressure_total.c do not include factors of 1/2.  
+	Also add turbulent pressure to total preessure.
+
+lines_service.c, routine outline, rfield.outlin shoud have tmn include - what does this do?
+
+in rt diffuse, use outline to do the iso sequence - should not be any explicit use of rfield.outlin

@@ -1,0 +1,119 @@
+title redshift 1000 recombination epoch
+#
+# commands controlling continuum =========
+# a true blackbody radiation field, in strict thermodynamic equilibrium
+blackbody 3000 STE
+#
+# commands for density & abundances =========
+hden 0
+abundances primordial
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+case b 
+iterate
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+normalize lines to "Ca B" 4861.32A
+print ages
+print departure coef element hydrogen
+print line faint -5
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save overview "igm_z3.ovr"
+save performance "igm_z3.per"
+save dr "igm_z3.dr"
+save monitors "igm_z3.asr"
+#
+# commands giving the monitors    =========
+## >>chng 01 sep 24, from 80.5 to 59.2, lower def case b optical depth
+## >>chng 03 may 17, from 59.2 to 23.6, update pump more often
+## >>chng 04 mar 04, from 23.6 to 54.07, improv conv
+## >>chng 04 jun 12, from 54.07 to 80.0, chng cont shield fcn
+## >>chng 07 oct 22, from 80.0 to 111.7, resolve l-levels of h-like sequence
+## >>chng 12 oct 22, from 111.7 to 92.71, zone tau in rt_line_one
+## >>chng 13 jan 08, from 92.71 to 104, remove duplicated factor in Pelec_esc
+## >>chng 13 jan 10, from 104 to 109.8, fix in-zone continuum shielding
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A 109.8
+##
+monitor "H+" temperature 3000
+##
+## >>chng 00 mar 22, widflx, pump bug from -0.709 to -0.672, also error
+## >>chng 01 aug 23, from 0.672 to 0.699, 2x better con res
+## >>chng 01 sep 24, from -0.699 to -1.06 lower def case b optical depth
+## >>chng 03 may 17, from -1.06 to -1.26 update pump more often
+## >>chng 04 mar 04, from -1.26 to -1.11 improv conv
+## >>chng 04 jun 12, from -1.11 to -0.651 chng cont shield fcn
+## >>chng 12 oct 22, from -0.651 to -0.9445, zone tau in rt_line_one
+## >>chng 13 jan 08, from -0.9445 to -0.7807, remove duplicated factor in Pelec_esc
+## >>chng 13 jan 10, from -0.7807 to -0.5804, fix in-zone continuum shielding
+## >>chng 13 dec 18, from -0.5804 to -0.6269, fixes to Federman shielding
+monitor ionization hydrogen 2 -0.6269 error 0.06
+##
+## >>chng 01 sep 24, from 0.304 to 0.326 lower def case b optical depth
+## >>chng 02 may 27, from 0.326 to 0.359, improved brems gaunts
+## >>chng 02 jun 21, from 0.359 to 0.320, improved brems gaunts
+## >>chng 03 may 17, from 0.320 to 0.347 update pump more often
+## >>chng 04 mar 04, from 0.347 to 0.327, imrov conv
+## >>chng 04 jun 12, from 0.327 to 0.294 chng cont shield fcn
+## >>chng 11 nov 16, from 0.294 to 0.3225, adjust newmole monitors
+## >>chng 11 dec 16, from 0.3225 to 0.2677, adjust botches due to recent iso recomb changes
+## >>chng 12 oct 22, from 0.2677 to 0.2963, zone tau in rt_line_one
+## >>chng 13 jan 08, from 0.2963 to 0.3199, remove duplicated factor in Pelec_esc
+## >>chng 13 may 23, from 0.3199 to 0.2974, move opac_update before cool_eval
+monitor line "ff h" 0 0.2974
+##
+## >>chng 01 sep 24, from 0.0185 to 0.049 lower def case b optical depth
+## >>chng 03 may 17, from 0.049 to 0.0806 update pump more often
+## >>chng 04 mar 04, from 0.0806 to 0.0555, imrov conv
+## >>chng 04 jun 12, from 0.0555 to 0.0162 chng cont shield fcn
+## >>chng 12 oct 22, from 0.0162 to 0.0365, zone tau in rt_line_one
+## >>chng 13 jan 08, from 0.0365 to 0.0236, remove duplicated factor in Pelec_esc
+## >>chng 13 jan 10, from 0.0236 to 0.0131, fix in-zone continuum shielding
+## >>chng 13 dec 18, from 0.0131 to 0.0152, fixes to Federman shielding
+monitor line "h- h" 0 0.0152
+##
+## >>chng 01 sep 24, from 0.0163 to 0.043 lower def case b optical depth
+## >>chng 03 may 17, from 0.043 to 0.0703 update pump more often
+## >>chng 04 mar 04, from 0.0703 to 0.0485, imrov conv
+## >>chng 04 jun 12, from 0.0485 to 0.0142 chng cont shield fcn
+## >>chng 12 oct 22, from 0.0142 to 0.0321, zone tau in rt_line_one
+## >>chng 13 jan 08, from 0.0321 to 0.0207, remove duplicated factor in Pelec_esc
+## >>chng 13 jan 10, from 0.0207 to 0.0115, fix in-zone continuum shielding
+## >>chng 13 dec 18, from 0.0115 to 0.0133, fixes to Federman shielding
+monitor line "h-fb" 0 0.0133
+##
+## >>chng 01 sep 24, from 0.0103 to 0.027 lower def case b optical depth
+## >>chng 03 may 17, from 0.027 to 0.0444 update pump more often
+## >>chng 04 mar 04, from 0.0444 to 0.0307, imrov conv
+## >>chng 04 jun 12, from 0.0307 to 0.0090 chng cont shield fcn
+## >>chng 12 oct 22, from 0.009 to 0.0203, zone tau in rt_line_one
+## >>chng 13 jan 08, from 0.0203 to 0.013, remove duplicated factor in Pelec_esc
+## >>chng 13 jan 10, from 0.013 to 0.0072, fix in-zone continuum shielding
+## >>chng 13 dec 18, from 0.0072 to 0.0084, fixes to Federman shielding
+monitor line "h2+ " 0 0.0084
+##
+# igm_z3.in
+# class limit igm
+# ========================================
+# 
+
+This is a model of the universe near the recombination epoch, at
+a redshift of a thousand.  The gas is exposed to a true blackbody at
+3000 K, and the abundances are primordial.  
+
+

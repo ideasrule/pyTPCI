@@ -1,0 +1,45 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=5 were downloaded using ADM.
+#
+# NB NB NB  np energy used for shell n up to n=5
+#
+# The remaining data were calculated using the ATLL r123
+#
+ 1 -1 -1 -1 0 6
+ 2 -1 -1 -1 26788791.3333333 4.47214
+ 3 -1 -1 -1 31739891.0666667 0.520683
+ 4 -1 -1 -1 33473131.5333333 0.213437
+ 5 -1 -1 -1 34275173.0533333 0.0942809
+ 6 -1 -1 -1 34712080
+ 7 -1 -1 -1 34974330
+ 8 -1 -1 -1 35144510
+ 9 -1 -1 -1 35261160
+10 -1 -1 -1 35344600
+11 -1 -1 -1 35406326
+12 -1 -1 -1 35453272
+13 -1 -1 -1 35489806
+14 -1 -1 -1 35518793
+15 -1 -1 -1 35542178
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L15349 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=15349&comment_code=&amp;element=Ar&amp;spectr_charge=18&amp;ref=15349&amp;type=E
+# PUBCON    Title: Energy Levels and Observed Spectral Lines of Ionized Argon, Ar II through Ar XVIII
+# PUBCON  Authors: E. B. Saloman
+# PUBCON  Journal: J. Phys. Chem. Ref. Data 39, 033101 (2010)
+# PUBCON      DOI: https://doi.org/10.1063/1.3337661
+# 
+# PUB     Refcode: L7188 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=7188&comment_code=&amp;element=Ar&amp;spectr_charge=18&amp;ref=7188&amp;type=E
+# PUBCON    Title: The Lamb Shift in Hydrogen-like Atoms, 1 ≤ Z ≤ 110
+# PUBCON  Authors: W. R. Johnson, and G. Soff
+# PUBCON  Journal: At. Data Nucl. Data Tables 33, 405–446 (1985)
+# PUBCON      DOI: https://doi.org/10.1016/0092-640X(85)90010-5

@@ -1,0 +1,4 @@
+test
+print line precision 6
+table lines "LineList_NLR.dat"
+

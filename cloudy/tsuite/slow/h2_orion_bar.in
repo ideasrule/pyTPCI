@@ -1,0 +1,388 @@
+Title Orion Bar with magneitc field with equipartition cosmic rays
+# This is the Orion Bar model presented in Pellegrini et al, Shaw et al.
+#
+# commands controlling continuum =========
+# these give the shape and intensity
+table SED "star_kurucz_39600.dat"
+Q(H) 48.99 
+brems 6 
+luminosity 32.6 range 36.76 to 588.0 Ryd
+#
+# commands for density & abundances =========
+Hden 3.500 
+init file="ism.ini" 
+Abundances H II region no grains                                                
+grains orion no qheat
+# these were actually used in the paper
+grains PAH no qheat
+## grains "ph2c_ab08_10.opc" function 3
+## grains "ph2n_ab08_10.opc" function 3  
+## >>TODO when paper is complete change this to whatever we decide upon
+## must monitor some vib excited lines since these are very sensitive
+## to temperature
+## set PAH "H,H2"
+#
+# commands controlling geometry  =========
+iterate
+sphere 
+double 
+stop temperature 0.602K 
+Constant pressure 
+Magnetic field tangled -5.10 2
+radius 0.114 to 0.5 linear parsecs
+#
+# other commands for details     =========
+cosmic rays equipartition 
+Set nend 3000 
+database h2 
+# use ORNL data for ortho & para H2 collisions
+database H2 orH2 collisions ORNL
+database H2 paH2 COLLISIONS ORNL
+turbulence 2km/s 2                                                              
+#
+# commands controlling output    =========
+print line faint -6                                                             
+print line sort wavelength                                                      
+print line column                                                               
+print last                                                                      
+save performance "h2_orion_bar.per"
+save grain opacity "h2_orion_bar.grop"   
+save monitors "h2_orion_bar.asr"   
+save h2 populations zone last "h2_orion_bar.h2pop"   
+save continuum last "h2_orion_bar.con" units microns
+save H2 lines last "h2_orion_bar.h2lin" 
+save overview last "h2_orion_bar.ovr"  
+save pressure last "h2_orion_bar.press" 
+save molecules last "h2_orion_bar.mol"    
+save secondaries last "h2_orion_bar.2nd" 
+save heating last "h2_orion_bar.heat"   
+save H2 rates last "h2_orion_bar.h2rat" last 
+save h2 column density last "h2_orion_bar.h2col" 
+save h2 temperature last "h2_orion_bar.temp"
+save PDR last "h2_orion_bar.pdr"
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 11 jul 16, add these
+## >>chng 11 jul 16, from 10 to 22.94, add column density monitors
+## >>chng 12 apr 09, from 22.94 to 22.43, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 13 oct 30, from 22.43 to 22.48, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 22.48 to 22.53, EleyRideal H2 formation
+## >>chng 20 jul 21, from 22.53 to 22.77, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density H2   22.77 error 0.1
+## >>chng 11 jul 16, from 10 to 19.74, add column density monitors
+## >>chng 11 nov 16, from 19.74 to 19.7, adjust newmole monitors
+## >>chng 12 jan 06, from 19.7 to 19.74, several H2 model changes
+## >>chng 12 apr 09, from 19.74 to 19.65, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 14 aug 28, from 19.65 to 19.69, EleyRideal H2 formation
+## >>chng 23 sep 08, from 19.69 to 19.74, fix SQRTPI in Lya destprob
+monitor column density CO   19.74 error 0.1
+## >>chng 11 jul 16, from 10 to 16.23, add column density monitors
+## >>chng 11 nov 16, from 16.23 to 16.01, adjust newmole monitors
+## >>chng 12 jan 06, from 16.01 to 16.16, several H2 model changes
+## >>chng 12 apr 09, from 16.16 to 15.44, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 12 oct 12, from 15.44 to 15.49, reset h2.lgEvaluate each iteration and sim
+## >>chng 13 mar 23, from 15.49 to 15.55, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 15.55 to 15.64, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 15.64 to 15.72, EleyRideal H2 formation
+## >>chng 14 dec 04, from 15.72 to 15.82, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 15.82 to 16.39, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 20 sep 06, from 16.39 to 16.52, further update to McCall CR-related rates from r14260
+## >>chng 21 apr 10, from 16.52 to 16.48, update chemistry and LAMDA
+monitor column density H3+  16.48 error 0.1
+## >>chng 11 jul 16, from 10 to 14.16, add column density monitors
+## >>chng 12 apr 09, from 14.16 to 14.51, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 13 oct 30, from 14.51 to 14.57, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 14.57 to 14.62, EleyRideal H2 formation
+## >>chng 15 aug 03, from 14.62 to 14.66, update LAMDA to 2015
+## >>chng 20 jul 21, from 14.66 to 14.87, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density H2+  14.87 error 0.1
+## >>chng 11 jul 16, from 10 to 12.09, add column density monitors
+## >>chng 11 dec 12, from 12.09 to 12.04, bug-fix for updating grain opacity (r5759)
+## >>chng 12 apr 09, from 12.04 to 12.78, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 14 mar 26, from 12.78 to 12.73, move O to external databases
+## >>chng 20 jul 21, from 12.73 to 12.56, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density H-   12.56 error 0.1
+## >>chng 11 jul 16, from 10 to 22.94, add column density monitors
+## >>chng 12 apr 09, from 22.94 to 22.43, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 13 oct 30, from 22.43 to 22.48, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 22.48 to 22.53, EleyRideal H2 formation
+## >>chng 20 jul 21, from 22.53 to 22.77, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density H2g  22.77 error 0.1
+## >>chng 11 jul 16, from 10 to 18.05, add column density monitors
+## >>chng 12 jan 06, from 18.05 to 18, several H2 model changes
+## >>chng 12 apr 09, from 18 to 18.41, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 13 jun 27, from 18.41 to 18.36, BUGFIX use g-bar for H2-H2 collisions
+## >>chng 13 oct 30, from 18.36 to 18.4, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 18.4 to 18.44, EleyRideal H2 formation
+## >>chng 16 mar 20, from 18.44 to 18.48, change from Werner model to Stout model for Fe+
+## >>chng 20 jul 21, from 18.48 to 18.31, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 23 sep 08, from 18.31 to 18.35, fix SQRTPI in Lya destprob
+monitor column density H2*  18.35 error 0.1
+## >>chng 11 jul 16, from 10 to 11.87, add column density monitors
+## >>chng 11 nov 16, from 11.87 to 11.81, adjust newmole monitors
+## >>chng 12 apr 09, from 11.81 to 12.58, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 14 aug 28, from 12.58 to 12.53, EleyRideal H2 formation
+## >>chng 14 dec 04, from 12.53 to 12.49, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 12.49 to 12.44, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density HeH+ 12.44 error 0.1
+## >>chng 11 jul 16, from 10 to 16.43, add column density monitors
+## >>chng 11 nov 16, from 16.43 to 15.98, adjust newmole monitors
+## >>chng 12 jan 06, from 15.98 to 16.49, several H2 model changes
+## >>chng 12 apr 09, from 16.49 to 15.92, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 12 oct 12, from 15.92 to 15.97, reset h2.lgEvaluate each iteration and sim
+## >>chng 13 mar 23, from 15.97 to 16.01, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 16.01 to 16.06, change H2/HD secondary scale factors
+## >>chng 14 dec 04, from 16.06 to 16.12, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 16.12 to 16.54, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 23 may 15, from 16.54 to 16.5, GS updates 21 reactions to UMIST 2012
+monitor column density O2   16.5 error 0.1
+## >>chng 11 jul 16, from 10 to 16.74, add column density monitors
+## >>chng 11 nov 16, from 16.74 to 16.3, adjust newmole monitors
+## >>chng 12 jan 06, from 16.3 to 16.77, several H2 model changes
+## >>chng 12 oct 12, from 16.77 to 16.84, reset h2.lgEvaluate each iteration and sim
+## >>chng 13 mar 23, from 16.84 to 16.88, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 16.88 to 16.92, change H2/HD secondary scale factors
+## >>chng 14 dec 04, from 16.92 to 17, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 17 to 17.28, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density H2O  17.28 error 0.1
+## >>chng 11 jul 16, from 10 to 17.03, add column density monitors
+## >>chng 11 nov 16, from 17.03 to 17.23, adjust newmole monitors
+## >>chng 12 jan 06, from 17.23 to 16.93, several H2 model changes
+## >>chng 12 apr 09, from 16.93 to 15.4, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 12 oct 12, from 15.4 to 15.35, reset h2.lgEvaluate each iteration and sim
+## >>chng 13 oct 30, from 15.35 to 15.41, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 15.41 to 15.46, EleyRideal H2 formation
+## >>chng 14 dec 04, from 15.46 to 15.5, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 15.5 to 15.92, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 sep 11, from 15.92 to 15.79, LAMDA update
+## >>chng 23 may 15, from 15.79 to 15.72, GS updates 21 reactions to UMIST 2012
+monitor column density C2   15.72 error 0.1
+## >>chng 11 jul 16, from 10 to 15.71, add column density monitors
+## >>chng 11 nov 16, from 15.71 to 15.97, adjust newmole monitors
+## >>chng 12 jan 06, from 15.97 to 15.58, several H2 model changes
+## >>chng 12 apr 09, from 15.58 to 13.52, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 13 oct 30, from 13.52 to 13.59, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 13.59 to 13.65, EleyRideal H2 formation
+## >>chng 14 dec 04, from 13.65 to 13.72, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 13.72 to 14.14, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 sep 11, from 14.14 to 14.01, LAMDA update
+monitor column density C3   14.01 error 0.1
+## >>chng 11 jul 16, from 10 to 16.1, add column density monitors
+## >>chng 11 nov 16, from 16.1 to 15.46, adjust newmole monitors
+## >>chng 12 jan 06, from 15.46 to 16.09, several H2 model changes
+## >>chng 12 apr 09, from 16.09 to 14.88, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 12 oct 12, from 14.88 to 15.01, reset h2.lgEvaluate each iteration and sim
+## >>chng 13 mar 23, from 15.01 to 15.1, improve big h2/chemistry consistency
+## >>chng 13 oct 30, from 15.1 to 15.16, change H2/HD secondary scale factors
+## >>chng 14 mar 26, from 15.16 to 15.12, move O to external databases
+## >>chng 14 aug 28, from 15.12 to 15.21, EleyRideal H2 formation
+## >>chng 14 dec 04, from 15.21 to 15.31, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 15.31 to 15.9, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 apr 10, from 15.9 to 15.85, update chemistry and LAMDA
+monitor column density SiO  15.85 error 0.1
+## >>chng 11 jul 16, from 10 to 17.23, add column density monitors
+## >>chng 11 nov 16, from 17.23 to 16.75, adjust newmole monitors
+## >>chng 12 jan 06, from 16.75 to 17.29, several H2 model changes
+## >>chng 12 apr 09, from 17.29 to 17.64, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 12 oct 12, from 17.64 to 17.71, reset h2.lgEvaluate each iteration and sim
+## >>chng 13 mar 23, from 17.71 to 17.75, improve big h2/chemistry consistency
+## >>chng 14 aug 28, from 17.75 to 17.8, EleyRideal H2 formation
+## >>chng 15 mar 07, from 17.8 to 17.84, merging newmesh branch
+## >>chng 20 jul 21, from 17.84 to 18.08, update DR H2 diss as per  2020RNAAS...4...78S
+monitor column density OH   18.08 error 0.1
+## >>chng 11 jul 16, from 10 to 16.12, add column density monitors
+## >>chng 11 nov 16, from 16.12 to 16.19, adjust newmole monitors
+## >>chng 12 jan 06, from 16.19 to 16.07, several H2 model changes
+## >>chng 12 apr 09, from 16.07 to 15.04, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 14 aug 28, from 15.04 to 15.08, EleyRideal H2 formation
+## >>chng 20 jul 21, from 15.08 to 15.26, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 sep 11, from 15.26 to 15.19, LAMDA update
+monitor column density CN   15.19 error 0.1
+## >>chng 11 jul 16, from 10 to 17.76, add column density monitors
+## >>chng 11 nov 16, from 17.76 to 17.89, adjust newmole monitors
+## >>chng 12 jan 06, from 17.89 to 17.72, several H2 model changes
+## >>chng 12 apr 09, from 17.72 to 17.27, update backbround CR to Indiolo_07 (8x larger)
+## >>chng 12 oct 12, from 17.27 to 17.22, reset h2.lgEvaluate each iteration and sim
+## >>chng 14 mar 26, from 17.22 to 17.28, move O to external databases
+## >>chng 16 dec 20, from 17.28 to 17.32, add secondary autoionization to DR suppression
+## >>chng 20 jul 21, from 17.32 to 17.44, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 sep 11, from 17.44 to 17.36, LAMDA update
+monitor column density CH   17.36 error 0.1
+##
+## >>chng 13 jun 27, from -3.4460 to 35.7358, add H2 2.121m line luminosity
+## >>chng 13 jun 27, from 35.7358 to 36.0254, fix the errors in mole_h2_coll.cpp
+## >>chng 13 jul 24, wl from 2.1215m to 2.12125m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from 36.03 to 35.97, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 35.97 to 36.02, EleyRideal H2 formation
+## >>chng 14 dec 04, from 36.02 to 36.06, fix double-counting of big-H2 Solomon rate
+monitor line luminosity "H2  " 2.12125m  36.06 error 0.1
+##
+## >>chng 13 jun 27, from -8.869 to 33.58, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 14 dec 04, from 33.58 to 33.6, fix double-counting of big-H2 Solomon rate
+## >>chng 15 aug 03, from 33.6 to 33.9, update LAMDA to 2015
+## >>chng 20 jul 21, from 33.9 to 33.97, update DR H2 diss as per  2020RNAAS...4...78S
+monitor "H2O " 538.142m line intensity 33.97
+## >>chng 13 jun 27, from -7.357 to 31.32, add line intensities of some molecules with strong emissions
+## >>chng 13 jun 27, from 31.32 to 31.3, fix the errors in mole_h2_coll.cpp
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 31.3 to 31.27, move O to external databases
+## >>chng 14 aug 28, from 31.27 to 31.32, EleyRideal H2 formation
+## >>chng 14 dec 04, from 31.32 to 31.39, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 31.39 to 31.66, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 sep 11, from 31.66 to 31.5, LAMDA update
+monitor "HNC " 1652.90m  line intensity 31.5
+## >>chng 13 jun 27, from -8.563 to 31.34, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from 31.34 to 31.4, change H2/HD secondary scale factors
+## >>chng 14 mar 26, from 31.4 to 31.38, move O to external databases
+## >>chng 14 aug 28, from 31.38 to 31.46, EleyRideal H2 formation
+## >>chng 14 dec 04, from 31.46 to 31.55, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 31.55 to 32.03, update DR H2 diss as per  2020RNAAS...4...78S
+monitor "HCS+" 1755.88m  32.03 line intensity
+## >>chng 13 jun 27, from -7.453 to 31.32, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from 31.32 to 31.35, change H2/HD secondary scale factors
+## >>chng 14 aug 28, from 31.35 to 31.38, EleyRideal H2 formation
+## >>chng 14 dec 04, from 31.38 to 31.43, fix double-counting of big-H2 Solomon rate
+## >>chng 15 aug 03, from 31.43 to 31.46, update LAMDA to 2015
+## >>chng 20 jul 21, from 31.46 to 31.71, update DR H2 diss as per  2020RNAAS...4...78S
+monitor "CS  " 3058.86m  31.71 line intensity
+## >>chng 13 jun 27, from -7.288 to 32.23, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 32.23 to 32.2, move O to external databases
+monitor "CO  " 2600.05m  32.2 line intensity
+## >>chng 13 jun 27, from -6.463 to 33.22, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 14 jan 05, from 33.22 to 33.2, N to external databases
+## >>chng 14 mar 26, from 33.2 to 33.18, move O to external databases
+## >>chng 20 jul 21, from 33.18 to 33.16, update DR H2 diss as per  2020RNAAS...4...78S
+monitor "CO  " 1300.05m  33.16 line intensity
+## >>chng 13 jun 27, from -6.149 to 33.78, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from 33.78 to 33.76, change H2/HD secondary scale factors
+## >>chng 14 mar 26, from 33.76 to 33.73, move O to external databases
+monitor "CO  " 866.727m  33.73 line intensity
+## >>chng 13 jun 27, from -6.177 to 34.17, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 14 mar 26, from 34.17 to 34.12, move O to external databases
+monitor "CO  " 650.074m  34.12 line intensity
+## >>chng 13 jun 27, from -6.485 to 34.48, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from 34.48 to 34.45, change H2/HD secondary scale factors
+## >>chng 14 mar 26, from 34.45 to 34.42, move O to external databases
+monitor "CO  " 520.089m  34.42 line intensity
+## >>chng 13 jun 27, from -6.954 to 34.72, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from 34.72 to 34.7, change H2/HD secondary scale factors
+## >>chng 14 mar 26, from 34.7 to 34.67, move O to external databases
+## >>chng 20 jul 21, from 34.67 to 34.65, update DR H2 diss as per  2020RNAAS...4...78S
+monitor "CO  " 433.438m  34.65 line intensity
+## >>chng 13 jun 27, from -7.48 to 34.93, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from 34.93 to 34.9, change H2/HD secondary scale factors
+## >>chng 14 mar 26, from 34.9 to 34.87, move O to external databases
+## >>chng 20 jul 21, from 34.87 to 34.85, update DR H2 diss as per  2020RNAAS...4...78S
+monitor "CO  " 371.549m  34.85 line intensity
+## >>chng 13 jun 27, from -8.049 to 35.1, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 13 oct 30, from 35.1 to 35.08, change H2/HD secondary scale factors
+## >>chng 14 mar 26, from 35.08 to 35.05, move O to external databases
+## >>chng 20 jul 21, from 35.05 to 35.03, update DR H2 diss as per  2020RNAAS...4...78S
+monitor "CO  " 325.137m  35.03 line intensity
+## >>chng 13 jun 27, from -7.522 to 33.42, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+monitor "^13CO" 906.599m  33.42 line intensity
+## >>chng 13 jun 27, from -8.247 to 32.75, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 20 jul 21, from 32.75 to 32.81, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 sep 11, from 32.81 to 31.97, LAMDA update
+## >>chng 21 sep 15, from 31.97 to 32.78, go back to unresolved model
+monitor "CN  " 880.858m  32.78  line intensity
+## >>chng 14 dec 04, from 21.76 to 21.83, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 21.83 to 22.05, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  0  22.05 error 0.1
+## >>chng 14 aug 28, from 21.14 to 22.34, first run with these monitors
+## >>chng 14 aug 28, from 22.34 to 22.38, EleyRideal H2 formation
+## >>chng 20 jul 21, from 22.38 to 22.62, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  1  22.62 error 0.1
+## >>chng 14 aug 28, from 19.06 to 21.37, first run with these monitors
+## >>chng 14 aug 28, from 21.37 to 21.41, EleyRideal H2 formation
+## >>chng 14 dec 04, from 21.41 to 21.45, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 21.45 to 21.62, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  2  21.62 error 0.1
+## >>chng 14 aug 28, from 18.32 to 20.97, first run with these monitors
+## >>chng 14 dec 04, from 20.97 to 21.04, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 21.04 to 21.16, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 apr 10, from 21.16 to 21.07, update chemistry and LAMDA
+## >>chng 23 sep 08, from 21.07 to 21.16, fix SQRTPI in Lya destprob
+monitor H2 column density level 0  3  21.16 error 0.1
+## >>chng 14 aug 28, from 16.04 to 19.29, first run with these monitors
+## >>chng 14 dec 04, from 19.29 to 19.37, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 19.37 to 19.41, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 21 apr 10, from 19.41 to 19.26, update chemistry and LAMDA
+## >>chng 23 sep 08, from 19.26 to 19.41, fix SQRTPI in Lya destprob
+monitor H2 column density level 0  4  19.41 error 0.1
+## >>chng 14 aug 28, from 16.55 to 18.74, first run with these monitors
+## >>chng 14 aug 28, from 18.74 to 18.78, EleyRideal H2 formation
+## >>chng 14 dec 04, from 18.78 to 18.83, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level 0  5  18.83 error 0.1
+## >>chng 14 aug 28, from 15.92 to 18.1, first run with these monitors
+## >>chng 14 aug 28, from 18.1 to 18.15, EleyRideal H2 formation
+## >>chng 14 dec 04, from 18.15 to 18.19, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 18.19 to 18.25, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  6  18.25 error 0.1
+## >>chng 14 aug 28, from 15.8 to 18.1, first run with these monitors
+## >>chng 14 aug 28, from 18.1 to 18.15, EleyRideal H2 formation
+## >>chng 15 mar 07, from 18.15 to 18.19, merging newmesh branch
+monitor H2 column density level 0  7  18.19 error 0.1
+## >>chng 14 aug 28, from 15.21 to 17.66, first run with these monitors
+## >>chng 14 aug 28, from 17.66 to 17.7, EleyRideal H2 formation
+## >>chng 14 dec 04, from 17.7 to 17.74, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level 0  8  17.74 error 0.1
+## >>chng 14 aug 28, from 14.87 to 17.42, first run with these monitors
+## >>chng 14 dec 04, from 17.42 to 17.48, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 17.48 to 17.4, update DR H2 diss as per  2020RNAAS...4...78S
+monitor H2 column density level 0  9  17.4 error 0.1
+## >>chng 14 aug 28, from 13.61 to 16.14, first run with these monitors
+## >>chng 14 oct 28, from 16.14 to 16.18, relativistic Gaunt factors
+## >>chng 16 dec 29, from 16.18 to 16.22, update H-H2 coll to Lique 2015
+## >>chng 20 jul 21, from 16.22 to 16.17, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 23 sep 08, from 16.17 to 16.21, fix SQRTPI in Lya destprob
+monitor H2 column density level 1  0  16.21 error 0.1
+## >>chng 14 aug 28, from 14.69 to 17.17, first run with these monitors
+## >>chng 14 aug 28, from 17.17 to 17.21, EleyRideal H2 formation
+## >>chng 14 dec 04, from 17.21 to 17.26, fix double-counting of big-H2 Solomon rate
+## >>chng 20 jul 21, from 17.26 to 17.3, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 23 sep 08, from 17.3 to 17.35, fix SQRTPI in Lya destprob
+monitor H2 column density level 1  1  17.35 error 0.1
+## >>chng 14 aug 28, from 13.92 to 16.39, first run with these monitors
+## >>chng 15 nov 03, from 16.39 to 16.43, update O III to Storey+14 collision strengths
+## >>chng 20 jul 21, from 16.43 to 16.31, update DR H2 diss as per  2020RNAAS...4...78S
+## >>chng 23 sep 08, from 16.31 to 16.35, fix SQRTPI in Lya destprob
+monitor H2 column density level 1  2  16.35 error 0.1
+## >>chng 14 aug 28, from 14.75 to 17.3, first run with these monitors
+## >>chng 14 aug 28, from 17.3 to 17.34, EleyRideal H2 formation
+## >>chng 14 dec 04, from 17.34 to 17.38, fix double-counting of big-H2 Solomon rate
+monitor H2 column density level 1  3  17.38 error 0.1
+## >>chng 14 aug 28, from -4.84 to 35.99, first run with these monitors
+## >>chng 14 dec 04, from 35.99 to 36.06, fix double-counting of big-H2 Solomon rate
+monitor line luminosity "Blnd" 2.121m  36.06 error 0.1
+#
+# hii pdr h2_orion_bar.in
+# ========================================
+# 
+
+This is the Orion Bar model discussed by
+	
+Pellegrini, E. W.; Baldwin, J. A.; Ferland, G. J.; Shaw, G.; Heathcote, S.
+ApJ, 693, 285  2009ApJ...693..285P
+and
+Shaw, Gargi; Ferland, G. J.; Henney, W. J.; Stancil, P. C.; Abel, N. P.; Pellegrini, E. W.; Baldwin, J. A.; van Hoof, P. A. M.
+2009arXiv0906.2310S
+
+
+

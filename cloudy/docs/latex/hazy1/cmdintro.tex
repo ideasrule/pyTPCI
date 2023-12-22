@@ -1,0 +1,594 @@
+\chapter{INTRODUCTION TO COMMANDS}
+% !TEX root = hazy1.tex
+
+\section{Overview}
+
+This section introduces the commands that drive \Cloudy.
+The following
+chapters group the commands together by purpose.
+Individual commands are
+discussed after examples of their use.
+This section begins by outlining
+conditions that are assumed by default and then goes on to discuss the
+various classes of commands (i.e., those that set the incident
+radiation field, composition, or the geometry).
+
+Keeping this document parallel with the code is a very high priority.
+In case of any confusion, please consult the original source.
+The commands are
+parsed by the series of routines that have names beginning with
+\cdRoutine{``parse''.}
+The list of routines can be seen by listing the files \cdFilename{parse*.cpp}.
+The second
+half of the name indicates the command that is parsed by that routine.
+
+\Cloudy\ is designed so that a reasonable set of
+initial conditions to be assumed by default so that
+a minimum number of commands are needed to drive it.
+These default conditions are summarized
+in Table \ref{tab:DefaultConditions},
+which also lists the
+commands that change each assumption.
+
+\begin{table}[t]
+\centering
+\caption{\label{tab:DefaultConditions}Default Conditions}
+\begin{tabular}{l l l }
+\hline
+Quantity& Value& Command\\
+\hline
+Default inner radius& $10^{30}$ cm& \cdCommand{radius}\\
+Default outer radius& $10^{31}$ cm& \cdCommand{radius}\\
+Highest allowed temperature& \TEMPLIMITHIGH\\
+Stop calculation when
+$T$ falls below this value& \TEMPSTOPDEFAULT& \cdCommand{stop temperature}\\
+Relative error in
+heating-cooling balance& 0.005& \cdCommand{set temperature convergence}\\
+Relative error
+in electron density& 0.0& \cdCommand{set eden convergence}\\
+Relative intensity of faintest
+line to print& $10^{-3}$& \cdCommand{print line faint}\\
+Low-energy limit to continuum& \emm\\
+High-energy limit to continuum& \egamry\\
+Limiting number of zones& 1400& \cdCommand{set nend}\\
+Total hydrogen column density& $10^{30}$ cm$^{-2}$& \cdCommand{stop column density}\\
+\hplus\ column density& $10^{30}$ cm$^{-2}$& \cdCommand{stop column density}\\
+\hO\ column density& $10^{30}$ cm$^{-2}$& \cdCommand{stop column density}\\
+Grains& No grains& \cdCommand{grains}\\
+Spectral resolution& mesh resolution& \cdCommand{set save line width}\\
+Background cosmic rays& No& \cdCommand{cosmic rays}\\
+Cosmic background& No& \cdCommand{background}\\
+\hline
+\end{tabular}
+\end{table}
+
+The code is also designed to check that its assumptions are not violated.
+It should complain if problems occur, if its limits are exceeded, or if
+the input parameters are unphysical.  It may print a series of warnings,
+cautions, or notes if some limit was exceeded or physical assumption
+violated.
+
+\section{Command format}
+
+\subsection{Input and Output}
+When executed as a stand-alone program \Cloudy\ reads
+\cdFilename{stdin} for input and produces output on \cdFilename{stdout.}
+From a command prompt, this
+would be done as \cdCommand{cloudy.exe $<$ input $>$ output}
+or \cdCommand{cloudy.exe -r prefix} (the latter form will read its
+input from \cdFilename{prefix.in} and write its main output to \cdFilename{prefix.out}).
+A third option is to supply the \Cloudy\ commands on the command line, e.g.
+\cdCommand{cloudy.exe -e test} which will execute the \Cloudy\ command
+\cdCommand{test} (the ``smoke test''). This is useful for quickly executing
+short scripts. If you want to execute multiple commands, the commands need to be separated
+by a semicolon and embedded in single quotes (to protect the semicolon from the shell), e.g.
+\cdCommand{cloudy.exe -e 'set continuum resolution 0.1; compile grains'}.
+The code is also designed
+to be used as a subroutine of other, much larger, programs.
+In this case the input stream is entered using
+the subroutine calls described in a section of Part 2 of this document.
+In either case, this input stream must contain all the commands needed to
+drive the program.
+The command format is the same whether used as a
+stand-alone program or as a subroutine.
+
+\subsection{Command-line format.}
+\label{sec:CommandLineFormat}
+Commands are entered at the start of a line (i.e. starting in column 1).
+They may be abbreviated, as long as the abbreviation is unambiguous,
+with a minimum of four characters (unless the whole command is shorter of course).
+The command is usually followed by one or more
+numbers or keywords.
+The script can be either lower or upper case, i.e. it is case insensitive.
+All the characters of the command name that are typed will be checked by the parser,
+unlike keywords where usually only the first four characters are checked\footnote{This
+will be changed in a future version of the code such that also all characters of the keywords will be checked.}.
+The code adheres to US spelling where appropriate.
+
+The end of each command line is marked\footnote{Before version 92 a colon (``:'') could also mark an end of line.
+This character is needed to specify a path in the Windows environment and
+is no longer an end-of-line indicator.} by the end-of-line, or the start of a comment
+(see Sect.~\ref{sec:CommentsInInput}).
+
+The command lines can generally be in any order and there is no limit to the length of an input line.
+The input stream ends with a blank line
+(i.e. an empty line, or a line with a space in the first column), the end-of-file,
+or a field of stars (``***'', i.e. a minimum of three consecutive stars starting in the first column).
+
+\subsection{Units}
+Most commands use cgs units.
+In a few cases common astronomical
+nomenclature can be entered (i.e., the luminosity can be specified
+as erg s$^{-1}$, in solar units, or even magnitudes).
+This syntax varies from command
+to command so it is important that the units be checked carefully.
+
+\subsection{Number of commands.}
+There is no limit to the number of commands that may be entered.
+
+\subsection{Output as input.}  \Cloudy\ can read its own output
+as an input stream.
+As described in the section \cdSectionTitle{Output} in
+Part 2 of this document, the code
+echoes the input command lines as a header
+before the calculation begins.
+These lines are centered on the page and surrounded by asterisks.
+
+Sometimes a particular model will need to be recomputed.  You can do
+this by making a copy of the printed command lines and using this copy as
+an input file.  The input parser will handle removal of the leading spaces
+and asterisk.  This is mainly a debugging aid.
+
+\subsection{Syntax used in this document}
+
+Sections describing each of the commands are introduced
+by examples of their use.
+
+Square brackets indicate optional parameters.
+Optional parameters are
+shown surrounded by square brackets (``['' and ``]'').
+The examples shown
+below use the format given in this document.
+\begin{verbatim}
+# following needs flux density, but frequency is optional
+f(nu) = -12.456 [at .1824 Ryd]
+#
+# the luminosity command has several optional keywords
+luminosity 38.3 [solar, range, linear]
+#
+# the phi(h) command has the range option
+phi(h) = 12.867 [range ...]
+\end{verbatim}
+These square brackets indicate only that the parameters are optional.
+The brackets should not be placed on the command line.
+They will be totally ignored if they occur.
+The above example would actually be entered as follows:
+\begin{verbatim}
+# following gives flux density at energy of 0.1824 Ryd
+f(nu) = -12.456 at .1824 Ryd
+#
+# the luminosity command with linear keyword
+luminosity 2e38 solar linear
+#
+# the phi(h) command with the range option
+phi(h) = 12.867 range 0.1 to 0.2 Ryd
+\end{verbatim}
+
+Underscores indicate a space.  Most commands and keywords require four
+character matches to be recognized.  Keywords which start with a letter (i.e.\ A$--$Z) must start following a space (or other non-alphabetic character) in order to be recognized.
+Only one space is needed between words.
+
+The following is an example with the commands written as they are shown
+in this document:
+\begin{verbatim}
+# blackbody with T=5e4 K, in strict TE
+blackbody 5e4 K lte
+#
+# use ISM radiation field
+table ism
+\end{verbatim}
+The following is how the commands should actually be entered:
+\begin{verbatim}
+# blackbody with T=5e4 K, in strict TE
+blackbody 5e4 K lte
+#
+# use ISM radiation field
+table ism
+\end{verbatim}
+The space must occur where the underscore is written.
+
+\subsection{and, because nobody ever reads this document\dots.}
+
+The examples of commands that follow show the square brackets
+and underscores for
+optional parameters and required spaces.
+Many people put these characters
+into the input stream because they don't read documentation.
+As a service to the user, the command-line parser will
+usually replace any square brackets
+or underscores with the space character when the command lines
+are initially read.
+The exception is any part of a string that is surrounded by double
+quotes.
+The string between double quotes is likely to be a file name and
+an underscore can occur in such a name.
+
+\subsection{The continue option}
+
+It may not be possible to enter all the required values on a single line
+for the \cdCommand{interpolate} and \cdCommand{abundances} commands.  In these two cases the original
+command line can be continued on following lines with a series of lines
+beginning with the keyword \cdCommand{continue}.  The format on a \cdCommand{continue} line is
+unchanged.  There is no limit to the number of \cdCommand{continue} lines that can be
+included.   The following
+is an example with the abundances command
+\begin{verbatim}
+abundances he =-1 li=-9 be=-11 b=-9 c=-4.3 n=-5 o=-2.3
+continue f=-7 ne =-1.2 na =-3 mg =-8
+continue al =-8 si =-8 p=-6 s=-8 cl=-9 ar =-8 k=-6
+continue  ca =-8 sc=-9 ti=-7 v=-8 cr=-6.3 mn=-6 fe =-8
+continue co =-9 ni =-8cu=-7 zn=-7
+\end{verbatim}
+
+\subsection{Numerical input}
+
+Numerical parameters are entered on the command line as free-format
+numbers.
+Exponential notation can be used.\footnote{Exponential notation could not be used in versions 07 and before.}
+Numbers may be preceded
+or followed by characters to increase readability.
+The strings
+``T=1000000K'', ``1000000'', and ``T=1E6'' are equivalent.
+A period or full stop (``.'') by itself is interpreted as a character,
+not numeral or number.
+
+Default values are often available.
+As an example, the \cdCommand{power law} command
+has three parameters, the last two being optional.  The following are all
+acceptable (but not equivalent) forms of the command;
+\begin{verbatim}
+power law, slope-1.4, cutoffs at 9 Ryd and 0.01 Ryd
+powe -1.0 5
+power law, slope=-1.4 .
+\end{verbatim}
+The last version uses the default cutoffs, i.e., none.  If optional
+parameters are omitted they must be omitted from right to left; numbers
+must appear in the expected order.
+
+Note that implicit negative signs (for instance, for the slope of the
+power law) \emph{do not} occur in any of the following commands.
+
+Table \ref{tab:FreeFormatNumbers} shows how various typed
+input numbers will be interpreted.
+The first column gives the typed quantity,
+the second its interpretation, and the third the explanation.
+
+\begin{table}
+\centering
+\caption{\label{tab:FreeFormatNumbers}
+Interpretation of Numerical Input}
+\begin{tabular}{llp{12pc}}
+\hline
+Typed Quantity& Interpreted as& Why\\
+\hline
+1e2& 100& Exponentional notation is OK\\
+1.2.3& two numbers 1.2 0.3& 1.2 is parsed, then .3\\
+.3 3& 0.3 and 3.0\\
+10\verb|^|3 & 1000 & \verb|^| acts as exponentiation operator\\
+\$temp & variable value & set by \$temp = 1000 previously in input\\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Comments}
+\label{sec:CommentsInInput}
+
+Comments may be entered among the input data in several ways.
+Comments
+can be entered at the end of a command line after
+a sharp sign (``\#'')
+or a double sharp sign (``\#\#'').
+Anything on a line after one of these characters is completely ignored.
+This can be used to document parameters on a line.
+Any line beginning with
+a \# or \#\# is also a comment and the entire line is ignored.
+Any comment starting with a single sharp sign is ``visible'', which means that
+it is echoed in the main output and also included in the file \cdFilename{optimal.in}
+(see Sect.~\ref{sec:optimize_file}).
+Comments starting with a double sharp sign are ``hidden'' comments and will be omitted in the main output
+and the file \cdFilename{optimal.in}.
+There is also a \cdCommand{title} command, to enter a title for the simulation.
+
+\subsection{Hidden commands}
+
+A command will be parsed and used by the code but not printed in the
+output if the keyword \cdCommand{hide} occurs somewhere on the command line.
+This
+provides a way to not print extensive sets of commands, like the
+\cdCommand{continue}
+option on the \cdCommand{continuum} command,
+or the \cdCommand{print off} command in an initialization file.
+
+\begin{shaded}
+\subsection{\experimental\ Commands for experimental parts of the code}
+
+The code is in continuous development. When new versions are released there
+will be new or experimental parts of the code that are still being developed
+or which have not been fully debugged. The newly-developed physics is not
+included in a calculation which uses the default conditions.
+The commands
+which exercise these new features are included in this document
+and are indicated in two ways.
+First by the \experimental\ symbol in the section
+header, and second by a grey background. You are welcome to give these
+commands a try but should not expect robust results.
+\end{shaded}
+
+\subsection{Log vs linear quantities}
+
+Most
+quantities are entered as the log of the number but some are linear.
+The
+following outlines some systematics of how these are entered.
+\begin{description}
+\item[Temperature.]  \Cloudy\ will interpret a temperature as a log if the number
+is less than or equal to 10 and the linear temperature if it is greater
+than 10.  Many commands have the optional keyword \cdCommand{linear} to force numbers
+below 10 to be interpreted as the linear temperature rather than the log.
+
+\item[Other parameters.]  The pattern for other quantities is not as clear as
+for the case of temperature.  Often quantities are interpreted as logs if
+negative, but may be linear or logs if positive (depending on the command).
+Many commands have the keywords \cdCommand{log} and \cdCommand{linear} to force one or the other
+interpretation to be used.
+
+\end{description}
+
+Using the new notation \verb|10^3.5| as a linear number is equivalent
+to the form \cdCommand{3.5 log}, and will be required to replace the
+\cdCommand{log} keyword in future versions of \Cloudy.
+
+\begin{shaded}
+\subsection{\experimental\ The \cdCommand{help} command}
+
+This command prints helpful information about Cloudy and exits.  Don't
+expect much as yet, beyond a recommendation to read this document!
+
+\end{shaded}
+
+\subsection{An example}
+
+Specific commands to set boundary conditions for a simulation are
+discussed in the following sections.
+As a minimum, the hydrogen density,
+the shape and intensity of the incident radiation field,
+and possibly the starting radius, must be specified to compute a model.
+As an example, a simple model
+of a planetary nebula could be computed by entering
+the following input stream.
+\begin{verbatim}
+title "this is the input stream for a planetary nebula"
+#
+# set the temperature of the central star
+blackbody, temperature = 1e5 K
+#
+# set the total luminosity of the central star
+luminosity total 38 # log(Ltot)- ergs/s
+radius 17   # log of starting radius in cm
+hden 4      # log of hydrogen density - cm^-3
+sphere # this is a sphere with large covering factor
+\end{verbatim}
+
+\section{Reading and Writing Files}
+\label{sec:ReadingWritingFiles}
+
+When \Cloudy\ is running, it needs to read many files and will usually also
+write new files to disk. In this section we will describe the rules used by
+the code to decide the location of these files. The skinny is that input files
+are always searched along a search path and output files are written in the
+local directory. Only one exception exists: the main input script, which must
+be located in the local directory. The default search path is to look first in
+the local directory, then the data directory of the \Cloudy\ distribution.
+Below we will give more details.
+
+The first thing the code needs is the main input script. The name of this file
+can be supplied to the code on the command line (e.g., using the
+\cdVariable{-r} flag). This file always needs to be in the local directory
+(a.k.a.\ current working directory). The code will not work correctly if you
+try to supply a filename in a subdirectory or using an absolute path, and will
+abort in that case. All output files written by the code will be in the local
+directory as well. This of course includes the main output file.
+
+It is sometimes necessary to read or write external files whose names
+are specified on a command line.  File names are entered inside pairs of
+double quotes, as in \cdFilename{"name.txt"}.
+
+The command parser first checks whether a quote occurs anywhere on the
+command line.  If one does occur then the parser will search for a second
+pair of quotes and use whatever text lies between as a filename.  The code
+will stop with an error condition if the second of the pair of quotes is
+not found or if the file cannot be opened for reading or writing.
+
+If an input file is supplied in this way, the rule is to always search for the
+file along a search path. This allows the user more freedom to organize the
+files. The default search path is to look in the local directory first, and if
+it is not found there, look in the \Cloudy\ data directory. The code will
+issue a caution if multiple matches with the same file name were found along
+the search path. It will then continue using the first match. An example is
+shown below:
+\begin{verbatim}
+CAUTION: multiple matches for file continuum_mesh.ini found:
+   ==/path/to/run/continuum_mesh.ini==
+   ==/path/to/cxx.yy/data/continuum_mesh.ini==
+Using the first match.
+\end{verbatim}
+The user can override or extend the default search path. This is described in
+more detail below in Section~\ref{sec:SearchPath}.
+
+As stated before, \Cloudy\ will always write output files in the local
+directory. If you try to supply a different path between double quotes (i.e.,
+a file in a subdirectory or an absolute path) the code will abort, as in the
+following example:
+\begin{verbatim}
+save continuum "subdir/name.com" # ERROR, this will abort!
+\end{verbatim}
+
+The search path described above will also be used when \Cloudy\ is reading
+data files from its distribution. This allows the user to place modified data
+files in the local directory and leave the files in the main data directory
+untouched. This is useful if you want to limit the scope of the modification
+to the current run only (to be precise, all subsequent runs in the directory
+that contains the modified file). One example would be when you want to alter
+the resolution of the \Cloudy\ frequency mesh by modifying the file
+\cdFilename{continuum\_mesh.ini} (see
+Section~\ref{Hazy2-sec:ChangingMeshResolution} in Part 2 of \Hazy). If you
+place the modified file in the local directory, it will only affect runs in
+that directory and not globally.
+
+\section{The Search Path for Input Files}
+\label{sec:SearchPath}
+
+The code uses a search path to locate input files, as was discussed in the
+previous section. The default search path is to look in the local directory
+first and then in the data directory included in the distribution. The user
+can override that setting by defining the environment variable
+\cdVariable{CLOUDY\_DATA\_PATH}. How you can do that depends on the operating
+system and the shell you are using. For csh/tcsh under Linux/UNIX use:
+\begin{verbatim}
+setenv CLOUDY_DATA_PATH ".:/path/to/cloudy/data" # (double quotes are optional)
+\end{verbatim}
+For bash/sh/ksh/etc... you should use:
+\begin{verbatim}
+export CLOUDY_DATA_PATH=".:/path/to/cloudy/data" # (no spaces around the '='!)
+\end{verbatim}
+These methods should also work under Mac OS X. The environment variable will
+be read when the code starts up and then override the standard setting
+compiled into the code. If you subsequently undefine the environment variable,
+the code will revert back to using the standard search path.
+
+The environment value \cdVariable{CLOUDY\_DATA\_PATH} supports a search path
+with multiple components, similar to the search paths used in UNIX. You can
+supply multiple directory paths, separated by a colon (':') on UNIX and Mac
+systems, or separated by a semicolon (';') on Windows systems. When Cloudy
+searches for a file, it will search in each of the component directories until
+it finds the file. The search will be done in the same order as they were
+defined in the environment variable. The code will {\em not} do a recursive
+descent into subdirectories of the search path components. The examples shown
+above would be equivalent to the default setting as the special path
+\cdFilename{``.''} is shorthand for the local directory, irrespective of where
+you are.
+
+When you modify the search path, you should realize that the default data
+directory must always be part of the search path. The code will not function
+otherwise! It is also strongly recommended to keep the local directory as part
+of the search path. To simplify this, \Cloudy\ supports the special path
+component \cdFilename{``+''} which will be expanded to the default search path
+for that release.
+
+A typical example would be this:
+\begin{verbatim}
+export CLOUDY_DATA_PATH="+:/path/to/local_data"
+\end{verbatim}
+This search path would consist of the default search path (i.e., the local
+directory and the \Cloudy\ data directory) followed by a custom directory
+\cdFilename{/path/to/local\_data} where you can store local files, such as
+stellar atmosphere grids, or custom grain opacity files. This avoids
+``polluting'' the standard data directory and also makes it easier to port the
+files from one release to the next. You can make multiple local data
+directories and combine them in custom sequences. One example would be one
+directory containing general local files, while the other contains files
+specifically needed for a non-standard spectral resolution run (such as binary
+stellar atmosphere grids, or grain opacity files). Such an example could look
+like this:
+\begin{verbatim}
+export CLOUDY_DATA_PATH="/path/to/non_standard_data:+:/path/to/local_data"
+\end{verbatim}
+Note that we put \cdFilename{/path/to/non\_standard\_data} up front (this is
+the directory containing data for a non-standard spectral resolution). This
+assures that the non-standard resolution version of a file is picked up first,
+before the standard version.
+
+\section{The \cdCommand{init} command}
+
+\noindent
+This is a special command that tells the code to read a set of commands
+stored in an ancillary file.  This allows frequently-used commands to be
+stored in a separate file.
+The \cdCommand{init} command is fully described in later sections below.
+
+The filename can be specified within a pair of double quotes, as in
+\cdFilename{"ism.ini"}.
+The default name for an initialization file is
+\cdFilename{cloudy.ini}.
+There is no limit to the number of commands that can be in an
+initialization file.
+
+This provides an easy way to change the default behavior of the code.
+For instance, many of the elements now included in \Cloudy\ have
+negligible abundances and the code will run a bit faster
+if they are turned off with
+the \cdCommand{element off} command.
+Also, only about half of these
+elements were included before version 86 of the code.
+The file \cdFilename{c84.ini} in the \Cloudy\ data directory
+which will turn off many of these elements.
+The \cdFilename{c84.ini} file contains
+the following commands:
+\begin{verbatim}
+print off hide
+element Lithium off
+element Beryllium off
+element Boron off
+element Fluorine off
+element Phosphor off
+element Chlorine off
+element Potassium off
+element Scandium off
+element Titanium off
+element Vanadium off
+element Chromium off
+element Manganese off
+element Cobalt off
+element Copper off
+element Zinc off
+print on
+\end{verbatim}
+
+The current version of the code would only include those elements present
+in version 84 if the command
+\begin{verbatim}
+init "c84.ini"
+\end{verbatim}
+were entered in the input stream.
+
+A series of \cdFilename{*.ini} files are included in the
+data directory included in the \Cloudy\ distribution.
+Do an \cdFilename{ls *.ini} within the data directory
+to list the available files. Note that not all these files
+are init files, e.g., \cdFilename{continuum\_mesh.ini} is not
+an init file in the sense we discussed here.
+Comments at the start of the files describe
+their purpose.
+
+\section{Random numbers}
+
+Some commands in \Cloudy\ need random numbers to work. Like all computer
+codes, \Cloudy\ uses a pseudo random number generator (PRNG) to create these
+numbers. A PRNG creates a deterministic sequence of numbers starting from a
+given seed. However, on each invocation the bits in the number are so
+efficiently scrambled that for all intents and purposes they can be considered
+a truly random sequence of numbers. The PRNG in \Cloudy\ is by default a fully
+vectorized version of xoshiro256** (Blackman and Vigna, 2018, in
+press)\footnote{http://xoshiro.di.unimi.it.}, while the random numbers with a
+normal distribution are now generated using the Ziggurat algorithm
+\citep{MarsagliaTsang00}. Both methods are very fast. An additional advantage
+is that the new code is fully aware of parallelization in the code, meaning
+that parallel ranks created with MPI or fork will automatically have a
+completely different sequence of random numbers. \Cloudy\ generates a random
+seed at the start of execution by default (when available derived from
+\cdFilename{/dev/urandom}, otherwise using the system time). The executable
+accepts the {\tt -s~[~seed~]} flag, which will set a fixed seed for the random
+number generator and is intended for debugging and testing purposes. The
+parameter is a 64-bit seed in hexadecimal form. If the seed is omitted, a
+default fixed value will be used. It is not recommended to use this flag in
+normal \Cloudy\ runs.

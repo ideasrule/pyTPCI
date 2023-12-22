@@ -1,0 +1,40 @@
+title first of func_trans_save/func_trans_read pair, save continuum
+#
+# commands controlling continuum =========
+ionization parameter -1
+table agn
+#
+# commands for density & abundances =========
+hden 10
+#
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling output    =========
+save overview "func_trans_save.ovr"
+save performance "func_trans_save.per"
+save ionization last "func_trans_save.ion"
+save continuum last "func_trans_save.con"
+# this continuum will be used by transread.in 
+save last transmitted continuum "func_trans_save.trn"
+#
+# commands giving the monitors    =========
+# this contains a large number of asserts that both tests use
+init file "trans.dat"
+# 
+# func_trans_save.in 
+# class function 
+# ========================================
+# 
+
+func_trans_save, func_trans_read, func_trans_read_scale are a set of
+tests that check that the code can save a transmitted
+continuum then read it.
+
+This sim must come before func_trans_read since it
+generates the save file needed by func_trans_read.
+Alphabetical order insures this.

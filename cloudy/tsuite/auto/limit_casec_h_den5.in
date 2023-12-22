@@ -1,0 +1,159 @@
+title case C
+#
+# commands controlling continuum =========
+black body, T = 50000 K
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden = 5
+init file="hheonly.ini"
+#
+# commands controlling geometry  =========
+set dr -10
+stop zone 1
+#
+# other commands for details     =========
+iterate
+stop lyman optical depth -6
+constant temperature = 10000 K
+#
+# commands controlling output    =========
+print h-like populations element hydrogen
+print line pump 
+print departure coefficients element hydrogen 
+save overview "limit_casec_h_den5.ovr"
+save performance "limit_casec_h_den5.per"
+save monitors "limit_casec_h_den5.asr" last
+#
+# commands giving the monitors    =========
+## >>chng 08 apr 30, from 183.7 to 174 H, He topoff change
+## >>chng 13 jul 25, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 174 to 189.4, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line "H  1" 1215.67A 189.4
+##
+## >>chng 13 jul 25, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 143.7 to 155.9, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line "pump" 1215.67A 155.9
+##
+## >>chng 07 oct 22, from 26.5 to 30.63, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 1026 to 1025.73A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 30.63 to 32.45, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1025.73A to 1025.72A, up Rydberg constant
+monitor line "H  1" 1025.72A 32.45
+## 
+## >>chng 13 jul 25, wl from 1025.7 to 1025.73A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 28.26 to 30.66, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1025.73A to 1025.72A, up Rydberg constant
+monitor line "pump" 1025.72A 30.66
+##
+## >>chng 07 oct 22, from 1.126 to 0.943, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.943 to 1, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A 1
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 1 to 1.075, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A 1.075
+## 
+## this can't be right -- hopefully fixed as of 15 jan 03...
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 jan 03, from 0.995 to 0, removed hand-coded Hbeta pump
+## >>chng 15 jan 12, implement absolute error test as -ve number
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "pump" 4861.32A 0 -0.001
+##
+## >>chng 07 oct 22, from 3.28 to 2.42, resolve l-levels of h-like sequence
+## >>chng 13 jul 25, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 2.42 to 2.63, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "H  1" 6562.80A 2.63
+## >>chng 13 jul 25, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 2.829 to 3.041, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "Ca B" 6562.80A 3.041
+##
+## >>chng 13 jul 25, wl from 4340A to 4340.49A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.444 to 0.4839, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 4340.49A to 4340.46A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4340.46A to 4340.47A, update NIST energies
+## >>chng 21 aug 18, wl from 4340.47A to 4340.46A, revert to PvH energies for H
+monitor line "H  1"  4340.46A 0.4839
+## >>chng 13 jul 25, wl from 4340A to 4340.49A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.47 to 0.5051, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 4340.49A to 4340.46A, up Rydberg constant
+## >>chng 21 mar 16, wl from 4340.46A to 4340.47A, update NIST energies
+## >>chng 21 aug 18, wl from 4340.47A to 4340.46A, revert to PvH energies for H
+monitor line "Ca B"  4340.46A 0.5051
+##
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.297 to 0.3259, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "H  1" 1.87510m 0.3259
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.326 to 0.35, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "Ca B" 1.87510m 0.35
+##
+## >>chng 13 jul 25, wl from 2.166m to 2.16553m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.0252 to 0.0278, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 2.16553m to 2.16551m, up Rydberg constant
+## >>chng 20 aug 22, wl from 2.16551m to 2.16553m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.16553m to 2.16552m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.16552m to 2.16553m, revert to PvH energies for H
+monitor line "H  1" 2.16553m 0.0278
+## >>chng 13 jul 25, wl from 2.166m to 2.16553m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.0271 to 0.0292, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 2.16553m to 2.16551m, up Rydberg constant
+## >>chng 20 aug 22, wl from 2.16551m to 2.16553m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.16553m to 2.16552m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.16552m to 2.16553m, revert to PvH energies for H
+monitor line "Ca B" 2.16553m 0.0292
+##
+monitor ionization hydrogen 1 -3.273
+## 
+## >>chng 05 oct 01, from -2.881 to -2.903, RP update levels
+## >>chng 15 mar 07, from -2.903 to -2.881, merging newmesh branch
+monitor ionization helium 1 -2.881
+## 
+## >>chng 00 sep 29, -0.964 to -0.942, H- bug, rebin cont
+monitor ionization helium 3 -0.942
+## 
+# limit_casec_h_den5.in
+# class limit 
+# ========================================
+# 
+
+
+This is Case C, what really happens when optically thin gas is
+irradiated by a continuum with Lyman line continuum fluorescence allowed.
+Checks:
+-	Departure coefficients for H, He levels
+-	Neutral fractions
+-	H* emissivity
+Case C is described in
+
+>>refer	H	case C	Ferland, G.J. 1999, PASP, 111, 1524
+

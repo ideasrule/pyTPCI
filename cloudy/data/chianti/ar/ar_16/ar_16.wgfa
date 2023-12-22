@@ -1,0 +1,105 @@
+    1    2        389.066      5.240e-02      1.150e+09 
+    1    3        353.853      1.150e-01      1.530e+09 
+    2    4         25.517      3.900e-02      2.000e+11 
+    3    4         25.684      7.750e-02      3.920e+11 
+    1    5         23.546      2.380e-01      1.430e+12 
+    4    5       1410.039      8.790e-02      1.460e+08 
+    1    6         23.506      4.770e-01      1.440e+12 
+    4    6       1279.591      1.980e-01      2.080e+08 
+    2    7         24.851      1.360e+00      3.660e+12 
+    3    7         25.010      2.690e-01      7.180e+11 
+    3    8         24.994      2.430e+00      4.320e+12 
+    2    9         18.696      8.340e-03      7.950e+10 
+    3    9         18.786      1.660e-02      1.570e+11 
+    5    9         73.597      8.950e-02      5.510e+10 
+    6    9         73.991      1.780e-01      1.080e+11 
+    1   10         17.747      6.040e-02      6.400e+11 
+    4   10         68.551      2.590e-01      1.840e+11 
+    7   10         73.868      4.400e-02      2.690e+10 
+    1   11         17.737      1.210e-01      6.410e+11 
+    4   11         68.406      5.190e-01      1.850e+11 
+    7   11         73.699      8.820e-03      2.710e+09 
+    8   11         73.837      7.930e-02      2.420e+10 
+    2   12         18.546      2.460e-01      1.190e+12 
+    3   12         18.635      4.890e-02      2.350e+11 
+    5   12         71.327      1.180e+00      3.860e+11 
+    6   12         71.697      2.340e-01      7.570e+10 
+    3   13         18.632      4.400e-01      1.410e+12 
+    6   13         71.662      2.100e+00      4.550e+11 
+    7   14        -73.030      4.060e+00      8.470e+11 
+    8   14        -73.173      2.900e-01      6.010e+10 
+    8   15        -73.143      5.790e+00      9.030e+11 
+    2   16         16.660      3.310e-03      3.970e+10 
+    3   16         16.731      6.590e-03      7.850e+10 
+    5   16         49.688      1.960e-02      2.650e+10 
+    6   16         49.867      3.900e-02      5.230e+10 
+   10   16        160.069      1.440e-01      1.880e+10 
+   11   16        160.867      2.870e-01      3.700e+10 
+    1   17         15.937      2.520e-02      3.310e+11 
+    4   17         47.647      6.960e-02      1.020e+11 
+    7   17         50.156      8.750e-03      1.160e+10 
+    9   17        149.450      2.860e-01      4.280e+10 
+   12   17        159.775      1.090e-01      1.420e+10 
+    1   18         15.933      5.040e-02      3.310e+11 
+    4   18         47.610      1.390e-01      1.030e+11 
+    7   18         50.115      1.750e-03      1.160e+09 
+    8   18         50.179      1.570e-02      1.040e+10 
+    9   18        149.089      5.740e-01      4.320e+10 
+   12   18        159.363      2.190e-02      1.440e+09 
+   13   18        159.533      1.970e-01      1.290e+10 
+    2   19         16.597      9.060e-02      5.490e+11 
+    3   19         16.668      1.800e-02      1.080e+11 
+    5   19         49.134      2.740e-01      1.890e+11 
+    6   19         49.309      5.450e-02      3.740e+10 
+   10   19        154.464      1.140e+00      7.990e+10 
+   11   19        155.207      2.270e-01      1.570e+10 
+   14   19       -158.363      5.070e-02      3.370e+09 
+    3   20         16.667      1.620e-01      6.500e+11 
+    6   20         49.299      4.910e-01      2.240e+11 
+   11   20        155.104      2.050e+00      9.450e+10 
+   14   20       -158.217      3.630e-03      1.610e+08 
+   15   20       -158.358      7.250e-02      3.210e+09 
+ -1
+%filename:  ar_16.wgfa
+
+Theoretical wavelengths, gf and A-values:  
+Autostructure calculation with energy levels optimized to match to the observed energies
+A Breit-Pauli distorted wave implementation for AUTOSTRUCTURE
+Badnell, N.R., 2011, Computer Physics Communications, 182, 1528
+ADSref:  http://adsabs.harvard.edu/abs/2011CoPhC.182.1528B
+
+Energy corrections to AS calculation way of 'SHFTIC' file constructed from 
+the following energies
+
+Observed energy levels:  Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2012).
+NIST Atomic Spectra Database (ver. 5.0), [Online]. 
+Available: http://physics.nist.gov/asd [2012, September 14].
+National Institute of Standards and Technology, Gaithersburg, MD.
+
+theoretical energies for n=2, level 67 above IP
+Yerokhin, V. A.; Surzhykov, A., Physical Review A, vol. 86, Issue 4, id. 042507
+Relativistic configuration-interaction calculation of energy levels
+of core-excited states in lithiumlike ions: Argon through krypton
+ADSref:  http://adsabs.harvard.edu/abs/2012PhRvA..86d2507Y
+DOI:  http://dx.doi.org/10.1103/PhysRevA.86.042507
+
+theoretical energy levels (n=2,3,4,5 above IP):
+calculations of U. Safronova reported in Kato et al., 1997, ADNDT, 67, 225.
+ADS http://adsabs.harvard.edu/abs/1997ADNDT..67..225K
+updated by U. Safronova, 2001, private communication
+
+ wavelengths determined from energy levels
+
+elvlcName = ar_16.elvlc
+ wgfaName = ar_16.wgfa.olg
+ allWvl =   1
+ minDiff =      0.00010
+ outfile = ar_16.wgfa.olg.imp
+produced as a part of the 'CHIANTI' atomic database for astrophysical spectroscopy
+ K. Dere (GMU) - 2017 June 03
+ minimum branching ratio =   1.00e-04
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

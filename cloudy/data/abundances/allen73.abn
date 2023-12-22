@@ -1,0 +1,37 @@
+# refer		cosmic abundances	Allen, C. W. 1973 Astrophysical Quantities
+#
+Hydrogen	1.0000e+00
+Helium		8.5114e-02
+Lithium		5.0119e-12
+Beryllium	1.2589e-11
+#
+# The Boron abundance is an upper limit.
+#
+Boron		1.0000e-09
+Carbon		3.3113e-04
+Nitrogen	9.1201e-05
+Oxygen		6.6069e-04
+Fluorine	3.9811e-08
+Neon		8.3176e-05
+Sodium		1.7783e-06
+Magnesium	2.6303e-05
+Aluminum	2.4547e-06
+Silicon		3.3113e-05
+Phosphorus	3.3113e-07
+Sulphur		1.5849e-05
+Chlorine	3.9811e-07
+Argon		6.3096e-06
+Potassium	8.9125e-08
+Calcium		1.9953e-06
+Scandium	1.6596e-09
+Titanium	1.3490e-07
+Vanadium	2.5119e-08
+Chromium	7.0795e-07
+Manganese	2.5119e-07
+Iron		3.9811e-05
+Cobalt		1.2589e-07
+Nickel		1.9953e-06
+Copper		3.1623e-08
+Zinc		1.5849e-08
+****************************************************
+

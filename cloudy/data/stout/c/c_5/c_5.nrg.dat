@@ -1,0 +1,55 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=5 were downloaded using ADM.
+#
+ 1  0  1  0 0.0
+ 2  0  3 -1 2411271.2
+ 2  0  1  0 2455025.5
+ 2  1  3  1 2455157.3
+ 2  1  3  0 2455169.9
+ 2  1  3  2 2455293.2
+ 2  1  1  1 2483372.8
+ 3  0  3 -1 2839573.8
+ 3  0  1  0 2851180
+ 3  1  3 -1 2851428.38888889
+ 3  2  3 -1 2857311.70666667
+ 3  2  1  2 2857530.3
+ 3  1  1  1 2859368.6
+ 4  0  3 -1 2983544.9
+ 4  0  1  0 2988246.2
+ 4  1  3 -1 2988367.5
+ 4  2  3 -1 2990788.64666667
+ 4  3  1  3 2990923.0
+ 4  3  3 -1 2990923.4
+ 4  2  1  2 2990929.5
+ 4  1  1  1 2991662.4
+ 5  0  3 -1 3048932.7
+ 5  0  1  0 3051280.4
+ 5  1  3 -1 3051349.16666667
+ 5  2  3 -1 3052590.86666667
+ 5  3  3 -1 3052653.3
+ 5  4  3 -1 3052659.4
+ 5  2  1  2 3052669.4
+ 5  1  1  1 3053044
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L10054 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=10054&comment_code=&amp;element=C&amp;spectr_charge=5&amp;ref=10054&amp;type=E
+# PUBCON    Title: Theoretical Energies for the n=1 and 2 States of the Helium Isoelectronic Sequence up to Z=100
+# PUBCON  Authors: G. W. F. Drake
+# PUBCON  Journal: Can. J. Phys. 66, 586–611 (1988)
+# PUBCON      DOI: https://doi.org/10.1139/p88-100
+# 
+# PUB     Refcode: L11091 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=11091&comment_code=&amp;element=C&amp;spectr_charge=5&amp;ref=11091&amp;type=E
+# PUBCON    Title: Extended Analysis of the Spectrum and Term System of He-like Carbon
+# PUBCON  Authors: L. Engström, P. Bengtsson, C. Jupén, and M. Westerlind
+# PUBCON  Journal: J. Phys. B 25, 2459–2472 (1992)
+# PUBCON      DOI: https://doi.org/10.1088/0953-4075/25/11/004

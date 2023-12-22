@@ -1,0 +1,18 @@
+  1 2s2.2p4               3  1 P  2.0  5          0.000       0.000000          0.000       0.000000 
+  2 2s2.2p4               3  1 P  1.0  3        158.265       0.001442        158.265       0.001442 
+  3 2s2.2p4               3  1 P  0.0  1        226.977       0.002068        226.977       0.002068 
+  4 2s2.2p4               1  2 D  2.0  5      15867.862       0.144599      16131.386       0.147000 
+  5 2s2.2p4               1  0 S  0.0  1      33792.583       0.307941      34062.465       0.310400 
+  6 2s2.2p3(4S).3s        5  0 S  2.0  5      73768.200       0.672225      74204.375       0.676200 
+  7 2s2.2p3(4S).3s        3  0 S  1.0  3      76794.978       0.699807      77167.281       0.703200 
+ -1
+%filename: o_1.elvlc
+%observed energies: downloaded from online NIST database, 2-Feb-2010
+%theoretical energies: Zatsarinny, O., & Tayal, S.S. 2003, ApJS, 148, 575
+% produced as part of the Arcetri/Cambridge/NRL 'CHIANTI' atomic data base collaboration
+%
+%   Peter Young, 2-Feb-2010
+
+Reference:
+Chianti  2022-02-18
+ -1

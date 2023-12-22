@@ -1,0 +1,40 @@
+title H- goes to LTE
+#
+# commands controlling continuum =========
+# this is a second way to get STE and tests the energy density option
+blackbody 5000 energy density 5000K
+#
+# commands for density & abundances =========
+hden 10
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+iterate
+constant temperature 5000
+#
+# commands controlling output    =========
+print populations h-like hydrogen
+save overview "limit_lte_hminus.ovr"
+save performance "limit_lte_hminus.per"
+save monitors last "limit_lte_hminus.asr"
+print departure coef element hydrogen
+#
+# commands giving the monitors    =========
+## >>chng 02 oct 28, error from 0.02 to 0.03, increase due to karpas et al
+## H2 rate coef, much larger than before
+monitor hminus departure coefficient 1. error 0.03
+# limit_lte_hminus.in
+# 
+# class limit 
+# ========================================
+# 
+
+This checks that the negative hydrogen ion goes
+to thermodynamic equilibrium when irradiated by
+a blackbody in thermodynamic equlibrium.  It was
+originally presented in
+ 
+>>refer	H-	test	Ferland, G. J., & Persson, S. E. 1989, ApJ, 347, 656

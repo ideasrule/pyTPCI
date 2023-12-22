@@ -1,0 +1,73 @@
+title Martin Gaskell's funny model
+# used to test that electron density convergence is ok
+# hydrogen line spectrum strongly pumped by continuum
+# all elements > H have HIGH abundances 
+# ionization of elements Fe, Mg, Si strongly affected
+# by charge transfer
+#
+# commands controlling continuum =========
+black 4000
+lumin 27.2
+#
+# commands for density & abundances =========
+hden 5.138
+abundances all 1000
+#
+# commands controlling geometry  =========
+radius 15
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+constant temper 5500
+#
+# commands controlling output    =========
+print line faint -3
+save overview "limit_eden.ovr"
+save performance "limit_eden.per"
+save monitors "limit_eden.asr" last
+#
+# commands giving the monitors    =========
+## >>chng 06 mar 03, from 9.000 to 9.028 NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 11 apr 22, from 9.028 to 9.005, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from 9.005 to 9.049, enable fit to Badnell DR suppression
+monitor eden 9.049
+## 
+## >>chng 06 nov 24, from 0.769 to 0.634, turn on Badnell RR
+## >>chng 06 nov 29, from 0.634 to 0.521, Badnell DR turned on
+## >>chng 12 nov 01, from 0.521 to 0.5811, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 15 mar 07, from 0.5811 to 0.5534, merging newmesh branch
+monitor ionization fraction magnesium 2 0.5534
+## 
+## >>chng 06 nov 24, from 0.050 to 0.038, turn on Badnell RR
+## >>chng 06 nov 29, from 0.038 to 0.031, Badnell DR turned on
+## >>chng 11 jul 12, from 0.031 to 0.0366, enable fit to Badnell DR suppression
+## >>chng 12 jul 09, from 0.0366 to 0.0347, get rid of major discontinuities in 3body rates
+## >>chng 12 nov 01, from 0.0347 to 0.0382, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 15 mar 07, from 0.0382 to 0.034, merging newmesh branch
+monitor ionization fraction silicon 2 0.034
+## 
+## >>chng 06 nov 24, from 0.676 to 0.625, turn on Badnell RR
+## >>chng 06 nov 29, from 0.625 to 0.589, Badnell DR turned on
+## >>chng 11 apr 22, from 0.589 to 0.545, update Ar sequence Badnell DR rates
+## >>chng 11 jul 12, from 0.545 to 0.7015, enable fit to Badnell DR suppression
+## >>chng 15 mar 07, from 0.7015 to 0.6686, merging newmesh branch
+monitor ionization fraction iron 2 0.6686
+## 
+# limit_eden.in
+# class limit 
+# ========================================
+# 
+
+This is mainly a test of the ability of the code to converge a model
+with a very strange electron density. The electrons are mainly contributed
+by heavy elements, and the gas is only slightly ionized. 
+
+Ionization of elements Fe, Mg, Si strongly affected by charge transfer
+with other heavy elements.
+
+Checks:
+-	Electron density is correct.
+-	Hydrogen line spectrum strongly pumped by continuum.
+

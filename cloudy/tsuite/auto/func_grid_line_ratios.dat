@@ -1,0 +1,18 @@
+# ratios of lines
+O  3     5006.84
+# >>chng 19 mar 01, change "Blnd" 4363 -> "O  3" 4363.21
+O  3     4363.21
+# 
+# ratios of lines
+O  3     51.8004m
+O  3     88.3323m
+# 
+# temperature diagnostic ratio
+O  3     5006.84
+# >>chng 13 jul 26, wl from 15.55m to 15.5503m, increased wl precision to 6 sig. fig.
+# >>chng 15 oct 08, wl from 15.5503m to 15.5509m, update O III energy levels to current NIST
+Ne 3     15.5509m
+# 
+# [S III] density diagnostic ratio
+S  3     18.7078m
+S  3     33.4704m

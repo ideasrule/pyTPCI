@@ -1,0 +1,184 @@
+cddefines.h has the typedef for structure/class EmLine:
+lines actually exist in taulines.h
+
+==============================================================================
+
+bogus lines
+in multilevel atoms some lines don't exist.  There are indicated by ipCont = -1
+
+==============================================================================
+
+space for TauLines lines is allocated in atmdat_readin
+TauLine2 in atmdat_readin
+iso in iso_create
+CORotate in atmdat_readin
+
+==============================================================================
+
+FeII lines, all in pop371
+Fe2LevN
+
+==============================================================================
+
+H-like and He-like lines 
+EmisLines[ipISO][nelem][ipHi][ipLo]
+space for lines is created in iso_create, 
+declared in taulines.h
+
+extra lyman lines
+iso.ExtraLymanLines[ipISO][nelem][ipHi]
+
+DEGENERATE LINES
+some lines are totally overlapping - best example is the set of transitions in
+H-like species that end up in 2s and 2p.  For these transitions the population
+that enters into the opacity is the sum of the two.  The struc element PopOpc
+includes the sum of the two lower levels for the absorption opacity.  This is
+done in the routine that determines level populations, hydrolevel for H.  
+With this, nothing else need be done.  The optical depths will be the sum 
+of the overlapping lines.
+
+==============================================================================
+
+Behar UTA lines  -  there are nUTA of them
+UTALines[i]
+
+==============================================================================
+
+level 1 level1 
+all included in taulines.h
+#include "taulines.h"
+
+/* level 1 lines extend from 1 through nLevel1+1 of this array
+ * the dummy line is in the 0th position */
+for( i=1; i <= nLevel1; i++ )
+	TauLines[i][0] = xxx;
+
+definition of TauLines is in taulines.h
+space created and data read in in atmdat_readin
+initial setup of line array in tauout
+
+==============================================================================
+level 2 atom_level2 
+
+atom_level2 lines are evaluated in DimaCool, 
+	which contains logic for when to reevaluate rates
+
+for( i=0; i<nWindLine; ++i)
+	TauLine2[i][ipCompPurpose] = xxxx;
+
+all included in taulines.h
+EXTERN EmLine *TauLine2;
+
+number of levels in taulines.h:
+#define	NWINDDIM	6744
+
+upper limit to loops is following, set to -1 when level 2 turned off
+extern long	nWindLine;
+
+data read in in getdata
+initial setup of line array in tauout
+collision strenghts generated in ColStrGBar, called in CoolDima
+level populations determined in CoolDima, called by CoolEvaluate
+added to line stack in lines.c
+
+==============================================================================
+
+carbon monoxide co 
+
+	for( i=0; i < nCORotate; i++ )
+	{
+		CORotate[i].EnergyRyd = 
+
+==============================================================================
+
+ots continuum rates, all iso seq rates, evaluated in routines RT_OTS;,
+called by ionize
+
+all lines add ots by calling RT_OTS_AddLine, called by routines that generate cooling,
+	mostly atom_level2 and atom_level3
+
+all continua add ots by calling RT_OTS_AddCont
+
+==============================================================================
+
+radiative transfer escape and destruction probabilities are set in MakeRT
+
+==============================================================================
+
+excitation temperature of any transferred line obtained by calling TexcLine
+Texc = TexcLine(TauLine2 )
+
+convert deexcitation rate coefficent into collision strength
+LineConvRate2CS( &TauLines[ipCl1_11m]  , SDIV(rate) ) 
+
+/*double ConvRate2CS( realnum gHi , realnum rate );
+ convert down coll rate back into electron cs in case other parts of code need this for reference */
+double ConvRate2CS( realnum gHi , realnum rate )
+
+==============================================================================
+
+line optical depths incremented in LineTauInc, called by tauinc
+
+line transfer parameters such as escape and pumping rates are established in 
+MakeWindRT and MakeStatRT which are called by MakeRT, which can be called from various places
+
+=========================================================================
+
+dumping info about a line,
+void DumpLine(EmLine * t)
+#include "dumpline.h"
+
+===========================================================================
+
+adding to line stack
+PutLine (em struct ) => linadd
+lindst 
+
+===========================================================================
+
+ionization and element labels are stored in zerologic.c
+
+elementnames.h has names
+#include "elementnames.h"
+elementnames.chElementSym has 2ch name as used in label
+elementnames.chElementNameShort[nelem] is 4-char name in caps
+elementnames.chElementName has full name upper and lower case
+
+generate a line label
+chLineLbl takes struc produces "totl 4861A"
+chIonLbl the ion label, like "C  4"
+
+===========================================================================
+
+damping constant for the line, save it */
+t->damp = t->dampXvel/velocity;
+
+===========================================================================
+
+line redistribution functions, 
+stored in t->iRedisFun
+-1 complete redis Dopper core only, 
+ 0 insanity
+ 1 incomplete redistirbution with damping wings, 
+ 2 complete redistribution with damping wings,
+
+types are defined in cddefines.h
+ipPRD; /* = 1 *//* partial redistribution with wings */
+ipCRD; /* = -1 *//* complete redistribution, core only, no wings, Hummer's K2 function */
+ipCRDW; /* = 2 *//* complete redistribution with wings */
+ipLY_A; /* = -1 *//* redistribution function for Lya, calls Hummer routine for H-like series only */
+ipDEST_K2; /*= 1*//* core function for K2 destruction */
+ipDEST_INCOM; /*= 2*//* core function for complete redist destruction */
+ipDEST_SIMPL; /*= 3*//* core function for simple destruction */
+
+individual lines are set to this in zero
+
+adjusted with atom he-likeredistribution, atom h-like redistribution commands
+
+===========================================================================
+
+printed lines
+
+PutLine( EmLine );  putting lines into printout
+
+prt_wl( ioQQQ , wavelength ) will print wavelength in proper format 

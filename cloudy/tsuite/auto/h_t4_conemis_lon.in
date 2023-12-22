@@ -1,0 +1,125 @@
+title low-den continuous HI emission with 2-nu important
+#
+# commands controlling continuum =========
+laser 2
+ionization -1
+#
+# commands for density & abundances =========
+hden 0
+init "honly.ini"
+#
+# commands controlling geometry  =========
+stop thickness 0
+#
+# other commands for details     =========
+# increase default resolution stored in continuum_mesh.ini 
+set continuum resolution 0.1
+case b 
+iterate
+constant temperature 4
+#
+# commands controlling output    =========
+print lines column 
+save overview "h_t4_conemis_lon.ovr"
+save performance "h_t4_conemis_lon.per"
+save continuum "h_t4_conemis_lon.con" last units microns 
+save two photon continuum "h_t4_conemis_lon.2nu" last rydbergs
+save monitors "h_t4_conemis_lon.asr"
+#
+# commands giving the monitors    =========
+monitor line "nFnu" 122.4m -26.458  luminosity
+## >>chng 13 jul 24, wl from 60.83m to 60.8322m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 60.8322m -26.214 luminosity
+## >>chng 13 jul 24, wl from 41.22m to 41.2152m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 41.2152m -26.078 luminosity
+## >>chng 13 jul 24, wl from 30.87m to 30.8695m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 30.8695m -25.976 luminosity
+## >>chng 13 jul 24, wl from 24.78m to 24.7829m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 24.7829m -25.899 luminosity
+## >>chng 13 jul 24, wl from 24.30m to 24.2998m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 24.2998m -25.892 luminosity
+## >>chng 13 jul 24, wl from 22.83m to 22.8302m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 22.8302m -25.869 luminosity
+## >>chng 13 jul 24, wl from 21.42m to 21.4199m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 21.4199m -25.847 luminosity
+## >>chng 13 jul 24, wl from 21.12m to 21.1235m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 21.1235m -25.843 luminosity
+## >>chng 13 jul 24, wl from 19.62m to 19.6199m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 19.6199m -25.815 luminosity
+## >>chng 13 jul 24, wl from 17.65m to 17.6534m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 17.6534m -25.776 luminosity
+monitor line "nFnu" 17.37m -25.771 luminosity
+## >>chng 13 jul 24, wl from 15.69m to 15.6901m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 15.6901m -25.737 luminosity
+## >>chng 13 jul 24, wl from 14.60m to 14.6036m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 14.6036m -25.709 luminosity
+monitor line "nFnu" 12.43m -25.650 luminosity
+monitor line "nFnu" 11.40m -25.622 luminosity
+monitor line "nFnu" 10.46m -25.586 luminosity
+## >>chng 13 jul 24, wl from 9.480m to 9.48002m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 9.48002m -25.555 luminosity
+## >>chng 13 jul 24, wl from 9.325m to 9.32488m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 9.32488m -25.550 luminosity
+## >>chng 13 jul 24, wl from 8.210m to 8.21035m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 8.21035m -25.499 luminosity
+monitor line "nFnu" 7.580m -25.475 luminosity
+## >>chng 13 jul 24, wl from 7.050m to 7.05026m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 7.05026m -25.438 luminosity
+## >>chng 13 jul 24, wl from 4.114m to 4.11370m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 4.11370m -25.231 luminosity
+## >>chng 11 oct 12, from -25.06 to -25.04, scale iso highest pcs to be consistent with recomb topoff
+## >>chng 13 jul 24, wl from 2.324m to 2.32440m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 2.32440m -25.04 luminosity
+## 
+## >>chng 02 jul 19, to case b, from -24.924 to 892
+## >>chng 13 jul 24, wl from 1.643m to 1.64313m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 1.64313m -24.892 luminosity
+## 
+## >>chng 07 feb 06, bugfix in r828, from -24.897 to -24.878 
+## >>chng 13 jul 24, wl from 1.480m to 1.48022m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 1.48022m -24.878 luminosity
+## 
+## >>chng 13 jul 24, wl from 1.436m to 1.43649m, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from -24.72 to -24.7, Marios bug fixes
+monitor line "nFnu" 1.43649m -24.7 luminosity
+## 
+## >>chng 02 jul 19, to case b, all following got brighter
+## >>chng 13 jul 24, wl from 1.119m to 1.11867m, increased wl precision to 6 sig. fig.
+monitor line "nFnu" 1.11867m -24.688 luminosity
+## 
+## >>chng 13 jul 24, wl from 8330A to 8329.68A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  8329.68A -24.676 luminosity
+## >>chng 13 jul 24, wl from 8079A to 8078.61A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  8078.61A -24.324 luminosity
+## >>chng 13 jul 24, wl from 6210A to 6209.66A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  6209.66A -24.361 luminosity
+## >>chng 13 jul 24, wl from 4885A to 4885.36A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  4885.36A -24.377 luminosity
+## >>chng 13 jul 24, wl from 3704A to 3704.34A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  3704.34A -24.315 luminosity
+## >>chng 13 jul 24, wl from 3588A to 3587.67A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  3587.67A -23.628 luminosity
+## >>chng 13 jul 24, wl from 2430A to 2430.05A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  2430.05A -23.868 luminosity ## peak of 2nu emission
+## >>chng 13 jul 24, wl from 2392A to 2392.03A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  2392.03A -23.870 luminosity
+## >>chng 13 jul 24, wl from 2071A to 2071.34A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  2071.34A -23.849 luminosity
+## >>chng 13 jul 24, wl from 2053A to 2052.68A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  2052.68A -23.846 luminosity
+## >>chng 13 jul 24, wl from 1793A to 1793.44A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  1793.44A -23.787 luminosity
+## >>chng 13 jul 24, wl from 1585A to 1585.12A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  1585.12A -23.736 luminosity
+## >>chng 13 jul 24, wl from 1458A to 1458.33A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  1458.33A -23.727 luminosity
+## >>chng 13 jul 24, wl from 1357A to 1356.96A, increased wl precision to 6 sig. fig.
+monitor line "nFnu"  1356.96A -23.775 luminosity
+##
+# h_t4_conemis_lon.in 
+# class limit 
+# ========================================
+# 
+
+This is a mate to hatomt10.in except that the density is low enough
+for two-photon emission to be very imporant in the optical and uv.

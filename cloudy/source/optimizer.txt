@@ -1,0 +1,17 @@
+in cdDriv the following:
+if( vary.lgVaryOn )
+{
+	if( lgTraceInput )
+		fprintf( ioQQQ, "cdDriv: calling lgOptimize_do\n");
+	/* option to drive optimizer set if OPTIMIZE was in input stream */
+	lgOptimize_do();
+}
+else
+{
+	if( lgTraceInput )
+		fprintf( ioQQQ, "cdDriv: calling cloudy\n");
+	/* optimize did not occur, only compute one model, call cloudy */
+	cloudy();
+}
+
+lgOptimize_do chooses which optimization routine to call

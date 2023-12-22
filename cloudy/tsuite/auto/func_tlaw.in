@@ -1,0 +1,53 @@
+title test model with tlaw table
+#
+# commands controlling continuum =========
+phi(H) 15
+table agn
+#
+# commands for density & abundances =========
+hden 9
+init "honly.ini"
+#
+# commands controlling geometry  =========
+sphere
+filling factor -5
+radius 16 17
+stop temperature 3 linear
+#
+# other commands for details     =========
+tlaw table radius
+continue -35 4
+continue 16 4
+continue 16.2 3
+continue 16.4 4
+continue 16.6 3.5
+continue 16.8 4
+continue 20 4
+continue 21 -1
+end of tlaw
+#
+# commands controlling output    =========
+save overview "func_tlaw.ovr"
+save performance "func_tlaw.per"
+save dr "func_tlaw.dr"
+save overveiw "func_tlaw.ovr"
+save monitors "func_tlaw.asr"
+#
+# commands giving the monitors    =========
+monitor volume ionization hydrogen 1 -0.0008
+## >>chng 23 may 15, from -2.724 to -2.858, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -2.858 to -2.726, GS update UMIST to 2012 and set upper limit on T
+monitor volume ionization hydrogen 2 -2.726
+monitor temperature "H" 3.864
+monitor temperature "H+" 3.832
+##
+#
+# func_tlaw.in
+# class function 
+# ========================================
+# 
+
+this model tests the tlaw density table command 
+
+
+

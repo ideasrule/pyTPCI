@@ -1,0 +1,40 @@
+title test conditions of very low ionization matrix solver
+#
+# commands controlling continuum =========
+blackbody 50000
+ionization parameter -30
+#
+# commands for density & abundances =========
+hden 2
+init file "hheonly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+no molecules
+constant temperature 100
+#
+# commands controlling output    =========
+save overview "limit_lowion.ovr"
+save performance "limit_lowion.per"
+save monitors "limit_lowion.asr" 
+#
+# commands giving the monitors    =========
+## >>chng 04 apr 17 - fix recom conv, from -12.972 to -10.212
+## >>chng 04 apr 29, from -10.212 to -10.416, He+ - H ct rate update
+## >>chng 04 jul 03, from -10.416 to -12.987, NA update H, CO chem net
+## >>chng 13 jan 29, from -12.99 to -12.62, more frequent 2nu OTS update
+monitor hydrogen 2 ionization -12.62 error 0.1
+##
+## >>chng 04 apr 29, from -16.20 to -16.001, He+ - H ct rate update
+## >>chng 04 jul 03, from -16.001 to -22.595, NA update H, CO chem net
+monitor helium 2 ionization -22.595 error 0.1
+## 
+# limit_lowion.in
+# class limit 
+# ========================================
+# 
+
+This model test very low ionization solution of hydrogen and helium.
+

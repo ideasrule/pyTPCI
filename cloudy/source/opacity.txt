@@ -1,0 +1,26 @@
+Opacities are stored in the opacity stack
+opac.OpacStack[NOPSV]
+lives in opacity.h
+
+Opacities are created in OpacityCreateAll.c
+
+opacity addressing
+	OpacityCreateAll sets a series of opacity offset indices, that must be used to address opacities.
+	If an opacity source has an offset ipOff, and a threshold n0, then the energy n,
+	which is n-n0 beyond the treshold, will have an associated opacity of
+	OpacStack[n-n0+ipOff-1]
+
+	if n- is set with ipoint then the first energy cell is n0=1, and the offset is
+	n-n0+ipOff
+
+following provides way to obtain any ionic cross section from opacity stack 
+/* function to facilitate addressing opacity array */
+double csphot(
+	/* INU is array index pointing to frequency where opacity is to be evaluated
+	 * on f not c scale */
+	long int inu, 
+	/* ITHR is pointer to threshold*/
+	long int ithr, 
+	/* IOFSET is offset as defined in opac0*/
+	long int iofset)
+

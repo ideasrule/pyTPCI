@@ -1,0 +1,180 @@
+title constant pressure equilibrium cooling cloud
+#
+# commands controlling continuum =========
+coronal 3.4e7 K init time 
+#
+# commands for density & abundances =========
+# want nT = 2e6 K cm-3
+hden 5.88e-2 linear
+constant pressure reset
+# >> chng 20 oct 05, from -6 to -5 for load balancing
+element limit off  -5
+#
+# commands controlling geometry  =========
+set dr 0 
+set nend 1
+stop zone 1
+#
+# other commands for details     =========
+# number of time steps
+iterate 400
+stop time when temperature falls below 1e4 K
+# this will do equilibrium cooling
+set dynamics populations equilibrium
+cosmic rays background
+#
+# commands controlling output    =========
+print line faint 2 log
+print line cumulative
+print ages
+set save prefix "time_cool_cp_eq"
+save time dependent ".tim" no hash
+save overview ".ovr" no hash
+save cooling ".col" no hash
+save heating ".het" no hash
+save continuum units Angstroms ".con"
+save cumulative continuum units Angstroms last ".concum"
+save monitors ".asr" last
+#
+# commands giving the asserts    =========
+#
+## >>chng 20 oct 05, from 13.65 to 13.68, limit more elements for load leveling
+monitor line luminosity cumulative intrinsic "Fe24"      11.1710A   13.68
+## >>chng 20 oct 05, from 14 to 14.04, limit more elements for load leveling
+## >>chng 22 jul 09, from 14.04 to 14.01, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      15.0130A   14.01
+## >>chng 20 oct 05, from 13.65 to 13.69, limit more elements for load leveling
+## >>chng 22 jul 09, from 13.69 to 13.65, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      17.0960A   13.65
+## >>chng 20 oct 05, from 13.79 to 13.84, limit more elements for load leveling
+## >>chng 22 jul 09, from 13.84 to 13.8, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      17.0510A   13.8
+## >>chng 20 oct 05, from 13.17 to 13.19, limit more elements for load leveling
+monitor line luminosity cumulative intrinsic "O  6"      1031.91A   13.19
+## >>chng 20 oct 05, from 13.35 to 13.38, limit more elements for load leveling
+## >>chng 22 jul 09, wl from 11.4271A to 11.4260A, upgrade to Chianti v10
+## >>chng 23 mar 17, from 13.38 to 13.36, add SiS and Lamda model
+monitor line luminosity cumulative intrinsic "Fe24"      11.4260A   13.36
+## >>chng 20 oct 05, from 13.44 to 13.46, limit more elements for load leveling
+## >>chng 22 jul 09, wl from 12.1612A to 12.1610A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 13.46 to 13.48, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe23"      12.1610A   13.48
+## >>chng 20 oct 05, from 12.59 to 12.62, limit more elements for load leveling
+monitor line luminosity cumulative intrinsic "Fe20"      13.0520A   12.62
+## >>chng 20 oct 05, from 13.79 to 13.84, limit more elements for load leveling
+## >>chng 22 jul 09, from 13.84 to 13.8, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      17.0510A   13.8
+## >>chng 20 oct 05, from 13.65 to 13.69, limit more elements for load leveling
+## >>chng 22 jul 09, from 13.69 to 13.65, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe17"      17.0960A   13.65
+## >>chng 20 oct 03, from 12.05 to 12.06, drift, update branching ratio for H3+ chemistry
+## >>chng 20 oct 05, from 12.06 to 12.1, limit more elements for load leveling
+## >>chng 22 jul 09, wl from 5303.01A to 5303.00A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 12.1 to 11.94, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe14"      5303.00A   11.94
+## >>chng 20 oct 05, from 11.8 to 11.85, limit more elements for load leveling
+## >>chng 22 jul 09, from 11.85 to 11.73, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe13"      1.07462m   11.73
+## >>chng 20 oct 05, from 11.58 to 11.63, limit more elements for load leveling
+## >>chng 22 jul 09, from 11.63 to 11.45, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe13"      1.07978m   11.45
+## >>chng 20 oct 05, from 11.34 to 11.38, limit more elements for load leveling
+## >>chng 22 jul 09, wl from 2405.69A to 2405.68A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.38 to 11.51, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe12"      2405.68A   11.51
+## >>chng 20 oct 05, from 11.25 to 11.29, limit more elements for load leveling
+## >>chng 22 jul 09, wl from 2169.09A to 2169.08A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.29 to 11.36, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe12"      2169.08A   11.36
+## >>chng 20 oct 05, from 10.56 to 10.59, limit more elements for load leveling
+## >>chng 22 jul 09, from 10.59 to 10.74, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe12"      1349.40A   10.74
+## >>chng 20 oct 05, from 10.79 to 10.83, limit more elements for load leveling
+## >>chng 22 jul 09, from 10.83 to 10.97, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe12"      1242.01A   10.97
+## >>chng 20 oct 05, from 11.46 to 11.5, limit more elements for load leveling
+monitor line luminosity cumulative intrinsic "Fe11"      2648.71A   11.5
+## >>chng 20 oct 05, from 11.5 to 11.53, limit more elements for load leveling
+## >>chng 22 jul 09, wl from 6374.54A to 6374.53A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.53 to 11.48, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Fe10"      6374.53A   11.48
+## >>chng 20 oct 05, from 11.1 to 11.13, limit more elements for load leveling
+monitor line luminosity cumulative intrinsic "Fe 9"      8234.56A   11.13
+## >>chng 17 may 25, wl from 18.9732A to 18.9709A, update Rydberg constant
+## >>chng 19 jul 24, from 14.21 to 14.23, fix bug on Presolving ions excitation on He like collisions
+## >>chng 20 oct 05, from 14.23 to 14.26, limit more elements for load leveling
+## >>chng 20 nov 30, wl from 18.9709A to 18.9696A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 18.9696A to 18.9689A, update NIST energies
+## >>chng 22 jul 09, from 14.26 to 14.23, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  8"      18.9689A   14.23
+## >>chng 20 oct 03, from 12.24 to 12.26, drift, update branching ratio for H3+ chemistry
+## >>chng 20 oct 05, from 12.26 to 12.3, limit more elements for load leveling
+## >>chng 21 mar 16, from O 7 16.7725A to 16.7699A, update to NIST
+## >>chng 22 jul 09, from 12.3 to 12.27, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  7"      16.7699A   12.27
+## >>chng 16 aug 17, from 13.02 to 12.92, bugfix at r11237
+## >>chng 17 sep 01, from 12.92 to 11.73, fix bug in high n collisional excitation rates for He-like iso-sequences
+## >>chng 19 jun 11, from 11.73 to 11.94, Percival and Richards (1978) used for He-like ions
+## >>chng 19 jul 24, from 11.94 to 11.68, fix bug on Presolving ions excitation on He like collisions
+## >>chng 19 aug 06, from 11.68 to 11.73, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 oct 05, from 11.73 to 11.77, limit more elements for load leveling
+## >>chng 21 nov 02, from 11.77 to 12.09, fix bug with overresolving CS in isoseq
+## >>chng 22 jul 09, from 12.09 to 12.06, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  7"      18.6270A   12.06
+## >>chng 19 jun 11, from 13.17 to 13.2, Percival and Richards (1978) used for He-like ions
+## >>chng 19 jul 24, from 13.2 to 13.17, fix bug on Presolving ions excitation on He like collisions
+## >>chng 20 oct 05, from 13.17 to 13.22, limit more elements for load leveling
+## >>chng 21 nov 02, from 13.22 to 13.26, fix bug with overresolving CS in isoseq
+## >>chng 22 jul 09, from 13.26 to 13.23, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  7"      21.6020A   13.23
+## >>chng 19 jun 11, from 12.71 to 12.73, Percival and Richards (1978) used for He-like ions
+## >>chng 19 jul 24, from 12.73 to 12.71, fix bug on Presolving ions excitation on He like collisions
+## >>chng 20 oct 05, from 12.71 to 12.75, limit more elements for load leveling
+## >>chng 22 jul 09, from 12.75 to 12.73, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  7"      21.8070A   12.73
+## >>chng 19 jun 11, from 13.22 to 13.26, Percival and Richards (1978) used for He-like ions
+## >>chng 19 jul 24, from 13.26 to 13.23, fix bug on Presolving ions excitation on He like collisions
+## >>chng 20 oct 05, from 13.23 to 13.26, limit more elements for load leveling
+monitor line luminosity cumulative intrinsic "O  7"      22.1012A   13.26
+## >>chng 20 oct 05, from 12.86 to 12.89, limit more elements for load leveling
+## >>chng 22 jul 09, wl from 1037.62A to 1037.61A, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  6"      1037.61A   12.89
+monitor line luminosity cumulative intrinsic "O  5"      1213.81A   12.1348
+monitor line luminosity cumulative intrinsic "N  5"      1242.80A   11.6809
+## >>chng 20 oct 05, from 11.14 to 11.17, limit more elements for load leveling
+monitor line luminosity cumulative intrinsic "Si 7"      2146.64A   11.17
+## >>chng 20 oct 05, from 11 to 11.02, limit more elements for load leveling
+monitor line luminosity cumulative intrinsic "Mg 6"      1806.00A   11.02
+## >>chng 20 oct 05, from 11.1 to 11.13, limit more elements for load leveling
+## >>chng 22 jul 09, wl from 1806.43A to 1806.42A, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "Mg 6"      1806.42A   11.13
+## >>chng 16 aug 18, from 11.66 to 11.68, enhanced coll ioniz for hightest n
+## >>chng 22 jul 09, wl from 1404.78A to 1404.81A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 11.68 to 11.65, upgrade to Chianti v10
+monitor line luminosity cumulative intrinsic "O  4"      1404.81A   11.65
+monitor line luminosity cumulative intrinsic "C  4"      1548.19A   12.3018
+## >>chng 16 jul 24, from 11.98 to 11.95, update C III to 2014A&A...566A.104F
+monitor line luminosity cumulative intrinsic "C  3"      1906.68A   11.95
+## >>chng 16 nov 14, from 11.48 to 11.5, Reintegration of RydDep after several bug fixes
+monitor line luminosity cumulative intrinsic "O  3"      1666.15A   11.5
+monitor line luminosity cumulative intrinsic "O  3"      5006.84A   11.7472
+## >>chng 16 aug 17, from 11.52 to 11.5, bugfix at r11237
+## >>chng 16 nov 14, from 11.5 to 11.34, Reintegration of RydDep after several bug fixes
+## >>chng 17 may 26 update Rydberg constant 1640.00 -> 1640.43
+## >>chng 19 jun 28, from 11.34 to 11.64, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 11.64 to 11.68, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 oct 05, from 11.68 to 11.7, limit more elements for load leveling
+## >>chng 20 nov 30, wl from 1640.43A to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, update 1-e energies to np
+monitor line luminosity cumulative intrinsic "He 2"      1640.41A   11.7
+## >>chng 16 jul 01, from 11.88 to 11.91, increase iterations, let Te drop to 1e4K
+## >>chng 16 aug 17, from 11.91 to 11.94, bugfix at r11237
+monitor line luminosity cumulative intrinsic "O  2"      3728.81A   11.94
+#
+# time_cool_cp.in 
+# class dynamics 
+# ========================================
+# 
+
+test time dependent cooling at constant pressure
+

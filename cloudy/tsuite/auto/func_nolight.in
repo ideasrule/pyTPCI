@@ -1,0 +1,20 @@
+title check OK with no radiation incident
+constant temp 5e7 linear
+hden 7 log
+set dr 0
+stop zone 1
+#
+save performance "func_nolight.per"
+save dr "func_nolight.dr"
+save overveiw "func_nolight.ovr"
+save monitors "func_nolight.asr"
+#
+monitor temperature "H+" 7.6990
+##
+#
+# func_nolight.in
+# class function
+# ========================================
+#
+
+Check that we handle limit where there is no incident radiation field

@@ -1,0 +1,21 @@
+# PAH grains contributed by Kevin Volk and modified further by Peter van Hoof
+# based on: 
+#>>refer	PAH	opacities	Desert, F.-X., Boulanger, F., Puget, J. L. 1990, A&A, 237, 215
+# with modifications based on:
+#>>refer	PAH	opacities	Schutte, W.A., Tielens, A.G.G.M., Allamandolla, L.J., 1993, ApJ, 415, 397
+#>>refer	PAH	opacities	Bregman, J.D., Allamandola, L.J., Witteborn, F.C., Tielens, A.G.G.M., 
+#>>refercon	Geballe, T.R., 1989, ApJ, 344, 791
+1030103  # magic number for version control
+C        # the hydrogen atoms are neglected in the atomic weight due to varying H/C ratio
+# chemical formulas are case sensitive and fractional indices are allowed,
+# (e.g., Mg0.6Fe0.4SiO3). Use no brackets or spaces.
+3.31e-4  # default abundance
+0.009    # default depletion
+1.80     # material density in g/cm^3
+3        # material type for enthalpy function, 1=carbonaceous, 2=silicate, 3=PAH
+0.3235   # work function in Rydberg
+0.0000   # gap between valence and conduction band in Rydberg
+0.5      # thermionic efficiency ( 0. < efficiency <= 1. )
+2000.    # sublimation temperature in K
+pah1     # type of data in this file, rfi_tbl, grey, pah1, etc...
+# no further data required

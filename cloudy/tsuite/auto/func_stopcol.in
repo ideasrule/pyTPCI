@@ -1,0 +1,42 @@
+title test stop column density "species" command
+#
+# commands controlling continuum =========
+ionization parameter -2
+blackbody 50000
+#
+# commands for density & abundances =========
+hden 2
+init file "ism.ini"
+# test option to turn off elements with small abundances
+element limit off -5
+#
+# commands controlling geometry  =========
+# stop calc at line ratio, the point of this test 
+stop column density "N+2" 10.
+#
+# other commands for details     =========
+constant temperature 10000 K
+#
+# commands controlling output    =========
+set save prefix "func_stopcol"
+save overview ".ovr"
+save performance ".per"
+save monitors ".asr" last
+save dr ".dr" last
+#
+# commands giving the monitors    =========
+#
+monitor "n  3" 989.799A -8.065 line intensity
+#
+# this should be an assert and not a monitor
+monitor column density "N+2" 10. 0.01
+#
+# func_stopcol.in
+# class function 
+# ========================================
+# 
+
+This is an example of a simple calculation that stops when
+a column density of a species reaches a specific value.
+The tricky part is that the species label contains a number, so
+we need to ascertain that the column density is parsed correctly.

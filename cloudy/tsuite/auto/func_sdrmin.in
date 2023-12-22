@@ -1,0 +1,37 @@
+title test set drmin command
+#
+# commands controlling continuum =========
+blackbody 8e4
+luminosity 37.5
+#
+# commands for density & abundances =========
+hden 4
+#
+# commands controlling geometry  =========
+radius 17
+sphere
+stop thickness 17.03
+stop temperature off
+#
+# other commands for details     =========
+set drmin 15.5
+cosmic rays background
+#
+# commands controlling output    =========
+save overview "func_sdrmin.ovr"
+save performance "func_sdrmin.per"
+save monitors "func_sdrmin.asr" last
+save dr "func_sdrmin.dr" last
+#
+# commands giving the monitors    =========
+##
+monitor thickness 17.03 0.001
+##
+monitor nzone 31 error 0.1
+
+This simulation tests the SET DRMIN command. It is a toy model of a planetary
+nebula that is designed to extend into the PDR. The minimum stepsize is
+deliberately set much too large so that we would immediately notice if the
+command was broken. It also tests if we still hit the correct outer radius
+when SET DRMIN is used. Without the SET DRMIN command this sim would need
+410 zones (trunk@2760).

@@ -1,0 +1,28 @@
+The observed and modelled SED of Vy 1-2 in the wavelength range from 0.43 to 140 μm.
+The data are from GSC2.2, GSC2.3, USNOB1, USNOB2, 2MASS, AKARI and WISE surveys.
+Figure 17 from Akras et al. (2015).
+
+email exchange of 2016 july 29
+Stavros Akras <akras@astro.ufrj.br>
+Dear Prof. Gary J. Ferland,
+
+Of course you can use the figure. I have no problem at all. On the contrary, it will be my pleasure to see this figure in the Cloudy documentation.
+Please fell free to use it
+
+Your Sincerely,
+
+Stavros Akras
+
+
+
+2016-07-29 17:16 GMT-03:00 Gary J. Ferland <gjferland@gmail.com>:
+Dear Dr Akras,
+I would like to use Figure 17 of your paper MNRAS 452, 2911–2929 (2015) on the cover of Hazy 2 in the next release of Cloudy.  I think we have everything we would need, and will certainly properly reference your original paper.  I hope this meets with your approval.
+all the best,
+Gary Ferland
+
+-- 
+Gary J. Ferland
+Physics, Univ of Kentucky
+Lexington KY 40506 USA
+tel: 859 257-8795

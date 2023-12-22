@@ -1,0 +1,224 @@
+title H2 with background cosmic ray ionization
+#
+# commands controlling continuum =========
+# this is hot star SED
+black 30000
+intensity  -5. range  0.4412 to 1 Ryd
+# this will remove all ionizing radiation
+extinguish 24 0
+# background CR ionization rate of 2.5e-17 s^-1,
+cosmic rays, background
+#
+# commands for density & abundances =========
+hden 5
+#
+# commands controlling geometry  =========
+set dr 0 
+stop zone 5 
+stop temperature 400 
+#
+# other commands for details     =========
+# failures should not occur
+failures 1 
+database h2 
+iterate
+# want clean test of CR physics so set constant kinetic temperature
+constant temperature 500K
+# must turn off line photoexcitation and Solomon process
+# since we want to test cr heating and ionization
+no induced processes
+#
+# commands controlling output    =========
+print column density 
+print ages
+save performance "h2_cr.per"
+save overview "h2_cr.ovr" last
+## default is to save only lines from ground electronic configuration
+## electronic all - report all lines
+save h2 lines "h2_cr.lin" last electronic all 
+save h2 rates "h2_cr.rat" last
+save h2 column density "h2_cr.col" last
+save monitors "h2_cr.asr" last
+save dominant rates "h2_cr.h2" "H2" last 
+save chemistry rates "h2_cr.h2d" "H2" destruction
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+##
+## >>chng 08 jul 12 add cosmic ray heating rate
+## >>chng 12 apr 09, from -21.94 to -21.01, update CR backbround to Indriolo+07, ~8x larger
+monitor line luminosity "CR H" 0 -21.01 err 0.1
+## 
+## >>chng 08 jul 12 metal heating is most of total heating
+## >>chng 11 nov 16, from -21.13 to -21.23, adjust newmole monitors
+monitor line luminosity "TotM" 0 -21.23 err 0.1
+##
+## >>chng 06 mar 02, add this assert
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 0.466 to 0.578
+## >>chng 06 nov 24, from 0.578 to 0.547, turn on Badnell RR
+## >>chng 11 nov 16, from 0.547 to 0.3526, adjust newmole monitors
+## >>chng 12 apr 09, from 0.3526 to 0.4084, update CR backbround to Indriolo+07, ~8x larger
+monitor eden 0.4084 
+## 
+## >>chng 03 feb 22, from 4.37 to 4.696, use big h2 mole rates
+## >>chng 03 sep 02, from 4.696 to 5.395, do 5 zones
+## >>chng 04 jan 28, from 5.395 to 5.345, cr background heating
+## >>chng 04 mar 24, from 5.345 to 5.378, finer convergence
+## >>chng 04 may 09, from 5.378 to 5.315, chng supra elec excit of h2
+## >>chng 04 may 25, from 5.315 to 5.378, chng supra elec excit of h2
+## >>chng 04 may 29, from 5.378 to 4.322, NA update H chem, GS update H2 rate
+## >>chng 04 jul 02, from 4.322 to 3.395, O H ct
+## >>chng 04 jul 03, from 3.395 to 3.352, NA update H, CO chem net
+## >>chng 04 oct 05, from 3.352 to 4.075, turn big H2 back on (had been off)
+## >>chng 05 aug 03, from 4.075 to 3.359, redo cr rates in big mol, inc trip
+## >>chng 05 aug 09, from 3.359 to 3.385, NA chng Federman rate, incr err
+## >>chng 06 mar 02, from 3.39 to 4.01, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 4.01 to 3.53
+## >>chng 11 apr 22, from 3.53 to 3.486, update Ar sequence Badnell DR rates
+## >>chng 11 nov 16, from 3.486 to 4.365, adjust newmole monitors
+## >>chng 12 apr 09, from 4.365 to 4.215, update CR backbround to Indriolo+07, ~8x larger
+monitor H2 column 4.215 error 0.1
+##
+## >>chng 03 aug 08, add this one
+## >>chng 03 aug 22, Nick Abel rewrite CO network
+## >>chng 03 sep 02, from 0.766 to 1.480, do 5 zones
+## >>chng 03 sep 10, from 1.48 to 1.506, better div into H2* 
+## >>chng 03 sep 11, from 1.506 to 1.392, better div into H2*, incr error 
+## >>chng 03 sep 16, from 1.392 to 1.479, Nick Abel better convers, new ion mol
+## >>chng 03 nov 18, from 1.479 to 1.869, update co network
+## >>chng 04 may 29, from 1.869 to 2.073, NA update H chem, GS update H2 rate
+## >>chng 04 jul 02, from 2.073 to 1.971, O H ct
+## >>chng 04 jul 03, from 1.971 to 2.027, NA update H, CO chem net
+## >>chng 04 oct 05, from 2.027 to 2.082, turn big H2 back on (had been off)
+## >>chng 05 aug 03, from 2.082 to 2.001, redo cr rates in big mol, inc trip
+## >>chng 06 mar 02, from 2.00 to 2.08, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+monitor CO column 2.08 error 0.1
+##
+monitor H2 ortho 3.0
+## 
+## >>chng 05 jan 05, added these state specific column densities
+## >>chng 05 aug 03, from 2.97 to 2.26, redo cr rates in big mol, inc trip
+## >>chng 06 mar 02, from 2.26 to 2.91, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 2.91 to 2.43
+## >>chng 11 nov 16, from 2.43 to 3.27, adjust newmole monitors
+## >>chng 12 apr 09, from 3.27 to 3.12, update CR backbround to Indriolo+07, ~8x larger
+monitor H2 column density level v=0 J=0 N=3.12 error 0.1
+## 
+## >>chng 05 aug 03, from 3.78 to 3.07, redo cr rates in big mol, inc trip
+## >>chng 06 mar 02, from 3.07 to 3.72, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 3.72 to 3.24
+## >>chng 11 apr 22, from 3.24 to 3.197, update Ar sequence Badnell DR rates
+## >>chng 11 nov 16, from 3.197 to 4.077, adjust newmole monitors
+## >>chng 12 apr 09, from 4.077 to 3.926, update CR backbround to Indriolo+07, ~8x larger
+monitor H2 column density level v=0 J=1 N=3.926 error 0.1
+## 
+## >>chng 05 aug 03, from 3.23 to 2.52, redo cr rates in big mol, inc trip
+## >>chng 06 mar 02, from 2.52 to 3.17, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 3.17 to 2.69
+## >>chng 11 apr 22, from 2.69 to 2.647, update Ar sequence Badnell DR rates
+## >>chng 11 nov 16, from 2.647 to 3.526, adjust newmole monitors
+## >>chng 12 apr 09, from 3.526 to 3.376, update CR backbround to Indriolo+07, ~8x larger
+monitor H2 column density level v=0 J=2 N=3.376 error 0.1
+## 
+## >>chng 05 aug 03, from 3.41 to 2.70, redo cr rates in big mol, inc trip
+## >>chng 06 mar 02, from 2.70 to 3.35, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 3.35 to 2.87
+## >>chng 11 nov 16, from 2.87 to 3.709, adjust newmole monitors
+## >>chng 12 apr 09, from 3.709 to 3.558, update CR backbround to Indriolo+07, ~8x larger
+monitor H2 column density level v=0 J=3 N=3.558 error 0.1
+## 
+## >>chng 05 aug 03, from 2.45 to 1.74, redo cr rates in big mol, inc trip
+## >>chng 06 mar 02, from 1.74 to 2.39, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 2.39 to 1.91
+## >>chng 11 apr 22, from 1.91 to 1.865, update Ar sequence Badnell DR rates
+## >>chng 11 nov 16, from 1.865 to 2.746, adjust newmole monitors
+## >>chng 12 apr 09, from 2.746 to 2.595, update CR backbround to Indriolo+07, ~8x larger
+monitor H2 column density level v=0 J=4 N=2.595 error 0.1
+## 
+## >>chng 05 aug 03, from 2.22 to 1.51, redo cr rates in big mol, inc trip
+## >>chng 06 mar 02, from 1.51 to 2.16, NA Fe0, Mg0, <-> Si+, S+, C+ ct,
+## also energy barrier for H + (CH and CH2) reactions
+## >>chng 06 may 30, NA refactor CO, fix H+CH=>C+H2 rate, from 2.16 to 1.68
+## >>chng 11 nov 16, from 1.68 to 2.539, adjust newmole monitors
+## >>chng 12 apr 09, from 2.539 to 2.389, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 20 jul 21, from 2.389 to 2.439, update CR H2 dissoc as per  2020RNAAS...4...78S
+monitor H2 column density level v=0 J=5 N=2.439 error 0.1
+##
+## >>chng 13 jun 27, from -3.4460 to -21.3758, add H2 2.1215m line luminosity
+## >>chng 13 jul 24, wl from 2.1215m to 2.12125m, increased wl precision to 6 sig. fig.
+## >>chng 16 dec 29, from -21.38 to -21.06, uupdate H-H2 coll to Lique 15
+monitor line luminosity "H2  " 2.12125m  -21.06 error 0.1
+##
+## >>chng 13 jun 27, from -8.869 to -17.92, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -17.92 to -17.6, update LAMDA to 2015
+## >>chng 20 jul 21, from -17.6 to -17.54, update CR H2 dissoc as per  2020RNAAS...4...78S
+monitor "H2O " 538.142m line intensity -17.54
+## >>chng 13 jun 27, from -7.357 to -24.77, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1653m to 1652.90m, increased wl precision to 6 sig. fig.
+## >>chng 20 jul 21, from -24.77 to -24.73, update CR H2 dissoc as per  2020RNAAS...4...78S
+## >>chng 21 sep 11, from -24.73 to -25.11, LAMDA update
+monitor "HNC " 1652.90m  line intensity -25.11
+## >>chng 13 jun 27, from -8.563 to -26.07, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+monitor "HCS+" 1755.88m  -26.07 line intensity
+## >>chng 13 jun 27, from -7.453 to -23.84, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -23.84 to -23.89, update LAMDA to 2015
+## >>chng 20 jul 21, from -23.89 to -23.85, update CR H2 dissoc as per  2020RNAAS...4...78S
+monitor "CS  " 3058.86m  -23.85 line intensity
+## >>chng 13 jun 27, from -7.288 to -21.7, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 2600.05m  -21.7 line intensity
+## >>chng 13 jun 27, from -6.463 to -20.2, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 1300.05m  -20.2 line intensity
+## >>chng 13 jun 27, from -6.149 to -19.33, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+monitor "CO  " 866.727m  -19.33 line intensity
+## >>chng 13 jun 27, from -6.177 to -18.72, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+monitor "CO  " 650.074m  -18.72 line intensity
+## >>chng 13 jun 27, from -6.485 to -18.25, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+monitor "CO  " 520.089m  -18.25 line intensity
+## >>chng 13 jun 27, from -6.954 to -17.89, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+monitor "CO  " 433.438m  -17.89 line intensity
+## >>chng 13 jun 27, from -7.48 to -17.61, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+monitor "CO  " 371.549m  -17.61 line intensity
+## >>chng 13 jun 27, from -8.049 to -17.4, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+monitor "CO  " 325.137m  -17.4 line intensity
+## >>chng 13 jun 27, from -7.522 to -20.91, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+monitor "^13CO" 906.599m  -20.91 line intensity
+## >>chng 13 jun 27, from -8.247 to -21.49, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 20 jul 21, from -21.49 to -21.47, update CR H2 dissoc as per  2020RNAAS...4...78S
+## >>chng 21 sep 11, from -21.47 to -22.46, LAMDA update
+## >>chng 21 sep 15, from -22.46 to -21.41, go back to unresolved model
+monitor "CN  " 880.858m  -21.41  line intensity
+# 
+# h2_cr.in
+# class limit  
+# ========================================
+# 
+
+This test conditions of cosmic ray ionization.  
+Solar abundances with no dust are assumed so this involves
+gas-phase chemistry alone.
+The Solomon process is disabled with the "no induced processes' command
+so H2 is mainly dissociated by cosmic rays.
+This forms a pair with h2_cr_grains, which does include grains.
+

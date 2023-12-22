@@ -1,0 +1,54 @@
+title H-like O VIII case B
+#
+# commands controlling continuum =========
+table agn 
+ionization parameter 4
+#
+# commands for density & abundances =========
+hden = 8
+init file="ism.ini"
+element oxygen abundance 1
+## >>chng 03 apr 28, add following to force low eden equal to O abund
+set eden 9
+#
+# commands controlling geometry  =========
+# set following so the n^2 dr is unity
+set dr -18
+stop zone 1
+#
+# other commands for details     =========
+case b hummer no photoionization
+no induced processes (OK)
+constant temperature = 1.e5
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 75.89a to 75.8927A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 75.8927A to 75.8835A, up Rydberg constant
+## >>chng 20 aug 22, wl from 75.8835A to 75.8858A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 75.8858A to 75.8966A, update NIST energies
+## >>chng 21 apr 08, wl from 75.8966A to 75.9015A, up 1-e energies to np
+normalize to "O  8" 75.9015A ## the balmer alpha transition
+save overview "hlike_o.ovr"
+save performance "hlike_o.per"
+save results "hlike_o.rlt"
+save monitors "hlike_o.asr"
+#
+# commands giving the monitors    =========
+## >>chng 03 apr 28, changed model to have different density and thickness
+## >>chng 03 apr 30, from -6.991 to -1.795, bug in csupra at very high Z
+monitor oxygen 8 ionization -1.795
+##
+# caseb_o.in
+# class limit 
+# ========================================
+# 
+ 
+This test case compares the predictions of the multi-level H-like O VIII atom
+with the Storey and Hummer (1995) results.  The set dr command sets the
+zone thickness to 1 cm.  The case b command sets Lyman line optical depths
+to very large values. 
+Checks:
+-	Neutral fractions
+-	H* emissivity
+-	Relative line intensities
+

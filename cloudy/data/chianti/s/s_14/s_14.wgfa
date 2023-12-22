@@ -1,0 +1,107 @@
+    1    2        445.700      5.950e-02      9.990e+08 
+    1    3        417.660      1.270e-01      1.210e+09 
+    2    4         33.381      4.040e-02      1.210e+11 
+    3    4         33.550      8.040e-02      2.380e+11 
+    1    5         30.469      2.330e-01      8.360e+11 
+    4    5       1614.987      1.000e-01      1.280e+08 
+    1    6         30.427      4.660e-01      8.390e+11 
+    4    6       1504.891      2.150e-01      1.590e+08 
+    2    7         32.416      1.350e+00      2.140e+12 
+    3    7         32.575      2.690e-01      4.230e+11 
+    3    8         32.560      2.420e+00      2.540e+12 
+    2    9         24.418      8.590e-03      4.810e+10 
+    3    9         24.508      1.710e-02      9.510e+10 
+    5    9         96.369      9.230e-02      3.320e+10 
+    6    9         96.791      1.840e-01      6.540e+10 
+    1   10         23.015      5.960e-02      3.750e+11 
+    4   10         88.898      2.520e-01      1.070e+11 
+    7   10         96.551      4.460e-02      1.600e+10 
+    1   11         23.005      1.190e-01      3.760e+11 
+    4   11         88.750      5.060e-01      1.070e+11 
+    7   11         96.376      8.940e-03      1.610e+09 
+    8   11         96.508      8.040e-02      1.440e+10 
+    2   12         24.200      2.460e-01      7.000e+11 
+    3   12         24.289      4.900e-02      1.380e+11 
+    5   12         93.062      1.170e+00      2.250e+11 
+    6   12         93.456      2.330e-01      4.440e+10 
+    3   13         24.285      4.410e-01      8.310e+11 
+    6   13         93.400      2.100e+00      2.670e+11 
+    7   14         95.386      4.060e+00      4.970e+11 
+    8   14         95.516      2.900e-01      3.530e+10 
+    8   15         95.488      5.800e+00      5.300e+11 
+    2   16         21.748      3.410e-03      2.400e+10 
+    3   16         21.819      6.800e-03      4.760e+10 
+    5   16         64.913      2.010e-02      1.590e+10 
+    6   16         65.104      4.010e-02      3.160e+10 
+   10   16        209.393      1.490e-01      1.130e+10 
+   11   16        210.221      2.960e-01      2.230e+10 
+    1   17        -20.681      2.490e-02      1.940e+11 
+    4   17        -61.914      6.850e-02      5.960e+10 
+    7   17        -65.532      8.860e-03      6.880e+09 
+    9   17       -193.969      2.790e-01      2.470e+10 
+   12   17       -208.912      1.110e-01      8.450e+09 
+    1   18        -20.677      4.980e-02      1.940e+11 
+    4   18        -61.870      1.370e-01      5.970e+10 
+    7   18        -65.483      1.770e-03      6.900e+08 
+    8   18        -65.544      1.590e-02      6.190e+09 
+    9   18       -193.544      5.590e-01      2.490e+10 
+   12   18       -208.419      2.220e-02      8.510e+08 
+   13   18       -208.694      1.990e-01      7.620e+09 
+    2   19         21.660      9.080e-02      3.230e+11 
+    3   19         21.731      1.810e-02      6.390e+10 
+    5   19         64.140      2.730e-01      1.110e+11 
+    6   19         64.326      5.450e-02      2.200e+10 
+   10   19        201.556      1.140e+00      4.660e+10 
+   11   19        202.323      2.260e-01      9.210e+09 
+   14   19        206.830      5.070e-02      1.970e+09 
+    3   20         21.730      1.630e-01      3.840e+11 
+    6   20         64.314      4.910e-01      1.320e+11 
+   11   20        202.200      2.040e+00      5.540e+10 
+   14   20        206.701      3.620e-03      9.420e+07 
+   15   20        206.830      7.240e-02      1.880e+09 
+    7   21         65.254      6.270e-01      1.640e+11 
+    8   21         65.315      4.470e-02      1.170e+10 
+   12   21        206.118      3.550e+00      9.290e+10 
+   13   21        206.390      2.530e-01      6.610e+09 
+    8   22         65.308      8.950e-01      1.750e+11 
+   13   22        206.326      5.060e+00      9.920e+10 
+ -1
+%filename:  s_14.wgfa
+
+Theoretical radiative data:
+Autostructure calculation with energy levels optimized to match to the observed energies
+A Breit-Pauli distorted wave implementation for AUTOSTRUCTURE
+Badnell, N.R., 2011, Computer Physics Communications, 182, 1528
+ADSref:  http://adsabs.harvard.edu/abs/2011CoPhC.182.1528B
+
+Autostructure calculation optimized with 'SHFTIC' file using energy corrections from the following sources:
+
+Observed bound energy levels n=2, 3, 4, 5:
+Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2012).
+NIST Atomic Spectra Database (ver. 5.0), [Online].
+Available: http://physics.nist.gov/asd [2012, September 14].
+National Institute of Standards and Technology, Gaithersburg, MD.
+
+Theoretical energies for n=2, 3 above IP
+Goryaev, F. F.; Vainshtein, L. A.; Urnov, A. M.
+Atomic data for doubly-excited states 2lnl‧ of He-like ions and 1s2lnl‧ of Li-like ions with Z = 6-36 and n = 2 , 3
+2017, ADNDT, 113, 117-257
+adsRef:  http://adsabs.harvard.edu/abs/2017ADNDT.113..117G
+DOI:  10.1016/j.adt.2016.04.002
+
+Theoretical energy levels (n=4, 5 above IP):
+calculations of U. Safronova reported in Kato et al., 1997, ADNDT, 67, 225.
+ADS http://adsabs.harvard.edu/abs/1997ADNDT..67..225K
+updated by U. Safronova, 2001, private communication
+
+ wavelengths determined from energy levels
+ minimum branching ratio =   1.00e-04
+ allWvl =   1
+ minDiff =      0.00010
+produced as a part of the 'CHIANTI' atomic database for astrophysical spectroscopy
+ K. Dere (GMU) - 2017 August 02
+%File processed with wgfa_tidy by pryoung on  6-Mar-2019
+
+Reference:
+Chianti  2022-02-18
+ -1

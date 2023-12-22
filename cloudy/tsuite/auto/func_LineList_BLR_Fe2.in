@@ -1,0 +1,5 @@
+test
+print line precision 6
+table lines "LineList_BLR_Fe2.dat"
+set save prefix "func_LineList_BLR_Fe2"
+save species bands ".fe2b" "FeII_bands.ini" "Fe+" last

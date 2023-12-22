@@ -1,0 +1,38 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=7 were downloaded using ADM.
+#
+# NB NB NB  np energy used for shell n up to n=7
+#
+# The remaining data were calculated using the ATLL r123
+#
+ 1 -1 -1 -1 0 2
+ 2 -1 -1 -1 9975072.12666667 0.0896908
+ 3 -1 -1 -1 11821027.44 0.0260342
+ 4 -1 -1 -1 12467161.7233333 0.00942809
+ 5 -1 -1 -1 12766201.786 0.00573488
+ 6 -1 -1 -1 12928626.4726667 0.00377124
+ 7 -1 -1 -1 13026554.54 0.00260342
+ 8 -1 -1 -1 13090201
+ 9 -1 -1 -1 13133752
+10 -1 -1 -1 13164902
+11 -1 -1 -1 13187949.7
+12 -1 -1 -1 13205478.7
+13 -1 -1 -1 13219120.2
+14 -1 -1 -1 13229944.2
+15 -1 -1 -1 13238676.3
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L7188 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=7188&comment_code=&amp;element=Na&amp;spectr_charge=11&amp;ref=7188&amp;type=E
+# PUBCON    Title: The Lamb Shift in Hydrogen-like Atoms, 1 ≤ Z ≤ 110
+# PUBCON  Authors: W. R. Johnson, and G. Soff
+# PUBCON  Journal: At. Data Nucl. Data Tables 33, 405–446 (1985)
+# PUBCON      DOI: https://doi.org/10.1016/0092-640X(85)90010-5

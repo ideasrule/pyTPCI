@@ -1,0 +1,39 @@
+title test stop line command
+#
+# commands controlling continuum =========
+ionization parameter -2
+blackbody 50000
+#
+# commands for density & abundances =========
+hden 2
+abundances old solar 84 
+init file "ism.ini"
+# test option to turn off elements with small abundances
+element limit off -5
+#
+# commands controlling geometry  =========
+# stop calc at line ratio, the point of this test 
+stop line "c  2" 157.636m reaches 0.0358 
+#
+# other commands for details     =========
+constant temperature 10000 K
+#
+# commands controlling output    =========
+save overview "func_stopline1.ovr"
+save performance "func_stopline1.per"
+save monitors "func_stopline1.asr" last
+save dr "func_stopline1.dr" last
+#
+# commands giving the monitors    =========
+monitor line "c  2" 157.636m 0.0358
+## >>chng 09 feb 23, from 18.95 to 18.99, remove otslin, otscon dampers (PR #84, r2758)
+monitor thickness 18.99
+##
+# func_stopline1.in
+# class function 
+# ========================================
+# 
+
+This is an example of a simple calculation that stops when
+a line reaches a specified intensity.
+The option to turn off elements with trivial abundances is used.

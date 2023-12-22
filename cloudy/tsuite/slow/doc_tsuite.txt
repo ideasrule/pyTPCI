@@ -1,0 +1,31 @@
+dynamics\_HII\_PDR & fast H+He+metals (low ionization parameter) 009 km s  \\ 
+feii\_blr\_n09\_p18 & FeII model  \\ 
+feii\_blr\_n09\_p18\_Z20 & FeII model  \\ 
+feii\_blr\_n11\_p20 & FeII model  \\ 
+feii\_blr\_n11\_p20\_Z20 & FeII model  \\ 
+feii\_blr\_n12\_p19 & FeII model  \\ 
+feii\_blr\_n12\_p19\_Z20 & FeII model  \\ 
+feii\_blr\_n12\_p21 & FeII model  \\ 
+feii\_blr\_n12\_p21\_Z20 & FeII model  \\ 
+feii\_blr\_n13\_p18 & BLR model, density 1e13 cm-3, flux of H-ion phots 1e18 cm2 s-1 \\ 
+feii\_blr\_n13\_p18\_Z20 & BLR model, density 1e13 cm-3, flux of H-ion phots 1e18 cm2 s-1 \\ 
+feii\_blr\_n13\_p22 & FeII model  \\ 
+feii\_blr\_n13\_p22\_Z20 & FeII model  \\ 
+grid\_extreme & exercise full range of density, temperature \\ 
+h2\_HTT91 & Hollenbach et al. 1991 low-density PDR \\ 
+h2\_orion\_bar & Title Orion Bar with magneitc field with equipartition cosmic rays \\ 
+h2\_orion\_hii\_pdr & constant gas pressure orion into pdr \\ 
+h2\_pdr\_leiden\_f2 & low density high flux model 2 as defined in e-mail \\ 
+h2\_pdr\_leiden\_f3 & high density low flux model 3 as defined in e-mail \\ 
+h2\_pdr\_leiden\_f4 & high density high flux model 4 as defined in e-mail \\ 
+h2\_pdr\_leiden\_hack\_f1 & low density low flux model 1 as defined in e-mail \\ 
+h2\_pdr\_leiden\_v1 & model 5 as defined in e-mail \\ 
+h2\_pdr\_leiden\_v2 & model 6 as defined in e-mail \\ 
+h2\_pdr\_leiden\_v3 & model 7 as defined in e-mail \\ 
+h2\_pdr\_leiden\_v4 & model 8 as defined in e-mail \\ 
+h2\_th85orion & Tielens and Hollenbach pdr model with orion grains, Table 2, paper b \\ 
+m17\_p07 & Pellegrini+07 2007ApJ...658.1119P model for M17 \\ 
+orion\_hii\_pdr\_pp & the Orion HII Region / PDR / Molecular cloud with an open geometry \\ 
+pdr\_xdr & XDR sim \\ 
+time\_cool\_cp & constant pressure cooling cloud \\ 
+time\_cool\_cp\_eq & constant pressure equilibrium cooling cloud \\ 

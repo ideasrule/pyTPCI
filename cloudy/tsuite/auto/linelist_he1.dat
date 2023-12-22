@@ -1,0 +1,151 @@
+# >>chng 13 jul 24, wl from 4471A to 4471.47A, increased wl precision to 6 sig. fig.
+# >>chng 13 jul 30, wl from 4471.47A to 4471.49A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 4471.49A to "Blnd" 4472.76A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 4472.76A to 4471.50A, adjust multiplet Blend WL for refraction index
+Blnd  4471.50A 
+# >>chng 13 jul 26, wl from 4471A to 4471.49A, increased wl precision to 6 sig. fig.
+Ca B  4471.49A 
+# >>chng 13 jul 27, wl from 2945A to 2945.10A, increased wl precision to 6 sig. fig.
+He 1  2945.10A 
+# >>chng 13 jul 27, wl from 2945A to 2945.10A, increased wl precision to 6 sig. fig.
+Ca B  2945.10A 
+# >>chng 13 jul 27, wl from 3188A to 3187.74A, increased wl precision to 6 sig. fig.
+He 1  3187.74A 
+# >>chng 13 jul 27, wl from 3188A to 3187.74A, increased wl precision to 6 sig. fig.
+Ca B  3187.74A 
+# >>chng 13 jul 27, wl from 3614A to 3613.64A, increased wl precision to 6 sig. fig.
+He 1  3613.64A 
+# >>chng 13 jul 27, wl from 3614A to 3613.64A, increased wl precision to 6 sig. fig.
+Ca B  3613.64A 
+# >>chng 13 jul 27, wl from 3965A to 3964.73A, increased wl precision to 6 sig. fig.
+He 1  3964.73A 
+# >>chng 13 jul 27, wl from 3965A to 3964.73A, increased wl precision to 6 sig. fig.
+Ca B  3964.73A 
+# >>chng 13 jul 27, wl from 4121A to 4120.81A, increased wl precision to 6 sig. fig.
+# >>chng 13 jul 30, wl from 4120.81A to 4120.82A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 4120.82A to "Blnd" 4122.00A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 4122.00A to 4120.84A, adjust multiplet Blend WL for refraction index
+Blnd  4120.84A 
+# >>chng 13 jul 27, wl from 4121A to 4120.82A, increased wl precision to 6 sig. fig.
+Ca B  4120.82A 
+# >>chng 13 jul 27, wl from 4388A to 4387.93A, increased wl precision to 6 sig. fig.
+He 1  4387.93A 
+# >>chng 13 jul 27, wl from 4388A to 4387.93A, increased wl precision to 6 sig. fig.
+Ca B  4387.93A 
+# >>chng 13 jul 27, wl from 4438A to 4437.55A, increased wl precision to 6 sig. fig.
+He 1  4437.55A 
+# >>chng 13 jul 27, wl from 4438A to 4437.55A, increased wl precision to 6 sig. fig.
+Ca B  4437.55A 
+# >>chng 13 jul 27, wl from 4713A to 4713.02A, increased wl precision to 6 sig. fig.
+# >>chng 13 jul 30, wl from 4713.02A to 4713.03A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 4713.03A to "Blnd" 4714.37A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 4714.37A to 4713.05A, adjust multiplet Blend WL for refraction index
+# >>chng 21 mar 16, wl from 4713.05A to 4713.17A, update NIST energies
+Blnd  4713.17A 
+# >>chng 13 jul 27, wl from 4713A to 4713.03A, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 4713.03A to 4713.16A, update NIST energies
+Ca B  4713.16A 
+# >>chng 13 jul 27, wl from 4922A to 4921.93A, increased wl precision to 6 sig. fig.
+He 1  4921.93A 
+# >>chng 13 jul 27, wl from 4922A to 4921.93A, increased wl precision to 6 sig. fig.
+Ca B  4921.93A 
+# >>chng 13 jul 27, wl from 5016A to 5015.68A, increased wl precision to 6 sig. fig.
+He 1  5015.68A 
+# >>chng 13 jul 27, wl from 5016A to 5015.68A, increased wl precision to 6 sig. fig.
+Ca B  5015.68A 
+# >>chng 13 jul 27, wl from 5048A to 5047.64A, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 5047.64A to 5047.74A, update NIST energies
+He 1  5047.74A 
+# >>chng 13 jul 27, wl from 5048A to 5047.64A, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 5047.64A to 5047.74A, update NIST energies
+Ca B  5047.74A 
+# >>chng 13 jul 27, wl from 5876A to 5875.61A, increased wl precision to 6 sig. fig.
+# >>chng 13 jul 30, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+Blnd  5875.66A 
+# >>chng 13 jul 27, wl from 5876A to 5875.64A, increased wl precision to 6 sig. fig.
+Ca B  5875.64A 
+# >>chng 13 jul 27, wl from 6678A to 6678.15A, increased wl precision to 6 sig. fig.
+He 1  6678.15A 
+# >>chng 13 jul 27, wl from 6678A to 6678.15A, increased wl precision to 6 sig. fig.
+Ca B  6678.15A 
+# >>chng 13 jul 27, wl from 7065A to 7065.18A, increased wl precision to 6 sig. fig.
+# >>chng 13 jul 30, wl from 7065.18A to 7065.22A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "He 1" 7065.22A to "Blnd" 7067.20A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 7067.20A to 7065.25A, adjust multiplet Blend WL for refraction index
+Blnd  7065.25A 
+# >>chng 13 jul 27, wl from 7065A to 7065.22A, increased wl precision to 6 sig. fig.
+Ca B  7065.22A 
+# >>chng 13 jul 27, wl from 7281A to 7281.35A, increased wl precision to 6 sig. fig.
+He 1  7281.35A 
+# >>chng 13 jul 27, wl from 7281A to 7281.35A, increased wl precision to 6 sig. fig.
+Ca B  7281.35A 
+# >>chng 13 jul 27, wl from 9464A to 9463.57A, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 9463.57A to 9463.58A, update NIST energies
+He 1  9463.58A 
+# >>chng 13 jul 27, wl from 9464A to 9463.57A, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 9463.57A to 9463.58A, update NIST energies
+Ca B  9463.58A 
+# >>chng 13 jul 27, wl from 1.083m to 1.08299m, increased wl precision to 6 sig. fig.
+# >>chng 13 jul 30, wl from 1.08299m to 1.08303m, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "totl" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+Blnd 1.08302m 
+# >>chng 13 jul 27, wl from 1.083m to 1.08303m, increased wl precision to 6 sig. fig.
+Ca B 1.08303m 
+# >>chng 13 jul 27, wl from 1.197m to 1.19692m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 1.19692m to 1.19691m, update NIST energies
+He 1 1.19691m 
+# >>chng 13 jul 27, wl from 1.197m to 1.19692m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 1.19692m to 1.19691m, update NIST energies
+Ca B 1.19691m 
+# >>chng 13 jul 27, wl from 1.253m to 1.25274m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 1.25274m to 1.25275m, update NIST energies
+He 1 1.25275m 
+# >>chng 13 jul 27, wl from 1.253m to 1.25274m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 1.25274m to 1.25275m, update NIST energies
+Ca B 1.25275m 
+# >>chng 13 jul 27, wl from 1.278m to 1.27835m, increased wl precision to 6 sig. fig.
+# >>chng 13 jul 27, wl from 1.27835m to 1.27849m, for consistency with Ca B line below
+He 1 1.27849m 
+# >>chng 13 jul 27, wl from 1.278m to 1.27849m, increased wl precision to 6 sig. fig.
+Ca B 1.27849m 
+# >>chng 13 jul 27, wl from 1.279m to 1.27905m, increased wl precision to 6 sig. fig.
+He 1 1.27905m 
+# >>chng 13 jul 27, wl from 1.279m to 1.27905m, increased wl precision to 6 sig. fig.
+Ca B 1.27905m 
+# >>chng 13 jul 27, wl from 1.297m to 1.29684m, increased wl precision to 6 sig. fig.
+He 1 1.29684m 
+# >>chng 13 jul 27, wl from 1.297m to 1.29684m, increased wl precision to 6 sig. fig.
+Ca B 1.29684m 
+# >>chng 13 jul 27, wl from 1.700m to 1.70027m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 1.70027m to 1.70025m, update NIST energies
+He 1 1.70025m 
+# >>chng 13 jul 27, wl from 1.700m to 1.70027m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 1.70027m to 1.70025m, update NIST energies
+Ca B 1.70025m 
+# >>chng 13 jul 27, wl from 1.869m to 1.86854m, increased wl precision to 6 sig. fig.
+He 1 1.86854m 
+# >>chng 13 jul 27, wl from 1.869m to 1.86854m, increased wl precision to 6 sig. fig.
+Ca B 1.86854m 
+# >>chng 13 jul 27, wl from 1.870m to 1.86972m, increased wl precision to 6 sig. fig.
+He 1 1.86972m 
+# >>chng 13 jul 27, wl from 1.870m to 1.86972m, increased wl precision to 6 sig. fig.
+Ca B 1.86972m 
+# >>chng 13 jul 27, wl from 1.909m to 1.90894m, increased wl precision to 6 sig. fig.
+He 1 1.90894m 
+# >>chng 13 jul 27, wl from 1.909m to 1.90894m, increased wl precision to 6 sig. fig.
+Ca B 1.90894m 
+# >>chng 13 jul 27, wl from 1.954m to 1.95430m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 1.95430m to 1.95431m, update NIST energies
+He 1 1.95431m 
+# >>chng 13 jul 27, wl from 1.954m to 1.95430m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 1.95430m to 1.95431m, update NIST energies
+Ca B 1.95431m 
+# >>chng 13 jul 27, wl from 2.112m to 2.11180m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 2.11180m to 2.11202m, update NIST energies
+He 1 2.11202m 
+# >>chng 13 jul 27, wl from 2.112m to 2.11180m, increased wl precision to 6 sig. fig.
+# >>chng 21 mar 16, wl from 2.11180m to 2.11202m, update NIST energies
+Ca B 2.11202m 

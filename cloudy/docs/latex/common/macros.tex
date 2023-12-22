@@ -1,0 +1,254 @@
+% 20 06 24, copied from  aastex63.cls
+
+%% need this change so that it works correctly in tables:
+{\catcode`\$=\active
+\gdef\nodata{ ~$\cdots$~ }}% 
+
+\newcommand\diameter{\ooalign{\hfil/\hfil\crcr\mathhexbox20D}}% 
+\newcommand\degr{\arcdeg}% 
+\newcommand\Sun{\sun}% 
+\newcommand\Sol{\sun}% 
+\newcommand\sun{\odot}% 
+\newcommand\Mercury{\astro{\char1}}% Mercury symbol, "1" 
+\newcommand\Venus{\astro{\char2}}% Venus symbol, "2" 
+\newcommand\Earth{\earth}% 
+\newcommand\Terra{\earth}% 
+\newcommand\earth{\oplus}% 
+\newcommand\Mars{\astro{\char4}}% Mars symbol, "4" 
+\newcommand\Jupiter{\astro{\char5}}% Jupiter symbol, "5" 
+\newcommand\Saturn{\astro{\char6}}% Saturn symbol, "6" 
+\newcommand\Uranus{\astro{\char7}}% Uranus symbol, "7" 
+\newcommand\Neptune{\astro{\char8}}% Neptune symbol, "8" 
+\newcommand\Pluto{\astro{\char9}}% Pluo symbol, "9" 
+\newcommand\Moon{\astro{\char10}}% Moon symbol, "M" 
+\newcommand\Luna{\Moon}% 
+\newcommand\Aries{\astro{\char11}}% 
+\newcommand\VEq{\Aries}% vernal equinox (Aries) 
+\newcommand\Taurus{\astro{\char12}}% 
+\newcommand\Gemini{\astro{\char13}}% 
+\newcommand\Cancer{\astro{\char14}}% 
+\newcommand\Leo{\astro{\char15}}% 
+\newcommand\Virgo{\astro{\char16}}% 
+\newcommand\Libra{\astro{\char17}}% 
+\newcommand\AEq{\Libra}% autumnal equinox (Libra) 
+\newcommand\Scorpius{\astro{\char18}}% 
+\newcommand\Sagittarius{\astro{\char19}}% 
+\newcommand\Capricornus{\astro{\char20}}% 
+\newcommand\Aquarius{\astro{\char21}}% 
+\newcommand\Pisces{\astro{\char22}}% 
+ 
+
+% some names we use
+\newcommand{\Cloudy}{\textsc{Cloudy}}
+\newcommand{\Hazy}{\textsc{Hazy}}
+\newcommand{\cdCommand}[1]{\textbf{#1}}
+\newcommand{\cdVariable}[1]{\emph{#1}}
+\newcommand{\cdSectionTitle}[1]{\emph{#1}}
+\newcommand{\cdFilename}[1]{\texttt{#1}}
+\newcommand{\cdRoutine}[1]{\emph{#1}}
+\newcommand{\cdTerm}[1]{\textbf{\emph{#1}}}
+\newcommand{\cdMono}[1]{\texttt{#1}}
+\newcommand{\fixit}[1]{\textbf{FIXIT: #1}}
+\font\manual=manfnt at 7pt \def\dbend{\hbox{\raise0.9ex\hbox{\manual\char127\hspace{0.6em}}}}
+\newcommand{\experimental}{\texorpdfstring{\dbend}{??}}
+
+% or symbol provided by Will H
+\newcommand\OR{\texorpdfstring{\ensuremath{\vert}}{|}}
+
+% Matt's 1.23\e{-2} 
+\providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+
+
+% \ion from Will, replace AAS version
+\newcommand\Ion[2]{\ensuremath{\mathrm{#1\,\scriptstyle #2}}}
+
+% macro sometimes found in ADS bibtex entries
+\newcommand{\mdash}{---} 
+
+% ion is in the aas style
+\newcounter{INTERNALionstage}
+\providecommand{\ion}[2]{% replace the aastex version
+  \setcounter{INTERNALionstage}{#2}%
+  \Ion{#1}{\Roman{INTERNALionstage}}}
+
+\providecommand{\red}[1]{{\color{red}#1}}
+
+% Will's todo and done macros
+%\newcommand\TODO[1]{\textbf{\boldmath [#1]}}
+\newcommand{\TODO}[1]{\textcolor{red}{{\textbf{\boldmath [#1]}}}}
+\newcommand\DONE[1]{{\color{green!50!gray} \textbf{DONE}} {\color{white!80!black!80!green} #1}}
+
+\newcommand{\Av}{A$_{\rm V}$}
+
+\def\gtsim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$>$}}}}
+\def\lesssim{\mathrel{\hbox{\rlap{\hbox{\lower4pt\hbox{$\sim$}}}\hbox{$<$}}}}
+\def\Msunpyr{M$_{\odot}\,$yr$^{-1}$}
+\def\Msun{M$_{\odot}$}
+%       Based on PATs UNITS.TEX with some additions
+%
+%       Simple units
+%
+\def\A{{\rm\thinspace \AA}}
+\def\cm{{\rm\thinspace cm}}
+\def\as{{\rm\thinspace arcsec}}
+\def\erg{{\rm\thinspace erg}}
+\def\eV{{\rm\thinspace eV}}
+\def\g{{\rm\thinspace g}}
+\def\ga{{\rm\thinspace gauss}}
+\def\hr{{\rm\thinspace hr}}
+\def\Hz{{\rm\thinspace Hz}}
+\def\K{{\rm\thinspace K}}
+\def\keV{{\rm\thinspace keV}}
+\def\km{{\rm\thinspace km}}
+\def\kpc{{\rm\thinspace kpc}}
+\def\Lsun{\mbox{$\rm\thinspace L_{\odot}$}}
+\def\m{{\rm\thinspace m}}
+\def\MeV{{\rm\thinspace MeV}}
+\def\mJy{{\rm\thinspace mJy}}
+\def\micron{\hbox{$\mu$m}}
+\def\Mpc{{\rm\thinspace Mpc}}
+\def\Msun{\mbox{$\rm\thinspace M_{\odot}$}}
+\def\nm{{\rm\thinspace nm}}
+\def\pc{{\rm\thinspace pc}}
+\def\ps{{\rm\thinspace s^{-1}}}
+\def\pcc{{\rm\thinspace cm^{-3}}}
+\def\Ryd{{\rm\thinspace Ryd}}
+\def\s{{\rm\thinspace s}}
+\def\sr{{\rm\thinspace sr}}
+\def\W{{\rm\thinspace W}}
+\def\yr{{\rm\thinspace yr}}
+%
+%       Compound units
+%
+\def\keVscm{\mbox{$\keV\cm^{2}\,$}}
+\def\cmps{\mbox{$\cm\s^{-1}\,$}}
+\def\cmpss{\mbox{$\cm\s^{-2}\,$}}
+\def\ccmps{\mbox{$\cm^{3}\s^{-1}\,$}}
+\def\ergpccmps{\mbox{$\erg\cm^{-3}\s^{-1}\,$}}
+\def\ergpg{\mbox{$\erg\g^{-1}\,$}}
+\def\ergpscm{\mbox{$\erg\cm^{-2}\,$}}
+\def\ergpscmps{\mbox{$\erg\cm^{-2}\s^{-1}\,$}}
+\def\ergpscmpspsas{\mbox{$\erg\cm^{-2}\s^{-1}\as^{-2}\,$}}
+\def\ergpscmpspa{\mbox{$\erg\cm^{-2}\s^{-1}\A^{-1}\,$}}
+\def\ergps{\mbox{$\erg\s^{-1}\,$}}
+\def\gpcm{\mbox{$\g\cm^{-3}\,$}}
+\def\gpcmps{\mbox{$\g\cm^{-3}\s^{-1}\,$}}
+\def\gps{\mbox{$\g\s^{-1}\,$}}
+\def\uJy{\mbox{$\mu${\rm Jy}}}
+\def\kmps{\mbox{$\km\ps\,$}}
+\def\kmpspMpc{\mbox{$\kmps\Mpc^{-1}\,$}}
+\def\Lsunppc{\mbox{$\Lsun\pc^{-3}\,$}}
+\def\Msunpc{\mbox{$\Msun\pc^{-3}\,$}}
+\def\Msunpkpc{\mbox{$\Msun\kpc^{-1}\,$}}
+\def\Msunppc{\mbox{$\Msun\pc^{-3}\,$}}
+\def\Msunppcpyr{\mbox{$\Msun\pc^{-3}\yr^{-1}\,$}}
+\def\Msunpyr{\mbox{$\Msun\yr^{-1}\,$}}
+\def\Msunpyrpkpc{\mbox{$\Msun\yr^{-1}\kpc^{-1}\,$}}
+\def\ps{\mbox{$\s^{-1}\,$}}
+\def\pscm{\mbox{$\cm^{-2}\,$}}
+\def\psm{\mbox{$\m^{-2}\,$}}
+\def\pccm{\mbox{$\cm^{-3}\,$}}
+\def\pscm{\mbox{$\cm^{-2}\,$}}
+\def\pscmps{\mbox{$\cm^{-2}\, \s^{-1}\,$}}
+\def\pcm{\mbox{$\m^{-3}\,$}}
+\def\pccmK{\mbox{$\cm^{-3}\K$}}
+\def\pcmK{\mbox{$\m^{-3}\K$}}
+\def\pressure{\mbox{$\g\, \cm^{-1}\, \s^{-2}\,$}}
+\def\pyr{\mbox{$\yr^{-1}\,$}}
+\def\pyrppc{\mbox{$\yr^{-1}\pc^{-1}\,$}}
+\def\scm{\mbox{$\cm^{2}\,$}}
+\def\Wpsm{\mbox{$\W\psm\,$}}
+\def\Wpscm{\mbox{$\W\pscm\,$}}
+\def\WHz{\mbox{$\W\Hz\,$}}
+%
+% spectral lines
+%
+\def\la{\mbox{{\rm L}$\alpha$}}
+\def\pa{\mbox{{\rm P}$\alpha$}}
+\def\ha{\mbox{{\rm H}$\alpha$}}
+\def\hb{\mbox{{\rm H}$\beta$}}
+\def\hi{\mbox{{\rm H~{\sc i}}}}
+\def\hii{\mbox{{\rm H~{\sc ii}}}}
+\def\hei{\mbox{{\rm He~{\sc i}}}}
+\def\heii{\mbox{{\rm He~{\sc ii}}}}
+\def\ci{\mbox{{\rm C~{\sc i}}}}
+\def\cii{\mbox{{\rm C~{\sc ii}}}}
+\def\ciii{\mbox{{\rm C~{\sc iii}}}}
+\def\civ{\mbox{{\rm C~{\sc iv}}}}
+\def\ni{\mbox{{\rm N~{\sc i}}}}
+\def\nii{\mbox{{\rm N~{\sc ii}}}}
+\def\oi{\mbox{{\rm O~{\sc i}}}}
+\def\oii{\mbox{{\rm O~{\sc ii}}}}
+\def\oiii{\mbox{{\rm O~{\sc iii}}}}
+\def\neii{\mbox{{\rm Ne~{\sc ii}}}}
+\def\neiii{\mbox{{\rm Ne~{\sc iii}}}}
+\def\nev{\mbox{{\rm Ne~{\sc v}}}}
+\def\mgii{\mbox{{\rm Mg~{\sc ii}}}}
+\def\cliii{\mbox{{\rm Cl~{\sc iii}}}}
+\def\sii{\mbox{{\rm S~{\sc ii}}}}
+\def\siii{\mbox{{\rm S~{\sc iii}}}}
+\def\ariii{\mbox{{\rm Ar~{\sc iii}}}}
+\def\caii{\mbox{{\rm Ca~{\sc ii}}}}
+\def\fei{\mbox{{\rm Fe~{\sc i}}}}
+\def\feii{\mbox{{\rm Fe~{\sc ii}}}}
+\def\feiii{\mbox{{\rm Fe~{\sc iii}}}}
+\def\feiv{\mbox{{\rm Fe~{\sc iv}}}}
+\def\fev{\mbox{{\rm Fe~{\sc v}}}}
+\def\fevi{\mbox{{\rm Fe~{\sc vi}}}}
+\def\fevii{\mbox{{\rm Fe~{\sc vii}}}}
+\def\feviii{\mbox{{\rm Fe~{\sc viii}}}}
+\def\feix{\mbox{{\rm Fe~{\sc ix}}}}
+\def\fex{\mbox{{\rm Fe~{\sc x}}}}
+\def\fexi{\mbox{{\rm Fe~{\sc xi}}}}
+\def\fexii{\mbox{{\rm Fe~{\sc xii}}}}
+\def\fexiii{\mbox{{\rm Fe~{\sc xiii}}}}
+\def\fexiv{\mbox{{\rm Fe~{\sc xiv}}}}
+\def\fexv{\mbox{{\rm Fe~{\sc xv}}}}
+\def\fexvi{\mbox{{\rm Fe~{\sc xvi}}}}
+\def\fexvii{\mbox{{\rm Fe~{\sc xvii}}}}
+\def\fexviii{\mbox{{\rm Fe~{\sc xviii}}}}
+\def\fexix{\mbox{{\rm Fe~{\sc xix}}}}
+\def\fexx{\mbox{{\rm Fe~{\sc xx}}}}
+\def\fexxi{\mbox{{\rm Fe~{\sc xxi}}}}
+\def\fexxii{\mbox{{\rm Fe~{\sc xxii}}}}
+\def\fexxiii{\mbox{{\rm Fe~{\sc xxiii}}}}
+\def\fexxiv{\mbox{{\rm Fe~{\sc xxiv}}}}
+\def\fexxv{\mbox{{\rm Fe~{\sc xxv}}}}
+\def\fexxvi{\mbox{{\rm Fe~{\sc xxvi}}}}
+%
+% types of baryons
+\def\water{\mbox{{\rm H}$_2${\rm O}}}
+\def\CO{\mbox{{\rm CO}}}
+\def\OH{\mbox{{\rm OH}}}
+\def\htwo{\mbox{{\rm H}$_2$}}
+\def\hone{\mbox{{\rm H}$^0$}}
+\def\h0{\mbox{{\rm H}$^0$}}
+%
+% \def\H{\mbox{{\rm H}}}
+%
+\def\hplus{\mbox{{\rm H}$^+$}}
+\def\hminus{\mbox{{\rm H}$^-$}}
+% cannot have numbers in names, so cap Oh represents zero
+\def\hO{\mbox{{\rm H}$^0$}}
+\def\heO{\mbox{{\rm He}$^0$}}
+\def\heo{\mbox{{\rm He}$^0$}}
+\def\heplus{\mbox{{\rm He}$^+$}}
+\def\hePP{\mbox{{\rm He}$^{2+}$}}
+\def\cO{\mbox{{\rm C}$^0$}}
+\def\cplus{\mbox{{\rm C}$^+$}}
+%
+\def\Hrec{\mbox{${\rm H}_{rec}$}}
+%\def\Hrec{\mbox{$H_{rec}$}}
+\def\centreline{\centerline}
+%
+% Nina
+\DeclareMathAlphabet{\vib}{OML}{cmm}{m}{it}
+% From Glenn
+\newcommand*{\satellite}[1]{\textit{#1}}
+\newcommand*{\xmm}{\satellite{XMM-Newton}}
+\newcommand*{\chandra}{\satellite{Chandra}}
+\newcommand*{\asca}{\satellite{ASCA}}
+\newcommand*{\rosat}{\satellite{ROSAT}}
+\newcommand*{\prog}[1]{\textsc{#1}}
+%% For kb, mH. etc. Italic with non-italic subscript.
+\newcommand*{\mysub}[2]{\ensuremath{#1_{\mathrm{#2}}}}

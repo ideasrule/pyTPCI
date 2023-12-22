@@ -1,0 +1,96 @@
+title he-like oxygen ion vs. Bautista & Kallman 2000 Table 1, column 3
+#
+# commands controlling continuum =========
+laser 100
+ionization -1
+#
+# commands for density & abundances =========
+hden 7
+# include lots of the element we are testing and set the ionization 
+# to be dominated by the correct ion stage
+element oxygen abundance -2
+element oxygen ionization -5 -5 -5 -5 -5 -5 -5 0 -5
+init file "ism.ini"
+element helium off
+element carbon off
+element nitrogen off
+element neon off
+element magnesium off
+element silicon off
+element sulphur off
+element chlorine off
+element argon off
+element iron off
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr -12
+#
+# other commands for details     =========
+database he-like resolved levels 10
+database he-like collapsed levels 20
+constant temper 5
+iterate
+#
+# commands controlling output    =========
+print he-like departure oxygen
+print line sort wavelength 
+print line faint -5
+save overview "helike_o.ovr"
+save performance "helike_o.per"
+save monitors "helike_o.asr"
+save continuum "helike_o.con" units Angstroms
+## This is Lyman alpha
+## >>chng 13 jul 25, wl from 21.60A to 21.6020A, increased wl precision to 6 sig. fig.
+normalize to "o  7" 21.6020A
+#
+# commands giving the monitors    =========
+## 
+## >>chng 05 mar 12, from -21.0 to -21.028, RP merge He-like code
+## >>chng 10 aug 12, from -21.03 to -24.76, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.76 to -21.02, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 24, wl from 21.60a to 21.6020A, increased wl precision to 6 sig. fig.
+monitor line luminosity "o  7"  21.6020A -21.02
+## 
+## 22.10A is 2^3S to ground
+## >>chng 13 jul 25, wl from 22.10A to 22.1012A, increased wl precision to 6 sig. fig.
+monitor line "O  7"  22.1012A 3.54
+## 
+## Totl is 2^3P to ground
+## >>chng 13 jul 25, wl from 21.81A to 21.8070A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 21.8070A to "Blnd" 21.8070A, update He-like triplet labels and wl
+monitor line "Blnd"  21.8070A 0.98
+## 
+## 18.63A is 3^1P to ground
+## >>chng 13 jul 25, wl from 18.63 to 18.6270A, increased wl precision to 6 sig. fig.
+monitor line "O  7"  18.6270A 0.215 error 0.15
+## 
+## 120.3A is 3^3P to 2^3S
+## >>chng 05 sep 5, wl from 120.5 to 120.3
+## >>chng 13 jul 25, wl from 120.3A to 120.333A, increased wl precision to 6 sig. fig.
+monitor line "O  7"  120.333A 0.108 error 0.15
+## 
+## 128.5A is 3^3D to 2^3P
+## >>chng 05 mar 12, from 0.25 to 0.234 RP merge He-like code
+## >>chng 05 sep 5, from 128.3 to 128.5
+## >>chng 13 jul 25, wl from 128.5A to 128.503A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 128.503A to 128.412A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "O  7" 128.412A to "Blnd" 128.462A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 128.462A to 128.461A, update NIST energies
+monitor line "Blnd"  128.461A 0.234
+## 
+## the entire 2^3S - 2^3P multiplet
+## >>chng 13 jul 25, wl from 1634A to 1633.92A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 1633.92A to 1638.28A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1638.28A to "Blnd" 1630.08A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 1630.08A to 1630.10A, update NIST energies
+monitor line "Blnd"  1630.10A  0.0309
+## 
+# helike_o.in
+# class limit 
+# ========================================
+# 
+
+test He-like emission for oxygen
+
+

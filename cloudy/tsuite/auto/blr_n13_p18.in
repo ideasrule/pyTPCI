@@ -1,0 +1,308 @@
+title BLR model, density 1e13 cm-3, flux of H-ion phots 1e18 cm2 s-1
+#
+# this is a very low ionization cloud
+# the conditions, and some lines, are surprisingly sensitive
+# to the treatment of hydrogen molecules
+#
+# commands controlling continuum =========
+table agn
+phi(h) 18
+#
+# commands for density & abundances =========
+hden 13
+#
+# commands controlling geometry  =========
+stop column density 23
+#
+# other commands for details     =========
+iterate to convergence 
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+normalize to "H  1" 1215.67A 100 
+print line faint 1  ## get rid of lots of faint lines 
+##
+## these are to try to speed things up
+init "c84.ini"
+no level2 lines
+##
+save performance "blr_n13_p18.per"
+save monitors "blr_n13_p18.asr" last
+save overview "blr_n13_p18.ovr" last
+save dr "blr_n13_p18.dr" last 
+save convergence reason "blr_n13_p18.cvr" 
+#
+# commands giving the monitors    =========
+## strong blr lines
+## >>chng 06 jul 18, from 6.429 to 6.457 RP major upgrade VS coll strengths
+## >>chng 07 oct 22, from 6.457 to 6.431, resolve l-levels of h-like sequence
+## >>chng 08 mar 17, from 6.431 to 6.400, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 08 jun 25, from 6.400 to 6.380 (12.1) add source/sink to ioniz ladder
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 6.38 to 6.441, Fran bug fix
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line luminosity "H  1"  1215.67A 6.441 ##total Hydrogen Lyman-alpha 1215.67 
+##
+## >>chng 06 jul 18, from 6.377 to 6.450 RP major upgrade VS coll strengths
+## >>chng 07 jul 27, from 6.450 to 6.402, repair common error in several collision routines
+## >>chng 07 oct 25, from 6.402 to 6.371, bugfix stark broadening incorrect
+## >>chng 09 oct 12, from 6.371 to 6.391, extend fine continuum to lower limit of code by default
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from 6.391 to 6.365, fix CT bug in mole_eval_balance
+## >>chng 16 aug 07, from 6.365 to 6.447, Fran bug fix
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 19 jun 28, from 6.447 to 6.425, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 6.425 to 6.45, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+## >>chng 21 nov 02, from 6.45 to 6.422, fix bug with overresolving CS in isoseq
+monitor line luminosity "H  1"  4861.32A 6.422 ##total of sum of both Si IV comp
+##
+## >>chng 18 jan 13, from 7.854 to 6.453, first run
+## >>chng 19 jun 28, from 6.453 to 6.421, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 6.421 to 6.446, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+## >>chng 21 nov 02, from 6.446 to 6.419, fix bug with overresolving CS in isoseq
+monitor line luminosity "Inwd" 4861.32A 6.419, 
+##
+##total HeII Balmer-a 1640
+## >>chng 04 apr 28, from 4.666 to 4.693, He+ - H ct rate update
+## >>chng 04 may 13, from 4.693 to 4.718, dest albedo chng
+## >>chng 04 may 19, from 4.72 to 4.58 RP update helike sequence, incr err
+## >>chng 05 mar 12, from 4.58 to 4.49 RP merge He-like code
+## >>chng 06 jul 18, from 4.49 to 4.58 RP major upgrade VS coll strengths
+## >>chng 07 jul 27, from 4.58 to 4.48, repair common error in several collision routines
+## >>chng 08 mar 22, from 4.48 to 4.42 bugfix r1879
+## >>chng 08 apr 30, from 4.42 to 4.47, H, He topoff change
+## >>chng 16 nov 14, from 4.47 to 4.425, Reintegration of RydDep after several bug fixes
+## >>chng 19 jun 28, from 4.425 to 4.538, reintegrate iso_collisions branch
+## >>chng 20 aug 22, wl from 1640.43 to 1640.40A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1640.40A to 1640.41A, up 1-e energies to np
+monitor line luminosity "he 2"  1640.41A 4.538 err 0.1
+##
+## >>chng 04 jun 01, from 2.327 to 2.349, unified calc of Lya line width
+## >>chng 06 jul 21, from 2.349 to 2.375, update Mg0 Si0 CT wth H+
+## >>chng 07 oct 22, from 2.375 to 2.317, resolve l-levels of h-like sequence
+## >>chng 08 mar 17, from 2.317 to 2.254, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 13 apr 23, from 2.254 to 2.274, move Cr, Sc, Na to Stout, rm cool_xxx, enable all other Chianti ions of these elements
+## >>chng 13 nov 22, from 2.274 to 2.245, collapsed branch merge r8609
+## >>chng 14 apr 19, from 2.245 to 2.276, Use Stout Ca 2
+## >>chng 15 nov 16, from 2.276 to 1.774, update Si III, 1888 TP now 3x smaller
+## >>chng 16 mar 24, from 1.774 to 1.734, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from 1.734 to 1.818, Fran bug fix
+## >>chng 20 jan 13, from 1.818 to 1.843, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line luminosity "Blnd" 1888 1.843  ##total of sum of Si III] 1892+
+##
+## >>chng 03 sep 11, from 3.008 to 3.032, H2* population improved
+## >>chng 04 jan 28, from 3.032 to 3.006, bug in H- -> H2 boltz factor
+## >>chng 06 jul 18, from 3.006 to 3.042 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from 3.042 to 2.986, Badnell DR turned on
+## >>chng 07 oct 22, from 2.986 to 2.959, resolve l-levels of h-like sequence
+## >>chng 08 mar 17, from 2.959 to 2.929, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 09 feb 24, from 2.929 to 2.954, botches due to r2763
+## >>chng 12 jul 09, from 2.954 to 2.983, get rid of major discontinuities in 3body rates
+## >>chng 12 nov 01, from 2.983 to 3.002, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 nov 19, from 3.002 to 3.039, fix CT bug in mole_eval_balance
+## >>chng 16 aug 07, from 3.039 to 3.096, Fran bug fix
+monitor line luminosity "Blnd"  1860 3.096  ##total sum of both Al III comp
+##
+##total C II] 2324.69 + 2328.12
+## >>chng 03 sep 11, from 3.769 to 4.800, H2* population improved
+## >>chng 03 sep 11, from 4.800 to 4.726, changed a few H2 reactions
+## >>chng 04 jan 28, from 4.726 to 3.789, bug in H- -> H2 boltz factor
+## >>chng 04 apr 16, from 3.789 to 3.871, ? ?, it does jump around
+## >>chng 04 apr 28, from 3.871 to 3.786, He+ - H ct rate update
+## >>chng 04 jun 01, from 3.786 to 3.808, unified calc of Lya line width
+## >>chng 04 jun 12, from 3.808 to 3.871 chng cont shield fcn
+## >>chng 04 jul 02, from 3.871 to 3.849, O H ct, incr err
+## >>chng 05 aug 03, from 3.849 to 3.935, NA update CO, H chem net
+## >>chng 05 dec 08, from 3.94 to 3.83, update to Elwert Solomon rate
+## >>chng 07 dec 06, from 3.83 to 3.87, secondaries prop to osc str, apply to iso species
+## >>chng 08 apr 30, from 3.87 to 3.82, H, He topoff change
+## >>chng 08 nov 04, from 3.82 to 3.778, line RT bug fixes (r2429-35)
+## >>chng 11 dec 16, from 3.778 to 3.822, adjust botches due to recent iso recomb changes
+## >>chng 12 mar 07, from 3.822 to 3.748, renorm to r5961 results
+## >>chng 13 apr 23, from 3.748 to 3.785, move Cr, Sc, Na to Stout, rm cool_xxx, enable all other Chianti ions of these elements
+## >>chng 14 apr 19, from 3.785 to 3.882, Use Stout Ca 2
+## >>chng 16 mar 24, from 3.882 to 3.82, FeII cooling using Stout 80 levels
+## >>chng 16 aug 07, from 3.82 to 3.869, Fran bug fix
+monitor line luminosity "blnd" 2326 3.869 err 0.1 
+##
+## >>chng 03 sep 11, from 6.765 to 6.810, H2* population improved
+## >>chng 04 jan 28, from 6.810 to 6.767, bug in H- -> H2 boltz factor
+## >>chng 06 jul 18, from 6.767 to 6.790 RP major upgrade VS coll strengths
+## >>chng 07 oct 22, from 6.790 to 6.746, resolve l-levels of h-like sequence
+## >>chng 08 mar 17, from 6.746 to 6.714, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 16 aug 07, from 6.714 to 6.758, Fran bug fix
+## >>chng 23 jun 27, from 6.758 to 6.783, update Fe+ model to Smyth+19
+monitor line luminosity "blnd" 2798 6.783  ##total of sum of both Mg II comp
+##
+## >>chng 03 sep 11, from 6.667 to 6.753, H2* population improved
+## >>chng 04 jan 28, from 6.753 to 6.670, bug in H- -> H2 boltz factor
+## >>chng 05 sep 27, from 6.670 to 6.700, TE, GS update H chem
+## >>chng 06 jul 21, from 6.700 to 6.670, update Mg0 Si0 CT wth H+
+## >>chng 07 jul 25, from 6.670 to 6.698, bugfix pvh FeII tau r1290
+## >>chng 08 mar 20, from 6.698 to 6.676, value drifted but did not throw assert
+## >>chng 13 nov 22, from 6.676 to 6.652, collapsed branch merge r8609
+## >>chng 14 apr 19, from 6.652 to 6.579, Use Stout Ca 2
+## >>chng 16 mar 24, from 6.579 to 6.556, FeII cooling using Stout 80 levels
+## >>chng 19 jul 30, from 6.556 to 6.581, split He I 2 ^3P_J
+monitor line luminosity "blnd"  3933 6.581
+##
+## >>chng 04 may 19, from 6.340 to 6.376 RP update helike sequence, incr err
+## >>chng 04 jul 03, from 6.376 to 6.402, NA update H, CO chem net
+## >>chng 05 mar 12, from 6.40 to 6.44 RP merge He-like code
+## >>chng 05 sep 27, from 6.440 to 6.420, TE, GS update H chem
+## >>chng 06 jul 18, from 6.420 to 6.393 RP major upgrade VS coll strengths
+## >>chng 07 jul 27, from 6.393 to 6.426, repair common error in several collision routines
+## >>chng 08 mar 22, from 6.426 to 6.405 bugfix r1879
+## >>chng 08 apr 03, from 6.405 to 6.340, include 10830 in fine opacity array
+## >>chng 09 oct 12, from 6.34 to 6.315, extend fine continuum to lower limit of code by default
+## >>chng 11 nov 16, from 6.315 to 6.337, adjust newmole monitors
+## >>chng 13 jul 25, wl from 1.083m to 1.08299m, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 1.08299m to 1.08303m, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 06, wl from 1.08299m to 1.08303m, botched merge
+## >>chng 15 may 12, from 6.337 to 6.371, coll. str. reduced mass scaling
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+## >>chng 19 jun 14, from 6.371 to 6.348, update to CODATA 2018
+## >>chng 19 jul 30, from 6.348 to 6.196, split He I 2 ^3P_J
+## >>chng 20 jan 13, from 6.196 to 6.107, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor line luminosity "Blnd"  1.08302m 6.107
+##
+## >>chng 05 mar 12, add 5876
+## >>chng 06 jul 18, from 5.630 to 5.502 RP major upgrade VS coll strengths
+## >>chng 07 apr 12, from 5.502 to 5.556 he-like proton collision bugfix 
+## >>chng 07 jul 27, from 5.556 to 5.671, repair common error in several collision routines
+## >>chng 13 jul 25, wl from 5876 to 5875.61A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 5875.61A to 5875.64A, increased wl precision to 6 sig. fig.
+## >>chng 13 sep 06, wl from 5875.61A to 5875.64A, botched merge
+## >>chng 13 nov 22, from 5.671 to 5.693, collapsed branch merge r8609
+## >>chng 16 aug 07, from 5.693 to 5.673, Fran bug fix
+## >>chng 18 feb 20, updated spectral label from "he 1" 5875.64A to "Blnd" 5877.29A, update He-like triplet labels and wl
+## >>chng 18 mar 06, wl from 5877.29A to 5875.66A, adjust multiplet Blend WL for refraction index
+## >>chng 19 jun 28, from 5.673 to 5.606, reintegrate iso_collisions branch
+## >>chng 19 jul 30, from 5.606 to 5.529, split He I 2 ^3P_J
+monitor line luminosity "Blnd"  5875.66A 5.529
+## 
+## >>chng 18 jan 13, from 4.613 to 0.5824, first run
+## >>chng 18 jun 15, from 0.5824 to 0.6752, modified ion trimming scheme
+monitor line luminosity "Blnd" 1397 0.6752  ##total of sum of both Si IV comp
+## 
+## >>chng 18 jan 13, from -0.1026 to -5.069, first run
+## >>chng 18 jun 15, from -5.069 to -5.11, modified ion trimming scheme
+## >>chng 19 mar 01, from -5.11 to -37, remove recombination, etc, components from blends (#415)
+## monitor line luminosity "blnd"  1402 -37 0.10  ##total O IV] 1402 
+## 
+## >>chng 18 jan 13, from 3.03 to 2.274, first run
+## >>chng 19 mar 01, from 2.274 to -1.584, remove recombination, etc, components from blends (#415)
+## >>chng 23 jun 27, from -1.584 to -1.542, update Fe+ model to Smyth+19
+monitor line luminosity "blnd"  1666 -1.542 error 0.1  ##total O III] 1666
+##
+## >>chng 18 jan 13, from 2.947 to 1.006, first run
+## >>chng 19 mar 01, from 1.006 to 0.6348, remove recombination, etc, components from blends (#415)
+## >>chng 19 jun 28, from 0.6348 to 0.6076, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 0.6076 to 0.6345, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 21 nov 02, from 0.6345 to 0.6067, fix bug with overresolving CS in isoseq
+monitor line luminosity "blnd"  1909 0.6067  ##total of sum of CIII] 1908.73+
+## 
+## >>chng 04 sep 25, from 7 to 8 incr temp toler 0.02 to 0.005
+## >>chng 04 sep 30, from 8 to 10, conv_base conv heat cool
+## >>chng 05 mar 13, from 10 to 12, RP update He-like
+## >>chng 08 dec 08, from 12 to 9.137, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 9.137 to 16.63, merging newsolvers branch
+## >>chng 09 jan 16, from 16.63 to 16.65 (error 0.08), average of 10 runs
+## >>chng 09 jan 22, from 16.65 to 20.04, some minor botches as a result of r2655
+## >>chng 09 apr 18, from 20.04 to 18.4, refactor evaluation of esc dest probs to occur with cooling
+## >>chng 09 jun 02, from 18.4 to 19.5, inc err, drift up
+## >>chng 12 mar 07, from 19.5 to 15.41, renorm to r5961 results
+## >>chng 12 mar 09, from 15.41 to 17.11, several renorms due to mid 5960s revisions
+## >>chng 12 may 22, from 17.11 to 14.95, bugfix r6155
+## >>chng 12 aug 21, from 14.95 to 16.73, fix CRPHOT botches and HD crash
+## >>chng 12 oct 09, from 16.73 to 15.07, fix CRD esc prob
+## >>chng 12 dec 11, from 15.07 to 13.15, CX to ground state
+## >>chng 13 nov 05, from 13.15 to 8.969, convergence branch changes
+## >>chng 14 apr 07, from 8.969 to 7.071, move H/C out of ConvBase loop
+## >>chng 21 aug 17, from 7.071 to 7.484, mean across all test suite runs
+monitor itrzn 7.484 error 0.10
+## 
+## >>chng 04 mar 05, from 5 to 6, last iter just barely converged on PC,
+## was converged on alpha & SDX
+## >>chng 04 jul 17, from 6 to 7, NA update chem net
+## >>chng 08 dec 08, from 7 to 5, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 5 to 4, merging newsolvers branch
+## >>chng 09 feb 24, from 4 to 5, botches due to r2763
+## >>chng 09 mar 27, from 5 to 4 improve rigor esc prob & pop defns
+## this one is on the ragged edge of 4 or 5 - increase error to reflect this
+## >>chng 09 mar 28, from 4 to 5 with .21 error
+## >>chng 09 apr 19, on verge between 4 and 5
+## >>chng 09 jul 14, from 6 to 4, reset autocv to 0.2 since 0.1 developed 32/64 bit distinction
+## >>chng 09 jul 15, from 4 to 5, set autocv from 0.1 to 0.2
+## >>chng 09 jul 29, bcx icc and gcc do not get same result
+monitor niter <6
+monitor niter >3
+##
+## >>chng 03 sep 11, from 300 to 400 H2* population improved
+## >>chng 04 mar 04, from < 400 to < 350, chng conv criteria
+## >>chng 08 dec 08, from 350 to 313, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 313 to 291, merging newsolvers branch
+## >>chng 09 jan 22, from 291 to 281, some minor botches as a result of r2655
+## >>chng 09 may 28, from 281 to 283, mean 32/64, incr err
+## >>chng 12 jul 02, from 283 to 357, change H,H=>H2,hv rate
+## >>chng 12 aug 16, from 357 to 325, fix radasc bug from r6346
+## >>chng 12 aug 16, from 325 to 283, further fix of Rawlings H2 rates
+## >>chng 14 mar 26, from 283 to 297, Move oxygen data to stout and chianti files
+## >>chng 18 jun 21, from 297 to 283, bugfixes at front face r12134:12136
+monitor nzone 283
+##
+## >>chng 14 jul 10, from 1.01 to 3.316, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 4300.00 3.316 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 6.16, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2400.00 6.16 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 5.357, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 6200.00 5.357 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 2.732, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1080.00 2.732 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 2.856, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1500.00 2.856 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 3.923, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1.15000m 3.923 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 4.051, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2500.00 4.051 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 3.498, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 2300.00 3.498 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 3.213, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 8900.00 3.213 error 0.1
+##
+## >>chng 14 jul 10, from 1.01 to 4.911, Add monitors for WillsNetzerWills FeII Lines
+## >>chng 16 mar 23, drop WillsNetzerWills FeII Lines
+## monitor line intensity "Fe 2" 1786.00 4.911 error 0.1 
+##
+# blr_n13_p18.in 
+# class blr 
+# ========================================
+
+This is one of the 5 models that sample the LOC plane.

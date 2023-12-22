@@ -1,0 +1,58 @@
+Stout Data Format as of January 8, 2013
+Check http://www.nublado.org/wiki/StoutData for updates
+
+Stout data files are stored in the data/stout/<element>/<element>_#/ directory.
+The Stout data are separated into 3 files named <element>_#.<extension>
+The extensions for the various files are: *.nrg for the energy level file, *.tp for the transition probability file, and *.coll for the collision data file.
+A masterlist file is used to determine which Stout species are enabled. The default masterlist file is Stout.ini and contained within the data/Stout/masterlist/ directory.
+The first line of each Stout file is a version number.
+Lines starting with # are considered comments
+Data fields in each Stout file are tab/space delimited.
+Stars, ********, marks the end of data in each file. The stars should start in the first column after the last line of data.
+
+Energy Level File
+
+The energy level file, <element>_#.nrg, has 4 data fields per energy level.
+We use experimental energies since they are used to derive observed wavelengths. The energies do not need to be in increasing order since code exists to resort the energy order and correct the indices for the energy, collision, and transition probability files.
+Field 1: The energy level index
+Field 2: Energy in wavenumbers
+Field 3: Statistical weight (g)
+Field 4: State information (optional)
+
+Transition Probability File
+
+Transition probabilities are cumulative. If more than one is given for a particular transition they are added together. This allows different contributors to the line, E1, M2, etc, to be specified independently.
+The transition probability file, <element>_#.tp, has up to 5 data fields per transition.
+Field 1: A character which identifies the data value provided by Field 4. A for Einstein A, G for gf, or S for line strength.
+Field 2: Lower level of the transition
+Field 3: Upper level of the transition
+Field 4: Either Aul, gf, or line strength depending on Field 1
+Field 5: Transition type (E1, E2, E3, M1, M2, or M3). This field is required for line strength data.
+
+Collision Data File
+
+The collision data file, <element>_#.coll, has 2 possible types of data rows, Temperature rows and Collision Data rows.
+Temperature rows start with the keyword TEMP, followed by the temperature data points in Kelvin.
+Collision Data rows start with a designation keyword, followed by the lower the upper levels of the transition, and then the collision data values of the type specified by the designation keyword.
+There should be the same number of temperature points as collision data points.
+Example designation keywords are: CS ELECTRON if the collision data are electron collision strengths and RATE PROTON if they are proton rate coefficients.
+Available keywords are listed below.
+The first line of the collision data file after the version number and excluding comments must be a Temperature row. All collision data after that row will be assumed to be on that temperature scale. The number of data points specified on the Temperature row must be the number of temperature points and the number of collision data points for all associated lines.
+Setting a new temperature scale is achieved by adding a new Temperature row followed by the associated Collision Data rows. Collision Data rows are associated with the closest Temperature row that appears above them.
+
+Keywords:
+  Type of Data:
+    CS = Collision Strengths (Only for Electron Colliders)
+    RATE = Rate Coefficients
+  Colliders:
+    ELECTRON = Electron
+    PROTON = Proton
+    H = Atomic Hydrogen
+    HE = Atomic Helium
+    HE+2 = Alpha particle
+    HE+ = Singly Ionized Helium
+    H2 ORTHO = Molecular Hydrogen Ortho
+    H2 PARA = Molecular Hydrogen Para
+    H2 = Molecular Hydrogen
+
+

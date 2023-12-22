@@ -1,0 +1,63 @@
+title check rate H2 forms on grain surfaces 
+#
+# commands controlling continuum =========
+# first continuum is FIR hot grain continuum produced in 
+# unmodeled HII Region
+blackbody, t = 75 K
+intensity 2.7 (total)
+# this is hot star continuum
+black 30000
+intensity  1.90 range  0.4412 to 1 Ryd
+# this will remove all ionizing radiation
+extinguish 24 0
+cosmic rays, background
+#
+# commands for density & abundances =========
+hden 0
+grains ism, abundance log 0.16 no qheat 
+init file="ism.ini"
+abundances he= -1.01 c= -3.52 n=-8 o=-3.30 ne=-8 mg=-5.89
+continue si= -6.10 s= -5.10 cl=-7 ar=-8 fe= -6.60
+#
+# commands controlling geometry  =========
+sphere
+# stop when gas is fully neutral
+stop efrac -10
+# stop when gas is cold
+stop temperature 10 linear
+stop zone 1 
+#
+# other commands for details     =========
+# set the gas temperature
+constant temperature 100 K
+## >>chng 16 apr 14, had been case B, this gets same effect with
+## no large Lyman optical depths
+Database H-like Lyman pumping off
+#
+# commands controlling output    =========
+normalize to "c  2" 157.636m 
+# uv lines are strongly pumped by stellar continuum, break out contribution
+print line pump
+print line optical depths
+print ages
+save overview "ism_jura.ovr"
+save performance "ism_jura.per"
+save monitors last "ism_jura.asr"
+save hydrogen 21 cm last "ism_jura.21cm"
+#
+# commands giving the monitors    =========
+## >>chng 03 jan 12, from -16.523 to -16.583, dist grains
+## Jura rate was 3e-17 s-1
+## >>chng 14 aug 28, from -16.58 to -16.37, EleyRideal H2 formation
+monitor grain h2 rate -16.37
+# ism_jura.in
+# class limit  
+# ========================================
+# 
+
+This model started out life as the Tielens & Hollenbach 1985 pdr.  The
+density was set to unity and the incident radiation field adjusted so
+that the two default grains have temperatures near 100K.  The model
+asserts that the H2 formation rate on grain surfaces is close to the
+# >>refer	H2	grain physics	Jura, M., 1975, ApJ, 197, 575
+rate.

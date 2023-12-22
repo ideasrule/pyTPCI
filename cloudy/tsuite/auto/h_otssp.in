@@ -1,0 +1,59 @@
+title spherical conservation and hydrogenic emission for pure hydrogen
+#
+# commands controlling continuum =========
+ionization -2
+blackbody 40000
+#
+# commands for density & abundances =========
+hden 5
+init file "honly.ini"  
+#
+# commands controlling geometry  =========
+radius 13
+# not iterating does not affect the solution
+sphere static (OK)
+stop efrac 0.05 ##stop when 5 percent ionized
+#
+# other commands for details     =========
+constant temper 7500
+diffuse ots
+no level2
+no induced processes (OK) 
+#
+# commands controlling output    =========
+save performance "h_otssp.per"
+save overview "h_otssp.ovr" 
+save monitors "h_otssp.asr" 
+save dr "h_otssp.dr" 
+#
+# commands giving the monitors    =========
+## >>chng 08 apr 30, from 1.00 to 0.979 H, He topoff change
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, change to testing "Ca B" 4861.36A (was "H  1" 4861.36A).
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A = 1.021 
+## 
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 1 to 1.034, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A = 1.034 error 0.02 ##make sure we conserve energy 
+##
+## >>chng 08 may 01, rm lots of redundant tests
+# h_otssp.in
+# class limit 
+# ========================================
+# 
+
+This tests the total emission from a spherical pure hydrogen Stromgren sphere
+using the OTS approximation.  The conservation of the total number
+of ionizing photons, and the emitted spectrum, are all checked.
+
+

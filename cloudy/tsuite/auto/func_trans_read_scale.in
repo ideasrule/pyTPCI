@@ -1,0 +1,48 @@
+title second of func_trans_save/func_trans_readread pair
+# use the transmitted continuum produced by func_trans_save
+#
+# commands controlling continuum =========
+# 10 continua scaled to 1/10 original should get same answer
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+table read "func_trans_save.trn" scale -1
+#
+# commands for density & abundances =========
+hden 10
+#
+# commands controlling geometry  =========
+set dr 0
+stop zone 1
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling output    =========
+# this contains a large number of asserts used by both commands
+init file "trans.dat"
+save overview "func_trans_read_scale.ovr"
+save performance "func_trans_read_scale.per"
+save ionization last "func_trans_read_scale.ion"
+save monitors last "func_trans_read_scale.asr"
+# transmitted continuum should scale as specified
+save last transmitted continuum "func_trans_read_scale.trn"
+#
+# commands giving the monitors    =========
+monitor "H+" temperature 22930 K
+# 
+# func_trans_read_scale.in
+# class function 
+# ========================================
+# 
+
+func_trans_save.in and func_trans_read_scale.in are a pair of
+tests that check that the code can save a transmitted
+continuum then read it.
+

@@ -1,0 +1,90 @@
+title he-like iron emission
+#
+# commands controlling continuum =========
+laser 1300
+ionization -1
+#
+# commands for density & abundances =========
+hden 7
+set dr -12
+# include lots of the element we are testing and set the ionization 
+# to be dominated by the correct ion stage
+element iron abundance -2
+element iron ionization -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 0 -5
+init file "ism.ini"
+element helium off
+element carbon off
+element nitrogen off
+element oxygen off
+element neon off
+element magnesium off
+element silicon off
+element sulphur off
+element chlorine off
+element argon off
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+database he-like resolved levels 10
+database he-like collapsed levels 20
+constant temper 5
+iterate
+#
+# commands controlling output    =========
+print line faint -2
+print he-like departure iron
+save overview "helike_fe.ovr"
+save performance "helike_fe.per"
+save monitors "helike_fe.asr"
+# This is Lyman alpha
+normalize to "Fe25" 1.8504A
+#
+# commands giving the monitors    =========
+## >>chng 05 sep 5, wl from 1.848 to 1.850
+## >>chng 10 aug 12, from -18.57 to -23.6, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -23.6 to -18.57, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+monitor line luminosity "Fe25"  1.8504A -18.57
+##
+## 1.868A is 2^3S to ground
+## >>chng 05 sep 5, wl from 1.867 to 1.868
+## >>chng 06 aug 18, from 1.01 to 1.302, RP update trans prob 
+## >>chng 13 jul 24, wl from 1.8682A to 1.86819A, increased wl precision to 6 sig. fig.
+monitor line "Fe25"  1.86819A 1.302
+##
+## Totl is 2^3P to ground
+## >>chng 04 may 19, wl from 1.857 to 1.856, int from 2.72 to 2.73
+## >>chng 05 sep 5, wl from 1.856 to 1.860
+## >>chng 06 aug 18, from 2.73 to 2.46 RP update trans prob 
+## >>chng 13 jul 24, wl from 1.8595 to 1.85951A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1.85951A to "Blnd" 1.85951A, update He-like triplet labels and wl
+monitor line "Blnd"  1.85951A 2.46
+##
+## 1.573A is 3^1P to ground
+## >>chng 11 aug 05, from 0.215 to 0.0073, add helike quadrupole transitions
+## >>chng 11 aug 05, from 0.0073 to 0.2132, increase line prec to disting nearly degen after r5333
+## >>chng 11 aug 08, add dipole lines to stack first, decrease line precision again
+## >>chng 13 jul 24, wl from 1.5732A to 1.57317A, increased wl precision to 6 sig. fig.
+monitor line "Fe25"  1.57317A 0.2132
+##
+## 10.02A is 3^3P to 2^3S
+## >>chng 05 sep 5, wl from 10.03 to 10.02
+## >>chng 13 jul 24, wl from 10.018A to 10.0178A, increased wl precision to 6 sig. fig.
+monitor line "Fe25"  10.0178A 0.0322
+##
+## 10.34A is 3^3D to 2^3P
+## >>chng 13 jul 24, wl from 10.341A to 10.3407A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 10.3407A to 10.3690A, increased wl precision to 6 sig. fig.
+## >>chng 13 aug 1, wl from 10.3690A to 10.2150A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "Fe25" 10.2150A to "Blnd" 10.2813A, update He-like triplet labels and wl
+monitor line "Blnd"  10.2813A 0.30
+# 
+# helike_fe.in
+# class limit 
+# ========================================
+# 
+
+check He-like emission for iron
+
+

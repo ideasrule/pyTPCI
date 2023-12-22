@@ -1,0 +1,318 @@
+agn\_blr\_albedo & measure Rayleigh scattering of Lya \\ 
+agn\_lex00\_u0 & intermediate-ionization x-ray ionized cloud from Lexington 2000 \\ 
+agn\_lex00\_u1 & high-ionization x-ray ionized cloud from Lexington 2000 \\ 
+agn\_lex00\_um1 & low-ionization x-ray ionized cloud from Lexington 2000 \\ 
+agn\_reflector & model of Compton reflector \\ 
+agn\_S\_curve\_grid & temperature across Spitzer thermal stability S curve \\ 
+agn\_warm\_absorber & simple warm absorber model \\ 
+agn\_warm\_absorber\_hiU & simple warm absorber model \\ 
+aperture\_beam\_int & test aperture beam command with intensity \\ 
+aperture\_beam\_lum & test aperture beam command with luminosity \\ 
+aperture\_slit & test aperture slit command with luminosity \\ 
+blr\_f92 & standard blr cloud in Ferland et al. 1992 \\ 
+blr\_fp89 & final F+P 1989 BLR model table 3 \\ 
+blr\_hizqso & high Z quasar cloud \\ 
+blr\_kk81 & old blr \\ 
+blr\_level2 & test dominant level2 lines \\ 
+blr\_n09\_p18 & BLR model, density 1e09 cm-3, flux of H-ion phots 1e18 cm2 s-1 \\ 
+blr\_n09\_p18\_Z20 & BLR model, density 1e09 cm-3, flux of H-ion phots 1e18 cm2 s-1, Z=20 \\ 
+blr\_n09\_p20 & BLR model, density 1e09 cm-3, flux of H-ion phots 1e20 cm2 s-1 \\ 
+blr\_n09\_p20\_Z20 & BLR model, density 1e09 cm-3, flux of H-ion phots 1e20 cm2 s-1, Z=20 \\ 
+blr\_n09\_p22 & BLR model, density 1e09 cm-3, flux of H-ion phots 1e20 cm2 s-1 \\ 
+blr\_n09\_p22\_Z20 & BLR model, density 1e09 cm-3, flux of H-ion phots 1e22 cm2 s-1, Z=20 \\ 
+blr\_n11\_p20 & BLR model, density 1e11 cm-3, flux of H-ion phots 1e20 cm2 s-1 \\ 
+blr\_n11\_p20\_Z20 & BLR model, density 1e11 cm-3, flux of H-ion phots 1e20 cm2 s-1, Z=20 \\ 
+blr\_n12\_p19 & BLR model, density 1e12 cm-3, flux of H-ion phots 1e19 cm2 s-1 \\ 
+blr\_n12\_p19\_Z20 & BLR model, density 1e12 cm-3, flux of H-ion phots 1e19 cm2 s-1, Z=20 \\ 
+blr\_n13\_p18 & BLR model, density 1e13 cm-3, flux of H-ion phots 1e18 cm2 s-1 \\ 
+blr\_n13\_p18\_Z20 & BLR model, density 1e13 cm-3, flux of H-ion phots 1e18 cm2 s-1, Z=20 \\ 
+blr\_n13\_p22 & BLR model, density 1e13 cm-3, flux of H-ion phots 1e22 cm2 s-1 \\ 
+blr\_n13\_p22\_Z20 & BLR model, density 1e13 cm-3, flux of H-ion phots 1e18 cm2 s-1, Z=20 \\ 
+blr\_n14\_p18 & BLR model, density 1e14 cm-3, flux of H-ion phots 1e18 cm2 s-1 \\ 
+blr\_n14\_p20 & BLR model, density 1e14 cm-3, flux of H-ion phots 1e20 cm2 s-1 \\ 
+blr\_n14\_p22 & BLR model, density 1e14 cm-3, flux of H-ion phots 1e22 cm2 s-1 \\ 
+blr\_nf84 & early model of blr \\ 
+blr\_nf84\_45deg & early model of BLR, with illumination at 45 degree angle \\ 
+blr\_rnfa & table 1 of Rees et al. ApJ 347, 648 \\ 
+blr\_rnfb & table 1 of Rees et al. ApJ 347, 648 \\ 
+chianti\_all\_cool & cooling of a collisionally ionized plasma \\ 
+chianti\_fe\_cool & cooling of a collisionally ionized plasma \\ 
+coll\_coronal & model of active region of solar corona \\ 
+coll\_heat\_only & test code in limit where ONLY mechanical heating is present \\ 
+coll\_t3 & coronal equilibrium at 10\^3 K \\ 
+coll\_t3\_grains & coronal equilibrium at 10\^3 K, with grains to assist chemistry \\ 
+coll\_t4 & coronal equilibrium at 10\^4 K \\ 
+coll\_t4\_Z30 & coronal equilibrium at 10\^4 K \\ 
+coll\_t5 & coronal equilibrium at 10\^5 K \\ 
+coll\_t6 & coronal equilibrium at 10\^6 K \\ 
+coll\_t7 & coronal equilibrium at 10\^7 K \\ 
+dynamics\_orion\_flow & Orion nebula blister with wind \\ 
+dynamics\_veryfast & very fast wind model \\ 
+dynamics\_veryfast\_rec & very fast wind model \\ 
+dynamics\_wind & test of equations of motion in a very highly ionized wind \\ 
+feii\_hin & test feii in high density limit \\ 
+feii\_hirad & feii in case of high radiation density limit \\ 
+feii\_pump & test feii in continuum pumped limit \\ 
+feii\_ste & thermal equilibrium of FeII in STE limit \\ 
+feii\_t4n0 & FeII emission in typical intermediate density photoionzied cloud \\ 
+feii\_t4n8 & FeII emission in typical intermediate density photoionzied cloud \\ 
+feii\_t4n8\_rt & FeII emission in typical intermediate density photoionzied cloud \\ 
+feii\_t4n8\_Smyth19 & FeII emission in typical intermediate density photoionzied cloud \\ 
+feii\_t4n8\_Tayal18 & FeII emission in typical intermediate density photoionzied cloud \\ 
+feii\_t4n8\_Verner99 & FeII emission in typical intermediate density photoionzied cloud \\ 
+func\_abund\_fluc & check fluctuating heavy-element abundances  \\ 
+func\_distance & check that distance and "print flux earth" commands work  \\ 
+func\_dlaw & test model with dlaw table \\ 
+func\_fulltrace & test full trace output \\ 
+func\_globule & test of globule command \\ 
+func\_grid\_line\_ratios & test generating line ratios in a grid run \\ 
+func\_grid\_list & test the 'list' keyword on the grid command \\ 
+func\_hotgas\_coolstar & test very soft continuum, very hot gas \\ 
+func\_ion\_increase & test model where ionization increases with depth \\ 
+func\_LineList\_PDR & check that wavelengths agree at high line precision \\ 
+func\_LineList\_PDR\_H2 & check that wavelengths agree at high line precision \\ 
+func\_lines & create output file with list of func\_lines \\ 
+func\_ly\_pump\_scale & test scaling of H lyman-line pumping \\ 
+func\_map & map of heating vs cooling \\ 
+func\_nolight & check OK with no radiation incident \\ 
+func\_sdrmin & test set drmin command \\ 
+func\_set\_ion & test impact of setting ionization  \\ 
+func\_stopcol & test stop column density "species" command \\ 
+func\_stopline1 & test stop line command \\ 
+func\_stopline2 & test stop line command \\ 
+func\_t10 & test very soft continuum, very hot gas \\ 
+func\_t3 & test low temperature limit of code, 3K \\ 
+func\_t3\_linesintroff & test low temperature limit of code, 3K \\ 
+func\_t3\_linesoff & test low temperature limit of code, 3K \\ 
+func\_test & run smoke test \\ 
+func\_test\_cycle & exercise full range of density, temperature \\ 
+func\_test\_grid & test whether the output from a repeated model reproduces exactly \\ 
+func\_testmole & this runs the standard, one command, test, which contains many asserts \\ 
+func\_tlaw & test model with tlaw table \\ 
+func\_trans\_lumi & test transmitted continuum in luminosity mode \\ 
+func\_trans\_read & second of func\_trans\_save/func\_trans\_read pair, use transmitted continuum \\ 
+func\_trans\_read\_lumi\_scale & test read transmitted continuum in luminosity mode \\ 
+func\_trans\_read\_scale & second of func\_trans\_save/func\_trans\_readread pair \\ 
+func\_trans\_save & first of func\_trans\_save/func\_trans\_read pair, save continuum \\ 
+func\_trans\_save\_lumi & test save transmitted continuum in luminosity mode \\ 
+grains\_hot & test temperature of gas and dust in high energy density environment \\ 
+grains\_hot\_wd01 & test temperature of gas and dust in high energy density environment \\ 
+grains\_lte & check that grains equilibriate at correct temp in ste limit \\ 
+grains\_qheat & cool atomic ISM with Si grain quantum heating \\ 
+grains\_temp & test all grain species temperature \\ 
+grains\_temp\_all & test all grain species temperature \\ 
+grid\_coronal & coronal equilibrium \\ 
+grid\_coronal\_grains & coronal equilibrium \\ 
+grid\_coronal\_primal & coronal equilibrium \\ 
+grid\_h2coronal & coronal equilibrium \\ 
+grid\_h2coronal\_primal & coronal equilibrium \\ 
+h2\_coll\_t4 & coronal equilibrium at 10\^4 K \\ 
+h2\_cr & H2 with background cosmic ray ionization \\ 
+h2\_cr\_grains & background cosmic ray ionization by suprathermal electrons only \\ 
+h2\_hminus & H2 populations in H- dominated limit \\ 
+h2\_pdr\_leiden\_f1 & low density and flux model 1  \\ 
+h2\_solomon & H2 populations in solomon dominated limit \\ 
+h2\_t2000 & test large H2 molecule in shock-like conditions \\ 
+h2\_t500 & test large H2 molecule in PDR-like conditions \\ 
+h\_otsopen & test ots, inward fractions for pure hydrogen, open geo, filling factor \\ 
+h\_otspp & plane parallel conservation and hydrogenic emission for pure hydrogen \\ 
+h\_otssp & spherical conservation and hydrogenic emission for pure hydrogen \\ 
+h\_outopen & test open geometry  \\ 
+h\_outpp & plane parallel H-only, close, test hydrogenic emission \\ 
+h\_outsp & spherical conservation and hydrogenic emission for pure hydrogen \\ 
+h\_t4\_conemis & continuous emission from H atom \\ 
+h\_t4\_conemis\_lon & low-den continuous HI emission with 2-nu important \\ 
+h\_t4\_conemis\_thick & H I continuous emissivity, used for plot in hazy \\ 
+heatomt10 & continuous emission from HeI  \\ 
+heatomt10lon & test low-den continuous emission from H atom, 2-nu is important \\ 
+heiont10 & continuous emission from HeII \\ 
+helike\_ar & He-like argon emission \\ 
+helike\_c & he-like carbon emission \\ 
+helike\_co & He-like cobalt emission \\ 
+helike\_cu & He-like copper emission \\ 
+helike\_fe & he-like iron emission \\ 
+helike\_mg & he-like magnesium emission \\ 
+helike\_n & He-like nitrogen emission \\ 
+helike\_ne & he-like neon emission \\ 
+helike\_ni & he-like nickel emission \\ 
+helike\_o & he-like oxygen ion vs. Bautista \& Kallman 2000 Table 1, column 3 \\ 
+helike\_si & He-like silicon emission \\ 
+helike\_zn & He-like zinc emission \\ 
+hhe\_otspp & plane parallel conservation and H-like emission for H, He \\ 
+hhe\_otssp & spherical conservation and H-like emission for H and He \\ 
+hhe\_outpp & plane parallel conservation emission for H, He gas \\ 
+hhe\_outppff & plane parallel filling factor pure H, He gas \\ 
+hhe\_outsp & spherical conservation and H-like emission for H, He \\ 
+hii\_blister & Lexington 1995 dust-free hii blister region \\ 
+hii\_coolstar & dust free cool HII region model, Lexington 1995 \\ 
+hii\_hiU\_StaticSphere\_noGrains & very high ionization parameter static H II region without dust \\ 
+hii\_hiU\_StaticSphere\_noGrains & test \\ 
+hii\_icf & HII region with negative He/H ICF \\ 
+hii\_paris & "New" Paris meeting HII region \\ 
+hii\_Um3 & H II region sim from Christophe Morriset's ionization paramter family \\ 
+hii\_Um35 & H II region sim from Christophe Morriset's ionization paramter family \\ 
+hii\_Um385 & H II region sim from Christophe Morriset's ionization paramter family \\ 
+hlike\_c & H-like C VI case B \\ 
+hlike\_o & H-like O VIII case B \\ 
+igm\_lalpha & Ly alpha forest cloud \\ 
+igm\_lalpha\_hm12 & Ly alpha forest cloud \\ 
+igm\_lalpha\_noisosub & Ly alpha forest cloud \\ 
+igm\_lalpha\_noisosub\_hm12 & Ly alpha forest cloud \\ 
+igm\_perseus & Perseus cluster \\ 
+igm\_primal & cloud with primordial abundances exposed to background at Z=10 \\ 
+igm\_z3 & redshift 1000 recombination epoch \\ 
+igm\_z3\_thick & redshift 1000 recombination epoch \\ 
+ism & cloud irradiated by ism background \\ 
+ism\_cosmicray & background cosmic ray ionization by suprathermal electrons only \\ 
+ism\_grid & interstellar cloud irradiated by ism background \\ 
+ism\_hot\_brems & generate continuum due to hot ism in high Z,z starburst \\ 
+ism\_jura & check rate H2 forms on grain surfaces  \\ 
+ism\_opacity & generate standard ISM opacity curve \\ 
+ism\_set\_cr\_rate & background cosmic ray ionization by suprathermal electrons only \\ 
+limit\_casea\_h\_den13 & case A \\ 
+limit\_casea\_h\_den\_temp & Test model H in Case A limit \\ 
+limit\_caseb\_h\_den10\_temp45 & the best we can do to predict the H I emission spectrum  \\ 
+limit\_caseb\_h\_den2\_temp37 & the best we can do to predict the H I emission spectrum  \\ 
+limit\_caseb\_h\_den2\_temp4 & the best we can do to predict the H I emission spectrum  \\ 
+limit\_caseb\_h\_den2\_temp45 & the best we can do to predict the H I emission spectrum  \\ 
+limit\_caseb\_h\_den2\_temp5 & the best we can do to predict the H I emission spectrum  \\ 
+limit\_caseb\_h\_den2\_temp5\_coronal & the best we can do to predict the H I emission spectrum  \\ 
+limit\_caseb\_h\_den4\_temp45 & the best we can do to predict the H I emission spectrum  \\ 
+limit\_caseb\_h\_hs87 & "Case B from Hummer and Storey" \\ 
+limit\_caseb\_h\_lot & log density case B, T=500 log n=2 \\ 
+limit\_caseb\_h\_n8 & h\_caseb\_n8 high density case B \\ 
+limit\_caseb\_he2\_den8 & limit\_caseb\_he2\_den8 He II case B \\ 
+limit\_caseb\_he\_den & Test model H and He atoms in Case B limit \\ 
+limit\_caseb\_he\_den2\_temp4 & the best we can do to predict the HeI emission spectrum  \\ 
+limit\_caseb\_he\_den4\_temp4 & the best we can do to predict the HeI emission spectrum  \\ 
+limit\_caseb\_he\_den4\_temp4\_Fuji & the best we can do to predict the HeI emission spectrum  \\ 
+limit\_caseb\_he\_den4\_temp4\_VR62 & the best we can do to predict the HeI emission spectrum  \\ 
+limit\_caseb\_he\_den4\_temp4\_VS80 & the best we can do to predict the HeI emission spectrum  \\ 
+limit\_caseb\_he\_den\_temp & Test model He atoms in Case B limit \\ 
+limit\_caseb\_hhe\_den & Test model H and He atoms in Case B limit \\ 
+limit\_caseb\_hhe\_den\_temp & Test model H and He atoms in Case B limit \\ 
+limit\_casec\_h\_den2 & H only optically thin in Lyman continuum \\ 
+limit\_casec\_h\_den5 & case C \\ 
+limit\_compton\_hi\_t & test high-T Compton energy exchange \\ 
+limit\_compton\_lo\_t & test low-T Compton energy exchange \\ 
+limit\_compton\_mid\_t & mid-T Compton energy exchange \\ 
+limit\_conserve & test that energy is limit\_conserved \\ 
+limit\_eden & Martin Gaskell's funny model \\ 
+limit\_h\_induc & constant temper black body limit from Ferland and Rees 1988 \\ 
+limit\_hi\_ion & very high ionization parameter limit \\ 
+limit\_laser\_1 & test of H ionization in optically thin limit \\ 
+limit\_laser\_2 & test of H and HeI ionization in optically thin limit \\ 
+limit\_laser\_200 & ionization in Auger-dominated limit \\ 
+limit\_laser\_200\_low & test ionization in Auger-dominated limit \\ 
+limit\_laser\_3 & test H and He ionization in optically thin limit \\ 
+limit\_lowd0 & test low density limit \\ 
+limit\_lowden & test optically thin model that extends to very low densities \\ 
+limit\_lowdm6 & test low density limit \\ 
+limit\_lowion & test conditions of very low ionization matrix solver \\ 
+limit\_lte\_h\_t50\_cion & collisionally ionized H in LTE limit \\ 
+limit\_lte\_h\_t50\_coll & collisionally excited H in LTE limit \\ 
+limit\_lte\_he1\_coll & He atom at high densities  \\ 
+limit\_lte\_he1\_nomole\_iso\_force & He atom in LTE at high densities, with no molecules, iso forced to LTE \\ 
+limit\_lte\_he1\_nomole\_ste & He atom in LTE at high densities, with no molecules \\ 
+limit\_lte\_he1\_nomole\_ste\_nocoll & He atom in LTE at high densities, with no molecules and no collapsed levels \\ 
+limit\_lte\_he1\_nomole\_ste\_nocoll2 & He atom in LTE for a large range of Te and density, with no molecules and no collapsed levels and no collisions \\ 
+limit\_lte\_he1\_ste & He atom in LTE at high densities  \\ 
+limit\_lte\_hhe\_coll\_t50 & H, He in LTE at high densities  \\ 
+limit\_lte\_hhe\_induc & radiation dominated H, He gas goes to STE \\ 
+limit\_lte\_hhe\_ste & H, He in STE \\ 
+limit\_lte\_hminus & H- goes to LTE \\ 
+limit\_lte\_metal & STE with metals \\ 
+limit\_recoil\_ion & test compton recoil ionization of hydrogen  \\ 
+limit\_strom & pure-H Stromgren sphere \\ 
+limit\_supra & secondary ionization dominated gas \\ 
+limit\_thick\_brems & optically thick brems \\ 
+limit\_vbhum & compare with Van Blerkom and Hummer exact RT results \\ 
+limit\_veryveryfast & very fast simulation for Purify/valgrind \\ 
+lya-21cm-constant & test effect of lya pump on spin temperature \\ 
+lya-21cm-excitation & test effect of lya pump on spin temperature \\ 
+lya-21cm-kinetic & test effect of lya pump on spin temperature \\ 
+nlr\_lex00 & NLR model for Lexington 2000 Meeting \\ 
+nlr\_liner & NLR liner model \\ 
+nlr\_liner\_grains & liner model with grains \\ 
+nlr\_paris & Paris meeting NLR model \\ 
+nova\_dqher & cold nova shell \\ 
+nova\_photos & dense nova photosphere \\ 
+optimize\_phymir & test phymir optimizers \\ 
+optimize\_subplex & test subplex optimizer \\ 
+orion\_hii\_open & conditions similar to Orion nebula blister \\ 
+orion\_hii\_pdr & constant pressure H+ region/pdr \\ 
+orion\_hii\_pdr\_fast & constant gas pressure H+ region/PDR \\ 
+pdr\_co\_fully & H2 and CO in fully molecular limit  \\ 
+pdr\_co\_fully\_noneq & H2 and CO are fully molecular, non-equilibrium case \\ 
+pdr\_coolbb & illumination by cool STE blackbody \\ 
+pdr\_dense\_persei & dense phase zeta persei cloud \\ 
+pdr\_HTT91 & low-density PDR from HTT91 \\ 
+pdr\_leiden\_f1 & Leiden meeting model 1 \\ 
+pdr\_leiden\_f2 & Leiden meeting model 2 \\ 
+pdr\_leiden\_f3 & Leiden meeting model 3 \\ 
+pdr\_leiden\_f4 & Leiden meeting model 4 \\ 
+pdr\_leiden\_hack\_f1 & Leiden meeting model 1 with hacks \\ 
+pdr\_leiden\_hack\_f2 & Leiden meeting model 2 with hacks \\ 
+pdr\_leiden\_hack\_f3 & Leiden meeting model 3 with hacks \\ 
+pdr\_leiden\_hack\_f4 & Leiden meeting model 4 with hacks \\ 
+pdr\_leiden\_hack\_v1 & Leiden meeting model 5 with hacks \\ 
+pdr\_leiden\_hack\_v2 & Leiden meeting model 6 with hacks \\ 
+pdr\_leiden\_hack\_v3 & Leiden meeting model 7 with hacks \\ 
+pdr\_leiden\_hack\_v4 & Leiden meeting model 8 with hacks \\ 
+pdr\_leiden\_v1 & Leiden meeting model 5 \\ 
+pdr\_leiden\_v2 & Leiden meeting model 6 \\ 
+pdr\_leiden\_v3 & Leiden meeting model 7 \\ 
+pdr\_leiden\_v4 & Leiden meeting model 8 \\ 
+pdr\_minimal & test physical conditions at the illuminated face of a PDR \\ 
+pdr\_orion\_veil & Orion's veil \\ 
+pdr\_th85ism & TH85 PDR with ISM grains \\ 
+pdr\_th85ism\_cgto & TH85 pdr with ISM grains and C > O \\ 
+pdr\_th85orion & TH85 PDR with Orion grains \\ 
+pn\_fluc & Paris PN with density fluctuations \\ 
+pn\_ots & Paris PN with ots \\ 
+pn\_paris & "Paris meeting PN" \\ 
+pn\_paris\_cpre & "Paris meeting PN with constant pressure" \\ 
+pn\_paris\_fast & Paris PN, fast version \\ 
+pn\_sqrden & PN with density propt R\^-2 and filling factor \\ 
+rrc\_o & he-like oxygen ion vs. Bautista \& Kallman 2000 Table 1, column 3 \\ 
+stars\_atlas & Atlas stellar atmosphere \\ 
+stars\_atlas\_3d & Atlas stellar atmosphere, 3D interpolation \\ 
+stars\_atlas\_all & interpolate on Atlas grids \\ 
+stars\_atlas\_odfnew\_all & access various Atlas ODFNEW grids \\ 
+stars\_bstar2006 & tlusty bstar grid \\ 
+stars\_bstar2006\_3d & tlusty bstar grid \\ 
+stars\_bstar2006\_all & tlusty bstar grid \\ 
+stars\_costar1 & costar interpolation mode 1 \\ 
+stars\_costar2 & costar interpolation mode 2 \\ 
+stars\_costar3 & costar interpolation mode 3 \\ 
+stars\_costar4 & costar interpolation mode 4 \\ 
+stars\_costarhalo & costar halo abundances \\ 
+stars\_kurucz79 & Kurucz 1979 SED \\ 
+stars\_mihalas & Mihalas SED \\ 
+stars\_obstar\_merged & tlusty bstar grid \\ 
+stars\_obstar\_merged\_3d & tlusty bstar grid \\ 
+stars\_obstar\_merged\_all & tlusty bstar grid \\ 
+stars\_optimize1 & optimizer on stellar grids \\ 
+stars\_optimize2 & optimizer on stellar grids \\ 
+stars\_optimize3 & optimizer on stellar grids \\ 
+stars\_ostar2002 & tlusty O star grid \\ 
+stars\_ostar2002\_3d & tlusty Ostar grid \\ 
+stars\_ostar2002\_all & tlusty Ostar grid \\ 
+stars\_rauch\_3d & Rauch 3-dimensional grid \\ 
+stars\_rauch\_cowd & Rauch hot PN star \\ 
+stars\_rauch\_h+he & Rauch PN central star \\ 
+stars\_rauch\_h-ca & Rauch central star hot PN \\ 
+stars\_rauch\_h-ni & Rauch hot PN star \\ 
+stars\_rauch\_helium & Rauch hot PN star \\ 
+stars\_rauch\_hydr & Rauch hot PN star \\ 
+stars\_rauch\_pg1159 & Rauch hot [WR] PN \\ 
+stars\_rauch\_pg1159\_ascii & Rauch cool [WR] PN \\ 
+stars\_starburst99 & Starburst 99 SED \\ 
+stars\_starburst99\_2d & Starburst 99 2D SED \\ 
+stars\_werner & Werner stars grid \\ 
+stars\_wmbasic & wmbasic stellar SED \\ 
+thin & "Thin coronal model" \\ 
+time\_cool\_cd & constant density cooling cloud \\ 
+time\_cool\_cd\_eq & constant density equilibrium cooling cloud \\ 
+time\_cool\_cd\_flux & constant density cooling cloud \\ 
+time\_cool\_cd\_noaccu & constant density cooling cloud \\ 

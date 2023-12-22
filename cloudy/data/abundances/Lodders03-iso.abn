@@ -1,0 +1,115 @@
+# SOLAR SYSTEM isotopic abundances
+# refer	Lodders 2003, ApJ, 591, 1220
+#
+# there are mostly the same as "best measurement from a single terrestrial source"
+# from Rosman & Taylor 1998, including updates as indicated in the notes
+# see Section 2.5 therein for a complete discussion
+#
+#Elm		Z	A	Fraction	Notes	
+HYDROGEN	 1	1	 99.99806	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+HYDROGEN	 1	2	  0.00194	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+#
+HELIUM		 2	3	  0.016597	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+HELIUM		 2	4	 99.983403	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+#
+LITHIUM		 3	6	  7.589
+LITHIUM		 3	7	 92.411
+#
+BERYLLIUM	 4	9	100.0
+#
+BORON		 5	10	 19.82
+BORON		 5	11	 80.18
+#
+CARBON		 6	12	 98.8922	
+CARBON		 6	13	  1.1078
+#
+NITROGEN	 7	14	 99.6337
+NITROGEN	 7	15	  0.3663
+#
+OXYGEN		 8	16	 99.7628
+OXYGEN		 8	17	  0.0372
+OXYGEN		 8	18	  0.20004 
+#
+FLUORINE	 9	19	100.0	
+#
+NEON		10	20	 92.9431	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+NEON		10	21	  0.2228	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+NEON		10	22	  6.8341	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+#
+SODIUM		11	23	100.0	
+#
+MAGNESIUM	12	24	 78.992
+MAGNESIUM	12	25	 10.003
+MAGNESIUM	12	26	 11.005
+#
+ALUMINIUM	13	27	100.0
+#
+SILICON		14	28	 92.22968
+SILICON		14	29	  4.68316
+SILICON		14	30	  3.08716
+#
+PHOSPHORUS	15	31	100.0	
+#
+SULPHUR		16	32	 95.018
+SULPHUR		16	33	  0.75	
+SULPHUR		16	34	  4.215
+SULPHUR		16	36	  0.017
+#
+CHLORINE	17	35	 75.771
+CHLORINE	17	37	 24.229
+#
+ARGON		18	36	 84.5946	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+ARGON		18	38	 15.3808	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+ARGON		18	40	  0.0246	Wieler 2002, Rev. Mineral. Geochim., 47, 21
+#
+POTASSIUM	19	39	 93.25811
+POTASSIUM	19	40	  0.011672
+POTASSIUM	19	41	  6.73022
+#
+CALCIUM		20	40	 96.941
+CALCIUM		20	42	  0.647
+CALCIUM		20	43	  0.135
+CALCIUM		20	44	  2.086
+CALCIUM		20	46	  0.004
+CALCIUM		20	48	  0.187
+#
+SCANDIUM	21	45	100.0
+#
+TITANIUM	22	46	  8.249
+TITANIUM	22	47	  7.437
+TITANIUM	22	48	 73.72
+TITANIUM	22	49	  5.409
+TITANIUM	22	50	  5.185
+#
+VANADIUM	23	50	  0.2497
+VANADIUM	23	51	 99.7503
+#
+CHROMIUM	24	50	  4.3452
+CHROMIUM	24	52	 83.7895
+CHROMIUM	24	53	  9.5006
+CHROMIUM	24	54	  2.3647
+#
+MANGANESE	25	55	100.0
+#
+IRON		26	54	  5.845
+IRON		26	56	 91.754
+IRON		26	57	  2.119
+IRON		26	58	  0.282
+#
+COBALT		27	59	100.0
+#
+NICKEL		28	58	 68.0769
+NICKEL		28	60	 26.2231
+NICKEL		28	61	  1.1399
+NICKEL		28	62	  3.6345
+NICKEL		28	64	  0.9256
+#
+COPPER		29	63	 69.174
+COPPER		29	65	 30.826
+#
+ZINC		30	64	 48.63
+ZINC		30	66	 27.90
+ZINC		30	67	  4.10
+ZINC		30	68	 18.75
+ZINC		30	70	  0.62
+****************

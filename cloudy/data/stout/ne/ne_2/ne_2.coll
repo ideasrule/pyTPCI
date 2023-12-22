@@ -1,0 +1,22 @@
+17 09 05
+# atomic hydrogen
+# Wan, Y., Leiberman, P., Buenker, R., Loch, S. D., Schultz, D. R., & Stancil, P. C.  2019, \apj, 881, 3
+# https://ui.adsabs.harvard.edu/abs/2019ApJ...881....3W
+TEMP	10	40	70	100	300	600	900	2000
+RATE H	1	2	3.08E-10	2.91E-10	2.82E-10	2.77E-10	2.81E-10	3.17E-10	3.56E-10	4.97E-10
+#
+# electron collisions <=2000 K
+# Wang, Q., Loch, S. D., Li, Y., Pindzola, M. S., Cumbee, R. S., Stancil, P. C., McLaughlin, B. M., & Ballance, C. P.  2017, \mnras, 469, 1225-1232
+# https://ui.adsabs.harvard.edu/abs/2017MNRAS.469.1225W
+# electron collisions >2000 K
+# Electron CS: Griffin,D.C., Mitnik,D.M. & Badnell, N. R.,2001,JPhB,34,4401"
+# http://adsabs.harvard.edu/abs/2001JPhB...34.4401G
+TEMP	1.00E+01	4.00E+01	7.00E+01	1.00E+02	1.50E+02	3.00E+02	4.50E+02	6.00E+02	7.50E+02	9.00E+02	1.05E+03	1.20E+03	1.35E+03	1.50E+03	1.65E+03	1.80E+03	1.95E+03	2.00E+03	4.00E+03	1.00E+04	4.00E+04	1.00E+05	4.00E+05
+CS ELECTRON 1 2	3.00E-01	3.00E-01	3.00E-01	3.00E-01	3.01E-01	3.01E-01	3.01E-01	3.01E-01	3.02E-01	3.02E-01	3.02E-01	3.02E-01	3.02E-01	3.03E-01	3.03E-01	3.03E-01	3.03E-01	3.04E-01	3.05E-01	3.14E-01	3.50E-01	4.00E-01	4.73E-01
+***********
+Reference:
+https://ui.adsabs.harvard.edu/abs/2019ApJ...881....3W
+https://ui.adsabs.harvard.edu/abs/2017MNRAS.469.1225W
+http://adsabs.harvard.edu/abs/2001JPhB...34.4401G
+***********
+  

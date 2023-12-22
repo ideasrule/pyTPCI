@@ -1,0 +1,52 @@
+title H-like C VI case B
+#
+# commands controlling continuum =========
+table agn 
+ionization parameter 3
+#
+# commands for density & abundances =========
+hden = 8
+init file="ism.ini"
+element carbon abundance 1
+set eden 9
+#
+# commands controlling geometry  =========
+set dr -18
+stop zone 1
+#
+# other commands for details     =========
+case b hummer no photoionization
+no induced processes (OK)
+constant temperature = 1.e5
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 135.0A to 134.965A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 25, wl from 134.965A to 134.949A, up Rydberg constant
+## >>chng 20 aug 22, wl from 134.949A to 134.950A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 134.950A to 134.964A, update NIST energies
+## >>chng 21 apr 08, wl from 134.964A to 134.969A, up 1-e energies to np
+normalize to "C  6" 134.969A ## the balmer beta transition
+save overview "hlike_c.ovr"
+save performance "hlike_c.per"
+save results "hlike_c.rlt"
+save monitors "hlike_c.asr"
+#
+# commands giving the monitors    =========
+## >>chng 03 feb 02 from -9.486 to -9.460, better dest prob
+## >>chng 03 apr 28, change entire model to get unit emission
+## >>chng 03 apr 30, csupra bug with such high O, -5.995 to -1.532
+monitor carbon 6 ionization -1.532
+# hlike_c.in
+# class limit 
+# ========================================
+# 
+ 
+This test case compares the predictions of the multi-level H-like CVI atom
+with the Storey and Hummer (1995) results.  The set dr command sets the
+zone thickness to 1 cm.  The case b command sets Lyman line optical depths
+to very large values. 
+Checks:
+-	Neutral fractions
+-	H* emissivity
+-	Relative line intensities
+

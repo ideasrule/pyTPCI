@@ -1,0 +1,50 @@
+title radiation dominated H, He gas goes to STE
+#
+# commands controlling continuum =========
+black body, t = 50000 STE
+database h-like collisions off ## this would mask radiative processes
+#
+# commands for density & abundances =========
+hden 4
+init file="hheonly.ini"
+element helium abundance 0 ## raise He abundance to H
+#
+# commands controlling geometry  =========
+stop lyman continuum optical depth -6
+set dr -10
+stop zone 1
+#
+# other commands for details     =========
+iterate
+no free-free heating ## this would be a major thermal agent, turn off
+no compton ## get rid of major heat to expose remaining
+set temperature convergence 0.002
+#
+# commands controlling output    =========
+print populations h-like hydrogen
+print heating
+print departure coef element hydrogen
+print line faint -1
+save overview "limit_lte_hhe_induc.ovr"
+save performance "limit_lte_hhe_induc.per"
+save monitors last "limit_lte_hhe_induc.asr"
+#
+# commands giving the monitors    =========
+## >>chng 00 mar 21 pump rate, contin binning bugs, change err from .01 to 0.02
+monitor "H+" temperature 50000 error 0.02
+## >>chng 00 mar 21 pump rate, contin binning bugs, change err from .01 to 0.02
+monitor "He+2" temperature 50000 error 0.02
+## >>chng 12 feb 27 change from 1 to 0.9978; Upgrade to Chianti 7
+monitor departure coef h-like hydrogen average = 0.9978
+## >>chng 00 mar 21 pump rate, contin binning bugs, change err from def to 0.2
+monitor departure coef h-like helium average = 1 error 0.2
+# limit_lte_hhe_induc.in
+# class limit 
+# ========================================
+# 
+
+This is a H, He-only gas that is optically thin in the Lyman continuum.  It is
+irradiated by a blackbody in strict thermodynamic equilibrium.  The tests confirm
+that the gas temperature equilibriates close to the black body temperature.
+
+

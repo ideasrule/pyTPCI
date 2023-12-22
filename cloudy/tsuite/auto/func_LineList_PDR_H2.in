@@ -1,0 +1,6 @@
+title check that wavelengths agree at high line precision
+test
+database h2
+print line precision 6
+table lines "LineList_PDR_H2.dat"
+

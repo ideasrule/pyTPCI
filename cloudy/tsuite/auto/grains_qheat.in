@@ -1,0 +1,65 @@
+title cool atomic ISM with Si grain quantum heating
+#
+# commands controlling continuum =========
+table draine
+extinguish 20
+#
+# commands for density & abundances =========
+hden 0
+# turns on grains with default abundance (log abundance ratio to ism = 0)
+# and with quantum heating enabled by default
+# (disabled with "no grains qheat" option)
+grains 0. "silicate_ism_10.opc"
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+cosmic rays background
+iterate
+#
+# commands controlling output    =========
+normalize to "c  2" 157.636m 
+print line faint -2
+print line column
+save overview "grains_qheat.ovr"
+save performance "grains_qheat.per"
+save monitors last "grains_qheat.asr"
+save grains temperature last "grains_qheat.qht"
+save continuum  "grains_qheat.con" units microns last
+save two photon continuum "grains_qheat.2nu" units microns
+save qheat last "grains_qheat.qhd"
+#
+# commands giving the monitors    =========
+## >>chng 10 sep 29, from -26.77 to -26.66, use atom_leveln for all temps
+## >>chng 12 apr 09, from -26.66 to -26.22, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 dec 23, from -26.22 to -26.2, C to external databases
+monitor line intensity "c  2" 157.636m -26.2
+##
+## >>chng 12 apr 09, from -28.7 to -27.63, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 dec 23, from -27.63 to -27.707 C to external databases
+## >>chng 14 mar 26, from -27.71 to -26.74, Move oxygen data to stout and chianti files
+monitor line intensity "O  1"  63.1679m -26.74 error 0.1
+##
+## >>chng 12 apr 09, from 64.4 to 136.3, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 13 dec 23, from 136.3 to 126.5, C to external databases
+## >>chng 14 mar 26, from 126.5 to 119.8, Move oxygen data to stout and chianti files
+monitor temperature "H+" 119.8
+## 
+monitor line intensity "nFnu" 122.4m -23.976
+## >>chng 13 jul 24, wl from 60.83m to 60.8322m, increased wl precision to 6 sig. fig.
+monitor line intensity "nFnu" 60.8322m -24.774
+## >>chng 13 jul 24, wl from 41.22m to 41.2152m, increased wl precision to 6 sig. fig.
+monitor line intensity "nFnu" 41.2152m -25.713
+## >>chng 13 jul 24, wl from 30.87m to 30.8695m, increased wl precision to 6 sig. fig.
+monitor line intensity "nFnu" 30.8695m -26.596
+#
+# grains_qheat.in
+# class limit 
+# ========================================
+# 
+
+This sim produces dust emission with a Wein trail that is
+dominated by quantum heating emission.
+

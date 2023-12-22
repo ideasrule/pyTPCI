@@ -1,0 +1,165 @@
+title the best we can do to predict the H I emission spectrum 
+#
+set save prefix "limit_caseb_h_den2_temp45"
+# commands controlling continuum =========
+laser 1.4
+ionization -1
+#
+# commands for density & abundances =========
+hden 100 linear 
+set eden 2
+init file "honly.ini"
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+database h-like resolved levels 30
+database h-like collapsed levels 70
+constant temperature 3e4
+case b hummer no photoionzation no pdest 
+no scattering escape
+no induced processes
+iterate
+#
+# commands controlling output    =========
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line case b "H  1"      6562.80A  1.027
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line case b "H  1"      4861.32A  1.0064
+## >>chng 21 mar 16, wl from 4340.46A to 4340.47A, update NIST energies
+## >>chng 21 aug 18, wl from 4340.47A to 4340.46A, revert to PvH energies for H
+monitor line case b "H  1"      4340.46A  1.021
+## >>chng 21 mar 16, wl from 4101.73A to 4101.74A, update NIST energies
+## >>chng 21 aug 18, wl from 4101.74A to 4101.73A, revert to PvH energies for H
+monitor line case b "H  1"      4101.73A  0.9992
+## >>chng 21 mar 16, wl from 3970.07A to 3970.08A, update NIST energies
+## >>chng 21 aug 18, wl from 3970.08A to 3970.07A, revert to PvH energies for H
+monitor line case b "H  1"      3970.07A  0.9989
+## >>chng 21 mar 16, wl from 3889.05A to 3889.06A, update NIST energies
+## >>chng 21 aug 18, wl from 3889.06A to 3889.05A, revert to PvH energies for H
+monitor line case b "H  1"      3889.05A  0.9987
+## >>chng 21 mar 16, wl from 3835.38A to 3835.39A, update NIST energies
+## >>chng 21 aug 18, wl from 3835.39A to 3835.38A, revert to PvH energies for H
+monitor line case b "H  1"      3835.38A  0.9987
+## >>chng 20 aug 22, wl from 3797.89A to 3797.90A, switched from computed to tabulated energies for H and He isoseq
+monitor line case b "H  1"      3797.90A  0.9983
+## >>chng 21 mar 16, wl from 3770.63A to 3770.64A, update NIST energies
+## >>chng 21 aug 18, wl from 3770.64A to 3770.63A, revert to PvH energies for H
+monitor line case b "H  1"      3770.63A  0.9982
+## >>chng 21 mar 16, wl from 3750.15A to 3750.16A, update NIST energies
+## >>chng 21 aug 18, wl from 3750.16A to 3750.15A, revert to PvH energies for H
+monitor line case b "H  1"      3750.15A  0.9982
+## >>chng 20 aug 22, wl from 3734.36A to 3734.37A, switched from computed to tabulated energies for H and He isoseq
+monitor line case b "H  1"      3734.37A  0.9976
+## >>chng 20 aug 22, wl from 3721.93A to 3721.94A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 3721.94A to 3721.95A, update NIST energies
+## >>chng 21 aug 18, wl from 3721.95A to 3721.94A, revert to PvH energies for H
+monitor line case b "H  1"      3721.94A  0.9976
+## >>chng 21 mar 16, wl from 3711.97A to 3711.98A, update NIST energies
+## >>chng 21 aug 18, wl from 3711.98A to 3711.97A, revert to PvH energies for H
+monitor line case b "H  1"      3711.97A  0.9973
+## >>chng 21 mar 16, wl from 3703.85A to 3703.86A, update NIST energies
+## >>chng 21 aug 18, wl from 3703.86A to 3703.85A, revert to PvH energies for H
+monitor line case b "H  1"      3703.85A  0.997
+## >>chng 21 mar 16, wl from 3697.15A to 3697.16A, update NIST energies
+## >>chng 21 aug 18, wl from 3697.16A to 3697.15A, revert to PvH energies for H
+monitor line case b "H  1"      3697.15A  0.9965
+monitor line case b "H  1"      1.87510m  1.005
+## >>chng 20 aug 22, wl from 1.28180m to 1.28181m, switched from computed to tabulated energies for H and He isoseq
+monitor line case b "H  1"      1.28181m  1.011
+## >>chng 20 aug 22, wl from 1.09380m to 1.09381m, switched from computed to tabulated energies for H and He isoseq
+monitor line case b "H  1"      1.09381m  0.9983
+## >>chng 20 aug 22, wl from 1.00493m to 1.00494m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.00494m to 1.00493m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 1.00493m to 1.00494m, revert to PvH energies for H
+monitor line case b "H  1"      1.00494m  0.9983
+## >>chng 20 aug 22, wl from 9545.93A to 9545.97A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9545.97A to 9545.95A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9545.95A to 9545.97A, revert to PvH energies for H
+monitor line case b "H  1"      9545.97A  0.9983
+## >>chng 20 aug 22, wl from 9228.97A to 9229.02A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9229.02A to 9229.00A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9229.00A to 9229.02A, revert to PvH energies for H
+monitor line case b "H  1"      9229.02A  0.9984
+## >>chng 20 aug 22, wl from 9014.87A to 9014.91A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 9014.91A to 9014.89A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 9014.89A to 9014.91A, revert to PvH energies for H
+monitor line case b "H  1"      9014.91A  0.9984
+## >>chng 20 aug 22, wl from 8862.74A to 8862.79A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8862.79A to 8862.77A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8862.77A to 8862.79A, revert to PvH energies for H
+monitor line case b "H  1"      8862.79A  0.9982
+## >>chng 20 aug 22, wl from 8750.43A to 8750.48A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 8750.48A to 8750.46A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 8750.46A to 8750.48A, revert to PvH energies for H
+monitor line case b "H  1"      8750.48A  0.9982
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line case b "H  1"      4.05115m  0.9946
+## >>chng 20 aug 22, wl from 2.62513m to 2.62515m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.62515m to 2.62514m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.62514m to 2.62515m, revert to PvH energies for H
+monitor line case b "H  1"      2.62515m  0.9945
+## >>chng 20 aug 22, wl from 2.16551m to 2.16553m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 2.16553m to 2.16552m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 2.16552m to 2.16553m, revert to PvH energies for H
+monitor line case b "H  1"      2.16553m  0.9964
+## >>chng 20 aug 22, wl from 1.94454m to 1.94456m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 1.94456m to 1.94455m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 1.94455m to 1.94456m, revert to PvH energies for H
+monitor line case b "H  1"      1.94456m  0.997
+## >>chng 20 aug 22, wl from 1.81740m to 1.81741m, switched from computed to tabulated energies for H and He isoseq
+monitor line case b "H  1"      1.81741m  0.9974
+## >>chng 20 aug 22, wl from 7.45777m to 7.45782m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 13, wl from 7.45782m to 7.45780m
+## >>chng 21 aug 18, wl from 7.45780m to 7.45782m and Elow from 105291.6 to 105291.7, revert to PvH energies for H
+monitor line case b "H  1"      7.45782m  Elow=105291.7  0.9813
+## >>chng 20 aug 22, wl from 4.65247m to 4.65251m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 13, wl from 4.65251m to 4.65248m
+## >>chng 21 aug 18, wl from 4.65248m to 4.65251m and Elow from 105291.6 to 105291.7, revert to PvH energies for H
+monitor line case b "H  1"      4.65251m  Elow=105291.7  0.9909
+## >>chng 20 aug 22, wl from 3.73951m to 3.73954m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 3.73954m to 3.73952m, up 1-e energies to np
+## >>chng 21 aug 18, wl from 3.73952m to 3.73954m, revert to PvH energies for H
+monitor line case b "H  1"      3.73954m  0.9936
+monitor departure "H[30]"  1.232
+monitor departure "H[70]"  0.714
+monitor departure "H[90]"  0.8669
+monitor departure "H[110]"  0.8306
+monitor departure "H[130]"  0.9167
+monitor departure "H[150]"  0.876
+monitor departure "H[250]"  0.8665
+monitor departure "H[350]"  0.8649
+monitor departure "H[450]"  0.8976
+monitor departure "H[470]"  0.8691
+monitor departure "H[490]"  0.8792
+## >>chng 19 jun 28, from 1.08 to 1.029, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 1.029 to 0.9543, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 23 sep 12, from 0.9543 to 1.047, use Hummer option on case b command
+monitor departure "H[510]"  1.047
+## >>chng 19 jun 28, from 1.487 to 1.435, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 1.435 to 1.322, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 23 sep 12, from 1.322 to 1.445, use Hummer option on case b command
+monitor departure "H[520]"  1.445
+## >>chng 19 jun 28, from 2.084 to 2.174, reintegrate iso_collisions branch
+## >>chng 19 aug 06, from 2.174 to 2.305, Adopted Lebedev & Beigman 1998 as default for n-changing collisions in iso-sequences
+## >>chng 23 sep 12, from 2.305 to 2.135, use Hummer option on case b command
+monitor departure "H[530]"  2.135
+print departure h-like hydrogen
+print line faint 0.01
+print line column
+save overview ".ovr"
+save performance ".per"
+save diffuse continuum ".dif" last no title units microns
+save continuum ".con" last no title units microns
+save monitors ".asr" last 
+#

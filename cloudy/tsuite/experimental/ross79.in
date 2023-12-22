@@ -1,0 +1,12 @@
+blackbody, T=10000000K
+luminosity total 37.3
+iterate 3
+radius 8 6
+hden 18.6
+# 
+save overview last "ross79.ovr"
+save continuum units kev last "ross79.con"
+
+This is the model presented in Ross, R. R., 1979, ApJ, 233, 334.
+The optical depth to electron scattering is around 2 so 
+Cloudy is not now appropriate for this case.

@@ -1,0 +1,13 @@
+# updated 2003 oct 28 to correct for changed line wavelengths
+# for information on the format of this file, see readme_LineList_dat.txt
+#
+# a list of hydrogen and helium lines only 
+#
+#He I 504.0A
+He 1 512.1A
+He 1 515.6A
+He 1 522.2A
+He 1 537.0A
+He 1 584.3A
+He 1 591.4A
+He 1 625.6A

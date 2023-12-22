@@ -1,0 +1,15 @@
+  1 3s2.3p4               3  1 P  2.0  5            0.0       0.000000            0.0       0.000000 
+  2 3s2.3p4               3  1 P  1.0  3          396.1       0.003610          339.0       0.003089 
+  3 3s2.3p4               3  1 P  0.0  1          573.6       0.005227          495.0       0.004511 
+  4 3s2.3p4               1  2 D  2.0  5         9238.6       0.084188         9213.0       0.083955 
+  5 3s2.3p4               1  0 S  0.0  1        22180.0       0.202119        22182.0       0.202137 
+ -1
+Observed energies: Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2012). NIST Atomic Spectra Database (ver. 5.0), [Online]. Available: http://physics.nist.gov/asd [2013, May 3]. National Institute of Standards and Technology, Gaithersburg, MD. 
+
+Theoretical energies from O. Zatsarinny and K. Bartschat,  J. Phys. B: 39, 2861 (2006).
+
+ Produced for the CHIANTI database  by Giulio Del Zanna, Jul 2016
+
+Reference:
+Chianti  2022-02-18
+ -1

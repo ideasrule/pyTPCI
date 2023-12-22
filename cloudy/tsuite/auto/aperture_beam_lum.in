@@ -1,0 +1,46 @@
+title test aperture beam command with luminosity
+#
+# commands controlling continuum =========
+laser 2
+q(h) 31.5
+#
+# commands for density & abundances =========
+hden 0
+init file "honly.ini"
+#
+# commands controlling geometry  =========
+stop thickness 1e10 linear cm 
+radius 9
+sphere
+aperture beam 
+#
+# other commands for details     =========
+constant temper 4
+#
+# commands controlling output    =========
+save overview "aperture_beam_lum.ovr"
+save performance "aperture_beam_lum.per"
+save monitors "aperture_beam_lum.asr"
+#
+# commands giving the monitors    =========
+## this is 2 times 1e10 (the thickness) divided by the 1e10 that 
+## was entered in the unit line
+monitor line intensity "unit" 1 0.30103
+# aperture_beam_lum.in
+# class geometry 
+# ========================================
+
+
+This is a homogeneous sphere that is especially simple.  The model
+is a test of the aperture command, a command that simulates observing
+part of an extended object.  In this case the aperture is a beam
+contered on the center of the nebula, with a line of sight
+extending through the object.  
+
+The code carries along a dummy emission line ("Unit 1") with a constant intensity
+of 1e-10 erg cm-3 s-1.  The line goes through all of the code's infrastructure,
+and when the calculation is complete, the program confirms that the "luminosity"
+of the line is the emitting volume times 1e-10.  The aperture command
+is verified by asserting that this emission line has the correct "luminosity".
+
+

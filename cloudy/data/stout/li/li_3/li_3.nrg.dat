@@ -1,0 +1,40 @@
+20190102 # magic number
+# Give level energies in cm^-1 for each ion.
+# Each line gives n, l, S, J, energy.
+# The last entry for each ion is the ionization potential.
+# It is marked with negative quantum numbers. The ionization
+# potential MUST be the last entry for a given element!
+#
+# NIST data for n<=10 were downloaded using ADM.
+#
+# NB NB NB  np energy used for shell n up to n=10
+#
+ 1 -1 -1 -1 0 0.002
+ 2 -1 -1 -1 740754.114453333 2.82843e-05
+ 3 -1 -1 -1 877924.97927 9.42809e-06
+ 4 -1 -1 -1 925935.059285 4.48454e-06
+ 5 -1 -1 -1 948156.714563667 2.60342e-06
+ 6 -1 -1 -1 960227.644409 6.11919e-06
+ 7 -1 -1 -1 967505.985302333 6.7082e-06
+ 8 -1 -1 -1 972229.881714667 5.21749e-06
+ 9 -1 -1 -1 975468.554201667 4.47214e-06
+10 -1 -1 -1 977785.148346667 3.72678e-06
+#
+# 
+# Bibliography:
+# -------------
+# PUB     Refcode: L3620c107 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=3620&comment_code=c107&amp;element=Li&amp;spectr_charge=3&amp;ref=3620&amp;type=E
+# PUBCON    Title: Energy Levels of One-Electron Atoms
+# PUBCON  Authors: G. W. Erickson
+# PUBCON  Journal: J. Phys. Chem. Ref. Data 6, 831–869 (1977)
+# PUBCON      DOI: https://doi.org/10.1063/1.555557
+# PUBCON  Comment: The energy level values were derived from Erickson's theoretical values of the total energies by scaling them to the CODATA-2006 values of the fundamental constants, as given by Kramida et al. 2008       
+# 
+# PUB     Refcode: L3620c96 on NIST
+# PUBCON      URL: https://physics.nist.gov/cgi-bin/ASBib1/get_ASBib_ref.cgi?db=el&db_id=3620&comment_code=c96&amp;element=Li&amp;spectr_charge=3&amp;ref=3620&amp;type=E
+# PUBCON    Title: Energy Levels of One-Electron Atoms
+# PUBCON  Authors: G. W. Erickson
+# PUBCON  Journal: J. Phys. Chem. Ref. Data 6, 831–869 (1977)
+# PUBCON      DOI: https://doi.org/10.1063/1.555557
+# PUBCON  Comment: The energy values reported in this paper have been adjusted by scaling to the CODATA 2006 values of fundamental constants as given by Mohr et al. 2008 (full reference: L12548).      

@@ -1,0 +1,30 @@
+# vacuum, for use in mixing laws to simulate fluffy grains
+1030103  # magic number for version control
+         # chemical formula for constituent atom, molecule, ...
+# chemical formulas are case sensitive and fractional indices are allowed,
+# (e.g., Mg0.6Fe0.4SiO3). Use no brackets or spaces.
+1.00     # default abundance
+1.00     # default depletion
+0.00     # material density in g/cm^3
+1        # material type for enthalpy function, 1=carbonaceous, 2=silicate
+2.e100   # work function in Rydberg
+1.e100   # gap between valence and conduction band in Rydberg
+0.5      # thermionic efficiency ( 0. < efficiency <= 1. )
+1.e100   # sublimation temperature in K
+rfi_tbl  # type of data in this file, rfi_tbl, grey, pah1, etc...
+# this table contains three numbers on each line:
+# the wavelength in micron and a complex number being either
+# n = (nr,ni), n-1 = (nr-1,ni) or the dielectric function n^2
+# which of the three is determined by:
+2        # complex data code 3 -> n; 2 -> n-1; 1 -> n^2
+# optical constants can differ for crystalline grains depending on direction
+# first define number of axes (between 1 and 3)
+1        # number of principal axes (provide optical constants for each axis)
+# then give relative weight for each axis in averaging process
+# e.g. 1 2 means first axis 1/3 and second axis 2/3
+1        # relative weights of axes (use 1 if only one axis is provided)
+# now provide optical constants for each axis.
+2        # number of data points for first axis
+# the wavelengths may be either monotonically increasing or decreasing
+   1.0000e-12  0.0000e+00  0.0000e+00
+   1.0000e+12  0.0000e+00  0.0000e+00

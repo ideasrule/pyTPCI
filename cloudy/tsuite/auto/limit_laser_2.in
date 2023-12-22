@@ -1,0 +1,51 @@
+title test of H and HeI ionization in optically thin limit
+#
+# commands controlling continuum =========
+laser 2.0 Ryd
+## >>chng 02 ocg 27, use lumin instead so that this
+## part of cont norm is also tested for laser
+intensity -0.3604
+#
+# commands for density & abundances =========
+hden 1
+init file="hheonly.ini"
+abundances all -10
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# other commands for details     =========
+constant temperature = 4
+iterate to convergence
+#
+# commands controlling output    =========
+save overview "limit_laser_2.ovr"
+save performance "limit_laser_2.per"
+save monitors "limit_laser_2.asr" last
+#
+# commands giving the monitors    =========
+monitor ionization hydrogen 1 -3.34
+## >>chng 11 sep 15, from -4.18 to -4.159, Chianti for Fe moderate to high ions
+monitor ionization helium 1 -4.159
+monitor niter 3 error 0.01
+# limit_laser_2.in
+# class limit  
+# ========================================
+# 
+
+This checks the calculation of the hydrogen and helium photoionization
+equilibrium. The continuum is a laser peaked at 2.0 Ryd, and so can
+only ionize hydrogen and atomic helium. 
+
+Checks:
+-	The hydrogen neutral fraction is nearly Ho/H+=4.51*10-4
+	(not exact since laser has finite width).
+-	Hb emissivity close to high density case A.  The predicted H  1 4861
+	intensity should be nearly 2.2 times the expected case B intensity.
+-	Helium ionization should be Heo/He+ = 6.61*10-4.
+
+H cross section is 0.927E-18 cm^2, rec coef is 4.18E-13
+answer is Ho/H+ = 4.51e-4
+HeI cross section is 6.54E-18 cm^2, rec coef is 4.32E-13
+answer is Heo/He+ = 6.61e-5

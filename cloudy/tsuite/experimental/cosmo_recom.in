@@ -1,0 +1,87 @@
+title cosmological recombination
+#
+# commands controlling continuum =========
+cosmology
+CMB z=4000 density time
+time 9.0 16.6
+time =  0.0  scale= 0 9.0 0.0
+time = 17.0  scale= 0 9.0 0.0043
+end of times
+# 
+# commands for density & abundances =========
+abundances primordial
+# element hydrogen isotopes (1 , 1) (2 , 4e-5)
+element helium abundance -1.102373 
+element lithium abundance -9.638272
+element beryllium off
+#
+# commands controlling geometry  =========
+stop zone 1
+# some convenient stopping tempertures:
+# T = 4 gets us down to about z=12. 
+# T = 3000K is just after z=1142, for comparison with Alizadeh & Hirata 2011.
+stop temperature 2000 linear time
+#
+# other commands for details     =========
+#
+# atom h-like no recomb interpolation
+# atom he-like no recomb interpolation
+#
+atom h2 limit -20
+# atom h2 matrix all
+# atom hd limit off 
+# atom h2 LTE
+set leiden hack H2* off
+# set H2 cont diss Stancil
+#
+iterate 10000
+set trim off
+set ind2 on
+set cumulative flux
+set continuum resolution 0.1
+set eden convergence -4
+no fine opacities
+no scattering opacity
+no scattering escape
+atom he-like element helium levels resolved 10
+atom h-like element helium levels resolved 10
+#
+# commands controlling output    =========
+normalize to "He 1" 4471.49
+print departure hydrogen
+set punch prefix "cosmo_recom"
+set save hash "return"
+save performance ".per" no hash
+save continuum ".con" last no hash
+save dr ".dr" no hash
+save species departure ".depH" "H" no hash
+save species population ".popH" "H" no hash
+save species departure ".depHe" "He" no hash
+save species population ".popHe" "He" no hash
+save species departure ".depHep" "He+" no hash
+save species population ".popHep" "He+" no hash
+save species departure ".depH2" "H2" no hash
+save species population ".popH2" "H2" no hash
+# save species departure ".depHD" "HD" no hash
+# save species population ".popHD" "HD" no hash
+save time dependent ".tim" no hash
+save molecules ".mol" no hash
+save cooling ".col" no hash
+save heating ".het" no hash
+save continuum ".con" last
+save chemistry rates creation ".h2_c" "H2" no hash
+save chemistry rates destruction ".h2_d" "H2" no hash
+save chemistry rates ".h2p_r" "H2+" no hash
+save dominant rates ".h2" "H2" no hash
+save dominant rates ".h2p" "H2+" no hash
+save dominant rates ".h3p" "H3+" no hash
+# save dominant rates ".hd" "HD" no hash
+# save dominant rates ".h2dp" "H2D+" no hash
+# save dominant rates ".hd2p" "HD2+" no hash
+# save dominant rates ".d3p" "D3+" no hash
+#
+# This temperature will botch if the stop temperature above is changed. 
+monitor temperature face 1978.4
+#
+
+

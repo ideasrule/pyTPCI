@@ -1,0 +1,33 @@
+title exercise full range of density, temperature
+c 
+element lithium off
+element berylium off
+element boron off
+// >>chng 12 apr 09, scale factor will result in CR rate for that meeting
+// old value maintained to keep history
+cmb
+iterate
+c 
+blackbody 6 
+energy density 6 vary
+grid 0 6 0.25
+c -8 18 
+hden 2 vary
+grid -8 18 1
+stop zone 1
+c set to constant small thickness
+set dr -10
+normalize to "Q(H)" 4861A
+c 
+save performance no hash "grid_extreme_fine.per"
+save grid no hash "grid_extreme_fine.grd" last 
+save overview last no hash "grid_extreme_fine.ovr" last 
+save monitors last no hash "grid_extreme_fine.asr" last 
+save average "grid_extreme_fine.avr" last 
+temperature hydrogen 2
+end of average
+c 
+// >>11 apr 26, val 21 from 4.1377 to 3.159 update Ar iso seq recom rates
+c
+c grid_extreme_fine.in limits
+ 

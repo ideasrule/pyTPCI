@@ -1,0 +1,108 @@
+title test ots, inward fractions for pure hydrogen, open geo, filling factor
+#
+# commands controlling continuum =========
+ionization -2
+blackbody 40000
+#
+# commands for density & abundances =========
+hden 5
+init file "honly.ini"  
+#
+# commands controlling geometry  =========
+stop efrac 0.05 ##stop when 5 percent ionized 
+constant temper 7500
+filling factor 0.01
+#
+# other commands for details     =========
+# must iterate to get inward line fractions, that are asserted below
+iterate 
+diffuse ots
+# not iterating does not affect the solution
+no level2
+no induced processes (OK) 
+#
+# commands controlling output    =========
+print line inward
+save performance "h_otsopen.per"
+save overview  "h_otsopen.ovr" last
+save dr  "h_otsopen.dr" last
+save monitors "h_otsopen.asr" last
+save continuum "h_otsopen.con" last units angstrom
+#
+# commands giving the monitors    =========
+# this is an open geometry, so do not expect H atom to exactly be case B
+# due to Lyman line leakage.  we iterated, so have a good estimate of
+# inward and outward fractions, which we test 
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A >1.0  ##
+## 
+## >>chng 08 apr 30, from 1.00 to 1.057 H, He topoff change
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A 1.057 ##
+## 
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A < 1.1  ##>but not a lot less
+##
+##>>chnn 99jun26, error had been just under 2%, increased above it when optical
+## depths of 2s and 2p were brought together, so increased error
+## >>chng 08 apr 30, from 1 to 0.968 H, He topoff change
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, change to testing "Ca B" 4861.36A (was "H  1" 4861.36A).
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A = 1.017 error 0.03 ##no surprise if not unity, since open
+## 
+## >>chng 08 apr 30, from 0.5 to 0.484 H, He topoff change
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.484 to 0.5002, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Inwd" 4861.32A =0.5002 error 0.03 ##no surprise if not unity, since open
+## 
+## >>chng 13 jul 25, wl from 3588 to 3587.67A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 18 to 18.39, change normalizing line to "H  1" 4861.36A.
+monitor line "nFnu" 3587.67A = 18.39 error 0.02 ##total Balmer continuum rel to h-beta
+## >>chng 13 jul 25, wl from 3588 to 3587.67A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 9 to 9.203, change normalizing line to "H  1" 4861.36A.
+monitor line "InwT" 3587.67A = 9.203 error 0.02 ##inward Balmer continuum rel to h-beta
+## 
+## >>chng 01 aug 23, from 18.26 to 18.633, 2x better continuum resolution
+## >>chng 17 sep 09, from 18.63 to 18.98, fix bug in high n collisional excitation rates for H-like iso-sequences
+monitor line "BaC " 3646 = 18.98 error 0.02##residual Balmer continuum rel to h-b
+## 
+## >>chng 01 aug 23, from 9.07 to 9.319 2x better continuum resolution
+## >>chng 17 sep 09, from 9.319 to 9.489, fix bug in high n collisional excitation rates for H-like iso-sequences
+monitor line "cout" 3646 = 9.489 error 0.02 ##Balmer continuum rel to h-beta
+## >>chng 01 aug 23, from 9.07 to 9.319 2x better continuum resolution
+## >>chng 17 sep 09, from 9.319 to 9.491, fix bug in high n collisional excitation rates for H-like iso-sequences
+monitor line "cref" 3646 = 9.491 error 0.02 ##Balmer continuum rel to h-beta
+# h_otsopen.in
+# class limit 
+# ========================================
+# 
+
+This tests the total emission from a hydrogen Stromgren sphere
+using the OTS approximation.  The conservation of the total number
+of ionizing photons, and the emitted spectrum, are all checked.
+

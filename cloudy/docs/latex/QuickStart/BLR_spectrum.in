@@ -1,0 +1,10 @@
+title BLR spectrum in Quick Start Guide
+table power law  // a built-in power-law continuum
+phi(H) 18.5      // the log of the flux of H-ionizing photons [cm-2 s-1]
+hden 10          // log of hydrogen density cm-3
+stop column density 22  // log of hydrogen column density cm-2
+iterate to convergence
+print last iteration
+save overview "blr.ovr" last
+save continuum "blr.con" units microns last
+

@@ -1,0 +1,88 @@
+title compare with Van Blerkom and Hummer exact RT results
+#
+# commands controlling continuum =========
+blackbody 50000 K
+phi(h) 12.30103
+# commands for density & abundances =========
+hden 4
+init "honly.ini"
+abundances all -10
+#
+# commands controlling geometry  =========
+stop efrac -0.5
+#
+# other commands for details     =========
+diffuse ots
+no level2 lines
+constant temper 4
+iterate
+#
+# commands controlling output    =========
+save performance "limit_vbhum.per"
+save monitors last "limit_vbhum.asr"
+save overview last "limit_vbhum.ovr"
+save dr last "limit_vbhum.dr"
+#
+# commands giving the monitors    =========
+monitor thickness 16.886
+## >>chng 01 apr 01, from 55 to 65, change eden zoning
+## >>chng 04 mar 04, from 65 to 75, improv conv
+## >>chng 08 dec 08, from 75 to 69, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 69 to 70, merging newsolvers branch
+## >>chng 12 nov 28, from 70 to 74, Make HII dr limit symmetric
+## >>chng 18 jun 20, from 74 to 70, #bugfixes at front face r12134:12136
+monitor nzone 70 error 0.01
+##
+monitor hydrogen ionization 1 -1.714
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A 1.000
+monitor line "Bac " 3646 15.24
+##
+## >>chng 05 mar 28, from 5 to 3.5, impr mol converg
+## >>chng 08 dec 08, from 3.5 to 2.696, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 2.696 to 3.429, merging newsolvers branch
+## >>chng 09 jun 26, from 3.429 to 3.571, remove several dampers
+## >>chng 12 oct 22, from 3.571 to 3.329, zone tau in rt_line_one
+## >>chng 12 nov 28, from 3.329 to 3.581, Make HII dr limit symmetric
+## >>chng 13 jan 10, from 3.581 to 3.689, fix in-zone continuum shielding
+## >>chng 13 nov 05, from 3.689 to 2.811, convergence branch changes
+## >>chng 13 nov 25, from 2.811 to 2.5, convergence branch changes
+## >>chng 18 jun 20, from 2.5 to 2.571, #bugfixes at front face r12134:12136
+monitor itrzn 2.571 error 0.02
+# 
+# limit_vbhum.in
+# 
+# class limit 
+# ========================================
+# 
+
+This is a test of the treatment of the diffuse fields, their transfer,
+and their effects on the ionization structure of a nebula. The comparison
+is made against the exact calculation published by Van Blerkom and
+Hummer (1967). The geometry is open, that is, similar to that assumed
+in most BLR calculations. 
+
+>>refer	H	ionization	Van Blerkom, D., & Hummer, D. G. 1967, MNRAS, 137, 353
+
+The diffuse ots command is entered in order to reproduce the
+Van Blerkom and Hummer results.  The default assumption, outward only,
+does not agree as well.  I changed the default from OTS to outward only
+to be in better agreement with predictions by Harrington and Rubin
+at the Lexington meeting.  They have not checked whether their codes
+are in agreement with the Van Blerkom and Hummer paper.
+
+Checks:
+-	Neutral fraction at illuminated face 5.8*10-4.
+-	Location of ionization front at 7.8*1016 cm.
+-	34He 1 486134 and 34CA B 486134 agree;  both slightly lower than 34Q(H) 486134.
+-	Answers with OTS agree with 1967 results.
+
+test hydrogen ground state rec effic against vb+h exact results
+this is their case e) - "zero condition"
+their answer for H0/Htot at the illuminated edge is approx 5.8E-4,
+and a Stromgren radius of approximately 7.7E16 cm

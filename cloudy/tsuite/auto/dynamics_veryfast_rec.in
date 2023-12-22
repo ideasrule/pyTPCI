@@ -1,0 +1,57 @@
+title very fast wind model
+#
+# commands controlling continuum =========
+table agn
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden 9
+# this is a set of commands to speed up calc
+init file "fast.ini"
+#
+# commands controlling geometry  =========
+stop thickness 8.4
+# this is a subsonic wind with advection 
+wind velo 5 advection
+#
+# other commands for details     =========
+# absolutely no convergence problems should occur 
+failures 1
+# this degrades the continuum resolution by factor of 3, to
+# speed up calc 
+set continuum resolution 3
+iterate 4
+#
+# commands controlling output    =========
+# the normalizing line is not defined on the emergent line stack
+print lines emergent off
+save overview "dynamics_veryfast_rec.ovr"
+save performance "dynamics_veryfast_rec.per"
+save monitors last "dynamics_veryfast_rec.asr"
+save pressure last "dynamics_veryfast_rec.pre"
+save total opacity last "dynamics_veryfast_rec.opc"
+save ionizing continuum last "dynamics_veryfast_rec.ion"
+save continuum last "dynamics_veryfast_rec.con"
+save dr "dynamics_veryfast_rec.dr"
+#
+# commands giving the monitors    =========
+## >>chng 03 nov 30, all asserts changed as result
+## of switch to fast.ini
+## >>chng 06 jul 25, from 4.230 to 4.250 HN update OIII, OII collision data
+monitor temperature "H+" 4.250
+##
+## >>chng 12 oct 24, from -1.26 to -1.241, tune up close monitor
+## >>chng 16 nov 14, from -1.241 to -1.221, Reintegration of RydDep after several bug fixes
+monitor ionization helium 2 -1.221
+##
+monitor ionization hydrogen 1 -3.234
+# 
+# dynamics_veryfast_rec.in 
+# class dynamics  
+# ========================================
+# 
+
+This is meant to be a very fast calculation to 
+use when running extensive debug-enabled runtimes.
+
+

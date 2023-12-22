@@ -1,0 +1,54 @@
+\chapter{LATEX STYLE AND MACROS}
+% !TEX root = hazy1.tex
+
+\section{Blocks of verbatim text}
+{\setverbatimfontsize{\tiny}
+\begin{verbatim}
+           3198CellPeak1.00E+00   Lo 9.99e-09=912.21cm   Hi-Con:1.20E+02 Ryd   E(hi):7.35E+06Ryd     E(hi):     100.01 MeV
+\end{verbatim}
+}
+
+
+Table \ref{tab:LabelNames} gives naming convention for labels.
+
+\begin{table}
+\centering
+\caption{Naming convention for labels}
+\begin{tabular}{c c}
+\hline
+Tables & tab:TableLabel \\
+Equations & eqn:EquationLabel \\
+Figures & fig:FigureLabel \\
+Section & sec:SectionLabel \\
+\hline
+\label{tab:LabelNames}
+\end{tabular}
+\end{table}
+
+
+\section{Macros}
+
+Table \ref{tab:StyleMacros} lists some of the macros defined
+in \cdFilename{macros.tex}.
+
+\begin{table}[h]
+\centering
+\caption{Macros defined in \protect\cdFilename{macros.tex}}
+\begin{tabular}{ l l l}
+\hline
+$\backslash$Cloudy & \Cloudy & the name of the code \\
+$\backslash$Hazy & \Hazy & the name of this document \\
+$\backslash$cdCommand\{command\} & \cdCommand{command} & a command \\
+$\backslash$cdFilename\{file name\} & \cdFilename{file name} & a file name \\
+$\backslash$cdTerm\{jargon\} & \cdTerm{jargon} & a defined term \\
+$\backslash$experimental & \experimental & \colorbox{shadecolor}{indicates experimental code} \\
+$\backslash$cdVariable\{variable name\} & \cdVariable{variable name} & name of variable \\
+$\backslash$cdRoutine\{routine name\} & \cdRoutine{routine name} & routine name \\
+$\backslash$cdSectionTitle\{Section of Hazy\} & \cdSectionTitle{Section of Hazy} & title of a section of Hazy \\
+$\backslash$cdMono\{typewriter text\} & \cdMono{typewriter text} & text in monospaced format \\
+\hline
+\label{tab:StyleMacros}
+\end{tabular}
+\end{table}
+
+\vspace*{\fill}

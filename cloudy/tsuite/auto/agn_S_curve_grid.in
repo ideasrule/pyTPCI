@@ -1,0 +1,70 @@
+title temperature across Spitzer thermal stability S curve
+#
+# commands controlling continuum =========
+# this is the generic AGN continuum
+table agn
+# the ionization parameter will be varied
+ionization parameter 0.00 vary
+grid from 0 to 3 in 0.25 dex steps sequential
+# add background so that FIR/radio does not have zero flux
+background
+iterate 
+#
+# commands for density & abundances =========
+# intended to make sim run as fast as possible
+hden 8
+no level 2 lines ## slight speed up - here for consistency with old ini file
+init file "ism.ini"
+element sulphur off
+element chlorine off
+element argon off
+#
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# commands controlling output
+# this produces a very large number of lines in the output mostly
+# because Hbeta is very weak in hot gas.  Choose Lya as the normalization
+# line to make line list smaller
+## >>chng 13 jul 24, wl from 1216 to 1215.68A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 24, wl from 1216.68 to 1215.67A, change in Rydberg constant
+normalize to "H  1" 1215.67A
+print line faint 10 will be varied
+# create file with list of grid parameters
+save overview "agn_S_curve_grid.ovr" last no hash
+save performance "agn_S_curve_grid.per"
+save grid "agn_S_curve_grid.grd" last no hash
+save species densities "agn_S_curve_grid.sden" "Si+12[10:11]" last no hash
+# save average H+ temperature
+save average "agn_S_curve_grid.avr" last no hash
+temperature hydrogen 1 
+end of temperatures 
+save monitors "agn_S_curve_grid.asr"
+# save heating and cooling
+save heating "agn_S_curve_grid.het" last no hash
+save cooling "agn_S_curve_grid.col" last no hash
+save pressure "agn_S_curve_grid.pre" last no hash
+save iron element "agn_S_curve_grid.fe" last  no hash
+save xspec atable "agn_S_curve_grid.fit" 
+save neon element "agn_S_curve_grid.ne" last separate
+#
+# commands giving the monitors    =========
+## >>chng 07 jan 25, use only Gu uta
+## asse hydro 2 temper 4.512 err0.05 grid 4.600 4.720 4.899 5.206 5.438 5.642 5.997 6.219 6.359 6.555 6.779 6.927
+## >>chng 08 oct 18, from 5.519 to 5.543, include Badnell UTA data
+## >>chng 11 jul 13, several changes due to collisional suppression of DR
+## >>chng 12 feb 27, from 5.152 to 5.127; upgrade to Chianti 7
+## >>chng 14 apr 07, from 5.3970 to 5.3769, update of Gaunt free-free factors
+monitor temperature grid "agn_S_curve_grid.dat" "H+" err 0.05
+#
+# agn_S_grid.in
+# class BLR
+# ========================================
+#
+
+This computes a series of models that check the temperature
+through the S curve in the Fields et al. three-phase model of
+ISM stability.
+
+

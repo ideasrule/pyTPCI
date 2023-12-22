@@ -1,0 +1,202 @@
+title Leiden meeting model 7 with hacks
+# This is one of the tests in Rollig et al. 2007, A&A, 467, 187 
+#
+# commands controlling continuum =========
+# Use the Draine 1978 field, for a semi-infinite slab we have to use half
+# the requested value, so the actual value
+# they want for the model is actually twice the value below
+table draine 5
+extinguish 24
+#
+# commands for density & abundances =========
+#  Define the abundance of PAHs so we can reproduce the same photoelectric
+# heating curve as BT94 
+#  We have also scaled the grain abundance to achieve the desired AV/NH ratio 
+## grains PAH no qheat 5.7
+grains ism 1.16 no qheat
+#  hydrogen density 
+hden 5.5
+#
+# commands controlling geometry  =========
+#
+# other commands for details     =========
+# this sim has more than one thermal solution - force into lowest one,
+# the one found by the rest of the group - without this we will find a
+# soln at 1400 K
+force temperature to 60K
+failures 3
+#  use leiden initialization file
+init file="pdr_leiden_hack.ini"
+#
+# commands controlling output    =========
+save performance "pdr_leiden_hack_v3.per"
+save monitors "pdr_leiden_hack_v3.asr"
+save leiden lines "pdr_leiden_hack_v3.lin"
+save leiden "pdr_leiden_hack_v3.lei"
+save dr "pdr_leiden_hack_v3.dr" 
+save grain temperature "pdr_leiden_hack_v3.grn"
+save overview "pdr_leiden_hack_v3.ovr"
+save heating "pdr_leiden_hack_v3.het"
+save cooling "pdr_leiden_hack_v3.col"
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+monitor H2 column density 21.912 error 0.1
+monitor CO column density 18.202 error 0.1
+##
+## >>chng 04 sep 18, from 16.03 to 16.05, imprv mole conv, incr err
+## >>chng 05 jun 26, from 16.05 to 15.95, make Federman chem the default
+## >>chng 05 jul 02, from 15.95 to 15.97, A_V zoning was not exact
+## >>chng 05 aug 24, from 15.97 to 16.12, NA update CO cr ion rate
+## >>chng 10 jun 25, from 16.12 to 16.0 HCO+ + e -> CO + H rate update
+## >>chng 11 nov 16, from 16 to 16.14, adjust newmole monitors
+monitor H2O column density 16.14 error 0.2
+## 
+## >>chng 05 aug 24, from 17.79 to 17.65, NA update CO cr ion rate
+## >>chng 13 aug 20, from 17.65 to 17.61, enable D chem by default
+## >>chng 13 sep 17, from 17.61 to 17.65, D chem off by default
+monitor O2 column density 17.65 error 0.1
+##
+## >>chng 05 jul 02, from 14.91 to 14.92, A_V zoning was not exact
+## >>chng 05 aug 03, from 14.92 to 14.66, NA update CO, H chem net
+## >>chng 05 aug 08, from 14.66 to 14.96, readd grain-gas coll energy exchange
+## >>chng 05 aug 18, from 14.96 to 15.10, NA further leiden hacks
+## >>chng 05 dec 20, from 15.10 to 15.04, RP change default helium levels
+## >>chng 10 mar 03, from 15.04 to 15.18, enable all LAMDA and increase max num levels
+## >>chng 10 jun 17, from 15.18 to 14.48, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from 14.48 to 15.36, bugfix r4165 & r4167
+## >>chng 11 nov 16, from 15.36 to 15.25, adjust newmole monitors
+monitor OH column density 15.25 error 0.2
+## 
+## >>chng 05 jun 26, from 19.96 to 22.22, make Federman chem the default
+## >>chng 05 jul 02, from 22.22 to 21.04, A_V zoning was not exact
+## >>chng 05 aug 03, from 21.22 to 19.28, NA update CO, H chem net
+## >>chng 05 aug 18, from 19.28 to 22.19, NA further leiden hacks
+## >>chng 10 mar 02, from 22.19 to 26.25, fix botches after CO model switch
+## >>chng 10 jun 17, from 26.25 to 18.47, fix botches due to recent dBase cooling changes
+## >>chng 13 nov 20, from 18.47 to 20.2, include H,H2+=>H+,H2 even when H2* is disabled
+monitor "H+" temperature 20.2 error 0.1
+## 
+## >>chng 04 aug 15, from 11.09 to 9.91, NA adjust ion conv
+## >>chng 05 aug 03, from 9.91 to 10.61 NA update CO, H chem net
+## >>chng 05 aug 08, from 10.61 to 10.03, readd grain-gas coll energy exchange
+## >>chng 05 dec 20, from 10.03 to 10.42, RP change default helium levels
+## >>chng 10 mar 02, from 10.42 to 11.66, fix botches after CO model switch
+## >>chng 10 mar 03, from 11.66 to 11.08, enable all LAMDA and increase max num levels
+## >>chng 10 aug 23, from 11.08 to 11.59, small changes after recent updates
+## >>chng 10 aug 25, from 11.59 to 8.52, bugfix r4165 & r4167
+monitor "H2" temperature 8.52 linear 
+## 
+## >>chng 06 nov 28, add these lines
+## >>chng 06 nov 29, from -5.487 to -5.512, Badnell DR turned on
+## >>chng 10 mar 02, from -5.512 to -5.396, fix botches after CO model switch
+## >>chng 10 jun 17, from -5.396 to -5.555, fix botches due to recent dBase cooling changes
+## >>chng 11 nov 16, from -5.555 to -5.518, adjust newmole monitors
+## >>chng 14 mar 26, from -5.518 to -5.539, Move oxygen data to stout and chianti files
+monitor line luminosity "c  2" 157.636m -5.539
+##
+## >>chng 06 nov 29, from -6.783 to -6.598, Badnell DR turned on
+## >>chng 10 mar 02, from -6.598 to -6.544, fix botches after CO model switch
+## >>chng 10 jun 17, from -6.544 to -6.623, fix botches due to recent dBase cooling changes
+## >>chng 11 jul 12, from -6.623 to -6.718, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -6.718 to -6.686, adjust newmole monitors
+## >>chng 13 feb 01, from -6.686 to -6.595, BUGFIX, largely undo r6703
+## >>chng 14 mar 26, from -6.595 to -6.619, Move oxygen data to stout and chianti files
+## >>chng 21 nov 04, from -6.619 to -6.561, update mole co data
+monitor line luminosity "c  1" 370.269m -6.561
+##
+## >>chng 06 nov 29, from -7.215 to -7.044, Badnell DR turned on
+## >>chng 11 jul 12, from -7.044 to -7.135, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -7.135 to -7.102, adjust newmole monitors
+## >>chng 13 feb 01, from -7.102 to -7.021, BUGFIX, largely undo r6703
+## >>chng 21 nov 04, from -7.021 to -6.96, update mole co data
+monitor line luminosity "c  1" 609.590m -6.96
+##
+## >>chng 06 nov 29, from -5.700 to -5.641, Badnell DR turned on
+## >>chng 10 mar 02, from -5.641 to -5.105, fix botches after CO model switch
+## >>chng 10 apr 11, from -5.105 to -5.126, more LAMDA models, add 13CO to chemistry
+## >>chng 10 jun 17, from -5.126 to -5.796, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from -5.796 to -5.819, bugfix r4165 & r4167
+## >>chng 11 jul 12, from -5.819 to -5.871, enable fit to Badnell DR suppression
+## >>chng 12 mar 07, from -5.871 to -5.852, renorm to r5961 results
+## >>chng 13 feb 01, from -5.852 to -5.795, BUGFIX, largely undo r6703
+## >>chng 13 dec 23, from -5.795 to -5.822 C to external databases
+## >>chng 14 mar 26, from -5.822 to -5.753, Move oxygen data to stout and chianti files
+## >>chng 21 sep 11, from -5.753 to -5.805, LAMDA update
+## >>chng 21 nov 04, from -5.805 to -5.763, update mole co data
+monitor line luminosity "O  1" 63.1679m -5.763
+##
+## >>chng 06 nov 29, from -7.981 to -7.884, Badnell DR turned on
+## >>chng 10 mar 02, from -7.884 to -7.242, fix botches after CO model switch
+## >>chng 10 apr 11, from -7.242 to -7.268, more LAMDA models, add 13CO to chemistry
+## >>chng 10 jun 17, from -7.268 to -7.998, fix botches due to recent dBase cooling changes
+## >>chng 10 aug 25, from -7.998 to -8.025, bugfix r4165 & r4167
+## >>chng 11 jul 12, from -8.025 to -8.094, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -8.094 to -8.025, BUGFIX, largely undo r6703
+## >>chng 13 jul 24, wl from 145.5m to 145.495m, increased wl precision to 6 sig. fig.
+## >>chng 13 dec 23, from -8.025 to -8.063, C to external databases
+## >>chng 14 mar 26, from -8.063 to -8.153, Move oxygen data to stout and chianti files
+## >>chng 21 sep 11, from -8.153 to -8.227, LAMDA update
+## >>chng 21 nov 04, from -8.227 to -8.171, update mole co data
+monitor line luminosity "O  1" 145.495m -8.171
+## 
+## >>chng 04 oct 02, from 10 to 12, improv conv criteria
+## >>chng 08 dec 08, from 12 to 6.528, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 6.528 to 12.23, merging newsolvers branch
+## >>chng 09 jan 16, from 12.23 to 12.2, average of 10 runs
+## >>chng 11 nov 16, from 12.2 to 8.726, adjust newmole monitors
+## >>chng 13 nov 25, from 8.726 to 7.133, remove jump from Federman shielding fn
+## >>chng 14 apr 07, from 7.133 to 5.149, move H/C out of ConvBase loop
+monitor itrzn 5.149 
+##
+## >>chng 05 aug 12, from 550 to 600, do not rm H2 vib heat with leiden hack
+## >>chng 08 dec 08, from 600 to 504, upper limit -> equals (r2515)
+## >>chng 09 jan 16, from 504 to 505, average of 10 runs
+## >>chng 11 nov 16, from 505 to 544, adjust newmole monitors
+## >>chng 13 aug 20, from 544 to 535, enable D chem by default
+## >>chng 13 sep 17, from 535 to 541, D chem off by default
+## >>chng 23 may 15, from 541 to 525, GS updates 21 reactions to UMIST 2012
+monitor nzone 525 error 0.01
+##
+## >>chng 13 jun 27, from -8.869 to -6.631, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -6.631 to -6.657, update LAMDA to 2015
+monitor "H2O " 538.142m line intensity -6.657
+## >>chng 13 jun 27, from -7.288 to -6.96, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 2600.05m  -6.96 line intensity
+## >>chng 13 jun 27, from -6.463 to -6.054, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+monitor "CO  " 1300.05m  -6.054 line intensity
+## >>chng 13 jun 27, from -6.149 to -5.616, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+monitor "CO  " 866.727m  -5.616 line intensity
+## >>chng 13 jun 27, from -6.177 to -5.397, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+monitor "CO  " 650.074m  -5.397 line intensity
+## >>chng 13 jun 27, from -6.485 to -5.352, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+monitor "CO  " 520.089m  -5.352 line intensity
+## >>chng 13 jun 27, from -6.954 to -5.524, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+monitor "CO  " 433.438m  -5.524 line intensity
+## >>chng 13 jun 27, from -7.48 to -5.999, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+monitor "CO  " 371.549m  -5.999 line intensity
+## >>chng 13 jun 27, from -8.049 to -6.736, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 15 aug 03, from -6.736 to -6.76, update LAMDA to 2015
+monitor "CO  " 325.137m  -6.76 line intensity
+## >>chng 13 jun 27, from -7.522 to -6.326, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+monitor "^13CO" 906.599m  -6.326 line intensity
+# 
+# pdr_leiden_hack_v3.in
+# class pdr 
+# ========================================
+# 
+
+This is one of the tests in Rollig et al. 2007, A&A, 467, 187 
+includes hacks to get standard answer

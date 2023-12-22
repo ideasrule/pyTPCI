@@ -1,0 +1,416 @@
+title simple warm absorber model
+#
+# commands controlling continuum =========
+table power law
+ionization parameter 0
+#
+# commands for density & abundances =========
+hden 6
+abundances old solar 84 
+#
+# commands controlling geometry  =========
+stop column density 22
+#
+# other commands for details     =========
+iterate to convergence
+#
+# commands controlling output    =========
+print line faint 10 
+save overview "agn_warm_absorber.ovr"
+save performance "agn_warm_absorber.per"
+save continuum "agn_warm_absorber.con" last units kev
+save continuum "agn_warm_absorber.conA" last units Angstroms
+save fine continuum "agn_warm_absorber.finA" last units Angstroms range 7.6A to 15A merge 3
+save dr "agn_warm_absorber.dr" last
+save lines, optical depth some, "agn_warm_absorber.opt" last
+O  3 5006.84A
+end of lines
+# this will be the default units, like the printout
+save line optical depths last "agn_warm_absorber_lab.lin" 
+# this will be the same, in rygbergs
+save line optical depths last "agn_warm_absorber_ryg.lin"  units rydberg
+save monitors last "agn_warm_absorber.asr" 
+#
+# commands giving the monitors    =========
+## >>chng 01 mar 17, from 0.790 to 0.657, H collision strengths updated
+## >>chng 03 0ct 08, from 0.657 to 0.622, reorder ots level1
+## >>chng 04 jun 12, from 0.622 to 0.561 chng cont shield fcn
+## >>chng 07 jan 20, from 0.561 to 0.537, e2 bug
+## >>chng 07 jan 25, from 0.537 to 0.509, use only Gu UTA data file
+## >>chng 07 oct 22, from 0.509 to 0.657, resolve l-levels of h-like sequence
+## >>chng 08 apr 07, from 0.657 to 0.623, a number of mostly minor iso changes
+## >>chng 09 jun 28, from 0.623 to 0.6583, check convergence of outward Hb
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 16 aug 07, from 0.6583 to 0.6883, Fran bug fix
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "cabo" 4861.32A 0.6883
+##
+## >>chng 01 dec 21, inner shell yields, 5.064 to 5.033
+## >>chng 03 nov 23, from 5.033 to 5.131, Kraemer et al. guess of dr
+## >>chng 04 sep 06, from 5.131 to 5.169, bug nej Auger
+## >>chng 06 feb 03, from 5.169 to 5.144, guess dr to Badnell mean
+## >>chng 06 jul 12, from 5.144 to 5.171, use Savin & Gu DR to make mean DR
+## >>chng 07 jan 20, from 5.171 to 5.188, e2 bug
+## >>chng 07 jan 23, from 5.188 to 5.205, update Gu UTA data file
+## >>chng 11 oct 12, from 5.205 to 5.224, bugfix - include cooling onto li-like ions
+## >>chng 13 jan 10, from 5.224 to 5.202, fix in-zone continuum shielding
+monitor line luminosity "toth" 0 5.202
+##
+## >>chng 01 dec 21, inner shell yields, 4.959 to 4.997
+## >>chng 03 nov 23, from 4.959 to 5.074, Kraemer et al. guess of dr
+## >>chng 04 sep 06, from 5.074 to 5.116, bug nej Auger
+## >>chng 06 feb 03, from 5.116 to 5.087, guess dr to Badnell mean
+## >>chng 06 jul 12, from 5.087 to 5.118, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from 5.118 to 5.141, Badnell DR turned on
+## >>chng 07 jan 23, from 5.141 to 5.163, update Gu UTA data file, inc err
+## >>chng 12 oct 26, from 5.163 to 5.091, adjust montiors to this branch
+monitor line luminosity "totm" 0 5.091 error 0.1
+monitor line luminosity "Ne 9"      13.4471A  3.118
+## >>chng 17 may 25, wl from 16.0086A to 16.0067A, up Rydberg constant
+## >>chng 20 aug 22, wl from 16.0067A to 16.0056A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 apr 08, wl from 16.0056A to 16.0059A, up 1-e energies to np
+monitor line luminosity "O  8"      16.0059A  2.221  
+## ground state radiative recombination continuum  
+## >>chng 21 march 16, wl from 16.7725A to 16.7699A, update to NIST energies
+monitor line luminosity "O  7"      16.7699A  3.573   
+monitor line luminosity "O  7"      17.7680A  2.04
+monitor line luminosity "O  7"      18.6270A  2.146 
+## >>chng 17 may 25, wl from 18.9732A to 18.9709A, up Rydberg constant
+## >>chng 20 aug 22, wl from 18.9709A to 18.9696A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 18.9696A to 18.9689A, update NIST energies
+monitor line luminosity "O  8"      18.9689A  4.165  
+monitor line luminosity "O  7"      21.6020A  3.336
+monitor line luminosity "O  7"      21.8070A  3.381 
+## >>chng 18 feb 20, updated spectral label from "TOTL" 21.8070A to "Blnd" 21.8070A, update He-like triplet labels and wl
+monitor line luminosity "Blnd"      21.8070A  3.385   
+monitor line luminosity "O  7"      22.1012A  3.992  
+## >>chng 17 may 25, wl from 24.7837A to 24.7807A, up Rydberg constant
+## >>chng 20 aug 22, wl from 24.7807A to 24.7819A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 24.7819A to 24.7810A, update NIST energies
+monitor line luminosity "N  7"      24.7810A  3.254
+monitor line luminosity "N  6"      28.7870A  2.392  
+## >>chng 20 aug 25, wl from 33.7372A to 33.7368A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 33.7368A to 33.7360A, update NIST energies
+monitor line luminosity "C  6"      33.7360A  3.531 
+monitor line luminosity "C  5"      40.2678A  2.324
+monitor line luminosity "S 10"      42.4800A  2.325  
+monitor line luminosity "Si 8"      49.9099A  1.866  
+monitor line luminosity "Si 9"      55.2899A  2.127  
+monitor line luminosity "Si 9"      55.4401A  2.354  
+monitor line luminosity "Si 8"      60.8598A  2.149  
+## >>chng 22 jul 09, wl from 62.7511A to 62.7510A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 1.838 to 1.885, upgrade to Chianti v10
+monitor line luminosity "Mg 9"      62.7510A  1.885  
+monitor line luminosity "Fe 9"      67.9902A  1.835  
+monitor line luminosity "Si 8"      69.4300A  1.773  
+monitor line luminosity "Mg 8"      69.7000A  1.757  
+monitor line luminosity "Mg 8"      71.3501A  1.871  
+monitor line luminosity "Mg 8"      75.1501A  2.081  
+monitor line luminosity "Ne 7"      75.9601A  1.846  
+monitor line luminosity "Fe10"      77.4497A  1.934  
+monitor line luminosity "Fe 9"      82.9401A  1.958  
+monitor line luminosity "Mg 7"      83.7500A  1.658  
+monitor line luminosity "Mg 7"      84.0598A  1.848  
+## >>chng 22 jul 09, wl from 88.0817A to 88.0790A, upgrade to Chianti v10
+monitor line luminosity "Ne 8"      88.0790A  2.087  
+## >>chng 22 jul 09, wl from 88.1196A to 88.1170A, upgrade to Chianti v10
+monitor line luminosity "Ne 8"      88.1170A  2.03  
+monitor line luminosity "Fe10"      93.4300A  1.854  
+monitor line luminosity "Fe10"      95.2200A  1.937  
+## >>chng 22 jul 09, wl from 97.4960A to 97.5020A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 1.908 to 1.849, upgrade to Chianti v10
+monitor line luminosity "Ne 7"      97.5020A  1.849  
+monitor line luminosity "Fe 9"      103.020A  1.892  
+monitor line luminosity "Fe 8"      103.100A  1.605 
+monitor line luminosity "Fe 8"      109.460A  1.519 
+monitor line luminosity "Ne 6"      122.920A  1.765 
+monitor line luminosity "Fe 8"      123.920A  1.789 
+## >>chng 22 jul 09, from 1.611 to 1.589, upgrade to Chianti v10
+monitor line luminosity "Fe 8"      130.941A  1.589 
+monitor line luminosity "Ni11"      148.377A  2.14 
+## >>chng 22 jul 09, wl from 150.090A to 150.089A, upgrade to Chianti v10
+monitor line luminosity "O  6"      150.089A  2.022 
+monitor line luminosity "O  6"      150.125A  1.948 
+## >>chng 22 jul 09, wl from 152.154A to 152.204A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 2.157 to 2.191, upgrade to Chianti v10
+## >>chng 23 may 11, from 2.191 to 2.215, update RR DR to 2022 Badnell wor
+monitor line luminosity "Ni12"      152.204A  2.215 
+## >>chng 22 jul 09, from 1.703 to 1.76, upgrade to Chianti v10
+monitor line luminosity "Fe 8"      167.486A  1.76 
+## >>chng 22 jul 09, from 1.728 to 1.679, upgrade to Chianti v10
+monitor line luminosity "Fe 8"      168.003A  1.679 
+## >>chng 22 jul 09, wl from 168.173A to 168.172A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 1.796 to 1.913, upgrade to Chianti v10
+monitor line luminosity "Fe 8"      168.172A  1.913 
+## >>chng 22 jul 09, wl from 168.545A to 168.544A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 1.703 to 1.833, upgrade to Chianti v10
+monitor line luminosity "Fe 8"      168.544A  1.833 
+## >>chng 22 jul 09, wl from 168.930A to 168.929A, upgrade to Chianti v10
+monitor line luminosity "Fe 8"      168.929A  1.863 
+monitor line luminosity "Fe 9"      171.073A  2.718 
+monitor line luminosity "O  5"      172.169A  1.54 
+## >>chng 22 jul 09, wl from 174.531A to 174.250A, upgrade to Chianti v10
+## >>chng 22 jul 09, from 2.889 to 2.79, upgrade to Chianti v10
+monitor line luminosity "Fe10"      174.250A  2.79 
+##
+## >>chng 01 aug 08, from 5.122 to 5.099, additional coolants
+## >>chng 03 nov 23, from 5.099 to 5.121, Kraemer et al. guess of dr
+## >>chng 05 dec 19, from 5.121 to 5.098, update cs Fe10, 11, & 13
+## >>chng 06 feb 03, from 5.098 to 5.119, guess dr to Badnell mean
+## >>chng 06 nov 29, from 5.119 to 5.171, Badnell DR turned on
+## >>chng 07 jan 23, from 5.171 to 5.195, update Gu UTA data file, inc err
+monitor temperature "H+" 5.195 error 0.1
+## 
+## >>chng 06 nov 29, from -2.532 to -2.601, Badnell DR turned on
+## >>chng 07 jan 20, from -2.601 to -2.577, e2 bug
+## >>chng 07 jan 23, from -2.577 to -2.602, update Gu UTA data file, inc err
+## >>chng 09 feb 23, from -2.602 to -2.664, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from -2.664 to -2.611, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 feb 27, from -2.611 to -2.559, Upgrade to Chianti 7
+## >>chng 13 jan 10, from -2.559 to -2.6, fix in-zone continuum shielding
+monitor carbon 5 ionization -2.6 error 0.1
+## 
+## >>chng 06 nov 29, from -0.930 to -0.960, Badnell DR turned on
+## >>chng 09 feb 23, from -0.96 to -0.9893, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 aug 05, from -0.9893 to -0.9535, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 feb 27, from -0.9535 to -0.9299, Upgrade to Chianti 7
+monitor carbon 6 ionization -0.9299
+## 
+monitor carbon 7 ionization -0.056
+##
+## >>chng 05 dec 19, from -2.977 to -2.974, update cs Fe10, 11, & 13
+## >>chng 06 jul 12, from -2.974 to -3.000, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -3.000 to -3.084, Badnell DR turned on
+## >>chng 07 jan 20, from -3.084 to -3.050, e2 bug
+## >>chng 07 jan 23, from -3.050 to -3.093, update Gu UTA data file, inc err
+## >>chng 07 dec 05, from -3.09 to -3.13, drift down
+## >>chng 09 feb 23, from -3.13 to -3.195, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 sep 15, from -3.195 to -3.136, Chianti for Fe moderate to high ions
+## >>chng 12 mar 17, from -3.136 to -3.098, adjust near botches after newmole merge
+## >>chng 12 oct 26, from -3.098 to -3.14, adjust montiors to this branch
+monitor oxygen 6 ionization -3.14 error 0.1
+##
+## >>chng 06 aug 17, from -0.981 to -1.003, update to Badnell dr
+## >>chng 06 nov 29, from -1.003 to -1.047, Badnell DR turned on
+## >>chng 07 jan 20, from -1.047 to -1.024, e2 bug
+## >>chng 07 jan 23, from -1.024 to -1.043, update Gu UTA data file, inc err
+## >>chng 09 feb 23, from -1.043 to -1.1, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 oct 04, from -1.1 to -1.059, Chianti for line-less ions of P and heavier elements
+monitor oxygen 7 ionization -1.059 error 0.1
+##
+## >>chng 06 nov 29, from -0.339 to -0.356, Badnell DR turned on
+monitor oxygen 8 ionization -0.356
+##
+## >>chng 06 nov 29, from -0.360 to -0.329, Badnell DR turned on
+## >>chng 07 jan 23, from -1.024 to -0.325, update Gu UTA data file, inc err
+## >>chng 09 feb 23, from -0.325 to -0.3058, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 oct 04, from -0.3058 to -0.3266, Chianti for line-less ions of P and heavier elements
+monitor oxygen 9 ionization -0.3266
+## 
+## >>chng 05 mar 03, from -2.11 to -2.143, new romas uta
+## >>chng 05 dec 19, from -2.143 to -2.146, update cs Fe10, 11, & 13
+## >>chng 06 feb 03, from -2.146 to -2.793, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.793 to -2.357, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -2.357 to -2.244, update to Badnell dr
+## >>chng 06 nov 26, from -2.244 to -2.888, use Gu et al. UTA data
+## >>chng 06 nov 29, from -2.888 to -1.488, Badnell DR turned on
+## >>chng 07 jan 20, from -1.488 to -1.517, e2 bug
+## >>chng 07 jan 23, from -1.517 to -1.275, update Gu UTA data file, inc err
+## >>chng 09 feb 23, from -1.275 to -1.324, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 jul 12, from -1.324 to -1.423, enable fit to Badnell DR suppression
+## >>chng 11 aug 05, from -1.423 to -1.385, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 mar 17, from -1.385 to -1.346, adjust near botches after newmole merge
+## >>chng 12 oct 26, from -1.346 to -1.66, adjust montiors to this branch
+## >>chng 13 feb 01, from -1.66 to -1.572, BUGFIX, largely undo r6703
+## >>chng 13 nov 25, from -1.572 to -1.637, remove jump from Federman shielding fn
+## >>chng 22 jul 09, from -1.637 to -1.591, upgrade to Chianti v10
+monitor iron ionization 9 -1.591 error 0.1
+## 
+## >>chng 05 mar 03, from -1.756 to -1.788, new romas uta
+## >>chng 05 dec 19, from -1.788 to -1.790, update cs Fe10, 11, & 13
+## >>chng 06 feb 03, from -1.790 to -2.468, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.468 to -2.051, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -2.051 to -1.948, update to Badnell dr
+## >>chng 06 nov 26, from -1.948 to -2.563, use Gu et al. UTA data
+## >>chng 06 nov 29, from -2.563 to -1.038, Badnell DR turned on
+## >>chng 07 jan 20, from -1.038 to -1.070, e2 bug
+## >>chng 07 jan 23, from -1.070 to -0.842, update Gu UTA data file, inc err
+## >>chng 11 jul 12, from -0.842 to -0.9194, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -0.9194 to -0.8694, Chianti for Fe moderate to high ions
+## >>chng 12 oct 26, from -0.8694 to -1.125, adjust montiors to this branch
+## >>chng 13 jul 15, from -1.125 to -1.086, move to Stout/Chianti for Si, botches are due to improved atomic data
+## >>chng 13 nov 25, from -1.086 to -1.149, remove jump from Federman shielding fn
+## >>chng 22 jul 09, from -1.149 to -1.107, upgrade to Chianti v10
+monitor iron ionization	10	-1.107 error 0.1
+## 
+## >>chng 05 mar 03, from -1.381 to -1.409, new romas uta
+## >>chng 06 feb 03, from -1.409 to -2.087, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.087 to -1.715, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -1.715 to -1.633, update to Badnell dr
+## >>chng 06 nov 26, from -1.633 to -2.142, use Gu et al. UTA data
+## >>chng 06 nov 29, from -2.142 to -0.859, Badnell DR turned on
+## >>chng 07 jan 20, from -1.038 to -0.887, e2 bug
+## >>chng 07 jan 23, from -0.887 to -0.700, update Gu UTA data file, inc err
+## >>chng 12 oct 26, from -0.7 to -0.9047, adjust montiors to this branch
+## >>chng 13 nov 25, from -0.9047 to -0.9535, remove jump from Federman shielding fn
+## >>chng 22 jul 09, from -0.9535 to -0.9154, upgrade to Chianti v10
+monitor iron ionization	11	-0.9154 error 0.1
+## 
+## >>chng 05 mar 03, from -0.763 to -0.787 new romas uta
+## >>chng 06 feb 03, from -0.787 to -1.280, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.180 to -1.097, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -1.097 to -1.043, update to Badnell dr
+## >>chng 06 nov 26, from -1.043 to -3.608, use Gu et al. UTA data
+## >>chng 06 nov 26, from -1.633 to -1.353, use Gu et al. UTA data
+## >>chng 06 nov 29, from -1.353 to -0.822, Badnell DR turned on
+## >>chng 07 jan 20, from -0.822 to -0.840, e2 bug
+## >>chng 07 jan 23, from -0.840 to -0.770, update Gu UTA data file, inc err
+## >>chng 12 oct 26, from -0.77 to -0.9016, adjust montiors to this branch
+## >>chng 13 nov 25, from -0.9016 to -0.9557, remove jump from Federman shielding fn
+monitor iron ionization	12	-0.9557 error 0.1
+## 
+## >>chng 05 mar 03, from -0.528 to -0.549, new romas uta
+## >>chng 06 feb 03, from -0.549 to -0.651, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.651 to -0.601, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26, from -0.601 to -0.626, use Gu et al. UTA data
+## >>chng 06 nov 29, from -0.626 to -0.757, Badnell DR turned on
+## >>chng 07 jan 23, from -0.757 to -0.904, update Gu UTA data file, inc err
+## >>chng 12 oct 26, from -0.904 to -0.9689, adjust montiors to this branch
+## >>chng 13 nov 25, from -0.9689 to -1.016, remove jump from Federman shielding fn
+monitor iron ionization	13	-1.016 error 0.1
+## 
+## >>chng 05 mar 03, from -0.833 to -0.852, new romas uta
+## >>chng 06 feb 03, from -0.852 to -0.794, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.794 to -0.833, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26,, from -0.833 to -0.733, use Gu et al. UTA data
+## >>chng 06 nov 29, from -0.733 to -1.008, Badnell DR turned on
+## >>chng 07 jan 23, from -1.008 to -1.221, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -1.221 to -1.180, use only Gu UTA data file
+## >>chng 11 jul 12, from -1.18 to -1.141, enable fit to Badnell DR suppression
+## >>chng 12 mar 17, from -1.141 to -1.182, adjust near botches after newmole merge
+monitor iron ionization	14	-1.182 error 0.1
+## 
+## >>chng 05 mar 03, from -1.036 to -1.005, new romas uta
+## >>chng 06 feb 03, from -1.005 to -0.762, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.762 to -0.817, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -0.817 to -0.844, update to Badnell dr
+## >>chng 06 nov 26, from -0.844 to -0.788, use Gu et al. UTA data
+## >>chng 06 nov 29, from -0.788 to -1.279, Badnell DR turned on
+## >>chng 07 jan 20, from -1.279 to -1.250, e2 bug
+## >>chng 07 jan 23, from -1.250 to -1.412, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -1.412 to -1.497, use only Gu UTA data file
+## >>chng 11 jul 12, from -1.497 to -1.452, enable fit to Badnell DR suppression
+## >>chng 11 nov 16, from -1.452 to -1.493, adjust newmole monitors
+## >>chng 12 feb 27, from -1.452 to -1.5, Upgrade to Chianti 7
+## >>chng 12 oct 26, from -1.5 to -1.381, adjust montiors to this branch
+monitor iron ionization	15	-1.381 error 0.1
+## 
+## >>chng 05 mar 03, from -1.621 to -1.604, new romas uta
+## >>chng 05 dec 19, from -1.604 to -1.588, update cs Fe10, 11, & 13
+## >>chng 06 feb 03, from -1.588 to -1.302, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.302 to -1.358, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26, from -1.358 to -1.304, use Gu et al. UTA data
+## >>chng 06 nov 29, from -1.304 to -1.519, Badnell DR turned on
+## >>chng 07 jan 20, from -1.519 to -1.501, e2 bug
+## >>chng 07 jan 23, from -1.501 to -1.695, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -1.695 to -1.632, use only Gu UTA data file
+## >>chng 11 jul 12, from -1.632 to -1.591, enable fit to Badnell DR suppression
+## >>chng 12 mar 17, from -1.591 to -1.632, adjust near botches after newmole merge
+## >>chng 12 oct 26, from -1.632 to -1.434, adjust montiors to this branch
+monitor iron ionization	16	-1.434 error 0.1
+## 
+## >>chng 05 mar 03, from -0.803 to -0.803, new romas uta
+## >>chng 06 feb 03, from -0.803 to -0.556, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.556 to -0.603, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 24, from -0.603 to -0.611, turn on Badnell RR
+## >>chng 06 nov 26, from -0.611 to -0.581, use Gu et al. UTA data
+## >>chng 06 nov 29, from -0.581 to -0.881, Badnell DR turned on
+## >>chng 07 jan 20, from -0.881 to -0.843, e2 bug
+## >>chng 07 jan 23, from -0.843 to -0.982, update Gu UTA data file, inc err
+## >>chng 07 apr 11, from -0.982 to -0.942, update Fe+14 DR Lukic et al 07
+## >>chng 12 feb 27, from -0.942 to -0.9903, Upgrade to Chianti 7
+## >>chng 12 oct 26, from -0.9903 to -0.6411, adjust montiors to this branch
+## >>chng 13 nov 25, from -0.6411 to -0.5951, remove jump from Federman shielding fn
+monitor iron ionization	17	-0.5951 error 0.1
+## 
+## >>chng 05 mar 03, from -1.256 to -1.202, new romas uta
+## >>chng 06 feb 03, from -1.202 to -1.360, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.360 to -1.403, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26, from -1.403 to -1.374, use Gu et al. UTA data
+## >>chng 06 nov 29, from -1.374 to -1.130, Badnell DR turned on
+## >>chng 07 jan 20, from -1.130 to -1.096, e2 bug
+## >>chng 07 jan 23, from -1.096 to -1.215, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -1.215 to -1.162, use only Gu UTA data file
+## >>chng 11 nov 16, from -1.162 to -1.204, adjust newmole monitors
+## >>chng 12 feb 27, from -1.162 to -1.221, Upgrade to Chianti 7
+## >>chng 12 oct 26, from -1.221 to -0.881, adjust montiors to this branch
+## >>chng 13 nov 25, from -0.881 to -0.8353, remove jump from Federman shielding fn
+monitor iron ionization	18	-0.8353 error 0.1
+## 
+## >>chng 05 mar 03, from -2.22 to -2.165, new romas uta
+## >>chng 06 feb 03, from -2.165 to -2.319, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.319 to -2.358, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26, from -2.358 to -2.321, use Gu et al. UTA data
+## >>chng 06 nov 29, from -2.321 to -1.706, Badnell DR turned on
+## >>chng 07 jan 20, from -1.706 to -1.674, e2 bug
+## >>chng 07 jan 23, from -1.674 to -1.773, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -1.773 to -1.700, use only Gu UTA data file
+## >>chng 11 oct 04, from -1.7 to -1.752, Chianti for line-less ions of P and heavier elements
+## >>chng 12 oct 22, from -1.752 to -1.815, zone tau in rt_line_one
+## >>chng 12 oct 26, from -1.815 to -1.449, adjust montiors to this branch
+## >>chng 13 nov 25, from -1.449 to -1.404, remove jump from Federman shielding fn
+monitor iron ionization	19	-1.404 error 0.1
+## 
+## >>chng 05 mar 03, from -3.656 to -3.600, new romas uta
+## >>chng 06 feb 03, from -3.600 to -3.458, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.458 to -3.494, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26, from -3.494 to -3.451, use Gu et al. UTA data
+## >>chng 06 nov 29, from -3.451 to -2.838, Badnell DR turned on
+## >>chng 07 jan 20, from -2.838 to -2.810, e2 bug
+## >>chng 07 jan 23, from -2.810 to -2.885, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -2.885 to -2.789, use only Gu UTA data file
+## >>chng 11 sep 15, from -2.789 to -2.84, Chianti for Fe moderate to high ions
+## >>chng 12 feb 27, from -2.84 to -2.891, Upgrade to Chianti 7
+## >>chng 12 oct 26, from -2.891 to -2.568, adjust montiors to this branch
+## >>chng 13 nov 25, from -2.568 to -2.523, remove jump from Federman shielding fn
+## >>chng 22 jul 09, from -2.523 to -2.571, upgrade to Chianti v10
+monitor iron ionization	20	-2.571 error 0.1
+## 
+## >>chng 05 mar 03, from -5.473 to -5.421, new romas uta
+## >>chng 06 feb 03, from -5.421 to -4.853, guess dr to Badnell mean
+## >>chng 06 jul 12, from -4.853 to -4.886, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 26, from -4.886 to -4.838, use Gu et al. UTA data
+## >>chng 06 nov 29, from -4.838 to -4.317, Badnell DR turned on
+## >>chng 07 jan 20, from -4.317 to -4.338, e2 bug
+## >>chng 07 jan 20, from -4.338 to -4.294, e2 bug
+## >>chng 07 jan 23, from -4.294 to -4.342, update Gu UTA data file, inc err
+## >>chng 07 jan 25, from -4.342 to -4.221, use only Gu UTA data file
+## >>chng 09 feb 23, from -4.221 to -4.18, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 11 sep 15, from -4.18 to -4.28, Chianti for Fe moderate to high ions
+## >>chng 12 feb 27, from -4.28 to -4.344, Upgrade to Chianti 7
+## >>chng 12 oct 26, from -4.344 to -4.025, adjust montiors to this branch
+## >>chng 13 nov 25, from -4.025 to -3.978, remove jump from Federman shielding fn
+## >>chng 22 jul 09, from -3.978 to -4.04, upgrade to Chianti v10
+monitor iron ionization	21	-4.04 error 0.1
+##
+## >>chng 07 jan 20, from 20 to 25 (21) e2 bug
+## >>chng 08 dec 08, from 25 to 17, upper limit -> equals (r2515)
+## >>chng 09 feb 23, from 17 to 16, remove otslin, otscon dampers (PR #84, r2758)
+## >>chng 09 jun 15, from 16 to 37, gradual approach to outer edge
+## >>chng 11 aug 05, from 37 to 39, make PRD redis func for h-like ions; LY_A func is now for H only
+## >>chng 12 oct 26, from 39 to 36, adjust montiors to this branch
+monitor nzone 36
+## 
+# warrm_absorber
+# class nlr  
+# ========================================
+# 
+
+
+this is a simple warm absorber model.  It makes a plot of the
+transmitted continuum, and generates a list of lines with
+significant optical depths

@@ -1,0 +1,58 @@
+# These are the ISM grain depletion factors that have been built into
+# Cloudy for a very long time. The references are to papers listed
+# in cloudy/docs/latex/common/bibliography2.bib.   Most depletions
+# come from Jenkins1987 or Cowie1986 but some special cases are 
+# indicated by comments above the element.
+# This file is parsed by default when the METALS DEPLETE command is used.
+# You can specify other files by including a filename within a pair of
+# double quotes on the command line, as in
+# metals deplete "myfile.dep"
+# By default, depletion files are saved in the data/abundances 
+# directory with names ending in .dep
+Hydrogen  	1.000e+00
+# noble gasß
+Helium    	1.000e+00
+# White1986
+Lithium   	1.600e-01
+# York 1982
+Beryllium 	6.000e-01
+# Federman 1993
+Boron     	1.300e-01
+Carbon    	4.000e-01
+Nitrogen  	1.000e+00
+Oxygen    	6.000e-01
+# Snow 1981
+Fluorine  	3.000e-01
+# noble gas
+Neon      	1.000e+00
+Sodium    	2.000e-01
+Magnesium 	2.000e-01
+Aluminium 	1.000e-02
+Silicon   	3.000e-02
+# Cardelli1991
+Phosphorus	2.500e-01
+Sulphur   	1.000e+00
+Chlorine  	4.000e-01
+# noble gas
+Argon     	1.000e+00
+# Chaffee1982
+Potassium 	3.000e-01
+Calcium   	1.000e-04
+# Snow 1980
+Scandium  	5.000e-03
+# Crinklaw 1994
+Titanium  	8.000e-03
+# Cardelli 1994
+Vanadium  	6.000e-03
+# Cardelli 1991
+Chromium  	6.000e-03
+# Cardelli 1991
+Manganese 	5.000e-02
+Iron      	1.000e-02
+Cobalt    	1.000e-02
+Nickel    	1.000e-02
+# Cardelli 1991
+Copper    	1.000e-01
+# Cardelli 1991
+Zinc      	2.500e-01
+*****************************

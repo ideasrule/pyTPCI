@@ -1,0 +1,178 @@
+radiative acceleration computed in pressure_total.cpp
+
+tmn corrections made and removed in zone start/end
+
+============================================================
+
+photoionizatiion rates:
+
+sum over rfield.SummedCon
+except for threshold which does not pick up otscon
+
+SummedCon is added together in RT_OTS_Update (in rtots.c)
+
+rfield.SummedCon[i] = rfield.flux[0][i] + rfield.SummedDif[i];
+
+rfield.SummedDif[i] = rfield.otscon[i] + rfield.otslin[i] + 
+	rfield.ConInterOut[i]*rfield.lgOutOnly + rfield.outlin[0][i] +
+	rfield.ConOTS_local_OTS_rate[i];
+
+============================================================
+
+routines:
+
+RT_diffuse in rtdiffuse.c
+determines local thermal emission
+adds energy to outward beams
+called by cloudy
+
+RT_OTS, in rtots.c, continuously updates ots rates, called during solution by 
+ConvIonizeOpacityDo
+
+ContCreatePointers ets incontinuum resolution and binning by calling fill
+the arguemnts to fill can be changed to change the continuum resolution
+
+====================================================================
+
+definition of incident continuum
+
+ContSetIntensity - sets intensity of final continuum
+
+Ffun returns the continuum interpoalted from the table.
+
+The cell resolution can be changed by looking at the file continuum_mesh.ini
+
+====================================================================
+
+built in continua are stored in predcont.h, set in zerologic.c
+#include "predcont.h"
+The array name is EnrPredCont and there are NPREDCONT values
+lines entered into em line stack in lines_continuum.c
+
+====================================================================
+
+otscon is updated in AddOTSCon,
+which is called by HydroOTS, HeMetalOTS, 
+
+final ots continuum is updated, averaged and set in SumContinuum
+
+====================================================================
+
+unit integration
+rfield.ConInterOut[rfield.nflux] is the point
+
+rtdiffuse adds 1e-10 to these two
+	rfield.ConEmitLocal[rfield.nflux] = 1.e-10f * Dilution /* */ ;
+	rfield.ThrowOut[rfield.nflux] = 1.e-10f * Dilution /* */;
+
+check is done in prtcomment
+
+====================================================================
+
+ConLocInter = local continuum that does interact, thrown into outward beam
+
+====================================================================
+
+rfield.nflux - number of continuum points defined in current continuum
+originally set to rfield.nupper in zero and contcreatemesh
+set to realistic value in consetintensity
+it is RESIZED in convinitemp 
+
+====================================================================
+
+incident continua
+rfield.flux_total_incident[0][j] - the original incident continuum
+rfield.flux[0] - outward attenuated incident continuum
+	incident continuum is initally defined in ContSetIntensity
+
+====================================================================
+
+reflected continua
+inward or reflected part of continuum, only computed in open geometry 
+rfield.ConRefIncid[0][j] reflected incident continuum
+rfield.ConRefDiff[j]) reflected diffuse continua
+rfield.reflin[0][j] reflected lines 
+
+====================================================================
+
+diffuse local thermal continuum 
+rfield.ConEmitLocal
+
+====================================================================
+
+outward continua
+rfield.ThrowOut - outward beam of interactive continua,
+	emitted in this zone, set in RT_diffuse, contains almost all of ConEmitLocal
+
+rfield.ConInterOut - integrated outward beam, interacts
+rfield.ConEmitOut[0] - total outward emission 
+	calculated from local diffuse emission in radius_increment
+
+parts of brems and h lyman continua added to ConEmitLocal but not ConInterOut
+
+====================================================================
+
+rfield.SummedCon[i] is sum of interactive fields
+
+contains 
+rfield.flux[0][i] 
+rfield.otslin[i] 
+rfield.otscon[i] 
+
+====================================================================
+
+rfield.outlin[0][i] 
+outward lines, included in ionizing radiation
+
+rfield.outcon[i] 
+outward portion of continuum, incremented in metdif
+
+====================================================================
+
+each cell has associate with it character descriptions
+of lines of continua there:  these are:
+rfield.chLineLabel[j] ,
+rfield.chContLabel[j] );
+
+=================================================================
+
+print diffuse continuum sets flag PrnLine.lgPrnDiff
+prints the continuum at the points entered in the vector 
+EnrPredCont[NPREDCONT], as set in zerologic.c
+added to stack in lineset1
+
+within the continuum array the labels for lines and continua are
+LineLabl.chLineLabel[j] ,
+/* cont label*/
+LineLabl.chContLabel[j] );
+
+====================================================================
+
+continuous optical depths
+/* following only optical depth to illuminated face */
+opac.depabs[i] += (realnum)(opac.opac[i]*radius.drad_x_fillfac);
+opac.depsct[i] += (realnum)(opac.scatop[i]*radius.drad_x_fillfac);
+
+/* these are total in inward direction, large if sherical */
+opac.tausct[0][i] += (realnum)(opac.scatop[i]*radius.drad_x_fillfac);
+opac.TauTotal[0][i] = opac.tauabs[0][i] + opac.tausct[0][i];
+
+these are incremeneted in radinc.c
+
+dtrans.chDffTrns =  "OTS"
+or
+dtrans.chDffTrns, "OUn"
+default is "OU2" set in zero.c
+
+============================================================
+
+hydrogenic species are discussed in hydrogen.txt
+
+====================================================================
+
+bounds are 
+/* these are the low and high energy bounds of the continuum */
+rfield.emm = 1.001e-8f;
+rfield.egamry = 7.354e6f;
+
+============================================================

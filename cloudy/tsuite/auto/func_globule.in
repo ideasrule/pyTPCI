@@ -1,0 +1,84 @@
+title test of globule command
+#
+# commands controlling continuum =========
+black 40000 K
+ionization parameter -1.5
+#
+# commands for density & abundances =========
+globule initial density=5 scale depth=14 
+init file "ism.ini"
+abundances hii region no qheat 
+#
+# commands controlling geometry  =========
+#
+# other commands for details     =========
+failures 2
+#
+# commands controlling output    =========
+print line faint -1.5
+save performance "func_globule.per"
+save overview last "func_globule.ovr"
+save results last "func_globule.rlt"
+save monitors last "func_globule.asr"
+save dr "func_globule.dr" last
+save heating "func_globule.het" last
+save cooling "func_globule.col" last
+#
+# commands giving the monitors    =========
+## >>chng 07 nov 17, from 1.10 to 1.17, changes in r1512
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A 1.17
+## 
+## >>chng 08 apr 30, from 1.607 to 1.586 H, He topoff change
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 jun 08, from 1.586 to 1.605, update h2small close monitors
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line luminosity "H  1" 4861.32A 1.605
+##
+## >>chng 04 sep 16, from 1.95 to 1.86, increase conv edentrue
+## >>chng 07 mar 20 from 1.86 to 1.77, due to chng in r987
+## >>chng 08 apr 30, from 1.77 to 1.85 H, He topoff change
+## >>chng 19 jul 30, from 1.85 to 1.985, split He I 2 ^3P_J
+monitor line "blnd" 2326 1.985
+## 
+monitor temperature "H+" 4.021
+## 
+## >>chng 03 jun 08, from 320 to 370, N0 zoning
+## >>chng 08 dec 08, from 370 to 278, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 278 to 288, merging newsolvers branch
+## >>chng 09 jan 16, from 288 to 289, average of 10 runs
+## >>chng 09 may 21, from 289 to 291, average of 32/64 bit runs
+## >>chng 23 jun 27, from 291 to 274, update Fe+ model to Smyth+19
+monitor nzone 274
+##
+## >>chng 03 oct 30, from 12 to 16, zoning changed, many fewer zones,
+## but more iterations per zone, net was faster
+## >>chng 04 feb 15, from 16 to 11
+## >>chng 04 jul 02, from 11 to 13, O H ct
+## >>chng 04 sep 16, from 13 to 20 increase conv edentrue
+## >>chng 05 dec 22, from 25 to 25 (19.7) drift up
+## >>chng 08 dec 08, from 25 to 18.62, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 18.62 to 45.23, merging newsolvers branch
+## >>chng 09 jan 08, from 45.23 to 46.24, minor changes in iter/zn, iterations, and zone that crept in over last month
+## >>chng 09 jan 16, disable this assert because the values show a bimodal distribution over various platforms
+## assert itrzn 46.24 error 0.02
+##
+# func_globule.in
+# class function 
+# ========================================
+# 
+
+
+This model uses the globule command, tests that the zoning logic
+works for this extreme case, and that the code is able to converge
+the globule model.
+

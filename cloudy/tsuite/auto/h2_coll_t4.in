@@ -1,0 +1,224 @@
+title coronal equilibrium at 10^4 K
+#
+# commands controlling continuum =========
+coronal 4
+#
+# other commands for details     =========
+iterate
+#
+# commands controlling geometry  =========
+stop column density 15 
+#
+# commands for density & abundances =========
+hden 4
+database H2
+#
+# commands controlling output    =========
+save performance "h2_coll_t4.per"
+save monitors "h2_coll_t4.asr" 
+save overview "h2_coll_t4.ovr" 
+save continuum "h2_coll_t4.con"  units angstroms 
+#
+# commands giving the monitors    =========
+## >> chng 20 sep 06 change default error to acknowledge stability of ISM chemistry
+monitor set error 0.1
+##
+## >>chng 12 nov 09, from 19.39 to 9.023, first run
+## >>chng 13 feb 10, from 9.023 to 8.656, H2,e-=>H-,H update
+## >>chng 13 nov 19, from 8.656 to 9, fix CT bug in mole_eval_balance
+## >>chng 23 jul 15, from 9 to 9.945, GS update UMIST to 2012 and set upper limit on T
+monitor H2 column density 9.945 error 0.20
+##
+## >>chng 12 nov 09, from 19.39 to 10.05, first run
+## >>chng 13 feb 01, from 10.05 to 10.18, BUGFIX, largely undo r6703
+## >>chng 13 feb 10, from 10.18 to 9.754, H2,e-=>H-,H update
+## >>chng 13 nov 19, from 9.754 to 10.44, fix CT bug in mole_eval_balance
+## >>chng 21 sep 11, from 10.44 to 10.03, LAMDA update
+## >>chng 23 may 15, from 10.03 to 9.7, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from 9.7 to 11.39, GS update UMIST to 2012 and set upper limit on T
+monitor CO column density 11.39 error 0.20
+##
+## >>chng 13 feb 01, from -3.05 to -3.136, BUGFIX, largely undo r6703
+## >>chng 13 nov 19, from -3.136 to -3.597, fix CT bug in mole_eval_balance
+## >>chng 23 jul 15, from -3.597 to -4.842, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Hydrogen  2 -4.842 error 0.15
+##
+## >>chng 13 nov 19, from -10.87 to -11.38, fix CT bug in mole_eval_balance
+## >>chng 16 mar 21, from -11.38 to -11.27, remove He+,Si=>Si+,He from chemical network (is already in ChargTranEval)
+## >>chng 21 sep 11, from -11.27 to -11.09, LAMDA update
+## >>chng 23 jul 15, from -11.09 to -12.37, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Helium    2 -12.37 error 0.30
+##
+## >>chng 13 feb 10, from -2.775 to -2.878, H2,e-=>H-,H update
+## >>chng 13 nov 19, from -2.878 to -3.037, fix CT bug in mole_eval_balance
+## >>chng 23 mar 17, from -3.037 to -2.255, add SiS and Lamda model"
+## >>chng 23 jul 15, from -2.255 to -5.272, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Carbon    2 -5.272 error 0.20
+##
+## >>chng 13 feb 01, from -2.956 to -3.044, BUGFIX, largely undo r6703
+## >>chng 13 nov 19, from -3.044 to -3.51, fix CT bug in mole_eval_balance
+## >>chng 23 jul 15, from -3.51 to -4.99, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Nitrogen  2 -4.99 error 0.15
+##
+## >>chng 13 feb 01, from -3.153 to -3.243, BUGFIX, largely undo r6703
+## >>chng 13 nov 05, from -3.243 to -3.187, convergence branch changes
+## >>chng 13 nov 19, from -3.187 to -3.716, fix CT bug in mole_eval_balance
+## >>chng 23 jul 15, from -3.716 to -5.239, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Oxygen    2 -5.239 error 0.15
+##
+## >>chng 13 feb 01, from -1.302 to -1.215, BUGFIX, largely undo r6703
+## >>chng 13 nov 19, from -1.215 to -1.167, fix CT bug in mole_eval_balance
+## >>chng 23 jul 15, from -1.167 to -0.6779, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Magnesium 1 -0.6779  error 0.1
+##
+## >>chng 13 feb 01, from -2.987 to -2.914, BUGFIX, largely undo r6703
+## >>chng 13 nov 19, from -2.914 to -2.796, fix CT bug in mole_eval_balance
+## >>chng 23 jul 15, from -2.796 to -1.932, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Aluminium 1 -1.932 error 0.1
+##
+## >>chng 13 feb 01, from -0.7942 to -0.7013, BUGFIX, largely undo r6703
+## >>chng 13 feb 10, from -0.7013 to -0.6345, H2,e-=>H-,H update
+## >>chng 18 jan 17, from -0.6345 to -0.7128, update Badnell RR, DR to http://dx.doi.org/10.1051/0004-6361/201731243
+## >>chng 23 mar 17, from -0.7128 to -0.8435, add SiS and Lamda model"
+## >>chng 23 jul 15, from -0.8435 to -0.466, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Silicon   1 -0.466 error 0.15
+##
+## >>chng 13 feb 10, from -0.8323 to -1.144, H2,e-=>H-,H update
+## >>chng 13 nov 19, from -1.144 to -0.9445, fix CT bug in mole_eval_balance
+## >>chng 23 mar 17, from -0.9445 to -2.565, add SiS and Lamda model"
+## >>chng 23 jul 15, from -2.565 to -4.054, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Sulphur   2 -4.054 error 0.15
+##
+## >>chng 13 feb 01, from -3.838 to -3.927, BUGFIX, largely undo r6703
+## >>chng 13 feb 10, from -3.927 to -3.773, H2,e-=>H-,H update
+## >>chng 13 nov 19, from -3.773 to -4.097, fix CT bug in mole_eval_balance
+## >>chng 23 jul 15, from -4.097 to -5.234, GS update UMIST to 2012 and set upper limit on T
+monitor ionization Argon     2 -5.234 error 0.1 
+##
+## >>chng 13 feb 01, from 1 to 0.9228, BUGFIX, largely undo r6703
+## >>chng 13 feb 10, from 0.9228 to 0.9605, H2,e-=>H-,H update
+## >>chng 13 nov 19, from 0.9605 to 0.5478, fix CT bug in mole_eval_balance
+## >>chng 23 jul 15, from 0.5478 to -0.0699, GS update UMIST to 2012 and set upper limit on T
+monitor eden -0.0699 error 0.1
+##
+## >>chng 13 jun 27, from -3.4460 to -12.2576, add H2 2.1215m line luminosity
+## >>chng 13 jul 24, wl from 2.1215m to 2.12125m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -12.26 to -11.49, fix CT bug in mole_eval_balance
+## >>chng 16 dec 29, from -11.49 to -11.61, uupdate H-H2 coll to Lique 15
+## >>chng 23 jul 15, from -11.61 to -10.32, GS update UMIST to 2012 and set upper limit on T
+monitor line luminosity "H2  " 2.12125m  -10.32 error 0.1
+##
+## >>chng 13 jun 27, from -8.869 to -20.53, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 538.1m to 538.142m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -20.53 to -19.89, fix CT bug in mole_eval_balance
+## >>chng 15 aug 03, from -19.89 to -19.81, update LAMDA to 2015
+## >>chng 23 jul 15, from -19.81 to -18.33, GS update UMIST to 2012 and set upper limit on T
+monitor "H2O " 538.142m line intensity -18.33
+##
+## >>chng 13 jun 27, from -8.563 to -20.68, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1756m to 1755.88m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -20.68 to -18.87, fix CT bug in mole_eval_balance
+##
+## >>chng 23 mar 17, from -18.87 to -20.75, add SiS and Lamda model"
+## >>chng 23 may 15, from -20.75 to -20.71, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -20.71 to -20.63, GS update UMIST to 2012 and set upper limit on T
+monitor "HCS+" 1755.88m  -20.63 line intensity
+## >>chng 13 jun 27, from -7.453 to -16.48, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 3059m to 3058.86m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -16.48 to -15.26, fix CT bug in mole_eval_balance
+## >>chng 15 aug 03, from -15.26 to -15.3, update LAMDA to 2015
+##
+## >>chng 23 mar 17, from -15.3 to -17.3, add SiS and Lamda model"
+## >>chng 23 may 15, from -17.3 to -17.25, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -17.25 to -18, GS update UMIST to 2012 and set upper limit on T
+monitor "CS  " 3058.86m  -18 line intensity
+## >>chng 13 jun 27, from -7.288 to -14.2, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 2600m to 2600.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -14.2 to -13.52, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -13.52 to -13.93, LAMDA update
+## >>chng 23 may 15, from -13.93 to -14.26, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -14.26 to -12.58, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 2600.05m  -12.58 line intensity
+## >>chng 13 jun 27, from -6.463 to -12.66, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 1300m to 1300.05m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -12.66 to -11.98, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -11.98 to -12.38, LAMDA update
+## >>chng 23 may 15, from -12.38 to -12.72, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -12.72 to -11.03, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 1300.05m  -11.03 line intensity
+## >>chng 13 jun 27, from -6.149 to -11.69, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 866.7m to 866.727m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -11.69 to -11.01, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -11.01 to -11.41, LAMDA update
+## >>chng 23 may 15, from -11.41 to -11.75, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -11.75 to -10.06, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 866.727m  -10.06 line intensity
+## >>chng 13 jun 27, from -6.177 to -10.98, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 650.1m to 650.074m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -10.98 to -10.3, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -10.3 to -10.71, LAMDA update
+## >>chng 23 may 15, from -10.71 to -11.04, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -11.04 to -9.356, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 650.074m  -9.356 line intensity
+## >>chng 13 jun 27, from -6.485 to -10.48, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 520.1m to 520.089m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -10.48 to -9.803, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -9.803 to -10.21, LAMDA update
+## >>chng 23 may 15, from -10.21 to -10.54, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -10.54 to -8.854, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 520.089m  -8.854 line intensity
+## >>chng 13 jun 27, from -6.954 to -10.14, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 433.4m to 433.438m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -10.14 to -9.46, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -9.46 to -9.866, LAMDA update
+## >>chng 23 may 15, from -9.866 to -10.2, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -10.2 to -8.511, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 433.438m  -8.511 line intensity
+## >>chng 13 jun 27, from -7.48 to -9.907, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 371.5m to 371.549m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -9.907 to -9.227, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -9.227 to -9.633, LAMDA update
+## >>chng 23 may 15, from -9.633 to -9.967, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -9.967 to -8.279, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 371.549m  -8.279 line intensity
+## >>chng 13 jun 27, from -8.049 to -9.752, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 325.1m to 325.137m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -9.752 to -9.072, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -9.072 to -9.477, LAMDA update
+## >>chng 23 may 15, from -9.477 to -9.812, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -9.812 to -8.123, GS update UMIST to 2012 and set upper limit on T
+monitor "CO  " 325.137m  -8.123 line intensity
+## >>chng 13 jun 27, from -7.522 to -13.29, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 906.6m to 906.599m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -13.29 to -12.61, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -12.61 to -13.01, LAMDA update
+## >>chng 23 may 15, from -13.01 to -13.35, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -13.35 to -11.66, GS update UMIST to 2012 and set upper limit on T
+monitor "^13CO" 906.599m  -11.66 line intensity
+## >>chng 13 jun 27, from -8.247 to -13.34, add line intensities of some molecules with strong emissions
+## >>chng 13 jul 24, wl from 880.9m to 880.858m, increased wl precision to 6 sig. fig.
+## >>chng 13 nov 19, from -13.34 to -12.71, fix CT bug in mole_eval_balance
+##
+## >>chng 21 sep 11, from -12.71 to -14.5, LAMDA update
+## >>chng 21 sep 15, from -14.5 to -13.19, go back to unresolved model
+## >>chng 23 may 15, from -13.19 to -12.84, GS updates 21 reactions to UMIST 2012
+## >>chng 23 jul 15, from -12.84 to -13.9, GS update UMIST to 2012 and set upper limit on T
+monitor "CN  " 880.858m  -13.9  line intensity
+#
+# h2_coll_t4.in
+# class coronal  
+# ========================================
+
+this tests conditions of collisional equilibrium at low densities
+
+database h2 included to test results of large model
+Hden is 4 (coll_tx series is 10) to reproduce conditinos for major bug)

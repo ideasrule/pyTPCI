@@ -1,0 +1,41 @@
+title coronal equilibrium
+# vary temperature in coronal equilibrium, monitor coolnd
+#
+# commands controlling continuum =========
+coronal 4 vary
+grid 1 9 0.25 sequential log
+#
+# commands for density & abundances =========
+hden 0
+#
+# must include cosmic ray background since going below 1e4 K
+cosmic ray background
+# 
+# commands controlling geometry  =========
+stop zone 1
+set dr 0
+#
+# commands controlling output    =========
+no blends
+save grid "grid_coronal.grd" last no hash
+save ages "grid_coronal.age" last no hash
+save monitors "grid_coronal.asr" last
+save cooling "grid_coronal.col" last no hash
+## >>chng 15 mar 07, 1st sim, from -28.9339 to -28.9137, merging newmesh branch
+## >>chng 16 nov 16, val 26 from -22.6115 to -22.6341, merging RydDep branch after fixing some bugs
+## >>chng 17 sep 01, val 23 from -22.3510 to -22.3749, fix bug in high n collisional excitation rates for He-like iso-sequences
+## >>chng 17 sep 01, val 24 from -22.4747 to -22.4984, fix bug in high n collisional excitation rates for He-like iso-sequences
+## >>chng 17 sep 01, val 25 from -22.4745 to -22.4972, fix bug in high n collisional excitation rates for He-like iso-sequences
+## >>chng 17 sep 01, val 27 from -22.6344 to -22.6578, fix bug in high n collisional excitation rates for He-like iso-sequences
+## >>chng 17 sep 01, val 28 from -22.5590 to -22.5809, fix bug in high n collisional excitation rates for He-like iso-sequences
+monitor CTOT grid "grid_coronal.dat" 0.05
+# 
+# grid_coronal.in
+# class coronal 
+# ========================================
+# 
+*********
+
+This is a classical cooling function calculation - cosmic rays must be included
+for temperatures below 1e4 K to sustain the chemistry.
+This is a coronal (collisional) ionization calculation.

@@ -1,0 +1,17 @@
+# charged Draine & Li PAH grains (both positive and negative)
+# based on: 
+#>>refer	PAH	opacities	Draine, B.T., & Li, A., 2007 ApJ, 657, 810
+1030103  # magic number for version control
+C        # the hydrogen atoms are neglected in the atomic weight due to varying H/C ratio
+# chemical formulas are case sensitive and fractional indices are allowed,
+# (e.g., Mg0.6Fe0.4SiO3). Use no brackets or spaces.
+3.31e-4  # default abundance
+0.009    # default depletion
+2.24     # material density in g/cm^3
+6        # material type for enthalpy function, 1=carbonaceous, 2=silicate, 3=PAH
+0.3235   # work function in Rydberg
+0.0000   # gap between valence and conduction band in Rydberg
+0.5      # thermionic efficiency ( 0. < efficiency <= 1. )
+2000.    # sublimation temperature in K
+ph3c     # type of data in this file, rfi_tbl, grey, pah1, etc...
+# no further data required

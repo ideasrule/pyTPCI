@@ -1,0 +1,59 @@
+title test low temperature limit of code, 3K
+#
+# commands controlling continuum =========
+table agn
+ionization parameters -2
+#
+# commands for density & abundances =========
+hden -1
+#
+# commands controlling geometry  =========
+stop zone 1
+# specify a thin cell of gas 1 cm thick
+set dr 0 
+#
+# other commands for details     =========
+# set constant temperature to low-T limit
+constant temperature, t=3.0 linear 
+# iterate since gas is optically thin
+iterate
+#
+# commands controlling output    =========
+print lines intrinsic off
+set save prefix "func_t3_linesintroff"
+save overview ".ovr"
+save performance ".per"
+save monitors last ".asr"
+#
+# commands giving the monitors    =========
+## >>chng 08 apr 19, from -0.077 to -0.960, hden from 10 to 1
+monitor ionization Hydrogen 1 -0.960
+## 
+## >>chng 07 nov 29, from -6.92 to -5.14, due to changes in r1579
+## >>chng 08 apr 19, from -5.14 to -0.09 hden from 10 to 1
+monitor ionization Helium 2   -0.09 error 0.2
+##
+## >>chng 07 oct 22, from -7.15 to -7.05, resolve l-levels of h-like sequence
+## >>chng 07 nov 29, from -7.05 to -6.18, due to changes in r1579
+## >>chng 08 apr 19, from -6.18 to -1.11 hden from 10 to 1
+monitor ionization Helium 3   -1.11 error 0.1
+## 
+## >>chng 06 nov 29, from -2.46 to -2.33, Badnell DR turned on
+## >>chng 07 dec 05, from -2.33 to -2.37, drift down
+## >>chng 08 apr 19, from -2.37 to -1.56 hden from 10 to 1
+## >>chng 11 jul 12, from -1.56 to -1.604, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -1.604 to -1.566, BUGFIX, largely undo r6703
+## >>chng 13 apr 16, from -1.566 to -1.933, limit cota 3body to T>100K
+monitor ionization Carbon 1   -1.933 error 0.1
+#
+monitor eden -1.00 error 0.1 
+# 
+# func_t3.in
+# class limit 
+# ========================================
+# 
+
+This is a test of the lowest temperature the code can do.
+It runs a constant temperature of 3K.
+The predicted intrinsic spectrum
+is suppressed in the main output.

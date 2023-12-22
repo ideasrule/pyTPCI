@@ -1,0 +1,59 @@
+  1 1s2.2s                2  0 S  0.5  2          0.000       0.000000          0.000       0.000000 
+  2 1s2.2p                2  1 P  0.5  2     224366.000       2.044573     224370.623       2.044616 
+  3 1s2.2p                2  1 P  1.5  4     239429.000       2.181838     239422.879       2.181782 
+  4 1s2.3s                2  0 S  0.5  2    3220100.000      29.343710    3220095.761      29.343672 
+  5 1s2.3p                2  1 P  0.5  2    3282020.000      29.907967    3282023.989      29.908003 
+  6 1s2.3p                2  1 P  1.5  4    3286550.000      29.949247    3286549.405      29.949242 
+  7 1s2.3d                2  2 D  1.5  4    3309260.000      30.156196    3309264.147      30.156234 
+  8 1s2.3d                2  2 D  2.5  6    3310680.000      30.169136    3310678.130      30.169119 
+  9 1s2.4s                2  0 S  0.5  2    4319700.000      39.364003    4319696.707      39.363973 
+ 10 1s2.4p                2  1 P  0.5  2    4344980.000      39.594371    4344980.202      39.594373 
+ 11 1s2.4p                2  1 P  1.5  4    4346860.000      39.611503    4346857.975      39.611485 
+ 12 1s2.4d                2  2 D  1.5  4    4356570.000      39.699987    4356572.250      39.700008 
+ 13 1s2.4d                2  2 D  2.5  6    4357210.000      39.705819    4357205.293      39.705776 
+ 14 1s2.4f                2  3 F  2.5  6    4357630.000      39.709647    4357625.197      39.709603 
+ 15 1s2.4f                2  3 F  3.5  8    4357930.000      39.712380    4357926.820      39.712351 
+ 16 1s2.5s                2  0 S  0.5  2    4822550.000      43.946309    4822547.707      43.946288 
+ 17 1s2.5p                2  1 P  0.5  2          0.000       0.000000    4835242.928      44.061976 
+ 18 1s2.5p                2  1 P  1.5  4          0.000       0.000000    4836375.172      44.072294 
+ 19 1s2.5d                2  2 D  1.5  4    4841120.000      44.115532    4841116.678      44.115501 
+ 20 1s2.5d                2  2 D  2.5  6    4841420.000      44.118265    4841419.709      44.118263 
+ 21 1s2.5f                2  3 F  2.5  6    4841730.000      44.121090    4841724.354      44.121039 
+ 22 1s2.5f                2  3 F  3.5  8    4841880.000      44.122457    4841873.741      44.122400 
+ -1
+%filename:  s_14.elvlc
+
+Theoretical energy levels:  
+Autostructure calculation with energy levels optimized to match to the observed energies
+A Breit-Pauli distorted wave implementation for AUTOSTRUCTURE
+Badnell, N.R., 2011, Computer Physics Communications, 182, 1528
+ADSref:  http://adsabs.harvard.edu/abs/2011CoPhC.182.1528B
+
+Autostructure calculation optimized with 'SHFTIC' file using energy corrections from the following sources:
+
+Observed bound energy levels n=2, 3, 4, 5:
+Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team (2012).
+NIST Atomic Spectra Database (ver. 5.0), [Online].
+Available: http://physics.nist.gov/asd [2012, September 14].
+National Institute of Standards and Technology, Gaithersburg, MD.
+
+Theoretical energies for n=2, 3 above IP
+Goryaev, F. F.; Vainshtein, L. A.; Urnov, A. M.
+Atomic data for doubly-excited states 2lnl‧ of He-like ions and 1s2lnl‧ of Li-like ions with Z = 6-36 and n = 2 , 3
+2017, ADNDT, 113, 117-257
+adsRef:  http://adsabs.harvard.edu/abs/2017ADNDT.113..117G
+DOI:  10.1016/j.adt.2016.04.002
+
+Theoretical energy levels (n=4, 5 above IP):
+calculations of U. Safronova reported in Kato et al., 1997, ADNDT, 67, 225.
+ADS http://adsabs.harvard.edu/abs/1997ADNDT..67..225K
+updated by U. Safronova, 2001, private communication
+
+produced as a part of the 'CHIANTI' atomic database for astrophysical spectroscopy
+K. Dere (GMU) - 2017 August 02
+
+
+
+Reference:
+Chianti  2022-02-18
+ -1

@@ -1,0 +1,631 @@
+#Species label	Database
+H	H-like 
+H+	
+H-	
+H2	
+H2*	
+H2+	
+H3+	
+He	He-like
+He+	H-like 
+He+2	
+HeH+	
+Li	Stout
+Li+	He-like
+Li+2	H-like 
+Li+3	
+Li-	
+LiH	
+LiH+	
+Be	Stout
+Be+	Stout
+Be+2	He-like
+Be+3	H-like 
+Be+4	
+B	Stout
+B+	Stout
+B+2	Stout
+B+3	He-like
+B+4	H-like 
+B+5	
+C	Stout
+C+	Stout
+C+2	Stout
+C+3	Chianti
+C+4	He-like
+C+5	H-like 
+C+6	
+CH	LAMDA
+CH+	
+CH2	LAMDA
+CH2+	
+CH3	
+CH3+	
+CH4	
+CH4+	
+CH5+	
+C2	
+C2+	
+C2H	LAMDA
+C2H+	
+C2H2	
+C2H2+	
+C2H3+	
+C3	
+C3+	
+C3H	
+C3H+	
+N	Stout
+N+	Chianti
+N+2	Chianti
+N+3	Stout
+N+4	Stout
+N+5	He-like
+N+6	H-like 
+N+7	
+NH	
+NH+	
+NH2	
+NH2+	
+NH3	LAMDA
+NH3+	
+NH4+	
+CN	LAMDA
+CN+	
+HCN	LAMDA
+HCN+	
+HNC	LAMDA
+HCNH+	
+HC3N	LAMDA
+N2	
+N2+	
+N2H+	LAMDA
+O	Stout
+O+	Stout
+O+2	Stout
+O+3	Chianti
+O+4	Stout
+O+5	Chianti
+O+6	He-like
+O+7	H-like 
+O+8	
+OH	LAMDA
+OH+	LAMDA
+H2O	LAMDA
+H2O+	
+H3O+	LAMDA
+CO	LAMDA
+CO+	
+HCO+	LAMDA
+H2CO	LAMDA
+CH3OH	LAMDA
+^13CO	LAMDA
+NO	LAMDA
+NO+	
+HNO	
+HNO+	
+OCN	
+OCN+	
+N2O	
+O2	LAMDA
+O2+	
+NO2	
+NO2+	
+F	
+F+	Stout
+F+2	Stout
+F+3	Stout
+F+4	Stout
+F+5	Stout
+F+6	Stout
+F+7	He-like
+F+8	H-like 
+F+9	
+HF	LAMDA
+HF+	
+H2F+	
+CF+	LAMDA
+Ne	Stout
+Ne+	Stout
+Ne+10	
+Ne+2	Stout
+Ne+3	Chianti
+Ne+4	Chianti
+Ne+5	Chianti
+Ne+6	Chianti
+Ne+7	Chianti
+Ne+8	He-like
+Ne+9	H-like 
+NeH+	
+Na	Stout
+Na+	Stout
+Na+10	H-like 
+Na+11	
+Na+2	Chianti
+Na+3	Chianti
+Na+4	Chianti
+Na+5	Chianti
+Na+6	Chianti
+Na+7	Chianti
+Na+8	Chianti
+Na+9	He-like
+Mg	Stout
+Mg+	Chianti
+Mg+10	He-like
+Mg+11	H-like 
+Mg+12	
+Mg+2	Stout
+Mg+3	Chianti
+Mg+4	Chianti
+Mg+5	Chianti
+Mg+6	Chianti
+Mg+7	Chianti
+Mg+8	Chianti
+Mg+9	Stout
+Al	Stout
+Al+	Chianti
+Al+10	Chianti
+Al+11	He-like
+Al+12	H-like 
+Al+13	
+Al+2	Stout
+Al+3	Stout
+Al+4	Chianti
+Al+5	Stout
+Al+6	Chianti
+Al+7	Chianti
+Al+8	Chianti
+Al+9	Chianti
+Si	Stout
+Si+	Stout
+Si+10	Chianti
+Si+11	Chianti
+Si+12	He-like
+Si+13	H-like 
+Si+14	
+Si+2	Stout
+Si+3	Stout
+Si+4	Chianti
+Si+5	Chianti
+Si+6	Stout
+Si+7	Chianti
+Si+8	Stout
+Si+9	Chianti
+SiH	
+SiH2+	
+SiC2	LAMDA
+SiN	
+SiN+	
+SiO	LAMDA
+SiO+	
+SiOH+	
+P	Stout
+P+	Stout
+P+10	Chianti
+P+11	Chianti
+P+12	Chianti
+P+13	He-like
+P+14	H-like 
+P+15	
+P+2	Stout
+P+3	Stout
+P+4	Chianti
+P+5	Stout
+P+6	Chianti
+P+7	Chianti
+P+8	Chianti
+P+9	Chianti
+S	Stout
+S+	Stout
+S+10	Chianti
+S+11	Chianti
+S+12	Chianti
+S+13	Chianti
+S+14	He-like
+S+15	H-like 
+S+16	
+S+2	Stout
+S+3	Chianti
+S+4	Stout
+S+5	Chianti
+S+6	Chianti
+S+7	Chianti
+S+8	Chianti
+S+9	Chianti
+HS	
+HS+	
+CS	LAMDA
+CS+	
+HCS+	LAMDA
+NS	
+NS+	
+SO	LAMDA
+SO+	
+OCS	LAMDA
+OCS+	
+SO2	LAMDA
+SiS	LAMDA
+S2	
+S2+	
+Cl	Stout
+Cl+	Chianti
+Cl+10	Chianti
+Cl+11	Chianti
+Cl+12	
+Cl+13	Chianti
+Cl+14	
+Cl+15	He-like
+Cl+16	H-like 
+Cl+17	
+Cl+2	Chianti
+Cl+3	Chianti
+Cl+4	Stout
+Cl+5	Stout
+Cl+6	Stout
+Cl+7	Stout
+Cl+8	Stout
+Cl+9	Chianti
+HCl	LAMDA
+HCl+	
+H2Cl+	
+CCl	
+CCl+	
+H2CCl+	
+ClO	
+ClO+	
+Ar	Stout
+Ar+	Stout
+Ar+10	Chianti
+Ar+11	Chianti
+Ar+12	Chianti
+Ar+13	Chianti
+Ar+14	Chianti
+Ar+15	Chianti
+Ar+16	He-like
+Ar+17	H-like 
+Ar+18	
+Ar+2	Stout
+Ar+3	Stout
+Ar+4	Stout
+Ar+5	Stout
+Ar+6	Chianti
+Ar+7	Chianti
+Ar+8	Chianti
+Ar+9	Chianti
+ArH+	LAMDA
+K	Stout
+K+	Stout
+K+10	Chianti
+K+11	Chianti
+K+12	Chianti
+K+13	Chianti
+K+14	Chianti
+K+15	Chianti
+K+16	Chianti
+K+17	He-like
+K+18	H-like 
+K+19	
+K+2	Stout
+K+3	Stout
+K+4	Chianti
+K+5	Chianti
+K+6	Stout
+K+7	Stout
+K+8	Chianti
+K+9	Stout
+Ca	Stout
+Ca+	Chianti
+Ca+10	Chianti
+Ca+11	Chianti
+Ca+12	Chianti
+Ca+13	Chianti
+Ca+14	Chianti
+Ca+15	Chianti
+Ca+16	Chianti
+Ca+17	Chianti
+Ca+18	He-like
+Ca+19	H-like 
+Ca+2	Stout
+Ca+20	
+Ca+3	Stout
+Ca+4	Chianti
+Ca+5	Stout
+Ca+6	Chianti
+Ca+7	Chianti
+Ca+8	Chianti
+Ca+9	Chianti
+Sc	Stout
+Sc+	Stout
+Sc+10	Stout
+Sc+11	Stout
+Sc+12	Stout
+Sc+13	Stout
+Sc+14	Stout
+Sc+15	Stout
+Sc+16	Stout
+Sc+17	Stout
+Sc+18	
+Sc+19	He-like
+Sc+2	Stout
+Sc+20	H-like 
+Sc+21	
+Sc+3	Stout
+Sc+4	Stout
+Sc+5	Stout
+Sc+6	Stout
+Sc+7	Stout
+Sc+8	Stout
+Sc+9	Stout
+Ti	
+Ti+	
+Ti+10	Chianti
+Ti+11	Chianti
+Ti+12	Stout
+Ti+13	Chianti
+Ti+14	Chianti
+Ti+15	Chianti
+Ti+16	Chianti
+Ti+17	Chianti
+Ti+18	Chianti
+Ti+19	Chianti
+Ti+2	Stout
+Ti+20	He-like
+Ti+21	H-like 
+Ti+22	
+Ti+3	Stout
+Ti+4	Stout
+Ti+5	Stout
+Ti+6	Stout
+Ti+7	Stout
+Ti+8	Stout
+Ti+9	Stout
+TiH	
+TiH+	
+TiH2	
+TiH2+	
+TiC	
+TiC+	
+HCTi	
+HCTi+	
+TiC2	
+TiC2+	
+TiN	
+TiN+	
+HNTi	
+HNTi+	
+TiNC	
+TiNC+	
+TiO	
+TiO+	
+TiOH+	
+TiO2	
+TiF+	
+TiS	
+TiS+	
+HTiS	
+HTiS+	
+V	
+V+	
+V+10	Stout
+V+11	Stout
+V+12	Stout
+V+13	
+V+14	Stout
+V+15	Stout
+V+16	Stout
+V+17	Stout
+V+18	Stout
+V+19	Stout
+V+2	
+V+20	Stout
+V+21	He-like
+V+22	H-like 
+V+23	
+V+3	Stout
+V+4	
+V+5	Stout
+V+6	Stout
+V+7	Stout
+V+8	Stout
+V+9	Stout
+Cr	
+Cr+	Stout
+Cr+10	Stout
+Cr+11	Stout
+Cr+12	Chianti
+Cr+13	Chianti
+Cr+14	Stout
+Cr+15	Chianti
+Cr+16	Chianti
+Cr+17	Chianti
+Cr+18	Chianti
+Cr+19	Chianti
+Cr+2	
+Cr+20	Chianti
+Cr+21	Chianti
+Cr+22	He-like
+Cr+23	H-like 
+Cr+24	
+Cr+3	Stout
+Cr+4	Stout
+Cr+5	
+Cr+6	Chianti
+Cr+7	Chianti
+Cr+8	Chianti
+Cr+9	Stout
+Mn	Stout
+Mn+	Stout
+Mn+10	Stout
+Mn+11	Stout
+Mn+12	Stout
+Mn+13	Stout
+Mn+14	Chianti
+Mn+15	Stout
+Mn+16	Chianti
+Mn+17	Chianti
+Mn+18	Chianti
+Mn+19	Chianti
+Mn+2	
+Mn+20	Chianti
+Mn+21	Chianti
+Mn+22	Chianti
+Mn+23	He-like
+Mn+24	H-like 
+Mn+25	
+Mn+3	
+Mn+4	Stout
+Mn+5	Stout
+Mn+6	
+Mn+7	Chianti
+Mn+8	Chianti
+Mn+9	Chianti
+Fe	Stout
+Fe+	Stout
+Fe+10	Chianti
+Fe+11	Chianti
+Fe+12	Chianti
+Fe+13	Chianti
+Fe+14	Chianti
+Fe+15	Chianti
+Fe+16	Chianti
+Fe+17	Chianti
+Fe+18	Chianti
+Fe+19	Chianti
+Fe+2	Stout
+Fe+20	Chianti
+Fe+21	Chianti
+Fe+22	Chianti
+Fe+23	Chianti
+Fe+24	He-like
+Fe+25	H-like 
+Fe+26	
+Fe+3	Chianti
+Fe+4	Chianti
+Fe+5	Chianti
+Fe+6	Stout
+Fe+7	Chianti
+Fe+8	Stout
+Fe+9	Chianti
+Co	
+Co+	Stout
+Co+10	Stout
+Co+11	Stout
+Co+12	Stout
+Co+13	Stout
+Co+14	Stout
+Co+15	Stout
+Co+16	Chianti
+Co+17	Stout
+Co+18	Chianti
+Co+19	Chianti
+Co+2	Stout
+Co+20	Chianti
+Co+21	Chianti
+Co+22	Chianti
+Co+23	Chianti
+Co+24	Chianti
+Co+25	He-like
+Co+26	H-like 
+Co+27	
+Co+3	
+Co+4	
+Co+5	
+Co+6	
+Co+7	Stout
+Co+8	
+Co+9	Stout
+Ni	Stout
+Ni+	Chianti
+Ni+10	Stout
+Ni+11	Chianti
+Ni+12	Chianti
+Ni+13	Chianti
+Ni+14	Stout
+Ni+15	Chianti
+Ni+16	Chianti
+Ni+17	Chianti
+Ni+18	Chianti
+Ni+19	Chianti
+Ni+2	Stout
+Ni+20	Chianti
+Ni+21	Chianti
+Ni+22	Chianti
+Ni+23	Chianti
+Ni+24	Chianti
+Ni+25	Chianti
+Ni+26	He-like
+Ni+27	H-like 
+Ni+28	
+Ni+3	Stout
+Ni+4	Stout
+Ni+5	
+Ni+6	Stout
+Ni+7	
+Ni+8	Stout
+Ni+9	
+Cu	Stout
+Cu+	
+Cu+10	
+Cu+11	
+Cu+12	Stout
+Cu+13	Stout
+Cu+14	Stout
+Cu+15	Stout
+Cu+16	Stout
+Cu+17	Stout
+Cu+18	
+Cu+19	
+Cu+2	
+Cu+20	Stout
+Cu+21	Stout
+Cu+22	Stout
+Cu+23	Stout
+Cu+24	Stout
+Cu+25	
+Cu+26	
+Cu+27	He-like
+Cu+28	H-like 
+Cu+29	
+Cu+3	
+Cu+4	
+Cu+5	
+Cu+6	
+Cu+7	
+Cu+8	
+Cu+9	
+Zn	
+Zn+	Stout
+Zn+10	
+Zn+11	
+Zn+12	
+Zn+13	
+Zn+14	
+Zn+15	
+Zn+16	
+Zn+17	
+Zn+18	Stout
+Zn+19	Chianti
+Zn+2	
+Zn+20	
+Zn+21	
+Zn+22	Chianti
+Zn+23	Chianti
+Zn+24	Chianti
+Zn+25	
+Zn+26	Chianti
+Zn+27	Chianti
+Zn+28	He-like
+Zn+29	H-like 
+Zn+3	Stout
+Zn+30	
+Zn+4	
+Zn+5	
+Zn+6	
+Zn+7	
+Zn+8	
+Zn+9	
+CRP	
+CRPHOT	
+PHOTON	
+e-	
+grn	

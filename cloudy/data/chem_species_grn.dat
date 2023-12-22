@@ -1,0 +1,44 @@
+#
+# columns are species label, formation enthalpy at OK in KJ/mol
+#
+# What are formation enthalpies of COgrn, H2Ogrn, OHgrn?  For 
+#	 present, take grn as standard state, and neglect adsorption enthalpy.
+#	 -- check e.g. http://www.arxiv.org/abs/astro-ph/0702322 for CO adsorption energy.
+#
+COgrn 	-113.8
+H2Ogrn	-238.9
+OHgrn 	38.4
+Cgrn  	711.2
+Ogrn  	246.8
+Ngrn  	470.8
+Sgrn  	274.7
+Hgrn  	216
+Sigrn 	446
+SiHgrn	374.9
+SiOgrn	-101.6
+CHgrn 	592.5
+O2grn 	0
+CH2grn	390
+CH3grn	149
+CH4grn	-66.8
+N2grn 	0
+NOgrn 	89.8
+S2grn 	128.3
+OCNgrn	556
+NHgrn 	376.5
+NH2grn	191.6
+NH3grn	-38.9
+CNgrn 	436.8
+HCNgrn	135.5
+HNOgrn	100
+HSgrn 	136.5
+CSgrn 	277.1
+NSgrn 	263
+SOgrn 	5
+OCSgrn	-142
+HNCgrn	201
+C2grn 	817
+C2Hgrn	560
+C3grn 	831
+C3Hgrn	602.5
+H2grn 	0

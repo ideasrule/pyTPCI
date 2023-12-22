@@ -1,0 +1,81 @@
+title test all grain species temperature
+#
+# commands controlling continuum =========
+black 50000
+ionization parameter -2
+#
+# commands for density & abundances =========
+hden 3
+# this turns on orion-style distributed grains
+grains orion
+# this turns on ism distributed grains
+grains ism
+#
+# commands controlling geometry  =========
+stop zone 1
+#
+# other commands for details     =========
+constant temper 4
+iterate
+#
+# commands controlling output    =========
+save overview "grains_temp_all.ovr"
+save performance "grains_temp_all.per"
+save monitors "grains_temp_all.asr" last 
+save dr "grains_temp_all.dr" last 
+save grain charge "grains_temp_all.grnchr" last 
+save grain temperature "grains_temp_all.grntem" last 
+save grain drift velocity "grains_temp_all.grndft" last 
+#
+# commands giving the monitors    =========
+monitor grain temperature 1	80.60
+monitor grain temperature 2	77.07
+monitor grain temperature 3	73.63
+monitor grain temperature 4	70.27
+monitor grain temperature 5	67.01
+monitor grain temperature 6	63.85
+monitor grain temperature 7	60.82
+monitor grain temperature 8	57.91
+monitor grain temperature 9	55.13
+monitor grain temperature 10	52.44
+monitor grain temperature 11	74.85
+monitor grain temperature 12	72.15
+monitor grain temperature 13	69.46
+monitor grain temperature 14	66.81
+monitor grain temperature 15	64.22
+monitor grain temperature 16	61.73
+monitor grain temperature 17	59.34
+monitor grain temperature 18	57.05
+monitor grain temperature 19	54.88
+monitor grain temperature 20	52.82
+monitor grain temperature 21	105.30
+monitor grain temperature 22	101.60
+monitor grain temperature 23	95.75
+monitor grain temperature 24	89.40
+monitor grain temperature 25	82.90
+monitor grain temperature 26	76.38
+monitor grain temperature 27	70.13
+monitor grain temperature 28	64.20
+monitor grain temperature 29	58.68
+monitor grain temperature 30	53.56
+monitor grain temperature 31	89.53
+monitor grain temperature 32	87.83
+monitor grain temperature 33	84.86
+monitor grain temperature 34	81.01
+monitor grain temperature 35	76.53
+monitor grain temperature 36	71.61
+monitor grain temperature 37	66.70
+monitor grain temperature 38	62.01
+monitor grain temperature 39	57.66
+monitor grain temperature 40	53.69
+
+	
+# grains_temp_all.in
+# class limit 
+# ========================================
+# 
+
+This is a relatively quick test of grains.  
+The Orion and ISM silicate and graphitic grains
+are turned on and their equilibrium temperature
+checked. 

@@ -1,0 +1,390 @@
+#!/usr/bin/perl
+################################################################################
+#
+# Monitor the system memory usage during a test suite run.  This does not apply
+# to specific processes, so refrain from running other processes during testing.
+#
+# A text file containing the memory use reported by 'free' is created on output,
+# as well as gnuplot scripts, and the postscript plots created from them.  The
+# latter illustrate the consumption of RAM and Swap space memory during the run.
+#
+# See the man page at the bottom of this file for more info.
+#
+# Chatzikos, Marios	2012-Nov-17
+#
+################################################################################
+
+use strict;
+use warnings;
+
+
+
+use POSIX ":sys_wait_h";
+
+use Getopt::Long;
+use Pod::Usage;
+
+
+
+
+
+#
+# User interface
+#
+my $show_help_and_exit	=	0;
+my $show_manual_and_exit=	0;
+
+
+my $unit_size		= undef;
+my $unit_size_def	= 'b';	# output in bytes
+
+my $sampling_interval;
+my $sampling_interval_def =   5;	# in seconds
+
+my $baseline_interval;
+my $baseline_interval_def =  60;	# in seconds
+
+
+
+#
+# Code operation
+#
+my $run_parl_conf;
+my $run_parl_conf_def	= '. 16';
+my $command;
+
+
+
+my $time_init = time;
+my @mem_stats;		# memory statistics
+
+my $convert_to_MB;
+
+
+
+
+
+################################################################################
+#                                INIT PROGRAM                                  #
+################################################################################
+sub Init
+{
+	my @argv = @_;
+
+	Getopt::Long::Configure("gnu_getopt");
+
+	my $result = Getopt::Long::GetOptionsFromArray
+			(
+				\@argv,
+				"h|help"	=> \$show_help_and_exit,
+				"m|man"		=> \$show_manual_and_exit,
+				"u=s"		=> \$unit_size,
+				"i=i"		=> \$sampling_interval,
+				"b=i"		=> \$baseline_interval,
+			);
+
+
+	Pod::Usage::pod2usage(-verbose=>2)
+		if ($show_manual_and_exit == 1);
+
+	Pod::Usage::pod2usage(-verbose=>99, -sections=> "NAME|SYNOPSIS|MANDATORY ARGUMENTS|OPTIONS")
+		if ($show_help_and_exit == 1);
+
+
+	if (not defined($unit_size) or ($unit_size ne 'b' and $unit_size ne 'k' and $unit_size ne 'm'))
+	{
+		$unit_size = $unit_size_def;
+	}
+
+	if (not defined($sampling_interval) or $sampling_interval <= 0)
+	{
+		$sampling_interval = $sampling_interval_def;
+	}
+
+	if (not defined($baseline_interval) or $baseline_interval <= 0)
+	{
+		$baseline_interval = $baseline_interval_def;
+	}
+
+
+
+	if (scalar(@argv) > 0)
+	{
+		$run_parl_conf = join(' ', @argv);
+	}
+	else
+	{
+		$run_parl_conf = $run_parl_conf_def;
+	}
+
+
+	return;
+}
+
+
+
+################################################################################
+#                                MEMORY MANAGEMENT                             #
+################################################################################
+sub getMemStat
+{
+	my $nmem = $#mem_stats;
+
+	$mem_stats[$nmem]{tstamp} = time;
+
+	my $free_out = `free -o -$unit_size`;
+	#	print $free_out;
+
+	my @lines = split(/\n/, $free_out);
+
+	my (@els);
+
+	chomp($lines[1]);
+	@els = split(/\s+/, $lines[1]);
+	$mem_stats[$nmem]{tmem} = $els[1];
+	$mem_stats[$nmem]{umem} = $els[2];
+	$mem_stats[$nmem]{fmem} = $els[3];
+
+	chomp($lines[2]);
+	@els = split(/\s+/, $lines[2]);
+	$mem_stats[$nmem]{tswp} = $els[1];
+	$mem_stats[$nmem]{uswp} = $els[2];
+	$mem_stats[$nmem]{fswp} = $els[3];
+
+	$#mem_stats++;
+
+	return;
+}
+
+
+
+################################################################################
+#                                PROGRAM OUTPUT                                #
+################################################################################
+sub genTextOutput
+{
+	my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
+							localtime(time);
+
+	my @abbr = qw/ Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec /;
+
+	my $tstamp = sprintf "%4d.%3s.%2d_%02d.%02d.%02d", 1900+$year, $abbr[$mon], $mday, $hour, $min, $sec;
+	my $output = "memory-usage-$tstamp.txt";
+
+	open OUTFILE, "> $output"
+	  or die "Could not open $output\n";
+
+	printf OUTFILE	"#\n"
+		.	"# File: %s\n"
+		.	"# Date: %4d-%3s-%2d %2d:%2d:%02d\n"
+		.	"#\n"
+		.	"# Systime script started: %d [s]\n"
+		.	"# Baseline buffer       : %d [s]\n"
+		.	"# Memory sampling       : %d [s]\n"
+		.	"# Memory units          : %s\n"
+		.	"#\n"
+		.	"# RelSysTime\t   TotMemory\t   UsedMemory\t  FreeMemory\t   TotSwap\t   UsedSwap\t   FreeSwap\n"
+		.	"#     (1)   \t      (2)   \t       (3)   \t      (4)   \t      (5) \t      (6)  \t      (7)  \n",
+		$output,
+		1900+$year, $abbr[$mon], $mday, $hour, $min, $sec,
+		$time_init,
+		$baseline_interval,
+		$sampling_interval,
+		($unit_size eq 'b' ? "Bytes" : (($unit_size eq "k") ? "KiloBytes" : "MegaBytes"));
+
+	for (my $i=0; $i < $#mem_stats; $i++)
+	{
+		printf OUTFILE "\t%7.0f\t %12.0f\t %12.0f\t %12.0f\t %12.0f\t %12.0f\t %12.0f\n",
+			$mem_stats[$i]{tstamp} - $time_init,
+			$mem_stats[$i]{tmem}, $mem_stats[$i]{umem}, $mem_stats[$i]{fmem},
+			$mem_stats[$i]{tswp}, $mem_stats[$i]{uswp}, $mem_stats[$i]{fswp};
+	}
+
+	close OUTFILE
+	   or warn "Warning: Could not close: $output\n";
+
+	print "Done. Created: $output\n";
+
+	return	$output;
+}
+
+
+
+sub set_plot_size_to_MB
+{
+	$convert_to_MB = 1024**2	if ($unit_size eq 'b');
+	$convert_to_MB = 1024 		if ($unit_size eq 'k');
+	$convert_to_MB = 1 		if ($unit_size eq 'm');
+
+	return;
+}
+
+
+
+sub genGplotOutput
+{
+	my ($file, $fname, $column) = @_;
+
+	my $gplt = $file;	$gplt =~ s/.txt$/-$fname.gplt/;
+	my $pscr = $file;	$pscr =~ s/.txt$/-$fname.ps/;
+
+	open GPLOT,	"> $gplt"
+	  or die "Error: Could not open: $gplt\n";
+
+
+	print  GPLOT "set terminal postscript enhanced color lw 2 \"Helvetica,16\"\n";
+	print  GPLOT "set output \"$pscr\"\n";
+	print  GPLOT "set xlabel \"Time [m]\"\n";
+	print  GPLOT "set ylabel \"Memory Used [MB]\"\n";
+	printf GPLOT "plot\t\"%s\" u 1:(\$%d/%f) w lp pt 7 ps 0.75 not\n", $file, $column, $convert_to_MB;
+	print  GPLOT "print \"Done. Created: $pscr\\n\"\n";
+
+	close GPLOT
+	   or warn "Warning: Could not close: $gplt\n";
+
+	system("gnuplot $gplt");
+
+	return;
+}
+
+
+
+sub genOutput
+{
+	my $file = &genTextOutput();
+
+	&set_plot_size_to_MB();
+	&genGplotOutput($file, "ram", 3);
+	&genGplotOutput($file, "swp", 6);
+
+
+	return;
+}
+
+
+
+
+
+################################################################################
+#                                MAIN PROGRAM                                  #
+################################################################################
+
+&Init(@ARGV);
+
+$#mem_stats = 0;	# init array
+
+
+my $pid = fork();
+die "cannot fork" unless defined $pid;
+
+if ($pid != 0)
+{
+	do
+	{
+		&getMemStat();
+		sleep $sampling_interval;
+	} while (waitpid(-1, WNOHANG) == 0);
+}
+else
+{
+	print "Sleeping for $baseline_interval [s]\n";
+	sleep $baseline_interval;
+
+	$command = "./run_parallel.pl $run_parl_conf &> run.out";
+
+	print "Executing:\t $command\n";
+	system($command);
+
+	print "Sleeping for $baseline_interval [s]\n";
+	sleep $baseline_interval;
+	exit 0;
+}
+
+
+
+&genOutput();
+exit(0);
+################################################################################
+
+
+
+
+
+__END__
+
+
+=head1 NAME
+
+    mem-monitor - Track system memory usage during parallel suite run
+
+
+=head1 SYNOPSIS
+
+    mem-monitor [-h] [-m] [-u unit] [-i ival] [-b bval] [run_parallel arguments]
+
+
+=head1 DESCRIPTION 
+
+    mem-monitor monitors the memory usage of the test suite.  The test suite
+    is launched in the background, while the script tracks the system memory
+    consumption with the aid of the 'free' linux utility.  The script must be
+    run from the top tsuite directory.
+
+    The frequency of memory usage sampling may be deterined by the user.  A
+    buffer period before and after the test suite run is used to assess the
+    background memory usage; this may also be adjusted by the user.  On output,
+    the script produces an ASCII file with the usage statistics and PostScript
+    plots of the of the RAM and Swap memory use.
+
+    It is advised that no other processes are launched on the system
+    while the script is running.
+
+
+    Also note that this script is designed to work ONLY on Linux systems.
+
+
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<-h|--help>
+
+    Print a brief help message and exit.
+
+=item B<-m|--man>
+
+    Display the manual page and exit.
+
+=item B<-u unit>
+
+    Memory unit for output of free.  The input <size> may be one of 'b' (byte),
+    'k' (kilobyte), or 'm' (megabyte).  See free(1) for more info.
+
+=item B<-i ival>
+
+    Sampling interval in seconds (> 0).
+
+=item B<-s sval>
+
+    Baseline interval in seconds (> 0).  The test suite will be preceded and
+    followed by <sval> idle (sleep) seconds to get a baseline of the background
+    memory usage. 
+
+=item B<...>
+
+    If additional arguments are given, they are used as command line arguments
+    to run_parallel.pl.  Note that quotation marks need to be escaped, as in
+
+         mem-memory "\"valgrind --leak-check=full cloudy.exe\"" 8
+
+=back
+
+
+
+=head1 SEE ALSO
+
+    free(1), auto/run_parallel.pl
+
+
+=cut

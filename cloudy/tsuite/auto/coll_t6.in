@@ -1,0 +1,385 @@
+title coronal equilibrium at 10^6 K
+#
+# commands controlling continuum =========
+coronal 6
+#
+# commands controlling geometry  =========
+stop column density 15 
+#
+# commands for density & abundances =========
+hden 10
+#
+# other commands for details     =========
+iterate 
+#
+# commands controlling output    =========
+## >>chng 13 jul 24, wl from 40.27A to 40.2678A, increased wl precision to 6 sig. fig.
+normalize to "c  5" 40.2678A 
+# output files
+save performance "coll_t6.per"
+save overview "coll_t6.ovr"
+save monitors "coll_t6.asr" 
+save continuum "coll_t6.con"  units angstroms 
+#
+# commands giving the monitors    =========
+## >>chng 15 nov 13, from -12.9 to -1.906, add this monitor
+monitor ctot -1.906
+## >>chng 02 mar 07, many changed as result of 3-bod rec of he-like species
+## abundance of he-like speces decreased by 0.1 to 0.3 dex
+## >>chng 02 mar 15, above was largely in error, moved mostly back to old val
+## >>chng 11 sep 15, from -4.509 to -4.541, Chianti for Fe moderate to high ions
+monitor ionization  Helium    2 -4.541 
+##
+## >>chng 02 aug 19, from -7.919 to -8.053, better he-like cs
+## >>chng 02 sep 18, from -8.053 to -7.998, better he-like cs
+## >>chng 03 jan 24, from -7.998 to -8.038, better he-like cs
+## >>chng 03 feb 28, from -8.038 to -7.942, better he-like
+## >>chng 05 mar 12, from -7.94 to -8.03 RP merge He-like code
+## >>chng 05 jun 05, from -8.03 to -8.07, update he-like iso seq
+## >>chng 06 apr 22, from -8.07 to -7.95, RP use Badnell DR for He-like
+## >>chng 06 jul 18, from -7.95 to -7.83 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from -7.83 to -6.83, use Badnell DR by default
+## >>chng 07 apr 12, from -6.83 to -6.94 he-like proton collision bugfix
+## >>chng 07 jul 27, from -6.94 to -6.88, repair common error in several collision routines
+## >>chng 11 jul 12, from -6.88 to -7.623, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -7.623 to -7.818, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -7.818 to -7.458, BUGFIX, largely undo r6703
+## >>chng 15 apr 28, from -7.458 to -7.554, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 12, from -7.554 to -7.49, coll. str. reduced mass scaling
+## >>chng 19 jun 11, from -7.49 to -7.439, Percival and Richards (1978) used for He-like ions
+## >>chng 20 jan 13, from -7.439 to -7.525, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor ionization  Carbon    3 -7.525 error 0.1
+##
+## >>chng 02 aug 19, from -3.834 to -3.969, better he-like cs
+## >>chng 02 sep 18, from -3.969 to -3.914, better he-like cs
+## >>chng 02 dec 20, from -3.914 to -3.893, better he-like atom
+## >>chng 03 jan 24, from -3.893 to -3.954, better he-like cs
+## >>chng 03 feb 28, from -3.954 to -3.857, better he-like
+## >>chng 05 mar 12, from -3.86 to -3.95 RP merge He-like code
+## >>chng 06 apr 22, from -3.95 to -3.87, RP use Badnell DR for He-like
+## >>chng 06 jul 18, from -3.87 to -3.75 RP major upgrade VS coll strengths
+## >>chng 06 nov 29, from -3.75 to -3.60, use Badnell DR by default
+## >>chng 07 apr 12, from -3.60 to -3.71 he-like proton collision bugfix
+## >>chng 07 jul 27, from -3.71 to -3.65, repair common error in several collision routines
+## >>chng 11 sep 15, from -3.65 to -3.861, Chianti for Fe moderate to high ions
+## >>chng 15 may 12, from -3.861 to -3.812, coll. str. reduced mass scaling
+## >>chng 19 jun 11, from -3.812 to -3.772, Percival and Richards (1978) used for He-like ions
+## >>chng 20 jan 13, from -3.772 to -3.858, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor ionization  Carbon    4 -3.858 error 0.1
+##
+## >>chng 02 aug 19, from -0.611 to -0.747, better he-like cs
+## >>chng 02 sep 18, from -0.747 to -0.692, better he-like cs
+## >>chng 02 dec 20, from -0.692 to -0.671, better he-like atom
+## >>chng 03 jan 24, from -0.671 to -0.732, better he-like cs
+## >>chng 03 feb 28, from -0.732 to -0.636, better he-like
+## >>chng 04 may 19, from -0.636 to -0.667, RP update he-like
+## >>chng 05 mar 12, from -0.667 to -0.723 ,RP merge He-like code
+## >>chng 05 jun 05, from -0.723 to -0.761, RP update he-like iso seq
+## >>chng 06 apr 22, from -0.76 to -0.65, RP use Badnell DR for He-like, inc err
+## >>chng 06 jul 18, from -0.65 to -0.53 RP major upgrade VS coll strengths
+## >>chng 07 apr 12, from -0.53 to -0.64 he-like proton collision bugfix
+## >>chng 07 jul 27, from -0.64 to -0.58, repair common error in several collision routines
+## >>chng 11 sep 15, from -0.58 to -0.6738, Chianti for Fe moderate to high ions
+## >>chng 15 may 12, from -0.6738 to -0.6031, coll. str. reduced mass scaling
+## >>chng 20 jan 13, from -0.6031 to -0.6706, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor ionization  Carbon    5 -0.6706 error 0.1 
+##
+## >>chng 02 aug 19, from -0.223 to -0.183, better he-like cs
+## >>chng 03 feb 28, from -0.183 to -0.212, better he-like
+## >>chng 05 mar 12, from -0.212 to -0.188 RP merge He-like code
+## >>chng 06 apr 22, from -0.188 to -0.208, RP use Badnell DR for He-like
+## >>chng 06 jul 18, from -0.208 to -0.251 RP major upgrade VS coll strengths
+## >>chng 07 apr 12, from -0.251 to -0.210 he-like proton collision bugfix
+## >>chng 07 oct 03, from -0.210 to -0.231, drift down
+## >>chng 11 sep 15, from -0.231 to -0.2066, Chianti for Fe moderate to high ions
+## >>chng 15 may 12, from -0.2066 to -0.2278, coll. str. reduced mass scaling
+## >>chng 20 jan 13, from -0.2278 to -0.2075, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor ionization  Carbon    6 -0.2075
+##
+## >>chng 05 jun 05, from -0.804 to -0.781, RP update he-like iso seq
+## >>chng 06 apr 22, from -0.781 to -0.810, RP use Badnell DR for He-like
+## >>chng 06 jul 18, from -0.810 to -0.852 RP major upgrade VS coll strengths
+## >>chng 07 apr 12, from -0.852 to -0.812 he-like proton collision bugfix
+## >>chng 07 oct 03, from -0.812 to -0.832, drift down
+## >>chng 11 sep 15, from -0.832 to -0.7786, Chianti for Fe moderate to high ions
+## >>chng 15 may 12, from -0.7786 to -0.7998, coll. str. reduced mass scaling
+## >>chng 20 jan 13, from -0.7998 to -0.7795, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor ionization  Carbon    7 -0.7795
+##
+## >>chng 02 aug 19, from -6.240 to -6.272, better he-like cs
+## >>chng 02 oct 29, from -6.272 to -6.247, debug he seq
+## >>chng 06 nov 24, from -6.247 to -6.210, turn on Badnell RR
+## >>chng 06 nov 29, from -6.210 to -5.414 use Badnell DR by default
+## >>chng 11 jul 12, from -5.414 to -6.026, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -6.026 to -5.678, BUGFIX, largely undo r6703
+## >>chng 15 apr 28, from -5.678 to -5.771, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 14, from -5.771 to -5.68, CollisSuppres, final version from Dragan Nikolic
+## >>chng 20 jan 13, from -5.68 to -5.703, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor ionization  Nitrogen  4 -5.703 
+## 
+## >>chng 02 aug 19, from -2.919 to -2.951, better he-like cs
+## >>chng 02 oct 29, from -2.951 to -2.926, debug he seq
+## >>chng 06 nov 24, from -2.926 to -2.904, turn on Badnell RR
+## >>chng 06 nov 29, from -2.904 to -2.812, use Badnell DR by default
+## >>chng 11 sep 15, from -2.812 to -2.848, Chianti for Fe moderate to high ions
+monitor ionization  Nitrogen  5 -2.848 
+## 
+## >>chng 02 aug 19, from -0.059 to -0.091, better he-like cs
+## >>chng 02 oct 29, from -0.091 to -0.066, debug he seq
+monitor ionization  Nitrogen  6 -0.066 
+## 
+## >>chng 02 aug 19, from -0.908 to -0.730, better he-like cs
+## >>chng 02 sep 18, from -0.730 to -0.824, better he-like cs
+## >>chng 02 oct 29, from -0.824 to -0.860, debug he seq
+## >>chng 03 feb 28, from -0.860 to -0.904, better he-like
+## >>chng 04 may 19, from -0.904 to -0.872, RP update he-like
+## >>chng 05 mar 12, from -0.872 to -0.853 RP merge He-like code
+## >>chng 05 jun 05, from -0.853 to -0.823, RP update he-like iso seq
+## >>chng 06 apr 22, from -0.823 to -0.86, RP use Badnell DR for He-like inc err
+## >>chng 06 jul 18, from -0.86 to -0.95 RP major upgrade VS coll strengths
+## >>chng 11 sep 15, from -0.95 to -0.8695, Chianti for Fe moderate to high ions
+monitor ionization  Nitrogen  7 -0.8695 error 0.1 
+## 
+## >>chng 02 aug 19, from -2.821 to -2.643, better he-like cs
+## >>chng 02 sep 18, from -2.643 to -2.738, better he-like cs
+## >>chng 02 oct 29, from -2.738 to -2.774, debug he seq
+## >>chng 03 feb 28, from -2.774 to -2.819, better he-like
+## >>chng 04 may 19, from -2.819 to -2.787, RP update he-like
+## >>chng 05 mar 12, from -2.787 to -2.768 RP merge He-like code
+## >>chng 05 jun 05, from -2.768 to -2.738, RP update he-like iso seq
+## >>chng 06 apr 22, from -2.738 to -2.78, RP use Badnell DR for He-like inc err
+## >>chng 06 jul 18, from -2.78 to -2.87 RP major upgrade VS coll strengths
+## >>chng 09 feb 24, from -2.87 to -2.832, botches due to r2763
+## >>chng 11 sep 15, from -2.832 to -2.755, Chianti for Fe moderate to high ions
+monitor ionization  Nitrogen  8 -2.755 error 0.1
+## 
+## >>chng 06 nov 29, from -5.121 to -4.476, use Badnell DR by default
+## >>chng 11 jul 12, from -4.476 to -5, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -5 to -4.826, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -4.826 to -4.806, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -4.806 to -4.476, BUGFIX, largely undo r6703
+## >>chng 15 apr 11, from -4.476 to -4.507, CollisSuppres change (r10314)
+## >>chng 15 apr 28, from -4.507 to -4.568, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 14, from -4.568 to -4.48, CollisSuppres, final version from Dragan Nikolic
+monitor ionization  Oxygen    5 -4.48 
+## 
+## >>chng 06 nov 29, from -2.528 to -2.496, use Badnell DR by default
+## >>chng 11 sep 15, from -2.496 to -2.331, Chianti for Fe moderate to high ions
+monitor ionization  Oxygen    6 -2.331 
+## 
+monitor ionization  Oxygen    7 -0.004 
+##
+## >>chng 02 aug 19, from -2.205 to -1.972, better he-like cs
+## >>chng 02 sep 18, from -1.972 to -2.108, better he-like cs
+## >>chng 02 oct 29, from -2.108 to -2.187, debug he seq
+## >>chng 05 jun 05, from -2.187 to -2.168, RP update he-like iso seq
+## >>chng 06 jul 18, from -2.168 to -2.219 RP major upgrade VS coll strengths
+## >>chng 11 sep 15, from -2.219 to -2.138, Chianti for Fe moderate to high ions
+monitor ionization  Oxygen    8 -2.138 
+##
+## >>chng 02 aug 19, from -5.514 to -5.280, better he-like cs
+## >>chng 02 sep 18, from -5.280 to -5.417, better he-like cs
+## >>chng 02 oct 29, from -5.417 to -5.495, debug he seq
+## >>chng 05 jun 05, from -5.495 to -5.477, RP update he-like iso seq
+## >>chng 06 jul 18, from -5.477 to -5.528 RP major upgrade VS coll strengths
+## >>chng 11 sep 15, from -5.528 to -5.416, Chianti for Fe moderate to high ions
+monitor ionization  Oxygen    9 -5.416
+##
+## >>chng 02 aug 19, from -5.462 to -5.392, better he-like cs
+## >>chng 03 nov 23, from -5.392 to -3.357, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -3.357 to -3.201, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.201 to -2.891, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -2.891 to -3.304, use Badnell DR by default
+## >>chng 11 jul 12, from -3.304 to -5.027, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -5.027 to -5.766, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -5.766 to -5.708, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -5.708 to -4.048, BUGFIX, largely undo r6703
+monitor ionization  Silicon   5 -4.048 
+##
+## >>chng 02 aug 19, from -2.996 to -2.929, better he-like cs
+## >>chng 03 nov 23, from -2.929 to -1.825, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -1.826 to -1.723, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.723 to -1.407, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -1.407 to -1.757, use Badnell DR by default
+## >>chng 11 jul 12, from -1.757 to -2.929, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -2.929 to -3.415, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -3.415 to -3.364, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -3.364 to -2.206, BUGFIX, largely undo r6703
+monitor ionization  Silicon   6 -2.206 
+##
+## >>chng 02 aug 19, from -1.507 to -1.445, better he-like cs
+## >>chng 03 nov 23, from -1.445 to -0.785, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -0.785 to -0.740, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.740 to -0.544, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -0.544 to -0.725, use Badnell DR by default
+## >>chng 11 jul 12, from -0.725 to -1.406, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.406 to -1.705, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -1.705 to -1.659, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -1.659 to -0.9626, BUGFIX, largely undo r6703
+monitor ionization  Silicon   7 -0.9626
+##
+## >>chng 02 aug 19, from -0.687 to -0.640, better he-like cs
+## >>chng 03 nov 23, from -0.640 to -0.393, Kraemer et al. guess of dr
+## >>chng 11 jul 12, from -0.393 to -0.6517, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -0.6517 to -0.7522, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -0.7522 to -0.4375, BUGFIX, largely undo r6703
+monitor ionization  Silicon   8 -0.4375 
+##
+## >>chng 03 nov 23, from -0.356 to -0.479, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -0.479 to -0.503, guess dr to Badnell mean
+## >>chng 06 jul 12, from -0.503 to -0.657, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -0.657 to -0.627, update to Badnell dr
+## >>chng 06 nov 29, from -0.627 to -0.501, use Badnell DR by default
+## >>chng 11 jul 12, from -0.501 to -0.3559, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.3559 to -0.4087, BUGFIX, largely undo r6703
+monitor ionization  Silicon   9 -0.4087 
+##
+## >>chng 02 aug 19, from -0.541 to -0.599, better he-like cs
+## >>chng 03 nov 23, from -0.599 to -1.100, Kraemer et al. guess of dr
+## >>chng 06 jul 12, from -1.100 to -1.437, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -1.437 to -1.387, update to Badnell dr
+## >>chng 06 nov 29, from -1.387 to -1.084, use Badnell DR by default
+## >>chng 11 jul 12, from -1.084 to -0.5934, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -0.5934 to -0.528, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -0.528 to -0.9247, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -0.9247 to -0.8335, update DR suppression
+## >>chng 15 apr 28, from -0.8335 to -0.8704, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 14, from -0.8704 to -0.9132, CollisSuppres, final version from Dragan Nikolic
+monitor ionization  Silicon  10 -0.9132 
+##
+## >>chng 02 aug 19, from -1.500 to -1.563, better he-like cs
+## >>chng 03 nov 23, from -1.563 to -2.400, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -2.400 to -2.375, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.375 to -2.837, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -2.837 to -2.771, update to Badnell dr
+## >>chng 06 nov 29, from -2.771 to -2.210, use Badnell DR by default
+## >>chng 11 jul 12, from -2.21 to -1.415, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.415 to -1.321, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -1.321 to -1.351, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -1.351 to -1.997, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -1.997 to -1.791, update DR suppression
+## >>chng 15 apr 28, from -1.791 to -1.868, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 14, from -1.868 to -1.941, CollisSuppres, final version from Dragan Nikolic
+monitor ionization  Silicon  11 -1.941 
+##
+## >>chng 02 aug 19, from -2.573 to -2.646, better he-like cs
+## >>chng 03 nov 23, from -2.646 to -4.200, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -4.200 to -4.049, guess dr to Badnell mean
+## >>chng 06 jul 12, from -4.049 to -4.672, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -4.672 to -4.617, update to Badnell dr
+## >>chng 06 nov 29, from -4.617 to -3.675, use Badnell DR by default
+## >>chng 11 jul 12, from -3.675 to -2.637, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -2.637 to -2.543, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -2.543 to -2.586, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -2.586 to -3.448, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -3.448 to -3.15, update DR suppression
+## >>chng 15 apr 28, from -3.15 to -3.255, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 14, from -3.255 to -3.336, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -3.336 to -3.361, update DR suppression in r10716
+monitor ionization  Silicon  12 -3.361 
+##
+## >>chng 02 aug 19, from -3.935 to -4.009, better he-like cs
+## >>chng 03 nov 23, from -4.009 to -5.562, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -5.562 to -5.412, guess dr to Badnell mean
+## >>chng 06 jul 12, from -5.412 to -7.336, use Savin & Gu DR to make mean DR
+## >>chng 06 aug 17, from -7.337 to -5.980, update to Badnell dr
+## >>chng 06 nov 29, from -5.980 to -5.044, use Badnell DR by default
+## >>chng 11 jul 12, from -5.044 to -4.005, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -4.005 to -3.91, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -3.91 to -3.955, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -3.955 to -4.816, BUGFIX, largely undo r6703
+## >>chng 13 apr 14, from -4.816 to -4.519, update DR suppression
+## >>chng 15 apr 28, from -4.519 to -4.624, CollisSuppres change suggested by Dragan Nikolic
+## >>chng 15 may 14, from -4.624 to -4.705, CollisSuppres, final version from Dragan Nikolic
+## >>chng 15 oct 14, from -4.705 to -4.73, update DR suppression in r10716
+monitor ionization  Silicon  13 -4.73
+##
+## >>chng 03 nov 23, from -5.071 to -4.937, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -4.937 to -4.807, guess dr to Badnell mean
+## >>chng 06 jul 12, from -4.807 to -4.668, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -4.668 to -4.088, use Badnell DR by default
+## >>chng 11 jul 12, from -4.088 to -5.87, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -5.87 to -5.777, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -5.777 to -5.746, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -5.746 to -5.036, BUGFIX, largely undo r6703
+monitor ionization  Iron      6 -5.036 
+##
+## >>chng 03 nov 23, from -3.090 to -2.999, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -2.999 to -2.927, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.927 to -2.829, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -2.829 to -2.357, use Badnell DR by default
+## >>chng 11 jul 12, from -2.357 to -3.611, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -3.611 to -3.531, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -3.531 to -3.508, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -3.508 to -2.783, BUGFIX, largely undo r6703
+monitor ionization  Iron      7 -2.783 
+##
+## >>chng 03 nov 23, from -1.570 to -1.482, Kraemer et al. guess of dr
+## >>chng 06 jul 12, from -1.482 to -1.450, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -1.450 to -1.201, use Badnell DR by default
+## >>chng 11 jul 12, from -1.201 to -1.984, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.984 to -1.953, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -1.953 to -1.204, BUGFIX, largely undo r6703
+monitor ionization  Iron      8 -1.204 
+##
+## >>chng 03 nov 23, from -0.535 to -0.448, Kraemer et al. guess of dr
+## >>chng 06 jul 12, from -0.448 to -0.415, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -0.415 to -0.371, use Badnell DR by default
+## >>chng 11 jul 12, from -0.371 to -0.7373, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -0.7373 to -0.7729, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -0.7729 to -0.4167, BUGFIX, largely undo r6703
+monitor ionization  Iron      9 -0.4167
+##
+## >>chng 03 nov 23, from -0.488 to -0.438, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -0.438 to -0.472, guess dr to Badnell mean
+## >>chng 13 feb 01, from -0.472 to -0.4523, BUGFIX, largely undo r6703
+monitor ionization  Iron     10 -0.4523 
+##
+## >>chng 03 nov 23, from -0.627 to -0.703, Kraemer et al. guess of dr
+## >>chng 06 jul 12, from -0.703 to -0.743, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -0.743 to -0.864, use Badnell DR by default
+## >>chng 11 jul 12, from -0.864 to -0.5168, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.5168 to -0.7972, BUGFIX, largely undo r6703
+monitor ionization  Iron     11 -0.7972 
+##
+## >>chng 03 nov 23, from -0.997 to -1.356, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -1.356 to -1.166, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.166 to -1.262, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -1.262 to -1.548, use Badnell DR by default
+## >>chng 11 jul 12, from -1.548 to -0.8956, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.8956 to -1.46, BUGFIX, largely undo r6703
+monitor ionization  Iron     12 -1.46 
+##
+## >>chng 02 aug 19, from -1.758 to -1.813, better he-like cs
+## >>chng 03 nov 23, from -1.813 to -2.560, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -2.560 to -2.051, guess dr to Badnell mean
+## >>chng 06 jul 12, from -2.051 to -2.180, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -2.180 to -2.492, use Badnell DR by default
+## >>chng 11 jul 12, from -2.492 to -1.566, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.566 to -1.495, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -1.495 to -2.289, BUGFIX, largely undo r6703
+## >>chng 16 dec 20, from -2.289 to -2.318, add secondary autoionization to DR suppression
+monitor ionization  Iron     13 -2.318 
+##
+## >>chng 02 aug 19, from -3.002 to -3.105, better he-like cs
+## >>chng 03 nov 23, from -3.105 to -4.230, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -4.230 to -3.406, guess dr to Badnell mean
+## >>chng 06 jul 12, from -3.406 to -3.561, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -3.561 to -3.759, use Badnell DR by default
+## >>chng 11 jul 12, from -3.759 to -2.585, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -2.585 to -2.427, Chianti for Fe moderate to high ions
+## >>chng 12 nov 01, from -2.427 to -2.451, Chianti experimental levels, revised Badnell DR suppression
+## >>chng 13 feb 01, from -2.451 to -3.429, BUGFIX, largely undo r6703
+## >>chng 16 dec 20, from -3.429 to -3.497, add secondary autoionization to DR suppression
+monitor ionization  Iron     14 -3.497 
+##
+## >>chng 02 aug 19, from -4.423 to -4.529, better he-like cs
+## >>chng 03 nov 23, from -4.529 to -30 Kraemer et al. guess of dr
+## assert ionization  Iron     15 -30
+# coll_t6.in
+# class coronal 
+# ========================================
+
+This test is an optically thin collisionally ionized gas.
+
+

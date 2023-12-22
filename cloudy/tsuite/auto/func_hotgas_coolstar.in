@@ -1,0 +1,145 @@
+title test very soft continuum, very hot gas
+#
+# commands controlling continuum =========
+# put in the cosmic background as the only continuum source 
+CMB  
+# gas has constant temperature of 1e6 K
+constant temperature, t=6
+#
+# commands for density & abundances =========
+hden 10.
+#
+# commands controlling geometry  =========
+stop zone 1
+# specify a thin cell of gas - 1 cm thick
+set dr 0 
+#
+# other commands for details     =========
+# iterate since gas is optically thin
+iterate
+#
+# commands controlling output    =========
+save overview "func_hotgas_coolstar.ovr"
+save performance "func_hotgas_coolstar.per"
+save monitors last "func_hotgas_coolstar.asr"
+#
+# commands giving the monitors    =========
+## >>chng 08 mar 17, from -6.633 to -6.662, r1844 - mostly iso PopOpc and rt_line_one_tauinc changes
+## >>chng 11 sep 15, from -6.662 to -6.627, Chianti for Fe moderate to high ions
+## >>chng 16 aug 07, from -6.627 to -6.588, Fran bug fix
+monitor ionization Hydrogen 1 -6.588
+## >>chng 02 apr 29, from -9.273 to -8.657, chng coll ion hi hei lev
+## >>chng 02 nov 20, from -8.657 to -8.701, new he diff, ots, incr errror
+## since so far from ionization peak
+## >>chng 02 dec 11, from -8.701 to -9.147, new hei
+## >>chng 03 feb 28, from -9.147 to -8.980, new hei
+## >>chng 03 may 02, from -8.980 to -9.066, series of small changes
+## >>chng 04 may 19, from -9.066 to -9.67 RP update helike sequence, incr err
+## >>chng 05 mar 12, from -9.67 to -10.79 RP merge He-like code
+## >>chng 06 jul 18, from -10.79 to -10.62 RP major upgrade VS coll strengths
+## >>chng 07 apr 12, from -10.62 to -9.798 helium-like state-specific DR added
+## >>chng 07 may 21, from -9.798 to -9.909, fix bug in He-like DR extrapolation
+## >>chng 07 nov 29, from -9.909 to -9.699, due to changes in r1579
+## >>chng 16 may 25, from -9.699 to -9.94, He-like DR density correction
+## >>chng 16 aug 18, from -9.94 to -10.07, enhanced coll ion from highest n
+## >>chng 17 sep 01, from -10.07 to -9.988, fix bug in high n collisional excitation rates for He-like iso-sequences
+monitor ionization Helium 1   -9.988 error 0.2
+##
+## >>chng 11 sep 15, from -4.509 to -4.542, Chianti for Fe moderate to high ions
+monitor ionization Helium 2   -4.542
+##
+## >>chng 02 aug 19, from -0.605 to -0.747, better he-like cs
+## >>chng 02 sep 18, from -0.747 to -0.693, better he-like cs
+## >>chng 02 dec 20, from -0.693 to -0.671, better he-like atom
+## >>chng 03 jan 24, from -0.671 to -0.732, improv cs
+## >>chng 03 feb 28, from -0.732 to -0.636, new hei
+## >>chng 04 may 19, from -0.636 to -0.667 RP update helike sequence
+## >>chng 05 mar 12, from -0.667 to -0.724 RP merge He-like code
+## >>chng 05 jun 05, from -0.724 to -0.761, RP update he-like iso seq
+## >>chng 06 apr 22, from -0.761 to -0.65, RP use Badnell DR for He-like inc err
+## >>chng 06 jul 18, from -0.65 to -0.53 RP major upgrade VS coll strengths
+## >>chng 07 apr 12, from -0.53 to -0.64, he-like proton collision bugfix
+## >>chng 07 jul 27, from -0.64 to -0.58, repair common error in several collision routines
+## >>chng 11 sep 15, from -0.58 to -0.6738, Chianti for Fe moderate to high ions
+## >>chng 15 may 12, from -0.6738 to -0.6031, coll. str. reduced mass scaling
+## >>chng 20 jan 13, from -0.6031 to -0.6706, PS-M is now default for He-like collisions l<3. S62 is maintained only for electron impact as default.
+monitor ionization Carbon 5  -0.6706 error 0.1
+##
+## >>chng 02 aug 19, from -0.222 to -0.183, better he-like cs
+## >>chng 03 feb 28, from -0.183 to -0.212, new hei
+## >>chng 05 mar 12, from -0.212 to -0.188 RP merge He-like code
+## >>chng 06 apr 22, from -0.188 to -0.21, RP use Badnell DR for He-like inc err
+## >>chng 06 jul 18, from -0.21 to -0.25 RP major upgrade VS coll strengths
+## >>chng 07 apr 22, from -0.25 to -0.210, he-like proton collision bugfix
+monitor ionization Carbon 6  -0.210 error 0.1
+##
+## >>chng 02 aug 19, from -0.820 to -0.782, better he-like cs
+## >>chng 03 feb 28, from -0.782 to -0.811, new hei
+## >>chng 05 mar 12, from -0.811 to -0.788 RP merge He-like code
+## >>chng 06 apr 22, from -0.788 to -0.808, RP use Badnell DR for He-like 
+## >>chng 06 jul 18, from -0.808 to -0.850 RP major upgrade VS coll strengths
+## >>chng 07 apr 12, from -0.850 to -0.810, he-like proton collision bugfix
+## >>chng 07 oct 03, from -0.810 to -0.831, drift down, inc err
+## >>chng 11 sep 15, from -0.831 to -0.7786, Chianti for Fe moderate to high ions
+monitor ionization Carbon 7  -0.7786 error 0.07
+##
+## >>chng 06 nov 29, from -2.528 to -2.496, Badnell DR turned on
+## >>chng 11 sep 15, from -2.496 to -2.331, Chianti for Fe moderate to high ions
+monitor ionization Oxygen 6  -2.331
+##
+monitor ionization Oxygen 7  -0.004
+##
+## >>chng 02 aug 19, from -2.205 to -1.972, better he-like cs
+## >>chng 02 sep 18, from -1.972 to -2.108, better he-like cs
+## >>chng 02 oct 29, from -2.108 to -2.187, debug he iso seq
+## >>chng 05 jun 05, from -2.187 to -2.168, RP update he-like iso seq
+## >>chng 06 jul 18, from -2.168 to -2.219 RP major upgrade VS coll strengths
+## >>chng 11 sep 15, from -2.219 to -2.138, Chianti for Fe moderate to high ions
+monitor ionization Oxygen 8  -2.138
+##
+## >>chng 03 nov 23, from -1.560 to -1.482, Kraemer et al. guess of dr
+## >>chng 06 jul 12, from -1.482 to -1.450, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -1.450 to -1.201, Badnell DR turned on
+## >>chng 11 jul 12, from -1.201 to -1.984, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -1.984 to -1.953, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -1.953 to -1.204, BUGFIX, largely undo r6703
+monitor ionization Iron   8  -1.204
+##
+## >>chng 03 nov 23, from -0.526 to -0.448, Kraemer et al. guess of dr
+## >>chng 06 jul 12, from -0.448 to -0.416, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -0.416 to -0.371, Badnell DR turned on
+## >>chng 11 jul 12, from -0.371 to -0.7375, enable fit to Badnell DR suppression
+## >>chng 11 sep 15, from -0.7375 to -0.7729, Chianti for Fe moderate to high ions
+## >>chng 13 feb 01, from -0.7729 to -0.4167, BUGFIX, largely undo r6703
+monitor ionization Iron   9  -0.4167
+##
+## >>chng 03 nov 23, from -0.484 to -0.438, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -0.438 to -0.472, guess dr to Badnell mean
+## >>chng 13 feb 01, from -0.472 to -0.4523, BUGFIX, largely undo r6703
+monitor ionization Iron  10  -0.4523
+##
+## >>chng 03 nov 23, from -0.632 to -0.703, Kraemer et al. guess of dr
+## >>chng 06 jul 12, from -0.703 to -0.743, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -0.743 to -0.864, Badnell DR turned on
+## >>chng 11 jul 12, from -0.864 to -0.5167, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.5167 to -0.7972, BUGFIX, largely undo r6703
+monitor ionization Iron  11  -0.7972
+##
+## >>chng 03 nov 23, from -1.017 to -1.355, Kraemer et al. guess of dr
+## >>chng 06 feb 03, from -1.355 to -1.166, guess dr to Badnell mean
+## >>chng 06 jul 12, from -1.166 to -1.262, use Savin & Gu DR to make mean DR
+## >>chng 06 nov 29, from -1.262 to -1.548, Badnell DR turned on
+## >>chng 11 jul 12, from -1.548 to -0.8952, enable fit to Badnell DR suppression
+## >>chng 13 feb 01, from -0.8952 to -1.46, BUGFIX, largely undo r6703
+monitor ionization Iron  12  -1.46
+## 
+# func_hotgas_coolstar.in
+# class limit 
+# ========================================
+# 
+
+This is a test where the CMB is the only continuum source.
+It does not extend to energies where the
+code needs to work.  There are special cases 
+used in this situation, for continuum addressing,
+so this checks whether those still function.

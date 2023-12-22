@@ -1,0 +1,69 @@
+title plane parallel conservation and hydrogenic emission for pure hydrogen
+#
+# commands controlling continuum =========
+ionization -2
+blackbody 40000
+#
+# commands for density & abundances =========
+hden 5
+init file "honly.ini"  
+#
+# commands controlling geometry  =========
+sphere static (OK)
+stop efrac 0.05 ##stop when 5 percent ionized 
+#
+# other commands for details     =========
+constant temper 7500
+no level2
+no induced processes (OK) 
+# needed to prevent 2s / Bal from becoming optically thick 
+turbulence 20 km/s
+diffuse ots
+database h-like levels resolved 10 
+#
+# commands controlling output    =========
+save performance "h_otspp.per"
+save overview "h_otspp.ovr" 
+save monitors "h_otspp.asr" 
+save dr "h_otspp.dr" 
+#
+# commands giving the monitors    =========
+## >> chng 08 apr 19, open errors from 2% to 5% default
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, change to testing "Ca B" 4861.36A (was "H  1" 4861.36A).
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A = 1. ## should be within 1 percent of precise
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 17, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Q(H)" 4861.32A = 1 ##make sure we conserve energy 
+##
+## >>chng 08 may 01, rm lots of redundant test on H spectrum
+## >>chng 04 mar 04, from 120 to 140, better conv criteria
+## >>chng 08 dec 08, from 140 to 120, upper limit -> equals (r2515)
+monitor nzone 120
+## 
+## >>chng 08 dec 08, from 5 to 3.325, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 3.325 to 3.6, merging newsolvers branch
+## >>chng 11 nov 16, from 3.6 to 3.483, adjust newmole monitors
+## >>chng 13 nov 05, from 3.483 to 3.311, convergence branch changes
+## >>chng 13 nov 25, from 3.311 to 3.025, convergence branch changes
+monitor itrzn 3.025 error 0.02
+# h_otspp.in
+# class limit 
+# ========================================
+# 
+
+
+This tests the total emission from a plane parallel pure hydrogen
+Stromgren sphere using the OTS approximation.  The conservation
+of the total number of ionizing photons, and the emitted spectrum,
+are all checked.
+

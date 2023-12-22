@@ -1,0 +1,171 @@
+title H only optically thin in Lyman continuum
+#
+# commands controlling continuum =========
+blackbody 40000
+ionization -2
+#
+# commands controlling geometry  =========
+stop thickness 16 
+#
+# commands for density & abundances =========
+hden 2
+init file "honly.ini"  
+#
+# other commands for details     =========
+iterate
+constant temper 10000
+no level2
+#
+# commands controlling output    =========
+print line inward
+##
+save performance "limit_casec_h_den2.per"
+save overview "limit_casec_h_den2.ovr"  last
+save fine optical depths last "limit_casec_h_den2.fin" range 0.9 1.02 every 1
+save optical depths last "limit_casec_h_den2.opt" 
+save continuum "limit_casec_h_den2.con"  last units microns
+save monitors "limit_casec_h_den2.asr"  last
+save dr "limit_casec_h_den2.dr"  last
+#
+# commands giving the monitors    =========
+## >>chng 02 jun 15, from 1.170 to 1.108, pump self shield
+## >>chng 04 mar 04, from 1.108 to 1.165, improv conv criteria
+## >>chng 04 jun 12, from 1.165 to 1.355, chng cont shield fcn
+## >>chng 07 oct 22, from 1.355 to 1.222, resolve l-levels of h-like sequence
+## >>chng 08 apr 10, from 1.222 to 1.192, change default h-like levels, other minor changes
+## >>chng 09 jun 11, from 1.192 to 1.146, stop thickness
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 1.146 to 1, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A = 1 error 0.02 
+## 
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.668 to 0.5832, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca A" 4861.32A = 0.5832 error 0.02 
+## >>chng 13 jul 24, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 1 to 0.8736, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "Ca B" 4861.32A = 0.8736 error 0.02 
+##
+## >>chng 13 jul 25, wl from 4861 to 4861.36A, increased wl precision to 6 sig. fig.
+## >>chng 17 may 26, wl from 4861.36A to 4861.33A, update Rydberg constant
+## >>chng 20 aug 25, wl from 4861.33A to 4861.32A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4861.32A to 4861.33A, update NIST energies
+## >>chng 21 apr 08, wl from 4861.33A to 4861.34A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 4861.34A to 4861.32A, revert to PvH energies for H
+monitor line "H  1" 4861.32A intensity -4.849
+##
+## >>chng 02 jun 15, from 3.328 to 3.144, pump self shield
+## >>chng 04 mar 04, from 3.144 to 3.355, improv conv criteria
+## >>chng 04 jun 12, from 3.355 to 3.970, chng cont shield fcn
+## >>chng 07 oct 22, from 3.970 to 3.212, resolve l-levels of h-like sequence
+## >>chng 08 apr 10, from 3.212 to 3.147, change default h-like levels, other minor changes
+## >>chng 13 jul 25, wl from 6563 to 6562.85A, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 3.147 to 2.736, change normalizing line to "H  1" 4861.36A.
+## >>chng 16 aug 07, from 2.736 to 2.658, Marios bug fixes
+## >>chng 17 may 26, wl from 6562.85A to 6562.81A, update Rydberg constant
+## >>chng 20 aug 25, wl from 6562.81A to 6562.80A, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 6562.80A to 6562.82A, update NIST energies
+## >>chng 21 apr 08, wl from 6562.82A to 6562.83A, up 1-e energies to np
+## >>chng 21 aug 18, wl from 6562.83A to 6562.80A, revert to PvH energies for H
+monitor line "H  1" 6562.80A = 2.658 error 0.02
+##
+## >>chng 02 jun 15, from 0.401 to 0.380 pump self shield
+## >>chng 04 mar 04, from 0.380 to 0.400, improv conv criteria
+## >>chng 04 jun 12, from 0.400 to 0.465 chng cont shield fcn
+## >>chng 07 oct 22, from 0.465 to 0.333, resolve l-levels of h-like sequence
+## >>chng 08 apr 30, from 0.333 to 0.358 H, He topoff change
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.358 to 0.3083, change normalizing line to "H  1" 4861.36A.
+## >>chng 16 aug 07, from 0.3083 to 0.2806, Marios bug fixes
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "H  1" 1.87510m = 0.2806 error 0.02 ##Paschen alpha
+## 
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.304 to 0.2655, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "Ca A" 1.87510m = 0.2655 error 0.02 ##Paschen alpha
+## >>chng 13 jul 25, wl from 1.875m to 1.87511m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.339 to 0.2958, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1.87511m to 1.87510m, up Rydberg constant
+monitor line "Ca B" 1.87510m = 0.2958 error 0.02 ##Paschen alpha
+##
+## >>chng 02 jun 15, from 0.188 to 0.181 pump self shield
+## >>chng 04 mar 04, from 0.181 to 0.188, improv conv criteria
+## >>chng 04 jun 12, from 0.188 to 0.215 chng cont shield fcn
+## >>chng 07 oct 22, from 0.215 to 0.174, resolve l-levels of h-like sequence
+## >>chng 09 jun 11, from 0.174 to 0.168, stop thickness
+## >>chng 13 jul 25, wl from 1.282m to 1.28181m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.168 to 0.1464, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 1.28181m to 1.28180m, up Rydberg constant
+## >>chng 20 aug 22, wl from 1.28180m to 1.28181m, switched from computed to tabulated energies for H and He isoseq
+monitor line "H  1" 1.28181m = 0.1464 error 0.025##Paschen beta
+##
+## >>chng 02 jun 15, from 0.094 to 0.090 pump self shield
+## >>chng 04 mar 04, from 0.090 to 0.094, improv conv criteria
+## >>chng 04 jun 12, from 0.094 to 0.108 chng cont shield fcn
+## >>chng 07 oct 22, from 0.108 to 0.072, resolve l-levels of h-like sequence
+## >>chng 08 apr 30, from 0.072 to 0.0849 H, He topoff change
+## >>chng 09 jun 11, from 0.0849 to 0.0833, stop thickness
+## >>chng 13 jul 25, wl from 4.051m to 4.05113m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.0833 to 0.0727, change normalizing line to "H  1" 4861.36A.
+## >>chng 16 aug 07, from 0.0727 to 0.0614, Marios bug fixes
+## >>chng 17 may 25, wl from 4.05113m to 4.05113m, up Rydberg constant
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "H  1" 4.05115m = 0.0614 error 0.02 ##Bracket alpha
+## 
+## >>chng 13 jul 25, wl from 4.051m to 4.05113m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.0802 to 0.0701, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 4.05113m to 4.05113m, up Rydberg constant
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "Ca B" 4.05115m = 0.0701 error 0.02 ##Bracket alpha
+## >>chng 13 jul 25, wl from 4.051m to 4.05113m, increased wl precision to 6 sig. fig.
+## >>chng 15 dec 15, from 0.0763 to 0.0666, change normalizing line to "H  1" 4861.36A.
+## >>chng 17 may 25, wl from 4.05113m to 4.05113m, up Rydberg constant
+## >>chng 20 aug 22, wl from 4.05113m to 4.05115m, switched from computed to tabulated energies for H and He isoseq
+## >>chng 21 mar 16, wl from 4.05115m to 4.05116m, update NIST energies
+## >>chng 21 apr 08, wl from 4.05116m to 4.05115m, up 1-e energies to np
+monitor line "Ca A" 4.05115m = 0.0666 error 0.02 ##Bracket alpha
+##
+## >>chng 15 dec 15, from 15.5 to 13.63, change normalizing line to "H  1" 4861.36A.
+monitor line "BaC " 3646 = 13.63 error 0.05 ##Balmer continuum rel to h-beta
+##
+monitor ionization hydrogen 1 -3.385 
+##
+## >>chng 02 dec 13, from 4.5 to 4, better conv
+## >>chng 03 dec 08, from < 4 to < 6.5, chng ots, zones
+## >>chng 08 dec 08, from 6.5 to 3.833, upper limit -> equals (r2515)
+## >>chng 08 dec 13, from 3.833 to 4.833, merging newsolvers branch
+## >>chng 09 jan 16, disabled this assert since this model has too few zones for it to be reliable
+## assert itrzn 4.833 error 0.02
+##
+# limit_casec_h_den2.in
+# class limit 
+# ========================================
+# 
+
+This is a pure hydrogen cloud that is optically thin in the Lyman continuum.
+The asserts check the emission in several H I lines and continua.
+This should be close to what really happens in a low column density
+cloud exposed to a continuum source that does not have strong Lyman lines.
+(The continuum source used is a pure blackbody, and so has no lines).
+So this is an example of "Case C" emission 
+>>refer	H	case C	Ferland, G.J. 1999, PASP, 111, 1524
+

@@ -1,0 +1,99 @@
+title He-like argon emission
+#
+# commands controlling continuum =========
+laser 600
+ionization -1
+#
+# commands for density & abundances =========
+hden 7
+# include lots of the element we are testing and set the ionization 
+# to be dominated by the correct ion stage
+element argon abundance -2
+element argon ionization -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 0 -5
+init file "ism.ini"
+element helium off
+element carbon off
+element nitrogen off
+element oxygen off
+element neon off
+element magnesium off
+element silicon off
+element sulphur off
+element chlorine off
+element iron off
+#
+# commands controlling geometry  =========
+set dr -12
+stop zone 1
+#
+# other commands for details     =========
+database he-like resolved levels 10
+database he-like collapsed levels 20
+constant temper 5
+iterate
+#
+# commands controlling output    =========
+print he-like departure argon
+print line faint -5
+save overview "helike_ar.ovr"
+save performance "helike_ar.per"
+save monitors "helike_ar.asr"
+# This is Lyman alpha
+## >>chng 13 jul 24, wl from 3.9488A to 3.94883A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 3.94883A to 3.94907A, update NIST energies
+normalize to "Ar17" 3.94907A
+#
+# commands giving the monitors    =========
+##>>chng 05 sep 5, wl from 3.947 to 3.949
+## >>chng 10 aug 12, from -19.31 to -24.27, fix botches related to r4125; star botches from recent continuum mesh changes
+## >>chng 11 feb 05, from -24.27 to -19.31, due to r4622, which reverts much of r4125 and addresses that fix in a better way
+## >>chng 13 jul 24, wl from 3.9488A to 3.94883A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 3.94883A to 3.94907A, update NIST energies
+monitor line luminosity "Ar17"  3.94907A -19.31
+## 
+# 3.994A is 2^3S to ground
+##>>chng 05 sep 5, wl from 3.996 to 3.994
+## >>chng 06 aug 18, from 1.7 to 2.28, RP update trans prob 2S to grnd
+## >>chng 13 jul 25, wl from 3.9939A to 3.99389A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 3.99389A to 3.99414A, update NIST energies
+monitor line "Ar17"  3.99414A 2.28
+## 
+# Totl is 2^3P to ground
+## >>chng 06 aug 18, from 2.5 to 1.90, RP update trans prob 2 to grnd
+## >>chng 13 jul 25, wl from 3.9691A to 3.96911A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "TOTL" 3.96911A to "Blnd" 3.96911A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 3.96911A to 3.96935A, update NIST energies
+monitor line "Blnd"  3.96935A 1.90
+## 
+# 3.365A is 3^1P to ground
+##>>chng 05 sep 5, wl from 3.368 to 3.365
+## >>chng 11 aug 05, from 0.215 to 0.0041, add helike quadrupole transitions
+## >>chng 11 aug 05, from 0.0041 to 0.2059, increase line prec to disting nearly degen after r5333
+## >>chng 11 aug 08, add dipole lines to stack first, decrease line precision again
+## >>chng 13 jul 25, wl from 3.3654A to 3.36545A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 3.36545A to 3.36562A, update NIST energies
+monitor line "Ar17"  3.36562A 0.2059
+## 
+# 21.54A is 3^3P to 2^3S
+##>>chng 05 sep 5, wl from 21.47 to 21.54
+## >>chng 09 feb 24, from 0.084 to 0.08, botches due to r2763
+## >>chng 13 jul 25, wl from 21.536A to 21.5364A, increased wl precision to 6 sig. fig.
+## >>chng 21 mar 16, wl from 21.5364A to 21.5357A, update NIST energies
+monitor line "Ar17"  21.5357A 0.08
+## 
+# 22.24A is 3^3D to 2^3P
+##>>chng 05 sep 5, wl from 22.30 to 22.24
+## >>chng 13 jul 25, wl from 22.237A to 22.2365A, increased wl precision to 6 sig. fig.
+## >>chng 13 jul 30, wl from 22.2365A to 22.1272A, increased wl precision to 6 sig. fig.
+## >>chng 18 feb 20, updated spectral label from "Ar17" 22.1272A to "Blnd" 22.1849A, update He-like triplet labels and wl
+## >>chng 21 mar 16, wl from 22.1849A to 22.2087A, update NIST energies
+monitor line "Blnd"  22.2087A 0.28
+# 
+# helike_ar.in
+# class limit 
+# ========================================
+# 
+
+test He-like emission for argon
+
+

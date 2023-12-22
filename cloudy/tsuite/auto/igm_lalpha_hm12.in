@@ -1,0 +1,131 @@
+title Ly alpha forest cloud
+#
+# commands controlling continuum =========
+# ionized by cosmic background
+# plus quasar/starburst continuum 
+cmb z=2
+table hm12 z = 2
+#
+# commands for density & abundances =========
+hden -2
+metals -1.5  ##reduce all heavy elements by 1.5 dex
+#
+# commands controlling geometry  =========
+stop neutral column density 15
+double  ## mimic two-sided photoionization
+#
+# other commands for details     =========
+iterate to convergence## must iterate since optically thin
+#
+# commands controlling output    =========
+print line faint -1
+set save prefix "igm_lalpha_hm12"
+save performance ".per"
+save overview last ".ovr"
+save dr last ".dr"
+save results last ".rlt"
+#
+# commands giving the monitors    =========
+## >>chng 16 jun 10, from 19.72 to 19.48, switch from hm05 -> hm12
+monitor thickness 19.48
+## >>chng 16 jun 10, from 4.27 to 4.246, switch from hm05 -> hm12
+monitor temperature "H+" 4.246
+## >>chng 16 jun 10, from -2.721 to -2.483, switch from hm05 -> hm12
+monitor ionization hydrogen 1 -2.483
+## >>chng 16 jun 10, from -2.726 to -2.464, switch from hm05 -> hm12
+monitor ionization Helium 1 -2.464
+monitor ionization Helium 2 -0.236
+monitor ionization Helium 3 -0.380
+##
+## >>chng 16 jun 10, from -4.007 to -3.384, switch from hm05 -> hm12
+monitor ionization Oxygen 1  -3.384
+## 
+## >>chng 16 jun 10, from -1.3 to -0.9445, switch from hm05 -> hm12
+monitor ionization Oxygen 2  -0.9445
+## 
+## >>chng 16 jun 10, from -0.096 to -0.1293, switch from hm05 -> hm12
+monitor ionization Oxygen 3  -0.1293
+## 
+## >>chng 16 jun 10, from -0.785 to -0.8588, switch from hm05 -> hm12
+monitor ionization Oxygen 4  -0.8588
+##
+## >>chng 16 jun 10, from -4.685 to -4.402, switch from hm05 -> hm12
+monitor ionization Carbon 1  -4.402 
+##
+## >>chng 16 jun 10, from -1.173 to -0.9432, switch from hm05 -> hm12
+monitor ionization Carbon 2  -0.9432 
+##
+monitor ionization Carbon 3  -0.089 
+##
+## >>chng 16 jun 10, from -1.093 to -1.22, switch from hm05 -> hm12
+monitor ionization Carbon 4  -1.22 
+##
+## >>chng 16 jun 10, from -1.906 to -2.029, switch from hm05 -> hm12
+monitor ionization Carbon 5  -2.029
+## 
+monitor ionization Magnesium 1  -3.492
+## 
+## >>chng 16 jun 10, from -1.717 to -1.583, switch from hm05 -> hm12
+monitor ionization Magnesium 2  -1.583
+## 
+## >>chng 16 jun 10, from -0.116 to -0.0965, switch from hm05 -> hm12
+monitor ionization Magnesium 3  -0.0965 
+## 
+## >>chng 16 jun 10, from -0.714 to -0.7932, switch from hm05 -> hm12
+monitor ionization Magnesium 4  -0.7932 
+## 
+## >>chng 16 jun 10, from -1.813 to -1.939, switch from hm05 -> hm12
+monitor ionization Magnesium 5  -1.939 
+## 
+## >>chng 16 jun 10, from -3.487 to -3.614, switch from hm05 -> hm12
+monitor ionization Magnesium 6  -3.614
+##
+## >>chng 16 jun 10, from -5.538 to -5.622, switch from hm05 -> hm12
+monitor ionization Silicon 1  -5.622
+##
+## >>chng 16 jun 10, from -1.316 to -1.18, switch from hm05 -> hm12
+monitor ionization Silicon 2  -1.18
+##
+monitor ionization Silicon 3  -0.1742
+##
+monitor ionization Silicon 4  -0.7361
+##
+## >>chng 16 jun 10, from -1.018 to -1.124, switch from hm05 -> hm12
+monitor ionization Silicon 5  -1.124
+##
+## >>chng 16 jun 10, from -3.106 to -2.567, switch from hm05 -> hm12
+monitor ionization Iron 2  -2.567
+##
+## >>chng 16 jun 10, from -0.9689 to -0.6762, switch from hm05 -> hm12
+monitor ionization Iron 3  -0.6762
+##
+## >>chng 16 jun 10, from -0.178 to -0.228, switch from hm05 -> hm12
+monitor ionization Iron 4  -0.228
+##
+## >>chng 16 jun 10, from -0.7175 to -0.7815, switch from hm05 -> hm12
+monitor ionization Iron 5  -0.7815
+##
+## >>chng 16 jun 10, from -1.502 to -1.552, switch from hm05 -> hm12
+monitor ionization Iron 6  -1.552
+##
+## >>chng 16 jun 10, from -7.074 to -6.943, switch from hm05 -> hm12
+## >>chng 17 may 26, wl from 1215.68A to 1215.67A, update Rydberg constant
+monitor line emergent intensity "H  1" 1215.67A -6.943
+##
+## assert itrzn 14 error 0.02
+##
+# igm_lalpha_hm12.in
+# class igm 
+# ========================================
+# 
+  
+This example demonstrates the behavior of the code in the low-density limit. 
+The ionizing source is the cosmic background at a redshift of z = 2. 
+The cloud is assumed to be optically thin to ionizing radiation,
+in keeping with the Gunn-Peterson test, so the double command is included,
+and an iteration is performed to converge the optical depth scale. 
+Continuum fluorescent excitation of lines is important because the cloud
+is optically thin.
+
+This sim corrects line intensities for isotropic continua.  Its sister sim,
+igm_lalpha_noisosub_hm12.in, computes intensities uncorrected for isotropic continua.

@@ -1,0 +1,4 @@
+FORCE:
+%::
+	$(MAKE) -f ../Makefile SRCDIR=.. $(MAKECMDGOALS)
+.PHONY: %

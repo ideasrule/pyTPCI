@@ -1,0 +1,47 @@
+title test generating line ratios in a grid run
+# 
+# commands controlling continuum =====
+blackbody 4e4 K
+ionization parameter -2
+# 
+# commands for density & abundances =====
+# these are to speed up the calculation, only do H, O, and Ne
+init "honly.ini"
+element oxygen on  
+element neon on  
+element sulphur on  
+element oxygen ionization 1 1 1
+element neon ionization 1 1 1 
+element sulphur ionization 1 1 1
+# vary the hydrogen density
+hden 4 vary
+grid 2 6.1 1 sequential
+# 
+# other commands for details =======
+# these are constant temperature models, vary T
+constant temperature 4 vary
+grid 4000 17000 3000 linear
+stop zone 1 
+#
+# commands controlling output =====
+save overview "func_grid_line_ratios.ovr"
+save monitors "func_grid_line_ratios.asr"
+save performance "func_grid_line_ratios.per"
+save line list "func_grid_line_ratios.pun" "func_grid_line_ratios.dat" ratio no hash
+save grid "func_grid_line_ratios.grd"
+#
+# commands giving (lack of) assert ==========
+monitor nothing 0 
+#
+# func_grid_line_line_ratios.in
+# class function
+# ===================================================
+
+This uses the grid command to compute line ratios for a wide range of
+density and temperature.  The ionization is set to a uniform value and
+only a few elements are included.  this makes the calculation faster
+and prevents recombination [O III] 4363 from becoming important (there
+is no O+3).
+
+These are the line ratios mentioned as limits in the Johnstone et al.
+Spitzer cooling flow filament paper (2007).

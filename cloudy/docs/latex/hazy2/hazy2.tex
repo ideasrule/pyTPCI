@@ -1,0 +1,100 @@
+\documentclass[12pt]{book}
+% !TEX root = hazy2.tex
+%\includeonly{limits}
+%\includeonly{coninter}
+%\includeonly{lineatomparam}
+%\includeonly{linedetl}
+%\includeonly{codestruc}
+%\includeonly{CloudyStandaloneProgram}
+%\includeonly{sub}
+%\includeonly{output}
+%\includeonly{observed}
+%\includeonly{lines}
+%\includeonly{problems}
+%\includeonly{odetail}
+%\includeonly{sources}
+%\includeonly{glossary}
+%\includeonly{conversion}
+%\includeonly{TestSuite}
+%\includeonly{refer}
+
+\input{../head_info}
+\input{../common/macros}
+\input{../variables}
+
+\begin{document}
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  title page
+\begin{titlepage}
+\begin{center}
+
+\Huge
+Hazy\\
+\Large
+\emph{a brief introduction to \Cloudy\ C\VERSION}\\
+\LARGE
+2. Results, computational environment,\\
+and test suite
+
+\begin{figure}
+\begin{center}
+\includegraphics[clip=on,width=0.8\columnwidth,keepaspectratio]{soft_xray_abs.jpg}
+\end{center}
+\end{figure}
+
+\vspace{15 mm }
+\LARGE
+\emph{Cloudy \& Associates} \\
+\Large
+\href{http://www.nublado.org}{www.nublado.org} \\
+\normalsize
+\today
+\end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% page with one figure and boilerplate text
+\clearpage
+\input{../frontis_common}
+\vspace{5mm}
+\noindent
+{\small
+{\em Cover image:}
+Continuum opacities plotted as a function of wavelength for a cloud with
+$\rm{N_H} = 10^{23} \, \rm{cm}^{-2}$.
+Figure 1 from \citet{Chakraborty2022}.
+}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% table of contents page - only include top two levels
+\setcounter{tocdepth}{2}
+\tableofcontents
+\listoffigures
+\listoftables
+
+\clearpage
+\mainmatter
+\include{output}       %proof 1
+\include{observed}     %proof 1
+\include{limits}       %proof 1
+\include{coninter}     %proof 2
+\include{lineatomparam}%proof 1
+\include{linedetl}     %proof 1
+\include{CloudyStandaloneProgram} %proof 1
+\include{sub}          %proof 1
+\include{lines}        %proof 1
+\include{problems}     %proof 1
+\include{odetail}      %proof 1
+\appendix
+\include{sources}      %proof 1
+\include{glossary}     %proof 1
+\include{conversion}   %proof 1
+\include{TestSuite}
+\backmatter
+\bibliographystyle{plainnat}
+\bibliography{../common/bibliography2}
+
+\end{document}

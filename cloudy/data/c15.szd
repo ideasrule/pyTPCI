@@ -1,0 +1,4 @@
+# size distribution file for single sized grain
+2010403 # magic number for version control
+ncarb   # choices are SSIZE, POWER, EXP1, EXP2, EXP3, etc...
+15      # number of carbon atoms in PAH

@@ -1,0 +1,16 @@
+title RF95 spectra
+c
+c commands controlling continuum =========
+powerlaw,slope=-0.8 [hi cut=2941.52 Ryd low cut=1.0001 Ryd]
+xi 1.54
+c
+c commands for density & abundances =========
+hden 9
+c
+c some other criterion ====================
+stop total column density 22.0
+c
+c the punched continuum file
+iterate 
+punch continuum file = "WA.con" units eV last
+

@@ -1,0 +1,563 @@
+#
+# this is a list of the lowest and strongest He-like transitions
+# of the first 30 elements
+# the entry El n  0 is the two-photon continuum
+#
+#>>chng 06 jul 21 add third n=2 line as per Ryan's LOC run
+#>>chng 06 aug 17, further lines added for Ryan's loc run
+#>>chng 06 aug 18, use mean wl of 2S - 2P multiplet
+#
+# helium lines are
+# 2s 1S  - ground - two-photon
+# 2p 3P  - ground
+# 2s 3S  - ground
+# 2p 1P  - ground
+# 2p 3P  - 2s 3S - entire multiplet with mean wl
+# 2p 1P  - 2s 1S
+#
+He 1	1202.81A	# two-photon singlet
+He 1	1251.13A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 591.412A to "Blnd" 591.412A, update He-like triplet labels and wl
+Blnd	591.412A
+He 1	625.563A
+He 1	584.334A
+# >>chng 13 aug 01, wl from 1.08299m to 1.08303m, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "He 1" 1.08303m to "Blnd" 1.08331m, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 1.08331m to 1.08302m, adjust multiplet Blend WL for refraction index
+Blnd	1.08302m
+#>>chng 06 may 20 from 2.060mm to 2.058mm RP change helike
+He 1	2.05813m
+#
+# the following are
+# 2s 1S  - ground - two-photon
+# 2p 3P  - ground
+# 2p 3P2 - ground
+# 2s 3S  - ground
+# 2p 1P  - ground
+# 2p 3P  - 2s 3S
+# 2p 3P0 - 2s 3S
+# 2p 3P1 - 2s 3S
+# 2p 3P2 - 2s 3S
+# 2p 1P  - 2s 1S
+#
+Li 2	407.021A 	# two-photon singlet
+Li 2	420.137A 	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 202.322A to "Blnd" 202.322A, update He-like triplet labels and wl
+Blnd	202.322A
+Li 2	202.321A
+Li 2	210.069A
+Li 2	199.279A
+# >>chng 13 aug 01, wl from 5484.32A to 5484.40A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 5484.40A to "Blnd" 5486.01A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 5486.01A to 5484.49A, adjust multiplet Blend WL for refraction index
+Blnd	5484.49A
+Li 2	5483.46A
+Li 2	5485.09A
+# >>chng 13 aug 01, wl from 5484.32A to 5484.40A, now using middle multiplet wl
+Li 2	5484.40A
+Li 2	9581.43A
+#
+Be 3	203.837A	# two-photon singlet
+Be 3	209.095A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 101.693A to "Blnd" 101.693A, update He-like triplet labels and wl
+Blnd	101.693A
+Be 3	101.693A
+Be 3	104.548A
+Be 3	100.255A
+# >>chng 13 aug 01, wl from 3721.72A to 3721.40A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 3721.40A to "Blnd" 3722.52A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 3722.52A to 3722.00A, adjust multiplet Blend WL for refraction index
+Blnd	3722.00A
+Be 3	3720.84A
+Be 3	3722.92A
+Be 3	3721.40A
+Be 3	6142.32A
+#
+# >>chng 21 mar 16, wl from 122.270A to 122.271A, update NIST energies
+B  4	122.271A	# two-photon singlet
+# >>chng 21 mar 16, wl from 124.879A to 124.880A, update NIST energies
+B  4	124.880A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 61.0903A to "Blnd" 61.0903A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 61.0903A to 61.0907A, update NIST energies
+Blnd	61.0907A
+# >>chng 21 mar 16, wl from 61.0903A to 61.0907A, update NIST energies
+B  4	61.0907A
+# >>chng 21 mar 16, wl from 62.4397A to 62.4402A, update NIST energies
+B  4	62.4402A
+# >>chng 21 mar 16, wl from 60.3144A to 60.3147A, update NIST energies
+B  4	60.3147A
+# >>chng 13 aug 01, wl from 2824.03A to 2824.59A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 2824.59A to "Blnd" 2823.98A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 2823.98A to 2823.14A, adjust multiplet Blend WL for refraction index
+# >>chng 21 mar 16, wl from 2823.14A to 2823.12A, update NIST energies
+Blnd	2823.12A
+# >>chng 21 mar 16, wl from 2824.59A to 2824.54A, update NIST energies
+B  4	2824.54A
+# >>chng 21 mar 16, wl from 2825.86A to 2825.83A, update NIST energies
+B  4	2825.83A
+# >>chng 21 mar 16, wl from 2821.64A to 2821.63A, update NIST energies
+B  4	2821.63A
+# >>chng 21 mar 16, wl from 4491.10A to 4490.80A, update NIST energies
+B  4	4490.80A
+#
+C  5	81.4656A	# two-photon singlet
+# >>chng 21 mar 16, wl from 82.9441A to 82.9438A, update NIST energies
+C  5	82.9438A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 40.7307A to "Blnd" 40.7307A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 40.7307A to 40.7306A, update NIST energies
+Blnd	40.7306A
+# >>chng 21 mar 16, wl from 40.7307A to 40.7306A, update NIST energies
+C  5	40.7306A
+# >>chng 21 mar 16, wl from 41.4721A to 41.4719A, update NIST energies
+C  5	41.4719A
+C  5	40.2678A
+# >>chng 13 aug 01, wl from 2275.25A to 2277.16A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 2277.16A to "Blnd" 2274.23A, update He-like triplet labels and wl
+# >>chng 18 mar 06, wl from 2274.23A to 2273.52A, adjust multiplet Blend WL for refraction index
+# >>chng 21 mar 16, wl from 2273.52A to 2273.63A, update NIST energies
+Blnd	2273.63A
+# >>chng 21 mar 16, wl from 2277.16A to 2277.27A, update NIST energies
+C  5	2277.27A
+# >>chng 21 mar 16, wl from 2277.81A to 2277.92A, update NIST energies
+C  5	2277.92A
+# >>chng 21 mar 16, wl from 2270.79A to 2270.89A, update NIST energies
+C  5	2270.89A
+# >>chng 21 mar 16, wl from 3526.70A to 3526.66A, update NIST energies
+C  5	3526.66A
+#
+N  6	58.1518A	# two-photon singlet
+N  6	59.0687A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 29.0840A to "Blnd" 29.0840A, update He-like triplet labels and wl
+Blnd	29.0840A
+N  6	29.0815A
+N  6	29.5343A
+N  6	28.7870A
+# >>chng 13 aug 01, wl from 1903.86A to 1907.26A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1907.26A to "Blnd" 1901.17A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 1901.17A to 1901.26A, update NIST energies
+Blnd	1901.26A
+# >>chng 21 mar 16, wl from 1907.58A to 1907.30A, update NIST energies
+N  6	1907.30A
+# >>chng 21 mar 16, wl from 1907.26A to 1907.30A, update NIST energies
+N  6	1907.30A
+# >>chng 21 mar 16, wl from 1896.74A to 1896.81A, update NIST energies
+N  6	1896.81A
+N  6	2896.36A
+#
+O  7	43.5884A	# two-photon singlet
+O  7	44.2024A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 21.8070A to "Blnd" 21.8070A, update He-like triplet labels and wl
+Blnd	21.8070A
+O  7	21.8044A
+O  7	22.1012A
+O  7    21.6020A
+# >>chng 13 aug 01, wl from 1633.92A to 1638.28A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1638.28A to "Blnd" 1630.08A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 1630.08A to 1630.10A, update NIST energies
+Blnd	1630.10A
+# >>chng 21 mar 16, wl from 1639.86A to 1639.88A, update NIST energies
+O  7	1639.88A
+# >>chng 21 mar 16, wl from 1638.28A to 1638.27A, update NIST energies
+O  7	1638.27A
+# >>chng 21 mar 16, wl from 1623.61A to 1623.64A, update NIST energies
+O  7	1623.64A
+O  7	2448.98A
+#
+F  8	33.8805A	# two-photon singlet
+F  8	34.3051A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 16.9470A to "Blnd" 16.9470A, update He-like triplet labels and wl
+Blnd	16.9470A
+F  8	16.9443A
+F  8	17.1525A
+F  8	16.8070A
+# >>chng 13 aug 01, wl from 1408.98A to 1414.23A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1414.23A to "Blnd" 1403.83A, update He-like triplet labels and wl
+Blnd	1403.83A
+F  8	1417.23A
+F  8	1414.23A
+F  8	1395.48A
+F  8	2136.08A
+#
+Ne 9	27.0904A	# two-photon singlet
+Ne 9	27.3975A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 13.5529A to "Blnd" 13.5529A, update He-like triplet labels and wl
+Blnd	13.5529A
+Ne 9	13.55A
+Ne 9	13.6987A
+Ne 9	13.4471A
+# >>chng 13 aug 01, wl from 1266.26A to 1272.81A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1272.81A to "Blnd" 1259.54A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 1259.54A to 1259.58A, update NIST energies
+Blnd	1259.58A
+# >>chng 21 mar 16, wl from 1277.70A to 1277.79A, update NIST energies
+Ne 9	1277.79A
+# >>chng 21 mar 16, wl from 1272.81A to 1272.91A, update NIST energies
+Ne 9	1272.91A
+Ne 9	1248.28A
+Ne 9	1855.98A
+#
+Na10	22.1533A	# two-photon singlet
+Na10	22.3830A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 11.0829A to "Blnd" 11.0829A, update He-like triplet labels and wl
+Blnd	11.0829A
+# >>chng 21 mar 16, wl from 11.08A to 11.0799A, update NIST energies
+Na10	11.0799A
+Na10	11.1915A
+# >>chng 21 mar 16, wl from 11.0027A to 11.0026A, update NIST energies
+Na10	11.0026A
+# >>chng 13 aug 01, wl from 1134.43A to 1142.35A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1142.35A to "Blnd" 1125.50A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 1125.50A to 1125.51A, update NIST energies
+Blnd	1125.51A
+Na10	1149.20A
+# >>chng 21 mar 16, wl from 1142.35A to 1142.34A, update NIST energies
+Na10	1142.34A
+Na10	1111.76A
+# >>chng 21 mar 16, wl from 1646.93A to 1647.07A, update NIST energies
+Na10	1647.07A
+#
+Mg11	18.4523A	# two-photon singlet
+Mg11	18.6287A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 9.23121A to "Blnd" 9.23121A, update He-like triplet labels and wl
+Blnd	9.23121A
+# >>chng 21 mar 16, wl from 9.22816A to 9.22817A, update NIST energies
+Mg11	9.22817A
+Mg11	9.31434A
+Mg11	9.16875A
+# >>chng 13 aug 01, wl from 1025.02A to 1034.31A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1034.31A to "Blnd" 1013.82A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 1013.82A to 1013.84A, update NIST energies
+Blnd	1013.84A
+# >>chng 21 mar 16, wl from 1043.30A to 1043.26A, update NIST energies
+Mg11	1043.26A
+# >>chng 21 mar 16, wl from 1034.31A to 1034.32A, update NIST energies
+Mg11	1034.32A
+# >>chng 21 mar 16, wl from 997.455A to 997.486A, update NIST energies
+Mg11	997.486A
+Mg11	1474.19A
+#
+Al12	15.6058A	# two-photon singlet
+Al12	15.7442A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 7.80696A to "Blnd" 7.80696A, update He-like triplet labels and wl
+Blnd	7.80696A
+Al12	7.80383A
+Al12	7.87212A
+Al12	7.75730A
+# >>chng 13 aug 01, wl from 932.384A to 943.156A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 943.156A to "Blnd" 918.554A, update He-like triplet labels and wl
+Blnd	918.554A
+Al12	954.326A
+Al12	943.156A
+Al12	899.669A
+Al12	1327.65A
+#
+Si13	13.3701A	# two-photon singlet
+Si13	13.4808A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 6.68828A to "Blnd" 6.68828A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 6.68828A to 6.68827A, update NIST energies
+Blnd	6.68827A
+Si13	6.68508A
+Si13	6.74039A
+Si13	6.64803A
+# >>chng 13 aug 01, wl from 852.828A to 865.144A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 865.144A to "Blnd" 836.734A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 836.734A to 836.701A, update NIST energies
+Blnd	836.701A
+# >>chng 21 mar 16, wl from 878.646A to 878.619A, update NIST energies
+Si13	878.619A
+# >>chng 21 mar 16, wl from 865.144A to 865.052A, update NIST energies
+Si13	865.052A
+# >>chng 21 mar 16, wl from 814.693A to 814.690A, update NIST energies
+Si13	814.690A
+Si13	1200.67A
+#
+P 14	11.5816A	# two-photon singlet
+P 14	11.6715A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 5.79335A to "Blnd" 5.79335A, update He-like triplet labels and wl
+Blnd	5.79335A
+P 14	5.79008A
+P 14	5.83575A
+P 14	5.76019A
+# >>chng 13 aug 01, wl from 783.534A to 797.474A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 797.474A to "Blnd" 763.183A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 763.183A to 763.191A, update NIST energies
+Blnd	763.191A
+# >>chng 21 mar 16, wl from 813.154A to 813.160A, update NIST energies
+P 14	813.160A
+# >>chng 21 mar 16, wl from 797.474A to 797.486A, update NIST energies
+P 14	797.486A
+# >>chng 21 mar 16, wl from 739.973A to 739.979A, update NIST energies
+P 14	739.979A
+P 14	1090.30A
+#
+S 15	10.1289A	# two-photon singlet
+S 15	10.2030A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 5.06649A to "Blnd" 5.06649A, update He-like triplet labels and wl
+Blnd	5.06649A
+S 15	5.06314A
+S 15	5.10150A
+S 15	5.03873A
+# >>chng 13 aug 01, wl from 722.675A to 738.319A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 738.319A to "Blnd" 698.311A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 698.311A to 698.310A, update NIST energies
+Blnd	698.310A
+# >>chng 21 mar 16, wl from 756.306A to 756.212A, update NIST energies
+S 15	756.212A
+# >>chng 21 mar 16, wl from 738.319A to 738.307A, update NIST energies
+S 15	738.307A
+# >>chng 21 mar 16, wl from 673.4A to 673.414A, update NIST energies
+S 15	673.414A
+S 15	991.945A
+#
+Cl16	8.93256A	# two-photon singlet
+Cl16	8.99435A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 4.46789A to "Blnd" 4.46789A, update He-like triplet labels and wl
+Blnd	4.46789A
+Cl16	4.46447A
+Cl16	4.49718A
+Cl16	4.44431A
+# >>chng 13 aug 01, wl from 668.624A to 686.059A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 686.059A to "Blnd" 639.901A, update He-like triplet labels and wl
+Blnd	639.901A
+Cl16	706.015A
+Cl16	686.059A
+Cl16	613.798A
+Cl16	903.506A
+#
+# >>chng 21 mar 16, wl from 7.93573A to 7.93621A, update NIST energies
+Ar17	7.93621A	# two-photon singlet
+# >>chng 21 mar 16, wl from 7.98778A to 7.98829A, update NIST energies
+Ar17	7.98829A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 3.96911A to "Blnd" 3.96911A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 3.96911A to 3.96935A, update NIST energies
+Blnd	3.96935A
+# >>chng 21 mar 16, wl from 3.96561A to 3.96586A, update NIST energies
+Ar17	3.96586A
+# >>chng 21 mar 16, wl from 3.99389A to 3.99414A, update NIST energies
+Ar17	3.99414A
+# >>chng 21 mar 16, wl from 3.94883A to 3.94907A, update NIST energies
+Ar17	3.94907A
+# >>chng 13 aug 01, wl from 620.361A to 639.554A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 639.554A to "Blnd" 589.841A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 589.841A to 589.840A, update NIST energies
+Blnd	589.840A
+Ar17	661.559A
+Ar17	639.554A
+# >>chng 21 mar 16, wl from 559.971A to 559.970A, update NIST energies
+Ar17	559.970A
+# >>chng 21 mar 16, wl from 823.249A to 823.188A, update NIST energies
+Ar17	823.188A
+#
+# >>chng 21 mar 16, wl from 7.09711A to 7.09701A, update NIST energies
+K 18	7.09701A	# two-photon singlet
+# >>chng 21 mar 16, wl from 7.14159A to 7.14135A, update NIST energies
+K 18	7.14135A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 3.54954A to "Blnd" 3.54954A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 3.54954A to 3.54948A, update NIST energies
+Blnd	3.54948A
+# >>chng 21 mar 16, wl from 3.546A to 3.54591A, update NIST energies
+K 18	3.54591A
+# >>chng 21 mar 16, wl from 3.57079A to 3.57068A, update NIST energies
+K 18	3.57068A
+# >>chng 21 mar 16, wl from 3.53196A to 3.53180A, update NIST energies
+K 18	3.53180A
+# >>chng 13 aug 01, wl from 576.172A to 596.338A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 596.338A to "Blnd" 537.498A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 537.498A to 538.289A, update NIST energies
+Blnd	538.289A
+# >>chng 21 mar 16, wl from 621.504A to 621.767A, update NIST energies
+K 18	621.767A
+# >>chng 21 mar 16, wl from 596.338A to 598.047A, update NIST energies
+K 18	598.047A
+# >>chng 21 mar 16, wl from 510.673A to 511.245A, update NIST energies
+K 18	511.245A
+# >>chng 21 mar 16, wl from 755.116A to 750.193A, update NIST energies
+K 18	750.193A
+#
+Ca19	6.38397A	# two-photon singlet
+Ca19	6.42216A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 3.19280A to "Blnd" 3.19280A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 3.19280A to 3.19274A, update NIST energies
+Blnd	3.19274A
+# >>chng 21 mar 16, wl from 3.18915A to 3.18914A, update NIST energies
+Ca19	3.18914A
+Ca19	3.21108A
+Ca19	3.17724A
+# >>chng 13 aug 01, wl from 537.858A to 560.739A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 560.739A to "Blnd" 493.676A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 493.676A to 493.251A, update NIST energies
+Blnd	493.251A
+# >>chng 21 mar 16, wl from 585.931A to 585.857A, update NIST energies
+Ca19	585.857A
+# >>chng 21 mar 16, wl from 560.739A to 558.940A, update NIST energies
+Ca19	558.940A
+# >>chng 21 mar 16, wl from 466.904A to 466.788A, update NIST energies
+Ca19	466.788A
+Ca19	687.947A
+#
+Sc20	5.77278A	# two-photon singlet
+Sc20	5.80583A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 2.88696A to "Blnd" 2.88696A, update He-like triplet labels and wl
+Blnd	2.88696A
+Sc20	2.88327A
+Sc20	2.90292A
+Sc20	2.87315A
+# >>chng 13 aug 01, wl from 501.593A to 525.127A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 525.127A to "Blnd" 451.899A, update He-like triplet labels and wl
+Blnd	451.899A
+Sc20	553.557A
+Sc20	525.127A
+Sc20	426.094A
+Sc20	626.409A
+#
+Ti21	5.24499A	# two-photon singlet
+Ti21	5.27372A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 2.62293A to "Blnd" 2.62293A, update He-like triplet labels and wl
+Blnd	2.62293A
+Ti21	2.61913A
+Ti21	2.63686A
+Ti21	2.61040A
+# >>chng 13 aug 01, wl from 469.987A to 496.574A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 496.574A to "Blnd" 414.426A, update He-like triplet labels and wl
+Blnd	414.426A
+Ti21	523.889A
+Ti21	496.574A
+Ti21	389.499A
+Ti21	565.931A
+#
+V 22	4.78608A	# two-photon singlet
+V 22	4.81129A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 2.39337A to "Blnd" 2.39337A, update He-like triplet labels and wl
+Blnd	2.39337A
+V 22	2.38949A
+V 22	2.40565A
+V 22	2.38195A
+# >>chng 13 aug 01, wl from 440.559A to 468.999A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 468.999A to "Blnd" 379.274A, update He-like triplet labels and wl
+Blnd	379.274A
+V 22	496.894A
+V 22	468.999A
+V 22	355.783A
+V 22	514.007A
+#
+Cr23	4.38458A	# two-photon singlet
+Cr23	4.40683A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 2.19253A to "Blnd" 2.19253A, update He-like triplet labels and wl
+Blnd	2.19253A
+Cr23	2.18858A
+Cr23	2.20341A
+Cr23	2.18203A
+# >>chng 13 aug 01, wl from 413.692A to 443.951A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 443.951A to "Blnd" 346.795A, update He-like triplet labels and wl
+Blnd	346.795A
+## >>chng 18 feb 20, updated spectral label from "TOTL" 443.951A to "Blnd" 346.795A, update He-like triplet labels and wl
+Blnd	346.795A
+Cr23	472.144A
+Cr23	443.951A
+Cr23	324.981A
+Cr23	466.374A
+#
+Mn24	4.03128A	# two-photon singlet
+Mn24	4.05102A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 2.01582A to "Blnd" 2.01582A, update He-like triplet labels and wl
+Blnd	2.01582A
+Mn24	2.01178A
+Mn24	2.02551A
+Mn24	2.00607A
+# >>chng 13 aug 01, wl from 389.091A to 421.124A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 421.124A to "Blnd" 316.809A, update He-like triplet labels and wl
+Blnd	316.809A
+Mn24	449.317A
+Mn24	421.124A
+Mn24	296.833A
+Mn24	422.690A
+#
+Fe25	3.71877A	# two-photon singlet
+Fe25	3.73638A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1.85951A to "Blnd" 1.85951A, update He-like triplet labels and wl
+Blnd	1.85951A
+# >>chng 21 mar 16, wl from 1.85541A to 1.85540A, update NIST energies
+Fe25	1.85540A
+Fe25	1.86819A
+Fe25	1.85040A
+# >>chng 13 aug 01, wl from 366.563A to 400.304A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 400.304A to "Blnd" 289.213A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 289.213A to 289.179A, update NIST energies
+Blnd	289.179A
+Fe25	428.229A
+Fe25	400.304A
+# >>chng 21 mar 16, wl from 271.157A to 271.120A, update NIST energies
+Fe25	271.120A
+Fe25	382.760A
+#
+Co26	3.44100A	# two-photon singlet
+Co26	3.45678A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1.72059A to "Blnd" 1.72059A, update He-like triplet labels and wl
+Blnd	1.72059A
+Co26	1.71641A
+Co26	1.72839A
+Co26	1.71199A
+# >>chng 13 aug 01, wl from 345.846A to 381.243A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 381.243A to "Blnd" 263.774A, update He-like triplet labels and wl
+Blnd	263.774A
+Co26	408.647A
+Co26	381.243A
+Co26	247.647A
+Co26	346.344A
+#
+# >>chng 21 mar 16, wl from 3.19299A to 3.19300A, update NIST energies
+Ni27	3.19300A	# two-photon singlet
+# >>chng 21 mar 16, wl from 3.20724A to 3.20720A, update NIST energies
+Ni27	3.20720A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1.59658A to "Blnd" 1.59658A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 1.59658A to 1.59656A, update NIST energies
+Blnd	1.59656A
+# >>chng 21 mar 16, wl from 1.59233A to 1.59231A, update NIST energies
+Ni27	1.59231A
+# >>chng 21 mar 16, wl from 1.60362A to 1.60360A, update NIST energies
+Ni27	1.60360A
+# >>chng 21 mar 16, wl from 1.58849A to 1.58840A, update NIST energies
+Ni27	1.58840A
+# >>chng 13 aug 01, wl from 326.896A to 363.877A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 363.877A to "Blnd" 240.529A, update He-like triplet labels and wl
+# >>chng 21 mar 16, wl from 240.529A to 240.476A, update NIST energies
+Blnd	240.476A
+# >>chng 21 mar 16, wl from 390.529A to 390.442A, update NIST energies
+Ni27	390.442A
+# >>chng 21 mar 16, wl from 363.877A to 363.782A, update NIST energies
+Ni27	363.782A
+# >>chng 21 mar 16, wl from 226.283A to 226.234A, update NIST energies
+Ni27	226.234A
+## >>chng 21 march 16, updated spectral label from "Ni27" 316.987A to "Ni27" 313.224A, update from NIST
+Ni27	313.224A
+#
+Cu28	2.97067A	# two-photon singlet
+Cu28	2.98350A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1.48538A to "Blnd" 1.48538A, update He-like triplet labels and wl
+Blnd	1.48538A
+Cu28	1.48106A
+Cu28	1.49175A
+Cu28	1.47758A
+# >>chng 13 aug 01, wl from 309.299A to 347.741A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 347.741A to "Blnd" 219.149A, update He-like triplet labels and wl
+Blnd	219.149A
+Cu28	373.455A
+Cu28	347.741A
+Cu28	206.701A
+Cu28	283.198A
+#
+Zn29	2.77053A	# two-photon singlet
+Zn29	2.78217A	# two-photon triplet
+## >>chng 18 feb 20, updated spectral label from "TOTL" 1.38530A to "Blnd" 1.38530A, update He-like triplet labels and wl
+Blnd	1.38530A
+Zn29	1.38092A
+Zn29	1.39109A
+Zn29	1.37781A
+# >>chng 13 aug 01, wl from 293.067A to 333.000A, now using middle multiplet wl
+## >>chng 18 feb 20, updated spectral label from "TOTL" 333.000A to "Blnd" 199.704A, update He-like triplet labels and wl
+Blnd	199.704A
+Zn29	357.270A
+Zn29	333.000A
+Zn29	188.929A
+Zn29	256.016A
+

@@ -1,0 +1,107 @@
+title coronal equilibrium at 10^3 K
+#
+# commands controlling continuum =========
+coronal 3  
+# add component of cosmic rays to drive chemistry 
+cosmic ray background
+#
+# other commands for details     =========
+iterate  
+#
+# commands controlling geometry  =========
+stop column density 15 
+stop temperature off
+#
+# commands for density & abundances =========
+hden 10  
+#
+# other commands for details     =========
+# this sim needs very precise convergence to get a reliable result
+set eden convergence tolerance 1e-4
+#
+# commands controlling output    =========
+save performance "coll_t3.per"
+save monitors "coll_t3.asr" 
+save overview "coll_t3.ovr" 
+save continuum "coll_t3.con"  units angstroms 
+save dominant rates "coll_t3.sulphur" "S"
+save dominant rates "coll_t3.molh2" "H2"
+save dominant rates "coll_t3.molh" "H"
+#
+# commands giving the monitors    =========
+## >>chng 15 nov 13, from -12.9 to -7.149, add this monitor
+monitor ctot -7.149
+## 
+## >>chng 08 aug 18, from -15.18 to -14.04 add CRs
+## >>chng 10 oct 18, from -14.04 to -14.13, replace faint brems with laser at high-energy limit of code in coronal cmmnd
+## >>chng 10 dec 01, from -14.13 to -13.91, first run in a few weeks, net change
+## >>chng 11 nov 16, from -13.91 to -15.45, adjust newmole monitors
+## >>chng 12 apr 09, from -15.45 to -14.5, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 apr 11, from -14.5 to -14.88, fix non-negligible cutoff in hmrate4
+monitor ionization Hydrogen  2 -14.88 error 0.2
+## 
+## >>chng 08 aug 18, from -7.67 to -7.26 add CRs
+## >>chng 10 dec 01, from -7.26 to -7.113, first run in a few weeks, net change
+## >>chng 11 nov 16, from -7.113 to -6.644, adjust newmole monitors
+## >>chng 12 apr 09, from -6.644 to -6.254, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 apr 11, from -6.254 to -6.112, fix non-negligible cutoff in hmrate4
+monitor ionization Lithium   2 -6.112 error 0.2
+## 
+## >>chng 08 aug 18, from -8.10 to -7.66 add CRs
+## >>chng 09 nov 18, from -7.66 to -7.583, fix stopping criterion
+## >>chng 10 dec 01, from -7.583 to -7.497, first run in a few weeks, net change
+## >>chng 11 nov 16, from -7.497 to -6.947, adjust newmole monitors
+## >>chng 12 apr 09, from -6.947 to -6.556, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 apr 11, from -6.556 to -6.415, fix non-negligible cutoff in hmrate4
+monitor ionization Beryllium 2 -6.415 error 0.2
+## 
+## >>chng 09 nov 18, from -7.49 to -7.414, fix stopping criterion
+## >>chng 10 oct 18, from -7.414 to -7.536, replace faint brems with laser at high-energy limit of code in coronal cmmnd
+## >>chng 10 dec 01, from -7.536 to -7.424, first run in a few weeks, net change
+## >>chng 11 nov 16, from -7.424 to -6.876, adjust newmole monitors
+## >>chng 12 apr 09, from -6.876 to -6.486, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 apr 11, from -6.486 to -6.345, fix non-negligible cutoff in hmrate4
+monitor ionization Boron     2 -6.345 error 0.2
+## 
+## >>chng 08 aug 18, from -6.39 to -5.84 add CRs
+## >>chng 10 dec 01, from -5.84 to -5.732, first run in a few weeks, net change
+## >>chng 11 nov 16, from -5.732 to -6.254, adjust newmole monitors
+## >>chng 12 apr 09, from -6.254 to -5.815, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 21 sep 11, from -5.815 to -4.444, LAMDA update
+monitor ionization Sodium    2 -4.444 error 0.2
+## 
+## >>chng 08 aug 18, from -4.22 to -3.72 add CRs
+## >>chng 08 dec 13, from -3.72 to -3.845, merging newsolvers branch
+## >>chng 09 nov 18, from -3.845 to -4.269, fix stopping criterion
+## >>chng 10 dec 01, from -4.269 to -4.196, first run in a few weeks, net change
+## >>chng 11 nov 16, from -4.196 to -4.497, adjust newmole monitors
+## >>chng 12 apr 09, from -4.497 to -4.145, update CR backbround to Indriolo+07, ~8x larger
+monitor ionization Magnesium 2 -4.145 error 0.2
+## 
+## >>chng 08 aug 18, from -3.92 to -3.34 add CRs
+## >>chng 10 dec 01, from -3.34 to -3.235, first run in a few weeks, net change
+## >>chng 11 apr 22, from -3.235 to -3.195, update Ar sequence Badnell DR rates
+## >>chng 11 nov 16, from -3.195 to -4.035, adjust newmole monitors
+## >>chng 12 apr 09, from -4.035 to -3.546, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 apr 11, from -3.546 to -3.794, fix non-negligible cutoff in hmrate4
+monitor ionization Aluminium 2 -3.794 error 0.1
+## 
+## >>chng 08 aug 18, from 2.05 to 2.61 add CRs
+## >>chng 09 nov 18, from 2.61 to 2.529, fix stopping criterion
+## >>chng 10 dec 01, from 2.529 to 2.62, first run in a few weeks, net change
+## >>chng 11 apr 22, from 2.62 to 2.578, update Ar sequence Badnell DR rates
+## >>chng 11 nov 16, from 2.578 to 1.916, adjust newmole monitors
+## >>chng 12 apr 09, from 1.916 to 2.369, update CR backbround to Indriolo+07, ~8x larger
+## >>chng 14 apr 11, from 2.369 to 2.227, fix non-negligible cutoff in hmrate4
+monitor eden 2.227 error 0.1
+#
+# coll_t3.in
+# class coronal  
+# ========================================
+
+This tests conditions of collisional equilibrium at low densities.
+This is one of a series of sims coll_t?.in which test ionization
+over a range of temperatures.  This one, unlike the others,
+includes cosmic rays.  Chemistry is important at this low temperature
+and the chemical network will collapse without a source of ionization.
+The cosmic rays provide this source of ionization.

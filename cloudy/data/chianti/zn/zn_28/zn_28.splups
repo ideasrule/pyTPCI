@@ -1,0 +1,20 @@
+ 30 28  1  2  1 3.081e-02 4.217e+00 3.530e+00 1.214e-01 1.025e-01 8.683e-02 7.408e-02 6.426e-02 5.619e-02 5.084e-02 4.605e-02 4.179e-02 3.551e-02 2.921e-02
+ 30 28  1  3  1 9.404e-02 6.358e+00 3.079e+00 2.213e-01 1.974e-01 1.763e-01 1.579e-01 1.400e-01 1.235e-01 1.074e-01 9.419e-02 8.387e-02 7.126e-02 5.915e-02
+ -1
+%filename:  zn_28.upsdat  
+
+Theoretical collision strengths:
+Liang, G. Y.; Badnell, N. R.
+R-matrix electron-impact excitation data for the Li-like iso-electronic sequence
+including Auger and radiation damping
+Astronomy & Astrophysics, Volume 528, id.A69, 15 pp
+DOI:  https://ui.adsabs.harvard.edu/link_gateway/2011A&A...528A..69L/doi:10.1051/0004-6361/201016417
+ADS ref:  https://ui.adsabs.harvard.edu/abs/2011A%26A...528A..69L/abstract
+
+collision strengths provided in the range   1.57e+05 to   1.57e+09 K
+produced as a part of the 'CHIANTI' atomic database for astrophysical spectroscopy
+ K. Dere (GMU) - 2013 January 03
+
+Reference:
+Chianti  2022-02-18
+ -1

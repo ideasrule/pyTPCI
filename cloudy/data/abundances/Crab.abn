@@ -1,0 +1,40 @@
+#Crab Nebula abundances from constant density model M1 of Table 3
+#refer	Crab	abund	Pequignot, D., & Dennefeld, M. 1983, A&A, 120, 249
+HYDROGEN	1	
+HELIUM		7.00E-01	
+#LITHIUM	2.04E-09--Element off
+#BERYLLIUM	2.63E-11--Element off
+#BORON		7.59E-10--Element off
+CARBON		7.00E-03	
+NITROGEN	1.23E-04	
+OXYGEN		1.70E-03	
+#FLUORINE	3.02E-08--Element off
+NEON		5.33E-04	
+#SODIUM		2.06E-06--Element off
+MAGNESIUM	8.00E-05	
+#ALUMINIUM	2.95E-06--Element off
+#SILICON	3.55E-05--Element off
+#PHOSPHORUS	3.73E-07--Element off
+SULPHUR		3.50E-05	
+#CHLORINE	1.88E-07--Element off
+#ARGON		3.98E-06--Element off
+#POTASSIUM	1.35E-07--Element off
+#CALCIUM	2.29E-06--Element off
+#SCANDIUM	1.58E-09--Element off
+#TITANIUM	1.10E-07--Element off
+#VANADIUM	1.05E-08--Element off
+#CHROMIUM	4.84E-07--Element off
+#MANGANESE	3.42E-07--Element off
+IRON		3.24E-05	
+#COBALT		8.32E-08--Element off
+#NICKEL		1.76E-06--Element off
+#COPPER		1.87E-08--Element off
+#ZINC		4.52E-08--Element off
+**************************************
+
+These are from model M1, Table 3, of Pequignot and Dennefeld
+(1983). Iron was not included and is from work
+in progress. Grains are not included by default. They must
+be added separately.
+
+D. Pequignot and M. Dennefeld. The Crab Nebula. A&A, 120:249–262, April 1983.

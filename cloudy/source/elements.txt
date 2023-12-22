@@ -1,0 +1,127 @@
+======================================================================
+ionization potentials
+
+lower and upper bound for each shell is given as follows:
+iplow = OpacPoint.ipElement[0][ns][nion][nelem];
+iphi = OpacPoint.ipElement[1][ns][nion][nelem];
+
+for entire species,
+Heavy.ipHeavy[nelem][ion]
+
+valence in Ryd saved in contcreatepointers.c into
+Heavy.Valence_IP_Ryd[nelem][ion]
+
+======================================================================
+abundances 
+solar default abundances
+set in routine AbundancesZero, which is in zerologic.c
+contained in abund.SolarSave
+
+solar abundances for the current calculation abund.solar[LIMELM];
+
+======================================================================
+current gas phase abundances
+these are the total gas phase abundances abund.gas_phase[LIMELM];
+
+======================================================================
+list of inner shells
+heavy.chShell[0], "1s" etc
+
+======================================================================
+strings giving labels names
+
+/* line	label */
+rfield.chLineLabel[j] ,
+/* cont label*/
+rfield.chContLabel[j] );
+
+shell labels stored in Shell.chShell[]
+
+set in zerologic.c
+
+ has names
+#include "elementnames.h"
+elementnames.chElementSym has 2ch name as used in label, as in "H " , "He" , "Li" ,"Be" ,
+elementnames.chElementNameShort[nelem] is 4-char name in caps
+elementnames.chElementName has full name upper and lower case
+/* this is series of two char nmbers, beginning with " 1" and
+ * ending with "31" */
+elementnames.chIonStage[LIMELM+3][3];
+/* string giving ionization stage as roman numerals */
+elementnames.chIonRoman[LIMELM+3][7];
+
+iso sequence names in iso.chISO
+
+these are saved in zerologic.c
+
+match element chech for element name
+routine GetElem will search for element name on command line 
+in cddefines.h
+
+======================================================================
+Abundances and ionic fractions
+abund.gas_phase[LIMELM+3][LIMELM+2]
+dense.xIonDense[nelem][ion] - density cm-3
+
+first argument is atomic number minus 1, so H is 0
+
+second argument is ionization stage, 
+0 for atom, 1 for first ion
+ 
+abund.gas_phase[nelem] is total gas phase density (cm-3), all ions and molecules, but not grains
+
+abund.xMolecules[nelem] is total gas density of element in various molecules
+
+======================================================================
+
+values of abundances are stored in struc solars.h
+initial sets of abundances are set in AbundancesZero.c
+
+======================================================================
+
+limits to ionization range
+
+upper and lower limits to range of element, nelem is on the C scale,
+IonLow and IonHigh are on c scale, 0 is smallest low can be, 
+0 <= IonLowHi <= N+1 where N is the atomic number.
+
+dense.IonLow[nelem], initally 0 in nsset
+dense.IonHigh[nelem], initially nelem+1 in nsset
+
+note non-c form of loop over ions 
+for( ion=dense.IonLow[nelem]; ion<=dense.IonHigh[nelem]; ++ion )
+
+if the element is turned off, both are set to -1
+
+abund.gas_phase[nelem][IonLow] is lowest ion stage with positive abundances
+abund.gas_phase[nelem][IonHigh] is highest ion stage with positive abundances
+
+======================================================================
+
+turning element off
+
+if the element is turned off, both 
+dense.IonLow[nelem]
+dense.IonHigh[nelem]
+are set to -1
+
+element turned off or on - check 
+#include "abundances.h"
+if( dense.lgElmtOn[nelem] )
+
+======================================================================
+
+mass in atomic mass units
+AtomcWgt.AtomicWeight[i]
+set in zerologic, about 1 for H, 4 for he, etc
+
+======================================================================
+
+in cddefines.h and cddefines.c are defined the static vars
+ipHYDRO
+ipHELIUM
+ipCARBON
+ipOXYGEN
+which are the indices for these elements in the array of elements
+these are off by one from the chemical scale due to c array counting
+
