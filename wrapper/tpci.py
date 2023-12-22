@@ -18,10 +18,17 @@ Mp = 11 * M_earth
 M_sun = 2e33
 M_star = 0.75 * M_sun
 
-hydrogen_frac = 0.92 #0.84 @ 100x metallicity
 init_temp = 740
-init_mu = 1.23 #2.62 at 100x metallicity
-metallicity = 1
+metallicity = 100
+
+if metallicity == 1:
+    init_mu = 1.23
+    hydrogen_frac = 0.92
+elif metallicity == 100:
+    init_mu = 2.62
+    hydrogen_frac = 0.84
+else:
+    assert(False)
 
 #Probably no need to change
 unit_density = 1e-10
@@ -139,7 +146,7 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
         heating /= rho
         cloudy_radii = 1 + (np.max(depth) - depth) / unit_length
         heating_interp = np.interp(pluto_radii, cloudy_radii[::-1], heating[::-1])
-        
+
     with open(output_file, "w") as f:
         for i in range(len(pluto_radii)):
             f.write("{} {:.6e}\n".format(pluto_radii[i], heating_interp[i]))
