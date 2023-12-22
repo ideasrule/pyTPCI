@@ -1,0 +1,2 @@
+OBJ     += rotate.o
+HEADERS += rotate.h
