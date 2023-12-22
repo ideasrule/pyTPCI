@@ -24,8 +24,4 @@
 
 /* [Beg] user-defined constants (do not change this line) */
 
-#define  UNIT_DENSITY                   1e-10
-#define  UNIT_LENGTH                    PLANET_RADIUS
-#define  UNIT_VELOCITY                  1.0e5
-
 /* [End] user-defined constants (do not change this line) */

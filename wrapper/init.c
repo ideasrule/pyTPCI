@@ -48,7 +48,7 @@ void Init (double *v, double r, double x2, double x3)
     P = 1e-9; //prevent CLOUDY from crashing
   }
   double rho = P * (MU * CONST_mH) / (CONST_kB * INIT_TEMP);
-  printf("Initial conditions: r=%lf, rho=%e, P=%e\n", r, rho, P);
+  //printf("Initial conditions: r=%lf, rho=%e, P=%e\n", r, rho, P);
   
   v[RHO] = rho / UNIT_DENSITY;
   v[VX1] = 0.0;
