@@ -1,5 +1,6 @@
 import subprocess
 import numpy as np
+import sys
 
 #Physical constants
 AU = 1.5e13
@@ -19,11 +20,17 @@ M_sun = 2e33
 M_star = 0.75 * M_sun
 
 init_temp = 740
-metallicity = 100
+metallicity = 0
 
-if metallicity == 1:
+if metallicity == 1 or metallicity == 0:
     init_mu = 1.23
     hydrogen_frac = 0.92
+elif metallicity == 10:
+    init_mu = 1.39
+    hydrogen_frac = 0.91
+elif metallicity == 30:
+    init_mu = 1.68
+    hydrogen_frac = 0.90
 elif metallicity == 100:
     init_mu = 2.62
     hydrogen_frac = 0.84
@@ -37,7 +44,7 @@ unit_velocity = 1e5
 unit_pressure = unit_density * unit_velocity**2
 
 iter_increase_at_step = 50
-dt = 0.1
+
 
 def write_params_header(filename="params.h"):
     f = open(filename, "w")
@@ -107,7 +114,7 @@ def run_cloudy(global_ind):
     script += 'stop temperature linear 5 K\n'
     script += 'turbulence 1 km/sec no pressure\n'
     script += 'double optical depth\n'
-    script += 'element limit off -5\n'        
+    script += 'element limit off -5\n'
     script += 'abundances GASS10 no grains\n'
     script += 'metals {} linear\n'.format(metallicity)
     script += 'print short\n'
@@ -166,13 +173,51 @@ def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto
     print("Running pluto command: ", command)
     subprocess.run(command, check=True)
 
+def is_converged(global_ind, max_frac_diff=0.02):
+    if global_ind == 0:
+        return False
+    
+    prev_pluto_filename = "data." + str(global_ind-1).zfill(4) + ".tab"
+    radii, rho = np.loadtxt(prev_pluto_filename, usecols=(0,2), unpack=True)
+    curr_pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"
+    radii, rho2 = np.loadtxt(curr_pluto_filename, usecols=(0,2), unpack=True)
+
+    max_rho_rel_diff = np.max(np.abs(rho2 / rho - 1))
+    print("Max rel change in rho: ", max_rho_rel_diff)
+    return max_rho_rel_diff < max_frac_diff
+    
+
 write_params_header()
-subprocess.run(["make", "clean"], check=True)
+#subprocess.run(["make", "clean"], check=True)
 subprocess.run(["make"], check=True)
 
-for i in range(100):
-    t = i * dt
-    #t = 10 + (i-100) * dt
-    write_heating_file(i)
-    run_pluto(i, t)
-    run_cloudy(i)
+if len(sys.argv) == 3:
+    global_ind = int(sys.argv[1])
+    t = float(sys.argv[2])
+elif len(sys.argv) == 1:
+    global_ind = 0
+    t = 0
+else:
+    print("Give no arguments to start from beginning.  Give timestep and time to resume.")
+    assert(False)
+
+dt = 0.1
+max_t = 100
+
+log_f = open("tpci_log.txt", "w")
+
+while t < max_t:
+    log_f.write("Starting loop for step {}, t={}, dt={}\n".format(global_ind, t, dt))
+    log_f.flush()
+    write_heating_file(global_ind)
+    run_pluto(global_ind, t)
+    run_cloudy(global_ind)
+    
+    if is_converged(global_ind):
+        dt *= 2
+        print("Doubling dt to {}".format(dt))
+
+    t += dt
+    global_ind += 1
+
+log_f.close()
