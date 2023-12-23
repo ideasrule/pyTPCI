@@ -207,7 +207,8 @@ max_t = 100
 log_f = open("tpci_log.txt", "w")
 
 while t < max_t:
-    log_f.write("Starting loop for step {}, t={}, dt={}\n".format(global_ind, t, dt))
+    log_f.write("Starting loop for step {}, t={}, dt={}\n".format(
+        global_ind, round(t,5), round(dt,5)))
     log_f.flush()
     write_heating_file(global_ind)
     run_pluto(global_ind, t)
