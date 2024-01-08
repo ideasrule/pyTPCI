@@ -83,7 +83,7 @@ def run_cloudy(global_ind):
     script = ''
     script += 'CMB\n'
     script += 'cosmic rays background\n'
-    script += 'init "spectra.ini"\n'
+    script += 'init "{}"\n'.format(STELLAR_SPEC)
     script += 'radius {:.6e} linear\n'.format(a)
     script += 'stop depth {:.6e} linear\n'.format(0.9995 * depths.max())
     script += 'illumination angle 66 deg\n'
