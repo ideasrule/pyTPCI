@@ -54,7 +54,7 @@ double DepthTable::tabval(double r0,
 		fprintf( ioQQQ, " requested radius outside range of dense_tabden\n" );
 		if (lgLinear)
 		  {
-		  fprintf( ioQQQ, " radius was%10.2e min, max=%10.2e%10.2e\n", 
+		  fprintf( ioQQQ, " radius was %10.5e min, max=%10.2e, %10.5e\n", 
 			   x, dist[0], dist[nvals-1] );
 		  }
 		else
