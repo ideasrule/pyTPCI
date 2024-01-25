@@ -1,30 +1,35 @@
 import subprocess
 import numpy as np
 import sys
+import pdb
 
 #Physical constants
 AU = 1.5e13
 k_B = 1.38e-16
 R_earth = 6.378136e8
+R_jup = 11.2 * R_earth
 M_earth = 5.97e27
+M_jup = 1.898e30
+M_sun = 2e33
 m_H = 1.67e-24
 
 pluto_radii = np.load("pluto_radii.npy")
 
 #System parameters
 STELLAR_SPEC = "spectra.ini"
-a = 0.06 * AU
-Rp = 2.9 * R_earth
-Mp = 11 * M_earth
-M_sun = 2e33
-M_star = 0.75 * M_sun
+a = 0.04723 * AU
+Rp = 1.359 * R_jup
+Mp = 0.69 * M_jup
+M_star = 1.131 * M_sun
+gamma = 5./3
+tau_frac = 0.1
 
-init_temp = 740
+init_temp = 1320
 metallicity = 0
 
 if metallicity == 1 or metallicity == 0:
-    init_mu = 1.23
-    hydrogen_frac = 0.92
+    init_mu = 1.28
+    hydrogen_frac = 0.909
 elif metallicity == 10:
     init_mu = 1.39
     hydrogen_frac = 0.91
@@ -42,8 +47,9 @@ unit_density = 1e-10
 unit_length = Rp
 unit_velocity = 1e5
 unit_pressure = unit_density * unit_velocity**2
+unit_time = unit_length / unit_velocity
 
-iter_increase_at_step = 50
+iter_increase_at_step = 110
 
 
 def write_params_header(filename="params.h"):
@@ -62,9 +68,10 @@ def write_params_header(filename="params.h"):
     f.write("#define  UNIT_LENGTH     {:.3e}\n".format(Rp))
     f.write("#define  UNIT_VELOCITY   {:.3e}\n".format(unit_velocity))
     f.close()
-        
-def run_cloudy(global_ind):
-    pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"            
+
+    
+def run_cloudy(global_ind, t):
+    pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"        
     radii, rho, v, P = np.loadtxt(pluto_filename, usecols=(0,2,3,6), unpack=True)
     radii *= unit_length
     rho *= unit_density
@@ -79,13 +86,15 @@ def run_cloudy(global_ind):
     else:
         mu = np.ones(len(depths)) * init_mu
         
-    Ts = (P * mu * m_H) / (k_B * rho)
+    #Ts = (P * mu * m_H) / (k_B * rho)
+    Ts = np.loadtxt("salz_result.dat", usecols=4)
     script = ''
     script += 'CMB\n'
     script += 'cosmic rays background\n'
     script += 'init "{}"\n'.format(STELLAR_SPEC)
+    #script += 'radius {:.6e} linear\n'.format(a)
     script += 'stop depth {:.6e} linear\n'.format(depths.max())
-    script += 'illumination angle 66 deg\n'
+    #script += 'illumination angle 66 deg\n'
 
     n_H = rho / (init_mu * m_H) * hydrogen_frac
     script += 'dlaw table depth linear\n'
@@ -97,28 +106,31 @@ def run_cloudy(global_ind):
     
     script += 'tlaw table depth linear\n'
     for i in range(len(depths)-1, -1, -1):
-        script += '{:.6e} {}\n'.format(depths[i], Ts[i])
+        script += '{:.6e} {}\n'.format(depths[i], Ts[i])    
     script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], Ts[0])
     script += 'end of tlaw\n'
 
-    script += 'wind advection table depth linear\n'
-    for i in range(len(depths)-1, -1, -1):
-        #Positive (inward) velocities crash CLOUDY for some reason
-        script += '{:.6e} {:.3e}\n'.format(depths[i], min(-1, -v[i]))
-    script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], -1)
-    script += 'end of velocity table\n'
-
-    if global_ind > iter_increase_at_step:
+    #if global_ind > iter_increase_at_step and t > 1000:
+    if True:
+        script += 'wind advection table depth linear\n'
+        for i in range(len(depths)-1, -1, -1):
+            #Positive (inward) velocities crash CLOUDY for some reason
+            script += '{:.6e} {:.3e}\n'.format(depths[i], min(-1, -v[i]))
+        script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], -1)
+        script += 'end of velocity table\n'
+        #script += 'set dynamics advection length fraction 0.01\n'
+        script += 'set dynamics advection length 9\n'
         script += 'iterate to convergence max=40\n'
     else:
         script += 'iterate 2\n'
-        
-    script += 'set dynamics advection length fraction 0.01\n'
+
+    script += 'failures 100\n'
+    script += 'set nend 2800\n'
     script += 'no molecules\n'
     script += 'stop temperature linear 5 K\n'
     script += 'turbulence 1 km/sec no pressure\n'
     script += 'double optical depth\n'
-    script += 'element limit off -5\n'
+    script += 'element limit off -2\n'
     script += 'abundances GASS10 no grains\n'
     script += 'metals {} linear\n'.format(metallicity)
     script += 'print short\n'
@@ -130,7 +142,7 @@ def run_cloudy(global_ind):
     script += 'save overview "over.tab" last\n'
     script += 'save pressure "pres.tab" last\n'
     script += 'save wind "wind.tab"\n'
-    script += 'save dynamics advection "dyna.tab" last\n'
+    #script += 'save dynamics advection "dyna.tab" last\n'
     script += 'save continuum "continuum.tab" last units Angstrom\n'
     script += 'save cooling "cool.tab" last\n'
     script += 'save ages "ages.tab" last\n'
@@ -147,6 +159,13 @@ def run_cloudy(global_ind):
     if result.returncode != 0:
         print("Warning: something went wrong in CLOUDY.  You can ignore this in the early timesteps")
 
+def calc_timestep(global_ind):
+    cloudy_file = "cl_data." + str(global_ind).zfill(4) + ".over.tab"
+    depth, rho, n, mu, T, heating = np.loadtxt(cloudy_file, usecols=range(6), unpack=True)
+    P = n * k_B * T
+    tau = P / (gamma - 1) / heating
+    return tau_frac * np.min(tau) / unit_time
+        
 
 def write_heating_file(global_ind, output_file="curr_heat.dat"):
     if global_ind == 0:
@@ -155,8 +174,9 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
         cloudy_file = "cl_data." + str(global_ind-1).zfill(4) + ".over.tab"
         depth, rho, heating = np.loadtxt(cloudy_file, usecols=(0,1,5), unpack=True)
         heating /= rho
-        cloudy_radii = 1 + (np.max(depth) - depth) / unit_length
+        cloudy_radii = np.max(pluto_radii) - depth / unit_length
         heating_interp = np.interp(pluto_radii, cloudy_radii[::-1], heating[::-1])
+        #heating_interp *= min(1, global_ind / iter_increase_at_step)
 
     with open(output_file, "w") as f:
         for i in range(len(pluto_radii)):
@@ -172,14 +192,14 @@ def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto
         f.write(template.replace("TSTOP", str(t + dt)))
 
     command = ["./pluto"]
-    if t > 0:
-        command += ["-restart", "{}".format(global_ind)]
+    #if t > 0:
+    command += ["-h5restart", "{}".format(global_ind)]
     print("Running pluto command: ", command)
     f = open("pluto_log.txt", "a")
     subprocess.run(command, check=True, stdout=f)
     f.close()
 
-def is_converged(global_ind, max_frac_diff=0.02):
+def get_max_rho_change(global_ind):
     if global_ind == 0:
         return False
     
@@ -190,8 +210,8 @@ def is_converged(global_ind, max_frac_diff=0.02):
 
     max_rho_rel_diff = np.max(np.abs(rho2 / rho - 1))
     print("Max rel change in rho: ", max_rho_rel_diff)
-    return max_rho_rel_diff < max_frac_diff
-    
+    return max_rho_rel_diff
+
 
 write_params_header()
 #subprocess.run(["make", "clean"], check=True)
@@ -204,13 +224,12 @@ if len(sys.argv) == 4:
 elif len(sys.argv) == 1:
     global_ind = 0
     t = 0
+    dt = 0.01
 else:
     print("Give no arguments to start from beginning.  Give timestep and time to resume.")
     assert(False)
 
-dt = 0.1
-max_t = 100
-
+max_t = 1000
 log_f = open("tpci_log.txt", "a")
 
 while t < max_t:
@@ -219,13 +238,21 @@ while t < max_t:
     log_f.flush()
     write_heating_file(global_ind)
     run_pluto(global_ind, t)
-    run_cloudy(global_ind)
+    run_cloudy(global_ind, t)
+    max_rho_change = get_max_rho_change(global_ind)
     
-    if is_converged(global_ind):
-        dt *= 2
-        print("Doubling dt to {}".format(dt))
-
     t += dt
     global_ind += 1
+
+    #dt = calc_timestep(global_ind-1)
+    #print(f"Using new timestep: {dt}")
+    
+    '''if max_rho_change < 0.1:
+        dt = dt * 2
+        print("Doubling dt to {}".format(dt))
+    if max_rho_change > 0.2:
+        dt = dt / 2
+        print("Shrinking dt to {}".format(dt))'''
+
 
 log_f.close()
