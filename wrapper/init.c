@@ -155,7 +155,11 @@ void UserDefBoundary (const Data *d, RBox *box, int side, Grid *grid)
       BOX_LOOP(box,k,j,i){
 	d->Vc[RHO][k][j][i] = RHO_SURF / UNIT_DENSITY;
 	d->Vc[PRS][k][j][i] = P_SURF / unit_pressure;
-	d->Vc[iVR][k][j][i] = d->Vc[iVR][k][j][IBEG];
+	double v_boundary = d->Vc[iVR][k][j][IBEG];
+	if (v_boundary < 0)
+	  d->Vc[iVR][k][j][i] = v_boundary;
+	else
+	  d->Vc[iVR][k][j][i] = 0;
       }
     }else if (box->vpos == X1FACE){
       BOX_LOOP(box,k,j,i){  }
