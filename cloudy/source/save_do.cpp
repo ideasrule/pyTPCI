@@ -3120,20 +3120,12 @@ void SaveDo(
 					fprintf( save.params[ipPun].ipPnunit, "\t%.4e\t%.4e\t%.4f\t",
 						 dense.xMassDensity, dense.pden, dense.wmole );
 
-					/* temperature, heating */
-					if(dynamics.Cool() > dynamics.Heat()) 
-					{
-						fprintf( save.params[ipPun].ipPnunit, "%.4e\t%.3e",
-							PrtLogLin(phycon.te ),
-							PrtLogLin(thermal.htot-dynamics.Heat() ) );
-					}
-					else
-					{
-						double diff = fabs(thermal.htot-dynamics.Cool());
-						fprintf( save.params[ipPun].ipPnunit, "%.4e\t%.3e",
-							PrtLogLin(phycon.te),
-							PrtLogLin( diff ) );
-					}
+					/* temperature, heating, cooling */
+					fprintf( save.params[ipPun].ipPnunit, "%.4e\t%.3e\t%.3e",
+						 PrtLogLin(phycon.te ),
+						 PrtLogLin(thermal.htot - dynamics.Heat()),
+						 PrtLogLin(thermal.ctot - dynamics.Cool())
+						 );
 
 					/* hydrogen and electron densities */
 					fprintf( save.params[ipPun].ipPnunit, "\t%.4e\t%.4e",
