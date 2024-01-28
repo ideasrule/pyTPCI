@@ -109,7 +109,7 @@ def run_cloudy(global_ind, t):
             script += '{:.6e} {:.3e}\n'.format(depths[i], min(-1e-10, -v[i]))
         script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], -1e-10)
         script += 'end of velocity table\n'
-        script += 'set dynamics advection length fraction 0.1\n'
+        script += 'set dynamics advection length fraction 0.01\n'
         script += 'iterate to convergence max=40\n'
     else:
         script += 'iterate 2\n'
