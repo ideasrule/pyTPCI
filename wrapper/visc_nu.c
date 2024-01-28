@@ -18,11 +18,10 @@ void Visc_nu(double *v, double x1, double x2, double x3,
  *  \return This function has no return value.
  * ************************************************************************** */
 {
-  double Re = 10;
-  double U = 1e5 / UNIT_VELOCITY; //typical velocity at low radii
+  double Re = 1;
+  double U = 1e6 / UNIT_VELOCITY; //typical velocity at low radii
   double Delta = 0.0002; //grid spacing at low radii
   //double unit_viscosity = UNIT_DENSITY * UNIT_VELOCITY * UNIT_LENGTH;
-  *nu1 = v[RHO] * Re * U * Delta; 
-  //*nu1 = 5e-3 / (UNIT_DENSITY * UNIT_VELOCITY * UNIT_LENGTH);
+  *nu1 = v[RHO] * (U * Delta / Re); 
   *nu2 = 0.0;
 }
