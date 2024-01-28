@@ -1,6 +1,7 @@
 import subprocess
 import numpy as np
 import sys
+import scipy.interpolate
 
 #Physical constants
 AU = 1.5e13
@@ -43,7 +44,7 @@ unit_length = Rp
 unit_velocity = 1e5
 unit_pressure = unit_density * unit_velocity**2
 
-iter_increase_at_step = 50
+advection_turnon = 100 #Time t
 
 
 def write_params_header(filename="params.h"):
@@ -63,7 +64,7 @@ def write_params_header(filename="params.h"):
     f.write("#define  UNIT_VELOCITY   {:.3e}\n".format(unit_velocity))
     f.close()
         
-def run_cloudy(global_ind):
+def run_cloudy(global_ind, t):
     pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"            
     radii, rho, v, P = np.loadtxt(pluto_filename, usecols=(0,2,3,6), unpack=True)
     radii *= unit_length
@@ -99,16 +100,16 @@ def run_cloudy(global_ind):
     for i in range(len(depths)-1, -1, -1):
         script += '{:.6e} {}\n'.format(depths[i], Ts[i])
     script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], Ts[0])
-    script += 'end of tlaw\n'
-
-    script += 'wind advection table depth linear\n'
-    for i in range(len(depths)-1, -1, -1):
-        #Positive (inward) velocities crash CLOUDY for some reason
-        script += '{:.6e} {:.3e}\n'.format(depths[i], min(-1, -v[i]))
-    script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], -1)
-    script += 'end of velocity table\n'
-
-    if global_ind > iter_increase_at_step:
+    script += 'end of tlaw\n'    
+    
+    if t > advection_turnon:
+        script += 'wind advection table depth linear\n'
+        for i in range(len(depths)-1, -1, -1):
+            #Positive (inward) velocities crash CLOUDY for some reason
+            script += '{:.6e} {:.3e}\n'.format(depths[i], min(-1e-10, -v[i]))
+        script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], -1e-10)
+        script += 'end of velocity table\n'
+        script += 'set dynamics advection length fraction 0.1\n'
         script += 'iterate to convergence max=40\n'
     else:
         script += 'iterate 2\n'
@@ -153,16 +154,27 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
         heating_interp = np.zeros(len(pluto_radii))
     else:
         cloudy_file = "cl_data." + str(global_ind-1).zfill(4) + ".over.tab"
-        depth, rho, heating = np.loadtxt(cloudy_file, usecols=(0,1,5), unpack=True)
-        heating /= rho
-        cloudy_radii = 1 + (np.max(depth) - depth) / unit_length
-        heating_interp = np.interp(pluto_radii, cloudy_radii[::-1], heating[::-1])
+        data = np.loadtxt(cloudy_file, usecols=(0,1,5,6))
+        data = data[::-1]
+        depth, rho, heating, cooling = data.T
+        net_heating = heating - cooling
+        net_heating /= rho
+        cloudy_radii = np.max(pluto_radii) - depth / unit_length
+
+        interpolator = scipy.interpolate.interp1d(cloudy_radii, net_heating, bounds_error=False, fill_value=0)
+        pluto_widths = np.gradient(pluto_radii)
+        heating_interp = interpolator(pluto_radii)
+
+        for i in range(len(pluto_radii)):
+            cond = (cloudy_radii >= pluto_radii[i] - pluto_widths[i] / 2) & (cloudy_radii < pluto_radii[i] + pluto_widths[i] / 2)
+            if np.sum(cond) > 1:
+                heating_interp[i] = np.mean(net_heating[cond])
+
 
     with open(output_file, "w") as f:
         for i in range(len(pluto_radii)):
             f.write("{} {:.6e}\n".format(pluto_radii[i], heating_interp[i]))
-
-    
+            
 
 def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto.ini"):
     with open(template_file, "r") as f:
@@ -208,7 +220,7 @@ else:
     print("Give no arguments to start from beginning.  Give timestep and time to resume.")
     assert(False)
 
-dt = 0.1
+dt = 0.01
 max_t = 100
 
 log_f = open("tpci_log.txt", "a")
@@ -219,11 +231,11 @@ while t < max_t:
     log_f.flush()
     write_heating_file(global_ind)
     run_pluto(global_ind, t)
-    run_cloudy(global_ind)
+    run_cloudy(global_ind, t)
     
     if is_converged(global_ind):
-        dt *= 2
-        print("Doubling dt to {}".format(dt))
+        dt *= 1.5
+        print("Increasing dt to {}".format(dt))
 
     t += dt
     global_ind += 1

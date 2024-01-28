@@ -15,13 +15,14 @@
 #define  DUST_FLUID                     NO
 #define  EOS                            IDEAL
 #define  ENTROPY_SWITCH                 NO
-#define  THERMAL_CONDUCTION             EXPLICIT
-#define  VISCOSITY                      NO
+#define  THERMAL_CONDUCTION             SUPER_TIME_STEPPING
+#define  VISCOSITY                      SUPER_TIME_STEPPING
 #define  ROTATING_FRAME                 NO
 
 /* -- user-defined parameters (labels) -- */
 
 
 /* [Beg] user-defined constants (do not change this line) */
+
 
 /* [End] user-defined constants (do not change this line) */
