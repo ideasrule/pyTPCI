@@ -102,7 +102,7 @@ def run_cloudy(global_ind, t):
     script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], Ts[0])
     script += 'end of tlaw\n'    
     
-    if t > advection_turnon:
+    if True: #t > advection_turnon:
         script += 'wind advection table depth linear\n'
         for i in range(len(depths)-1, -1, -1):
             #Positive (inward) velocities crash CLOUDY for some reason
@@ -114,7 +114,6 @@ def run_cloudy(global_ind, t):
     else:
         script += 'iterate 2\n'
         
-    script += 'set dynamics advection length fraction 0.01\n'
     script += 'no molecules\n'
     script += 'stop temperature linear 5 K\n'
     script += 'turbulence 1 km/sec no pressure\n'
@@ -191,7 +190,7 @@ def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto
     subprocess.run(command, check=True, stdout=f)
     f.close()
 
-def is_converged(global_ind, max_frac_diff=0.02):
+def is_converged(global_ind, max_frac_diff=0.10):
     if global_ind == 0:
         return False
     
@@ -221,7 +220,7 @@ else:
     assert(False)
 
 dt = 0.01
-max_t = 100
+max_t = 1000
 
 log_f = open("tpci_log.txt", "a")
 
