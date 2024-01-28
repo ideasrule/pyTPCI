@@ -102,7 +102,7 @@ def run_cloudy(global_ind, t):
     script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], Ts[0])
     script += 'end of tlaw\n'    
     
-    if True: #t > advection_turnon:
+    if t > advection_turnon:
         script += 'wind advection table depth linear\n'
         for i in range(len(depths)-1, -1, -1):
             #Positive (inward) velocities crash CLOUDY for some reason
