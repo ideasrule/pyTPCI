@@ -7,7 +7,7 @@
 pluto:                              # Default target
 
 ARCH         = Linux.gcc.defs
-PLUTO_DIR    = /home/stanley/work/my_tpci/PLUTO
+PLUTO_DIR    = /home/stanley/work/pyTPCI/PLUTO
 SRC          = $(PLUTO_DIR)/Src
 INCLUDE_DIRS = -I. -I$(SRC)
 VPATH        = ./:$(SRC)/New:$(SRC):$(SRC)/Time_Stepping:$(SRC)/States
@@ -73,9 +73,11 @@ endif
 OBJ += weno3_states.o
 OBJ += rk_step.o
 OBJ += update_stage.o
+OBJ += sts.o
 OBJ += parabolic_update.o
 include $(SRC)/HD/makefile
 include $(SRC)/Thermal_Conduction/makefile
+include $(SRC)/Viscosity/makefile
 include $(SRC)/Cooling/makefile
 include $(SRC)/Cooling/Tabulated/makefile
 include $(SRC)/EOS/Ideal/makefile
