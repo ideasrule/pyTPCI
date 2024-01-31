@@ -22,6 +22,7 @@ M_star = 0.75 * M_sun
 
 init_temp = 740
 metallicity = 0
+min_temperature = 28 #CLOUDY limit
 
 if metallicity == 1 or metallicity == 0:
     init_mu = 1.23
@@ -98,7 +99,11 @@ def run_cloudy(global_ind, t):
     
     script += 'tlaw table depth linear\n'
     for i in range(len(depths)-1, -1, -1):
+        if Ts[i] < min_temperature:
+            print(f"WARNING: temperature {Ts[i]} below min {min_temperature}")
+            Ts[i] = min_temperature
         script += '{:.6e} {}\n'.format(depths[i], Ts[i])
+        
     script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], Ts[0])
     script += 'end of tlaw\n'    
     
