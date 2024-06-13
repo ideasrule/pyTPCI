@@ -243,7 +243,7 @@ while t < max_t:
     if max_frac_diff < 0.05:
         dt *= 1.5
         print("Increasing dt to {}".format(dt))
-    if max_frac_diff > 0.10:
+    if max_frac_diff > 0.10 and dt > 0.01:
         dt /= 2
         print("Decreasing dt to {}".format(dt))
 
