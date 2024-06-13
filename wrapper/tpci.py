@@ -180,7 +180,7 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
             f.write("{} {:.6e}\n".format(pluto_radii[i], heating_interp[i]))
             
 
-def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto.ini"):
+def run_pluto(global_ind, t, dt, template_file="pluto_template.ini", ini_file="pluto.ini"):
     with open(template_file, "r") as f:
         template = f.read()
     config = template.replace("TSTOP", str(t+dt))
@@ -195,7 +195,7 @@ def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto
     subprocess.run(command, check=True, stdout=f)
     f.close()
 
-def is_converged(global_ind, max_frac_diff=0.10):
+def get_max_frac_diff(global_ind):
     if global_ind == 0:
         return False
     
@@ -206,7 +206,7 @@ def is_converged(global_ind, max_frac_diff=0.10):
 
     max_rho_rel_diff = np.max(np.abs(rho2 / rho - 1))
     print("Max rel change in rho: ", max_rho_rel_diff)
-    return max_rho_rel_diff < max_frac_diff
+    return max_rho_rel_diff
     
 
 write_params_header()
@@ -220,13 +220,12 @@ if len(sys.argv) == 4:
 elif len(sys.argv) == 1:
     global_ind = 0
     t = 0
+    dt = 0.01
 else:
     print("Give no arguments to start from beginning.  Give timestep and time to resume.")
     assert(False)
 
-dt = 0.01
 max_t = 1000
-
 log_f = open("tpci_log.txt", "a")
 
 while t < max_t:
@@ -234,14 +233,19 @@ while t < max_t:
         global_ind, round(t,5), round(dt,5)))
     log_f.flush()
     write_heating_file(global_ind)
-    run_pluto(global_ind, t)
+    run_pluto(global_ind, t, dt)
     run_cloudy(global_ind, t)
-    
-    if is_converged(global_ind):
-        dt *= 1.5
-        print("Increasing dt to {}".format(dt))
 
     t += dt
     global_ind += 1
+        
+    max_frac_diff = get_max_frac_diff(global_ind)
+    if max_frac_diff < 0.05:
+        dt *= 1.5
+        print("Increasing dt to {}".format(dt))
+    if max_frac_diff > 0.10:
+        dt /= 2
+        print("Decreasing dt to {}".format(dt))
+
 
 log_f.close()
