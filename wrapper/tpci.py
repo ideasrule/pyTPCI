@@ -77,6 +77,7 @@ def write_params_header(filename="params.h"):
 
     
 def run_cloudy(global_ind, t, last_cloudy_iter):
+    ''' RUN CLOUDY from previous PLUTO data'''
     pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"        
     radii, rho, v, P = np.loadtxt(pluto_filename, usecols=(0,2,3,6), unpack=True)
     radii *= unit_length
@@ -169,6 +170,7 @@ def run_cloudy(global_ind, t, last_cloudy_iter):
         
 
 def write_heating_file(global_ind, output_file="curr_heat.dat"):
+    ''' Write heating file curr_heat.dat from CLOUDY to transfer into PLUTO'''
     cloudy_file = "cl_data." + str(global_ind).zfill(4) + ".over.tab"
     data = np.loadtxt(cloudy_file, usecols=(0,1,5,6))
     data = data[::-1]
@@ -194,6 +196,7 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
     
 
 def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto.ini"):
+    ''' Run PLUTO '''
     with open(template_file, "r") as f:
         template = f.read()
     config = template.replace("TSTOP", str(t+dt))
@@ -210,6 +213,7 @@ def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto
 
     
 def get_max_change(global_ind, last_cloudy_iter):
+    ''' Find maximum relative difference of density and pressure '''
     if global_ind == 0:
         return False
     
@@ -255,10 +259,10 @@ else:
     print("Give no arguments to start from beginning.  Give timestep and time to resume.")
     assert(False)
 
-max_t = 1000
+max_t = 1000 # run pyTPCI until max_t
 log_f = open("tpci_log.txt", "a")
 
-
+# main loop
 while t < max_t:
     log_f.write("Starting loop for step {}, t={}, dt={}\n".format(
         global_ind, round(t,5), round(dt,5)))
