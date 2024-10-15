@@ -23,8 +23,6 @@ a = 0.04723 * AU
 Rp = 1.359 * R_jup
 Mp = 0.69 * M_jup
 M_star = 1.131 * M_sun
-gamma = 5./3
-tau_frac = 0.1
 
 init_temp = 1320
 metallicity = 1
