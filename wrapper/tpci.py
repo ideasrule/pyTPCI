@@ -138,7 +138,10 @@ def run_cloudy(global_ind, t, last_cloudy_iter):
     script += 'stop temperature linear 5 K\n'
     script += 'turbulence 1 km/sec no pressure\n'
     script += 'double optical depth\n' # simulate planet's surface
-    script += 'element limit off -5\n'
+    if metallicity == 0:
+        script += 'element limit off -2\n'
+    else:
+        script += 'element limit off -5\n'
     script += 'abundances GASS10 no grains\n'
     script += 'metals {} linear\n'.format(metallicity)
     script += 'print short\n'
