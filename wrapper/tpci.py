@@ -58,7 +58,7 @@ advec_turnon = 100
 
 
 def write_params_header(filename="params.h"):
-    ''' Write CLOUDY params file'''
+    ''' Write PLUTO params file'''
     f = open(filename, "w")
     f.write("#define  PLANET_RADIUS   ({} * CONST_Rearth)\n".format(Rp/R_earth))
     f.write("#define  PLANET_MASS     ({} * CONST_Mearth)\n".format(Mp/M_earth))
