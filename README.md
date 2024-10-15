@@ -1,9 +1,8 @@
-Initially, after cloning the pyTPCI directory to your computer, copy the `wrapper` folder for **each instance of pyTPCI you wish to run**. 
-
 ## Setup
-1) Define the environment variable `PLUTO_DIR` and run `$PLUTO_DIR/setup.py` in your folder. Further customization of PLUTO takes place in `pluto_template.ini`.
-2) Run `make` and `make clean` in your folder to produce the PLUTO executable.
-3) Run `make` in `cloudy/source` to produce `cloudy.exe`.
+1) After cloning the pyTPCI directory to your computer, copy the `wrapper` folder for **each instance of pyTPCI you wish to run**. 
+2) Define the environment variable `PLUTO_DIR` and run `$PLUTO_DIR/setup.py` in your folder. Further customization of PLUTO takes place in `pluto_template.ini`.
+3) Run `make` and `make clean` in your folder to produce the PLUTO executable.
+4) Run `make` in `cloudy/source` to produce `cloudy.exe`.
 
 pyTPCI runs PLUTO and then CLOUDY in alternating steps, transferring heating information between them with `write_heating_file`. In order to save computational power and improve speed, 
 by default pyTPCI only calls CLOUDY if there is at least a 10% maximum fractional difference (`max_rho_rel_diff`) in density between PLUTO files. 
