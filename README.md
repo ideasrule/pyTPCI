@@ -5,7 +5,7 @@
 4) Run `make` in `cloudy/source` to produce `cloudy.exe`.
 
 pyTPCI runs PLUTO and then CLOUDY in alternating steps, transferring heating information between them with `write_heating_file`. In order to save computational power and improve speed, 
-by default pyTPCI only calls CLOUDY if there is at least a 10% maximum fractional difference (`max_rho_rel_diff`) in density between PLUTO files. 
+by default pyTPCI only calls CLOUDY if there is at least a 10% maximum fractional difference (`max_rel_diff`) in density or pressure between PLUTO files. 
 
 ## Running pyTPCI
 1) Create a stellar spectrum at the planet's surface (semimajor axis), with columns of log10(frequency (Hz)) and log10(F_nu), spectral irradiance (ergs/(s cm^2 Hz)). At the end this also contains the integrated luminosity at the planet's surface, and the energy range in Rydbergs. See `spectra_example.ini`.
