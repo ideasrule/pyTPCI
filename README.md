@@ -1,3 +1,5 @@
+pyTPCI is an improved version of The PLUTO-CLOUDY Interface, coupling together hydrodynamics code [PLUTO](https://plutocode.ph.unito.it/) and gas microphysics code [CLOUDY](https://gitlab.nublado.org/cloudy/cloudy).
+
 ## Setup
 1) After cloning the pyTPCI directory to your computer, copy the `wrapper` folder for **each instance of pyTPCI you wish to run**. 
 2) Define the environment variable `PLUTO_DIR` and run `$PLUTO_DIR/setup.py` in your folder. Further customization of PLUTO takes place in `pluto_template.ini`.
@@ -17,9 +19,10 @@ by default pyTPCI only calls CLOUDY if there is at least a 10% maximum fractiona
 - To plot one file, run `python plot.py global_ind` where `global_ind` is the number of the file, such as "54".
 - To plot multiple files, run `python plot.py start stop step`, where `start` and `stop` are the initial and final file numbers to plot, with a given `step`. Plotting files will automatically skip file names that do not exist. 
 
-## Logging information
+## Logging and Docs information
 - pyTPCI run information is in `tpci_log.txt`.
 - PLUTO output logs for each PLUTO run are appended in `pluto_log.txt`
+- CLOUDY docs are in `cloudy/docs` and PLUTO docs are in `PLUTO/Doc`
 
 ## Troubleshooting and Common Errors
 - Is the path to the `spectra.ini` file correct?
