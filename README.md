@@ -10,7 +10,7 @@ pyTPCI runs PLUTO and then CLOUDY in alternating steps, transferring heating inf
 by default pyTPCI only calls CLOUDY if there is at least a 10% maximum fractional difference (`max_rel_diff`) in density or pressure between PLUTO files. 
 
 ## Running pyTPCI
-1) Create a stellar spectrum at the planet's surface (semimajor axis), with columns of log10(frequency (Hz)) and log10(F_nu), spectral irradiance (ergs/(s cm^2 Hz)). At the end this also contains the integrated luminosity at the planet's surface, and the energy range in Rydbergs. See `spectra_example.ini`.
+1) Create a stellar spectrum at the planet's surface (semimajor axis), with columns of log10(frequency (Hz)) and log10(F_nu), spectral irradiance (ergs/(s cm^2 Hz)). At the end this also contains the band-integrated flux at the planet's surface, and the energy range in Rydbergs. See `spectra_example.ini`.
 2) Edit `tpci.py` to set the system parameters: the stellar spectrum file, the semimajor axis, planet radius and mass, stellar mass, initial temperature, and metallicity. Upon running, this will generate a CLOUDY `params.h` file and an input script ending in `.in`.
 3) Open `screen` and run `python tpci.py` to start at t=0 and use the default timestep dt=0.01. If restarting from a previous pyTPCI run, instead do `python tpci.py global_ind time timestep`, where `global_ind` is the number of the CLOUDY file you wish to start from.
 4) Monitor pyTPCI's progress by plotting PLUTO and CLOUDY files using `plot.py` and `cloudy_plot.py`.
