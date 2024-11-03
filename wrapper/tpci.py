@@ -242,7 +242,7 @@ def delete_pluto_files(last_cloudy_iter, curr_cloudy_iter):
             pass
 
 write_params_header()
-#subprocess.run(["make", "clean"], check=True)
+subprocess.run(["make", "clean"], check=True)
 subprocess.run(["make"], check=True)
 
 # [start, t, dt]
@@ -271,7 +271,7 @@ while t < max_t:
     run_pluto(global_ind, t)
     max_rho_change = get_max_change(global_ind, last_cloudy_iter)
     if max_rho_change > 0.1:
-        #delete_pluto_files(last_cloudy_iter, global_ind)
+        delete_pluto_files(last_cloudy_iter, global_ind)
         run_cloudy(global_ind, t, last_cloudy_iter)
         write_heating_file(global_ind)
         last_cloudy_iter = global_ind
