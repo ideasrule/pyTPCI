@@ -1,0 +1,22 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: pyTPCI
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Michael
+    family-names: Zhang
+    orcid: 'https://orcid.org/0000-0002-0659-1783'
+    affiliation: University of Chicago
+  - given-names: Riley
+    family-names: Rosener
+    orcid: 'https://orcid.org/0000-0001-7905-2134'
+    email: rosener.riley@gmail.com
+    affiliation: University of Chicago
+repository-code: 'https://github.com/ideasrule/pyTPCI'
+license: GPL-3.0-or-later
+version: 1.0.0
