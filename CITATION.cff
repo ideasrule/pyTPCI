@@ -18,5 +18,12 @@ authors:
     email: rosener.riley@gmail.com
     affiliation: University of Chicago
 repository-code: 'https://github.com/ideasrule/pyTPCI'
+abstract: >-
+  A software interface between CLOUDY and PLUTO for
+  simulating 1D hydrodynamic escape in exoplanets published
+  in Rosener et al (2025)
+keywords:
+  - exoplanets
+  - hydrodynamic escape
 license: GPL-3.0-or-later
 version: 1.0.0
