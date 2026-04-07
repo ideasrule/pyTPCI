@@ -18,7 +18,7 @@ m_H = 1.67e-24
 pluto_radii = np.load("pluto_radii.npy")
 
 # System parameters ---
-STELLAR_SPEC = "spectra_hd209458_sf.ini"
+STELLAR_SPEC = "spectra_hd209458b.ini"
 a = 0.04723 * AU
 Rp = 1.359 * R_jup
 Mp = 0.69 * M_jup
