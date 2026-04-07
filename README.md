@@ -1,10 +1,11 @@
 pyTPCI is an improved version of The PLUTO-CLOUDY Interface, coupling together hydrodynamics code [PLUTO](https://plutocode.ph.unito.it/) and gas microphysics code [CLOUDY](https://gitlab.nublado.org/cloudy/cloudy).
 
 ## Setup
-1) After cloning the pyTPCI directory to your computer, copy the `wrapper` folder for **each instance of pyTPCI you wish to run**. 
-2) Define the environment variable `PLUTO_DIR` and run `$PLUTO_DIR/setup.py` in your folder. Further customization of PLUTO takes place in `pluto_template.ini`.
-3) Run `make` and `make clean` in your folder to produce the PLUTO executable.
-4) Run `make` in `cloudy/source` to produce `cloudy.exe`.
+1) Make sure you have libhdf5-dev installed.  On Ubuntu, you can do "sudo apt install libhdf5-dev"
+2) After cloning the pyTPCI directory to your computer, copy the `wrapper` folder for **each instance of pyTPCI you wish to run**. 
+3) Define the environment variable `PLUTO_DIR` and run `$PLUTO_DIR/setup.py` in your folder. Further customization of PLUTO takes place in `pluto_template.ini`.
+4) Run `make` and `make clean` in your folder to produce the PLUTO executable.
+5) Run `make` in `cloudy/source` to produce `cloudy.exe`.
 
 pyTPCI runs PLUTO and then CLOUDY in alternating steps, transferring heating information between them with `write_heating_file`. In order to save computational power and improve speed, 
 by default pyTPCI only calls CLOUDY if there is at least a 10% maximum fractional difference (`max_rel_diff`) in density or pressure between PLUTO files. 
