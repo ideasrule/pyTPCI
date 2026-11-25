@@ -10,6 +10,11 @@ pyTPCI is an improved version of The PLUTO-CLOUDY Interface, coupling together h
 pyTPCI runs PLUTO and then CLOUDY in alternating steps, transferring heating information between them with `write_heating_file`. In order to save computational power and improve speed, 
 by default pyTPCI only calls CLOUDY if there is at least a 10% maximum fractional difference (`max_rel_diff`) in density or pressure between PLUTO files. 
 
+Three refinements of this coupling:
+- **Refresh.** CLOUDY is also called whenever the heating table is older than `MAX_AGE` (0.5 code time units). Otherwise a quiet flow never triggers a call and PLUTO settles against a stale table. The 10% trigger only looks at r < 5 Rp.
+- **Lyman-alpha thermostat.** `curr_heat.dat` holds heating and cooling per gram separately, the density and P/rho of the state CLOUDY was given, and local exponents. `radiat.c` rescales the rates to each cell's current state, so the steep temperature dependence of Lyman-alpha cooling acts inside PLUTO between CLOUDY calls. The only non-zero exponent is dln(cooling)/dlnT = f_Lya * 118348 K / T, where f_Lya is the fraction of the cooling CLOUDY attributes to collisionally excited hydrogen lines.
+- **Filtered CLOUDY input.** The density, pressure and velocity passed to CLOUDY (and used by the trigger) are Gaussian-smoothed in radius (width 0.02 r, only above 1.3-1.4 Rp) to remove small acoustic pulses, which would otherwise be imprinted on the heating table and re-excited. PLUTO's own state is not modified.
+
 ## Running pyTPCI
 1) Create a stellar spectrum at the planet's surface (semimajor axis), with columns of log10(frequency (Hz)) and log10(F_nu), spectral irradiance (ergs/(s cm^2 Hz)). At the end this also contains the band-integrated flux at the planet's surface, and the energy range in Rydbergs. See `spectra_example.ini`.
 2) Edit `tpci.py` to set the system parameters: the stellar spectrum file, the semimajor axis, planet radius and mass, stellar mass, initial temperature, and metallicity. Upon running, this will generate a CLOUDY `params.h` file and an input script ending in `.in`.

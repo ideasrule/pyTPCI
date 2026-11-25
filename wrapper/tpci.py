@@ -80,10 +80,38 @@ def write_params_header(filename="params.h"):
     f.close()
 
     
+# Remove sub-0.05 Rp acoustic structure outside the base before it reaches Cloudy and the
+# trigger. With the raw state, each Cloudy table encodes the current pulses at fixed radii; the pulses
+# then move on and the mismatched heating launches new ones (a frozen-table PLUTO-only test shows the
+# pulses leave r < 5 Rp in ~0.2 units with none re-forming). ln(rho), ln(P) and v are Gaussian-smoothed
+# in r (sigma = FILT_SIGMA * r) with weight 0 below 1.3 Rp rising to 1 at 1.4 Rp (sharp real structure at 1.2-1.3); smoothing a log of a
+# near-exponential profile leaves steady profiles almost unchanged (error ~ sigma^2/2 * curvature).
+FILT_SIGMA = 0.02
+
+def filter_state(r, rho, v, P):
+    w = np.clip((r - 1.3) / 0.1, 0.0, 1.0)
+    if not w.any():
+        return rho, v, P
+    sig = FILT_SIGMA * r
+    dr = np.gradient(r)
+    out = []
+    for q, log in ((rho, True), (v, False), (P, True)):
+        y = np.log(q) if log else q
+        ys = y.copy()
+        for i in np.nonzero(w)[0]:
+            m = np.abs(r - r[i]) < 3 * sig[i]
+            k = np.exp(-0.5 * ((r[m] - r[i]) / sig[i])**2) * dr[m]
+            ys[i] = np.sum(k * y[m]) / np.sum(k)
+        ys = w * ys + (1 - w) * y
+        out.append(np.exp(ys) if log else ys)
+    return tuple(out)
+
+
 def run_cloudy(global_ind, t, last_cloudy_iter):
     ''' RUN CLOUDY from previous PLUTO data'''
     pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"        
     radii, rho, v, P = np.loadtxt(pluto_filename, usecols=(0,2,3,6), unpack=True)
+    rho, v, P = filter_state(radii, rho, v, P)
     radii *= unit_length
     rho *= unit_density
     v *= unit_velocity
@@ -179,6 +207,17 @@ def run_cloudy(global_ind, t, last_cloudy_iter):
     result = subprocess.run(["../cloudy/source/cloudy.exe", "-r", prefix], check=False)
     if result.returncode != 0:
         print("Warning: something went wrong in CLOUDY.  You can ignore this in the early timesteps")
+
+    # Accept the Cloudy output only if over.tab is complete; otherwise the previous heating table is kept
+    try:
+        over = np.loadtxt(prefix + ".over.tab", usecols=(0,))
+        ok = len(over) > 200 and over.max() > 0.99 * depths.max()
+    except Exception:
+        ok = False
+    if not ok:
+        print("CLOUDY OUTPUT INVALID at", global_ind, "- keeping previous heating table")
+        return False
+    return True
         
 
 def cloudy_equilibrium(x, rho_cgs, tag):
@@ -220,28 +259,51 @@ def cloudy_equilibrium(x, rho_cgs, tag):
 
 def write_heating_file(global_ind, output_file="curr_heat.dat"):
     ''' Write heating file curr_heat.dat from CLOUDY to transfer into PLUTO'''
+    # Heating and cooling per gram are written separately, together with the (filtered) state Cloudy was
+    # given, rho_tab and theta_tab = P/rho (code units), and local exponents. radiat.c rescales the rates
+    # to the current cell state, H/rho * x^bhT y^bhr - C/rho * x^bcT y^bcr with x = theta/theta_tab,
+    # y = rho/rho_tab, so the Lya thermostat (C ~ T^10-18) acts in PLUTO's cooling ODE between Cloudy
+    # calls instead of through a frozen net rate. Exact at the table state.
+    # The only non-zero exponent is bcT = dln(C/rho)/dlnT = f_Lya * 118348 K / T, with f_Lya the fraction
+    # of the cooling in collisionally excited H lines ("ISclinH H" in this call's cool.tab) and T the
+    # Cloudy temperature: C_Lya ~ exp(-E_Lya/kT). Heating and density exponents are 0.
     cloudy_file = "cl_data." + str(global_ind).zfill(4) + ".over.tab"
-    data = np.loadtxt(cloudy_file, usecols=(0,1,5,6))
+    data = np.loadtxt(cloudy_file, usecols=(0,1,5,6,4))
     data = data[::-1]
-    depth, rho, heating, cooling = data.T
-    net_heating = heating - cooling
-    net_heating /= rho
+    depth, rho, heating, cooling, Te = data.T
     cloudy_radii = np.max(pluto_radii) - depth / unit_length
-
-    interpolator = scipy.interpolate.interp1d(cloudy_radii, net_heating, bounds_error=False, fill_value=0)
     pluto_widths = np.gradient(pluto_radii)
-    heating_interp = interpolator(pluto_radii)
-    
-    for i in range(len(pluto_radii)):
-        cond = (cloudy_radii >= pluto_radii[i] - pluto_widths[i] / 2) & (cloudy_radii < pluto_radii[i] + pluto_widths[i] / 2)
-        #print(i, np.sum(cond))
-        if np.sum(cond) > 1:
-            heating_interp[i] = np.mean(net_heating[cond])
-        
+    cols = []
+    try:
+        cdep, flya = [], []
+        with open(cloudy_file.replace(".over.tab", ".cool.tab")) as f:
+            for line in f:
+                if line.startswith("#"):
+                    continue
+                p = line.rstrip("\n").split("\t")
+                cdep.append(float(p[0]))
+                flya.append(sum(float(fr) for lab, fr in zip(p[5::2], p[6::2]) if lab.startswith("ISclinH H")))
+        b_cT = np.interp(depth, cdep, flya) * 118348.0 / Te
+    except Exception as e:
+        print("WARNING: no cooling exponents for", global_ind, repr(e))
+        b_cT = np.zeros(len(depth))
+    for q in (heating / rho, cooling / rho, b_cT):
+        interpolator = scipy.interpolate.interp1d(cloudy_radii, q, bounds_error=False, fill_value=0)
+        q_interp = interpolator(pluto_radii)
+        for i in range(len(pluto_radii)):
+            cond = (cloudy_radii >= pluto_radii[i] - pluto_widths[i] / 2) & (cloudy_radii < pluto_radii[i] + pluto_widths[i] / 2)
+            if np.sum(cond) > 1:
+                q_interp[i] = np.mean(q[cond])
+        cols.append(q_interp)
+
+    r_t, rho_t, v_t, P_t = np.loadtxt("data." + str(global_ind).zfill(4) + ".tab", usecols=(0,2,3,6), unpack=True)
+    rho_t, _, P_t = filter_state(r_t, rho_t, v_t, P_t)
+    assert np.allclose(r_t, pluto_radii, rtol=1e-6)
 
     with open(output_file, "w") as f:
         for i in range(len(pluto_radii)):
-            f.write("{} {:.6e}\n".format(pluto_radii[i], heating_interp[i]))
+            f.write("{} {:.6e} {:.6e} {:.6e} {:.6e} {:.4f} {:.4f} {:.4f} {:.4f}\n".format(
+                pluto_radii[i], cols[0][i], cols[1][i], rho_t[i], P_t[i] / rho_t[i], 0.0, 0.0, cols[2][i], 0.0))
     
 
 def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto.ini"):
@@ -271,8 +333,15 @@ def get_max_change(global_ind, last_cloudy_iter):
     curr_pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"
     radii, rho2, P2 = np.loadtxt(curr_pluto_filename, usecols=(0,2,6), unpack=True)
 
-    max_rho_rel_diff = np.max(np.abs(rho2 / rho - 1))
-    max_P_rel_diff = np.max(np.abs(P2 / P - 1))
+    # compare the same filtered states Cloudy sees (v is not used by the trigger)
+    rho, _, P = filter_state(radii, rho, np.zeros_like(rho), P)
+    rho2, _, P2 = filter_state(radii, rho2, np.zeros_like(rho2), P2)
+
+    # trigger only on r < 5 Rp, where the heating matters; noise in the outer wind
+    # otherwise forces a Cloudy re-run almost every step
+    inner = radii < 5.0
+    max_rho_rel_diff = np.max(np.abs(rho2[inner] / rho[inner] - 1))
+    max_P_rel_diff = np.max(np.abs(P2[inner] / P[inner] - 1))
     max_rel_diff = max(max_rho_rel_diff, max_P_rel_diff)
     print("Max rel change: ", max_rel_diff)
     return max_rel_diff
@@ -310,11 +379,19 @@ elif len(sys.argv) == 1:
         os.remove("ic.dat")
     dt = 1e-2
     last_cloudy_iter = 0
+    # zero rates until the first Cloudy call (columns as in write_heating_file)
+    with open("curr_heat.dat", "w") as f:
+        for r in pluto_radii:
+            f.write("{} 0 0 1 1 0 0 0 0\n".format(r))
 else:
     print("Give no arguments to start from beginning.  Give timestep and time to resume.")
     assert(False)
 
 max_t = 1000 # run pyTPCI until max_t
+# Also call Cloudy whenever the heating table is this old (code time units). Once the flow is quiet the
+# 10% trigger never fires and PLUTO would settle against a stale table; with the refresh the run is a
+# fixed-point iteration between PLUTO and Cloudy.
+MAX_AGE = 0.5
 log_f = open("tpci_log.txt", "a")
 
 # main loop
@@ -326,11 +403,12 @@ while t < max_t:
     max_rho_change = get_max_change(global_ind, last_cloudy_iter)
     # The Parker initial condition is close to steady, so the 10% trigger may not fire for a long
     # time: make the first Cloudy call on the initial state
-    if max_rho_change > 0.1 or (IC_MODE == "parker" and last_cloudy_iter == 0 and global_ind >= 1):
+    stale = (global_ind - last_cloudy_iter) * dt >= MAX_AGE - 1e-9
+    if max_rho_change > 0.1 or stale or (IC_MODE == "parker" and last_cloudy_iter == 0 and global_ind >= 1):
         delete_pluto_files(last_cloudy_iter, global_ind)
-        run_cloudy(global_ind, t, last_cloudy_iter)
-        write_heating_file(global_ind)
-        last_cloudy_iter = global_ind
+        if run_cloudy(global_ind, t, last_cloudy_iter):
+            write_heating_file(global_ind)
+            last_cloudy_iter = global_ind
     
     t += dt
     global_ind += 1

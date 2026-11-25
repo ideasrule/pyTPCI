@@ -22,63 +22,58 @@ void Radiat (double *v, double *rhs)
  * 
  ******************************************************************* */
 {
+  /* THERMO: curr_heat.dat rows are
+       r  H/rho  C/rho  rho_tab  theta_tab  bhT  bhr  bcT  bcr
+     (H/rho, C/rho per gram in cgs; rho_tab, theta_tab = P/rho in code units; b = local exponents).
+     The rate is rescaled to the cell's current state so the thermostat responds between Cloudy calls. */
+  #define NCOL 9
   static int ntab;
-  static double *radii, *heating_rates;
+  static double *tab[NCOL];
   static double heating_unit = UNIT_LENGTH/UNIT_DENSITY/pow(UNIT_VELOCITY, 3.0);
-  
-/* -------------------------------------------
-        Read tabulated cooling function
-   ------------------------------------------- */
-  //printf("r=%lf\n", gCooling_x1);
-  if (radii == NULL){
+  int n;
+
+  if (tab[0] == NULL){
     FILE *fcool;
     printLog (" > Reading table from disk...\n");
     fcool = fopen("curr_heat.dat","r");
     if (fcool == NULL){
-      printLog ("! Radiat: cooltable.dat could not be found.\n");
+      printLog ("! Radiat: curr_heat.dat could not be found.\n");
       QUIT_PLUTO(1);
     }
-    radii = ARRAY_1D(20000, double);
-    heating_rates = ARRAY_1D(20000, double);
-
+    for (n = 0; n < NCOL; n++) tab[n] = ARRAY_1D(20000, double);
     ntab = 0;
-    while (fscanf(fcool, "%lf  %lf\n", radii + ntab, 
-                                       heating_rates + ntab)!=EOF) {
+    while (fscanf(fcool, "%lf %lf %lf %lf %lf %lf %lf %lf %lf\n", tab[0] + ntab, tab[1] + ntab,
+                  tab[2] + ntab, tab[3] + ntab, tab[4] + ntab, tab[5] + ntab, tab[6] + ntab,
+                  tab[7] + ntab, tab[8] + ntab) == NCOL) {
       ntab++;
     }
     fclose(fcool);
-  }
-
-/* ----------------------------------------------
-        Table lookup by binary search  
-   ---------------------------------------------- */
-
-  int    klo=0, khi=ntab-1, kmid;
-  double r = gCooling_x1, r_mid, dr;
-  if (r > radii[khi] || r < radii[klo]){
-    rhs[RHOE] = 0.0;
-    //printf("WARNING: out of bounds %lf\n", r);
-    return;
-    QUIT_PLUTO(1);
-  }
-
-  while (klo != (khi - 1)){
-    kmid = (klo + khi)/2;
-    r_mid = radii[kmid];
-    if (r <= r_mid){
-      khi = kmid;
-    }else if (r > r_mid){
-      klo = kmid;
+    if (ntab < 2){
+      printLog ("! Radiat: curr_heat.dat has %d rows of %d columns.\n", ntab, NCOL);
+      QUIT_PLUTO(1);
     }
   }
 
-/* -----------------------------------------------
-    Compute r.h.s
-   ----------------------------------------------- */
+  int    klo=0, khi=ntab-1, kmid;
+  double r = gCooling_x1, w, q[NCOL];
+  double *radii = tab[0];
+  if (r > radii[khi] || r < radii[klo]){
+    rhs[RHOE] = 0.0;
+    return;
+  }
+  while (klo != (khi - 1)){
+    kmid = (klo + khi)/2;
+    if (r <= radii[kmid]) khi = kmid; else klo = kmid;
+  }
+  w = (r - radii[klo])/(radii[khi] - radii[klo]);
+  for (n = 1; n < NCOL; n++) q[n] = tab[n][klo]*(1.0 - w) + tab[n][khi]*w;
 
-  dr        = radii[khi] - radii[klo];
-  rhs[RHOE] = heating_rates[klo] * (radii[khi] - r)/dr + heating_rates[khi]*(r - radii[klo])/dr;
+  /* current state relative to the table state; clamped to the range the trigger allows (~10%) */
+  double theta = (g_gamma - 1.0)*v[RHOE]/v[RHO];
+  double x = theta/q[4], y = v[RHO]/q[3];
+  x = MAX(0.85, MIN(1.18, x));
+  y = MAX(0.85, MIN(1.18, y));
+
+  rhs[RHOE] = q[1]*pow(x, q[5])*pow(y, q[6]) - q[2]*pow(x, q[7])*pow(y, q[8]);
   rhs[RHOE] = rhs[RHOE] * (v[RHO] * UNIT_DENSITY) * heating_unit;
-  //printf("Setting heating: r=%lf, rate=%e, unit=%e\n", gCooling_x1, rhs[RHOE], heating_unit);
 }
-
