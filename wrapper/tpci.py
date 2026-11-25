@@ -79,11 +79,65 @@ def write_params_header(filename="params.h"):
     f.write("#define  RHO_SURF        (P_SURF * (MU * CONST_amu) / (CONST_kB * INIT_TEMP))\n")
     f.write("#define  BETA            (CONST_G * PLANET_MASS * (MU * CONST_amu) / (PLANET_RADIUS * CONST_kB * INIT_TEMP))\n")
     f.write("#define  UNIT_DENSITY    {}\n".format(unit_density))
-    f.write("#define  UNIT_LENGTH     {:.3e}\n".format(Rp))
+    f.write("#define  UNIT_LENGTH     {:.15e}\n".format(unit_length))  # full precision: same cm grid as here
     f.write("#define  UNIT_VELOCITY   {:.3e}\n".format(unit_velocity))
     f.close()
 
     
+GRID_RTOL = 1e-6  # relative tolerance for two radii to count as the same
+
+def stop_run(message):
+    """Stop the whole run with a message in the console and in tpci_log.txt"""
+    message = "GRID MISMATCH, run stopped: " + message
+    with open("tpci_log.txt", "a") as f:
+        f.write(message + "\n")
+    sys.exit(message)
+
+def check_same_radii(radii, what):
+    """Stop the run unless `radii` (in units of Rp) is the wrapper's grid, pluto_radii.npy"""
+    radii = np.atleast_1d(radii)
+    if radii.shape != pluto_radii.shape:
+        stop_run("{} has {} radii, pluto_radii.npy has {}".format(what, len(radii), len(pluto_radii)))
+    bad = np.abs(radii / pluto_radii - 1) > GRID_RTOL
+    if bad.any():
+        i = np.nonzero(bad)[0][0]
+        stop_run("{} differs from pluto_radii.npy at {} of {} radii, first at index {}: {} vs {}".format(
+            what, bad.sum(), len(radii), i, radii[i], pluto_radii[i]))
+
+def check_pluto_grid(global_ind):
+    """PLUTO's own cell centres, as written in its output, against the wrapper's grid"""
+    name = "data." + str(global_ind).zfill(4) + ".tab"
+    check_same_radii(np.loadtxt(name, usecols=0), "PLUTO output " + name)
+
+def check_heating_grid(name="curr_heat.dat"):
+    """The radii of the heating table radiat.c interpolates in, against the wrapper's grid"""
+    check_same_radii(np.loadtxt(name, usecols=0), "heating table " + name)
+
+def check_cloudy_grid(prefix, depths):
+    """Cloudy picks its own zones, so they cannot coincide with PLUTO's cells. What must agree is the
+    frame: the density law Cloudy read has to be tabulated at the wrapper's radii, and Cloudy's zones
+    (depth below the outermost cell centre) have to lie inside the wrapper's grid."""
+    tab = []
+    with open(prefix + ".in") as f:
+        for line in f:
+            if line.startswith("dlaw table"):
+                for line in f:
+                    if line.startswith("end of dlaw"):
+                        break
+                    tab.append(float(line.split()[0]))
+                break
+    r_max = np.max(pluto_radii)
+    # the last table entry is the extra point just beyond the innermost cell
+    check_same_radii((r_max - np.array(tab[:-1]) / unit_length)[::-1], "density table of " + prefix + ".in")
+    try:
+        zone_depth = np.atleast_1d(np.loadtxt(prefix + ".over.tab", usecols=0))
+    except Exception:
+        return   # no usable output: left to the validity check in run_cloudy
+    if len(zone_depth) and (zone_depth.min() < 0 or zone_depth.max() > depths.max() * (1 + GRID_RTOL) + 1.0):
+        stop_run("Cloudy zones in {}.over.tab span depths {:.6e} to {:.6e} cm, outside the grid's 0 to {:.6e} cm".format(
+            prefix, zone_depth.min(), zone_depth.max(), depths.max()))
+
+
 # Remove sub-0.05 Rp acoustic structure outside the base before it reaches Cloudy and the
 # trigger. With the raw state, each Cloudy table encodes the current pulses at fixed radii; the pulses
 # then move on and the mismatched heating launches new ones (a frozen-table PLUTO-only test shows the
@@ -146,7 +200,7 @@ def run_cloudy(global_ind, t, last_cloudy_iter, prefix=None, he_levels=None):
     n_H = rho / (init_mu * amu) * hydrogen_frac # density
     script += 'dlaw table depth linear\n'
     for i in range(len(depths)-1, -1, -1):
-        script += '{:.6e} {:.3e}\n'.format(depths[i], n_H[i])
+        script += '{:.9e} {:.3e}\n'.format(depths[i], n_H[i])
     # Fake point to extend range of table
     script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], n_H[0])
     script += 'end of dlaw\n'
@@ -157,7 +211,7 @@ def run_cloudy(global_ind, t, last_cloudy_iter, prefix=None, he_levels=None):
             print(f"WARNING: temperature {Ts[i]} below min {min_temperature}")
             Ts[i] = min_temperature
             
-        script += '{:.6e} {}\n'.format(depths[i], Ts[i])    
+        script += '{:.9e} {}\n'.format(depths[i], Ts[i])    
     script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], Ts[0])
     script += 'end of tlaw\n'
 
@@ -165,7 +219,7 @@ def run_cloudy(global_ind, t, last_cloudy_iter, prefix=None, he_levels=None):
         script += 'wind advection table depth linear\n' # wind velocities
         for i in range(len(depths)-1, -1, -1):
             # Positive (inward) velocities crash CLOUDY
-            script += '{:.6e} {:.3e}\n'.format(depths[i], min(-1e-10, -v[i]))
+            script += '{:.9e} {:.3e}\n'.format(depths[i], min(-1e-10, -v[i]))
         script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], -1e-10)
         script += 'end of velocity table\n'
         script += 'set dynamics advection length fraction 0.01\n'
@@ -213,6 +267,8 @@ def run_cloudy(global_ind, t, last_cloudy_iter, prefix=None, he_levels=None):
     if result.returncode != 0:
         print("Warning: something went wrong in CLOUDY.  You can ignore this in the early timesteps")
 
+    check_cloudy_grid(prefix, depths)
+
     # Accept the Cloudy output only if over.tab is complete; otherwise the previous heating table is kept
     try:
         over = np.loadtxt(prefix + ".over.tab", usecols=(0,))
@@ -237,7 +293,7 @@ def cloudy_equilibrium(x, rho_cgs, tag):
     script += 'illumination angle 66 deg\n'
     script += 'dlaw table depth linear\n'
     for i in range(len(depths)-1, -1, -1):
-        script += '{:.6e} {:.3e}\n'.format(depths[i], n_H[i])
+        script += '{:.9e} {:.3e}\n'.format(depths[i], n_H[i])
     script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], n_H[0])
     script += 'end of dlaw\n'
     script += 'iterate 2\n'
@@ -303,12 +359,13 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
 
     r_t, rho_t, v_t, P_t = np.loadtxt("data." + str(global_ind).zfill(4) + ".tab", usecols=(0,2,3,6), unpack=True)
     rho_t, _, P_t = filter_state(r_t, rho_t, v_t, P_t)
-    assert np.allclose(r_t, pluto_radii, rtol=1e-6)
+    check_same_radii(r_t, "PLUTO output data." + str(global_ind).zfill(4) + ".tab")
 
     with open(output_file, "w") as f:
         for i in range(len(pluto_radii)):
             f.write("{} {:.6e} {:.6e} {:.6e} {:.6e} {:.4f} {:.4f} {:.4f} {:.4f}\n".format(
                 pluto_radii[i], cols[0][i], cols[1][i], rho_t[i], P_t[i] / rho_t[i], 0.0, 0.0, cols[2][i], 0.0))
+    check_heating_grid(output_file)
     
 
 def run_pluto(global_ind, t, template_file="pluto_template.ini", ini_file="pluto.ini"):
@@ -408,7 +465,9 @@ while t < max_t:
     log_f.write("Starting loop for step {}, t={}, dt={}\n".format(
         global_ind, round(t,5), round(dt,5)))
     log_f.flush()
+    check_heating_grid()         # the table PLUTO is about to read
     run_pluto(global_ind, t)
+    check_pluto_grid(global_ind) # the cells PLUTO actually used
     max_rho_change = get_max_change(global_ind, last_cloudy_iter)
     # The Parker initial condition is close to steady, so the 10% trigger may not fire for a long
     # time: make the first Cloudy call on the initial state

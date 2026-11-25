@@ -32,6 +32,9 @@ When the run reaches `max_t`, the last state is given to CLOUDY once more with `
 ## Composition
 The mean molecular weight of the neutral gas (`init_mu`, in atomic mass units) and the hydrogen number fraction (`hydrogen_frac`) are computed from CLOUDY's own GASS10 abundance file (He/H = 0.0851), with the metals scaled by `metallicity`, so PLUTO's mass density and CLOUDY's hydrogen density correspond exactly. Any metallicity can be used.
 
+## Grid check
+PLUTO, CLOUDY and the wrapper must all work on the radius grid in `pluto_radii.npy`. Every step the wrapper compares that grid with the cell centres in PLUTO's output, with the radii of the heating table PLUTO reads (`curr_heat.dat`), and with the density table given to CLOUDY; it also checks that CLOUDY's zones (which CLOUDY chooses itself) lie inside the grid. On any mismatch the run stops with a `GRID MISMATCH` message in the console and in `tpci_log.txt`. If you change the grid in `pluto_template.ini`, regenerate `pluto_radii.npy`.
+
 ## Plotting information
 - To plot one file, run `python plot.py global_ind` where `global_ind` is the number of the file, such as "54".
 - To plot multiple files, run `python plot.py start stop step`, where `start` and `stop` are the initial and final file numbers to plot, with a given `step`. Plotting files will automatically skip file names that do not exist. 
