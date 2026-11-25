@@ -53,7 +53,7 @@ void Init (double *v, double r, double x2, double x3)
     if (fic == NULL){   /* no table: the original isothermal hydrostatic initial condition */
       double Piso = P_SURF * exp(BETA * (PLANET_RADIUS / (UNIT_LENGTH * r)  - 1));
       if (Piso < 1e-9) Piso = 1e-9; /* prevent CLOUDY from crashing */
-      v[RHO] = Piso * (MU * CONST_mH) / (CONST_kB * INIT_TEMP) / UNIT_DENSITY;
+      v[RHO] = Piso * (MU * CONST_amu) / (CONST_kB * INIT_TEMP) / UNIT_DENSITY;
       v[VX1] = v[VX2] = v[VX3] = 0.0;
       v[PRS] = Piso / unit_pressure;
       return;

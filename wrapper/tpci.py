@@ -6,7 +6,7 @@ import pdb
 import os
 import parker_ic
 
-from constants import AU, k_B, m_H, R_earth, R_jup, M_earth, M_jup, M_sun, T_Lya
+from constants import AU, k_B, amu, R_earth, R_jup, M_earth, M_jup, M_sun, T_Lya, atomic_weight
 
 pluto_radii = np.load("pluto_radii.npy")
 
@@ -23,20 +23,32 @@ metallicity = 1
 
 min_temperature = 28 #cloudy limit
 
-if metallicity == 1 or metallicity == 0:
-    init_mu = 1.28
-    hydrogen_frac = 0.909
-elif metallicity == 10:
-    init_mu = 1.39
-    hydrogen_frac = 0.91
-elif metallicity == 30:
-    init_mu = 1.68
-    hydrogen_frac = 0.90
-elif metallicity == 100:
-    init_mu = 2.62
-    hydrogen_frac = 0.84
-else:
-    assert(False)
+# Elements below this abundance (by number, relative to H) are switched off in Cloudy
+element_limit = -2 if metallicity == 0 else -5
+
+def composition(abund_file="../cloudy/data/abundances/solar_GASS10.abn"):
+    """Mean mass per nucleus [amu] and hydrogen fraction by number of the neutral atomic gas, for the
+    composition Cloudy is given: GASS10 (He/H = 0.0851) with the metals scaled by `metallicity` and
+    the elements below `element_limit` switched off. So rho = n_H * init_mu * amu / hydrogen_frac
+    is exactly Cloudy's own conversion between hydrogen density and mass density."""
+    n_tot = mass = 0.0
+    with open(abund_file) as f:
+        for line in f:
+            p = line.split()
+            if line.startswith("*"):
+                break
+            if len(p) != 2 or p[0] not in atomic_weight:
+                continue
+            x = float(p[1])
+            if p[0] not in ("HYDROGEN", "HELIUM"):
+                x *= metallicity
+            if x < 10.0**element_limit:
+                continue
+            n_tot += x
+            mass += x * atomic_weight[p[0]]
+    return mass / n_tot, 1.0 / n_tot
+
+init_mu, hydrogen_frac = composition()
 
 # No need to change
 unit_density = 1e-10
@@ -64,8 +76,8 @@ def write_params_header(filename="params.h"):
     f.write("#define  SEMIMAJOR_AXIS  ({} * CONST_au)\n".format(a/AU))
     f.write("#define  n_SURF          1e14\n")
     f.write("#define  P_SURF          (n_SURF * CONST_kB * INIT_TEMP)\n")
-    f.write("#define  RHO_SURF        (P_SURF * (MU * CONST_mH) / (CONST_kB * INIT_TEMP))\n")
-    f.write("#define  BETA            (CONST_G * PLANET_MASS * (MU * CONST_mH) / (PLANET_RADIUS * CONST_kB * INIT_TEMP))\n")
+    f.write("#define  RHO_SURF        (P_SURF * (MU * CONST_amu) / (CONST_kB * INIT_TEMP))\n")
+    f.write("#define  BETA            (CONST_G * PLANET_MASS * (MU * CONST_amu) / (PLANET_RADIUS * CONST_kB * INIT_TEMP))\n")
     f.write("#define  UNIT_DENSITY    {}\n".format(unit_density))
     f.write("#define  UNIT_LENGTH     {:.3e}\n".format(Rp))
     f.write("#define  UNIT_VELOCITY   {:.3e}\n".format(unit_velocity))
@@ -99,8 +111,9 @@ def filter_state(r, rho, v, P):
     return tuple(out)
 
 
-def run_cloudy(global_ind, t, last_cloudy_iter):
-    ''' RUN CLOUDY from previous PLUTO data'''
+def run_cloudy(global_ind, t, last_cloudy_iter, prefix=None, he_levels=None):
+    ''' RUN CLOUDY from previous PLUTO data. prefix: name of the Cloudy files (default cl_data.<global_ind>);
+    he_levels: number of resolved n shells of the He I model atom (default: Cloudy's own, 6)'''
     pluto_filename = "data." + str(global_ind).zfill(4) + ".tab"        
     radii, rho, v, P = np.loadtxt(pluto_filename, usecols=(0,2,3,6), unpack=True)
     rho, v, P = filter_state(radii, rho, v, P)
@@ -122,7 +135,7 @@ def run_cloudy(global_ind, t, last_cloudy_iter):
         else:
             mu = np.ones(len(depths)) * init_mu
         
-    Ts = (P * mu * m_H) / (k_B * rho)
+    Ts = (P * mu * amu) / (k_B * rho)
     script = ''
     script += 'CMB\n'
     script += 'cosmic rays background\n'
@@ -130,7 +143,7 @@ def run_cloudy(global_ind, t, last_cloudy_iter):
     script += 'stop depth {:.6e} linear\n'.format(depths.max())
     script += 'illumination angle 66 deg\n'
 
-    n_H = rho / (init_mu * m_H) * hydrogen_frac # density
+    n_H = rho / (init_mu * amu) * hydrogen_frac # density
     script += 'dlaw table depth linear\n'
     for i in range(len(depths)-1, -1, -1):
         script += '{:.6e} {:.3e}\n'.format(depths[i], n_H[i])
@@ -167,15 +180,15 @@ def run_cloudy(global_ind, t, last_cloudy_iter):
     script += 'stop temperature linear 5 K\n'
     script += 'turbulence 1 km/sec no pressure\n'
     script += 'double optical depth\n' # simulate planet's surface
-    if metallicity == 0:
-        script += 'element limit off -2\n'
-    else:
-        script += 'element limit off -5\n'
+    script += 'element limit off {}\n'.format(element_limit)
     script += 'abundances GASS10 no grains\n'
     script += 'metals {} linear\n'.format(metallicity)
+    if he_levels is not None:
+        script += 'database He-like helium levels resolved {}\n'.format(he_levels)
     script += 'print short\n'
     script += 'print line faint -2 log\n'
-    prefix = "cl_data." + str(global_ind).zfill(4)
+    if prefix is None:
+        prefix = "cl_data." + str(global_ind).zfill(4)
     script += 'set save prefix "{}"\n'.format(prefix + ".")
     script += 'set save hash ""\n'
     script += 'save overview "all_iters_over.tab"\n'
@@ -217,7 +230,7 @@ def cloudy_equilibrium(x, rho_cgs, tag):
     Same deck as run_cloudy otherwise. Returns r/Rp, T, mu on the Cloudy zones, in increasing r."""
     radii = pluto_radii * unit_length
     depths = np.max(radii) - radii
-    n_H = np.exp(np.interp(pluto_radii, x, np.log(rho_cgs))) / (init_mu * m_H) * hydrogen_frac
+    n_H = np.exp(np.interp(pluto_radii, x, np.log(rho_cgs))) / (init_mu * amu) * hydrogen_frac
     script = 'CMB\ncosmic rays background\n'
     script += 'init "{}"\n'.format(STELLAR_SPEC)
     script += 'stop depth {:.6e} linear\n'.format(depths.max())
@@ -233,7 +246,7 @@ def cloudy_equilibrium(x, rho_cgs, tag):
     script += 'stop temperature linear 5 K\n'
     script += 'turbulence 1 km/sec no pressure\n'
     script += 'double optical depth\n'
-    script += 'element limit off -2\n' if metallicity == 0 else 'element limit off -5\n'
+    script += 'element limit off {}\n'.format(element_limit)
     script += 'abundances GASS10 no grains\n'
     script += 'metals {} linear\n'.format(metallicity)
     script += 'print short\n'
@@ -384,6 +397,10 @@ max_t = 1000 # run pyTPCI until max_t
 # 10% trigger never fires and PLUTO would settle against a stale table; with the refresh the run is a
 # fixed-point iteration between PLUTO and Cloudy.
 MAX_AGE = 0.5
+# The last state is given to Cloudy once more with this many resolved n shells in the He I model atom
+# (Cloudy's default is 6), for the final output cl_final.*: the metastable 2^3S population is 10-60%
+# higher than with 6, but the call is ~50x slower, too slow to use during the run.
+FINAL_HE_LEVELS = 30
 log_f = open("tpci_log.txt", "a")
 
 # main loop
@@ -404,5 +421,10 @@ while t < max_t:
     
     t += dt
     global_ind += 1
+
+if global_ind > 0:
+    log_f.write("Final Cloudy call on step {} with {} resolved He I shells\n".format(global_ind - 1, FINAL_HE_LEVELS))
+    log_f.flush()
+    run_cloudy(global_ind - 1, t, last_cloudy_iter, prefix="cl_final", he_levels=FINAL_HE_LEVELS)
 
 log_f.close()

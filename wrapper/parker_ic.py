@@ -3,7 +3,7 @@
   * Mass-loss rate: energy-limited, Mdot = eff * 4 pi Rp^3 F_XUV cos(angle) / (G Mp), where F_XUV is the
     flux below 912 A in the Cloudy spectrum file and the 4 pi matches the 1D spherical geometry
     (every direction receives the slanted flux F cos(angle)).
-  * Wind: steady transonic solution of the momentum equation for a prescribed theta(r) = P/rho = kT/(mu mH)
+  * Wind: steady transonic solution of the momentum equation for a prescribed theta(r) = P/rho = kT/(mu amu)
     in the PLUTO gravity (planet + stellar tide), integrated in both directions from the critical point;
     rho = Mdot / (4 pi r^2 v).
   * Base: theta goes from the base value (init_temp, init_mu) to the wind's with a tanh of width `width`
@@ -27,7 +27,7 @@ from scipy.integrate import solve_ivp
 from scipy.ndimage import gaussian_filter1d
 
 # constants.py has PLUTO's values (pluto.h), so the base is hydrostatic in PLUTO's own gravity
-from constants import G, k_B, m_H, nu_Ryd
+from constants import G, k_B, amu, nu_Ryd
 
 def f_xuv(spec_file):
     """Flux below 912 A [erg/cm2/s] of a Cloudy 'interpolate' table normalised by an 'intensity' line"""
@@ -79,7 +79,7 @@ def build(Rp, Mp, M_star, a, init_temp, init_mu, n_surf, spec_file, angle_deg, u
     g = -G * Mp / r**2 + G * M_star / (a - r)**2 - G * (M_star + Mp) / a**3 * (l_cm - r)
     F = f_xuv(spec_file)
     mdot = eff * 4 * np.pi * Rp**3 * F * np.cos(np.radians(angle_deg)) / (G * Mp)
-    th_c = k_B * init_temp / (init_mu * m_H)
+    th_c = k_B * init_temp / (init_mu * amu)
     P_surf = n_surf * k_B * init_temp
     print(f"Parker IC: F_XUV = {F:.4e} erg/cm2/s, energy-limited Mdot = {mdot:.4e} g/s (eff = {eff})", flush=True)
 
@@ -101,7 +101,7 @@ def build(Rp, Mp, M_star, a, init_temp, init_mu, n_surf, spec_file, angle_deg, u
         xj = brentq(resid, lo, hi, xtol=1e-7)
         return (xj,) + profile(xj)
 
-    th_hot = np.full(len(x), k_B * T_wind / (mu_wind * m_H))
+    th_hot = np.full(len(x), k_B * T_wind / (mu_wind * amu))
     mu_hot = np.full(len(x), mu_wind)
     xj, rho, v, P, mu, rc = solve(th_hot, mu_hot)
     print(f"Parker IC: isothermal guess T = {T_wind:.0f} K, mu = {mu_wind}: r_join = {xj:.4f}, r_sonic = {rc / Rp:.3f}", flush=True)
@@ -112,7 +112,7 @@ def build(Rp, Mp, M_star, a, init_temp, init_mu, n_surf, spec_file, angle_deg, u
             # (static equilibrium has no expansion cooling, so T runs to 2-5e4 K far out. Capping it at
             # T_wind was tried: the foot then needs a higher density for the same Mdot, gets more neutral
             # and colder, and the iteration runs away until no cold layer fits.)
-            th_cl = np.maximum(k_B * np.interp(x, r_cl, T_cl) / (np.interp(x, r_cl, mu_cl) * m_H), th_c)
+            th_cl = np.maximum(k_B * np.interp(x, r_cl, T_cl) / (np.interp(x, r_cl, mu_cl) * amu), th_c)
             sm = gaussian_filter1d(np.interp(lx, np.log(x), np.log(th_cl)), 0.01 / (lx[1] - lx[0]), mode="nearest")
             th_new = np.exp(np.interp(np.log(x), lx, sm))
             above = x > xj + 3 * width
@@ -136,7 +136,7 @@ def build(Rp, Mp, M_star, a, init_temp, init_mu, n_surf, spec_file, angle_deg, u
         for it in range(n_iter_free):
             r_cl, T_cl, mu_cl = cloudy_eq(x, rho, f"icf{it}")
             mu = np.interp(x, r_cl, mu_cl)
-            th_new = np.maximum(smooth(np.maximum(k_B * np.interp(x, r_cl, T_cl) / (mu * m_H), th_c)), th_c)
+            th_new = np.maximum(smooth(np.maximum(k_B * np.interp(x, r_cl, T_cl) / (mu * amu), th_c)), th_c)
             err = np.abs(np.log(th_new / theta))
             d = damp
             while True:
@@ -157,5 +157,5 @@ def build(Rp, Mp, M_star, a, init_temp, init_mu, n_surf, spec_file, angle_deg, u
                                               P / (unit_density * unit_velocity**2), mu]), fmt="%.10e")
     for xx in (1.0, 1.01, 1.03, 1.05, 1.1, 1.2, 1.5, 2, 3, 5, 10, 15):
         i = np.argmin(abs(x - xx))
-        print(f"  r={xx:<5} rho={rho[i]:.3e} v={v[i]/1e5:.3e} km/s theta={P[i]/rho[i]/1e10:.1f} T={P[i]/rho[i]*mu[i]*m_H/k_B:.0f} mu={mu[i]:.2f}", flush=True)
+        print(f"  r={xx:<5} rho={rho[i]:.3e} v={v[i]/1e5:.3e} km/s theta={P[i]/rho[i]/1e10:.1f} T={P[i]/rho[i]*mu[i]*amu/k_B:.0f} mu={mu[i]:.2f}", flush=True)
     return dict(F_xuv=F, mdot=mdot, r_sonic=rc / Rp, r_join=xj)

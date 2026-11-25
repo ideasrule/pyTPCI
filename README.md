@@ -26,6 +26,12 @@ Three refinements of this coupling:
 - `"parker"` (default): `parker_ic.py` builds a transonic wind on top of the cold hydrostatic base and writes it to `ic.dat`, which `init.c` reads. The first guess is an isothermal 10^4 K wind with an energy-limited mass-loss rate (10% efficiency, XUV flux taken from the stellar spectrum file). The temperature, mean molecular weight and mass-loss rate are then iterated to CLOUDY's thermal equilibrium for the wind's own density profile. This takes a few tens of CLOUDY runs before the first PLUTO step, but the simulation then starts close to the steady state instead of having to lift the atmosphere off the planet.
 - `"isothermal"`: the hydrostatic atmosphere at `init_temp` (no `ic.dat`).
 
+## Final output
+When the run reaches `max_t`, the last state is given to CLOUDY once more with `FINAL_HE_LEVELS = 30` resolved n shells in the He I model atom instead of CLOUDY's default 6, and the result is saved as `cl_final.*`. With 30 shells the metastable 2^3S helium density is 10-60% higher, but the call is about 50 times slower, so it is made only once.
+
+## Composition
+The mean molecular weight of the neutral gas (`init_mu`, in atomic mass units) and the hydrogen number fraction (`hydrogen_frac`) are computed from CLOUDY's own GASS10 abundance file (He/H = 0.0851), with the metals scaled by `metallicity`, so PLUTO's mass density and CLOUDY's hydrogen density correspond exactly. Any metallicity can be used.
+
 ## Plotting information
 - To plot one file, run `python plot.py global_ind` where `global_ind` is the number of the file, such as "54".
 - To plot multiple files, run `python plot.py start stop step`, where `start` and `stop` are the initial and final file numbers to plot, with a given `step`. Plotting files will automatically skip file names that do not exist. 
