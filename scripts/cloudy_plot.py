@@ -3,8 +3,12 @@ import matplotlib.pyplot as plt
 import sys
 import os
 
+# constants.py lives in the wrapper folder (and in every run folder copied from it)
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "wrapper"))
+import constants
+
 # replace with planet radius (Earth radii)
-unit_length = 12.54 * 6.378136e8
+unit_length = 12.54 * constants.R_earth
 
 
 # start, [stop, step]

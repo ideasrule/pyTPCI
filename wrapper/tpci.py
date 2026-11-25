@@ -6,15 +6,7 @@ import pdb
 import os
 import parker_ic
 
-# Physical constants
-AU = 1.5e13
-k_B = 1.38e-16
-R_earth = 6.378136e8
-R_jup = 11.2 * R_earth
-M_earth = 5.97e27
-M_jup = 1.898e30
-M_sun = 2e33
-m_H = 1.67e-24
+from constants import AU, k_B, m_H, R_earth, R_jup, M_earth, M_jup, M_sun, T_Lya
 
 pluto_radii = np.load("pluto_radii.npy")
 
@@ -283,7 +275,7 @@ def write_heating_file(global_ind, output_file="curr_heat.dat"):
                 p = line.rstrip("\n").split("\t")
                 cdep.append(float(p[0]))
                 flya.append(sum(float(fr) for lab, fr in zip(p[5::2], p[6::2]) if lab.startswith("ISclinH H")))
-        b_cT = np.interp(depth, cdep, flya) * 118348.0 / Te
+        b_cT = np.interp(depth, cdep, flya) * T_Lya / Te
     except Exception as e:
         print("WARNING: no cooling exponents for", global_ind, repr(e))
         b_cT = np.zeros(len(depth))

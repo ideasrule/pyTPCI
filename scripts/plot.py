@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 import sys
 import os
 
+# constants.py lives in the wrapper folder (and in every run folder copied from it)
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "wrapper"))
+import constants
+
 # PLUTO units
 UNIT_DENSITY = 1e-10
 UNIT_VELOCITY = 1e5
@@ -43,7 +47,7 @@ for i, filename in enumerate(files):
     plt.title("P")
 
     plt.figure(3)
-    plt.loglog(r, P*2.3*1.67e-24/(1.38e-16*rho*1e-10), color=colors[i])
+    plt.loglog(r, P*UNIT_PRESSURE*2.3*constants.m_H/(constants.k_B*rho*UNIT_DENSITY), color=colors[i])
     plt.title("Estimated Temperature (K)")
 
 plt.show()
