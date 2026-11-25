@@ -4,6 +4,7 @@ import sys
 import scipy.interpolate
 import pdb
 import os
+import parker_ic
 
 # Physical constants
 AU = 1.5e13
@@ -54,6 +55,11 @@ unit_time = unit_length / unit_velocity
 
 advec_turnon = 100
 
+# Initial condition: "parker" (transonic wind on a cold hydrostatic base, built by parker_ic.py with
+# temperature, mean molecular weight and mass-loss rate relaxed to Cloudy thermal equilibrium; takes
+# a few tens of Cloudy runs before the first step) or "isothermal" (hydrostatic atmosphere at init_temp)
+IC_MODE = "parker"
+
 
 def write_params_header(filename="params.h"):
     ''' Write PLUTO params file'''
@@ -89,7 +95,12 @@ def run_cloudy(global_ind, t, last_cloudy_iter):
         cloudy_depths, cloudy_mu = np.loadtxt(prev_cloudy_file, usecols=(0,3), unpack=True)
         mu = np.interp(depths, cloudy_depths, cloudy_mu)
     else:
-        mu = np.ones(len(depths)) * init_mu
+        # the first call uses the mu profile the initial condition was built with
+        if os.path.exists("ic.dat"):
+            ic_r, ic_mu = np.loadtxt("ic.dat", usecols=(0, 4), unpack=True)
+            mu = np.interp(radii / unit_length, ic_r, ic_mu)
+        else:
+            mu = np.ones(len(depths)) * init_mu
         
     Ts = (P * mu * m_H) / (k_B * rho)
     script = ''
@@ -169,6 +180,43 @@ def run_cloudy(global_ind, t, last_cloudy_iter):
     if result.returncode != 0:
         print("Warning: something went wrong in CLOUDY.  You can ignore this in the early timesteps")
         
+
+def cloudy_equilibrium(x, rho_cgs, tag):
+    """Cloudy thermal equilibrium (no tlaw, no advection) for a density profile rho(x = r/Rp).
+    Same deck as run_cloudy otherwise. Returns r/Rp, T, mu on the Cloudy zones, in increasing r."""
+    radii = pluto_radii * unit_length
+    depths = np.max(radii) - radii
+    n_H = np.exp(np.interp(pluto_radii, x, np.log(rho_cgs))) / (init_mu * m_H) * hydrogen_frac
+    script = 'CMB\ncosmic rays background\n'
+    script += 'init "{}"\n'.format(STELLAR_SPEC)
+    script += 'stop depth {:.6e} linear\n'.format(depths.max())
+    script += 'illumination angle 66 deg\n'
+    script += 'dlaw table depth linear\n'
+    for i in range(len(depths)-1, -1, -1):
+        script += '{:.6e} {:.3e}\n'.format(depths[i], n_H[i])
+    script += '{:.6e} {:.3e}\n'.format(1.01*depths[0], n_H[0])
+    script += 'end of dlaw\n'
+    script += 'iterate 2\n'
+    script += 'set nend 2800\n'
+    script += 'no molecules\n'
+    script += 'stop temperature linear 5 K\n'
+    script += 'turbulence 1 km/sec no pressure\n'
+    script += 'double optical depth\n'
+    script += 'element limit off -2\n' if metallicity == 0 else 'element limit off -5\n'
+    script += 'abundances GASS10 no grains\n'
+    script += 'metals {} linear\n'.format(metallicity)
+    script += 'print short\n'
+    script += 'print line faint -2 log\n'
+    script += 'set save prefix "{}."\n'.format(tag)
+    script += 'set save hash ""\n'
+    script += 'save overview "over.tab" last\n'
+    with open(tag + ".in", "w") as f:
+        f.write(script)
+    subprocess.run(["../cloudy/source/cloudy.exe", "-r", tag], check=False)
+    depth, mu, Te = np.loadtxt(tag + ".over.tab", usecols=(0, 3, 4), unpack=True)
+    assert len(depth) > 200 and depth.max() > 0.99 * depths.max(), "incomplete Cloudy equilibrium run " + tag
+    return ((np.max(radii) - depth) / unit_length)[::-1], Te[::-1], mu[::-1]
+
 
 def write_heating_file(global_ind, output_file="curr_heat.dat"):
     ''' Write heating file curr_heat.dat from CLOUDY to transfer into PLUTO'''
@@ -254,6 +302,12 @@ if len(sys.argv) == 4:
 elif len(sys.argv) == 1:
     global_ind = 0
     t = 0
+    if IC_MODE == "parker":
+        # writes ic.dat, which init.c reads (init.c falls back to the isothermal atmosphere without it)
+        parker_ic.build(Rp, Mp, M_star, a, init_temp, init_mu, 1e14, STELLAR_SPEC, 66,
+                        unit_density, unit_velocity, r_out=np.max(pluto_radii), cloudy_eq=cloudy_equilibrium)
+    elif os.path.exists("ic.dat"):
+        os.remove("ic.dat")
     dt = 1e-2
     last_cloudy_iter = 0
 else:
@@ -270,7 +324,9 @@ while t < max_t:
     log_f.flush()
     run_pluto(global_ind, t)
     max_rho_change = get_max_change(global_ind, last_cloudy_iter)
-    if max_rho_change > 0.1:
+    # The Parker initial condition is close to steady, so the 10% trigger may not fire for a long
+    # time: make the first Cloudy call on the initial state
+    if max_rho_change > 0.1 or (IC_MODE == "parker" and last_cloudy_iter == 0 and global_ind >= 1):
         delete_pluto_files(last_cloudy_iter, global_ind)
         run_cloudy(global_ind, t, last_cloudy_iter)
         write_heating_file(global_ind)

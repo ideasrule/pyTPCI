@@ -16,6 +16,11 @@ by default pyTPCI only calls CLOUDY if there is at least a 10% maximum fractiona
 3) Open `screen` and run `python tpci.py` to start at t=0 and use the default timestep dt=0.01. If restarting from a previous pyTPCI run, instead do `python tpci.py global_ind time timestep`, where `global_ind` is the number of the CLOUDY file you wish to start from.
 4) Monitor pyTPCI's progress by plotting PLUTO and CLOUDY files using `plot.py` and `cloudy_plot.py`.
 
+## Initial condition
+`IC_MODE` in `tpci.py` selects the state at t=0:
+- `"parker"` (default): `parker_ic.py` builds a transonic wind on top of the cold hydrostatic base and writes it to `ic.dat`, which `init.c` reads. The first guess is an isothermal 10^4 K wind with an energy-limited mass-loss rate (10% efficiency, XUV flux taken from the stellar spectrum file). The temperature, mean molecular weight and mass-loss rate are then iterated to CLOUDY's thermal equilibrium for the wind's own density profile. This takes a few tens of CLOUDY runs before the first PLUTO step, but the simulation then starts close to the steady state instead of having to lift the atmosphere off the planet.
+- `"isothermal"`: the hydrostatic atmosphere at `init_temp` (no `ic.dat`).
+
 ## Plotting information
 - To plot one file, run `python plot.py global_ind` where `global_ind` is the number of the file, such as "54".
 - To plot multiple files, run `python plot.py start stop step`, where `start` and `stop` are the initial and final file numbers to plot, with a given `step`. Plotting files will automatically skip file names that do not exist. 

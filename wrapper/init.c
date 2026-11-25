@@ -43,15 +43,41 @@ void Init (double *v, double r, double x2, double x3)
  *********************************************************************** */
 {
   double unit_pressure = UNIT_DENSITY * UNIT_VELOCITY * UNIT_VELOCITY;
-  double P = P_SURF * exp(BETA * (PLANET_RADIUS / (UNIT_LENGTH * r)  - 1));
-  if (P < 1e-9) {
-    P = 1e-9; //prevent CLOUDY from crashing
+  /* Initial condition from ic.dat (written by parker_ic.py: cold hydrostatic base + transonic
+     wind; code units, columns r rho v P mu), interpolated in ln rho, ln P and v */
+  static double *tr, *trho, *tv, *tp;
+  static int nt = 0;
+  if (tr == NULL){
+    FILE *fic = fopen("ic.dat", "r");
+    double mu;
+    if (fic == NULL){   /* no table: the original isothermal hydrostatic initial condition */
+      double Piso = P_SURF * exp(BETA * (PLANET_RADIUS / (UNIT_LENGTH * r)  - 1));
+      if (Piso < 1e-9) Piso = 1e-9; /* prevent CLOUDY from crashing */
+      v[RHO] = Piso * (MU * CONST_mH) / (CONST_kB * INIT_TEMP) / UNIT_DENSITY;
+      v[VX1] = v[VX2] = v[VX3] = 0.0;
+      v[PRS] = Piso / unit_pressure;
+      return;
+    }
+    tr = ARRAY_1D(40000, double); trho = ARRAY_1D(40000, double);
+    tv = ARRAY_1D(40000, double); tp   = ARRAY_1D(40000, double);
+    while (nt < 40000 && fscanf(fic, "%lf %lf %lf %lf %lf\n", tr + nt, trho + nt, tv + nt, tp + nt, &mu) == 5) nt++;
+    fclose(fic);
+    if (nt < 2 || r > tr[nt-1]){
+      printLog ("! Init: ic.dat has %d rows.\n", nt);
+      QUIT_PLUTO(1);
+    }
   }
-  double rho = P * (MU * CONST_mH) / (CONST_kB * INIT_TEMP);
-  //printf("Initial conditions: r=%lf, rho=%e, P=%e\n", r, rho, P);
-  
-  v[RHO] = rho / UNIT_DENSITY;
-  v[VX1] = 0.0;
+  int klo = 0, khi = nt - 1, kmid;
+  while (klo != (khi - 1)){
+    kmid = (klo + khi)/2;
+    if (r <= tr[kmid]) khi = kmid; else klo = kmid;
+  }
+  double w = (r - tr[klo])/(tr[khi] - tr[klo]);
+  w = MAX(0.0, MIN(1.0, w));
+
+  v[RHO] = exp(log(trho[klo])*(1.0 - w) + log(trho[khi])*w);
+  double P = exp(log(tp[klo])*(1.0 - w) + log(tp[khi])*w) * unit_pressure;
+  v[VX1] = tv[klo]*(1.0 - w) + tv[khi]*w;
   v[VX2] = 0.0;
   v[VX3] = 0.0;
   #if HAVE_ENERGY
