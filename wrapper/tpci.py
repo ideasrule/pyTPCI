@@ -455,10 +455,11 @@ max_t = 1000 # run pyTPCI until max_t
 # fixed-point iteration between PLUTO and Cloudy.
 MAX_AGE = 0.5
 # The last state is given to Cloudy once more with this many resolved n shells in the He I model atom
-# (Cloudy's default is 6), for the final output cl_final.*: the metastable 2^3S column is 3-17% higher
-# than with 6 (up to 60-80% locally in the outer wind), but the call is 50-60x slower, too slow to use
-# during the run.
-FINAL_HE_LEVELS = 30
+# (Cloudy's default is 6), for the final output cl_final.*. With 30 shells the metastable 2^3S column is
+# 3-17% higher than with 6 (up to 60-80% locally in the outer wind), but the call is 50-60x slower. 20
+# shells is the compromise: for HD 209458b the column is within 0.6% of the 30-shell one (within 6%
+# everywhere out to 10 Rp) and the call is 7x slower than the default instead of 52x.
+FINAL_HE_LEVELS = 20
 log_f = open("tpci_log.txt", "a")
 
 # main loop

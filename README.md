@@ -27,7 +27,7 @@ Three refinements of this coupling:
 - `"isothermal"`: the hydrostatic atmosphere at `init_temp` (no `ic.dat`).
 
 ## Final output
-When the run reaches `max_t`, the last state is given to CLOUDY once more with `FINAL_HE_LEVELS = 30` resolved n shells in the He I model atom instead of CLOUDY's default 6, and the result is saved as `cl_final.*`. With 30 shells the metastable 2^3S helium column is 3-17% higher (HD 189733b and HD 209458b; up to 60-80% locally in the outer wind), but the call is 50-60 times slower, so it is made only once.
+When the run reaches `max_t`, the last state is given to CLOUDY once more with `FINAL_HE_LEVELS = 20` resolved n shells in the He I model atom instead of CLOUDY's default 6, and the result is saved as `cl_final.*`. With 30 shells the metastable 2^3S helium column is 3-17% higher than with 6 (HD 189733b and HD 209458b; up to 60-80% locally in the outer wind), but the call is 50-60 times slower. With 20 shells the column is within 0.6% of the 30-shell value for HD 209458b and the call is 7 times slower than the default, so 20 is used, once, at the end.
 
 ## Composition
 The mean molecular weight of the neutral gas (`init_mu`, in atomic mass units) and the hydrogen number fraction (`hydrogen_frac`) are computed from CLOUDY's own GASS10 abundance file (He/H = 0.0851), with the metals scaled by `metallicity`, so PLUTO's mass density and CLOUDY's hydrogen density correspond exactly. Any metallicity can be used.
